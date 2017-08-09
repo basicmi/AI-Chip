@@ -44,6 +44,8 @@
 
 ## Horizon Robotics
 
+## IntelliFusion
+
 ## KnuEdge's KnuPath
 
 ## PEZY Computing K.K.
