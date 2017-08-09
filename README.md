@@ -47,8 +47,6 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 > "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
 Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
 
-
-
 ## Apple
 > Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
@@ -137,10 +135,10 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/technology) (SNAP) will not do deep learning and is a curiosity without being a practical drop in CNN engineering solution, yet. IBM's [stochastic phase-change neurons](http://www.nature.com/nnano/journal/v11/n8/full/nnano.2016.70.html?foxtrotcallback=true) seem more interesting if that is a path you wish to tread.
 
 ## Groq
-[Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed TPU.
+[Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
 
 ## Aimotive
-[This artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
+[This BDTi artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
 > Speaking of chips, AImotive and partner VeriSilicon are in the process of designing a 22 nm FD-SOI test chip, which is forecast to come out of GlobalFoundries' fab in Q1 2018 (Figure 4). It will feature a 1 TMAC/sec aiWare core, consuming approximately 25 mm2 of silicon area; a Vivante VIP8000-derivative processor core will inhabit the other half of the die, and between 2-4 GBytes of DDR4 SDRAM will also be included in the multi-die package. The convolution-tailored LAM in this test chip, according to Feher, will have the following specifications (based on preliminary synthesis results):
 > 2,048 8x8 MACs
 > Logic area (including input/output buffering logic, LAM control and MACs): 3.45mm2
