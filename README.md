@@ -182,4 +182,5 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 
 ## Reference
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
+2. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
 
