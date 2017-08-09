@@ -157,6 +157,7 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 
 ## KAIST DNPU
 [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)
+
 [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)
 
 ## Synopsys Embedded Vision
