@@ -8,7 +8,7 @@
 On edge, Nvidia have NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)"
 
 ### Open Source DLA from Nvidia
-Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the General release will be avaliable on Sep. as promised. For more guess, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
+Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the General release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
 ## AMD
 ### GPU
@@ -42,25 +42,35 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 - [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.
 
 ## Qualcomm
-
+> Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
+> The [Hexagon DSP](https://www.bdti.com/InsideDSP/2015/09/30/Qualcomm) is far from a very wide parallel platform and it has been confirmed by Yann LeCun that Qualcomm and Facebook are working together on a better way in Wired's "[The Race To Build An AI Chip For Everything Just Got Real](https://www.wired.com/2017/04/race-make-ai-chips-everything-heating-fast/)",
+> "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
+Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
 
 ## Apple
+> Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
 ## ARM
+[DynamIQ](http://pages.arm.com/dynamiq-technology.html) is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.
 
 ## IBM TrueNorth
+[TrueNorth](http://www.research.ibm.com/articles/brain-chip.shtml) is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA [SyNAPSE](https://en.wikipedia.org/wiki/SyNAPSE) program.
+> It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. [Wikipedia](https://en.wikipedia.org/wiki/TrueNorth)
 
 ## HiSilicon(华为海思）
+Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. No more details yet.
 
 ## Cambricon（寒武纪）
+[Cambricon](http://www.cambricon.com/scheme/#sol_c) is working IP License, Chip Service, Smart Card and Intelligent Platform.
 
 ## Horizon Robotics（地平线机器人）
+[This Chinese start-up](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 
 ## Deephi（深鉴科技）
+[DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. 
 
 ## Bitmain（比特大陆）
-
-## IntelliFusion（云天励飞）
+Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for AI. 
 
 ## Wave Computing
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. From their [white paper](http://wavecomp.ai/technology/), the ALUs can do 1b, 8b, 16b and 32b,  
@@ -79,30 +89,45 @@ On TensorFlow ops,
 Some more details can be fund in [AI芯片 浅析Yann LeCun提到的两款Dataflow Chip](https://zhuanlan.zhihu.com/p/26594188)
 
 ## Graphcore
-
-## KnuEdge's KnuPath
+[Graphcore](https://www.graphcore.ai/) raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give [a talk](https://youtu.be/T8DvHnb3Y9g) at the 3rd Research and Applied AI Summit (RAAIS) in London, showing [interesting ideas](https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2) behind their processor. 
+[解密又一个xPU：Graphcore的IPU](https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g) give some analysis on its IPU architecture.
 
 ## PEZY Computing K.K.
+
 
 ## KnuEdge's KnuPath
 Their product page has since June 2016 gone missing in action. Not sure what they are up to with the $100M they put into their [MIMD architecture](https://www.hpcwire.com/2016/12/15/knupath-hermosa-chip-expected-first-half-2017/). It was described at the time as having 256 tiny DSP, or tDSP, cores on each ASIC along with an ARM controller suitable for sparse matrix processing in a 35W envelope. 
 The performance is unknown, but they compared their chip to a current NVIDIA, at that time, and said they had 2.5 times the performance. We know Nvidia is now more than ten times faster with their Tensor cores so KnuEdge will have a tough job keeping up. A MIMD or DSP approach will have to execute awfully well to take some share in this space.
 
 ## Tenstorrent
+[Tenstorrent](http://tenstorrent.com/index.html) is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the [Cognitive 300 list](http://www.cogniteventures.com/the-cognitive-computing-startup-list/).
 
 ## Cerebras
+[Cerebras](https://www.cerebras.net/) is notable due to its backing from Benchmark and that its founder was the CEO of SeaMicro. It appears to have [raised $25M](https://techcrunch.com/2016/12/19/a-stealthy-startup-called-cerebras-raised-around-25-million-to-build-deep-learning-hardware/) and remains in stealth mode.
 
 ## Thinci
+[Thinci](http://thinci.com/index.html) is [developing vision processors](https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/) from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.
 
 ## Koniku
+[Koniku's web site](http://koniku.io/) is counting down to "your new reality". They have raised very little money and after watching their Youtube clip embedded in this [Forbes page](https://www.forbes.com/sites/federicoguerrini/2016/05/22/neuron-based-chips-will-soon-become-commonplace-this-startup-founder-says/2/#299122784f1f), you too will not likely not be convinced, but you never know. Harnessing biological cells is certainly different. It sounds like [a science project](https://motherboard.vice.com/en_us/article/d7ypqw/komiku-neuron-computer-agabi), but, then this,
+> "We are a business. We are not a science project," Agabi, who is scheduled to speak at the Pioneers Festival in Vienna, next week, says, "There are demands that silicon cannot offer today, that we can offer with our systems."
+> The core of the Koniku offer is the so-called neuron-shell, inside which the startup says it can control how neurons communicate with each other, combined with a patent-pending electrode which allows to read and write information inside the neurons. All this packed in a device as large as an iPad, which they hope to reduce to the size of a nickel by 2018.
 
 ## Adapteva
+[Adapteva](http://www.adapteva.com/): "[Adapteva tapes out Epiphany-V: A 1024-core 64-bit RISC processor](https://meanderful.blogspot.jp/2016/10/adapteva-tapes-out-epiphany-v-1024-core.html)." Andreas Olofsson taped out his 1024 core chip late last year and we await news of its performance. [Epiphany-V](http://www.parallella.org/docs/e5_1024core_soc.pdf) has new instructions for deep learning and we'll have to see if this memory-controller-less design with 64MB of on-chip memory will have appropriate scalability. The impressive efficiency of Andrea's design and build may make this a chip we can all actually afford, so let's hope it performs well.
 
 ## Knowm
+[Knowm](http://knowm.org/) talks about Anti-Hebbian and Hebbian (AHaH) plasticity and memristors. Here is a paper covering the subject, "[AHaH Computing–From Metastable Switches to Attractors to Machine Learning](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175)."
 
 ## Mythic
+A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
 
 ## Kalray
+Despite many promises,[Kalray](http://www.kalrayinc.com/) has not progressed their chip offering beyond the 256 core beast I covered back in 2015, "Kalray - new product meander." Kalray is advertising their product as suitable for embedded self-driving car applications though I can't see the product architecture being an ideal CNN platform in its current form. Kalray has a Kalray Neural Network (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.
+
+Kalrays NN fortunes may improve with an imminent product refresh and just this month Kalray completed a new funding that raised $26M. The new Coolidge processor is due in mid-2018 with 80 or 160 cores along with 80 or 160 co-processors optimised for vision and deep learning.
+
+This is quite a change in architecture from their >1000 core approach and I think it is most sensible.
 
 ## Groq
 
