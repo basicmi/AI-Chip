@@ -5,10 +5,10 @@
 - [Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.
 
 ### SoC
-On edge, Nvidia have NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)"
+On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)"
 
 ### Open Source DLA from Nvidia
-Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the General release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
+Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
 ## AMD
 ### GPU
