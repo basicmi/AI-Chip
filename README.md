@@ -93,7 +93,9 @@ Some more details can be fund in [AI芯片 浅析Yann LeCun提到的两款Datafl
 [解密又一个xPU：Graphcore的IPU](https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g) give some analysis on its IPU architecture.
 
 ## PEZY Computing K.K.
-
+Pezy-SC and Pezy-SC2 are the 1024 core and 2048 core processors that [Pezy](http://pezy.co.jp/en/index.html) develop. The Pezy-SC 1024 core chip powered the top 3 systems on the Green500 list of supercomputers back in 2015. The [Pezy-SC2](https://en.wikichip.org/wiki/pezy/pezy-sc2) is the follow up chip that is meant to be delivered by now, but details are scarce yet intriguing,
+> "PEZY-SC2 HPC Brick: 32 of PEZY-SC2 module card with 64GB DDR4 DIMM (2.1 PetaFLOPS (DP) in single tank with 6.4Tb/s"
+It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do. In the [June 2017 Green500 list](https://www.top500.org/green500/list/2017/06/), a Nvidia P100 system took the number one spot and there is a Pezy-SC2 system at number 7. So the chip seems alive but details are thin on the ground. [Motoaki Saito](https://wired.jp/special/2016/motoaki-saito/) is certainly worth watching.
 
 ## KnuEdge's KnuPath
 Their product page has since June 2016 gone missing in action. Not sure what they are up to with the $100M they put into their [MIMD architecture](https://www.hpcwire.com/2016/12/15/knupath-hermosa-chip-expected-first-half-2017/). It was described at the time as having 256 tiny DSP, or tDSP, cores on each ASIC along with an ARM controller suitable for sparse matrix processing in a 35W envelope. 
@@ -123,36 +125,54 @@ The performance is unknown, but they compared their chip to a current NVIDIA, at
 A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
 
 ## Kalray
-Despite many promises,[Kalray](http://www.kalrayinc.com/) has not progressed their chip offering beyond the 256 core beast I covered back in 2015, "Kalray - new product meander." Kalray is advertising their product as suitable for embedded self-driving car applications though I can't see the product architecture being an ideal CNN platform in its current form. Kalray has a Kalray Neural Network (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.
+Despite many promises,[Kalray](http://www.kalrayinc.com/) has not progressed their chip offering beyond the 256 core beast covered back in 2015, "[Kalray - new product meander](https://meanderful.blogspot.jp/2015/06/kalray-new-product-meander.html)." Kalray is advertising their product as suitable for embedded self-driving car applications. Kalray has a [Kalray Neural Network](http://www.eenewseurope.com/news/kalray-turns-neural-networks) (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.
+Kalrays NN fortunes may improve with an imminent product refresh and just this month Kalray completed a new funding that raised $26M. The new [Coolidge processor]((http://www.eenewseurope.com/news/kalray-turns-neural-networks)) is due in mid-2018 with 80 or 160 cores along with 80 or 160 co-processors optimised for vision and deep learning.
 
-Kalrays NN fortunes may improve with an imminent product refresh and just this month Kalray completed a new funding that raised $26M. The new Coolidge processor is due in mid-2018 with 80 or 160 cores along with 80 or 160 co-processors optimised for vision and deep learning.
-
-This is quite a change in architecture from their >1000 core approach and I think it is most sensible.
+## Brainchip
+Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/technology) (SNAP) will not do deep learning and is a curiosity without being a practical drop in CNN engineering solution, yet. IBM's [stochastic phase-change neurons](http://www.nature.com/nnano/journal/v11/n8/full/nnano.2016.70.html?foxtrotcallback=true) seem more interesting if that is a path you wish to tread.
 
 ## Groq
+[Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed TPU.
 
 ## Aimotive
+[This artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
+> Speaking of chips, AImotive and partner VeriSilicon are in the process of designing a 22 nm FD-SOI test chip, which is forecast to come out of GlobalFoundries' fab in Q1 2018 (Figure 4). It will feature a 1 TMAC/sec aiWare core, consuming approximately 25 mm2 of silicon area; a Vivante VIP8000-derivative processor core will inhabit the other half of the die, and between 2-4 GBytes of DDR4 SDRAM will also be included in the multi-die package. The convolution-tailored LAM in this test chip, according to Feher, will have the following specifications (based on preliminary synthesis results):
+> 2,048 8x8 MACs
+> Logic area (including input/output buffering logic, LAM control and MACs): 3.45mm2
+> Memory (on-chip buffer): in the range of 5-25mm2 depending on configuration (10-50 Mbits).
 
 ## Deep Vision
+[Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
 ## Deep Scale
+[DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
 
 ## REM
+[Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 ## Leepmind
+[Leepmind](http://www.leapmind.io/products.php)
+> We are carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
 ## KAIST DNPU
-
-## MIT A Scalable Speech Recognizer
+[Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)
+[从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)
 
 ## Synopsys Embedded Vision
+[DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)
+[处理器IP厂商的机器学习方案 - Synopsys](http://mp.weixin.qq.com/s/Y4BvzmH67OaTWc_2SXIVGg)
 
 ## CEVA XM6
+[CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)
+[处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)
 
 ## VeriSilicon VIP8000
+[VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)
+[神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)
 
 ## Cadence P5/P6/C5
+[Tensilica Vision DSPs for Imaging, Computer Vision, and Neural Networks](https://ip.cadence.com/vision&CMP=TIP_BB_CDN_Vis_0501_C5_PP)
 
-### Reference
+## Reference
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
 
