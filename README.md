@@ -1,7 +1,9 @@
 ## GPUs from Nvidia
-[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/)
 
-## 
+[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/)
+[Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw)
+
+##  
 
 ## Welcome to GitHub Pages
 
