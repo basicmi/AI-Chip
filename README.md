@@ -1,5 +1,5 @@
 ## GPUs from Nvidia
-https://www.nvidia.com/en-us/data-center/tesla-v100/
+[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/)
 
 ## 
 
