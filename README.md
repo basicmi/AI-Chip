@@ -52,8 +52,12 @@ Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, a
 ## Apple
 > Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
+[Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
+
 ## ARM
 [DynamIQ](http://pages.arm.com/dynamiq-technology.html) is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.
+
+ARM also provide a open source [Compute Library](https://developer.arm.com/technologies/compute-library) contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.
 
 ## IBM TrueNorth
 [TrueNorth](http://www.research.ibm.com/articles/brain-chip.shtml) is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA [SyNAPSE](https://en.wikipedia.org/wiki/SyNAPSE) program.
@@ -147,7 +151,7 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 > Logic area (including input/output buffering logic, LAM control and MACs): 3.45mm2
 > Memory (on-chip buffer): in the range of 5-25mm2 depending on configuration (10-50 Mbits).
 
-Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef)
+Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef).
 ## Deep Vision
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
