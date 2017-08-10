@@ -17,7 +17,7 @@
 ## Intel
 ### Nervana
 - Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
-### movidius
+### Movidius
 - [Movidous VPU](https://www.movidius.com/technology) is basicly an array of vector processor, which may not be very efficient to accelerate DNNs.
 
 ### FPGA
