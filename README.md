@@ -24,7 +24,7 @@
 - Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
 ## Google TPU
-- Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. The giant heatsinks on the TPU2 are some cause for speculation, but the market is changing from devices to units with groups of devices and also such groups within the cloud.
+- Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. 
 
 Other references are:
 
@@ -146,6 +146,7 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 > Logic area (including input/output buffering logic, LAM control and MACs): 3.45mm2
 > Memory (on-chip buffer): in the range of 5-25mm2 depending on configuration (10-50 Mbits).
 
+Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef)
 ## Deep Vision
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
