@@ -70,7 +70,8 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 ## HiSilicon(华为海思）
 > Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. 
 
-No more details yet.
+According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera] SoC(http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A V100.pdf), it has:
+> Dual-core CNN@700 MHz neural network acceleration engine
 
 ## Cambricon（寒武纪）
 [Cambricon](http://www.cambricon.com/scheme/#sol_c) is working on IP License, Chip Service, Smart Card and Intelligent Platform.
