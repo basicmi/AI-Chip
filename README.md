@@ -70,6 +70,10 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 ## HiSilicon(华为海思）
 > Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. 
 
+### Kirin for Smart Phone
+Kirin 970 may have an embedded deep learning accelerator.
+
+### Mobile Camera SoC
 According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A%20V100.pdf), it has:
 > Dual-core CNN@700 MHz neural network acceleration engine
 
