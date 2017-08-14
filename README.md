@@ -22,7 +22,7 @@
 > Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
 
 ### Movidius
-- [Movidous VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
+- [Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
 
 ### FPGA
 - Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
