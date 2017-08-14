@@ -83,6 +83,8 @@ According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](ht
 ## Horizon Robotics（地平线机器人）
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 
+> Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. They also teamed up with Midea and launched an intelligent [air conditioner](http://www.midea.com/global/products/air_conditioning/residential_air_conditioner/ac_split/201403/t20140309_70731.shtml) that no doubt solves loads of first world problems including home security. No news yet on when we can expect their Brain Processing Unit (BPU) to debut but it was supposed to be “[in early 2017](http://www.scmp.com/tech/article/1921396/chinese-start-track-deliver-artificial-intelligence-chip)“. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
+
 ## Deephi（深鉴科技）
 [DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. 
 
@@ -115,6 +117,8 @@ Their product page has since June 2016 gone missing in action. Not sure what the
 
 > The performance is unknown, but they compared their chip to a current NVIDIA, at that time, and said they had 2.5 times the performance. We know Nvidia is now more than ten times faster with their Tensor cores so KnuEdge will have a tough job keeping up. A MIMD or DSP approach will have to execute awfully well to take some share in this space.
 
+> Since KnuEdge “emerged from stealth” last year, the company has gone quiet and not offered up any additional information about what they’ve been up to. According to an [article in VentureBeat](https://venturebeat.com/2016/06/06/former-nasa-chief-unveils-100-million-neural-computing-chip-company-knuedge/), we know that KnuEdge has already been generating revenue and that they were considering raising more funding this year in addition to the $100 million in “patient money” they have already raised. Their website contains next to no information aside from employee profiles. At an [Xconomy conference](http://www.xconomy.com/san-diego/2017/05/02/smarr-others-talk-healthtech-ai-at-xconomys-impact-of-innovation/) a few weeks ago, the Company talked about “cloud-based machine intelligence as a service” that is “supposed to be rolled out sometime this year“.
+
 ## Tenstorrent
 [Tenstorrent](http://tenstorrent.com/index.html) is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the [Cognitive 300 list](http://www.cogniteventures.com/the-cognitive-computing-startup-list/).
 
@@ -123,6 +127,8 @@ Their product page has since June 2016 gone missing in action. Not sure what the
 
 ## Thinci
 [Thinci](http://thinci.com/index.html) is [developing vision processors](https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/) from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.
+
+> Founded in 2010, Eldorado Hills, California startup ThinCI has taken in an undisclosed amount of funding to develop a technology that will bring vision processing to all devices. The ability for smart devices to have functionality like computer vision that doesn’t require regular communication to the cloud is referred to as “edge computing” or “fog computing”. That’s where ThinCI wants to play.
 
 ## Koniku
 [Koniku's web site](http://koniku.io/) is counting down to "your new reality". They have raised very little money and after watching their Youtube clip embedded in this [Forbes page](https://www.forbes.com/sites/federicoguerrini/2016/05/22/neuron-based-chips-will-soon-become-commonplace-this-startup-founder-says/2/#299122784f1f), you too will not likely not be convinced, but you never know. Harnessing biological cells is certainly different. It sounds like [a science project](https://motherboard.vice.com/en_us/article/d7ypqw/komiku-neuron-computer-agabi), but, then this,
@@ -133,10 +139,12 @@ Their product page has since June 2016 gone missing in action. Not sure what the
 [Adapteva](http://www.adapteva.com/): "[Adapteva tapes out Epiphany-V: A 1024-core 64-bit RISC processor](https://meanderful.blogspot.jp/2016/10/adapteva-tapes-out-epiphany-v-1024-core.html)." Andreas Olofsson taped out his 1024 core chip late last year and we await news of its performance. [Epiphany-V](http://www.parallella.org/docs/e5_1024core_soc.pdf) has new instructions for deep learning and we'll have to see if this memory-controller-less design with 64MB of on-chip memory will have appropriate scalability. The impressive efficiency of Andrea's design and build may make this a chip we can all actually afford, so let's hope it performs well.
 
 ## Knowm
-[Knowm](http://knowm.org/) talks about Anti-Hebbian and Hebbian (AHaH) plasticity and memristors. Here is a paper covering the subject, "[AHaH Computing–From Metastable Switches to Attractors to Machine Learning](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175)."
+- [Knowm](http://knowm.org/) is actually setup as a .ORG but they appear to be pursuing a for-profit enterprise. The New Mexcio startup has taken in an undisclosed amount of seed funding so far to develop a new computational framework called [AHaH Computing](http://knowm.org/ahah-computing/) (Anti-Hebbian and Hebbian). The gory details can be found in [this publication](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175), but the short story is that this technology aims to reduce the size and power consumption of intelligent machine learning applications by up to 9 orders of magnitude.
+
 
 ## Mythic
 A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
+> Founded in 2012, Texas-based startup Mythic (formerly known as Isocline) has taken in $9.5 million in funding with Draper Fisher Jurvetson as the lead investor. Prior to receiving any funding, the startup has taken in [$2.5 million in grants](https://techcrunch.com/2017/03/22/mythic-launches-a-chip-to-enable-computer-vision-and-voice-control-on-any-device/). Mythic is developing an AI chip that “puts desktop GPU compute capabilities and deep neural networks onto a button-sized chip – with 50x higher battery life and far more data processing capabilities than competitors“. Essentially, that means you can give voice control and computer vision to any device locally without needing cloud connectivity.
 
 ## Kalray
 Despite many promises,[Kalray](http://www.kalrayinc.com/) has not progressed their chip offering beyond the 256 core beast covered back in 2015, "[Kalray - new product meander](https://meanderful.blogspot.jp/2015/06/kalray-new-product-meander.html)." Kalray is advertising their product as suitable for embedded self-driving car applications. Kalray has a [Kalray Neural Network](http://www.eenewseurope.com/news/kalray-turns-neural-networks) (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.
@@ -169,6 +177,11 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Leepmind](http://www.leapmind.io/products.php)
 > We are carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
+## Krtkl
+[krtkl](http://krtkl.com/). 
+
+> This crowdfunding effort made its way into our original article on AI chips so it’s only fair we include it in this one. While it is not actually possible to pick a worse name for your startup than “krtkl”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
+
 ## KAIST DNPU
 - [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)
 
@@ -194,5 +207,6 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 ## Reference
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
-2. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
+2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)
+3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
 
