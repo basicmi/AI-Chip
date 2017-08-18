@@ -38,6 +38,8 @@ Other references are:
 
 - [脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)
 
+- [Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)
+
 ## Xilinx
 Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
 > Whilst performance per Watt is impressive for FPGAs, the vendors' larger chips have long had earth shatteringly high chip prices for the larger chips. Finding a balance between price and capability is the main challenge with the FPGAs.
