@@ -82,6 +82,8 @@ According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](ht
 ## Cambricon（寒武纪）
 [Cambricon](http://www.cambricon.com/scheme/#sol_c) is working on IP License, Chip Service, Smart Card and Intelligent Platform.
 
+Cambricon just [raised record $100M round A] (https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon)
+
 ## Horizon Robotics（地平线机器人）
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 
