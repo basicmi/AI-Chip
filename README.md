@@ -62,6 +62,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 > "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
 Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
 
+In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.
+
 ## Apple
 > Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
