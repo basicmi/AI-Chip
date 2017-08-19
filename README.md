@@ -13,6 +13,7 @@
 ## AMD
 ### GPU
 - The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
+
 > AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
 
 ## Intel
