@@ -29,7 +29,7 @@
 ### FPGA
 - Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
-## Fujitsu DPU
+## Fujitsu DLU
 > This [DLU that Fujitsu is creating](https://www.nextplatform.com/2017/08/09/fujitsu-bets-deep-leaning-hpc-divergence/) is done from scratch, and it is not based on either the Sparc or ARM instruction set and, in fact, it has its own instruction set and a new data format specifically for deep learning, which were created from scratch. 
 
 > Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. 
