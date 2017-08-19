@@ -13,6 +13,7 @@
 ## AMD
 ### GPU
 - The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
+> AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
 
 ## Intel
 ### Nervana
@@ -26,6 +27,11 @@
 
 ### FPGA
 - Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
+
+## Fujitsu DPU
+> This [DLU that Fujitsu is creating](https://www.nextplatform.com/2017/08/09/fujitsu-bets-deep-leaning-hpc-divergence/) is done from scratch, and it is not based on either the Sparc or ARM instruction set and, in fact, it has its own instruction set and a new data format specifically for deep learning, which were created from scratch. 
+
+> Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. 
 
 ## Google TPU
 - Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. 
@@ -91,9 +97,10 @@ Cambricon just [raised record $100M round A] (https://www.chinamoneynetwork.com/
 
 ## Deephi（深鉴科技）
 [DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. 
+This nextplatform arcicle [FPGA Startup Gathers Funding Force for Merged Hyperscale Inference](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.
 
 ## Bitmain（比特大陆）
-Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for AI. 
+Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 
 ## Wave Computing
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  [white paper](http://wavecomp.ai/technology/).
@@ -138,7 +145,6 @@ Their product page has since June 2016 gone missing in action. Not sure what the
 
 ## Knowm
 - [Knowm](http://knowm.org/) is actually setup as a .ORG but they appear to be pursuing a for-profit enterprise. The New Mexcio startup has taken in an undisclosed amount of seed funding so far to develop a new computational framework called [AHaH Computing](http://knowm.org/ahah-computing/) (Anti-Hebbian and Hebbian). The gory details can be found in [this publication](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175), but the short story is that this technology aims to reduce the size and power consumption of intelligent machine learning applications by up to 9 orders of magnitude.
-
 
 ## Mythic
 A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
