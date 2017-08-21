@@ -3,36 +3,38 @@
 ## Nvidia
 
 **GPU**
-- [Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.
-- Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.
-- [Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.
+[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.
+
+Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.
+
+[Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.
 
 **SoC**
-- On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)"
+On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)"
 
-**Open Source DLA from Nvidia**
-- Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
+**Open Source Deep Learning Accelerator DLA**
+Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
 ## AMD
 
 **GPU**
-- The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
+The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
 
 > AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
 
 ## Intel
 
 **Nervana**
-- Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
 
 **Mobileye EyeQ**
 > Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
 
 **Movidius**
-- [Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
+[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
 
 **FPGA**
-- Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
+Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
 ## Fujitsu DLU
 > This [DLU that Fujitsu is creating](https://www.nextplatform.com/2017/08/09/fujitsu-bets-deep-leaning-hpc-divergence/) is done from scratch, and it is not based on either the Sparc or ARM instruction set and, in fact, it has its own instruction set and a new data format specifically for deep learning, which were created from scratch. 
@@ -44,22 +46,25 @@ Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look
 
 Other references are:
 
-- [Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)
+[Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)
 
-- [Google的神经网络处理器专利](https://mp.weixin.qq.com/s/lBQyNSNa6-joeLZ_Kq2W8A)
+[Google的神经网络处理器专利](https://mp.weixin.qq.com/s/lBQyNSNa6-joeLZ_Kq2W8A)
 
-- [脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)
+[脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)
 
-- [Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)
+[Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)
 
 ## Xilinx
 Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
+
 > Whilst performance per Watt is impressive for FPGAs, the vendors' larger chips have long had earth shatteringly high chip prices for the larger chips. Finding a balance between price and capability is the main challenge with the FPGAs.
 
 ## Microsoft FPGA
-- Microsoft has thrown its hat into the FPGA ring, "[Microsoft Goes All in for FPGAs to Build Out AI Cloud](https://www.top500.org/news/microsoft-goes-all-in-for-fpgas-to-build-out-cloud-based-ai/)." 
-- Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)"
-- [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.
+Microsoft has thrown its hat into the FPGA ring, "[Microsoft Goes All in for FPGAs to Build Out AI Cloud](https://www.top500.org/news/microsoft-goes-all-in-for-fpgas-to-build-out-cloud-based-ai/)." 
+
+Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)"
+
+[Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.
 
 ## Qualcomm
 > Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
