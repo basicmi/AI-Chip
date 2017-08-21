@@ -213,6 +213,9 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 - [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)
 
+## Amazon AWS FPGA
+> [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
+
 ## Synopsys Embedded Vision
 - [DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)
 
