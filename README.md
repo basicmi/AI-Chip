@@ -200,8 +200,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 ## Leepmind
-[Leepmind](http://www.leapmind.io/products.php)
-> We are carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
+> [Leepmind](http://www.leapmind.io/products.php) is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
 ## Krtkl
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
