@@ -1,4 +1,4 @@
-# List of AI/Minchine Learning/Deep Learning Chips and IPs
+# List of AI/Machine Learning/Deep Learning CHIPs and IPs
 
 ## Nvidia
 
