@@ -1,4 +1,4 @@
-# List of AI/Machine Learning/Deep Learning CHIPs and IPs
+# List of AI/ML/DL CHIPs and IPs
 
 ## Nvidia
 
