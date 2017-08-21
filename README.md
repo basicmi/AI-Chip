@@ -1,3 +1,5 @@
+# AI/ML/DL Chips and IPs
+
 ## Nvidia
 ### GPU
 - [Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.
