@@ -100,7 +100,7 @@ Cambricon just [raised record $100M round A](https://www.chinamoneynetwork.com/2
 
 ## Deephi（深鉴科技）
 [DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. 
-This nextplatform arcicle [FPGA Startup Gathers Funding Force for Merged Hyperscale Inference](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.
+This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hyperscale Inference"](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.
 
 ## Bitmain（比特大陆）
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
