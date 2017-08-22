@@ -1,7 +1,6 @@
-# List of AI/ML/DL CHIPs and IPs
+<div align="center"><h1>List of AI/ML/DL CHIPs and IPs</h1></div>
 
 <div align="center"><h2>I. Traditional Chip Giants</h2></div>
-<hr />
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="40"> </div>
 **GPU**
@@ -95,8 +94,7 @@ Kirin 970 may have an embedded deep learning accelerator.
 According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A%20V100.pdf), it has:
 > Dual-core CNN@700 MHz neural network acceleration engine
 
-## II. Internet/Cloud/HPC Giants
-
+<div align="center"><h2>II. Internet/Cloud/HPC Giants</h2></div>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Google_logo.png" height="40"></div>
 
@@ -162,7 +160,7 @@ Other references are:
 
 > Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. 
 
-## III. Traditional IP Vendors
+<div align="center"><h2>III. Traditional IP Vendors</h2></div>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="30"></div>
 
@@ -201,7 +199,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 - [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)
 
-## IV. Startups
+<div align="center"><h2>IV. Startups</h2></div>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></div>
 
@@ -276,7 +274,7 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Brainchip_logo.png" height="40"></div>
 Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/technology) (SNAP) will not do deep learning and is a curiosity without being a practical drop in CNN engineering solution, yet. IBM's [stochastic phase-change neurons](http://www.nature.com/nnano/journal/v11/n8/full/nnano.2016.70.html?foxtrotcallback=true) seem more interesting if that is a path you wish to tread.
 
-### Groq
+<div align="center"><h3>Groq</h3></div>
 [Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="40"></div>
@@ -288,13 +286,13 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 
 Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef).
 
-### DEEP VISION
+<div align="center"><h3>DEEP VISION</h3></div>
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="40"></div>
 [DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
 
-### REM
+<div align="center"><h3>REM</h3></div>
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="40"></div>
@@ -303,15 +301,15 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="40"></div>
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
-### TERADEEP
+<div align="center"><h3>TERADEEP</h3></div>
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
 
-## KAIST DNPU
+<div align="center"><h3>KAIST DNPU</h3></div>
 - [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)
 
 - [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)
 
-## Reference
+<div align="center"><h2>Reference</h2></div>
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
 2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
