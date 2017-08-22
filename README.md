@@ -1,7 +1,8 @@
 <div align="center"><h1>AI/ML/DL ICs and IPs</h1></div>
+<div align="center"><h3>Editor T.S.</h3></div>
+<div align="center"><h3>欢迎访问我的微信公众号StarryHeavensAbove</h3></div>
 
 <div align="center"><h2>I. IC Giants</h2></div>
-
 <HR>
 
 <div align="center"><h3> </h3></div>
