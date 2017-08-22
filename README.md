@@ -312,11 +312,6 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/technology) (SNAP) will not do deep learning and is a curiosity without being a practical drop in CNN engineering solution, yet. IBM's [stochastic phase-change neurons](http://www.nature.com/nnano/journal/v11/n8/full/nnano.2016.70.html?foxtrotcallback=true) seem more interesting if that is a path you wish to tread.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h3>Groq</h3></div>
-<div align="center"><h3> </h3></div>
-[Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
-
-<div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 [This BDTi artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
@@ -328,7 +323,7 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef).
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h3>DEEP VISION</h3></div>
+<div align="center"><h2>DEEP VISION</h2></div>
 <div align="center"><h3> </h3></div>
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
@@ -338,7 +333,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h3>REM</h3></div>
+<div align="center"><h2>REM</h2></div>
 <div align="center"><h3> </h3></div>
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
@@ -353,16 +348,22 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h3>TERADEEP</h3></div>
+<div align="center"><h2>TERADEEP</h2></div>
 <div align="center"><h3> </h3></div>
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h3>KAIST DNPU</h3></div>
+<div align="center"><h2>Groq</h2></div>
+<div align="center"><h3> </h3></div>
+[Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
+
+<div align="center"><h3> </h3></div>
+<div align="center"><h2>KAIST DNPU</h2></div>
 <div align="center"><h3> </h3></div>
 - [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)
 
 - [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)
+
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>Reference</h2></div>
