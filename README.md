@@ -303,7 +303,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="40">
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/TeraDeep_logo.png" height="40">
+### TERADEEP
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
 
 ## KAIST DNPU
