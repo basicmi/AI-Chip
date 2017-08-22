@@ -1,4 +1,4 @@
-<div align="center"><h1>List of AI/ML/DL CHIPs and IPs</h1></div>
+<div align="center"><h1>AI/ML/DL CHIPs and IPs</h1></div>
 
 <div align="center"><h2>I. Traditional Chip Giants</h2></div>
 
