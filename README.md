@@ -150,7 +150,7 @@ Other references are:
 [FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="60">
 
 
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html)
@@ -215,7 +215,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 > Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. They also teamed up with Midea and launched an intelligent [air conditioner](http://www.midea.com/global/products/air_conditioning/residential_air_conditioner/ac_split/201403/t20140309_70731.shtml) that no doubt solves loads of first world problems including home security. No news yet on when we can expect their Brain Processing Unit (BPU) to debut but it was supposed to be “[in early 2017](http://www.scmp.com/tech/article/1921396/chinese-start-track-deliver-artificial-intelligence-chip)“. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60">
 [DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. 
 This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hyperscale Inference"](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.
 
