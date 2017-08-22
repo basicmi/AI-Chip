@@ -240,7 +240,7 @@ Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on th
 Some more details can be fund in this article: [AI芯片 浅析Yann LeCun提到的两款Dataflow Chip](https://zhuanlan.zhihu.com/p/26594188)
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="80"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></div>
 <div align="center"><h3> </h3></div>
 [Graphcore](https://www.graphcore.ai/) raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give [a talk](https://youtu.be/T8DvHnb3Y9g) at the 3rd Research and Applied AI Summit (RAAIS) in London, showing [interesting ideas](https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2) behind their processor. 
 
@@ -254,7 +254,7 @@ Pezy-SC and Pezy-SC2 are the 1024 core and 2048 core processors that [Pezy](http
 It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do. In the [June 2017 Green500 list](https://www.top500.org/green500/list/2017/06/), a Nvidia P100 system took the number one spot and there is a Pezy-SC2 system at number 7. So the chip seems alive but details are thin on the ground. [Motoaki Saito](https://wired.jp/special/2016/motoaki-saito/) is certainly worth watching.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/KnuEdge_logo.png" height="80"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/KnuEdge_logo.png" height="70"></div>
 <div align="center"><h3> </h3></div>
 [Their product page](https://www.knuedge.com/) has since June 2016 gone missing in action. Not sure what they are up to with the $100M they put into their [MIMD architecture](https://www.hpcwire.com/2016/12/15/knupath-hermosa-chip-expected-first-half-2017/). It was described at the time as having 256 tiny DSP, or tDSP, cores on each ASIC along with an ARM controller suitable for sparse matrix processing in a 35W envelope. 
 
@@ -266,7 +266,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 [Tenstorrent](http://tenstorrent.com/index.html) is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the [Cognitive 300 list](http://www.cogniteventures.com/the-cognitive-computing-startup-list/).
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></div>
 <div align="center"><h3> </h3></div>
 [Cerebras](https://www.cerebras.net/) is notable due to its backing from Benchmark and that its founder was the CEO of SeaMicro. It appears to have [raised $25M](https://techcrunch.com/2016/12/19/a-stealthy-startup-called-cerebras-raised-around-25-million-to-build-deep-learning-hardware/) and remains in stealth mode.
 
@@ -278,7 +278,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 > Founded in 2010, Eldorado Hills, California startup ThinCI has taken in an undisclosed amount of funding to develop a technology that will bring vision processing to all devices. The ability for smart devices to have functionality like computer vision that doesn’t require regular communication to the cloud is referred to as “edge computing” or “fog computing”. That’s where ThinCI wants to play.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></div>
 <div align="center"><h3> </h3></div>
 [Koniku's web site](http://koniku.io/) is counting down to "your new reality". They have raised very little money and after watching their Youtube clip embedded in this [Forbes page](https://www.forbes.com/sites/federicoguerrini/2016/05/22/neuron-based-chips-will-soon-become-commonplace-this-startup-founder-says/2/#299122784f1f), you too will not likely not be convinced, but you never know. Harnessing biological cells is certainly different. It sounds like [a science project](https://motherboard.vice.com/en_us/article/d7ypqw/komiku-neuron-computer-agabi), but, then this,
 > "We are a business. We are not a science project," Agabi, who is scheduled to speak at the Pioneers Festival in Vienna, next week, says, "There are demands that silicon cannot offer today, that we can offer with our systems."
@@ -295,7 +295,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 - [Knowm](http://knowm.org/) is actually setup as a .ORG but they appear to be pursuing a for-profit enterprise. The New Mexcio startup has taken in an undisclosed amount of seed funding so far to develop a new computational framework called [AHaH Computing](http://knowm.org/ahah-computing/) (Anti-Hebbian and Hebbian). The gory details can be found in [this publication](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175), but the short story is that this technology aims to reduce the size and power consumption of intelligent machine learning applications by up to 9 orders of magnitude.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="25"></div>
 <div align="center"><h3> </h3></div>
 A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
 > Founded in 2012, Texas-based startup Mythic (formerly known as Isocline) has taken in $9.5 million in funding with Draper Fisher Jurvetson as the lead investor. Prior to receiving any funding, the startup has taken in [$2.5 million in grants](https://techcrunch.com/2017/03/22/mythic-launches-a-chip-to-enable-computer-vision-and-voice-control-on-any-device/). Mythic is developing an AI chip that “puts desktop GPU compute capabilities and deep neural networks onto a button-sized chip – with 50x higher battery life and far more data processing capabilities than competitors“. Essentially, that means you can give voice control and computer vision to any device locally without needing cloud connectivity.
@@ -317,7 +317,7 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 [Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 [This BDTi artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
 > Speaking of chips, AImotive and partner VeriSilicon are in the process of designing a 22 nm FD-SOI test chip, which is forecast to come out of GlobalFoundries' fab in Q1 2018 (Figure 4). It will feature a 1 TMAC/sec aiWare core, consuming approximately 25 mm2 of silicon area; a Vivante VIP8000-derivative processor core will inhabit the other half of the die, and between 2-4 GBytes of DDR4 SDRAM will also be included in the multi-die package. The convolution-tailored LAM in this test chip, according to Feher, will have the following specifications (based on preliminary synthesis results):
@@ -333,7 +333,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 [DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
 
@@ -343,12 +343,12 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
 > [Leepmind](http://www.leapmind.io/products.php) is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
