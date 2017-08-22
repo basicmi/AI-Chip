@@ -2,7 +2,7 @@
 
 <div align="center"><h2>I. Traditional Chip Giants</h2></div>
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="40"> </div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
@@ -323,19 +323,9 @@ Brainchip's [Spiking Neuron Adaptive Processor](http://www.brainchipinc.com/tech
 Another interesting activity of Aimotive is [Neural Network Exchange Format (NNEF)](https://www.khronos.org/nnef).
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>DEEP VISION</h2></div>
-<div align="center"><h3> </h3></div>
-[Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
-
-<div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 [DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
-
-<div align="center"><h3> </h3></div>
-<div align="center"><h2>REM</h2></div>
-<div align="center"><h3> </h3></div>
-[Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></div>
@@ -348,9 +338,19 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
+<div align="center"><h2>REM</h2></div>
+<div align="center"><h3> </h3></div>
+[Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
+
+<div align="center"><h3> </h3></div>
 <div align="center"><h2>TERADEEP</h2></div>
 <div align="center"><h3> </h3></div>
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
+
+<div align="center"><h3> </h3></div>
+<div align="center"><h2>DEEP VISION</h2></div>
+<div align="center"><h3> </h3></div>
+[Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>Groq</h2></div>
