@@ -144,7 +144,7 @@ Other references are:
 [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40" style="background-color:gray;">
 
 
 [FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
@@ -208,7 +208,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 [Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="40" style="background-color:gray>
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="40" style="background-color:gray;">
 
 
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
