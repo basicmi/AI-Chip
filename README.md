@@ -2,7 +2,7 @@
 
 ## I. Traditional Chip Giants
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="40" </div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="40"> </div>
 
 **GPU**
 
