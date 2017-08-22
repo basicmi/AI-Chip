@@ -99,7 +99,7 @@ According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](ht
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>II. Internet/Cloud/HPC Giants</h2></div>
-
+<HR>
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Google_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
@@ -171,7 +171,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>III. Traditional IP Vendors</h2></div>
-
+<HR>
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
@@ -212,7 +212,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>IV. Startups</h2></div>
-
+<HR>
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
@@ -374,6 +374,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>Reference</h2></div>
+<HR>
 <div align="center"><h3> </h3></div>
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
 2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)
