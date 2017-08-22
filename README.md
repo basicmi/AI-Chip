@@ -1,6 +1,7 @@
 <div align="center"><h1>AI/ML/DL CHIPs and IPs</h1></div>
 
 <div align="center"><h2>I. Traditional Chip Giants</h2></div>
+<br/>
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
