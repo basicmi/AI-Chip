@@ -1,8 +1,36 @@
-<div align="center"><h1>AI/ML/DL CHIPs and IPs</h1></div>
+<div align="center"><h1>AI/ML/DL ICs and IPs</h1></div>
 
-<div align="center"><h2>I. Traditional Chip Giants</h2></div>
+<div align="center"><h2>I. IC Giants</h2></div>
 
 <HR>
+
+<div align="center"><h3> </h3></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
+<div align="center"><h3> </h3></div>
+
+<div align="center"><h3>Nervana</h3></div>
+
+Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+
+<div align="center"><h3>Mobileye EyeQ</h3></div>
+> Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
+
+<div align="center"><h3>Movidius</h3></div>
+[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
+
+<div align="center"><h3>FPGA</h3></div>
+Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
+
+<div align="center"><h3> </h3></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+
+> Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
+> The [Hexagon DSP](https://www.bdti.com/InsideDSP/2015/09/30/Qualcomm) is far from a very wide parallel platform and it has been confirmed by Yann LeCun that Qualcomm and Facebook are working together on a better way in Wired's "[The Race To Build An AI Chip For Everything Just Got Real](https://www.wired.com/2017/04/race-make-ai-chips-everything-heating-fast/)",
+> "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
+Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
+
+In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
@@ -24,40 +52,12 @@ On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous 
 Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
-<div align="center"><h3> </h3></div>
-
-<div align="center"><h3>Nervana</h3></div>
-
-Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
-
-<div align="center"><h3>Mobileye EyeQ</h3></div>
-> Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
-
-<div align="center"><h3>Movidius</h3></div>
-[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
-
-<div align="center"><h3>FPGA</h3></div>
-Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
-
-<div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
       
 The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
 
 > AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
-
-<div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
-<div align="center"><h3> </h3></div>
-
-> Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
-> The [Hexagon DSP](https://www.bdti.com/InsideDSP/2015/09/30/Qualcomm) is far from a very wide parallel platform and it has been confirmed by Yann LeCun that Qualcomm and Facebook are working together on a better way in Wired's "[The Race To Build An AI Chip For Everything Just Got Real](https://www.wired.com/2017/04/race-make-ai-chips-everything-heating-fast/)",
-> "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
-Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
-
-In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
@@ -68,7 +68,7 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 
 Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
