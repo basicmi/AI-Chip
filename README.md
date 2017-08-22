@@ -1,6 +1,6 @@
 # List of AI/ML/DL CHIPs and IPs
 
-## Nvidia
+## ![Nvidia](https://github.com/basicmi/Deep-Learning-Processor-List//blob/master/resource/Nvidia_logo_s.png)
 
 **GPU**
 
