@@ -128,31 +128,33 @@ Other references are:
 
 - [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.
 
-- [This article](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
+- [This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alibaba_Cloud_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div> 
 
-[FPGA Cloud server](https://cn.aliyun.com/product/ecs/fpga)
+[FPGA Cloud server](https://cn.aliyun.com/product/ecs/fpga) (Beta) is an computing instance of a field-programmable gate array (FPGA) that allows users to easily create FPGA design in minutes and create custom, dedicated hardware accelerators based on the Alibaba Cloud Elastic Computing Framework. 
+> 深度学习（Deep Learning）是一种多层计算模型，可以对复杂输入进行建模，在图像分类、语音识别、自然语言处理中取得了成果，FPGA 实例由于其细粒度并行的硬件特性，非常适合小批量数据的深度学习预测过程，以低功耗、低延迟、高性能著称，以 AlexNet 模型为例，使用 FPGA计算实例进行图片类别预测，速度比仅用CPU的普通实例快 8~15 倍。
   
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tencent_Cloud_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>  
 
-[FPGA instance](https://cloud.tencent.com/product/fpga)
+Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)(Beta), with three different specifications based on Xilinx Kintex UltraScale KU115 FPGA. They will provide more choices equiped with Inter FPGA in the future.
 
 <div align="center"><h3> </h3></div>  
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>  
 
-[FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
+[FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html) is open for beta test.
+> 在百度内部，FPGA从2013年开始就应用在许多典型的深度学习模型中，如DNN，RNN，CNN，LSTM等，涵盖了语音识别，自然语言处理，推荐算法，图像识别等广泛的应用领域。百度FPGA云服务器中开放了基于FPGA的深度卷积神经网络加速服务，单卡提供3Tops的定点计算能力，支持典型深度卷积网络算子，如卷积、逆卷积、池化、拼接、切割等，有效加速典型网络结构如VggNet、GoogLeNet、ResNet等。我们基于FPGA的深度学习硬件，深度定制优化了主流深度学习平台如caffe等，用户可以直接将深度学习业务切换到FPGA平台，而无需考虑底层硬件细节。
 
 <div align="center"><h3> </h3></div>  
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>  
 
-[FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html)
+[FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html), high performance FPGA instance is open for beta test.
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Fujitsu_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
