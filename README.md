@@ -20,7 +20,7 @@ On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous 
 
 Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
-<img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="80">
+<img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60">
 
 **Nervana**
 
@@ -38,6 +38,7 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 
 Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
+
 <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="40">
 
 
@@ -48,6 +49,7 @@ The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/e
 
 <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40">
 
+
 > Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
 > The [Hexagon DSP](https://www.bdti.com/InsideDSP/2015/09/30/Qualcomm) is far from a very wide parallel platform and it has been confirmed by Yann LeCun that Qualcomm and Facebook are working together on a better way in Wired's "[The Race To Build An AI Chip For Everything Just Got Real](https://www.wired.com/2017/04/race-make-ai-chips-everything-heating-fast/)",
 > "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
@@ -56,25 +58,32 @@ Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, a
 In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.
 
 
-<img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="80">
+<img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60">
 
 
 > Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
 [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="40">
+
+<img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="40">
+
 
 Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
 
 > Whilst performance per Watt is impressive for FPGAs, the vendors' larger chips have long had earth shatteringly high chip prices for the larger chips. Finding a balance between price and capability is the main challenge with the FPGAs.
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/IBM_logo.png" height="40">
+
 
 [TrueNorth](http://www.research.ibm.com/articles/brain-chip.shtml) is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA [SyNAPSE](https://en.wikipedia.org/wiki/SyNAPSE) program.
 > It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. [Wikipedia](https://en.wikipedia.org/wiki/TrueNorth)
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Hisilicon_logo.png" height="40">
+
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="40">
+
+
 > Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. 
 
 **Kirin for Smart Phone**
@@ -87,7 +96,10 @@ According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](ht
 > Dual-core CNN@700 MHz neural network acceleration engine
 
 ## II. Internet/Cloud/HPC Giants
+
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Google_logo.png" height="40">
+
 
 Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. 
 
@@ -101,11 +113,15 @@ Other references are:
 
 - [Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS_logo.png" height="40">
+
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS.png" height="40">
+
 
 > [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="40">
+
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60">
+
 
 - Microsoft has thrown its hat into the FPGA ring, "[Microsoft Goes All in for FPGAs to Build Out AI Cloud](https://www.top500.org/news/microsoft-goes-all-in-for-fpgas-to-build-out-cloud-based-ai/)." 
 
@@ -115,20 +131,33 @@ Other references are:
 
 - [This article](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aliyun_logo.gif" height="40">
+
 
 [FPGA Cloud server](https://cn.aliyun.com/product/ecs/fpga)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tencent_Cloud_logo.png" height="40">
+
+
 [FPGA instance](https://cloud.tencent.com/product/fpga)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud.png" height="40">
+
+
 [FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_cloud.png" height="40">
+
+
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html)
 
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Fujitsu_logo.png" height="40">
+
+
 > This [DLU that Fujitsu is creating](https://www.nextplatform.com/2017/08/09/fujitsu-bets-deep-leaning-hpc-divergence/) is done from scratch, and it is not based on either the Sparc or ARM instruction set and, in fact, it has its own instruction set and a new data format specifically for deep learning, which were created from scratch. 
 
 > Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. 
@@ -136,24 +165,38 @@ Other references are:
 ## III. Traditional IP Vendors
 
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="40">
+
+
 [DynamIQ](http://pages.arm.com/dynamiq-technology.html) is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.
 
 ARM also provide a open source [Compute Library](https://developer.arm.com/technologies/compute-library) contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synopsys_logo.png" height="40">
+
+
 - [DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)
 
 - [处理器IP厂商的机器学习方案 - Synopsys](http://mp.weixin.qq.com/s/Y4BvzmH67OaTWc_2SXIVGg)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/CEVA_logo.png" height="40">
+
+
 - [CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)
 
 - [处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cadence_logo.png" height="40">
+
+
 - [Tensilica Vision DSPs for Imaging, Computer Vision, and Neural Networks](https://ip.cadence.com/vision&CMP=TIP_BB_CDN_Vis_0501_C5_PP)
 
+
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Verisilicon_logo.png" height="40">
+
+
 - [VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)
 
 - [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)
@@ -161,9 +204,13 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 ## IV. Startups
 
 ### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40">
+
+
 [Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="40" style="background-color:gray>
+
+
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 
 > Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. They also teamed up with Midea and launched an intelligent [air conditioner](http://www.midea.com/global/products/air_conditioning/residential_air_conditioner/ac_split/201403/t20140309_70731.shtml) that no doubt solves loads of first world problems including home security. No news yet on when we can expect their Brain Processing Unit (BPU) to debut but it was supposed to be “[in early 2017](http://www.scmp.com/tech/article/1921396/chinese-start-track-deliver-artificial-intelligence-chip)“. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
