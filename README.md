@@ -2,6 +2,8 @@
 
 <div align="center"><h2>I. Traditional Chip Giants</h2></div>
 
+<HR style="border:1 dashed #987cb9" width="80%" color=#987cb9 SIZE=1>
+
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
