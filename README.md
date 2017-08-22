@@ -132,7 +132,7 @@ Other references are:
 - [This article](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resourceAlibaba_Cloud_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alibaba_Cloud_logo.png" height="40">
 
 
 [FPGA Cloud server](https://cn.aliyun.com/product/ecs/fpga)
@@ -150,7 +150,7 @@ Other references are:
 [FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resourceHUAWEI_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="40">
 
 
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html)
@@ -194,7 +194,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 - [Tensilica Vision DSPs for Imaging, Computer Vision, and Neural Networks](https://ip.cadence.com/vision&CMP=TIP_BB_CDN_Vis_0501_C5_PP)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Verisilicon_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/VeriSilicon_logo.png" height="40">
 
 
 - [VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)
