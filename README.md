@@ -81,7 +81,7 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 > It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. [Wikipedia](https://en.wikipedia.org/wiki/TrueNorth)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="60">
 
 
 > Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. 
@@ -132,7 +132,7 @@ Other references are:
 - [This article](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aliyun_logo.gif" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resourceAlibaba_Cloud_logo.png" height="40">
 
 
 [FPGA Cloud server](https://cn.aliyun.com/product/ecs/fpga)
@@ -144,13 +144,13 @@ Other references are:
 [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40">
 
 
 [FPGA Cloud Compute](https://cloud.baidu.com/product/fpga.html)
 
 
-### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_cloud.png" height="40">
+### <img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resourceHUAWEI_logo.png" height="40">
 
 
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html)
