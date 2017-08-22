@@ -155,6 +155,8 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><h3> </h3></div>  
 
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html), high performance FPGA instance is open for beta test.
+> FPGA云服务器提供CPU和FPGA直接的高达100Gbps PCIe互连通道，每节点提供8片Xilinx VU9P FPGA，同时提供FPGA之间高达200Gbps的Mesh光互连专用通道，让您的应用加速需求不再受到硬件限制。
+
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Fujitsu_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
