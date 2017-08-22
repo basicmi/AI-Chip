@@ -1,8 +1,7 @@
 # List of AI/ML/DL CHIPs and IPs
 
-## I. Traditional Chip Giants
-
-<div align="center"><h3>I. Traditional Chip Giants</h3></div>
+<div align="center"><h2>I. Traditional Chip Giants</h2></div>
+<hr />
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="40"> </div>
 **GPU**
