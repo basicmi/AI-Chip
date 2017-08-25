@@ -6,8 +6,8 @@
 <div align="center"><h2>Latest updates</h2></div>
 <HR>
 1. Add Cloud FPGA service From Aliyun, Tencent Cloud, Baidu Cloud and Huawei Cloud.
-2. Add referent articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU)
-3. Add NovuMind in Startup section 
+2. Add articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU) after Hot Chips 2017.
+3. Add NovuMind in Startup section.
 
 <div align="center"><h2>I. IC Giants</h2></div>
 <HR>
