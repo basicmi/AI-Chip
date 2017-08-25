@@ -347,7 +347,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 > NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
 [this video](https://www.youtube.com/watch?v=TGQGStPoNu4) is the description and demos of NovuMind FPGA AI Accelerator.
