@@ -7,9 +7,10 @@
 <HR>
 
 <font color="Darkred">
-1. Add Cloud FPGA service from Aliyun, Tencent Cloud, Baidu Cloud and Huawei Cloud.
-<br>2. Add articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU) after Hot Chips 2017.
-<br>3. Add NovuMind in Startup section.
+1. Add cloud FPGA service information from Aliyun, Tencent Cloud, Baidu Cloud and Huawei Cloud.
+<br>2. Add news and articles about Cambricon and Bitmain.
+<br>3. Add articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU) after Hot Chips 2017.
+<br>4. Add NovuMind in Startup section.
 </font>
 
 <div align="center"><h1> </h1></div>
