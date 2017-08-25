@@ -3,8 +3,15 @@
 <div align="center">微信公众号StarryHeavensAbove</div>
 <div align="center"><h1> </h1></div>
 
+<div align="center"><h2>Latest updates</h2></div>
+<HR>
+1. Add Cloud FPGA service From Aliyun, Tencent Cloud, Baidu Cloud and Huawei Cloud.
+2. Add referent articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU)
+3. Add NovuMind in Startup section 
+
 <div align="center"><h2>I. IC Giants</h2></div>
 <HR>
+<div align="center"><h1> </h1></div>
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
@@ -128,13 +135,13 @@ Other references are:
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
-- Microsoft has thrown its hat into the FPGA ring, "[Microsoft Goes All in for FPGAs to Build Out AI Cloud](https://www.top500.org/news/microsoft-goes-all-in-for-fpgas-to-build-out-cloud-based-ai/)." 
-
 - Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)".
 
 - [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.
 
 - [This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.
+
+- [Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alibaba_Cloud_logo.png" height="30"></div>
@@ -252,7 +259,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 <div align="center"><h3> </h3></div>
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  [white paper](http://wavecomp.ai/technology/).
 
-Some more details can be fund in this article: [AI芯片 浅析Yann LeCun提到的两款Dataflow Chip](https://zhuanlan.zhihu.com/p/26594188)
+After HotChips 2017, in the next plateform article "[First In-Depth View of Wave Computing’s DPU Architecture, Systems](https://www.nextplatform.com/2017/08/23/first-depth-view-wave-computings-dpu-architecture-systems/)", more details were discussed.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></div>
