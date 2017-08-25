@@ -150,6 +150,12 @@ Other references are:
 Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)(Beta), with three different specifications based on Xilinx Kintex UltraScale KU115 FPGA. They will provide more choices equiped with Inter FPGA in the future.
 
 <div align="center"><h3> </h3></div>  
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>  
+> We’ve written much over the last few years about the company’s emphasis on streamlining deep learning processing, most notably with GPUs, but [Baidu has a new processor](https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/) up its sleeve called the XPU. For now, the device has just been demonstrated in FPGA, but if it continues to prove useful for AI, analytics, cloud, and autonomous driving the search giant could push it into a full-bore ASIC.
+
+
+<div align="center"><h3> </h3></div>  
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>  
 
