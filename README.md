@@ -2,7 +2,7 @@
 <div align="center">Editor T.S.</div>
 <div align="center">微信公众号StarryHeavensAbove</div>
 <div align="center"><h1> </h1></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/walle_s.jpg" height="100"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/walle_s.jpg" height="80"></div>
 <div align="center"><h1> </h1></div>
 
 <div align="center"><h2>Latest updates</h2></div>
