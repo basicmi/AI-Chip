@@ -424,5 +424,6 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)
 
 <div align="center"><h3> </h3></div>
-<?PHP include ("https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/counter.php"); ?>
+
+<table width=81 cellspacing=0 border=0 cellpadding=0><tr><td width=81 height=22><a href="" target=_blank><img width=81 height=22 src="http://www.image-free-counter.net/toxaemic670.aspx?n=05" border=0 alt=""></a></td></tr><tr><td height=13><a href="http://www.free-counter-plus.com/" target=_blank><img width=50 height=13 src="http://www.image-free-counter.net/alsikes_220.jpg" alt="Http://www.free-counter-plus.com" border=0></a><a target=_blank href="http://www.free-counter-plus.com/counter/stats/stats.asp?id=555567083"><img width=31 alt="" src="http://www.image-free-counter.net/slanted-b.jpg" border=0 height=13></a></td></tr><tr align=CENTER><td colspan=2 height=15></td></tr></table>
 
