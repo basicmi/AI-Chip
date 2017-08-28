@@ -9,7 +9,7 @@
 /* This program is free software. You can redistribute it and/or modify */
 /************************************************************************/
 ## --  START OF CONFIG SECTION  --  ##
-$counterstyle = "images";   # Enter images or text
+$counterstyle = "text";   # Enter images or text
 $imagetype = "1";           # 1 to 10 = The type of image to display (SEE README FILE)
 ## --  END OF CONFIG SECTION  --  ##
 
