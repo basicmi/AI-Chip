@@ -422,5 +422,8 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 
+<a title="web analytics" href="http://statcounter.com/" target="_blank"><img src="//c.statcounter.com/11432900/0/8035c448/0/" alt="web
+analytics" style="border:none;"></a>
+
 <div align='center'><a href='http://www.free-website-hit-counter.com'><img src='http://www.free-website-hit-counter.com/c.php?d=9&id=104270&s=7' border='0' title='free website hit counter'></a><br/><small><a href='http://www.free-website-hit-counter.com' title="free website hit counter">Free website hit counter</a></small></div>
 
