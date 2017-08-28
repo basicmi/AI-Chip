@@ -420,5 +420,5 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)
 
 <div align="center"><h3> </h3></div>
-<?PHP include ("counter.php"); ?>
+<?PHP include ("https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/counter.php"); ?>
 
