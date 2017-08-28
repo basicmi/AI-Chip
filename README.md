@@ -415,8 +415,11 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <HR>
 <div align="center"><h3> </h3></div>
 1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)
+      
 2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)
+
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
+
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)
 
 <div align="center"><h3> </h3></div>
