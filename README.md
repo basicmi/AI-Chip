@@ -422,6 +422,8 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 
+<html>
+<body>
 
 <script type="text/javascript">
 
@@ -436,6 +438,12 @@ else
 document.write("Visits:  " + localStorage.pagecount + "  time(s).");
 
 </script> 
+
+<p>刷新页面会看到计数器在增长。</p>
+
+</body>
+</html>
+
 
 <div align='center'><a href='http://www.free-website-hit-counter.com'><img src='http://www.free-website-hit-counter.com/c.php?d=9&id=104270&s=7' border='0' title='free website hit counter'></a><br/><small><a href='http://www.free-website-hit-counter.com' title="free website hit counter">Free website hit counter</a></small></div>
 
