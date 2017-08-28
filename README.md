@@ -418,4 +418,6 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)
+      
+<TABLE border="0" cellpadding="0" cellspacing="0" width="110"><TR><TD height="25" width="110"><A target=_blank href=><IMG alt="" border="0" width="110" src=http://www.imgserver.org/clangs/jabotsc.jpg height="25"></A></TD></TR><TR><TD height="14"><A href=http://www.free-counter-plus.com/ target=_blank><IMG alt="http://www.free-counter-plus.com" border="0" height="14" width="63" src=http://www.imgserver.org/0brunt/osprey.aspx?id=ZT></A><A href=http://www.free-counter-plus.com/counter/stats/stats.asp?id=555567082 target=_blank><IMG src=http://www.imgserver.org/sahib272.jpg width="47" height="14" border="0" alt=""></A></TD></TR><TR align=center><TD colspan="2" height="14"></TD></TR></TABLE>
 
