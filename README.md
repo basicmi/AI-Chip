@@ -9,9 +9,9 @@
 <HR>
 
 <font color="Darkred">
-1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>, [Tencent Cloud](#Tencent_Cloud), [Baidu Cloud](#Baidu_Cloud) and [Huawei](#HUAWEI_Cloud) Cloud.
-<br>2. Add news and articles about Cambricon and Bitmain.
-<br>3. Add articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU) after Hot Chips 2017.
+1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>,  <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu_Cloud">Baidu Cloud</a> and <a href="#HUAWEI_Cloud">Huawei Cloud</a>.
+<br>2. Add news and articles about <a href="#Cambricon">Cambricon</a> and <a href="#Bitmain">Bitmain</a>.
+<br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
 <br>4. Add NovuMind in Startup section.
 </font>
 
@@ -140,6 +140,7 @@ Other references are:
 > [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
 
 <div align="center"><h3> </h3></div>
+<a name="Microsoft"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
@@ -242,6 +243,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><h2>IV. Startups</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
+<a name="Cambricon"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
@@ -262,12 +264,14 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hyperscale Inference"](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.
 
 <div align="center"><h3> </h3></div>
+<a name="Bitmain"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Bitmain_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 > [Bitmain’s newest product, the Sophon, may or may not take over deep learning](https://qz.com/1053799/chinas-bitmain-dominates-bitcoin-mining-now-it-wants-to-cash-in-on-artificial-intelligence/). But by giving it such a name Zhan and his Bitmain co-founder, Jihan Wu, have signaled to the world their intentions. The Sophon unit will include Bitmain’s first piece of bespoke silicon for a revolutionary AI technology. If things go to plan, thousands of Bitmain Sophon units soon could be training neural networks in vast data centers around the world.
 
 <div align="center"><h3> </h3></div>
+<a name="Wave"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Wave_Computing_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  [white paper](http://wavecomp.ai/technology/).
