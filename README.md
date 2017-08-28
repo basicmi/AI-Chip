@@ -9,7 +9,7 @@
 <HR>
 
 <font color="Darkred">
-1. Add cloud FPGA service information from [Aliyun](#Alibaba_Cloud), [Tencent Cloud](#Tencent_Cloud), [Baidu Cloud](#Baidu_Cloud) and [Huawei](#HUAWEI_Cloud) Cloud.
+1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>, [Tencent Cloud](#Tencent_Cloud), [Baidu Cloud](#Baidu_Cloud) and [Huawei](#HUAWEI_Cloud) Cloud.
 <br>2. Add news and articles about Cambricon and Bitmain.
 <br>3. Add articles about Microsoft’s BrainWave, Baidu XPU and Wave Computing Dataflow Processing Unit (DPU) after Hot Chips 2017.
 <br>4. Add NovuMind in Startup section.
