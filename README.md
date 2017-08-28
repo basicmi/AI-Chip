@@ -54,11 +54,9 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
-- [Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.
-
-- Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.
-
-- [Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.
+[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.<br><br>
+Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.<br><br>
+[Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.<br><br>
 
 <div align="center"><h3>SoC</h3></div>
 
@@ -124,9 +122,9 @@ According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](ht
 Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. 
 
 Other references are:<br>
-[Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)<br>
-[Google的神经网络处理器专利](https://mp.weixin.qq.com/s/lBQyNSNa6-joeLZ_Kq2W8A)<br>
-[脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)<br>
+[Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)<br><br>
+[Google的神经网络处理器专利](https://mp.weixin.qq.com/s/lBQyNSNa6-joeLZ_Kq2W8A)<br><br>
+[脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)<br><br>
 [Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)<br>
 
 <div align="center"><h3> </h3></div>
@@ -140,10 +138,10 @@ Other references are:<br>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
-Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)".<br>
-[Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br>
-[This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.<br>
-[Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br>
+Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)".<br><br>
+[Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br><br>
+[This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.<br><br>
+[Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
 
 <div align="center"><h3> </h3></div>
 <a name="Alibaba_Cloud"></a>
@@ -206,14 +204,14 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synopsys_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-[DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)<br>
+[DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)<br><br>
 [处理器IP厂商的机器学习方案 - Synopsys](http://mp.weixin.qq.com/s/Y4BvzmH67OaTWc_2SXIVGg)<br>
 
 <div align="center"><h3> </h3></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/CEVA_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-[CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)<br>
+[CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)<br><br>
 [处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)<br>
 
 <div align="center"><h3> </h3></div>
@@ -226,9 +224,8 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/VeriSilicon_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-- [VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)
-
-- [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)
+[VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)<br><br>
+[神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)<br>
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>IV. Startups</h2></div>
