@@ -425,21 +425,9 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align='center'><a href='http://www.free-website-hit-counter.com'><img src='http://www.free-website-hit-counter.com/c.php?d=9&id=104270&s=7' border='0' title='free website hit counter'></a><br/><small><a href='http://www.free-website-hit-counter.com' title="free website hit counter">Free website hit counter</a></small></div>
 
 <div align="center"><h3> </h3></div>
-#####################################################
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=11432900; 
-var sc_invisible=0; 
-var sc_security="8035c448"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
+
 <noscript><div class="statcounter"><a title="web analytics"
 href="http://statcounter.com/" target="_blank"><img class="statcounter"
 src="//c.statcounter.com/11432900/0/8035c448/0/" alt="web
 analytics"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
 
-#####################################################
