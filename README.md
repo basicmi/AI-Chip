@@ -37,7 +37,7 @@ table, th, td {
   </tr>
   <tr>
     <th>Startups</th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Thinci">Thinci</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">Brainchip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td><td>27</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">Brainchip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td><td>27</td>
   </tr>
 </table>
 
@@ -331,7 +331,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 <a name="Thinci"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Thinci_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
-[Thinci](http://thinci.com/index.html) is [developing vision processors](https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/) from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.
+[ThinCI](http://thinci.com/index.html) is [developing vision processors](https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/) from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.
 > Founded in 2010, Eldorado Hills, California startup ThinCI has taken in an undisclosed amount of funding to develop a technology that will bring vision processing to all devices. The ability for smart devices to have functionality like computer vision that doesn’t require regular communication to the cloud is referred to as “edge computing” or “fog computing”. That’s where ThinCI wants to play.
 
 <div align="center"><h3> </h3></div>
