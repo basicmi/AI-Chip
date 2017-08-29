@@ -12,7 +12,7 @@
 1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>,  <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu_Cloud">Baidu Cloud</a> and <a href="#HUAWEI_Cloud">Huawei Cloud</a>.
 <br>2. Add news and articles about <a href="#Cambricon">Cambricon</a> and <a href="#Bitmain">Bitmain</a>.
 <br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
-<br>4. Add NovuMind in Startup section.
+<br>4. Add <a href="#NovuMind">NovuMind</a> in Startup section.
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -33,7 +33,8 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 > Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
 
 <div align="center"><h3>Movidius</h3></div>
-[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.
+[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.<br><br>
+[Myriad™ X](https://www.movidius.com/myriadx) is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
 
 <div align="center"><h3>FPGA</h3></div>
 Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
@@ -365,6 +366,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
+<a name="NovuMind"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 > NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
