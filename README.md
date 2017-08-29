@@ -18,10 +18,33 @@
 
 <div align="center"><h1> </h1></div>
 
-<div align="center"><h2Shortcut</h2></div>
+<div align="center"><h2>Shortcut</h2></div>
 <HR>
-IC Giants | Internet/Cloud/HPC | IP Vendors | Startups
-----------|--------------------|------------|----------
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+<table style="width:100%">
+  <tr>
+    <th>IC Giants</th>
+    <th>Internet/Cloud/HPC</th> 
+    <th>IP Vendors</th>
+    <th>Startups</th>
+  </tr>
+  <tr>
+    <td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#HiSilicon">HiSilicon</a></td>
+    <td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td>
+    <td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Thinci">Thinci</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">Brainchip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>9</td>
+    <td>5</td>
+    <td>27</td>    
+  </tr>
+</table>
 
 <div align="center"><h1> </h1></div>
 
