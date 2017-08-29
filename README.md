@@ -20,7 +20,8 @@
 
 <div align="center"><h2Shortcut</h2></div>
 <HR>
-IC Giants|Internet/Cloud/HPC|IP Vendors|Startups
+IC Giants | Internet/Cloud/HPC | IP Vendors | Startups
+----------|--------------------|------------|----------
 
 <div align="center"><h1> </h1></div>
 
