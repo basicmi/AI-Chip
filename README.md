@@ -18,6 +18,17 @@
 
 <div align="center"><h1> </h1></div>
 
+<div align="center"><h2Shortcut</h2></div>
+<HR>
+IC Giants|Internet/Cloud/HPC|IP Vendors|Startups
+
+<div align="center"><h1> </h1></div>
+
+<div align="center"><h3> </h3></div>
+
+
+<div align="center"><h1> </h1></div>
+
 <div align="center"><h2>I. IC Giants</h2></div>
 <HR>
 <div align="center"><h1> </h1></div>
