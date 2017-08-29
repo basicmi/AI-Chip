@@ -28,7 +28,7 @@ table, th, td {
 <table style="width:100%">
   <tr>
     <th>IC Giants</th>
-    <th>Internet/Cloud/HPC</th> 
+    <th>Cloud/HPC</th> 
     <th>IP Vendors</th>
     <th>Startups</th>
   </tr>
