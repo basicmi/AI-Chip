@@ -297,7 +297,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 [Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>IV. Startups Worldwide</h2></div>
+<div align="center"><h2>V. Startups Worldwide</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cerebras"></a>
