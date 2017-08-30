@@ -12,8 +12,8 @@
 1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>,  <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu_Cloud">Baidu Cloud</a> and <a href="#HUAWEI_Cloud">Huawei Cloud</a>.
 <br>2. Add news and articles about <a href="#Cambricon">Cambricon</a> and <a href="#Bitmain">Bitmain</a>.
 <br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
-<br>4. Add <a href="#NovuMind">NovuMind</a> in Startup section.
-<br>5. Add <a href="#Movidius">Movidius Myriad™ X</a>.
+<br>4. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
+<br>5. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -36,8 +36,12 @@ table, th, td {
     <th>IP Vendors</th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>5</td>
   </tr>
   <tr>
-    <th>Startups</th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">Brainchip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td><td>27</td>
+    <th>Startups in China</th>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a></td><td>5</td>
+  </tr>
+  <tr>  
+    <th>Startups Worldwide</th>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">Brainchip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td><td>23</td>
   </tr>
 </table>
 
@@ -285,6 +289,12 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 <div align="center"><h3> </h3></div>
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 > [Bitmain’s newest product, the Sophon, may or may not take over deep learning](https://qz.com/1053799/chinas-bitmain-dominates-bitcoin-mining-now-it-wants-to-cash-in-on-artificial-intelligence/). But by giving it such a name Zhan and his Bitmain co-founder, Jihan Wu, have signaled to the world their intentions. The Sophon unit will include Bitmain’s first piece of bespoke silicon for a revolutionary AI technology. If things go to plan, thousands of Bitmain Sophon units soon could be training neural networks in vast data centers around the world.
+
+<div align="center"><h3> </h3></div>
+<a name="Chipintelli"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Bitmain_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+[Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
 <div align="center"><h3> </h3></div>
 <a name="Cerebras"></a>
