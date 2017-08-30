@@ -292,7 +292,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 
 <div align="center"><h3> </h3></div>
 <a name="Chipintelli"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Bitmain_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Chipintelli_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
