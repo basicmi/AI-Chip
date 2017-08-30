@@ -261,7 +261,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)<br>
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>IV. Startups</h2></div>
+<div align="center"><h2>IV. Startups in China</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cambricon"></a>
@@ -296,6 +296,9 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 <div align="center"><h3> </h3></div>
 [Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
+<div align="center"><h3> </h3></div>
+<div align="center"><h2>IV. Startups Worldwide</h2></div>
+<HR>
 <div align="center"><h3> </h3></div>
 <a name="Cerebras"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></div>
