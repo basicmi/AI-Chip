@@ -14,6 +14,7 @@
 <br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
 <br>4. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
 <br>5. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
+<br>6. Add <a href="#HiSilicon">HiSilicon Kirin970 representations</a>.
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -143,10 +144,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <a name="HiSilicon"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-> Yu Chengdong, Huawei CEO, recently announced at the 2017 China Internet Conference that Huawei is developing an AI processor. 
-
 **Kirin for Smart Phone**
-<br>Kirin 970 may have an embedded deep learning accelerator.
+<br> HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.
 
 **Mobile Camera SoC**
 <br>According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A%20V100.pdf), it has:
