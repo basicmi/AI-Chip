@@ -14,7 +14,7 @@
 <br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
 <br>4. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
 <br>5. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
-<br>6. Add <a href="#HiSilicon">HiSilicon Kirin970 representations</a>.
+<br>6. Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.
 </font>
 
 <div align="center"><h1> </h1></div>
