@@ -124,7 +124,7 @@ The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/e
 > Will it or won't it?  [Bloomberg](https://www.bloomberg.com/news/articles/2017-05-26/apple-said-to-plan-dedicated-chip-to-power-ai-on-devices) is reporting it will as a secondary processor but there is little detail. Not only is it an important area for Apple, but it helps avoid and compete with Qualcomm.
 
 [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
-Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
+<br> Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
 
 <div align="center"><h3> </h3></div>
 <a name="Xilinx"></a>
