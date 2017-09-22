@@ -9,13 +9,12 @@
 <HR>
 
 <font color="Darkred">
-1. Add cloud FPGA service information from <a href="#Alibaba_Cloud">Aliyun</a>,  <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu_Cloud">Baidu Cloud</a> and <a href="#HUAWEI_Cloud">Huawei Cloud</a>.
-<br>2. Add news and articles about <a href="#Cambricon">Cambricon</a> and <a href="#Bitmain">Bitmain</a>.
-<br>3. Add articles about <a href="#Microsoft">Microsoft’s BrainWave</a>, <a href="#Baidu">Baidu XPU</a> and <a href="#Wave">Wave Computing</a> Dataflow Processing Unit (DPU) after Hot Chips 2017.
-<br>4. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
-<br>5. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
-<br>6. Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.
-<br>7. Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>.  
+<br>1. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
+<br>2. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
+<br>3. Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.
+<br>4. Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>.  
+<br>5. Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.
+<br>6. Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -35,7 +34,7 @@ table, th, td {
     <th>Cloud/HPC</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
   </tr>
   <tr>
-    <th>IP Vendors</th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>5</td>
+    <th>IP Vendors</th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>5</td>
   </tr>
   <tr>
     <th>Startups in China</th>
@@ -115,6 +114,8 @@ Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Acc
 The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
 
 > AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
+
+> [Tesla is reportedly developing its own processor for artificial intelligence, intended for use with its self-driving systems, in partnership with AMD](https://techcrunch.com/2017/09/20/tesla-said-to-be-working-on-its-own-self-driving-ai-chip-with-amd/). Tesla has an existing relationship with Nvidia, whose GPUs power its Autopilot system, but this new in-house chip reported by CNBC could potentially reduce its reliance on third-party AI processing hardware.
 
 <div align="center"><h3> </h3></div>
 <a name="Apple"></a>
@@ -238,6 +239,12 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><h3> </h3></div>
 [DesignWare EV6x Embedded Vision Processors](https://www.synopsys.com/company/newsroom/mnr/ev6x-processors-news-release.html)<br><br>
 [处理器IP厂商的机器学习方案 - Synopsys](http://mp.weixin.qq.com/s/Y4BvzmH67OaTWc_2SXIVGg)<br>
+
+<div align="center"><h3> </h3></div>
+<a name="Imagination"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Imagination_logo.png" height="60"></div>
+<div align="center"><h3> </h3></div>
+> [Imagination reveals PowerVR Neural Network Accelerator (NNA) with 2x the performance and half the bandwidth of nearest competitor](https://www.imgtec.com/news/press-release/imagination-reveals-powervr-neural-network-accelerator-nna-with-2x-the-performance-and-half-the-bandwidth-of-nearest-competitor/)
 
 <div align="center"><h3> </h3></div>
 <a name="CEVA"></a>
