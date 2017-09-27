@@ -105,7 +105,7 @@ Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/da
 <div align="center"><h3>SoC</h3></div>
 On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE, "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)".
 
-<div align="center"><h3>Open Source Deep Learning Accelerator DLA</h3></div>
+<div align="center"><h3>NVDLA</h3></div>
 Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
 <br> Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
