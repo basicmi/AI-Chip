@@ -15,6 +15,7 @@
 <br>4. Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>.  
 <br>5. Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.
 <br>6. Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
+<br>6. Add <a href="#Nvidia">Link to NVDLA, Nvidia open source Deep Learning Accelerator</a>.  
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -106,6 +107,9 @@ On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous 
 
 <div align="center"><h3>Open Source Deep Learning Accelerator DLA</h3></div>
 Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
+
+<br> Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
+> The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
 
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
