@@ -475,8 +475,5 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)<br>
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)<br>
 
-<div align="center"><h3> </h3></div>
-
-<div align='center'><a href='http://www.free-website-hit-counter.com'><img src='http://www.free-website-hit-counter.com/c.php?d=9&id=104270&s=7' border='0' title='free website hit counter'></a><br/><small><a href='http://www.free-website-hit-counter.com' title="free website hit counter">Free website hit counter</a></small></div>
 
 
