@@ -81,7 +81,7 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 <div align="center"><h3>FPGA</h3></div>
 Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
-<a name="Intel_FPGA"></a>
+<a name="Loihi"></a>
 <div align="center"><h3>FPGA</h3></div>
 Intel's Loihi test chip is the [First-of-Its-Kind Self-Learning Chip](https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/).
 > The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations.
