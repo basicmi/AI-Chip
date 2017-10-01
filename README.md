@@ -16,7 +16,7 @@
 <br>5. Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.
 <br>6. Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
 <br>7. Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>. 
-<br>8. Add <a href="#Intel">Intel's Loihi test chip</a>.     
+<br>8. Add <a href="#Loihi">Intel's Loihi test chip</a>.     
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -82,7 +82,7 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
 
 <a name="Loihi"></a>
-<div align="center"><h3>FPGA</h3></div>
+<div align="center"><h3>Loihi</h3></div>
 Intel's Loihi test chip is the [First-of-Its-Kind Self-Learning Chip](https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/).
 > The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations.
 
