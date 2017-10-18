@@ -80,7 +80,8 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 
 <a name="Movidius"></a>
 <div align="center"><h3>Movidius</h3></div>
-[Movidius VPU](https://www.movidius.com/technology) is basicly an array of vector processor.<br><br>
+> [MYRIAD 2](https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf) IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
+
 [Myriad™ X](https://www.movidius.com/myriadx) is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
 
 <a name="Intel_FPGA"></a>
