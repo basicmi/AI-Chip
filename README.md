@@ -70,6 +70,7 @@ table, th, td {
 <div align="center"><h3>Nervana</h3></div>
 Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
 <br>
+<br>
 [Intel® Nervana™ Neural Network Processors (NNP) Redefine AI Silicon](https://www.intelnervana.com/intel-nervana-neural-network-processors-nnp-redefine-ai-silicon/)
 > As our Intel CEO Brian Krzanich discussed earlier today at Wall Street Journal’s D.Live event, Intel will soon be shipping the world’s first family of processors designed from the ground up for artificial intelligence (AI): the [Intel® Nervana™ Neural Network Processor family](https://newsroom.intel.com/editorials/intel-pioneers-new-technologies-advance-artificial-intelligence/) (formerly known as “Lake Crest”). This family of processors is over 3 years in the making, and on behalf of the team building it, I’d like to share a bit more insight on the motivation and design behind the world’s first neural network processor.
 
