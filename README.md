@@ -17,6 +17,8 @@
 <br>6. Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
 <br>7. Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>. 
 <br>8. Add <a href="#Loihi">Intel's Loihi test chip</a>.     
+<br>9. Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>. 
+<br>10. Add <a href="#Google">Google's Pixel Visual Core</a>.     
 </font>
 
 <div align="center"><h1> </h1></div>
@@ -67,6 +69,7 @@ table, th, td {
 <a name="Nervana"></a>
 <div align="center"><h3>Nervana</h3></div>
 Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+> As our Intel CEO Brian Krzanich discussed earlier today at Wall Street Journal’s D.Live event, Intel will soon be shipping the world’s first family of processors designed from the ground up for artificial intelligence (AI): the [Intel® Nervana™ Neural Network Processor family](https://newsroom.intel.com/editorials/intel-pioneers-new-technologies-advance-artificial-intelligence/) (formerly known as “Lake Crest”). This family of processors is over 3 years in the making, and on behalf of the team building it, I’d like to share a bit more insight on the motivation and design behind the world’s first neural network processor.
 
 <a name="Mobileye"></a>
 <div align="center"><h3>Mobileye EyeQ</h3></div>
@@ -171,6 +174,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><h3> </h3></div>
 
 Google's original [TPU](https://www.nextplatform.com/2017/04/05/first-depth-look-googles-tpu-architecture/) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. Google is making them available for use in their [cloud](https://www.blog.google/topics/google-cloud/google-cloud-offer-tpus-machine-learning/) with TPU pods containing 64 devices for up to 11.5 PetaFlops of performance. 
+
+> [Pixel Visual Core](https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/) is Google’s first custom-designed co-processor for consumer products. It’s built into every Pixel 2, and in the coming months, we’ll turn it on through a software update to enable more applications to use Pixel 2’s camera for taking HDR+ quality pictures.
 
 Other references are:<br>
 [Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)<br><br>
