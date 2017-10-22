@@ -9,16 +9,17 @@
 <HR>
 
 <font color="Darkred">
-<br>1. Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
-<br>2. Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
-<br>3. Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.
-<br>4. Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>.  
-<br>5. Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.
-<br>6. Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
-<br>7. Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>. 
-<br>8. Add <a href="#Loihi">Intel's Loihi test chip</a>.     
-<br>9. Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>. 
-<br>10. Add <a href="#Google">Google's Pixel Visual Core</a>.     
+<br>-Add <a href="#Google">Google's Pixel Visual Core</a>.   
+<br>-Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>. 
+<br>-Add <a href="#Loihi">Intel's Loihi test chip</a>.    
+<br>-Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>.
+<br>-Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>.  
+<br>-Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.
+<br>-Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>. 
+<br>-Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.
+<br>-Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.
+<br>-Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.
+  
 </font>
 
 <div align="center"><h1> </h1></div>
