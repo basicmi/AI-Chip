@@ -12,9 +12,9 @@
 <ul>
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
 <li>Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>. </li>
-<li>Add <a href="#Loihi">Intel's Loihi test chip</a>. </li>   
+<li>Add <a href="#Loihi">Intel's Loihi test chip</a>. </li>
 <li>Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>.</li>
-<li>Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>. </li> 
+<li>Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>. </li>
 <li>Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.</li>
 <li>Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>. </li>
 <li>Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.</li>
