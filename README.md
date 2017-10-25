@@ -9,6 +9,7 @@
 <HR>
 
 <font color="Darkred">
+<ul>
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
 <li>Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>. </li>
 <li>Add <a href="#Loihi">Intel's Loihi test chip</a>. </li>   
@@ -19,6 +20,7 @@
 <li>Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.</li>
 <li>Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.</li>
 <li>Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.</li>
+</ul>
 </font>
 
 <div align="center"><h1> </h1></div>
