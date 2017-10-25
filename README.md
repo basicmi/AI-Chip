@@ -264,6 +264,8 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Imagination_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 > [Imagination reveals PowerVR Neural Network Accelerator (NNA) with 2x the performance and half the bandwidth of nearest competitor](https://www.imgtec.com/news/press-release/imagination-reveals-powervr-neural-network-accelerator-nna-with-2x-the-performance-and-half-the-bandwidth-of-nearest-competitor/)
+  
+  [PowerVR Series2NX Neural Network Accelerator](https://www.imgtec.com/powervr/vision/)
 
 <div align="center"><h3> </h3></div>
 <a name="CEVA"></a>
