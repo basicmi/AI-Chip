@@ -17,9 +17,6 @@
 <li>Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>. </li>
 <li>Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.</li>
 <li>Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>. </li>
-<li>Add <a href="#HiSilicon">HiSilicon Kirin970 presentations</a>.</li>
-<li>Add <a href="#Movidius">Movidius Myriad™ X</a> and <a href="#Chipintelli">Chipintelli</a> in "Startup in China" section.</li>
-<li>Add <a href="#NovuMind">NovuMind</a> in "Startup Worldwide" section.</li>
 </ul>
 </font>
 
