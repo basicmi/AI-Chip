@@ -162,7 +162,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 **Kirin for Smart Phone**
-<br> HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.
+<br> HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.  
+In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-launch-on-october-16th-more-kirin-970-details),we can find more details about NPU in Kirin970.
 
 **Mobile Camera SoC**
 <br>According to a Brief Data Sheet of [Hi3559A V100ESultra-HD Mobile Camera SoC](http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A%20V100.pdf), it has:
