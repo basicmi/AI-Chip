@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
 <li>Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>.</li>
 <li>Add <a href="#Loihi">Intel's Loihi test chip</a>.</li>
@@ -31,7 +32,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#HiSilicon">HiSilicon</a></td><td>8</td>
+    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#HiSilicon">HiSilicon</a></td><td>9</td>
   </tr>
   <tr>
     <th>Cloud/HPC</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
@@ -156,6 +157,15 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><h3> </h3></div>
 [TrueNorth](http://www.research.ibm.com/articles/brain-chip.shtml) is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA [SyNAPSE](https://en.wikipedia.org/wiki/SyNAPSE) program.
 > It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. [Wikipedia](https://en.wikipedia.org/wiki/TrueNorth)
+
+<div align="center"><h3> </h3></div>
+<a name="STMicroelectronics"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/STMicroelectronics_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+[ST preps second neural network IC](http://www.eenewseurope.com/news/st-preps-second-neural-network-ic-0)
+> STMicroelectronics is designing a second iteration of the neural networking technology that the company reported on at the International Solid-State Circuits Conference (ISSCC) in February 2017.  
+
+[ISSCC2017 Deep-Learning Processors文章学习 （一）](http://mp.weixin.qq.com/s/POZ9k5INJC8SCKMNogzmXg) is a reference.
 
 <div align="center"><h3> </h3></div>
 <a name="HiSilicon"></a>
