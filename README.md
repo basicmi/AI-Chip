@@ -339,7 +339,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 > [Bitmain’s newest product, the Sophon, may or may not take over deep learning](https://qz.com/1053799/chinas-bitmain-dominates-bitcoin-mining-now-it-wants-to-cash-in-on-artificial-intelligence/). But by giving it such a name Zhan and his Bitmain co-founder, Jihan Wu, have signaled to the world their intentions. The Sophon unit will include Bitmain’s first piece of bespoke silicon for a revolutionary AI technology. If things go to plan, thousands of Bitmain Sophon units soon could be training neural networks in vast data centers around the world.  
 
-**[On Nov.8, Bitmain announced its Sophon BM1869 AI chip.](https://www.sophon.ai/)**
+**[On Nov.8, Bitmain announced its Sophon BM1869 Tensor Computing Processor, Deep Learning Accelerating Card SC1 and IVS server SS1.](https://www.sophon.ai/)**
 
 
 <div align="center"><h3> </h3></div>
