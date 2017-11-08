@@ -306,7 +306,8 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.
-[AI Chip Explosion: Cambricon’s Billion-Device Ambition](https://syncedreview.com/2017/11/06/ai-chip-explosion-cambricons-billion-device-ambition/)
+
+**[AI Chip Explosion: Cambricon’s Billion-Device Ambition](https://syncedreview.com/2017/11/06/ai-chip-explosion-cambricons-billion-device-ambition/)**
 > On November 6 in Beijing, China’s rising semiconductor company Cambricon released the Cambrian-1H8 for low power consumption computer vision application, the higher-end Cambrian-1H16 for more general purpose application, the Cambrian-1M for autonomous driving applications with yet-to-be-disclosed release date, and an AI system software named Cambrian NeuWare.
 
 <div align="center"><h3> </h3></div>
@@ -315,17 +316,19 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><h3> </h3></div>
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 > Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
-[Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital](http://www.intelcapital.com/news/news.html?id=555)
+
+**[Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital](http://www.intelcapital.com/news/news.html?id=555)**
 > October 19, 2017, San Francisco, USA – Horizon Robotics, a leading global Artificial Intelligence (AI) startup, today announced during Intel Capital’s CEO Showcase that it has received investment from Intel Capital. Harvest Investments will join the round as a co-investor with participation from existing shareholders including Morningside Venture Capital, Hillhouse Capital, Wu Capital and Linear Ventures. The Company expects that its A-plus series funding round will total approximately US$100 million upon closing.
 
 <div align="center"><h3> </h3></div>
 <a name="Deephi"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-[DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. DeePhi has the [Deep Neural Network Development Kit, DNNDK](http://deephi.com/dnndk), which is a deep learning software development kit aimed at simplifying and accelerating deep learning applications.
+[DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. DeePhi has the [Deep Neural Network Development Kit, DNNDK](http://deephi.com/dnndk), which is a deep learning software development kit aimed at simplifying and accelerating deep learning applications.  
+
 This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hyperscale Inference"](https://www.nextplatform.com/2017/05/22/fpga-startup-gathers-funding-force-merged-hyperscale-inference/) gave more information of the company.  
 
-[AI startup DeePhi raises $40m in financing from Ant Financial, Samsung](http://www.chinadaily.com.cn/business/tech/2017-10/25/content_33685368.htm),
+**[AI startup DeePhi raises $40m in financing from Ant Financial, Samsung](http://www.chinadaily.com.cn/business/tech/2017-10/25/content_33685368.htm)**
 > Domestic artificial intelligent startup DeePhi Tech announced on Tuesday at a products launch that it has completed a Series A+ of financing for about $40 million.
 > This round of financing was led by Alibaba's financial affiliate Ant Financial Services Group and Samsung, with China Merchants Venture and China Growth Capital participating as fellow investors.
 
@@ -336,7 +339,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 > [Bitmain’s newest product, the Sophon, may or may not take over deep learning](https://qz.com/1053799/chinas-bitmain-dominates-bitcoin-mining-now-it-wants-to-cash-in-on-artificial-intelligence/). But by giving it such a name Zhan and his Bitmain co-founder, Jihan Wu, have signaled to the world their intentions. The Sophon unit will include Bitmain’s first piece of bespoke silicon for a revolutionary AI technology. If things go to plan, thousands of Bitmain Sophon units soon could be training neural networks in vast data centers around the world.  
 
-On Nov.8, AI World conference, Bitmain anouced its [Sophon BM1869] AI chip(sophon.ai). 
+**On Nov.8, AI World conference, Bitmain anouced its [Sophon BM1869](sophon.ai) AI chip. **
 
 
 <div align="center"><h3> </h3></div>
