@@ -11,7 +11,8 @@
 <font color="Darkred">
 <ul>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
-<li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>
+<li>Add <a href="#Graphcore">Graphcore: Peliminary IPU Benchmarks</a>.</li>
+<li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>    
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
 <li>Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>.</li>
 <li>Add <a href="#Loihi">Intel's Loihi test chip</a>.</li>
@@ -369,6 +370,8 @@ After HotChips 2017, in the next plateform article "[First In-Depth View of Wave
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></div>
 <div align="center"><h3> </h3></div>
 [Graphcore](https://www.graphcore.ai/) raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give [a talk](https://youtu.be/T8DvHnb3Y9g) at the 3rd Research and Applied AI Summit (RAAIS) in London, showing [interesting ideas](https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2) behind their processor. <br><br>
+In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.graphcore.ai/posts/preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications)  
+
 [解密又一个xPU：Graphcore的IPU](https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g) give some analysis on its IPU architecture.
 
 <div align="center"><h3> </h3></div>
