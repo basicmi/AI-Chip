@@ -304,7 +304,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cambricon"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></div>
+<div align="center"><a href="http://www.cambricon.com/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.
 
@@ -313,7 +313,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 <div align="center"><h3> </h3></div>
 <a name="Horizon_Robotics"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="40"></div>
+<div align="center"><a href="http://www.horizon.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
 > Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
@@ -323,7 +323,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 <div align="center"><h3> </h3></div>
 <a name="Deephi"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60"></div>
+<div align="center"><a href="http://www.deephi.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. DeePhi has the [Deep Neural Network Development Kit, DNNDK](http://deephi.com/dnndk), which is a deep learning software development kit aimed at simplifying and accelerating deep learning applications.  
 
@@ -335,7 +335,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 <a name="Bitmain"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Bitmain_logo.png" height="40"></div>
+<div align="center"><a href="https://www.bitmain.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Bitmain_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processors for both training and inference tasks. 
 > [Bitmain’s newest product, the Sophon, may or may not take over deep learning](https://qz.com/1053799/chinas-bitmain-dominates-bitcoin-mining-now-it-wants-to-cash-in-on-artificial-intelligence/). But by giving it such a name Zhan and his Bitmain co-founder, Jihan Wu, have signaled to the world their intentions. The Sophon unit will include Bitmain’s first piece of bespoke silicon for a revolutionary AI technology. If things go to plan, thousands of Bitmain Sophon units soon could be training neural networks in vast data centers around the world.  
@@ -345,7 +345,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 
 <div align="center"><h3> </h3></div>
 <a name="Chipintelli"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Chipintelli_logo.png" height="40"></div>
+<div align="center"><a href="http://www.chipintelli.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Chipintelli_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
@@ -354,20 +354,20 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cerebras"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></div>
+<div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
 [Cerebras](https://www.cerebras.net/) is notable due to its backing from Benchmark and that its founder was the CEO of SeaMicro. It appears to have [raised $25M](https://techcrunch.com/2016/12/19/a-stealthy-startup-called-cerebras-raised-around-25-million-to-build-deep-learning-hardware/) and remains in stealth mode.
 
 <div align="center"><h3> </h3></div>
 <a name="Wave"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Wave_Computing_logo.png" height="40"></div>
+<div align="center"><a href="http://wavecomp.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Wave_Computing_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  [white paper](http://wavecomp.ai/technology/).<br><br>
 After HotChips 2017, in the next plateform article "[First In-Depth View of Wave Computing’s DPU Architecture, Systems](https://www.nextplatform.com/2017/08/23/first-depth-view-wave-computings-dpu-architecture-systems/)", more details were discussed.
 
 <div align="center"><h3> </h3></div>
 <a name="Graphcore"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></div>
+<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
 [Graphcore](https://www.graphcore.ai/) raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give [a talk](https://youtu.be/T8DvHnb3Y9g) at the 3rd Research and Applied AI Summit (RAAIS) in London, showing [interesting ideas](https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2) behind their processor. <br><br>
 In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.graphcore.ai/posts/preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications)  
@@ -376,7 +376,7 @@ In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.gra
 
 <div align="center"><h3> </h3></div>
 <a name="PEZY"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.gif" height="60"></div>
+<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.gif" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 Pezy-SC and Pezy-SC2 are the 1024 core and 2048 core processors that [Pezy](http://pezy.co.jp/en/index.html) develop. The Pezy-SC 1024 core chip powered the top 3 systems on the Green500 list of supercomputers back in 2015. The [Pezy-SC2](https://en.wikichip.org/wiki/pezy/pezy-sc2) is the follow up chip that is meant to be delivered by now, but details are scarce yet intriguing,
 > "PEZY-SC2 HPC Brick: 32 of PEZY-SC2 module card with 64GB DDR4 DIMM (2.1 PetaFLOPS (DP) in single tank with 6.4Tb/s"
@@ -384,27 +384,27 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 
 <div align="center"><h3> </h3></div>
 <a name="KnuEdge"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/KnuEdge_logo.png" height="70"></div>
+<div align="center"><a href="https://www.knuedge.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/KnuEdge_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
 [Their product page](https://www.knuedge.com/) has since June 2016 gone missing in action. Not sure what they are up to with the $100M they put into their [MIMD architecture](https://www.hpcwire.com/2016/12/15/knupath-hermosa-chip-expected-first-half-2017/). It was described at the time as having 256 tiny DSP, or tDSP, cores on each ASIC along with an ARM controller suitable for sparse matrix processing in a 35W envelope. 
 > Since KnuEdge “emerged from stealth” last year, the company has gone quiet and not offered up any additional information about what they’ve been up to. According to an [article in VentureBeat](https://venturebeat.com/2016/06/06/former-nasa-chief-unveils-100-million-neural-computing-chip-company-knuedge/), we know that KnuEdge has already been generating revenue and that they were considering raising more funding this year in addition to the $100 million in “patient money” they have already raised. Their website contains next to no information aside from employee profiles. At an [Xconomy conference](http://www.xconomy.com/san-diego/2017/05/02/smarr-others-talk-healthtech-ai-at-xconomys-impact-of-innovation/) a few weeks ago, the Company talked about “cloud-based machine intelligence as a service” that is “supposed to be rolled out sometime this year“.
 
 <div align="center"><h3> </h3></div>
 <a name="Tenstorrent"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="70"></div>
+<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
 [Tenstorrent](http://tenstorrent.com/index.html) is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the [Cognitive 300 list](http://www.cogniteventures.com/the-cognitive-computing-startup-list/).
 
 <div align="center"><h3> </h3></div>
 <a name="Thinci"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Thinci_logo.png" height="40"></div>
+<div align="center"><a href="http://thinci.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Thinci_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [ThinCI](http://thinci.com/index.html) is [developing vision processors](https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/) from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.
 > Founded in 2010, Eldorado Hills, California startup ThinCI has taken in an undisclosed amount of funding to develop a technology that will bring vision processing to all devices. The ability for smart devices to have functionality like computer vision that doesn’t require regular communication to the cloud is referred to as “edge computing” or “fog computing”. That’s where ThinCI wants to play.
 
 <div align="center"><h3> </h3></div>
 <a name="Koniku"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></div>
+<div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
 [Koniku's web site](http://koniku.io/) is counting down to "your new reality". They have raised very little money and after watching their Youtube clip embedded in this [Forbes page](https://www.forbes.com/sites/federicoguerrini/2016/05/22/neuron-based-chips-will-soon-become-commonplace-this-startup-founder-says/2/#299122784f1f), you too will not likely not be convinced, but you never know. Harnessing biological cells is certainly different. It sounds like [a science project](https://motherboard.vice.com/en_us/article/d7ypqw/komiku-neuron-computer-agabi), but, then this,
 > "We are a business. We are not a science project," Agabi, who is scheduled to speak at the Pioneers Festival in Vienna, next week, says, "There are demands that silicon cannot offer today, that we can offer with our systems."
@@ -412,39 +412,39 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 
 <div align="center"><h3> </h3></div>
 <a name="Adapteva"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Adapteva_logo.png" height="80"></div>
+<div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Adapteva_logo.png" height="80"></a></div>
 <div align="center"><h3> </h3></div>
 [Adapteva](http://www.adapteva.com/): "[Adapteva tapes out Epiphany-V: A 1024-core 64-bit RISC processor](https://meanderful.blogspot.jp/2016/10/adapteva-tapes-out-epiphany-v-1024-core.html)." Andreas Olofsson taped out his 1024 core chip late last year and we await news of its performance. [Epiphany-V](http://www.parallella.org/docs/e5_1024core_soc.pdf) has new instructions for deep learning and we'll have to see if this memory-controller-less design with 64MB of on-chip memory will have appropriate scalability. The impressive efficiency of Andrea's design and build may make this a chip we can all actually afford, so let's hope it performs well.
 
 <div align="center"><h3> </h3></div>
 <a name="Knowm"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Knowm_logo.png" height="40"></div>
+<div align="center"><a href="http://knowm.org/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Knowm_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Knowm](http://knowm.org/) is actually setup as a .ORG but they appear to be pursuing a for-profit enterprise. The New Mexcio startup has taken in an undisclosed amount of seed funding so far to develop a new computational framework called [AHaH Computing](http://knowm.org/ahah-computing/) (Anti-Hebbian and Hebbian). The gory details can be found in [this publication](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175), but the short story is that this technology aims to reduce the size and power consumption of intelligent machine learning applications by up to 9 orders of magnitude.
 
 <div align="center"><h3> </h3></div>
 <a name="Mythic"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="25"></div>
+<div align="center"><a href="https://www.mythic-ai.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="25"></a></div>
 <div align="center"><h3> </h3></div>
 A battery powered neural chip from [Mythic](https://www.mythic-ai.com/technology/) with 50x lower power.
 > Founded in 2012, Texas-based startup Mythic (formerly known as Isocline) has taken in $9.5 million in funding with Draper Fisher Jurvetson as the lead investor. Prior to receiving any funding, the startup has taken in [$2.5 million in grants](https://techcrunch.com/2017/03/22/mythic-launches-a-chip-to-enable-computer-vision-and-voice-control-on-any-device/). Mythic is developing an AI chip that “puts desktop GPU compute capabilities and deep neural networks onto a button-sized chip – with 50x higher battery life and far more data processing capabilities than competitors“. Essentially, that means you can give voice control and computer vision to any device locally without needing cloud connectivity.
 
 <div align="center"><h3> </h3></div>
 <a name="Kalray"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kalray_logo.png" height="40"></div>
+<div align="center"><a href="http://www.kalrayinc.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kalray_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 Despite many promises,[Kalray](http://www.kalrayinc.com/) has not progressed their chip offering beyond the 256 core beast covered back in 2015, "[Kalray - new product meander](https://meanderful.blogspot.jp/2015/06/kalray-new-product-meander.html)." Kalray is advertising their product as suitable for embedded self-driving car applications. Kalray has a [Kalray Neural Network](http://www.eenewseurope.com/news/kalray-turns-neural-networks) (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.<br><br>
 Kalrays NN fortunes may improve with an imminent product refresh and just this month Kalray completed a new funding that raised $26M. The new [Coolidge processor]((http://www.eenewseurope.com/news/kalray-turns-neural-networks)) is due in mid-2018 with 80 or 160 cores along with 80 or 160 co-processors optimised for vision and deep learning.
 
 <div align="center"><h3> </h3></div>
 <a name="Brainchip"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Brainchip_logo.png" height="40"></div>
+<div align="center"><a href="http://www.brainchipinc.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Brainchip_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 BrainChip Inc (CA. USA) was the first company to offer a [Spiking Neural processor](http://www.brainchipinc.com/technology), which was patented in 2008 (patent US 8,250,011). The current device, called the BrainChip Accelerator is a chip intended for rapid learning. It is offered as part of the BrainChip Studio software. BrainChip is a publicly listed company as part of BrainChip Holdings Ltd.
 
 <div align="center"><h3> </h3></div>
 <a name="Aimotive"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="60"></div>
+<div align="center"><a href="https://aimotive.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [This BDTi artical](https://www.bdti.com/InsideDSP/2017/07/27/AImotive) shows some information of aiWare IP of [Aimotive](https://aimotive.com/what-we-do/#aiware) .
 > Speaking of chips, AImotive and partner VeriSilicon are in the process of designing a 22 nm FD-SOI test chip, which is forecast to come out of GlobalFoundries' fab in Q1 2018 (Figure 4). It will feature a 1 TMAC/sec aiWare core, consuming approximately 25 mm2 of silicon area; a Vivante VIP8000-derivative processor core will inhabit the other half of the die, and between 2-4 GBytes of DDR4 SDRAM will also be included in the multi-die package. The convolution-tailored LAM in this test chip, according to Feher, will have the following specifications (based on preliminary synthesis results):
@@ -455,38 +455,38 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="Deep_Scale"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="35"></div>
+<div align="center"><a href="http://deepscale.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deep_Scale_logo.png" height="35"></a></div>
 <div align="center"><h3> </h3></div>
 [DeepScale raises $3 million for perception AI to make self-driving cars safe](https://techcrunch.com/2017/03/21/deepscale-raises-3-million-for-perception-ai-to-make-self-driving-cars-safe/)
 
 <div align="center"><h3> </h3></div>
 <a name="Leepmind"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></div>
+<div align="center"><a href="http://www.leapmind.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></a></div>
 <div align="center"><h3> </h3></div>
 > [Leepmind](http://www.leapmind.io/products.php) is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
 <div align="center"><h3> </h3></div>
 <a name="Krtkl"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="30"></div>
+<div align="center"><a href="http://krtkl.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="30"></a></div>
 <div align="center"><h3> </h3></div>
 > While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
 <a name="NovuMind"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="40"></div>
+<div align="center"><a href="http://www.novumind.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 > NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
 [this video](https://www.youtube.com/watch?v=TGQGStPoNu4) is the description and demos of NovuMind FPGA AI Accelerator.
 
 <div align="center"><h3> </h3></div>
 <a name="REM"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="60"></div>
+<div align="center"><a href="http://www.remicro.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 <div align="center"><h3> </h3></div>
 <a name="TERADEEP"></a>
-<div align="center"><h2><a href="https://www.teradeep.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Teradeep_logo.png" height="70"></a></h2></div>
+<div align="center"><a href="https://www.teradeep.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Teradeep_logo.png" height="80"></a></div>
 <div align="center"><h3> </h3></div>
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
 
