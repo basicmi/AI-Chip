@@ -480,7 +480,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="REM"></a>
-<div align="center"><h2>REM</h2></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
@@ -492,7 +492,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="DEEP_VISION"></a>
-<div align="center"><h2>DEEP VISION</h2></div>
+<div align="center"><h2><a href="http://deepvision.io/">DEEP VISION</a></h2></div>
 <div align="center"><h3> </h3></div>
 [Deep Vision](http://deepvision.io/) is bulding low-power chips for deep learning. Perhaps one of these papers by the founders have clues, "[Convolution Engine: Balancing Efficiency & Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2013.convolution.isca.pdf)" [2013] and "[Convolution Engine: Balancing Efficiency and Flexibility in Specialized Computing](http://csl.stanford.edu/~christos/publications/2015.convolution_engine.cacm.pdf)" [2015].
 
@@ -503,7 +503,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
 
 <div align="center"><h3> </h3></div>
-<a name="KAIST_DNPU"></a>
+<a name="KAIST_DNPU">
 <div align="center"><h2>KAIST DNPU</h2></div>
 <div align="center"><h3> </h3></div>
 [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)<br><br>
