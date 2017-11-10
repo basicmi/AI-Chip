@@ -480,13 +480,13 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="REM"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 [Reduced Energy Microsystems](http://www.remicro.com/) are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to [TechCrunch](https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/).
 
 <div align="center"><h3> </h3></div>
 <a name="TERADEEP"></a>
-<div align="center"><h2>TERADEEP</h2></div>
+<div align="center"><h2><a href="(https://www.teradeep.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Teradeep_logo.png" height="70"></a></h2></div>
 <div align="center"><h3> </h3></div>
 [TeraDeep](https://www.teradeep.com/) is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.
 
