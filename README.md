@@ -11,6 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
+<li>Add <a href="#NXP">NXP: ADAS chip S32V234</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore: Peliminary IPU Benchmarks</a>.</li>
 <li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>    
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
@@ -34,7 +35,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#HiSilicon">HiSilicon</a></td><td>9</td>
+    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a> <a href="#HiSilicon">HiSilicon</a></td><td>10</td>
   </tr>
   <tr>
     <th>Cloud/HPC</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
@@ -168,6 +169,14 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 > STMicroelectronics is designing a second iteration of the neural networking technology that the company reported on at the International Solid-State Circuits Conference (ISSCC) in February 2017.  
 
 [ISSCC2017 Deep-Learning Processors文章学习 （一）](http://mp.weixin.qq.com/s/POZ9k5INJC8SCKMNogzmXg) is a reference.
+
+<div align="center"><h3> </h3></div>
+<a name="NXP"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/NXP_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+**ADAS Chip**
+<br> [S32V234: Vision Processor for Front and Surround View Camera, Machine Learning and Sensor Fusion Applications](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform/vision-processor-for-front-and-surround-view-camera-machine-learning-and-sensor-fusion-applications:S32V234?lang_cd=en)
+> The S32V234 is our 2nd generation vision processor family designed to support computation intensive applications for image processing and offers an ISP, powerful 3D GPU, dual APEX-2 vision accelerators, security and supports SafeAssure™. S32V234 is suited for ADAS, NCAP front camera, object detection and recognition, surround view, machine learning and sensor fusion applications. S32V234 is engineered for automotive-grade reliability, functional safety and security measures to support vehicle and industrial automation.
 
 <div align="center"><h3> </h3></div>
 <a name="HiSilicon"></a>
