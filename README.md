@@ -511,7 +511,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="Groq"></a>
-<div align="center"><h2>Groq</h2></div>
+<div align="center"><h2><a href="http://groq.com/">Groq</a></h2></div>
 <div align="center"><h3> </h3></div>
 [Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
 
