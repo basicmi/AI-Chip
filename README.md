@@ -11,7 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
-<li>Add <a href="#NXP">NXP: ADAS chip S32V234</a>.</li>
+<li>Add <a href="#NXP">NXP S32 AUTOMOTIVE PLATFORM and S32V234 Chip</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore: Peliminary IPU Benchmarks</a>.</li>
 <li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>    
 <li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
@@ -174,6 +174,10 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <a name="NXP"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/NXP_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
+**S32 AUTOMOTIVE PLATFORM**
+<br> [S32 AUTOMOTIVE PLATFORM](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform:S32)
+> The NXP S32 automotive platform is the world’s first scalable automotive computing architecture. It offers a unified hardware platform and an identical software environment across application domains to bring rich in-vehicle experiences and automated driving functions to market faster.  
+
 **ADAS Chip**
 <br> [S32V234: Vision Processor for Front and Surround View Camera, Machine Learning and Sensor Fusion Applications](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform/vision-processor-for-front-and-surround-view-camera-machine-learning-and-sensor-fusion-applications:S32V234?lang_cd=en)
 > The S32V234 is our 2nd generation vision processor family designed to support computation intensive applications for image processing and offers an ISP, powerful 3D GPU, dual APEX-2 vision accelerators, security and supports SafeAssure™. S32V234 is suited for ADAS, NCAP front camera, object detection and recognition, surround view, machine learning and sensor fusion applications. S32V234 is engineered for automotive-grade reliability, functional safety and security measures to support vehicle and industrial automation.
