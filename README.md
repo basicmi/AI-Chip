@@ -11,6 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
+<li>Add <a href="#Groq">Groq website</a>.</li>
 <li>Add <a href="#NXP">NXP S32 AUTOMOTIVE PLATFORM and S32V234 Chip</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore: Peliminary IPU Benchmarks</a>.</li>
 <li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>    
@@ -514,6 +515,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><h2><a href="http://groq.com/">Groq</a></h2></div>
 <div align="center"><h3> </h3></div>
 [Groq](https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html) is founded by Ex-googlers, who designed Google TPU.
+[Groq's website](groq.com) claims that its first chip will run 400 trillion operations per second with 8TOP/s per Watt power efficiency.
 
 <div align="center"><h3> </h3></div>
 <a name="KAIST_DNPU">
