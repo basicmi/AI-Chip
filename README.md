@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Vathys">Vathys</a>.</li>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
 <li>Add <a href="#Groq">Groq website</a>.</li>
 <li>Add <a href="#NXP">NXP S32 AUTOMOTIVE PLATFORM and S32V234 Chip</a>.</li>
@@ -20,8 +21,6 @@
 <li>Add <a href="#Loihi">Intel's Loihi test chip</a>.</li>
 <li>Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>.</li>
 <li>Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>. </li>
-<li>Add <a href="#AMD">Tesla said to be working on its own self-driving AI chip with AMD</a>.</li>
-<li>Add <a href="#Apple">Apple unveils A11 bionic neural engine AI chip</a>. </li>
 </ul>
 </font>
 
@@ -50,7 +49,7 @@ table, th, td {
   </tr>
   <tr>  
     <th>Startups Worldwide</th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a></td><td>23</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Vathys">Vathys</a></td><td>24</td>
   </tr>
 </table>
 
@@ -523,6 +522,12 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><h3> </h3></div>
 [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)<br><br>
 [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)<br>
+    
+<div align="center"><h3> </h3></div>
+<a name="Vathys">
+<div align="center"><h2>Vathys</h2></div>
+<div align="center"><h3> </h3></div>
+Resently, Tapabrata Ghosh from [Vathys](http://vathys.ai/) present their [Petascale Deep Learning chip](https://youtu.be/4nSn0JhZX18), very ambitious design. Hopefully, they can show us the positive results with their engineering sample 2018.<br><br>
 
 
 <div align="center"><h3> </h3></div>
