@@ -10,7 +10,9 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
 <li>Add <a href="#Vathys">Vathys</a>.</li>
+<li>Add <a href="#Kneron">Kneron</a>.</li>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
 <li>Add <a href="#Groq">Groq website</a>.</li>
 <li>Add <a href="#NXP">NXP S32 AUTOMOTIVE PLATFORM and S32V234 Chip</a>.</li>
@@ -45,11 +47,11 @@ table, th, td {
   </tr>
   <tr>
     <th>Startups in China</th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a></td><td>5</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a></td><td>5</td>
   </tr>
   <tr>  
     <th>Startups Worldwide</th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Vathys">Vathys</a></td><td>24</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys</a></td><td>24</td>
   </tr>
 </table>
 
@@ -363,6 +365,12 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 [Chipintelli's](http://www.chipintelli.com/?_l=en) first IC, [CI1006](http://www.chipintelli.com/CI1006?_l=en), is designed for automatic speech recognition application. 
 
 <div align="center"><h3> </h3></div>
+<a name="Thinkforce"></a>
+<div align="center"><a href="http://www.think-force.com/index_e.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Thinkforce_logo.png" height="40"></a></div>
+<div align="center"><h3> </h3></div>
+[Sequoia, Hillhouse, Yitu Technology Join $68M Series A Round In Chinese AI Chip Maker ThinkForce](https://www.chinamoneynetwork.com/2017/12/15/sequoia-hillhouse-yitu-technology-join-68m-series-round-chinese-ai-chip-maker-thinkforce)
+
+<div align="center"><h3> </h3></div>
 <div align="center"><h2>V. Startups Worldwide</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
@@ -522,7 +530,13 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><h3> </h3></div>
 [Face Recognition System “K-Eye” Presented by KAIST](http://www.kaist.ac.kr/_prog/_board/?code=ed_news&mode=V&no=65402&upr_ntt_no=65402&site_dvs_cd=en&menu_dvs_cd=)<br><br>
 [从ISSCC Deep Learning处理器论文到人脸识别产品](https://zhuanlan.zhihu.com/p/28328046)<br>
-    
+
+<div align="center"><h3> </h3></div>
+<a name="Kneron"></a>
+<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kneron_logo.png" height="80"></a></div>
+<div align="center"><h3> </h3></div>
+[Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing](https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html)<br><br>
+
 <div align="center"><h3> </h3></div>
 <a name="Vathys">
 <div align="center"><h2>Vathys</h2></div>
