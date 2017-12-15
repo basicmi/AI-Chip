@@ -533,7 +533,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="Kneron"></a>
-<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kneron_logo.png" height="80"></a></div>
+<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kneron_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing](https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html)<br><br>
 
