@@ -17,14 +17,6 @@
 <li>Add <a href="#Kneron">Kneron</a>.</li>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
 <li>Add <a href="#Groq">Groq website</a>.</li>
-<li>Add <a href="#NXP">NXP S32 AUTOMOTIVE PLATFORM and S32V234 Chip</a>.</li>
-<li>Add <a href="#Graphcore">Graphcore: Peliminary IPU Benchmarks</a>.</li>
-<li>Add <a href="#STMicroelectronics">STMicroelectronics: second iteration of the neural networking technology</a>.</li>    
-<li>Add <a href="#Google">Google's Pixel Visual Core</a>.</li>
-<li>Add <a href="#Nervana">Intel Nervana™ Neural Network Processors (NNP)</a>.</li>
-<li>Add <a href="#Loihi">Intel's Loihi test chip</a>.</li>
-<li>Add <a href="#Nvidia">Nvidia open source Deep Learning Accelerator</a>.</li>
-<li>Add <a href="#Imagination">Imagination reveals PowerVR Neural Network Accelerator (NNA)</a>. </li>
 </ul>
 </font>
 
