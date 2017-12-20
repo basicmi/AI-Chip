@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add <a href="#Horizon_Robotics">products of Horizon_Robotics</a>.</li>
+<li>Add <a href="#Horizon Robotics">products of Horizon_Robotics</a>.</li>
 <li>Add <a href="#IBM">IBM Power9</a>.</li>
 <li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
 <li>Add <a href="#Vathys">Vathys</a>.</li>
