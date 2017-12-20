@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add <a href="#Thinkforce">IBM Power9</a>.</li>     
+<li>Add <a href="#IBM">IBM Power9</a>.</li>
 <li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
 <li>Add <a href="#Vathys">Vathys</a>.</li>
 <li>Add <a href="#Kneron">Kneron</a>.</li>
