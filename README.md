@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Thinkforce">IBM Power9</a>.</li>     
 <li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
 <li>Add <a href="#Vathys">Vathys</a>.</li>
 <li>Add <a href="#Kneron">Kneron</a>.</li>
@@ -162,6 +163,9 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><h3> </h3></div>
 [TrueNorth](http://www.research.ibm.com/articles/brain-chip.shtml) is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA [SyNAPSE](https://en.wikipedia.org/wiki/SyNAPSE) program.
 > It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. [Wikipedia](https://en.wikipedia.org/wiki/TrueNorth)
+
+[With IBM POWER9, we’re all riding the AI wave](https://www.ibm.com/blogs/systems/with-ibm-power9-were-ahead-of-the-ai-wave/)
+> "With POWER9, we’re moving to a new off-chip era, with advanced accelerators like GPUs and FPGAs driving modern workloads, including AI...POWER9 will be the first commercial platform loaded with on-chip support for NVIDIA’s next-generation NVLink, OpenCAPI 3.0 and PCI-Express 4.0. These technologies provide a giant hose to transfer data." 
 
 <div align="center"><h3> </h3></div>
 <a name="STMicroelectronics"></a>
