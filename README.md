@@ -335,13 +335,10 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <a name="Horizon_Robotics"></a>
 <div align="center"><a href="http://www.horizon.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
-[Horizon Robotics](http://www.horizon.ai/) has a [Brain Processing Unit](http://www.horizon.ai/programme.php) (BPU) in the works. 
-> Chinese startup Horizon Robotics joined forces with Intel to showcase an Advanced Driver Assistance System (ADAS) at CES 2017 which is a single camera that can see stuff and identify it. The founder and CEO of Horizon Robotics, Dr. Kai YU, used to be the Head of Baidu Institute of Deep Learning so we’re expecting some great things from this startup which has taken in an undisclosed amount of funding so far.
-
+**Dec. 20, [Horizon Robotics](http://www.horizon.ai/) annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.**
+  
 [Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital](http://www.intelcapital.com/news/news.html?id=555)
 > October 19, 2017, San Francisco, USA – Horizon Robotics, a leading global Artificial Intelligence (AI) startup, today announced during Intel Capital’s CEO Showcase that it has received investment from Intel Capital. Harvest Investments will join the round as a co-investor with participation from existing shareholders including Morningside Venture Capital, Hillhouse Capital, Wu Capital and Linear Ventures. The Company expects that its A-plus series funding round will total approximately US$100 million upon closing.
-  
-**Dec. 20, Horizon Robotics annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.**
 
 <div align="center"><h3> </h3></div>
 <a name="Deephi"></a>
