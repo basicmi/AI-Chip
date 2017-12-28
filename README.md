@@ -10,11 +10,10 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
 <li>Add <a href="#Horizon_Robotics">products of Horizon Robotics</a>.</li>
 <li>Add <a href="#IBM">IBM Power9</a>.</li>
 <li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
-<li>Add <a href="#Vathys">Vathys</a>.</li>
-<li>Add <a href="#Kneron">Kneron</a>.</li>
 <li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
 <li>Add <a href="#Groq">Groq website</a>.</li>
 </ul>
@@ -180,6 +179,14 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 **ADAS Chip**
 <br> [S32V234: Vision Processor for Front and Surround View Camera, Machine Learning and Sensor Fusion Applications](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform/vision-processor-for-front-and-surround-view-camera-machine-learning-and-sensor-fusion-applications:S32V234?lang_cd=en)
 > The S32V234 is our 2nd generation vision processor family designed to support computation intensive applications for image processing and offers an ISP, powerful 3D GPU, dual APEX-2 vision accelerators, security and supports SafeAssure™. S32V234 is suited for ADAS, NCAP front camera, object detection and recognition, surround view, machine learning and sensor fusion applications. S32V234 is engineered for automotive-grade reliability, functional safety and security measures to support vehicle and industrial automation.
+
+<div align="center"><h3> </h3></div>
+<a name="MediaTek"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/MediaTek_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+[Next Gen. MediaTek Helio P-Series Processors Will Focus On AI & Facial Recognition](https://www.gizmochina.com/2017/12/27/next-gen-mediatek-helio-p-series-processors-will-focus-ai-facial-recognition/)
+> MediaTek’s Deputy General Manager, Kuan Chou Chen, revealed in the year end media meet that the company will launch two new P-series processors in 2018. The performance of the two chips is said to be impressive but the focus will be on advanced AI, edge computing, and computer vision technologies. 
+
 
 <div align="center"><h3> </h3></div>
 <a name="HiSilicon"></a>
