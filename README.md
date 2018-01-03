@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
 <li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
 <li>Add <a href="#Horizon_Robotics">products of Horizon Robotics</a>.</li>
 <li>Add <a href="#IBM">IBM Power9</a>.</li>
@@ -44,7 +45,7 @@ table, th, td {
   </tr>
   <tr>  
     <th>Startups Worldwide</th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys</a></td><td>25</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys, <a href="#Esperanto">Esperanto Technologies</a></a></td><td>26</td>
   </tr>
 </table>
 
@@ -546,6 +547,13 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><h3> </h3></div>
 Resently, Tapabrata Ghosh from [Vathys](http://vathys.ai/) present their [Petascale Deep Learning chip](https://youtu.be/4nSn0JhZX18), very ambitious design. Hopefully, they can show us the positive results with their engineering sample 2018.<br><br>
 
+<div align="center"><h3> </h3></div>
+<a name="Esperanto ">
+<div align="center"><h2>Esperanto</h2></div>
+<div align="center"><h3> </h3></div>
+According to this article, ["Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"](https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/), 
+> Although [Esperanto](https://www.esperanto.ai/) will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.
+<br><br>
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>Reference</h2></div>
