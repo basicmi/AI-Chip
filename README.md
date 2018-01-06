@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
 <li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
 <li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
 <li>Add <a href="#Horizon_Robotics">products of Horizon Robotics</a>.</li>
@@ -31,7 +32,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a></td><td>11</td>
+    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a></td><td>12</td>
   </tr>
   <tr>
     <th>Cloud/HPC</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
@@ -122,6 +123,12 @@ Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Acc
 
 <br> Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
 > The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
+
+<div align="center"><h3> </h3></div>
+<a name="Samsung"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Samsung_logo.png" height="35"></div>
+<div align="center"><h3> </h3></div>
+Samsung resently unveiled “[The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities](https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content)”.
 
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
