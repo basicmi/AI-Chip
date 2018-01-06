@@ -129,6 +129,9 @@ Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Acc
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Samsung_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 Samsung resently unveiled “[The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities](https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content)”.
+   
+
+
 
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
