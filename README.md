@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Rockchip">RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
 <li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
 <li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
@@ -32,7 +33,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th>IC Giants</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a></td><td>12</td>
+    <th>IC Vendors</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>13</td>
   </tr>
   <tr>
     <th>Cloud/HPC</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
@@ -212,7 +213,14 @@ In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-1
 > Dual-core CNN@700 MHz neural network acceleration engine
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>II. Internet/Cloud/HPC Giants</h2></div>
+<a name="Rockchip"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rockchip_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+[Rockchip Released Its First AI Processor RK3399Pro -- NPU Performance up to 2.4TOPs](https://www.prnewswire.com/news-releases/rockchip-released-its-first-ai-processor-rk3399pro----npu-performance-up-to-24tops-300578633.html)
+> RK3399Pro adopted exclusive AI hardware design. Its NPU computing performance reaches 2.4TOPs, and indexes of both high performance and low consumption keep ahead: the performance is 150% higher than other same type NPU processor; the power consumption is less than 1%, comparing with other solutions adopting GPU as AI computing unit. 
+
+<div align="center"><h3> </h3></div>
+<div align="center"><h2>II. Tech Giants & Cloud/HPC Vendors</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Google"></a>
