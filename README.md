@@ -58,7 +58,7 @@ table, th, td {
 
 <div align="center"><h1> </h1></div>
 
-<div align="center"><h2>I. IC Giants</h2></div>
+<div align="center"><h2>I. IC Vendors</h2></div>
 <HR>
 <div align="center"><h1> </h1></div>
 
@@ -220,7 +220,7 @@ In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-1
 > RK3399Pro adopted exclusive AI hardware design. Its NPU computing performance reaches 2.4TOPs, and indexes of both high performance and low consumption keep ahead: the performance is 150% higher than other same type NPU processor; the power consumption is less than 1%, comparing with other solutions adopting GPU as AI computing unit. 
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>II. Tech Giants & Cloud/HPC Vendors</h2></div>
+<div align="center"><h2>II. Tech Giants & HPC Vendors</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Google"></a>
