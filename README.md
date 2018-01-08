@@ -214,7 +214,7 @@ In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-1
 
 <div align="center"><h3> </h3></div>
 <a name="Rockchip"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rockchip_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rockchip_logo.png" height="50"></div>
 <div align="center"><h3> </h3></div>
 [Rockchip Released Its First AI Processor RK3399Pro -- NPU Performance up to 2.4TOPs](https://www.prnewswire.com/news-releases/rockchip-released-its-first-ai-processor-rk3399pro----npu-performance-up-to-24tops-300578633.html)
 > RK3399Pro adopted exclusive AI hardware design. Its NPU computing performance reaches 2.4TOPs, and indexes of both high performance and low consumption keep ahead: the performance is 150% higher than other same type NPU processor; the power consumption is less than 1%, comparing with other solutions adopting GPU as AI computing unit. 
