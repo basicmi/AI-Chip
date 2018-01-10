@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add <a href="#Rockchip">RK3399Pro</a>.</li>
+<li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
 <li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
 <li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
