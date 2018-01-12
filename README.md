@@ -33,20 +33,20 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th>IC Vendors</th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>13</td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>13</td>
   </tr>
   <tr>
-    <th>Tech Giants & HPC Vendors</th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a></td><td>9</td>
   </tr>
   <tr>
-    <th>IP Vendors</th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>6</td>
+    <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>6</td>
   </tr>
   <tr>
-    <th>Startups in China</th>
+    <th><a href="#Startups_in_China">Startups in China</a></th>
     <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a></td><td>6</td>
   </tr>
   <tr>  
-    <th>Startups Worldwide</th>
+    <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
     <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys, <a href="#Esperanto">Esperanto Technologies</a></a></td><td>26</td>
   </tr>
 </table>
@@ -58,7 +58,7 @@ table, th, td {
 
 <div align="center"><h1> </h1></div>
 
-<div align="center"><h2>I. IC Vendors</h2></div>
+<div align="center"><h2><a name="IC_Vendors"></a>I. IC Vendors</h2></div>
 <HR>
 <div align="center"><h1> </h1></div>
 
@@ -220,7 +220,7 @@ In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-1
 > RK3399Pro adopted exclusive AI hardware design. Its NPU computing performance reaches 2.4TOPs, and indexes of both high performance and low consumption keep ahead: the performance is 150% higher than other same type NPU processor; the power consumption is less than 1%, comparing with other solutions adopting GPU as AI computing unit. 
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>II. Tech Giants & HPC Vendors</h2></div>
+<div align="center"><h2><a name="Tech_Giants"></a>II. Tech Giants & HPC Vendors</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Google"></a>
@@ -293,7 +293,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 > Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. 
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>III. Traditional IP Vendors</h2></div>
+<div align="center"><h2><a name="IP_Vendors"></a>III. Traditional IP Vendors</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="ARM"></a>
@@ -338,7 +338,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)<br>
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>IV. Startups in China</h2></div>
+<div align="center"><h2><a name="Startups_in_China"></a>IV. Startups in China</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cambricon"></a>
@@ -393,7 +393,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 [Sequoia, Hillhouse, Yitu Technology Join $68M Series A Round In Chinese AI Chip Maker ThinkForce](https://www.chinamoneynetwork.com/2017/12/15/sequoia-hillhouse-yitu-technology-join-68m-series-round-chinese-ai-chip-maker-thinkforce)
 
 <div align="center"><h3> </h3></div>
-<div align="center"><h2>V. Startups Worldwide</h2></div>
+<div align="center"><h2><a name="Startups_Worldwide"></a>V. Startups Worldwide</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
 <a name="Cerebras"></a>
