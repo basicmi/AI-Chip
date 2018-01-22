@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#GTI">Gyrfalcon Technology</a>.</li>
 <li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
 <li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
@@ -47,7 +48,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys, <a href="#Esperanto">Esperanto Technologies</a></a></td><td>26</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a></td><td>27</td>
   </tr>
 </table>
 
@@ -558,6 +559,12 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kneron_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing](https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html)<br><br>
+
+<div align="center"><h3> </h3></div>
+<a name="GTI"></a>
+<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_logo.jpeg" height="60"></a></div>
+<div align="center"><h3> </h3></div>
+[Here](https://www.youtube.com/watch?v=AxFtVhHXOnc) is the demo of their chip, usb dongle and development board.<br><br>
 
 <div align="center"><h3> </h3></div>
 <a name="Vathys">
