@@ -11,6 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
+<li>Add <a href="#Amazon_AWS">Amazon's custom AI chip for future Echo devices</a>.</li>
 <li>Add <a href="#GTI">Gyrfalcon Technology</a>.</li>
 <li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
@@ -245,6 +246,8 @@ Other references are:<br>
 <div align="center"><h3> </h3></div>
 > [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
 
+Amazon has started designing a custom artificial intelligence chip that would power future Echo devices and improve the quality and response time of its Alexa voice assistant, according to a report from [The Information](https://www.theinformation.com/articles/amazon-is-becoming-an-ai-chip-maker-speeding-alexa-responses). 
+
 <div align="center"><h3> </h3></div>
 <a name="Microsoft"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
@@ -302,7 +305,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
 [DynamIQ](http://pages.arm.com/dynamiq-technology.html) is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.<br><br>
-ARM also provide a open source [Compute Library](https://developer.arm.com/technologies/compute-library) contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.
+ARM also provide a open source [Compute Library](https://developer.arm.com/technologies/compute-library) contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.<br><br>
 [Arm Machine Learning Processor](https://developer.arm.com/products/processors/machine-learning/arm-ml-processor)
 > Specifically designed for inference at the edge, the ML processor gives an industry-leading performance of 4.6 TOPs, with a stunning efficiency of 3 TOPs/W for mobile devices and smart IP cameras.
 
