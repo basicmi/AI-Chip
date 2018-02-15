@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
 <li>Add <a href="#GTI">Gyrfalcon Technology</a>.</li>
 <li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
@@ -302,6 +303,8 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><h3> </h3></div>
 [DynamIQ](http://pages.arm.com/dynamiq-technology.html) is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.<br><br>
 ARM also provide a open source [Compute Library](https://developer.arm.com/technologies/compute-library) contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.
+[Arm Machine Learning Processor](https://developer.arm.com/products/processors/machine-learning/arm-ml-processor)
+> Specifically designed for inference at the edge, the ML processor gives an industry-leading performance of 4.6 TOPs, with a stunning efficiency of 3 TOPs/W for mobile devices and smart IP cameras.
 
 <div align="center"><h3> </h3></div>
 <a name="Synopsys"></a>
