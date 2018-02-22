@@ -200,8 +200,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <a name="MediaTek"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/MediaTek_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
-[Next Gen. MediaTek Helio P-Series Processors Will Focus On AI & Facial Recognition](https://www.gizmochina.com/2017/12/27/next-gen-mediatek-helio-p-series-processors-will-focus-ai-facial-recognition/)
-> MediaTek’s Deputy General Manager, Kuan Chou Chen, revealed in the year end media meet that the company will launch two new P-series processors in 2018. The performance of the two chips is said to be impressive but the focus will be on advanced AI, edge computing, and computer vision technologies. 
+[MediaTek Unveils Its Edge AI Platform & AI Technology For Cross Platform Consumer Devices](https://www.mediatek.com/news-events/press-releases/mediatek-unveils-its-edge-ai-platform-ai-technology-for-cross-platform-consumer-devices)
+> Through a combination of hardware and software, an AI processing unit (APU ; Artificial intelligence Processing Unit ), and NeuroPilot SDK, MediaTek will bring AI across its wide-ranging technology portfolio – a portfolio that powers 1.5 billion consumer products a year across smartphones, smart homes, autos and more. 
 
 
 <div align="center"><h3> </h3></div>
