@@ -10,6 +10,8 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Qualcomm">Qualcomm AI Engine</a>.</li>
+<li>Add <a href="#Google">Benchmarking Google’s new TPUv2</a>.</li>
 <li>Add <a href="#Google">Google announced the open beta of its TPU2</a>.</li>
 <li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
 <li>Add <a href="#Amazon_AWS">Amazon's custom AI chip for future Echo devices</a>.</li>
@@ -102,13 +104,10 @@ Intel's Loihi test chip is the [First-of-Its-Kind Self-Learning Chip](https://ne
 <a name="Qualcomm"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
+In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.<br><br>
 
-> Qualcomm has been fussing around ML for a while with the Zeroth SDK and [Snapdragon Neural Processing Engine](https://developer.qualcomm.com/software/snapdragon-neural-processing-engine). The NPE certainly works reasonably well on the [Hexagon DSP](https://en.wikipedia.org/wiki/Qualcomm_Hexagon) that Qualcomm use. 
-> The [Hexagon DSP](https://www.bdti.com/InsideDSP/2015/09/30/Qualcomm) is far from a very wide parallel platform and it has been confirmed by Yann LeCun that Qualcomm and Facebook are working together on a better way in Wired's "[The Race To Build An AI Chip For Everything Just Got Real](https://www.wired.com/2017/04/race-make-ai-chips-everything-heating-fast/)",
-> "And more recently, Qualcomm has started building chips specifically for executing neural networks, according to LeCun, who is familiar with Qualcomm's plans because Facebook is helping the chip maker develop technologies related to machine learning. Qualcomm vice president of technology Jeff Gehlhaar confirms the project. "We're very far along in our prototyping and development," he says."
-Perhaps we'll see something soon beyond the Kryo CPU, Adreno GPU, Hexagon DSP, and Hexagon Vector Extensions. It is going to be hard to be a start-up in this space if you're competing against Qualcomm's machine learning.
-
-In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.
+[Qualcomm Artificial Intelligence Engine Powers AI Capabilities of Snapdragon Mobile Platform](https://www.qualcomm.com/news/releases/2018/02/21/qualcomm-artificial-intelligence-engine-powers-ai-capabilities-snapdragon)
+> Qualcomm Artificial Intelligence (AI) Engine, which is comprised of several hardware and software components to accelerate on-device AI-enabled user experiences on select Qualcomm® Snapdragon™ mobile platforms. The AI Engine will be supported on Snapdragon 845, 835, 821, 820 and 660 mobile platforms, with cutting-edge on-device AI processing found in the Snapdragon 845.
 
 <div align="center"><h3> </h3></div>
 <a name="Nvidia"></a>
@@ -135,9 +134,6 @@ Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Acc
 <div align="center"><h3> </h3></div>
 Samsung resently unveiled “[The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities](https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content)”.
    
-
-
-
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="35"></div>
@@ -232,8 +228,7 @@ In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-1
 <div align="center"><h3> </h3></div>
 
 Google's [original TPU](https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu) had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new [TPU2](https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/) is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. <br><br>
-[Lately](https://cloudplatform.googleblog.com/2018/02/Cloud-TPU-machine-learning-accelerators-now-available-in-beta.html), Google is making [Cloud TPUs](https://cloud.google.com/tpu/) available for use in [Google Cloud Platform (GCP)](https://cloud.google.com/). 
-<br><br>
+[Lately](https://cloudplatform.googleblog.com/2018/02/Cloud-TPU-machine-learning-accelerators-now-available-in-beta.html), Google is making [Cloud TPUs](https://cloud.google.com/tpu/) available for use in [Google Cloud Platform (GCP)](https://cloud.google.com/). Here you can find the latest [banchmark result of Google TPU2](https://blog.riseml.com/benchmarking-googles-new-tpuv2-121c03b71384).<br><br>
 [Pixel Visual Core](https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/) is Google’s first custom-designed co-processor for consumer products. It’s built into every Pixel 2, and in the coming months, we’ll turn it on through a software update to enable more applications to use Pixel 2’s camera for taking HDR+ quality pictures.
 
 Other references are:<br>
