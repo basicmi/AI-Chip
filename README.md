@@ -597,6 +597,8 @@ According to this article, ["Esperanto exits stealth mode, aims at AI with a 4,0
 <div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
 According to the linkedin page of its CEO, former SPARC developer in ORACLE, [SambaNova Systems](https://sambanovasystems.com/) is a computing startup focused on building machine learning and big data analytics platforms. SambaNova's software-defined analytics platform enables optimum performance for any ML training, inference or analytics models.<br><br>
+[The red-hot AI hardware space gets even hotter with $56M for a startup called SambaNova Systems](https://techcrunch.com/2018/03/15/the-red-hot-ai-chip-space-gets-even-hotter-with-56m-for-a-startup-called-sambanova/)
+> SambaNova is the product of technology from Kunle Olukotun and Chris Ré, two professors at Stanford, and led by former Oracle SVP of development Rodrigo Liang, who was also a VP at Sun for almost 8 years.
 
 <div align="center"><h3> </h3></div>
 <a name="GreenWaves"></a>
