@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add <a href="#Nvidia">DGX-2 System</a>.</li>
+<li>Add <a href="#Nvidia">Nvidia DGX-2 System</a>.</li>
 <li>Add <a href="#SambaNova">SambaNova Systems</a>.</li>
 <li>Add <a href="#Nokia">Nokia ReefShark</a>.</li>
 <li>Add <a href="#GreenWaves">GreenWaves GAP8</a>.</li>
