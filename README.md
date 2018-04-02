@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Nvidia">DGX-2 System</a>.</li>
 <li>Add <a href="#SambaNova">SambaNova Systems</a>.</li>
 <li>Add <a href="#Nokia">Nokia ReefShark</a>.</li>
 <li>Add <a href="#GreenWaves">GreenWaves GAP8</a>.</li>
@@ -117,6 +118,8 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
+
+**[Nvidia’s DGX-2 System Packs An AI Performance Punch](https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/)**<br><br>
 
 [Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.<br><br>
 Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.<br><br>
