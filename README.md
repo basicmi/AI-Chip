@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
 <li>Add <a href="#Nvidia">Nvidia DGX-2 System</a>.</li>
 <li>Add <a href="#SambaNova">SambaNova Systems</a>.</li>
 <li>Add <a href="#Nokia">Nokia ReefShark</a>.</li>
@@ -429,7 +430,9 @@ After HotChips 2017, in the next plateform article "[First In-Depth View of Wave
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
 [Graphcore](https://www.graphcore.ai/) raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give [a talk](https://youtu.be/T8DvHnb3Y9g) at the 3rd Research and Applied AI Summit (RAAIS) in London, showing [interesting ideas](https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2) behind their processor. <br><br>
-In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.graphcore.ai/posts/preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications)  
+In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.graphcore.ai/posts/preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications)  <br><br>
+
+**Simon Knowles, Graphcore CTO, spoke at the Scaled Machine Learning Conference at Stanford in March about [Scaling Throughput Processors for Machine Intelligence'](https://www.graphcore.ai/posts/video-scaling-throughput-processors-for-machine-intelligence). **
 
 [解密又一个xPU：Graphcore的IPU](https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g) give some analysis on its IPU architecture.
 
