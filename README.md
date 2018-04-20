@@ -592,12 +592,6 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 [Here](https://www.youtube.com/watch?v=AxFtVhHXOnc) is the demo of their chip, usb dongle and development board.<br><br>
 
 <div align="center"><h3> </h3></div>
-<a name="Vathys">
-<div align="center"><h2>Vathys</h2></div>
-<div align="center"><h3> </h3></div>
-Resently, Tapabrata Ghosh from [Vathys](http://vathys.ai/) present their [Petascale Deep Learning chip](https://youtu.be/4nSn0JhZX18), very ambitious design. Hopefully, they can show us the positive results with their engineering sample 2018.<br><br>
-
-<div align="center"><h3> </h3></div>
 <a name="Esperanto">
 <div align="center"><h2><a href="https://www.esperanto.ai/">Esperanto Technologies</a></h2></div>
 <div align="center"><h3> </h3></div>
