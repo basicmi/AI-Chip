@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
 <li>Add <a href="#Nvidia">Nvidia DGX-2 System</a>.</li>
 <li>Add <a href="#SambaNova">SambaNova Systems</a>.</li>
@@ -50,7 +51,7 @@ table, th, td {
     <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a></td><td>10</td>
   </tr>
   <tr>
-    <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td><td>6</td>
+    <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
@@ -353,6 +354,12 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><h3> </h3></div>
 [VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second](http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html)<br><br>
 [神经网络DSP核的一桌麻将终于凑齐了](https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw)<br>
+
+<div align="center"><h3> </h3></div>
+<a name="Videantis"></a>
+<div align="center"><a href="http://www.videantis.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Videantis_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+The [v-MP6000UDX processor from Videantis](http://www.videantis.com/products/deep-learning) is a scalable processor family that has been designed to run high-performance deep learning, computer vision, imaging and video coding applications in a low power footprint. 
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2><a name="Startups_in_China"></a>IV. Startups in China</h2></div>
