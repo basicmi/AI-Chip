@@ -357,7 +357,7 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 
 <div align="center"><h3> </h3></div>
 <a name="Videantis"></a>
-<div align="center"><a href="http://www.videantis.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Videantis_logo.png" height="40"></div>
+<div align="center"><a href="http://www.videantis.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Videantis_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 The [v-MP6000UDX processor from Videantis](http://www.videantis.com/products/deep-learning) is a scalable processor family that has been designed to run high-performance deep learning, computer vision, imaging and video coding applications in a low power footprint. 
 
