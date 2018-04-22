@@ -252,7 +252,7 @@ Other references are:<br>
 
 <div align="center"><h3> </h3></div>
 <a name="Amazon"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [Amazon may be developing AI chips for Alexa](https://techcrunch.com/2018/02/12/amazon-may-be-developing-ai-chips-for-alexa/)
 > The Information has a report this morning that Amazon [is working on building AI chips for the Echo](https://www.theinformation.com/amazon-is-becoming-an-ai-chip-maker-speeding-alexa-responses?shared=922dfb3ba4e3984e), which would allow Alexa to more quickly parse information and get those answers.
