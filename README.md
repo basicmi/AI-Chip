@@ -265,7 +265,7 @@ Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future
 
 <div align="center"><h3> </h3></div>
 <a name="Alibaba"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/alibaba_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/alibaba_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div> 
 [Alibaba is making its own neural network chip](https://technode.com/2018/04/20/alibaba-npu/)
 > Alibaba is developing its own neural network chip, the Ali-NPU, which will be used in AI applications, such as image video analysis, machine learning, and other scenarios.
@@ -318,7 +318,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 <div align="center"><h3> </h3></div>
 <a name="Facebook"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/facebook_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/facebook_logo.png" height="50"></div>
 <div align="center"><h3> </h3></div>
 [Facebook Is Forming a Team to Design Its Own Chips](https://www.bloomberg.com/news/articles/2018-04-18/facebook-is-forming-a-team-to-design-its-own-chips)
 > Facebook Inc. is building a team to design its own semiconductors, adding to a trend among technology companies to supply themselves and lower their dependence on chipmakers such as Intel Corp. and Qualcomm Inc., according to job listings and people familiar with the matter.
