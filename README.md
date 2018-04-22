@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
 <li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
 <li>Add <a href="#Nvidia">Nvidia DGX-2 System</a>.</li>
@@ -48,7 +49,7 @@ table, th, td {
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>13</td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a></td><td>10</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia, <a href="#Facebook">Facebook</a></a></td><td>10</td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
@@ -59,7 +60,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Vathys">Vathys</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a></td><td>29</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a></td><td>28</td>
   </tr>
 </table>
 
@@ -263,6 +264,13 @@ Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future
 [Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
 
 <div align="center"><h3> </h3></div>
+<a name="Alibaba"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/alibaba_logo.png" height="30"></div>
+<div align="center"><h3> </h3></div> 
+[Alibaba is making its own neural network chip](https://technode.com/2018/04/20/alibaba-npu/)
+> Alibaba is developing its own neural network chip, the Ali-NPU, which will be used in AI applications, such as image video analysis, machine learning, and other scenarios.
+
+<div align="center"><h3> </h3></div>
 <a name="Alibaba_Cloud"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alibaba_Cloud_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div> 
@@ -307,6 +315,13 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nokia_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
 > Nokia has developed the [ReefShark chipsets]((https://networks.nokia.com/5g/reefshark)) for its 5G network solutions. AI is implemented in the ReefShark design for radio and embedded in the baseband to use augmented deep learning to trigger smart, rapid actions by the autonomous, cognitive network, enhancing network optimization and increasing business opportunities.
+
+<div align="center"><h3> </h3></div>
+<a name="Facebook"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/facebook_logo.png" height="30"></div>
+<div align="center"><h3> </h3></div>
+[Facebook Is Forming a Team to Design Its Own Chips](https://www.bloomberg.com/news/articles/2018-04-18/facebook-is-forming-a-team-to-design-its-own-chips)
+> Facebook Inc. is building a team to design its own semiconductors, adding to a trend among technology companies to supply themselves and lower their dependence on chipmakers such as Intel Corp. and Qualcomm Inc., according to job listings and people familiar with the matter.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2><a name="IP_Vendors"></a>III. Traditional IP Vendors</h2></div>
