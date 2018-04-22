@@ -21,7 +21,7 @@
 <li>Add <a href="#Google">Benchmarking Google’s new TPUv2</a>.</li>
 <li>Add <a href="#Google">Google announced the open beta of its TPU2</a>.</li>
 <li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
-<li>Add <a href="#Amazon_AWS">Amazon's custom AI chip for future Echo devices</a>.</li>
+<li>Add <a href="#Amazon">Amazon's custom AI chip for future Echo devices</a>.</li>
 <li>Add <a href="#GTI">Gyrfalcon Technology</a>.</li>
 <li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
 <li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
@@ -251,17 +251,17 @@ Other references are:<br>
 [Should We All Embrace Systolic Arrays?](https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu)<br>
 
 <div align="center"><h3> </h3></div>
-<a name="Amazon_AWS"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS.png" height="60"></div>
-<div align="center"><h3> </h3></div>
-> [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
-
-<div align="center"><h3> </h3></div>
 <a name="Amazon"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 [Amazon may be developing AI chips for Alexa](https://techcrunch.com/2018/02/12/amazon-may-be-developing-ai-chips-for-alexa/)
 > The Information has a report this morning that Amazon [is working on building AI chips for the Echo](https://www.theinformation.com/amazon-is-becoming-an-ai-chip-maker-speeding-alexa-responses?shared=922dfb3ba4e3984e), which would allow Alexa to more quickly parse information and get those answers.
+
+<div align="center"><h3> </h3></div>
+<a name="Amazon_AWS"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS.png" height="50"></div>
+<div align="center"><h3> </h3></div>
+> [Amazon EC2 F1](https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls) is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an [FPGA Developer AMI](https://aws.amazon.com/marketplace/pp/B06VVYBLZZ) and [Hardware Developer Kit](https://github.com/aws/aws-fpga) (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.
 
 <div align="center"><h3> </h3></div>
 <a name="Microsoft"></a>
