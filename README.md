@@ -46,10 +46,10 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Apple">Apple</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>13</td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>12</td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia, <a href="#Facebook">Facebook</a></a></td><td>10</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia, <a href="#Facebook">Facebook</a></a></td><td>11</td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
@@ -158,14 +158,6 @@ The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/e
 > [Tesla is reportedly developing its own processor for artificial intelligence, intended for use with its self-driving systems, in partnership with AMD](https://techcrunch.com/2017/09/20/tesla-said-to-be-working-on-its-own-self-driving-ai-chip-with-amd/). Tesla has an existing relationship with Nvidia, whose GPUs power its Autopilot system, but this new in-house chip reported by CNBC could potentially reduce its reliance on third-party AI processing hardware.
 
 <div align="center"><h3> </h3></div>
-<a name="Apple"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
-<div align="center"><h3> </h3></div>
-Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
-<br> [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
-
-
-<div align="center"><h3> </h3></div>
 <a name="Xilinx"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
@@ -271,6 +263,13 @@ Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future
 [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br><br>
 [This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.<br><br>
 [Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
+
+<div align="center"><h3> </h3></div>
+<a name="Apple"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
+<div align="center"><h3> </h3></div>
+Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
+<br> [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
 
 <div align="center"><h3> </h3></div>
 <a name="Alibaba"></a>
