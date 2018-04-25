@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add two optical AI computing company <a href="#Lightelligence">Lightmatter</a> and <a href="#Lightmatter">Facebook</a> .</li>
+<li>Add two optical AI computing company <a href="#Lightelligence">Lightelligence</a> and <a href="#Lightmatter">Lightmatter</a> .</li>
 <li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
 <li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
