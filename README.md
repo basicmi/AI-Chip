@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add two optical AI computing company <a href="#Lightelligence">Lightmatter</a> and <a href="#Lightmatter">Facebook</a> .</li>
 <li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
 <li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
 <li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
@@ -60,7 +61,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a></td><td>28</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a></td><td>30</td>
   </tr>
 </table>
 
@@ -635,6 +636,20 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GreenWaves_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
 > GreenWaves Technologies develops IoT Application Processors based on Open Source IP blocks enabling content understanding applications on embedded, battery-operated devices with unmatched energy efficiency. Our first product is GAP8. GAP8 provides an ultra-low power computing solution for edge devices carrying out inference from multiple, content rich sources such as images, sounds and motions. GAP8 can be used in a variety of different applications and industries.
+
+<div align="center"><h3> </h3></div>
+<a name="Lightelligence"></a>
+<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightelligence_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[Light-Powered Computers Brighten AI’s Future](https://www.scientificamerican.com/article/light-powered-computers-brighten-ai-rsquo-s-future/)
+> Optical computers may have finally found a use—improving artificial intelligence
+
+<div align="center"><h3> </h3></div>
+<a name="Lightmatter"></a>
+<div align="center"><a href="https://www.lightmatter.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightmatter_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[Lightmatter aims to reinvent AI-specific chips with photonic computing and $11M in funding](https://techcrunch.com/2018/02/05/lightmatter-aims-to-reinvent-ai-specific-chips-with-photonic-computing-and-11m-in-funding/)
+> It takes an immense amount of processing power to create and operate the “AI” features we all use so often, from playlist generation to voice recognition. Lightmatter  is a startup that is looking to change the way all that computation is done — and not in a small way. The company makes photonic chips that essentially perform calculations at the speed of light, leaving transistors in the dust. It just closed an $11 million Series A.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2>Reference</h2></div>
