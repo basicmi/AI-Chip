@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add tow Benchmarks, DAWNBench and Fathom in Reference section</a>.</li>
 <li>Add two optical AI computing company <a href="#Lightelligence">Lightelligence</a> and <a href="#Lightmatter">Lightmatter</a> .</li>
 <li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
 <li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
@@ -652,6 +653,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 > It takes an immense amount of processing power to create and operate the “AI” features we all use so often, from playlist generation to voice recognition. Lightmatter  is a startup that is looking to change the way all that computation is done — and not in a small way. The company makes photonic chips that essentially perform calculations at the speed of light, leaving transistors in the dust. It just closed an $11 million Series A.
 
 <div align="center"><h3> </h3></div>
+<a name="Reference"></a>
 <div align="center"><h2>Reference</h2></div>
 <HR>
 <div align="center"><h3> </h3></div>
@@ -660,6 +662,8 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)<br>
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)<br>
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)<br>
+5. [DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)](https://dawn.cs.stanford.edu/benchmark/index.html)<br>
+6. [Fathom:Reference workloads for modern deep learning methods.](https://github.com/rdadolf/fathom)(br)
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
