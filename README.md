@@ -663,7 +663,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)<br>
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)<br>
 5. [DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)](https://dawn.cs.stanford.edu/benchmark/index.html)<br>
-6. [Fathom:Reference workloads for modern deep learning methods.](https://github.com/rdadolf/fathom)(br)
+6. [Fathom:Reference workloads for modern deep learning methods.](https://github.com/rdadolf/fathom)<br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
