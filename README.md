@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add information from <a href="#PEZY">PEZY: First Use of TCI</a>.</li>
 <li>Add two benchmarks, DAWNBench and Fathom in <a href="#Reference">Reference section</a>.</li>
 <li>Add two optical AI computing company <a href="#Lightelligence">Lightelligence</a> and <a href="#Lightmatter">Lightmatter</a> .</li>
 <li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
@@ -474,7 +475,10 @@ In a resent post, Graphcore shows ["Preliminary IPU Benchmarks"](https://www.gra
 <div align="center"><h3> </h3></div>
 Pezy-SC and Pezy-SC2 are the 1024 core and 2048 core processors that [Pezy](http://pezy.co.jp/en/index.html) develop. The Pezy-SC 1024 core chip powered the top 3 systems on the Green500 list of supercomputers back in 2015. The [Pezy-SC2](https://en.wikichip.org/wiki/pezy/pezy-sc2) is the follow up chip that is meant to be delivered by now, but details are scarce yet intriguing,
 > "PEZY-SC2 HPC Brick: 32 of PEZY-SC2 module card with 64GB DDR4 DIMM (2.1 PetaFLOPS (DP) in single tank with 6.4Tb/s"
-It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do. In the [June 2017 Green500 list](https://www.top500.org/green500/list/2017/06/), a Nvidia P100 system took the number one spot and there is a Pezy-SC2 system at number 7. So the chip seems alive but details are thin on the ground. [Motoaki Saito](https://wired.jp/special/2016/motoaki-saito/) is certainly worth watching.
+It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do. In the [June 2017 Green500 list](https://www.top500.org/green500/list/2017/06/), a Nvidia P100 system took the number one spot and there is a Pezy-SC2 system at number 7. So the chip seems alive but details are thin on the ground. [Motoaki Saito](https://wired.jp/special/2016/motoaki-saito/) is certainly worth watching.<br>
+
+[The 2,048-core PEZY-SC2 sets a Green500 record](https://fuse.wikichip.org/news/191/the-2048-core-pezy-sc2-sets-a-green500-record/)
+> The SC2 is a second-generation chip featuring twice as many cores – i.e., 2,048 cores with 8-way SMT for a total of 16,384 threads. Operating at 1 GHz with 4 FLOPS per cycle per core as with the SC, the SC2 has a peak performance of 8.192 TFLOPS (single-precision). Both prior chips were manufactured on TSMC’s 28HPC+, however in order to enable the considerably higher core count within reasonable power consumption, PEZY decided to skip a generation and go directly to TSMC’s 16FF+ Technology.
 
 <div align="center"><h3> </h3></div>
 <a name="KnuEdge"></a>
