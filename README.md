@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news from <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add benchmark, MLPerf in <a href="#Reference">Reference section</a>.</li>
 <li>Add information from <a href="#PEZY">PEZY: First Use of TCI</a>.</li>
 <li>Add two benchmarks, DAWNBench and Fathom in <a href="#Reference">Reference section</a>.</li>
@@ -395,7 +396,10 @@ The [v-MP6000UDX processor from Videantis](http://www.videantis.com/products/dee
 <a name="Cambricon"></a>
 <div align="center"><a href="http://www.cambricon.com/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
-[Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.
+[Cambricon](http://www.cambricon.com/en/) successfully [raised record $100M round A](https://www.chinamoneynetwork.com/2017/08/18/chinas-state-development-investment-corp-leads-100m-round-in-ai-chip-maker-cambricon) resently, providing solutions covering IP licensing, Chip Service, Smart Card and Intelligent Platform.<br>
+**[Chinese AI Chip Maker Cambricon Unveils New Cloud-Based Smart Chip](https://www.chinamoneynetwork.com/2018/05/04/chinese-ai-chip-maker-cambricon-unveils-new-cloud-based-smart-chip)**
+> Chinese artificial intelligence chip maker Cambricon Technologies Corp Ltd has unveiled two new products, a cloud-based smart chip Cambricon MLU100 and a new version of its AI processor IP product Cambricon 1M, at a launching event in Shanghai on May 3rd.
+
 
 [AI Chip Explosion: Cambricon’s Billion-Device Ambition](https://syncedreview.com/2017/11/06/ai-chip-explosion-cambricons-billion-device-ambition/)
 > On November 6 in Beijing, China’s rising semiconductor company Cambricon released the Cambrian-1H8 for low power consumption computer vision application, the higher-end Cambrian-1H16 for more general purpose application, the Cambrian-1M for autonomous driving applications with yet-to-be-disclosed release date, and an AI system software named Cambrian NeuWare.
@@ -404,7 +408,7 @@ The [v-MP6000UDX processor from Videantis](http://www.videantis.com/products/dee
 <a name="Horizon_Robotics"></a>
 <div align="center"><a href="http://www.horizon.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Horizon_Robotics_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
-**Dec. 20, [Horizon Robotics](http://www.horizon.ai/) annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.**
+Dec. 20, [Horizon Robotics](http://www.horizon.ai/) annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.
   
 [Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital](http://www.intelcapital.com/news/news.html?id=555)
 > October 19, 2017, San Francisco, USA – Horizon Robotics, a leading global Artificial Intelligence (AI) startup, today announced during Intel Capital’s CEO Showcase that it has received investment from Intel Capital. Harvest Investments will join the round as a co-investor with participation from existing shareholders including Morningside Venture Capital, Hillhouse Capital, Wu Capital and Linear Ventures. The Company expects that its A-plus series funding round will total approximately US$100 million upon closing.
