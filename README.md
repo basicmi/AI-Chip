@@ -10,7 +10,8 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news from <a href="#Cambricon">Cambricon</a>.</li>
+<li>Add news of <a href="#Google">Google TPU3</a> and <a href="#Microsoft">Microsoft Brainwave</a>.</li>
+<li>Add news of <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add benchmark, MLPerf in <a href="#Reference">Reference section</a>.</li>
 <li>Add information from <a href="#PEZY">PEZY: First Use of TCI</a>.</li>
 <li>Add two benchmarks, DAWNBench and Fathom in <a href="#Reference">Reference section</a>.</li>
@@ -241,7 +242,11 @@ Google's [original TPU](https://cloud.google.com/blog/big-data/2017/05/an-in-dep
 [Lately](https://cloudplatform.googleblog.com/2018/02/Cloud-TPU-machine-learning-accelerators-now-available-in-beta.html), Google is making [Cloud TPUs](https://cloud.google.com/tpu/) available for use in [Google Cloud Platform (GCP)](https://cloud.google.com/). Here you can find the latest [banchmark result of Google TPU2](https://blog.riseml.com/benchmarking-googles-new-tpuv2-121c03b71384).<br><br>
 [Pixel Visual Core](https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/) is Google’s first custom-designed co-processor for consumer products. It’s built into every Pixel 2, and in the coming months, we’ll turn it on through a software update to enable more applications to use Pixel 2’s camera for taking HDR+ quality pictures.
 
+**[Tearing Apart Google’s TPU 3.0 AI Coprocessor](https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor/)**
+> Google did its best to impress this week at its annual IO conference. While Google rolled out a bunch of benchmarks that were run on its current Cloud TPU instances, based on TPUv2 chips, the company divulged a few skimpy details about its next generation TPU chip and its systems architecture. The company changed from version notation (TPUv2) to revision notation (TPU 3.0) with the update, but ironically the detail we have assembled shows that the step from TPUv2 to what we will call TPUv3 probably isn’t that big; it should probably be called TPU v2r5 or something like that.
+
 Other references are:<br>
+[Google TPU3 看点](https://mp.weixin.qq.com/s/b22p26_delWfSpy9kDJKhA)<br><br>
 [Google TPU 揭密](https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw)<br><br>
 [Google的神经网络处理器专利](https://mp.weixin.qq.com/s/lBQyNSNa6-joeLZ_Kq2W8A)<br><br>
 [脉动阵列 - 因Google TPU获得新生](https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ)<br><br>
@@ -264,10 +269,11 @@ Other references are:<br>
 <a name="Microsoft"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-Wired did a nice story on the MSFT use of FPGAs too, "[Microsoft Bets Its Future on a Reprogrammable Computer Chip](https://www.wired.com/2016/09/microsoft-bets-future-chip-reprogram-fly/)".<br><br>
 [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br><br>
 [This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.<br><br>
 [Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
+**[Real-time AI: Microsoft announces preview of Project Brainwave](https://blogs.microsoft.com/ai/build-2018-project-brainwave/)**
+> At Microsoft’s [Build developers conference in Seattle this week](https://news.microsoft.com/2018/05/07/microsoft-build-highlights-new-opportunity-for-developers-at-the-edge-and-in-the-cloud/), the company is announcing a preview of Project Brainwave integrated with Azure Machine Learning, which the company says will make Azure the most efficient cloud computing platform for AI.
 
 <div align="center"><h3> </h3></div>
 <a name="Apple"></a>
