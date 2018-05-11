@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add product page of <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add news of <a href="#Google">Google TPU3</a> and <a href="#Microsoft">Microsoft Brainwave</a>.</li>
 <li>Add news of <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add benchmark, MLPerf in <a href="#Reference">Reference section</a>.</li>
@@ -406,9 +407,10 @@ The [v-MP6000UDX processor from Videantis](http://www.videantis.com/products/dee
 **[Chinese AI Chip Maker Cambricon Unveils New Cloud-Based Smart Chip](https://www.chinamoneynetwork.com/2018/05/04/chinese-ai-chip-maker-cambricon-unveils-new-cloud-based-smart-chip)**
 > Chinese artificial intelligence chip maker Cambricon Technologies Corp Ltd has unveiled two new products, a cloud-based smart chip Cambricon MLU100 and a new version of its AI processor IP product Cambricon 1M, at a launching event in Shanghai on May 3rd.
 
-
 [AI Chip Explosion: Cambricon’s Billion-Device Ambition](https://syncedreview.com/2017/11/06/ai-chip-explosion-cambricons-billion-device-ambition/)
 > On November 6 in Beijing, China’s rising semiconductor company Cambricon released the Cambrian-1H8 for low power consumption computer vision application, the higher-end Cambrian-1H16 for more general purpose application, the Cambrian-1M for autonomous driving applications with yet-to-be-disclosed release date, and an AI system software named Cambrian NeuWare.
+
+**[Cambricon release new product page, including IP, Chip and Software tools](http://www.cambricon.com/index.php?c=page&id=20)**
 
 <div align="center"><h3> </h3></div>
 <a name="Horizon_Robotics"></a>
