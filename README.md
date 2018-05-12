@@ -517,7 +517,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 <a name="Koniku"></a>
 <div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
-> Founded in 2014, Newark, California startup Koniku has taken in $1.65 million in funding so far to become “the world’s first neurocomputation company“. The idea is that since the brain is the most powerful computer ever devised, why not reverse engineer it? Simple, right? Koniku is actually integrating biological neurons onto chips and has made enough progress that they claim to have AstraZeneca as a customer. Boeing has also signed on with a letter of intent to use the technology in chemical-detecting drones.
+> Founded in 2014, Newark, California startup [Koniku](http://koniku.io/) has taken in $1.65 million in funding so far to become “the world’s first neurocomputation company“. The idea is that since the brain is the most powerful computer ever devised, why not reverse engineer it? Simple, right? Koniku is actually integrating biological neurons onto chips and has made enough progress that they claim to have AstraZeneca as a customer. Boeing has also signed on with a letter of intent to use the technology in chemical-detecting drones.
 
 <div align="center"><h3> </h3></div>
 <a name="Adapteva"></a>
