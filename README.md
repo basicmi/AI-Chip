@@ -523,7 +523,7 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 <a name="Adapteva"></a>
 <div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Adapteva_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
-[Adapteva](http://www.adapteva.com/)has taken in $5.1 million in funding from investors that include mobile giant Ericsson. [The paper "Epiphany-V: A 1024 processor 64-bit RISC System-On-Chip"](http://www.parallella.org/docs/e5_1024core_soc.pdf) describes the design of Adapteva's 1024-core processor chip in 16nm FinFet technology. 
+[Adapteva](http://www.adapteva.com/) has taken in $5.1 million in funding from investors that include mobile giant Ericsson. [The paper "Epiphany-V: A 1024 processor 64-bit RISC System-On-Chip"](http://www.parallella.org/docs/e5_1024core_soc.pdf) describes the design of Adapteva's 1024-core processor chip in 16nm FinFet technology. 
 
 <div align="center"><h3> </h3></div>
 <a name="Knowm"></a>
