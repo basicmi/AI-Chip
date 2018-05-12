@@ -498,7 +498,6 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 <a name="KnuEdge"></a>
 <div align="center"><a href="https://www.knuedge.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/KnuEdge_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
-[Their product page](https://www.knuedge.com/) has since June 2016 gone missing in action. Not sure what they are up to with the $100M they put into their [MIMD architecture](https://www.hpcwire.com/2016/12/15/knupath-hermosa-chip-expected-first-half-2017/). It was described at the time as having 256 tiny DSP, or tDSP, cores on each ASIC along with an ARM controller suitable for sparse matrix processing in a 35W envelope. 
 > Since KnuEdge “emerged from stealth” last year, the company has gone quiet and not offered up any additional information about what they’ve been up to. According to an [article in VentureBeat](https://venturebeat.com/2016/06/06/former-nasa-chief-unveils-100-million-neural-computing-chip-company-knuedge/), we know that KnuEdge has already been generating revenue and that they were considering raising more funding this year in addition to the $100 million in “patient money” they have already raised. Their website contains next to no information aside from employee profiles. At an [Xconomy conference](http://www.xconomy.com/san-diego/2017/05/02/smarr-others-talk-healthtech-ai-at-xconomys-impact-of-innovation/) a few weeks ago, the Company talked about “cloud-based machine intelligence as a service” that is “supposed to be rolled out sometime this year“.
 
 <div align="center"><h3> </h3></div>
@@ -518,15 +517,13 @@ It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do.
 <a name="Koniku"></a>
 <div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
-[Koniku's web site](http://koniku.io/) is counting down to "your new reality". They have raised very little money and after watching their Youtube clip embedded in this [Forbes page](https://www.forbes.com/sites/federicoguerrini/2016/05/22/neuron-based-chips-will-soon-become-commonplace-this-startup-founder-says/2/#299122784f1f), you too will not likely not be convinced, but you never know. Harnessing biological cells is certainly different. It sounds like [a science project](https://motherboard.vice.com/en_us/article/d7ypqw/komiku-neuron-computer-agabi), but, then this,
-> "We are a business. We are not a science project," Agabi, who is scheduled to speak at the Pioneers Festival in Vienna, next week, says, "There are demands that silicon cannot offer today, that we can offer with our systems."
-> The core of the Koniku offer is the so-called neuron-shell, inside which the startup says it can control how neurons communicate with each other, combined with a patent-pending electrode which allows to read and write information inside the neurons. All this packed in a device as large as an iPad, which they hope to reduce to the size of a nickel by 2018.
+> Founded in 2014, Newark, California startup Koniku has taken in $1.65 million in funding so far to become “the world’s first neurocomputation company“. The idea is that since the brain is the most powerful computer ever devised, why not reverse engineer it? Simple, right? Koniku is actually integrating biological neurons onto chips and has made enough progress that they claim to have AstraZeneca as a customer. Boeing has also signed on with a letter of intent to use the technology in chemical-detecting drones.
 
 <div align="center"><h3> </h3></div>
 <a name="Adapteva"></a>
 <div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Adapteva_logo.png" height="70"></a></div>
 <div align="center"><h3> </h3></div>
-[Adapteva](http://www.adapteva.com/): "[Adapteva tapes out Epiphany-V: A 1024-core 64-bit RISC processor](https://meanderful.blogspot.jp/2016/10/adapteva-tapes-out-epiphany-v-1024-core.html)." Andreas Olofsson taped out his 1024 core chip late last year and we await news of its performance. [Epiphany-V](http://www.parallella.org/docs/e5_1024core_soc.pdf) has new instructions for deep learning and we'll have to see if this memory-controller-less design with 64MB of on-chip memory will have appropriate scalability. The impressive efficiency of Andrea's design and build may make this a chip we can all actually afford, so let's hope it performs well.
+[Adapteva](http://www.adapteva.com/)has taken in $5.1 million in funding from investors that include mobile giant Ericsson. [The paper "Epiphany-V: A 1024 processor 64-bit RISC System-On-Chip"](http://www.parallella.org/docs/e5_1024core_soc.pdf) describes the design of Adapteva's 1024-core processor chip in 16nm FinFet technology. 
 
 <div align="center"><h3> </h3></div>
 <a name="Knowm"></a>
@@ -581,7 +578,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <a name="Krtkl"></a>
 <div align="center"><a href="http://krtkl.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="30"></a></div>
 <div align="center"><h3> </h3></div>
-> While it is not actually possible to pick a worse name for your startup than “[krtkl](http://krtkl.com/)”, at least the product name is manageable. Snickerdoodle is “reconfigurable hardware for building intelligent systems” (think Raspberry Pi). A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
+> A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.
 
 <div align="center"><h3> </h3></div>
 <a name="NovuMind"></a>
