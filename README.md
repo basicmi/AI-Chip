@@ -11,7 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
-<li>Add startup <a href="#InnoGrit">InnoGrit</a>.</li>
+<li>Add startup <a href="#Innogrit">Innogrit</a>.</li>
 <li>Add startup <a href="#ThinkSilicon">ThinkSilicon</a>.</li>
 <li>Add product page of <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add news of <a href="#Google">Google TPU3</a> and <a href="#Microsoft">Microsoft Brainwave</a>.</li>
@@ -70,7 +70,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a></td><td>30</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a></td><td>33</td>
   </tr>
 </table>
 
@@ -681,7 +681,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <a name="Innogrit"></a>
 <div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
-[InnoGrit Technologies Incorporated](https://innogritcorp.com/technology) is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  
+[Innogrit Technologies Incorporated](https://innogritcorp.com/technology) is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  
 
 <div align="center"><h3> </h3></div>
 <a name="Kortiq"></a>
