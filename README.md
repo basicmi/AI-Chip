@@ -10,6 +10,9 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
+<li>Add startup <a href="#InnoGrit">InnoGrit</a>.</li>
+<li>Add startup <a href="#ThinkSilicon">ThinkSilicon</a>.</li>
 <li>Add product page of <a href="#Cambricon">Cambricon</a>.</li>
 <li>Add news of <a href="#Google">Google TPU3</a> and <a href="#Microsoft">Microsoft Brainwave</a>.</li>
 <li>Add news of <a href="#Cambricon">Cambricon</a>.</li>
@@ -666,6 +669,31 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><h3> </h3></div>
 [Lightmatter aims to reinvent AI-specific chips with photonic computing and $11M in funding](https://techcrunch.com/2018/02/05/lightmatter-aims-to-reinvent-ai-specific-chips-with-photonic-computing-and-11m-in-funding/)
 > It takes an immense amount of processing power to create and operate the “AI” features we all use so often, from playlist generation to voice recognition. Lightmatter  is a startup that is looking to change the way all that computation is done — and not in a small way. The company makes photonic chips that essentially perform calculations at the speed of light, leaving transistors in the dust. It just closed an $11 million Series A.
+
+<div align="center"><h3> </h3></div>
+<a name="ThinkSilicon"></a>
+<div align="center"><a href="https://think-silicon.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ThinkSilicon_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[First Low-Power AI-Inference Accelerator Vision Processing Unit From Think Silicon To Debut at Embedded World 2018](https://think-silicon.com/2018/02/21/1138-2/)
+> TORONTO, Canada/NUREMBERG, Germany – FEB 21st, 2018 – Think Silicon®, a leader in developing ultra-low power graphics IP technology, will demonstrate a prototype of NEMA®|xNN, the world’s first low-power ‘Inference Accelerator’ Vision Processing Unit for artificial intelligence, convolutional neural networks at Embedded World 2018..
+
+<div align="center"><h3> </h3></div>
+<a name="Innogrit"></a>
+<div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[InnoGrit Technologies Incorporated](https://innogritcorp.com/technology) is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  
+
+<div align="center"><h3> </h3></div>
+<a name="Innogrit"></a>
+<div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[InnoGrit Technologies Incorporated](https://innogritcorp.com/technology) is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  
+
+<div align="center"><h3> </h3></div>
+<a name="Kortiq"></a>
+<div align="center"><a href="http://www.kortiq.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kortiq_logo.png" height="50"></a></div>
+<div align="center"><h3> </h3></div>
+[Kortiq](http://www.kortiq.com/) is a startup providing "FPGA based Neural Network Engine IP Core and The scalable Solution for Low Cost Edge Machine Learning Inference for Embedded Vision". Recently, they revealed some comparison data. You can also find the Preliminary Datasheet of their AIScaleCDP2 IP Core on their website.
 
 <div align="center"><h3> </h3></div>
 <a name="Reference"></a>
