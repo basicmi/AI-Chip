@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
+<li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
 <li>Add startup <a href="#Hailo">Hailo</a>.</li>
 <li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
 <li>Add startup <a href="#Innogrit">Innogrit</a>.</li>
