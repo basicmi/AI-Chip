@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
 <li>Add startup <a href="#Hailo">Hailo</a>.</li>
 <li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
 <li>Add startup <a href="#Innogrit">Innogrit</a>.</li>
@@ -359,6 +360,9 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 [Arm Machine Learning Processor](https://developer.arm.com/products/processors/machine-learning/arm-ml-processor)
 > Specifically designed for inference at the edge, the ML processor gives an industry-leading performance of 4.6 TOPs, with a stunning efficiency of 3 TOPs/W for mobile devices and smart IP cameras.
 
+**[ARM Details "Project Trillium" Machine Learning Processor Architecture](https://www.anandtech.com/show/12791/arm-details-project-trillium-mlp-architecture)**
+> Arm details more of the architecture of what Arm now seems to more consistently call their “machine learning processor” or MLP from here on now. The MLP IP started off a blank sheet in terms of architecture implementation and the team consists of engineers pulled off from the CPU and GPU teams.
+
 <div align="center"><h3> </h3></div>
 <a name="Synopsys"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synopsys_logo.png" height="40"></div>
@@ -370,9 +374,9 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <a name="Imagination"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Imagination_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-> [Imagination reveals PowerVR Neural Network Accelerator (NNA) with 2x the performance and half the bandwidth of nearest competitor](https://www.imgtec.com/news/press-release/imagination-reveals-powervr-neural-network-accelerator-nna-with-2x-the-performance-and-half-the-bandwidth-of-nearest-competitor/)
-  
 [PowerVR Series2NX Neural Network Accelerator](https://www.imgtec.com/powervr/vision/)
+**[Imagination Announces First PowerVR Series2NX Neural Network Accelerator Cores: AX2185 and AX2145](https://www.anandtech.com/show/12931/imagination-announces-ax2185-ax2145-powervr-2nx-neural-network-accelerators)**
+> the company is announcing the first products in the 2NX NNA family: the higher-performance AX2185 and lower-cost AX2145.
 
 <div align="center"><h3> </h3></div>
 <a name="CEVA"></a>
@@ -380,6 +384,8 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><h3> </h3></div>
 [CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)<br><br>
 [处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)<br>
+[CEVA Announces NeuPro Neural Network IP](https://www.anandtech.com/show/12217/ceva-announces-neupro-neural-network-ip)
+> Ahead of CES CEVA announced a new specialised neural network accelerator IP called NeuPro.
 
 <div align="center"><h3> </h3></div>
 <a name="Cadence"></a>
