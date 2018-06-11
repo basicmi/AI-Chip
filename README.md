@@ -374,7 +374,9 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <a name="Imagination"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Imagination_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-[PowerVR Series2NX Neural Network Accelerator](https://www.imgtec.com/powervr/vision/)<br><br>
+[PowerVR Series2NX Neural Network Accelerator](https://www.imgtec.com/powervr/vision/)
+   
+   
 **[Imagination Announces First PowerVR Series2NX Neural Network Accelerator Cores: AX2185 and AX2145](https://www.anandtech.com/show/12931/imagination-announces-ax2185-ax2145-powervr-2nx-neural-network-accelerators)**
 > the company is announcing the first products in the 2NX NNA family: the higher-performance AX2185 and lower-cost AX2145.
 
