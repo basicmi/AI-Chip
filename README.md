@@ -692,7 +692,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 
 <div align="center"><h3> </h3></div>
 <a name="Hailo"></a>
-<div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Hailo_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Hailo_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Hailo raises a $12.5M Series A round for its deep learning chips](https://techcrunch.com/2018/06/05/hailo-raises-a-12-5m-series-a-round-for-its-deep-learning-chips/)
 >Israel-based [Hailo](https://www.hailotech.com/), which is building deep learning chips for embedded devices. The company announced that it has raised a $12 million Series A round.
