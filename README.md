@@ -385,7 +385,9 @@ ARM also provide a open source [Compute Library](https://developer.arm.com/techn
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/CEVA_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform](http://www.ceva-dsp.com/product/ceva-xm6/)<br><br>
-[处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)<br>
+[处理器IP厂商的机器学习方案 - CEVA](http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w)
+   
+   
 [CEVA Announces NeuPro Neural Network IP](https://www.anandtech.com/show/12217/ceva-announces-neupro-neural-network-ip)
 > Ahead of CES CEVA announced a new specialised neural network accelerator IP called NeuPro.
 
