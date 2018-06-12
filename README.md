@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news, <a href="#Microsoft">"Microsoft hiring engineers for cloud AI chip design" </a>.</li>
 <li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
 <li>Add startup <a href="#Hailo">Hailo</a>.</li>
 <li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
@@ -278,8 +279,11 @@ Other references are:<br>
 [Inside the Microsoft FPGA-based configurable cloud](https://channel9.msdn.com/Events/Build/2017/B8063) is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br><br>
 [This article "智慧云中的FPGA"](http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg) gives and overview about FPGA used in AI aceleration in the cloud.<br><br>
 [Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip](https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/) shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
-**[Real-time AI: Microsoft announces preview of Project Brainwave](https://blogs.microsoft.com/ai/build-2018-project-brainwave/)**
+[Real-time AI: Microsoft announces preview of Project Brainwave](https://blogs.microsoft.com/ai/build-2018-project-brainwave/)
 > At Microsoft’s [Build developers conference in Seattle this week](https://news.microsoft.com/2018/05/07/microsoft-build-highlights-new-opportunity-for-developers-at-the-edge-and-in-the-cloud/), the company is announcing a preview of Project Brainwave integrated with Azure Machine Learning, which the company says will make Azure the most efficient cloud computing platform for AI.
+   
+**[Microsoft is hiring engineers to work on A.I. chip design for its cloud](https://www.cnbc.com/2018/06/11/microsoft-hiring-engineers-for-cloud-ai-chip-design.html)**
+> Microsoft is following Google's lead in designing a computer processor for artificial intelligence, according to recent job postings.
 
 <div align="center"><h3> </h3></div>
 <a name="Apple"></a>
