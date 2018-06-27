@@ -475,7 +475,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 [China’s AISpeech Raises $76M on Advanced Speech Tech; Eyes AI Chips](https://medium.com/syncedreview/chinas-aispeech-raises-76m-on-advanced-speech-tech-eyes-ai-chips-2c7651ac6a8)
 
 <div align="center"><h3> </h3></div>
-<a name="Rokit"></a>
+<a name="Rokid"></a>
 <div align="center"><a href="https://www.rokid.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rokid_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Chinese AI startup Rokid will mass produce their own custom AI chip for voice recognition](https://technode.com/2018/06/05/rokid/)
