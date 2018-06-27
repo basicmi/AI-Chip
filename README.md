@@ -466,12 +466,12 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 
 <div align="center"><h3> </h3></div>
 <a name="Unisound"></a>
-<div align="center"><a href="https://www.unisound.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Unisound_logo.png" height="90"></a></div>
+<div align="center"><a href="https://www.unisound.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Unisound_logo.png" height="100"></a></div>
 [Unisound raises US$100 million to fund AI, chip development](http://www.ejinsight.com/20180516-unisound-raises-us100-to-fund-ai-chip-development/)
 
 <div align="center"><h3> </h3></div>
 <a name="AISpeech"></a>
-<div align="center"><a href="http://www.aispeech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AISpeech_logo.png" height="90"></a></div>
+<div align="center"><a href="http://www.aispeech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AISpeech_logo.png" height="100"></a></div>
 [China’s AISpeech Raises $76M on Advanced Speech Tech; Eyes AI Chips](https://medium.com/syncedreview/chinas-aispeech-raises-76m-on-advanced-speech-tech-eyes-ai-chips-2c7651ac6a8)
 
 <div align="center"><h3> </h3></div>
