@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add three Chinese AI startups working their own chip <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a> and <a href="#Rokid">Rokid</a> .</li>
 <li>Add news, <a href="#Microsoft">"Microsoft hiring engineers for cloud AI chip design" </a>.</li>
 <li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
 <li>Add startup <a href="#Hailo">Hailo</a>.</li>
@@ -34,17 +35,6 @@
 <li>Add <a href="#Google">Benchmarking Google’s new TPUv2</a>.</li>
 <li>Add <a href="#Google">Google announced the open beta of its TPU2</a>.</li>
 <li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
-<li>Add <a href="#Amazon">Amazon's custom AI chip for future Echo devices</a>.</li>
-<li>Add <a href="#GTI">Gyrfalcon Technology</a>.</li>
-<li>Add <a href="#Rockchip">Rockchip RK3399Pro</a>.</li>
-<li>Add <a href="#Samsung">Samsung Exynos 9810</a>.</li>
-<li>Add <a href="#Esperanto">Esperanto Technologies</a>.</li>
-<li>Add news from <a href="#MediaTek">MediaTek</a>.</li>
-<li>Add <a href="#Horizon_Robotics">products of Horizon Robotics</a>.</li>
-<li>Add <a href="#IBM">IBM Power9</a>.</li>
-<li>Add <a href="#Thinkforce">Thinkforce</a>.</li>
-<li>Add news from <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#DeePhi">DeePhi</a>, <a href="#Cambricon">Cambricon</a>,  <a href="#Bitmain">Bitmain</a>.</li>
-<li>Add <a href="#Groq">Groq website</a>.</li>
 </ul>
 </font>
 
@@ -69,7 +59,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a></td><td>6</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a></td><td>9</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -473,6 +463,24 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 <div align="center"><a href="http://www.think-force.com/index_e.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Thinkforce_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Sequoia, Hillhouse, Yitu Technology Join $68M Series A Round In Chinese AI Chip Maker ThinkForce](https://www.chinamoneynetwork.com/2017/12/15/sequoia-hillhouse-yitu-technology-join-68m-series-round-chinese-ai-chip-maker-thinkforce)
+
+<div align="center"><h3> </h3></div>
+<a name="Unisound"></a>
+<div align="center"><a href="https://www.unisound.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Unisound_logo.png" height="40"></a></div>
+<div align="center"><h3> </h3></div>
+[Unisound raises US$100 million to fund AI, chip development](http://www.ejinsight.com/20180516-unisound-raises-us100-to-fund-ai-chip-development/)
+
+<div align="center"><h3> </h3></div>
+<a name="AISpeech"></a>
+<div align="center"><a href="http://www.aispeech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AISpeech_logo.png" height="40"></a></div>
+<div align="center"><h3> </h3></div>
+[China’s AISpeech Raises $76M on Advanced Speech Tech; Eyes AI Chips](https://medium.com/syncedreview/chinas-aispeech-raises-76m-on-advanced-speech-tech-eyes-ai-chips-2c7651ac6a8)
+
+<div align="center"><h3> </h3></div>
+<a name="Rokit"></a>
+<div align="center"><a href="https://www.rokid.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rokid_logo.png" height="40"></a></div>
+<div align="center"><h3> </h3></div>
+[Chinese AI startup Rokid will mass produce their own custom AI chip for voice recognition](https://technode.com/2018/06/05/rokid/)
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2><a name="Startups_Worldwide"></a>V. Startups Worldwide</h2></div>
