@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add three Chinese AI startups working their own chip <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a> and <a href="#Rokid">Rokid</a> .</li>
 <li>Add news, <a href="#Microsoft">"Microsoft hiring engineers for cloud AI chip design" </a>.</li>
 <li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
@@ -63,7 +64,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq, <a href="#Hailo">Hailo</a></a></td><td>33</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq, <a href="#Hailo">Hailo</a>, <a href="#Tachyum">Tachyum</a></td><td>34</td>
   </tr>
 </table>
 
@@ -716,6 +717,13 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><h3> </h3></div>
 [Hailo raises a $12.5M Series A round for its deep learning chips](https://techcrunch.com/2018/06/05/hailo-raises-a-12-5m-series-a-round-for-its-deep-learning-chips/)
 >Israel-based [Hailo](https://www.hailotech.com/), which is building deep learning chips for embedded devices. The company announced that it has raised a $12 million Series A round.
+
+<div align="center"><h3> </h3></div>
+<a name="Tachyum"></a>
+<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="60"></a></div>
+<div align="center"><h3> </h3></div>
+[Silicon Startup Raises ‘Prodigy’ for Hyperscale/AI Workloads](https://www.hpcwire.com/2018/05/23/silicon-startup-raises-prodigy-for-hyperscale-ai-workloads/)
+>Silicon Valley-based Tachyum Inc., which has been emerging from stealth over the last year and a half, is unveiling a processor codenamed “Prodigy,” said to combine features of both CPUs and GPUs in a way that offers a purported 10x performance-per-watt advantage over current technologies. The company is primarily focused on the hyperscale datacenter market, but has aspirations to support brainier applications, noting that “Prodigy will enable a super-computational system for real-time full capacity human brain neural network simulation by 2020.”
 
 <div align="center"><h3> </h3></div>
 <a name="Reference"></a>
