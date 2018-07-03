@@ -56,7 +56,6 @@ table, th, td {
   <tr><th><a href="#Startups_Worldwide">Startups Worldwide</a></th><td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq, <a href="#Hailo">Hailo</a>, <a href="#Tachyum">Tachyum</a></td><td>34</td></tr>
 </table>
 
-
 <div align="center"><h1> </h1></div>
 
 <div align="center"><h2><a name="IC_Vendors"></a>I. IC Vendors</h2></div>
@@ -82,7 +81,7 @@ Intel purchased Nervana Systems who was developing both a GPU/software approach 
 
 <a name="Movidius"></a>
 <div align="center"><h3>Movidius</h3></div>
-> [MYRIAD 2](https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf) IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
+[MYRIAD 2](https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf) IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
 
 [Myriad™ X](https://www.movidius.com/myriadx) is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
 
@@ -111,7 +110,6 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><h3>GPU</h3></div>
 
 [Nvidia’s DGX-2 System Packs An AI Performance Punch](https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/)
-> 
 
 [Building Bigger, Faster GPU Clusters Using NVSwitches](https://www.nextplatform.com/2018/04/13/building-bigger-faster-gpu-clusters-using-nvswitches/)
 > Nvidia launched its second-generation DGX system in March. In order to build the 2 petaflops half-precision DGX-2, Nvidia had to first design and build a new NVLink 2.0 switch chip, named NVSwitch. While Nvidia is only shipping NVSwitch as an integral component of its DGX-2 systems today, Nvidia has not precluded selling NVSwitch chips to data center equipment manufacturers.
@@ -126,7 +124,8 @@ On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous 
 <div align="center"><h3>NVDLA</h3></div>
 Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
 
-<br> Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
+<br> 
+Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
 > The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
 
 <div align="center"><h3> </h3></div>
@@ -198,7 +197,8 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 **Kirin for Smart Phone**
-<br> HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.  
+<br> 
+HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.  
 In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-launch-on-october-16th-more-kirin-970-details),we can find more details about NPU in Kirin970.
 
 **Mobile Camera SoC**
@@ -581,7 +581,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 <a name="Leepmind"></a>
 <div align="center"><a href="http://www.leapmind.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></a></div>
 <div align="center"><h3> </h3></div>
-> [Leepmind](http://www.leapmind.io/products.php) is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
+[Leepmind](http://www.leapmind.io/products.php) is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning
 
 <div align="center"><h3> </h3></div>
 <a name="Krtkl"></a>
@@ -700,14 +700,14 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Hailo_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 [Hailo raises a $12.5M Series A round for its deep learning chips](https://techcrunch.com/2018/06/05/hailo-raises-a-12-5m-series-a-round-for-its-deep-learning-chips/)
->Israel-based [Hailo](https://www.hailotech.com/), which is building deep learning chips for embedded devices. The company announced that it has raised a $12 million Series A round.
+> Israel-based [Hailo](https://www.hailotech.com/), which is building deep learning chips for embedded devices. The company announced that it has raised a $12 million Series A round.
 
 <div align="center"><h3> </h3></div>
 <a name="Tachyum"></a>
 <div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Silicon Startup Raises ‘Prodigy’ for Hyperscale AI Workloads](https://www.hpcwire.com/2018/05/23/silicon-startup-raises-prodigy-for-hyperscale-ai-workloads/)
->Silicon Valley-based Tachyum Inc., which has been emerging from stealth over the last year and a half, is unveiling a processor codenamed “Prodigy,” said to combine features of both CPUs and GPUs in a way that offers a purported 10x performance-per-watt advantage over current technologies. The company is primarily focused on the hyperscale datacenter market, but has aspirations to support brainier applications, noting that “Prodigy will enable a super-computational system for real-time full capacity human brain neural network simulation by 2020.”
+> Silicon Valley-based Tachyum Inc., which has been emerging from stealth over the last year and a half, is unveiling a processor codenamed “Prodigy,” said to combine features of both CPUs and GPUs in a way that offers a purported 10x performance-per-watt advantage over current technologies. The company is primarily focused on the hyperscale datacenter market, but has aspirations to support brainier applications, noting that “Prodigy will enable a super-computational system for real-time full capacity human brain neural network simulation by 2020.”
 
 <div align="center"><h3> </h3></div>
 <a name="Reference"></a>
