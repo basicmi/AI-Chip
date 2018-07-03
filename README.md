@@ -701,7 +701,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 
 <div align="center"><h3> </h3></div>
 <a name="Innogrit"></a>
-<div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="40"></a></div>
+<div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="35"></a></div>
 <div align="center"><h3> </h3></div>
 [Innogrit Technologies Incorporated](https://innogritcorp.com/technology) is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  
 
@@ -720,9 +720,9 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 
 <div align="center"><h3> </h3></div>
 <a name="Tachyum"></a>
-<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="60"></a></div>
+<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
-[Silicon Startup Raises ‘Prodigy’ for Hyperscale/AI Workloads](https://www.hpcwire.com/2018/05/23/silicon-startup-raises-prodigy-for-hyperscale-ai-workloads/)
+[Silicon Startup Raises ‘Prodigy’ for Hyperscale AI Workloads](https://www.hpcwire.com/2018/05/23/silicon-startup-raises-prodigy-for-hyperscale-ai-workloads/)
 >Silicon Valley-based Tachyum Inc., which has been emerging from stealth over the last year and a half, is unveiling a processor codenamed “Prodigy,” said to combine features of both CPUs and GPUs in a way that offers a purported 10x performance-per-watt advantage over current technologies. The company is primarily focused on the hyperscale datacenter market, but has aspirations to support brainier applications, noting that “Prodigy will enable a super-computational system for real-time full capacity human brain neural network simulation by 2020.”
 
 <div align="center"><h3> </h3></div>
