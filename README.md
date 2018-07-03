@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add three Chinese AI startups working their own chip <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a> and <a href="#Rokid">Rokid</a> .</li>
 <li>Add news, <a href="#Microsoft">"Microsoft hiring engineers for cloud AI chip design" </a>.</li>
 <li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
