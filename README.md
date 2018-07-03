@@ -72,7 +72,6 @@ table, th, td {
 
 <div align="center"><h3> </h3></div>
 
-
 <div align="center"><h1> </h1></div>
 
 <div align="center"><h2><a name="IC_Vendors"></a>I. IC Vendors</h2></div>
