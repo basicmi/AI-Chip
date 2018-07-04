@@ -309,9 +309,10 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><h3> </h3></div>  
 <a name="Baidu"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_logo.png" height="40"></div>
-<div align="center"><h3> </h3></div>  
+<div align="center"><h3> </h3></div>
+[AN EARLY LOOK AT BAIDU’S CUSTOM AI AND ANALYTICS PROCESSOR](https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/)
 > We’ve written much over the last few years about the company’s emphasis on streamlining deep learning processing, most notably with GPUs, but [Baidu has a new processor](https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/) up its sleeve called the XPU. For now, the device has just been demonstrated in FPGA, but if it continues to prove useful for AI, analytics, cloud, and autonomous driving the search giant could push it into a full-bore ASIC.
-    
+<br> 
 **[Baidu creates Kunlun silicon for AI](https://www.zdnet.com/article/baidu-creates-kunlun-silicon-for-ai/)**
 > A pair of chips from the Chinese search giant are aimed at cloud and edge use cases. The company said it started developing a field-programmable gate array AI accelerator in 2011, and that Kunlun is almost 30 times faster. The chips are made with Samsung's 14nm process, have 512GBps memory bandwidth, and are capable of 260 tera operations per second at 100 watts.
 
