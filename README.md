@@ -54,7 +54,7 @@ table, th, td {
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a></td><td>12</td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a></td><td>11</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a></td><td>11</td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
@@ -312,7 +312,8 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><h3> </h3></div>
 [AN EARLY LOOK AT BAIDU’S CUSTOM AI AND ANALYTICS PROCESSOR](https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/)
 > We’ve written much over the last few years about the company’s emphasis on streamlining deep learning processing, most notably with GPUs, but [Baidu has a new processor](https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/) up its sleeve called the XPU. For now, the device has just been demonstrated in FPGA, but if it continues to prove useful for AI, analytics, cloud, and autonomous driving the search giant could push it into a full-bore ASIC.
-<br> 
+   
+   
 **[Baidu creates Kunlun silicon for AI](https://www.zdnet.com/article/baidu-creates-kunlun-silicon-for-ai/)**
 > A pair of chips from the Chinese search giant are aimed at cloud and edge use cases. The company said it started developing a field-programmable gate array AI accelerator in 2011, and that Kunlun is almost 30 times faster. The chips are made with Samsung's 14nm process, have 512GBps memory bandwidth, and are capable of 260 tera operations per second at 100 watts.
 
@@ -349,6 +350,13 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <div align="center"><h3> </h3></div>
 [Facebook Is Forming a Team to Design Its Own Chips](https://www.bloomberg.com/news/articles/2018-04-18/facebook-is-forming-a-team-to-design-its-own-chips)
 > Facebook Inc. is building a team to design its own semiconductors, adding to a trend among technology companies to supply themselves and lower their dependence on chipmakers such as Intel Corp. and Qualcomm Inc., according to job listings and people familiar with the matter.
+
+<div align="center"><h3> </h3></div>
+<a name="HPE"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HPE_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+[HPE DEVELOPING ITS OWN LOW POWER “NEURAL NETWORK” CHIPS](https://www.nextplatform.com/2017/11/09/hpe-developing-low-power-neural-network-chips/)
+> In the context of a broader discussion about the company’s Extreme Edge program focused on space-bound systems, HPE’s Dr. Tom Bradicich, VP and GM of Servers, Converged Edge, and IoT systems, described a future chip that would be ideally suited for high performance computing under intense power and physical space limitations characteristic of space missions. To be more clear, he told us as much as he could—very little is known about the architecture, but there was some key elements he described.
 
 <div align="center"><h3> </h3></div>
 <div align="center"><h2><a name="IP_Vendors"></a>III. Traditional IP Vendors</h2></div>
