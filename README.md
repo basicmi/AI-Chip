@@ -353,7 +353,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 <div align="center"><h3> </h3></div>
 <a name="HPE"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HPE_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HPE_logo.png" height="80"></div>
 <div align="center"><h3> </h3></div>
 [HPE DEVELOPING ITS OWN LOW POWER “NEURAL NETWORK” CHIPS](https://www.nextplatform.com/2017/11/09/hpe-developing-low-power-neural-network-chips/)
 > In the context of a broader discussion about the company’s Extreme Edge program focused on space-bound systems, HPE’s Dr. Tom Bradicich, VP and GM of Servers, Converged Edge, and IoT systems, described a future chip that would be ideally suited for high performance computing under intense power and physical space limitations characteristic of space missions. To be more clear, he told us as much as he could—very little is known about the architecture, but there was some key elements he described.
