@@ -81,8 +81,8 @@ table, th, td {
 <table style="width:100%">
   <tr>
     <th>Both</th>
-    <th>Datacenter/Cloud</th> 
-    <th>Edge/Embedded</th>
+    <th>Datacenter</th> 
+    <th>Edge</th>
   </tr>
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a></td>  
