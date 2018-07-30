@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Google">Google's Edge TPU</a>.</li>
 <li>Add startup <a href="#Baidu">Baidu's Kunlun</a>.</li>
 <li>Add startup <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add three Chinese AI startups working their own chip <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a> and <a href="#Rokid">Rokid</a> .</li>
@@ -267,6 +268,9 @@ Google's [original TPU](https://cloud.google.com/blog/big-data/2017/05/an-in-dep
 
 **[Tearing Apart Google’s TPU 3.0 AI Coprocessor](https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor/)**
 > Google did its best to impress this week at its annual IO conference. While Google rolled out a bunch of benchmarks that were run on its current Cloud TPU instances, based on TPUv2 chips, the company divulged a few skimpy details about its next generation TPU chip and its systems architecture. The company changed from version notation (TPUv2) to revision notation (TPU 3.0) with the update, but ironically the detail we have assembled shows that the step from TPUv2 to what we will call TPUv3 probably isn’t that big; it should probably be called TPU v2r5 or something like that.
+
+**[Edge TPU](https://cloud.google.com/edge-tpu/)**
+> AI is pervasive today, from consumer to enterprise applications. With the explosive growth of connected devices, combined with a demand for privacy/confidentiality, low latency and bandwidth constraints, AI models trained in the cloud increasingly need to be run at the edge. Edge TPU is Google’s purpose-built ASIC designed to run AI at the edge. It delivers high performance in a small physical and power footprint, enabling the deployment of high-accuracy AI at the edge.
 
 Other references are:<br>
 [Google TPU3 看点](https://mp.weixin.qq.com/s/b22p26_delWfSpy9kDJKhA)<br><br>
