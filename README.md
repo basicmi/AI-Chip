@@ -11,6 +11,7 @@
 <font color="Darkred">
 <ul>
 <li>Add <a href="#Tesla">Tesla's "Hardware 3"</a>.</li>
+<li>Remove DeePhi which is now part of Xilinx.</li>
 <li>Add <a href="#Google">Google's Edge TPU</a>.</li>
 <li>Add startup <a href="#Baidu">Baidu's Kunlun</a>.</li>
 <li>Add startup <a href="#Tachyum">Tachyum</a>.</li>
@@ -63,7 +64,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a></td><td>9</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a></td><td>8</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -87,7 +88,7 @@ table, th, td {
     <th>Edge</th>
   </tr>
   <tr>
-    <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Deephi">DeePhi</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a></td>  
+    <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a></td>  
     <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a></td>
     <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a></td>
   </tr>
@@ -387,9 +388,9 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 
 <div align="center"><h3> </h3></div>
 <a name="Tesla"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="70"></div>
 <div align="center"><h3> </h3></div>
-[Tesla is building its own AI chips for self-driving cars](https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/)
+**[Tesla is building its own AI chips for self-driving cars](https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/)**
 > The final outcome, according to Elon, is pretty dramatic: he says that whereas Tesla’s computer vision software running on Nvidia’s hardware was handling about 200 frames per second, its specialized chip is able to do crunch out 2000 frames per second “with full redundancy and failover”.
 
 <div align="center"><h3> </h3></div>
@@ -480,6 +481,7 @@ Dec. 20, [Horizon Robotics](http://www.horizon.ai/) annouced two chip products, 
 [Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital](http://www.intelcapital.com/news/news.html?id=555)
 > October 19, 2017, San Francisco, USA – Horizon Robotics, a leading global Artificial Intelligence (AI) startup, today announced during Intel Capital’s CEO Showcase that it has received investment from Intel Capital. Harvest Investments will join the round as a co-investor with participation from existing shareholders including Morningside Venture Capital, Hillhouse Capital, Wu Capital and Linear Ventures. The Company expects that its A-plus series funding round will total approximately US$100 million upon closing.
 
+<!-- 
 <div align="center"><h3> </h3></div>
 <a name="Deephi"></a>
 <div align="center"><a href="http://www.deephi.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60"></a></div>
@@ -491,6 +493,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 [AI startup DeePhi raises $40m in financing from Ant Financial, Samsung](http://www.chinadaily.com.cn/business/tech/2017-10/25/content_33685368.htm)
 > Domestic artificial intelligent startup DeePhi Tech announced on Tuesday at a products launch that it has completed a Series A+ of financing for about $40 million.
 > This round of financing was led by Alibaba's financial affiliate Ant Financial Services Group and Samsung, with China Merchants Venture and China Growth Capital participating as fellow investors.
+-->
 
 <div align="center"><h3> </h3></div>
 <a name="Bitmain"></a>
