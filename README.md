@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Nvidia">Nvidia's Next Generation Turing GPU</a>.</li>
 <li>Add <a href="#Tesla">Tesla's "Hardware 3"</a>.</li>
 <li>Remove DeePhi which is now part of Xilinx.</li>
 <li>Add <a href="#Google">Google's Edge TPU</a>.</li>
@@ -152,6 +153,9 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
+
+**[NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, & More](https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture)**
+> at NVIDIA’s SIGGRAPH 2018 keynote presentation, company CEO Jensen Huang formally unveiled the company’s much awaited (and much rumored) Turing GPU architecture. The next generation of NVIDIA’s GPU designs, Turing will be incorporating a number of new features and is rolling out this year. 
 
 [Nvidia’s DGX-2 System Packs An AI Performance Punch](https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/)
 
