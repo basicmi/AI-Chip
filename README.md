@@ -784,7 +784,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 
 <div align="center"><h3> </h3></div>
 <a name="Alphaics"></a>
-<div align="center"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alphaics_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alphaics_logo.png" height="50"></a></div>
 <div align="center"><h3> </h3></div>
 [Startup AI Chip Passes Road Test](https://www.eetimes.com/document.asp?doc_id=1333585)
 > AlphaICs designed an instruction set architecture (ISA) optimized for deep-learning, reinforcement-learning, and other machine-learning tasks. The startup aims to produce a family of chips with 16 to 256 cores, roughly spanning 2 W to 200 W.
