@@ -715,7 +715,7 @@ Another interesting activity of Aimotive is [Neural Network Exchange Format (NNE
 
 <div align="center"><h3> </h3></div>
 <a name="Esperanto">
-<div align="center"><a href="https://www.esperanto.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/esperanto_logo.jpeg" height="60"></a></div>
+<div align="center"><a href="https://www.esperanto.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/esperanto_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>
 According to this article, ["Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"](https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/), 
 > Although [Esperanto](https://www.esperanto.ai/) will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.
