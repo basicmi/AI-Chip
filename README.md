@@ -792,7 +792,7 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 
 <div align="center"><h3> </h3></div>
 <a name="Syntiant"></a>
-<div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Syntiant_logo.png" height="50"></a></div>
+<div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Syntiant_logo.png" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 [Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/)
 > Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.
