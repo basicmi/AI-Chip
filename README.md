@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Apple">Apple's A12</a>, <a href="#HiSilicon">Huawei's Kirin980</a> and <a href="#Nvidia">Nvidia's T4</a>.</li>
 <li>Add Chinese startup <a href="#Nextvpu">NextVPU</a>.</li>
 <li>Add startup <a href="#Syntiant">Syntiant</a>.</li>
 <li>Add startup <a href="#Alphaics">AlphaICs</a>.</li>
@@ -157,6 +158,9 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
+**[NVIDIA TESLA T4 TENSOR CORE GPU](https://www.nvidia.com/en-us/data-center/tesla-t4/)**
+> Powering the TensorRT Hyperscale Inference Platform.
+
 **[NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, & More](https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture)**
 > at NVIDIA’s SIGGRAPH 2018 keynote presentation, company CEO Jensen Huang formally unveiled the company’s much awaited (and much rumored) Turing GPU architecture. The next generation of NVIDIA’s GPU designs, Turing will be incorporating a number of new features and is rolling out this year. 
 
@@ -249,6 +253,9 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <div align="center"><h3> </h3></div>
 **Kirin for Smart Phone**
 <br> 
+**[Kirin 980, the World's First 7nm Process Mobile AI Chipset](https://consumer.huawei.com/en/campaign/kirin980/)**
+> Introducing the Kirin 980, the world's first 7nm process mobile phone SoC chipset, the world’s first cortex-A76 architecture chipset, the world’s first dual NPU design, and the world’s first chipset to support LTE Cat.21. The Kirin 980 combines multiple technological innovations and leads the AI trend to provide users with impressive mobile performance and to create a more convenient and intelligent life.
+
 HiSilicon [Kirin 970 Processor](http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/) annouced fearturing with dedicated Neural-network Processing Unit.  
 In [this article](https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-launch-on-october-16th-more-kirin-970-details),we can find more details about NPU in Kirin970.
 
@@ -318,7 +325,10 @@ Other references are:<br>
 <a name="Apple"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
-Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
+**[A12 Bionic The smartest, most powerful chip in a smartphone.](https://www.apple.com/lae/iphone-xs/a12-bionic/)**
+> A whole new level of intelligence. The A12 Bionic, with our next-generation Neural Engine, delivers incredible performance. It uses real-time machine learning to transform the way you experience photos, gaming, augmented reality, and more.
+
+<br> Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. [The A11](https://en.wikipedia.org/wiki/Apple_A11) also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
 <br> [Core ML](https://developer.apple.com/machine-learning/) is Apple's current sulotion for machine learning application.
 
 <div align="center"><h3> </h3></div>
