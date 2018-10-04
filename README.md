@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Xilinx">Xilinx's AI inference card</a>.</li>
 <li>Add news of <a href="#Alibaba">Alibaba's AI Chip</a>.</li>
 <li>Add startup <a href="#Habana">Habana</a>.</li>
 <li>Add <a href="#Apple">Apple's A12</a>, <a href="#HiSilicon">Huawei's Kirin980</a> and <a href="#Nvidia">Nvidia's T4</a>.</li>
@@ -205,6 +206,9 @@ The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/e
 <a name="Xilinx"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
+
+**[Xilinx Launches the World's Fastest Data Center and AI Accelerator Cards](https://www.xilinx.com/news/press/2018/xilinx-launches-the-world-s-fastest-data-center-and-ai-accelerator-cards.html)**
+> Xilinx launched [Alveo](https://www.xilinx.com/alveo), a portfolio of powerful accelerator cards designed to dramatically increase performance in industry-standard servers across cloud and on-premise data centers. 
 
 Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
 
