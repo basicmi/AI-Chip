@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add two more AI benchmarks, AI Benchmark and AI Matrix in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Xilinx">Xilinx's AI inference card</a>.</li>
 <li>Add news of <a href="#Alibaba">Alibaba's AI Chip</a>.</li>
 <li>Add startup <a href="#Habana">Habana</a>.</li>
@@ -842,7 +843,9 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)<br>
 5. [DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)](https://dawn.cs.stanford.edu/benchmark/index.html)<br>
 6. [Fathom:Reference workloads for modern deep learning methods.](https://github.com/rdadolf/fathom)<br>
-6. [MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms.](https://mlperf.org/)<br>
+7. [MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms.](https://mlperf.org/)<br>
+8. [AI Matrix](https://aimatrix.ai/en-us/index.html)<br>
+9. [AI-Benchmark](http://ai-benchmark.com/index.html)<br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
