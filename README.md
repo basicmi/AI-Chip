@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#HUAWEI_Cloud">Huawei's AI Chip</a>.</li>
 <li>Add two more AI benchmarks, AI Benchmark and AI Matrix in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Xilinx">Xilinx's AI inference card</a>.</li>
 <li>Add news of <a href="#Alibaba">Alibaba's AI Chip</a>.</li>
@@ -383,8 +384,14 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <a name="HUAWEI_Cloud"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>  
+**[Chinese tech giant Huawei unveils A.I. chips, taking aim at giants like Qualcomm and Nvidia](https://www.cnbc.com/2018/10/10/huawei-unveils-ai-chips-taking-aim-at-giants-like-qualcomm-and-nvidia.html)**
+> Huawei unveils two new artificial intelligence (AI) chips called the Ascend 910 and Ascend 310.
+> The two chips are aimed at uses in data centers and internet-connected consumer devices, Rotating Chairman Eric Xu says at the Huawei Connect conference in Shanghai.
+> The move pits the Chinese tech giant against major chipmakers including Qualcomm and Nvidia.
+
 [FPGA Accelerated Cloud Server](http://www.hwclouds.com/product/fcs.html), high performance FPGA instance is open for beta test.
 > FPGA云服务器提供CPU和FPGA直接的高达100Gbps PCIe互连通道，每节点提供8片Xilinx VU9P FPGA，同时提供FPGA之间高达200Gbps的Mesh光互连专用通道，让您的应用加速需求不再受到硬件限制。
+
 
 <div align="center"><h3> </h3></div>
 <a name="Fujitsu"></a>
