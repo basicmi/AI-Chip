@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tesla">Tesla's AI Chip</a>.</li>
 <li>Add news of <a href="#HUAWEI_Cloud">Huawei's AI Chip</a>.</li>
 <li>Add two more AI benchmarks, AI Benchmark and AI Matrix in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Xilinx">Xilinx's AI inference card</a>.</li>
@@ -424,7 +425,10 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <a name="Tesla"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="70"></div>
 <div align="center"><h3> </h3></div>
-**[Tesla is building its own AI chips for self-driving cars](https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/)**
+**[Tesla aims for new neural net computer in production in 6 months, results in 500-2000% increase in ops/sec, says Elon Musk](https://electrek.co/2018/10/16/tesla-neural-net-computer-production-elon-musk/)**
+> Tesla CEO Elon Musk updated the timeline to release the company’s new neural net computer, which they claimed will be the ‘world’s most advanced computer for autonomous driving’.
+
+[Tesla is building its own AI chips for self-driving cars](https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/)
 > The final outcome, according to Elon, is pretty dramatic: he says that whereas Tesla’s computer vision software running on Nvidia’s hardware was handling about 200 frames per second, its specialized chip is able to do crunch out 2000 frames per second “with full redundancy and failover”.
 
 <div align="center"><h3> </h3></div>
