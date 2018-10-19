@@ -405,7 +405,7 @@ Tencent cloud introduces [FPGA instance](https://cloud.tencent.com/product/fpga)
 <a name="Nokia"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nokia_logo.png" height="30"></div>
 <div align="center"><h3> </h3></div>
-> Nokia has developed the [ReefShark chipsets]((https://networks.nokia.com/5g/reefshark)) for its 5G network solutions. AI is implemented in the ReefShark design for radio and embedded in the baseband to use augmented deep learning to trigger smart, rapid actions by the autonomous, cognitive network, enhancing network optimization and increasing business opportunities.
+> Nokia has developed the [ReefShark chipsets](https://networks.nokia.com/5g/reefshark) for its 5G network solutions. AI is implemented in the ReefShark design for radio and embedded in the baseband to use augmented deep learning to trigger smart, rapid actions by the autonomous, cognitive network, enhancing network optimization and increasing business opportunities.
 
 <div align="center"><h3> </h3></div>
 <a name="Facebook"></a>
