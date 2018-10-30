@@ -249,16 +249,17 @@ Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https:
 <br> [S32V234: Vision Processor for Front and Surround View Camera, Machine Learning and Sensor Fusion Applications](https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform/vision-processor-for-front-and-surround-view-camera-machine-learning-and-sensor-fusion-applications:S32V234?lang_cd=en)
 > The S32V234 is our 2nd generation vision processor family designed to support computation intensive applications for image processing and offers an ISP, powerful 3D GPU, dual APEX-2 vision accelerators, security and supports SafeAssure™. S32V234 is suited for ADAS, NCAP front camera, object detection and recognition, surround view, machine learning and sensor fusion applications. S32V234 is engineered for automotive-grade reliability, functional safety and security measures to support vehicle and industrial automation.
 
+
 <div align="center"><h3> </h3></div>
-<a name="MediaTek"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/MediaTek_logo.png" height="40"></div>
+<a name="Marvell"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Marvell_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 **[Marvell Demonstrates Artificial Intelligence SSD Controller Architecture Solution](https://www.marvell.com/company/news/pressDetail.do?releaseID=9976)**
 > Marvell will demonstrate today at the Flash Memory Summit how it will provide artificial intelligence capabilities to a broad range of industries by incorporating NVIDIA’s Deep Learning Accelerator (NVDLA) technology in its family of data center and client SSD controllers. 
 
 <div align="center"><h3> </h3></div>
-<a name="Marvell"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Marvell_logo.png" height="60"></div>
+<a name="MediaTek"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/MediaTek_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 [MediaTek Unveils Its Edge AI Platform & AI Technology For Cross Platform Consumer Devices](https://www.mediatek.com/news-events/press-releases/mediatek-unveils-its-edge-ai-platform-ai-technology-for-cross-platform-consumer-devices)
 > Through a combination of hardware and software, an AI processing unit (APU ; Artificial intelligence Processing Unit ), and NeuroPilot SDK, MediaTek will bring AI across its wide-ranging technology portfolio – a portfolio that powers 1.5 billion consumer products a year across smartphones, smart homes, autos and more. 
