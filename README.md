@@ -596,7 +596,7 @@ Bitcoin Mining Giant [Bitmain](https://www.bitmain.com/) is developing processor
 
 <div align="center"><h3> </h3></div>
 <a name="Wave"></a>
-<div align="center"><a href="http://wavecomp.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Wave_Computing_logo.png" height="40"></a></div>
+<div align="center"><a href="http://wavecomp.ai/"><img src="https://cdn.nanalyze.com/uploads/2017/05/Wave-Computing-Logo-300x61.jpg" height="40"></a></div>
 <div align="center"><h3> </h3></div>
 Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  [white paper](http://wavecomp.ai/technology/).<br><br>
 After HotChips 2017, in the next plateform article "[First In-Depth View of Wave Computing’s DPU Architecture, Systems](https://www.nextplatform.com/2017/08/23/first-depth-view-wave-computings-dpu-architecture-systems/)", more details were discussed.
