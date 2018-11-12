@@ -125,7 +125,7 @@ table, th, td {
 
 <a name="Nervana"></a>
 <div align="center"><h3>Nervana</h3></div>
-Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a [Knights Crest](https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets/) project. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a <a href="https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets">Knights Crest</a>. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
 <br>
 <br>
 [Intel® Nervana™ Neural Network Processors (NNP) Redefine AI Silicon](https://www.intelnervana.com/intel-nervana-neural-network-processors-nnp-redefine-ai-silicon/)
@@ -839,8 +839,9 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><h3> </h3></div>
 <a name="Syntiant"></a>
 <div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Syntiant_logo.png" height="30"></a></div>
-<div align="center"><h3> </h3></div><br>
-[Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/) > Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch. [Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/)
+<div align="center"><h3> </h3></div>
+[Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/)
+> Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.
 
 <div align="center"><h3> </h3></div>
 <a name="Habana"></a>
