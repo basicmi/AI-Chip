@@ -125,39 +125,37 @@ table, th, td {
 
 <a name="Nervana"></a>
 <div align="center"><h3>Nervana</h3></div>
-Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a <a href="https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets">Knights Crest</a>. [NextPlatform](https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/) suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a <a href="https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets">Knights Crest</a>. <a href="https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/">NextPlatform</a> suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
 <br>
 <br>
-[Intel® Nervana™ Neural Network Processors (NNP) Redefine AI Silicon](https://www.intelnervana.com/intel-nervana-neural-network-processors-nnp-redefine-ai-silicon/)
-> As our Intel CEO Brian Krzanich discussed earlier today at Wall Street Journal’s D.Live event, Intel will soon be shipping the world’s first family of processors designed from the ground up for artificial intelligence (AI): the [Intel® Nervana™ Neural Network Processor family](https://newsroom.intel.com/editorials/intel-pioneers-new-technologies-advance-artificial-intelligence/) (formerly known as “Lake Crest”). This family of processors is over 3 years in the making, and on behalf of the team building it, I’d like to share a bit more insight on the motivation and design behind the world’s first neural network processor.
+<a href="https://www.intelnervana.com/intel-nervana-neural-network-processors-nnp-redefine-ai-silicon/">Intel® Nervana™ Neural Network Processors (NNP) Redefine AI Silicon</a> > As our Intel CEO Brian Krzanich discussed earlier today at Wall Street Journal’s D.Live event, Intel will soon be shipping the world’s first family of processors designed from the ground up for artificial intelligence (AI): the <a href="https://newsroom.intel.com/editorials/intel-pioneers-new-technologies-advance-artificial-intelligence/">Intel® Nervana™ Neural Network Processor family</a> (formerly known as “Lake Crest”). This family of processors is over 3 years in the making, and on behalf of the team building it, I’d like to share a bit more insight on the motivation and design behind the world’s first neural network processor.
 
 <a name="Mobileye"></a>
 <div align="center"><h3>Mobileye EyeQ</h3></div>
-> Mobileye is currently developing its fifth generation SoC, the [EyeQ®5](https://www.mobileye.com/our-technology/evolution-eyeq-chip/), to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
+> Mobileye is currently developing its fifth generation SoC, the <a href="https://www.mobileye.com/our-technology/evolution-eyeq-chip/">EyeQ®5</a>, to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
 
 <a name="Movidius"></a>
 <div align="center"><h3>Movidius</h3></div>
-[MYRIAD 2](https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf) IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
+<a href="https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf">MYRIAD 2</a> IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
 
-[Myriad™ X](https://www.movidius.com/myriadx) is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
+<a href="https://www.movidius.com/myriadx">Myriad™ X</a> is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
 
 <a name="Intel_FPGA"></a>
 <div align="center"><h3>FPGA</h3></div>
-Intel [FPGA OpenCL](https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html) and [Solutions](https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html).
+Intel <a href="https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html">FPGA OpenCL</a> and <a href="https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html">Solutions</a>.
 
 <a name="Loihi"></a>
 <div align="center"><h3>Loihi</h3></div>
-Intel's Loihi test chip is the [First-of-Its-Kind Self-Learning Chip](https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/).
+Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/">First-of-Its-Kind Self-Learning Chip</a>.
 > The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations.
 
 <div align="center"><h3> </h3></div>
 <a name="Qualcomm"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
-In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous) shows its AI roadmap.<br><br>
+In a recent blog, <a href="https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous">"We are making on-device AI ubiquitous"</a> shows its AI roadmap.<br><br>
 
-[Qualcomm Artificial Intelligence Engine Powers AI Capabilities of Snapdragon Mobile Platform](https://www.qualcomm.com/news/releases/2018/02/21/qualcomm-artificial-intelligence-engine-powers-ai-capabilities-snapdragon)
-> Qualcomm Artificial Intelligence (AI) Engine, which is comprised of several hardware and software components to accelerate on-device AI-enabled user experiences on select Qualcomm® Snapdragon™ mobile platforms. The AI Engine will be supported on Snapdragon 845, 835, 821, 820 and 660 mobile platforms, with cutting-edge on-device AI processing found in the Snapdragon 845.
+<a href="https://www.qualcomm.com/news/releases/2018/02/21/qualcomm-artificial-intelligence-engine-powers-ai-capabilities-snapdragon">Qualcomm Artificial Intelligence Engine Powers AI Capabilities of Snapdragon Mobile Platform</a> > Qualcomm Artificial Intelligence (AI) Engine, which is comprised of several hardware and software components to accelerate on-device AI-enabled user experiences on select Qualcomm® Snapdragon™ mobile platforms. The AI Engine will be supported on Snapdragon 845, 835, 821, 820 and 660 mobile platforms, with cutting-edge on-device AI processing found in the Snapdragon 845.
 
 <div align="center"><h3> </h3></div>
 <a name="Nvidia"></a>
@@ -165,56 +163,55 @@ In a recent blog, ["We are making on-device AI ubiquitous"](https://www.qualcomm
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
-**[NVIDIA TESLA T4 TENSOR CORE GPU](https://www.nvidia.com/en-us/data-center/tesla-t4/)**
+<strong><a href="https://www.nvidia.com/en-us/data-center/tesla-t4/">NVIDIA TESLA T4 TENSOR CORE GPU</a></strong>
 > Powering the TensorRT Hyperscale Inference Platform.
 
-**[NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, & More](https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture)**
+<strong><a href="https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture">NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, &amp; More</a></strong>
 > at NVIDIA’s SIGGRAPH 2018 keynote presentation, company CEO Jensen Huang formally unveiled the company’s much awaited (and much rumored) Turing GPU architecture. The next generation of NVIDIA’s GPU designs, Turing will be incorporating a number of new features and is rolling out this year. 
 
-[Nvidia’s DGX-2 System Packs An AI Performance Punch](https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/)
+<a href="https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/">Nvidia’s DGX-2 System Packs An AI Performance Punch</a>
 
-[Building Bigger, Faster GPU Clusters Using NVSwitches](https://www.nextplatform.com/2018/04/13/building-bigger-faster-gpu-clusters-using-nvswitches/)
+<a href="https://www.nextplatform.com/2018/04/13/building-bigger-faster-gpu-clusters-using-nvswitches/">Building Bigger, Faster GPU Clusters Using NVSwitches</a>
 > Nvidia launched its second-generation DGX system in March. In order to build the 2 petaflops half-precision DGX-2, Nvidia had to first design and build a new NVLink 2.0 switch chip, named NVSwitch. While Nvidia is only shipping NVSwitch as an integral component of its DGX-2 systems today, Nvidia has not precluded selling NVSwitch chips to data center equipment manufacturers.
 
-[Nvidia's latest GPU](https://www.nvidia.com/en-us/data-center/tesla-v100/) can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.<br><br>
-Nvidia is packing up 8 boards into their [DGX-1](https://www.nvidia.com/en-us/data-center/dgx-server/)for 960 Tensor TFlops.<br><br>
-[Nvidia Volta - 架构看点](https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw) gives some insights of Volta architecture.<br><br>
+<a href="https://www.nvidia.com/en-us/data-center/tesla-v100/">Nvidia's latest GPU</a> can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.<br>
+<br>
+Nvidia is packing up 8 boards into their <a href="https://www.nvidia.com/en-us/data-center/dgx-server/">DGX-1</a>for 960 Tensor TFlops.<br><br>
+<a href="https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw">Nvidia Volta - 架构看点</a> gives some insights of Volta architecture.<br><br>
 
 <div align="center"><h3>SoC</h3></div>
-On edge, Nvidia provide NVIDIA DRIVE™ PX, [The AI Car Computer for Autonomous Driving](http://www.nvidia.com/object/drive-px.html) and JETSON TX1/TX2 MODULE, "[The embedded platform for autonomous everything](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html)".
+On edge, Nvidia provide NVIDIA DRIVE™ PX, <a href="http://www.nvidia.com/object/drive-px.html">The AI Car Computer for Autonomous Driving</a> and JETSON TX1/TX2 MODULE, "<a href="http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html">The embedded platform for autonomous everything</a>".
 
 <div align="center"><h3>NVDLA</h3></div>
-Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read [从Nvidia开源深度学习加速器说起](http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q).
+Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read <a href="http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q">从Nvidia开源深度学习加速器说起</a>.
 
 <br> 
-Now the open source DLA is available on [Github](https://github.com/nvdla/) and more information can be found [here](http://nvdla.org/).
+Now the open source DLA is available on <a href="https://github.com/nvdla/">Github</a> and more information can be found <a href="http://nvdla.org/">here</a>.
 > The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
 
 <div align="center"><h3> </h3></div>
 <a name="Samsung"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Samsung_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
-Samsung resently unveiled “[The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities](https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content)”.
-   
+Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content">The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities</a>”.   
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
-The soon to be released [AMD Radeon Instinct MI25](https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/) is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
+The soon to be released <a href="https://instinct.radeon.com/en-us/product/mi/radeon-instinct-mi25/">AMD Radeon Instinct MI25</a> is promising 12.3 TFlops of SP or 24.6 TFlops of FP16. If your calculations are amenable to Nvidia's Tensors, then AMD can't compete. Nvidia also does twice the bandwidth with 900GB/s versus AMD's 484 GB/s.
+> AMD has put <a href="https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/">a very good X86 server processor</a> into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
 
-> AMD has put [a very good X86 server processor](https://www.nextplatform.com/2017/08/08/shape-amd-hpc-ai-iron-come/) into the market for the first time in nine years, and it also has a matching GPU that gives its OEM and ODM partners a credible alternative for HPC and AI workload to the combination of Intel Xeons and Nvidia Teslas that dominate hybrid computing these days.
-
-> [Tesla is reportedly developing its own processor for artificial intelligence, intended for use with its self-driving systems, in partnership with AMD](https://techcrunch.com/2017/09/20/tesla-said-to-be-working-on-its-own-self-driving-ai-chip-with-amd/). Tesla has an existing relationship with Nvidia, whose GPUs power its Autopilot system, but this new in-house chip reported by CNBC could potentially reduce its reliance on third-party AI processing hardware.
+> <a href="https://techcrunch.com/2017/09/20/tesla-said-to-be-working-on-its-own-self-driving-ai-chip-with-amd/">Tesla is reportedly developing its own processor for artificial intelligence, intended for use with its self-driving systems, in partnership with AMD</a>. Tesla has an existing relationship with Nvidia, whose GPUs power its Autopilot system, but this new in-house chip reported by CNBC could potentially reduce its reliance on third-party AI processing hardware.
 
 <div align="center"><h3> </h3></div>
 <a name="Xilinx"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 
-**[Xilinx Launches the World's Fastest Data Center and AI Accelerator Cards](https://www.xilinx.com/news/press/2018/xilinx-launches-the-world-s-fastest-data-center-and-ai-accelerator-cards.html)**
+<strong><a href="https://www.xilinx.com/news/press/2018/xilinx-launches-the-world-s-fastest-data-center-and-ai-accelerator-cards.html">Xilinx Launches the World's Fastest Data Center and AI Accelerator Cards</a></strong>
 > Xilinx launched [Alveo](https://www.xilinx.com/alveo), a portfolio of powerful accelerator cards designed to dramatically increase performance in industry-standard servers across cloud and on-premise data centers. 
 
-Xilinx provide "[Machine Learning Inference Solutions from Edge to Cloud](https://www.xilinx.com/applications/megatrends/machine-learning.html)" and naturally claim their FPGA's are best for INT8 with one of their [white papers](https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf).
+Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-learning.html">Machine Learning Inference Solutions from Edge to Cloud</a>" and naturally claim their FPGA's are best for INT8 with one of their <a href="https://www.xilinx.com/support/documentation/white_papers/wp486-deep-learning-int8.pdf">white papers</a>.
 
 > Whilst performance per Watt is impressive for FPGAs, the vendors' larger chips have long had earth shatteringly high chip prices for the larger chips. Finding a balance between price and capability is the main challenge with the FPGAs.
 
