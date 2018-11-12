@@ -839,8 +839,8 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 <div align="center"><h3> </h3></div>
 <a name="Syntiant"></a>
 <div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Syntiant_logo.png" height="30"></a></div>
-<div align="center"><h3> </h3></div>
- > Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.
+<div align="center"><h3> </h3></div><br>
+[Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/) > Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.
 
 <div align="center"><h3> </h3></div>
 <a name="Habana"></a>
@@ -864,7 +864,6 @@ According to the linkedin page of its CEO, former SPARC developer in ORACLE, [Sa
 7. [MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms.](https://mlperf.org/)<br>
 8. [AI Matrix](https://aimatrix.ai/en-us/index.html)<br>
 9. [AI-Benchmark](http://ai-benchmark.com/index.html)<br>
-10. [Syntiant: Analog Deep Learning Chips](https://semiengineering.com/syntiant-analog-deep-learning-chips/) <br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
