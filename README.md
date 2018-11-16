@@ -1,4 +1,4 @@
-<div align="center"><h1>AI/ML/DL ICs and IPs</h1></div>
+<div align="center"><h1>AI ICs and IPs</h1></div>
 <div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/">T.S.</a></div>
 <div align="center">Weichat Blog with AI chip related articles: <a href="http://mp.weixin.qq.com/s/DezA7rhV3ng63p8snBH4xw">StarryHeavensAbove</a></div>
 <div align="center"><h1> </h1></div>
@@ -1346,15 +1346,15 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 
 <div align="center"><h3> </h3></div>
       
-1. [FPGAs and AI processors: DNN and CNN for all](https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html)<br>
-2. [12 AI Hardware Startups Building New AI Chips](http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/)<br>
-3. [Tutorial on Hardware Architectures for Deep Neural Networks](http://eyeriss.mit.edu/tutorial.html)<br>
-4. [Neural Network Accelerator Inference](https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/)<br>
-5. [DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)](https://dawn.cs.stanford.edu/benchmark/index.html)<br>
-6. [Fathom:Reference workloads for modern deep learning methods.](https://github.com/rdadolf/fathom)<br>
-7. [MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms.](https://mlperf.org/)<br>
-8. [AI Matrix](https://aimatrix.ai/en-us/index.html)<br>
-9. [AI-Benchmark](http://ai-benchmark.com/index.html)<br>
+1. <a href="https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html">FPGAs and AI processors: DNN and CNN for all</a><br>
+2. <a href="http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/">12 AI Hardware Startups Building New AI Chips</a><br>
+3. <a href="http://eyeriss.mit.edu/tutorial.html">Tutorial on Hardware Architectures for Deep Neural Networks</a><br>
+4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
+5. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
+6. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
+7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a><br>
+8. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
+9. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
