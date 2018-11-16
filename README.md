@@ -197,7 +197,9 @@ Now the open source DLA is available on <a href="https://github.com/nvdla/">Gith
 <strong><a href="https://news.samsung.com/global/samsung-brings-on-device-ai-processing-for-premium-mobile-devices-with-exynos-9-series-9820-processor">Samsung Brings On-device AI Processing for Premium Mobile Devices with Exynos 9 Series 9820 Processor</a></strong>
 > Fourth-generation custom core and 2.0Gbps LTE Advanced Pro modem enables enriched mobile experiences including AR and VR applications 
 
+<br> 
 Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content">The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities</a>”.   
+
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="35"></div>
