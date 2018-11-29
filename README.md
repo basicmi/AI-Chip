@@ -408,7 +408,11 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <div align="center"><h3> </h3></div>
 
 <p><strong><a href="https://aws.amazon.com/cn/machine-learning/inferentia/">AWS Inferentia. High performance machine learning inference chip, custom designed by AWS.</a></strong></p>
+<blockquote>
+  <p>AWS Inferentia provides high throughput, low latency inference performance at an extremely low cost. Each chip provides hundreds of TOPS (tera operations per second) of inference throughput to allow complex models to make fast predictions. For even more performance, multiple AWS Inferentia chips can be used together to drive thousands of TOPS of throughput. AWS Inferentia will be available for use with Amazon SageMaker, Amazon EC2, and Amazon Elastic Inference.</p>
+</blockquote>
 
+<p><strong>AWS FPGA instance</strong></p>
 <blockquote>
   <p><a href="https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls">Amazon EC2 F1</a> is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an <a href="https://aws.amazon.com/marketplace/pp/B06VVYBLZZ">FPGA Developer AMI</a> and <a href="https://github.com/aws/aws-fpga">Hardware Developer Kit</a> (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.</p>
 </blockquote>
