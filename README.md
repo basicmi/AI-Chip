@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#aiCTX">aiCTX</a>.</li>
 <li>Add news of <a href="#Amazon_AWS">AWS's inference chip: Inferentia</a>.</li>
 <li>Add news of <a href="#Samsung">Samsung's NPU</a>.</li>
 <li>Add <a href="#Marvell">Marvell’s AI SSD controller proof-of-concept architecture solution</a>.</li>
@@ -82,7 +83,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a></td><td>37</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a></td><td>38</td>
   </tr>
 </table>
 
@@ -104,7 +105,7 @@ table, th, td {
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>, <a href="#Marvell">Marvell</a></td>  
     <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a></td>
-    <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a></td>
+    <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a></td>
   </tr>
 </table>
 
@@ -1341,6 +1342,21 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 
 <blockquote>
   <p>The Goya chip can process 15,000 ResNet-50 images/second with 1.3-ms latency at a batch size of 10 while running at 100 W. That compares to 2,657 images/second for an Nvidia V100 and 1,225 for a dual-socket Xeon 8180. At a batch size of one, Goya handles 8,500 ResNet-50 images/second with a 0.27-ms latency.</p>
+</blockquote>
+
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="aiCTX"></a></p>
+
+<div align="center"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/aiCTX_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1333983">Baidu Backs Neuromorphic IC Developer</a></strong></p>
+
+<blockquote>
+  <p>MUNICH — Swiss startup aiCTX has closed a $1.5 million pre-A funding round from Baidu Ventures to develop commercial applications for its low-power neuromorphic computing and processor designs and enable what it calls “neuromorphic intelligence.” It is targeting low-power edge-computing embedded sensory processing systems.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
