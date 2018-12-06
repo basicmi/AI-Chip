@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Qualcomm">Qualcomm's Snapdragon 855 Mobile Platform</a>.</li>
 <li>Add startup <a href="#aiCTX">aiCTX</a>.</li>
 <li>Add news of <a href="#Amazon_AWS">AWS's inference chip: Inferentia</a>.</li>
 <li>Add news of <a href="#Samsung">Samsung's NPU</a>.</li>
@@ -157,6 +158,10 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 In a recent blog, <a href="https://www.qualcomm.com/news/onq/2017/08/16/we-are-making-device-ai-ubiquitous">"We are making on-device AI ubiquitous"</a> shows its AI roadmap.<br><br>
+
+<strong><a href="https://www.qualcomm.com/products/snapdragon-855-mobile-platform">Snapdragon 855 Mobile Platform</a></strong>
+> Our 4th generation on-device AI engine is the ultimate personal assistant for camera, voice, XR and gaming – delivering smarter, faster and more secure experiences. Utilizing all cores, it packs 3 times the power of its predecessor for stellar on-device AI capabilities.
+> Greater than 7 trillion operations per second (TOPS)
 
 <a href="https://www.qualcomm.com/news/releases/2018/02/21/qualcomm-artificial-intelligence-engine-powers-ai-capabilities-snapdragon">Qualcomm Artificial Intelligence Engine Powers AI Capabilities of Snapdragon Mobile Platform</a> > Qualcomm Artificial Intelligence (AI) Engine, which is comprised of several hardware and software components to accelerate on-device AI-enabled user experiences on select Qualcomm® Snapdragon™ mobile platforms. The AI Engine will be supported on Snapdragon 845, 835, 821, 820 and 660 mobile platforms, with cutting-edge on-device AI processing found in the Snapdragon 845.
 
