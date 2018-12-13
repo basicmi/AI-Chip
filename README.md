@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#MediaTek">Mediatek's Helio P90/P70</a>.</li>
+<li>Add news of <a href="#MediaTek">Mediatek's Helio P90</a>.</li>
 <li>Add <a href="#Reference">"White Paper on AI Chip Technologies 2018" in Reference</a>.</li>
 <li>Add news of <a href="#Reference">MLPerf in Reference</a>.</li>
 <li>Add startup <a href="#Flexlogix">Flex Logix</a>.</li>
@@ -55,7 +55,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a></td><td>38</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a></td><td>39</td>
   </tr>
 </table>
 
