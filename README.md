@@ -4,12 +4,16 @@
 <div align="center"><h1> </h1></div>
 <div align="center"><a href="http://mp.weixin.qq.com/s/DezA7rhV3ng63p8snBH4xw"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/walle_s.jpg" height="80"></a></div>
 <div align="center"><h1> </h1></div>
-
+ 
 <div align="center"><h2>Latest updates</h2></div>
 <HR>
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Mediatek">Mediatek's Helio P90/P70</a>.</li>
+<li>Add <a href="#Reference">"White Paper on AI Chip Technologies 2018" in Reference</a>.</li>
+<li>Add news of <a href="#Reference">MLPerf in Reference</a>.</li>
+<li>Add startup <a href="#Flexlogix">Flex Logix</a>.</li>
 <li>Add news of <a href="#Qualcomm">Qualcomm's Snapdragon 855 Mobile Platform</a>.</li>
 <li>Add startup <a href="#aiCTX">aiCTX</a>.</li>
 <li>Add news of <a href="#Amazon_AWS">AWS's inference chip: Inferentia</a>.</li>
@@ -305,7 +309,7 @@ Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.mediatek.com/news-events/press-releases/mediatek-unveils-its-edge-ai-platform-ai-technology-for-cross-platform-consumer-devices">MediaTek Unveils Its Edge AI Platform &amp; AI Technology For Cross Platform Consumer Devices</a></p>
+<p><strong><a href="https://i.mediatek.com/p90">MediaTek announced Helio P90, highlighting AI processing.</a></strong></p>
 
 <blockquote>
   <p>Through a combination of hardware and software, an AI processing unit (APU ; Artificial intelligence Processing Unit ), and NeuroPilot SDK, MediaTek will bring AI across its wide-ranging technology portfolio – a portfolio that powers 1.5 billion consumer products a year across smartphones, smart homes, autos and more. </p>
@@ -1361,6 +1365,18 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
   <p>MUNICH — Swiss startup aiCTX has closed a $1.5 million pre-A funding round from Baidu Ventures to develop commercial applications for its low-power neuromorphic computing and processor designs and enable what it calls “neuromorphic intelligence.” It is targeting low-power edge-computing embedded sensory processing systems.</p>
 </blockquote>
 
+<p><a name="Flexlogix"></a></p>
+
+<div align="center"><a href="http://www.flex-logix.com/nmax"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/flexlogix_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.zdnet.com/article/ai-startup-flex-logix-targets-nvidias-market-for-inference-chips/">AI startup Flex Logix touts vastly higher performance than Nvidia</a></strong></p>
+
+<blockquote>
+  <p>Four-year-old startup Flex Logix has taken the wraps off its novel chip design for machine learning. CEO Geoff Tate describes how the chip may take advantage of an "explosion" of inferencing activity in "edge computing," and how Nvidia can't compete on performance.</p>
+</blockquote>
+
 <div align="center"><h3> </h3></div>
 
 <p><a name="Reference"></a></p>
@@ -1377,9 +1393,10 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
 5. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
 6. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a><br>
+7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here</a></strong><br>
 8. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 9. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
+10. <strong>"White Paper on AI Chip Technologies 2018". You can down load from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
