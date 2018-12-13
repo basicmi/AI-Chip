@@ -27,39 +27,6 @@
 <li>Add startup <a href="#Habana">Habana</a>.</li>
 <li>Add <a href="#Apple">Apple's A12</a>, <a href="#HiSilicon">Huawei's Kirin980</a> and <a href="#Nvidia">Nvidia's T4</a>.</li>
 <li>Add Chinese startup <a href="#Nextvpu">NextVPU</a>.</li>
-<li>Add startup <a href="#Syntiant">Syntiant</a>.</li>
-<li>Add startup <a href="#Alphaics">AlphaICs</a>.</li>
-<li>Add <a href="#Nvidia">Nvidia's Next Generation Turing GPU</a>.</li>
-<li>Add <a href="#Tesla">Tesla's "Hardware 3"</a>.</li>
-<li>Remove DeePhi which is now part of Xilinx.</li>
-<li>Add <a href="#Google">Google's Edge TPU</a>.</li>
-<li>Add startup <a href="#Baidu">Baidu's Kunlun</a>.</li>
-<li>Add startup <a href="#Tachyum">Tachyum</a>.</li>
-<li>Add three Chinese AI startups working their own chip <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a> and <a href="#Rokid">Rokid</a> .</li>
-<li>Add news, <a href="#Microsoft">"Microsoft hiring engineers for cloud AI chip design" </a>.</li>
-<li>Add the latest information of <a href="#ARM">ARM's "Project Trillium"</a> and <a href="#Imagination">Imagination's NNA</a>.</li>
-<li>Add startup <a href="#Hailo">Hailo</a>.</li>
-<li>Add startup <a href="#Kortiq">Kortiq</a>.</li>
-<li>Add startup <a href="#Innogrit">Innogrit</a>.</li>
-<li>Add startup <a href="#ThinkSilicon">ThinkSilicon</a>.</li>
-<li>Add product page of <a href="#Cambricon">Cambricon</a>.</li>
-<li>Add news of <a href="#Google">Google TPU3</a> and <a href="#Microsoft">Microsoft Brainwave</a>.</li>
-<li>Add news of <a href="#Cambricon">Cambricon</a>.</li>
-<li>Add benchmark, MLPerf in <a href="#Reference">Reference section</a>.</li>
-<li>Add information from <a href="#PEZY">PEZY: First Use of TCI</a>.</li>
-<li>Add two benchmarks, DAWNBench and Fathom in <a href="#Reference">Reference section</a>.</li>
-<li>Add two optical AI computing company <a href="#Lightelligence">Lightelligence</a> and <a href="#Lightmatter">Lightmatter</a> .</li>
-<li>Add news from <a href="#Alibaba">Alibaba</a> and <a href="#Facebook">Facebook</a> .</li>
-<li>Add <a href="#Videantis">Videantis in IP vendor section</a>.</li>
-<li>Add <a href="#Graphcore">Graphcore's latest talk</a>.</li>
-<li>Add <a href="#Nvidia">Nvidia DGX-2 System and NvSwitch</a>.</li>
-<li>Add <a href="#SambaNova">SambaNova Systems</a>.</li>
-<li>Add <a href="#Nokia">Nokia ReefShark</a>.</li>
-<li>Add <a href="#GreenWaves">GreenWaves GAP8</a>.</li>
-<li>Add <a href="#Qualcomm">Qualcomm AI Engine</a>.</li>
-<li>Add <a href="#Google">Benchmarking Google’s new TPUv2</a>.</li>
-<li>Add <a href="#Google">Google announced the open beta of its TPU2</a>.</li>
-<li>Add <a href="#ARM">Arm Machine Learning Processor</a>.</li>
 </ul>
 </font>
 
