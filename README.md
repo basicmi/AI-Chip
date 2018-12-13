@@ -10,7 +10,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#Mediatek">Mediatek's Helio P90/P70</a>.</li>
+<li>Add news of <a href="#MediaTek">Mediatek's Helio P90/P70</a>.</li>
 <li>Add <a href="#Reference">"White Paper on AI Chip Technologies 2018" in Reference</a>.</li>
 <li>Add news of <a href="#Reference">MLPerf in Reference</a>.</li>
 <li>Add startup <a href="#Flexlogix">Flex Logix</a>.</li>
@@ -1393,10 +1393,10 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
 5. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
 6. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here</a></strong><br>
+7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a></strong><br>
 8. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 9. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
-10. <strong>"White Paper on AI Chip Technologies 2018". You can down load from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive</a></strong><br>
+10. <strong>"White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
