@@ -278,7 +278,7 @@ Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-
 
 <p><strong><a href="https://i.mediatek.com/p90">MediaTek announced Helio P90, highlighting AI processing.</a></strong></p>
 
-<p><strong><a href="https://www.anandtech.com/show/13718/mediatek-announces-new-premium-helio-p90-soc">This article, "MediaTek Announces New Premium Helio P90 SoC", from AnandTech gave more in-deepth analysis. </a></strong></p>
+<p>This article, <strong><a href="https://www.anandtech.com/show/13718/mediatek-announces-new-premium-helio-p90-soc">"MediaTek Announces New Premium Helio P90 SoC"</a></strong>, from AnandTech has more in-deepth analysis. </p>
 
 <div align="center"><h3> </h3></div>
 
