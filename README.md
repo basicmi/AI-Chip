@@ -278,9 +278,7 @@ Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-
 
 <p><strong><a href="https://i.mediatek.com/p90">MediaTek announced Helio P90, highlighting AI processing.</a></strong></p>
 
-<blockquote>
-  <p>Through a combination of hardware and software, an AI processing unit (APU ; Artificial intelligence Processing Unit ), and NeuroPilot SDK, MediaTek will bring AI across its wide-ranging technology portfolio – a portfolio that powers 1.5 billion consumer products a year across smartphones, smart homes, autos and more. </p>
-</blockquote>
+<p><strong><a href="https://www.anandtech.com/show/13718/mediatek-announces-new-premium-helio-p90-soc">This article from AnandTech gave more in-deepth analysis. </a></strong></p>
 
 <div align="center"><h3> </h3></div>
 
