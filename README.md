@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#PFN">Preferred Network</a>.</li>
 <li>Add news of <a href="#MediaTek">Mediatek's Helio P90</a>.</li>
 <li>Add <a href="#Reference">"White Paper on AI Chip Technologies 2018" in Reference</a>.</li>
 <li>Add news of <a href="#Reference">MLPerf in Reference</a>.</li>
@@ -55,7 +56,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a></td><td>39</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#KnuEdge">KnuEdge</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a></td><td>40</td>
   </tr>
 </table>
 
@@ -1340,6 +1341,19 @@ Kalrays NN fortunes may improve with an imminent product refresh and just this m
 
 <blockquote>
   <p>Four-year-old startup Flex Logix has taken the wraps off its novel chip design for machine learning. CEO Geoff Tate describes how the chip may take advantage of an "explosion" of inferencing activity in "edge computing," and how Nvidia can't compete on performance.</p>
+</blockquote>
+
+<p><a name="PFN"></a></p>
+
+<div align="center"><a href="https://projects.preferred.jp/mn-core/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PFN_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.preferred-networks.jp/en/news">Preferred Networks develops a custom deep learning processor MN-Core for use in MN-3, a new large-scale cluster, in spring 2020</a></strong></p>
+
+<blockquote>
+  <p>Dec. 12, 2018, Tokyo Japan – Preferred Networks, Inc. (“PFN”, Head Office: Tokyo, President & CEO: Toru Nishikawa) announces that it is developing MN-Core (TM), a processor dedicated to deep learning and will exhibit this independently developed hardware for deep learning, including the MN-Core chip, board, and server, at the SEMICON Japan 2018, held at Tokyo Big Site. 
+ </p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
