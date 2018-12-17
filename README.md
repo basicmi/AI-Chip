@@ -934,10 +934,10 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="http://thinci.com/index.html">ThinCI</a> is <a href="https://venturebeat.com/2016/10/06/thinci-teams-with-denso-to-create-vision-processors-with-100x-performance-improvements/">developing vision processors</a> from Sacremento with employees in India too. They claim to be at the point of first silicon, Thinci-tc500, along with benchmarking and winning of customers already happening. Apart from "doing everything in parallel" we have little to go on.</p>
+<p><a href="https://venturebeat.com/2018/09/05/thinci-raises-65-million-to-develop-its-ai-processors-for-automonomous-and-connected-vehicles/">ThinCI raises $65 million to develop its AI processors for automonomous and connected vehicles</a></p>
 
 <blockquote>
-  <p>Founded in 2010, Eldorado Hills, California startup ThinCI has taken in an undisclosed amount of funding to develop a technology that will bring vision processing to all devices. The ability for smart devices to have functionality like computer vision that doesn’t require regular communication to the cloud is referred to as “edge computing” or “fog computing”. That’s where ThinCI wants to play.</p>
+  <p>Based in El Dorado Hills, California, ThinCI is developing silicon, but also software and a development kit that allows its hardware platform to be extended to a wide range of uses.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -994,8 +994,11 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p>Despite many promises,<a href="http://www.kalrayinc.com/">Kalray</a> has not progressed their chip offering beyond the 256 core beast covered back in 2015, "<a href="https://meanderful.blogspot.jp/2015/06/kalray-new-product-meander.html">Kalray - new product meander</a>." Kalray is advertising their product as suitable for embedded self-driving car applications. Kalray has a <a href="http://www.eenewseurope.com/news/kalray-turns-neural-networks">Kalray Neural Network</a> (KaNN) software package and claims better efficiency than GPUs with up to 1 TFlop/s on chip.<br><br>
-Kalrays NN fortunes may improve with an imminent product refresh and just this month Kalray completed a new funding that raised $26M. The new <a href="(http://www.eenewseurope.com/news/kalray-turns-neural-networks)">Coolidge processor</a> is due in mid-2018 with 80 or 160 cores along with 80 or 160 co-processors optimised for vision and deep learning.</p>
+<p><a href="https://www.hpcwire.com/off-the-wire/kalray-releases-the-kalray-neural-network-3-0/">Kalray Releases the Kalray Neural Network 3.0</a> </p>
+<blockquote>
+  <p>Kalray (Euronext Growth Paris – ALKAL), a pioneer in processors for new intelligent systems, has announced the launch of the Kalray Neural Network 3.0 (KaNN), a platform for Artificial Intelligence application development. KaNN allows developers to seamlessly port their AI-based algorithms from well-known machine learning frameworks including Caffe, Torch and TensorFlow onto Kalray’s Massively Parallel Processor Array (MPPA) intelligent processor.</p>
+</blockquote>
+
 
 <div align="center"><h3> </h3></div>
 
