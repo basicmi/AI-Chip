@@ -1042,11 +1042,11 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Leepmind"></a></p>
 
-<div align="center"><a href="http://www.leapmind.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></a></div>
+<div align="center"><a href="https://leapmind.io/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="http://www.leapmind.io/products.php">Leepmind</a> is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning</p>
+<p><a href="https://leapmind.io/en/technology/">Leepmind</a> is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning</p>
 
 <div align="center"><h3> </h3></div>
 
@@ -1069,6 +1069,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 <div align="center"><h3> </h3></div>
 
 <blockquote>
+ 
   <p>NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
   <a href="https://www.youtube.com/watch?v=TGQGStPoNu4">this video</a> is the description and demos of NovuMind FPGA AI Accelerator.</p>
 </blockquote>
