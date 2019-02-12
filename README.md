@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add Chinese startup <a href="#Canaan">Canaan</a>.</li>
 <li>Add startup <a href="#Cornami">Cornami</a>.</li>
 <li>Add startup <a href="#PFN">Preferred Network</a>.</li>
 <li>Add news of <a href="#MediaTek">Mediatek's Helio P90</a>.</li>
@@ -53,7 +54,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a></td><td>9</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a></td><td>9</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -840,6 +841,18 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <blockquote>
   <p>The world leading computer vision processing IC and system company, NextVPU, today unveiled AI vision processing IC N171. N171 is the flagship IC of NextVPU’s N1 series computer vison chips. As a VPU, N171 pushes the Edge AI computing limit further from many aspects. With powerful computing engines embedded, N171 has unprecedent geometry calculation and deep neural network processing capabilities, and can be widely used in surveillance, robots, drones, UGV, smart home, ADAS applications, etc.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Canaan"></a></p>
+
+<div align="center"><a href="https://canaan-creative.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Canaan_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>Canaan's [Kendryte](https://kendryte.com/) is a series of AI chips which focuses on IoT.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
