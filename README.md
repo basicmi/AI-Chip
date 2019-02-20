@@ -1390,7 +1390,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Anaflash"></a></p>
 
-<div align="center"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Anaflash_logo.jpg" height="40"></a></div>
+<div align="center"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Anaflash_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
