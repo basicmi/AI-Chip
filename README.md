@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Horizon_Robotics">Horizon Robotics</a>.</li>
 <li>Add startup <a href="#Anaflash">Anaflash</a>.</li>
 <li>Add Chinese startup <a href="#Canaan">Canaan</a>.</li>
 <li>Add startup <a href="#Cornami">Cornami</a>.</li>
@@ -754,13 +755,13 @@ ARM also provide a open source <a href="https://developer.arm.com/technologies/c
 
 <div align="center"><h3> </h3></div>
 
-<p>Dec. 20, <a href="http://www.horizon.ai/">Horizon Robotics</a> annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.</p>
-
-<p><a href="http://www.intelcapital.com/news/news.html?id=555">Artificial Intelligence Startup Horizon Robotics Receives Investment from Intel Capital</a></p>
+<p><a href="https://www.reuters.com/article/us-china-tech-semiconductors/chinese-ai-chip-maker-horizon-robotics-raises-600-million-from-sk-hynix-others-idUSKCN1QG0HW">Chinese AI chip maker Horizon Robotics raises $600 million from SK Hynix, others</a></p>
 
 <blockquote>
-  <p>October 19, 2017, San Francisco, USA – Horizon Robotics, a leading global Artificial Intelligence (AI) startup, today announced during Intel Capital’s CEO Showcase that it has received investment from Intel Capital. Harvest Investments will join the round as a co-investor with participation from existing shareholders including Morningside Venture Capital, Hillhouse Capital, Wu Capital and Linear Ventures. The Company expects that its A-plus series funding round will total approximately US$100 million upon closing.</p>
+  <p>Chinese chip maker Horizon Robotics said on Wednesday it had raised $600 million in its latest funding round, bringing its valuation to $3 billion, amid a push from Chinese companies and the government to boost the semiconductor industry.</p>
 </blockquote>
+
+<p>Dec. 20, <a href="http://www.horizon.ai/">Horizon Robotics</a> annouced two chip products, "Journey" for ADAS and "Sunrise" for Smart Cameras.</p>
 
 <!-- <div align="center"><h3> </h3></div><a name="Deephi"></a><div align="center"><a href="http://www.deephi.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deephi_logo.png" height="60"></a></div>
 <div align="center"><h3> </h3></div>[DeePhi Tech](http://www.deephi.com/) has the cutting-edge technologies in deep compression, compiling toolchain, deep learning processing unit (DPU) design, FPGA development, and system-level optimization. DeePhi has the [Deep Neural Network Development Kit, DNNDK](http://deephi.com/dnndk), which is a deep learning software development kit aimed at simplifying and accelerating deep learning applications.  
