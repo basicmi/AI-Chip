@@ -861,7 +861,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 <div align="center"><h3> </h3></div>
 
 <blockquote>
-  <p>Canaan's [Kendryte](https://kendryte.com/) is a series of AI chips which focuses on IoT.</p>
+  <p>Canaan's <a href="https://kendryte.com/">Kendryte</a> is a series of AI chips which focuses on IoT.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
