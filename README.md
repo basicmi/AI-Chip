@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
 <li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 <li>Add news of <a href="#Horizon_Robotics">Horizon Robotics</a>.</li>
 <li>Add startup <a href="#Anaflash">Anaflash</a>.</li>
@@ -340,11 +341,16 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://venturebeat.com/2019/03/06/google-begins-selling-the-150-coral-dev-board-a-hardware-kit-for-accelerated-ai-edge-computing/">Google begins selling the $150 Coral Dev Board, a hardware kit for accelerated AI edge computing</a></strong></p>
+<blockquote>
+  <p>If you’re a software dev looking to get a head start on AI development at the edge, why not try on Google’s new hardware for size? The search company today made available the Coral Dev Board, a $150 computer featuring a removable system-on-module with one of its custom tensor processing unit (TPU) AI chips.</p>
+</blockquote>
+
 <p>Google's <a href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">original TPU</a> had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new <a href="https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/">TPU2</a> is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. <br><br>
 <a href="https://cloudplatform.googleblog.com/2018/02/Cloud-TPU-machine-learning-accelerators-now-available-in-beta.html">Lately</a>, Google is making <a href="https://cloud.google.com/tpu/">Cloud TPUs</a> available for use in <a href="https://cloud.google.com/">Google Cloud Platform (GCP)</a>. Here you can find the latest <a href="https://blog.riseml.com/benchmarking-googles-new-tpuv2-121c03b71384">banchmark result of Google TPU2</a>.<br><br>
 <a href="https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/">Pixel Visual Core</a> is Google’s first custom-designed co-processor for consumer products. It’s built into every Pixel 2, and in the coming months, we’ll turn it on through a software update to enable more applications to use Pixel 2’s camera for taking HDR+ quality pictures.</p>
 
-<p><strong><a href="https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor/">Tearing Apart Google’s TPU 3.0 AI Coprocessor</a></strong></p>
+<p><a href="https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor/">Tearing Apart Google’s TPU 3.0 AI Coprocessor</a></p>
 
 <blockquote>
   <p>Google did its best to impress this week at its annual IO conference. While Google rolled out a bunch of benchmarks that were run on its current Cloud TPU instances, based on TPUv2 chips, the company divulged a few skimpy details about its next generation TPU chip and its systems architecture. The company changed from version notation (TPUv2) to revision notation (TPU 3.0) with the update, but ironically the detail we have assembled shows that the step from TPUv2 to what we will call TPUv3 probably isn’t that big; it should probably be called TPU v2r5 or something like that.</p>
