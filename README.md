@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 <li>Add news of <a href="#Horizon_Robotics">Horizon Robotics</a>.</li>
 <li>Add startup <a href="#Anaflash">Anaflash</a>.</li>
 <li>Add Chinese startup <a href="#Canaan">Canaan</a>.</li>
@@ -1392,6 +1393,21 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
+<p><a name="AIChipBenchmarks"></a></p>
+
+<div align="center"><h2>AI Chip Benchmarks</h2></div>
+
+<p><HR>
+
+1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
+2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
+3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a></strong><br>
+4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
+5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
+6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
+
+<div align="center"><h3> </h3></div>
+
 <p><a name="Reference"></a></p>
 
 <div align="center"><h2>Reference</h2></div>
@@ -1404,12 +1420,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 2. <a href="http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/">12 AI Hardware Startups Building New AI Chips</a><br>
 3. <a href="http://eyeriss.mit.edu/tutorial.html">Tutorial on Hardware Architectures for Deep Neural Networks</a><br>
 4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
-5. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
-6. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-7. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a></strong><br>
-8. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
-9. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
-10. <strong>"White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a></strong><br>
+5. <strong>"White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
