@@ -1156,7 +1156,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_logo.png" height="50"></a></div>
+<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_Logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1377,7 +1377,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Cornami"></a></p>
 
-<div align="center"><a href="http://cornami.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cornami_logo.jpg" height="40"></a></div>
+<div align="center"><a href="http://cornami.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cornami_logo.jpg" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1405,7 +1405,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="AIChipCompilers"></a></p>
 
-<div align="center"><h2>AI Chip Benchmarks</h2></div>
+<div align="center"><h2>AI Chip Compilers</h2></div>
 
 <p><HR>
 1. <a href="https://github.com/pytorch/glow">pytorch/glow</a><br>
