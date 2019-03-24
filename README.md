@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add a new section of <a href="#AIChipCompilers">AI Chip Compilers</a>.</li>
 <li>Add Chinese startup <a href="#Enflame">Enflame</a>.</li>
 <li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
 <li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
@@ -867,7 +868,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <p><a name="Enflame"></a></p>
 
-<div align="center"><a href="http://www.enflame-tech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Enflame_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.enflame-tech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Enflame_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -921,7 +922,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="PEZY"></a></p>
 
-<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.png" height="40"></a></div>
+<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1155,7 +1156,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_logo.jpeg" height="60"></a></div>
+<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1165,22 +1166,21 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Esperanto"></p>
 
-<div align="center"><a href="https://www.esperanto.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/esperanto_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.esperanto.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/esperanto_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p>According to this article, <a href="https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/">"Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"</a>, </p>
+<p>According to this article, <a href="https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/">"Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"</a></p>
 
 <blockquote>
-  <p>Although <a href="https://www.esperanto.ai/">Esperanto</a> will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.
-  <br><br></p>
+  <p>Although <a href="https://www.esperanto.ai/">Esperanto</a> will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.<br><br></p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
 
 <p><a name="SambaNova"></a></p>
 
-<div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="50"></a></div>
+<div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1400,6 +1400,21 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
   <p>Anaflash Inc. (San Jose, CA) is a startup company that has developed a test chip to demonstrate analog neurocomputing taking place inside logic-compatible embedded flash memory. 
  </p>
 </blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="AIChipCompilers"></a></p>
+
+<div align="center"><h2>AI Chip Benchmarks</h2></div>
+
+<p><HR>
+1. <a href="https://github.com/pytorch/glow">pytorch/glow</a><br>
+2. <a href="https://tvm.ai/">TVM:End to End Deep Learning Compiler Stack</a><br>
+3. <a href="https://www.tensorflow.org/xla">Google Tensorflow XLA</a></strong><br>
+4. <a href="https://developer.nvidia.com/tensorrt">Nvidia TensorRT</a><br>
+5. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
+6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
+7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
 
 <div align="center"><h3> </h3></div>
 
