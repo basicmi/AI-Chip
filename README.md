@@ -10,6 +10,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add Chinese startup <a href="#Enflame">Enflame</a>.</li>
 <li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
 <li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 <li>Add news of <a href="#Horizon_Robotics">Horizon Robotics</a>.</li>
@@ -58,7 +59,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a></td><td>10</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a>, <a href="#Enflame">Enflame</a></td><td>11</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -83,7 +84,7 @@ table, th, td {
   </tr>
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>, <a href="#Marvell">Marvell</a></td>  
-    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a></td>
+    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a>, <a href="#Enflame">Enflame</a></td>
     <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a></td>
   </tr>
 </table>
@@ -864,6 +865,16 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
   <p>Canaan's <a href="https://kendryte.com/">Kendryte</a> is a series of AI chips which focuses on IoT.</p>
 </blockquote>
 
+<p><a name="Enflame"></a></p>
+
+<div align="center"><a href="http://www.enflame-tech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Enflame_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>Enflame Tech is a startup company based in Shanghai, China. It was established in March 2018 with two R&D centers in Shanghai and Beijing. Enflame is developing the deep learning accelerator SoCs and software stack, targeting AI training platform solutions for the Cloud service provider and the data centers. </p>
+</blockquote>
+
 <div align="center"><h3> </h3></div>
 
 <div align="center"><h2><a name="Startups_Worldwide"></a>V. Startups Worldwide</h2></div>
@@ -910,16 +921,9 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="PEZY"></a></p>
 
-<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.gif" height="60"></a></div>
+<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
-
-<p>Pezy-SC and Pezy-SC2 are the 1024 core and 2048 core processors that <a href="http://pezy.co.jp/en/index.html">Pezy</a> develop. The Pezy-SC 1024 core chip powered the top 3 systems on the Green500 list of supercomputers back in 2015. The <a href="https://en.wikichip.org/wiki/pezy/pezy-sc2">Pezy-SC2</a> is the follow up chip that is meant to be delivered by now, but details are scarce yet intriguing,</p>
-
-<blockquote>
-  <p>"PEZY-SC2 HPC Brick: 32 of PEZY-SC2 module card with 64GB DDR4 DIMM (2.1 PetaFLOPS (DP) in single tank with 6.4Tb/s"
-  It will be interesting to see what  2,048 MIMD MIPS Warrior 64-bit cores can do. In the <a href="https://www.top500.org/green500/list/2017/06/">June 2017 Green500 list</a>, a Nvidia P100 system took the number one spot and there is a Pezy-SC2 system at number 7. So the chip seems alive but details are thin on the ground. <a href="https://wired.jp/special/2016/motoaki-saito/">Motoaki Saito</a> is certainly worth watching.<br></p>
-</blockquote>
 
 <p><a href="https://fuse.wikichip.org/news/191/the-2048-core-pezy-sc2-sets-a-green500-record/">The 2,048-core PEZY-SC2 sets a Green500 record</a></p>
 
