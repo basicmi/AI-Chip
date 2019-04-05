@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add paper of <a href="#Samsung">Samsung's NPU</a>.</li>
 <li>Add a new section of <a href="#AIChipCompilers">AI Chip Compilers</a>.</li>
 <li>Add Chinese startup <a href="#Enflame">Enflame</a>.</li>
 <li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
@@ -180,9 +181,10 @@ Now the open source DLA is available on <a href="https://github.com/nvdla/">Gith
 <a name="Samsung"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Samsung_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
+Jinook Song, Yunkyo Cho, Jun-Seok Park, Jun-Woo Jang, Sehwan Lee, Joon-Ho Song, Inyup Kang. Hwaseong, Korea. A 11.5 TOPS/W 1,024-MAC Butterfly-Structure Dual-Core Sparsity-Aware Neural Processing Unit in 8nm Flagship Mobile SOC. ISSCC 2019.
+<div align="center"><h3> </h3></div>
 <strong><a href="https://news.samsung.com/global/samsung-brings-on-device-ai-processing-for-premium-mobile-devices-with-exynos-9-series-9820-processor">Samsung Brings On-device AI Processing for Premium Mobile Devices with Exynos 9 Series 9820 Processor</a></strong>
 > Fourth-generation custom core and 2.0Gbps LTE Advanced Pro modem enables enriched mobile experiences including AR and VR applications 
-
 <br> 
 Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content">The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities</a>”.   
 
