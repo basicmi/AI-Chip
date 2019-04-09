@@ -1145,8 +1145,8 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html">Groq</a> is founded by Ex-googlers, who designed Google TPU.
-<a href="groq.com">Groq's website</a> claims that its first chip will run 400 trillion operations per second with 8TOP/s per Watt power efficiency.</p>
+<p><a href="https://www.cnbc.com/2017/04/20/ex-googlers-left-secretive-ai-unit-to-form-groq-with-palihapitiya.html">Groq is founded by Ex-googlers, who designed Google TPU.</a></p>
+<p><a href="groq.com">Groq's website</a> claims that its first chip will run 400 trillion operations per second with 8TOP/s per Watt power efficiency.</p>
 
 <div align="center"><h3> </h3></div>
 
@@ -1156,8 +1156,8 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="http://www.kaist.ac.kr/_prog/_board/?code=ed_news&amp;mode=V&amp;no=65402&amp;upr_ntt_no=65402&amp;site_dvs_cd=en&amp;menu_dvs_cd=">Face Recognition System “K-Eye” Presented by KAIST</a><br><br>
-<a href="https://zhuanlan.zhihu.com/p/28328046">从ISSCC Deep Learning处理器论文到人脸识别产品</a><br></p>
+<p><a href="http://www.kaist.ac.kr/_prog/_board/?code=ed_news&amp;mode=V&amp;no=65402&amp;upr_ntt_no=65402&amp;site_dvs_cd=en&amp;menu_dvs_cd=">Face Recognition System “K-Eye” Presented by KAIST</a><br><p>
+<p><a href="https://zhuanlan.zhihu.com/p/28328046">从ISSCC Deep Learning处理器论文到人脸识别产品</a><br></p>
 
 <div align="center"><h3> </h3></div>
 
