@@ -1156,8 +1156,8 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="http://www.kaist.ac.kr/_prog/_board/?code=ed_news&amp;mode=V&amp;no=65402&amp;upr_ntt_no=65402&amp;site_dvs_cd=en&amp;menu_dvs_cd=">Face Recognition System “K-Eye” Presented by KAIST</a><br><p>
-<p><a href="https://zhuanlan.zhihu.com/p/28328046">从ISSCC Deep Learning处理器论文到人脸识别产品</a><br></p>
+<p><a href="http://www.kaist.ac.kr/_prog/_board/?code=ed_news&amp;mode=V&amp;no=65402&amp;upr_ntt_no=65402&amp;site_dvs_cd=en&amp;menu_dvs_cd=">Face Recognition System “K-Eye” Presented by KAIST</a><p>
+<p><a href="https://zhuanlan.zhihu.com/p/28328046">从ISSCC Deep Learning处理器论文到人脸识别产品</a></p>
 
 <div align="center"><h3> </h3></div>
 
@@ -1167,7 +1167,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html">Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing</a><br><br></p>
+<p><a href="https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html">Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing</a></p>
 
 <div align="center"><h3> </h3></div>
 
@@ -1177,7 +1177,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.youtube.com/watch?v=AxFtVhHXOnc">Here</a> is the demo of their chip, usb dongle and development board.<br><br></p>
+<p><a href="https://www.youtube.com/watch?v=AxFtVhHXOnc">Here</a> is the demo of their chip, usb dongle and development board.</p>
 
 <div align="center"><h3> </h3></div>
 
