@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add Compiler <a href="#AIChipCompilers">ONNC</li>
+<li>Add Compiler <a href="#AIChipCompilers">ONNC</a>.</li>
 <li>Add Chinese startup <a href="#EEasy">EEasy Tech</a>.</li>
 <li>Add startup <a href="#Optalysys">Optaylsys</a>.</li>
 <li>Add a new section of <a href="#AIChipCompilers">AI Chip Compilers</a>.</li>
