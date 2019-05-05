@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add MLIR <a href="#AIChipCompilers">in AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
+<li>Add MLIR in <a href="#AIChipCompilers">AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
 <li>Add startup <a href="#etacompute">Eta Compute</a>.</li>
 <li>Add Compiler <a href="#AIChipCompilers">ONNC</a>.</li>
 <li>Add Chinese startup <a href="#EEasy">EEasy Tech</a>.</li>
@@ -615,7 +615,7 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <p><a name="Tesla"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="70"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -629,13 +629,6 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <blockquote>
   <p>Processing power is important, but building chips could be an expensive distraction for Tesla</p>
-</blockquote>
-
-
-<p><a href="https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/">Tesla is building its own AI chips for self-driving cars</a></p>
-
-<blockquote>
-  <p>The final outcome, according to Elon, is pretty dramatic: he says that whereas Tesla’s computer vision software running on Nvidia’s hardware was handling about 200 frames per second, its specialized chip is able to do crunch out 2000 frames per second “with full redundancy and failover”.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
