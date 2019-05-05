@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add MLIR <a href="#AIChipCompilers">in AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
 <li>Add startup <a href="#etacompute">Eta Compute</a>.</li>
 <li>Add Compiler <a href="#AIChipCompilers">ONNC</a>.</li>
 <li>Add Chinese startup <a href="#EEasy">EEasy Tech</a>.</li>
@@ -618,11 +619,18 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://electrek.co/2018/10/16/tesla-neural-net-computer-production-elon-musk/">Tesla aims for new neural net computer in production in 6 months, results in 500-2000% increase in ops/sec, says Elon Musk</a></strong></p>
+<p><strong><a href="https://www.theverge.com/2019/4/22/18511594/tesla-new-self-driving-chip-is-here-and-this-is-your-best-look-yet/">Tesla’s new self-driving chip is here, and this is your best look yet</a></strong></p>
 
 <blockquote>
-  <p>Tesla CEO Elon Musk updated the timeline to release the company’s new neural net computer, which they claimed will be the ‘world’s most advanced computer for autonomous driving’.</p>
+  <p>...And today, at Tesla’s Autonomy Investor Day in Palo Alto, California, the company gave the world its first, detailed glimpse at what Musk is now calling “the best chip in the world” — a 260 square millimeter piece of silicon, with 6 billion transistors, that the company claims offers 21 times the performance of the Nvidia chips it was using before.</p>
 </blockquote>
+
+<p><strong><a href="https://www.theverge.com/2019/4/24/18514308/tesla-full-self-driving-computer-chip-autonomy-day-specs">Tesla’s new AI chip isn’t a silver bullet for self-driving cars</a></strong></p>
+
+<blockquote>
+  <p>Processing power is important, but building chips could be an expensive distraction for Tesla</p>
+</blockquote>
+
 
 <p><a href="https://techcrunch.com/2018/08/01/tesla-is-building-its-own-ai-chips-for-self-driving-cars/">Tesla is building its own AI chips for self-driving cars</a></p>
 
@@ -1459,6 +1467,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
 7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
 8. <a href="https://onnc.ai/">ONNC (Open Neural Network Compiler)</a><br>
+9. <a href="https://github.com/tensorflow/mlir/">Multi-Level Intermediate Representation</a><br>
 
 <div align="center"><h3> </h3></div>
 
