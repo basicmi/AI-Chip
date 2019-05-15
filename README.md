@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Hailo">Hailo’s Hailo-8 chip</a>.</li>
 <li>Add MLIR in <a href="#AIChipCompilers">AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
 <li>Add startup <a href="#etacompute">Eta Compute</a>.</li>
 <li>Add Compiler <a href="#AIChipCompilers">ONNC</a>.</li>
@@ -1292,10 +1293,10 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://techcrunch.com/2018/06/05/hailo-raises-a-12-5m-series-a-round-for-its-deep-learning-chips/">Hailo raises a $12.5M Series A round for its deep learning chips</a></p>
+<p><a href="https://venturebeat.com/2019/05/14/hailo-unveils-hailo-8-an-edge-chip-custom-designed-for-ai-workloads/amp/">Hailo unveils Hailo-8, an edge chip custom-designed for AI workloads</a></p>
 
 <blockquote>
-  <p>Israel-based <a href="https://www.hailotech.com/">Hailo</a>, which is building deep learning chips for embedded devices. The company announced that it has raised a $12 million Series A round.</p>
+  <p>......Hailo-8 is capable of 26 tera operations per second (TOPs) ...... In one preliminary test at an image resolution of 224 x 224, the Hailo-8 processed 672 frames per second compared with the Xavier AGX’s 656 frames and sucked down only 1.67 watts (equating to 2.8 TOPs per watt) versus the Nvidia chip’s 32 watts (0.14 TOPs per watt)......</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
