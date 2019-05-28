@@ -1466,7 +1466,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Achronix"></a></p>
 
-<div align="center"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Achronix_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Achronix_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
