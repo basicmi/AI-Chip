@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#AIChipCompilers">The Tensor Algebra Compiler (taco)</a>.</li>
 <li>Add news of <a href="#Achronix">Achronix’s Speedster7t FPGA</a>.</li>
 <li>Add news of <a href="#Hailo">Hailo’s Hailo-8 chip</a>.</li>
 <li>Add MLIR in <a href="#AIChipCompilers">AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
@@ -1475,6 +1476,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
 8. <a href="https://onnc.ai/">ONNC (Open Neural Network Compiler)</a><br>
 9. <a href="https://github.com/tensorflow/mlir/">Multi-Level Intermediate Representation</a><br>
+10. <a href="http://tensor-compiler.org/">The Tensor Algebra Compiler (taco)</a><br>
 
 <div align="center"><h3> </h3></div>
 
