@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Habana">Habana's Gaudi AI Training Chip</a>.</li>
 <li>Add news of <a href="#LG">LG's AI Chip</a>.</li>
 <li>Add <a href="#AIChipCompilers">The Tensor Algebra Compiler (taco)</a>.</li>
 <li>Add news of <a href="#Achronix">Achronix’s Speedster7t FPGA</a>.</li>
@@ -1367,7 +1368,15 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1333719">Startup’s AI Chip Beats GPU</a></strong></p>
+<p><strong><a href="https://habana.ai/press/habana-labs-announces-gaudi-ai-training-processor/">HABANA LABS Announces Gaudi AI Training Processor</a></strong></p>
+
+<p><strong><a href="https://habana.ai/media-center/">You can also find the reports in the media</a></strong></p>
+
+<blockquote>
+  <p>TEL-AVIV, ISRAEL and SAN JOSE, CA–June 17, 2019 – Habana Labs, Ltd. (www.habana.ai), a leading developer of AI processors, today announced the Habana Gaudi™ AI Training Processor. Training systems based on Gaudi processors will deliver an increase in throughput of up to four times over systems built with equivalent number GPUs.</p>
+</blockquote>
+
+<p><a href="https://www.eetimes.com/document.asp?doc_id=1333719">Startup’s AI Chip Beats GPU</a></p>
 
 <blockquote>
   <p>The Goya chip can process 15,000 ResNet-50 images/second with 1.3-ms latency at a batch size of 10 while running at 100 W. That compares to 2,657 images/second for an Nvidia V100 and 1,225 for a dual-socket Xeon 8180. At a batch size of one, Goya handles 8,500 ResNet-50 images/second with a 0.27-ms latency.</p>
