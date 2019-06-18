@@ -1369,12 +1369,11 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 <div align="center"><h3> </h3></div>
 
 <p><strong><a href="https://habana.ai/press/habana-labs-announces-gaudi-ai-training-processor/">HABANA LABS Announces Gaudi AI Training Processor</a></strong></p>
-
-<p><strong><a href="https://habana.ai/media-center/">You can also find the reports in the media</a></strong></p>
-
 <blockquote>
   <p>TEL-AVIV, ISRAEL and SAN JOSE, CA–June 17, 2019 – Habana Labs, Ltd. (www.habana.ai), a leading developer of AI processors, today announced the Habana Gaudi™ AI Training Processor. Training systems based on Gaudi processors will deliver an increase in throughput of up to four times over systems built with equivalent number GPUs.</p>
 </blockquote>
+
+<p><strong><a href="https://habana.ai/media-center/">You can also find the reports in the media</a></strong></p>
 
 <p><a href="https://www.eetimes.com/document.asp?doc_id=1333719">Startup’s AI Chip Beats GPU</a></p>
 
