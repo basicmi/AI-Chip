@@ -350,7 +350,7 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.renesas.com/eu/en/about/press-center/news/2019/news20190613.html">Renesas Electronics Develops New Processing-In-Memory Technology for Next-Generation AI Chips that Achieves AI Processing Performance of 8.8 TOPS/W</a></p>
+<p><strong><a href="https://www.renesas.com/eu/en/about/press-center/news/2019/news20190613.html">Renesas Electronics Develops New Processing-In-Memory Technology for Next-Generation AI Chips that Achieves AI Processing Performance of 8.8 TOPS/W</a></strong></p>
 
 <blockquote>
   <p>Renesas Electronics Corporation (TSE: 6723), a premier supplier of advanced semiconductor solutions, today announced it has developed an AI accelerator that performs CNN (convolutional neural network) processing at high speeds and low power to move towards the next generation of Renesas embedded AI (e-AI), which will accelerate increased intelligence of endpoint devices. A Renesas test chip featuring this accelerator has achieved the power efficiency of 8.8 TOPS/W (Note 1), which is the industry's highest class of power efficiency. The Renesas accelerator is based on the processing-in-memory (PIM) architecture, an increasingly popular approach for AI technology, in which multiply-and-accumulate operations are performed in the memory circuit as data is read out from that memory. </p>
