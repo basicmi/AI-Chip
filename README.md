@@ -1211,7 +1211,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://www.gyrfalcontech.ai/" height="40"></a></div>
+<div align="center"><a href="https://www.gyrfalcontech.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
