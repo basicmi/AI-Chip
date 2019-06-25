@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li><a href="#AIChipBenchmarks">MLPerf v0.5 Inference Benchmarks are here</a>.</li>
 <li>Add news of <a href="#Renesas_Electronics">Renesas Electronics's PIM AI Chip</a>.</li>
 <li>Add news of <a href="#Habana">Habana's Gaudi AI Training Chip</a>.</li>
 <li>Add news of <a href="#LG">LG's AI Chip</a>.</li>
@@ -1527,7 +1528,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
 2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>Now you can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a></strong><br>
+3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. You can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a>. <strong><a href="https://mlperf.org/inference-overview/">MLPerf Inference Benchmarks is here</a></strong>.<br>
 4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
 6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
