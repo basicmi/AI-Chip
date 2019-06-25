@@ -1211,11 +1211,15 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_Logo.png" height="40"></a></div>
+<div align="center"><a href="https://gyrfalcontech.com/"><img src="https://www.gyrfalcontech.ai/" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.youtube.com/watch?v=AxFtVhHXOnc">Here</a> is the demo of their chip, usb dongle and development board.</p>
+<p>According to this article, <a href="https://www.prnewswire.com/news-releases/gyrfalcon-offers-automotive-ai-chip-technology-300860069.html">"Gyrfalcon offers Automotive AI Chip Technology"</a></p>
+
+<blockquote>
+  <p>Gyrfalcon Technology Inc. (GTI), has been promoting matrix-based application specific chips for all forms of AI since offering their production versions of AI accelerator chips in September 2017. Through the licensing of its proprietary technology, the company is confident it can help automakers bring highly competitive AI chips to production for use in vehicles within 18 months, along with significant gains in AI performance, improvements in power dissipation and cost advantages.</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
