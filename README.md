@@ -1514,10 +1514,6 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p>Founded in Oct. 2017, WITINMEM focuses on Low cost, low power AI chips and system solutions based on processing-in-memory technology in NOR Flash memory.</p>
 
-<blockquote>
-  <p>Achronix is back in the game of providing full-fledged FPGAs with a new high-end 7-nm family, joining the Gold Rush of silicon to accelerate deep learning. It aims to leverage novel design of its AI block, a new on-chip network, and use of GDDR6 memory to provide similar performance at a lower cost than larger rivals Intel and Xilinx.</p>
-</blockquote>
-
 <div align="center"><h3> </h3></div>
 
 <p><a name="AIChipCompilers"></a></p>
