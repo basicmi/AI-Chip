@@ -352,7 +352,7 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <p><a name="Ambarella"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ambarella_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ambarella_logo.png" height="50"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -943,7 +943,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <p><a name="Tsingmicro"></a></p>
 
-<div align="center"><a href="http://www.tsingmicro.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tsingmicro_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.tsingmicro.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tsingmicro_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -951,7 +951,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <p><a name="Blacksesame"></a></p>
 
-<div align="center"><a href="http://bst.ai/#"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Blacksesame_logo.png" height="40"></a></div>
+<div align="center"><a href="http://bst.ai/#"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Blacksesame_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 
