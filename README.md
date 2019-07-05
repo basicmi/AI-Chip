@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add links to <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Ambarella">Ambarella</a> and <a href="#Blacksesame">Black Sesame</a>.</li>
 <li>Add Chinese startup <a href="#WITINMEM">WITINMEM</a>.</li>
 <li><a href="#AIChipBenchmarks">MLPerf v0.5 Inference Benchmarks are here</a>.</li>
 <li>Add news of <a href="#Renesas_Electronics">Renesas Electronics's PIM AI Chip</a>.</li>
@@ -40,17 +41,6 @@
 <li>Add startup <a href="#Flexlogix">Flex Logix</a>.</li>
 <li>Add news of <a href="#Qualcomm">Qualcomm's Snapdragon 855 Mobile Platform</a>.</li>
 <li>Add startup <a href="#aiCTX">aiCTX</a>.</li>
-<li>Add news of <a href="#Amazon_AWS">AWS's inference chip: Inferentia</a>.</li>
-<li>Add news of <a href="#Samsung">Samsung's NPU</a>.</li>
-<li>Add <a href="#Marvell">Marvell’s AI SSD controller proof-of-concept architecture solution</a>.</li>
-<li>Add news of <a href="#Tesla">Tesla's AI Chip</a>.</li>
-<li>Add news of <a href="#HUAWEI_Cloud">Huawei's AI Chip</a>.</li>
-<li>Add two more AI benchmarks, AI Benchmark and AI Matrix in <a href="#Reference">Reference</a>.</li>
-<li>Add news of <a href="#Xilinx">Xilinx's AI inference card</a>.</li>
-<li>Add news of <a href="#Alibaba">Alibaba's AI Chip</a>.</li>
-<li>Add startup <a href="#Habana">Habana</a>.</li>
-<li>Add <a href="#Apple">Apple's A12</a>, <a href="#HiSilicon">Huawei's Kirin980</a> and <a href="#Nvidia">Nvidia's T4</a>.</li>
-<li>Add Chinese startup <a href="#Nextvpu">NextVPU</a>.</li>
 </ul>
 </font>
 
@@ -65,7 +55,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a></td><td>14</td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a></td><td>15</td>
   </tr>
   <tr>
     <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a></td><td>15</td>
@@ -75,7 +65,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a>, <a href="#Enflame">Enflame</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#WITINMEM">WITINMEM</a></td><td>13</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a>, <a href="#Enflame">Enflame</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#WITINMEM">WITINMEM</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a></td><td>15</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -101,7 +91,7 @@ table, th, td {
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>, <a href="#Marvell">Marvell</a>, <a href="#Achronix">Achronix</a></td>  
     <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a>, <a href="#Enflame">Enflame</a></td>
-    <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#LG">LG</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#WITINMEM">WITINMEM</a></td>
+    <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#LG">LG</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#WITINMEM">WITINMEM</a>,  <a href="#Ambarella">Ambarella</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a></td>
   </tr>
 </table>
 
@@ -357,6 +347,16 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <blockquote>
   <p>Renesas Electronics Corporation (TSE: 6723), a premier supplier of advanced semiconductor solutions, today announced it has developed an AI accelerator that performs CNN (convolutional neural network) processing at high speeds and low power to move towards the next generation of Renesas embedded AI (e-AI), which will accelerate increased intelligence of endpoint devices. A Renesas test chip featuring this accelerator has achieved the power efficiency of 8.8 TOPS/W (Note 1), which is the industry's highest class of power efficiency. The Renesas accelerator is based on the processing-in-memory (PIM) architecture, an increasingly popular approach for AI technology, in which multiply-and-accumulate operations are performed in the memory circuit as data is read out from that memory. </p>
 </blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Ambarella"></a></p>
+
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ambarella_logo.png" height="40"></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><a href="https://www.ambarella.com/">Intelligent Vision Processors For Edge Applications</a></p>
 
 <div align="center"><h3> </h3></div>
 
@@ -932,6 +932,36 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
   <p>EEasy Technology Co. Ltd is an AI system-on-chip (SoC) design house and total solution provider. Its offerings include AI acceleration; image and graphic processing; video encoding and decoding; and mixed-signal ULSI design capabilities.</p>
 </blockquote>
 
+
+<p><a name="WITINMEM"></a></p>
+
+<div align="center"><a href="http://www.witin.net/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/WITINMEM_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p>Founded in Oct. 2017, WITINMEM focuses on Low cost, low power AI chips and system solutions based on processing-in-memory technology in NOR Flash memory.</p>
+
+<p><a name="Tsingmicro"></a></p>
+
+<div align="center"><a href="http://www.tsingmicro.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tsingmicro_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p>Qingwei Intelligent Technology (Tsing Micro) is AI chip company spin-off from Tsinghua University.</p>
+
+<p><a name="Blacksesame"></a></p>
+
+<div align="center"><a href="http://bst.ai/#"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Blacksesame_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://equalocean.com/ai/20190412-black-sesame-technologies-completes-usd-100-million-series-b-financing">Black Sesame Technologies Nearly Completes 100 Million Series B Financing Round</a></strong></p>
+
+<blockquote>
+  <p>Black Sesame Technologies (黑芝麻智能科技) has nearly completed its 100 million Series B Financing round which will be used to expand cooperation with OEMs, accelerate mass production, reference design development of autopilot controllers, and software-vehicle integration.</p>
+</blockquote>
+
+
 <div align="center"><h3> </h3></div>
 
 <div align="center"><h2><a name="Startups_Worldwide"></a>V. Startups Worldwide</h2></div>
@@ -1505,14 +1535,6 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
   <p>Achronix is back in the game of providing full-fledged FPGAs with a new high-end 7-nm family, joining the Gold Rush of silicon to accelerate deep learning. It aims to leverage novel design of its AI block, a new on-chip network, and use of GDDR6 memory to provide similar performance at a lower cost than larger rivals Intel and Xilinx.</p>
 </blockquote>
 
-
-<p><a name="WITINMEM"></a></p>
-
-<div align="center"><a href="http://www.witin.net/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/WITINMEM_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p>Founded in Oct. 2017, WITINMEM focuses on Low cost, low power AI chips and system solutions based on processing-in-memory technology in NOR Flash memory.</p>
 
 <div align="center"><h3> </h3></div>
 
