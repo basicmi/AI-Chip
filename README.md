@@ -307,7 +307,7 @@ Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-
 <strong><a href="https://consumer.huawei.com/en/campaign/kirin980/">Kirin 980, the World's First 7nm Process Mobile AI Chipset</a></strong></p>
 
 <blockquote>
-  <p>Introducing the Kirin 980, the world's first 7nm process mobile phone SoC chipset, the world’s first cortex-A76 architecture chipset, the world’s first dual NPU design, and the world’s first chipset to support LTE Cat.21. The Kirin 980 combines multiple technological innovations and leads the AI trend to provide users with impressive mobile performance and to create a more convenient and intelligent life.</p>
+  <p>Introducing the Kirin 980, the world's first 7nm process mobile phone SoC chipset, the world’s first cortex-A76 architecture chipset, the world’s first dual NPU design, and the world’s first chipset to support LTE Cat.21. The Kirin 980 combines multiple technological inFtions and leads the AI trend to provide users with impressive mobile performance and to create a more convenient and intelligent life.</p>
 </blockquote>
 
 <p>HiSilicon <a href="http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/">Kirin 970 Processor</a> annouced fearturing with dedicated Neural-network Processing Unit. <br />
@@ -1173,7 +1173,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 <blockquote>
  
   <p>NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
-  <a href="https://www.youtube.com/watch?v=TGQGStPoNu4">this video</a> is the description and demos of NovuMind FPGA AI Accelerator.</p>
+  Here is a <a href="https://www.novumind.com/2019/05/29/moor-insights-paper-on-novumind/">paper from Moor Insights & Strategy, a global technology analyst and research firm.</a> about NovuMind</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
