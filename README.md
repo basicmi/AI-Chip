@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#InnoGrit">InnoGrit AI</a>.</li>
 <li>Add startup <a href="#Areanna">Areanna AI</a>.</li>
 <li>Add links to <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Ambarella">Ambarella</a> and <a href="#Blacksesame">Black Sesame</a>.</li>
 <li>Add Chinese startup <a href="#WITINMEM">WITINMEM</a>.</li>
@@ -1343,6 +1344,11 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 <div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="35"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><a href="https://www.eetimes.com/document.asp?doc_id=1334982#">Startup Puts AI Core in SSDs</a></p>
+<blockquote>
+  <p>Startup InnoGrit debuted a set of three controllers for solid-state drives (SSDs), including one for data centers that embeds a neural-network accelerator. They enter a crowded market with claims of power and performance advantages over rivals.</p>
+</blockquote>
 
 <p><a href="https://innogritcorp.com/technology">Innogrit Technologies Incorporated</a> is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  </p>
 
