@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add EEMBC MLMark Benchmark in  <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 <li>Add news of <a href="#InnoGrit">InnoGrit</a>.</li>
 <li>Add startup <a href="#Areanna">Areanna AI</a>.</li>
 <li>Add links to <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Ambarella">Ambarella</a> and <a href="#Blacksesame">Black Sesame</a>.</li>
