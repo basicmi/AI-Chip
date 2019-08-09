@@ -1587,6 +1587,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
 6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
+7. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark Benchmark</a><br>
 
 <div align="center"><h3> </h3></div>
 
