@@ -1545,7 +1545,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Areanna"></a></p>
 
-<div align="center"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Areanna_logo.png" height="30"></a></div>
+<div align="center"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Areanna_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
