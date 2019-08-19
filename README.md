@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras's huge WSE AI chip</a>.</li>
 <li>Add startup <a href="#Neuroblade">Neuroblade</a>.</li>
 <li>Add EEMBC MLMark Benchmark in  <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 <li>Add news of <a href="#InnoGrit">InnoGrit</a>.</li>
@@ -979,6 +980,13 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 <div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www-wired-com.cdn.ampproject.org/c/s/www.wired.com/story/power-ai-startup-built-really-big-chip/amp">TO POWER AI, THIS STARTUP BUILT A REALLY, REALLY BIG CHIP</a></strong></p>
+
+<blockquote>
+  <p>Computer chips are usually small. The processor that powers the latest iPhones and iPads is smaller than a fingernail, and even the beefy devices used in cloud servers aren’t much bigger than a postage stamp. Then there’s a new chip from startup Cerebras: It’s bigger than an iPad all by itself.
+The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, making it likely the largest computer chip ever, and a monument to the tech industry’s hopes for artificial intelligence. Cerebras plans to offer it to tech companies trying to build smarter AI more quickly.</p>
+</blockquote>
 
 <p><a href="https://www.cerebras.net/">Cerebras</a> is notable due to its backing from Benchmark and that its founder was the CEO of SeaMicro. It appears to have <a href="https://techcrunch.com/2016/12/19/a-stealthy-startup-called-cerebras-raised-around-25-million-to-build-deep-learning-hardware/">raised $25M</a> and remains in stealth mode.</p>
 
