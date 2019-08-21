@@ -146,7 +146,11 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-<strong><a href="https://www.qualcomm.com/products/snapdragon-855-mobile-platform">Snapdragon 855 Mobile Platform</a></strong>
+<strong><a href="https://www.qualcomm.com/news/releases/2019/04/09/qualcomm-brings-power-efficient-artificial-intelligence-inference">Qualcomm Brings Power Efficient Artificial Intelligence Inference Processing to the Cloud</a></strong>
+> Qualcomm Technologies, Inc., a subsidiary of Qualcomm Incorporated (NASDAQ: QCOM), announced that it is bringing the Company’s artificial intelligence (AI) expertise to the cloud with the Qualcomm® Cloud AI 100. Built from the ground up to meet the explosive demand for AI inference processing in the cloud, the Qualcomm Cloud AI 100 utilizes the Company’s heritage in advanced signal processing and power efficiency. <br>
+
+
+<a href="https://www.qualcomm.com/products/snapdragon-855-mobile-platform">Snapdragon 855 Mobile Platform</a>
 > Our 4th generation on-device AI engine is the ultimate personal assistant for camera, voice, XR and gaming – delivering smarter, faster and more secure experiences. Utilizing all cores, it packs 3 times the power of its predecessor for stellar on-device AI capabilities.
 > Greater than 7 trillion operations per second (TOPS)
 
