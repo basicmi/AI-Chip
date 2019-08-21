@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Intel">Intel's AI chip</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras's huge WSE AI chip</a>.</li>
 <li>Add startup <a href="#Neuroblade">Neuroblade</a>.</li>
 <li>Add EEMBC MLMark Benchmark in  <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
@@ -117,12 +118,9 @@ table, th, td {
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
-<a name="Nervana"></a>
-<div align="center"><h3>Nervana</h3></div>
-Intel purchased Nervana Systems who was developing both a GPU/software approach in addition to their Nervana Engine ASIC. Comparable performance is unclear. Intel is also planning in integrating into the Phi platform via a <a href="https://www.nextplatform.com/2016/11/22/inside-intels-strategy-integrate-nervana-deep-learning-assets">Knights Crest</a>. <a href="https://www.nextplatform.com/2016/08/08/deep-learning-chip-upstart-set-take-gpus-task/">NextPlatform</a> suggested the 2017 target on 28nm may be 55 TOPS/s for some width of OP. There is a NervanaCon Intel has scheduled for December, so perhaps we'll see the first fruits then.
+<strong><a href="https://newsroom.intel.com/news/hot-chips-2019/">At Hot Chips, Intel Pushes ‘AI Everywhere’</a></strong>
+> At Hot Chips 2019, Intel revealed new details of upcoming high-performance artificial intelligence (AI) accelerators: Intel® Nervana™ neural network processors, with the NNP-T for training and the NNP-I for inference. Intel engineers also presented technical details on hybrid chip packaging technology, Intel® Optane™ DC persistent memory and chiplet technology for optical I/O.
 <br>
-<br>
-<a href="https://www.intelnervana.com/intel-nervana-neural-network-processors-nnp-redefine-ai-silicon/">Intel® Nervana™ Neural Network Processors (NNP) Redefine AI Silicon</a> > As our Intel CEO Brian Krzanich discussed earlier today at Wall Street Journal’s D.Live event, Intel will soon be shipping the world’s first family of processors designed from the ground up for artificial intelligence (AI): the <a href="https://newsroom.intel.com/editorials/intel-pioneers-new-technologies-advance-artificial-intelligence/">Intel® Nervana™ Neural Network Processor family</a> (formerly known as “Lake Crest”). This family of processors is over 3 years in the making, and on behalf of the team building it, I’d like to share a bit more insight on the motivation and design behind the world’s first neural network processor.
 
 <a name="Mobileye"></a>
 <div align="center"><h3>Mobileye EyeQ</h3></div>
