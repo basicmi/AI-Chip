@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Nvidia">NVDLA Deep Learning Inference Compiler</a>.</li>
 <li>Add news of <a href="#Intel">Intel's AI chip</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras's huge WSE AI chip</a>.</li>
 <li>Add startup <a href="#Neuroblade">Neuroblade</a>.</li>
@@ -159,6 +160,9 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
+
+<strong><a href="https://devblogs.nvidia.com/nvdla/">NVDLA Deep Learning Inference Compiler is Now Open Source</a></strong>
+> With the open-source release of NVDLA’s optimizing compiler on <a href="https://github.com/nvdla/sw/releases/tag/v1.2.0-OC">GitHub</a>, system architects and software teams now have a starting point with the complete source for the world’s first fully open software and hardware inference platform. 
 
 <strong><a href="https://www.nvidia.com/en-us/data-center/tesla-t4/">NVIDIA TESLA T4 TENSOR CORE GPU</a></strong>
 > Powering the TensorRT Hyperscale Inference Platform.
