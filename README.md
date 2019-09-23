@@ -1592,7 +1592,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Luminous"></a></p>
 
-<div align="center"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Luminous_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Luminous_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1604,7 +1604,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Efinix"></a></p>
 
-<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Efinix_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Efinix_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
