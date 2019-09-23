@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add startup <a href="#Luminous">Luminous Computing</a>.</li>
+<li>Add startup <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>.</li>
 <li>Add news of <a href="#Nvidia">NVDLA Deep Learning Inference Compiler</a>.</li>
 <li>Add news of <a href="#Intel">Intel's AI chip</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras's huge WSE AI chip</a>.</li>
@@ -77,7 +77,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a></td><td>48</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a></td><td>50</td>
   </tr>
 </table>
 
@@ -1600,6 +1600,30 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <blockquote>
   <p>Luminous Computing has developed an optical microchip that runs AI models much faster than other semiconductors while using less power.</p>
+</blockquote>
+
+<p><a name="Efinix"></a></p>
+
+<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Efinix_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.zdnet.com/article/chip-startup-efinix-hopes-to-bootstrap-ai-efforts-in-iot/">Chip startup Efinix hopes to bootstrap AI efforts in IoT</a></strong></p>
+
+<blockquote>
+  <p>Six-year-old startup Efinix has created an intriguing twist on the FPGA technology dominated by Intel and Xiliinx; the company hopes its energy-efficient chips will bootstrap the market for embedded AI in the Internet of Things.</p>
+</blockquote>
+
+<p><a name="AIstorm"></a></p>
+
+<div align="center"><a href="https://aistorm.ai"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AIstorm_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://venturebeat.com/2019/02/11/aistorm-raises-13-2-million-for-ai-edge-computing-chips/">AIStorm raises $13.2 million for AI edge computing chips</a></strong></p>
+
+<blockquote>
+  <p>David Schie, a former senior executive at Maxim, Micrel, and Semtech, thinks both markets are ripe for disruption. He — along with WSI, Toshiba, and Arm veterans Robert Barker, Andreas Sibrai, and Cesar Matias — in 2011 cofounded AIStorm, a San Jose-based artificial intelligence (AI) startup that develops chipsets that can directly process data from wearables, handsets, automotive devices, smart speakers, and other internet of things (IoT) devices. </p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
