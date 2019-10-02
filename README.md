@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Alibaba">Alibaba's cloud inference chip Hanguang 800</a>.</li>
 <li>Add startup <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>.</li>
 <li>Add news of <a href="#Nvidia">NVDLA Deep Learning Inference Compiler</a>.</li>
 <li>Add news of <a href="#Intel">Intel's AI chip</a>.</li>
@@ -66,7 +67,7 @@ table, th, td {
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a></td><td>15</td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a></td><td>15</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a></td><td>15</td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
@@ -98,7 +99,7 @@ table, th, td {
   </tr>
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>, <a href="#Marvell">Marvell</a>, <a href="#Achronix">Achronix</a></td>  
-    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI_Cloud">HUAWEI Cloud</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a>, <a href="#Enflame">Enflame</a></td>
+    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a>, <a href="#Enflame">Enflame</a></td>
     <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Deep_Scale">DeepScale</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#LG">LG</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#WITINMEM">WITINMEM</a>,  <a href="#Ambarella">Ambarella</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a>, <a href="#Areanna">Areanna AI</a>,  <a href="#Neuroblade">Neuroblade</a></td>
   </tr>
 </table>
@@ -493,31 +494,10 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <div align="center"><h3> </h3></div>
 
 <p>
-<strong><a href="https://www.zdnet.com/article/alibaba-to-launch-own-ai-chip-next-year/">Alibaba to launch own AI chip next year</a></strong></p>
+<strong><a href="https://medium.com/syncedreview/alibabas-new-ai-chip-can-process-nearly-80k-images-per-second-63412dec22a3">Alibaba’s New AI Chip Can Process Nearly 80K Images Per Second</a></strong></p>
 
 <blockquote>
-  <p>Chinese internet giant sets up a semiconductor company and unveils plans to release its own artificial intelligence processor, as it looks to boost support for its cloud and Internet of Things businesses.</p>
-</blockquote>
-
-<p><a href="https://technode.com/2018/04/20/alibaba-npu/">Alibaba is making its own neural network chip</a></p>
-
-<blockquote>
-  <p>Alibaba is developing its own neural network chip, the Ali-NPU, which will be used in AI applications, such as image video analysis, machine learning, and other scenarios.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Alibaba_Cloud"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alibaba_Cloud_logo.png" height="30"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p>
-<a href="https://cn.aliyun.com/product/ecs/fpga">FPGA Cloud server</a> (Beta) is an computing instance of a field-programmable gate array (FPGA) that allows users to easily create FPGA design in minutes and create custom, dedicated hardware accelerators based on the Alibaba Cloud Elastic Computing Framework. </p>
-
-<blockquote>
-  <p>深度学习（Deep Learning）是一种多层计算模型，可以对复杂输入进行建模，在图像分类、语音识别、自然语言处理中取得了成果，FPGA 实例由于其细粒度并行的硬件特性，非常适合小批量数据的深度学习预测过程，以低功耗、低延迟、高性能著称，以 AlexNet 模型为例，使用 FPGA计算实例进行图片类别预测，速度比仅用CPU的普通实例快 8~15 倍。</p>
+  <p>At the Alibaba Cloud (Aliyun) Apsara Conference 2019, Pingtouge unveiled its first AI dedicated processor for cloud-based large-scale AI inferencing. The Hanguang 800 is the first semiconductor product in Alibaba’s 20-year history.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -555,23 +535,7 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 <div align="center"><h3> </h3></div>
 
 <p><br />
-<a name="Baidu_Cloud"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_cloud_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><br />
-<a href="https://cloud.baidu.com/product/fpga.html">FPGA Cloud Compute</a> is open for beta test.</p>
-
-<blockquote>
-  <p>在百度内部，FPGA从2013年开始就应用在许多典型的深度学习模型中，如DNN，RNN，CNN，LSTM等，涵盖了语音识别，自然语言处理，推荐算法，图像识别等广泛的应用领域。百度FPGA云服务器中开放了基于FPGA的深度卷积神经网络加速服务，单卡提供3Tops的定点计算能力，支持典型深度卷积网络算子，如卷积、逆卷积、池化、拼接、切割等，有效加速典型网络结构如VggNet、GoogLeNet、ResNet等。我们基于FPGA的深度学习硬件，深度定制优化了主流深度学习平台如caffe等，用户可以直接将深度学习业务切换到FPGA平台，而无需考虑底层硬件细节。</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><br />
-<a name="HUAWEI_Cloud"></a></p>
+<a name="HUAWEI"></a></p>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="60"></div>
 
