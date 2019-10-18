@@ -4,7 +4,7 @@
 <div align="center"><h1> </h1></div>
 <div align="center"><a href="http://mp.weixin.qq.com/s/DezA7rhV3ng63p8snBH4xw"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/walle_s.jpg" height="80"></a></div>
 <br>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chips.png"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chip_Landscape_MidRes.png"></div>
 <div align="center"><h1> </h1></div>
  
 <div align="center"><h2>Latest updates</h2></div>
