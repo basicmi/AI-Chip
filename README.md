@@ -11,6 +11,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Rain">Rain Neuromorphics</a> and <a href="#ABR">Applied Brain Research</a>.</li>
 <li>Add startup <a href="#Untether">Untether AI</a> and <a href="#GrAI">GrAI Matter Lab</a>.</li>
 <li>Add startup <a href="#SiMa">SiMa.ai</a>.</li>
 <li>Remove DeepScale who was acquired by Tesla.</li> 
@@ -80,7 +81,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a></td><td>52</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Thinci">ThinCI</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#KAIST_DNPU">KAIST DNPU</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a></td><td>54</td>
   </tr>
 </table>
 
@@ -1608,7 +1609,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 </blockquote>
 
 
-<p><a name="Untether"></a></p>
+<p><a name="GrAI"></a></p>
 
 <div align="center"><a href="https://www.graimatterlabs.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GrAI_logo.png" height="40"></a></div>
 
@@ -1618,6 +1619,28 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <blockquote>
   <p>GrAI Matter Labs (aka GML), a neuromorphic computing pioneer today revealed NeuronFlow – a new programmable processor technology – and announced an early access program to its GrAIFlow software development kit.</p>
+</blockquote>
+
+<p><a name="Rain"></a></p>
+
+<div align="center"><a href="http://rain-neuromorphics.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rain_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.crunchbase.com/organization/rain-neuromorphics">Rain Neuromorphics on Crunchbase</a></strong></p>
+<blockquote>
+  <p>We build artificial intelligence processors, inspired by the brain. Our mission is to enable brain-scale intelligence.</p>
+</blockquote>
+
+<p><a name="ABR"></a></p>
+
+<div align="center"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ABR_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.crunchbase.com/organization/applied-brain-research">Applied Brain Research on Crunchbase</a></strong></p>
+<blockquote>
+  <p>ABR makes the world's most advanced neuromoprhic compiler, runtime and libraries for the emerging space of neuromorphic computing.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
