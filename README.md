@@ -11,6 +11,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Check out <a href="#https://mlperf.org/inference-results/">MLPerf Inference v0.5 Results</a>.</li>
 <li>Add startup <a href="#Rain">Rain Neuromorphics</a> and <a href="#ABR">Applied Brain Research</a>.</li>
 <li>Add startup <a href="#Untether">Untether AI</a> and <a href="#GrAI">GrAI Matter Lab</a>.</li>
 <li>Add startup <a href="#SiMa">SiMa.ai</a>.</li>
