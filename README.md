@@ -762,7 +762,7 @@ ARM also provide a open source <a href="https://developer.arm.com/technologies/c
 
 <p><a name="Cambricon"></a></p>
 
-<div align="center"><a href="http://www.cambricon.com/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.cambricon.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cambricon_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
