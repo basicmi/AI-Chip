@@ -1539,7 +1539,7 @@ In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/prelim
 
 <p><a name="Neuroblade"></a></p>
 
-<div align="center"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Neuroblade_logo.png" height="30"></a></div>
+<div align="center"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Neuroblade_logo.png" height="120"></a></div>
 
 <div align="center"><h3> </h3></div>
 
