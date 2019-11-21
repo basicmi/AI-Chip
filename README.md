@@ -138,7 +138,10 @@ table, th, td {
 <a name="Movidius"></a>
 <div align="center"><h3>Movidius</h3></div>
 <a href="https://newsroom.intel.com/news/new-intel-vision-accelerator-solutions-speed-deep-learning-artificial-intelligence-edge-devices/">New Intel Vision Accelerator Solutions Speed Deep Learning and Artificial Intelligence on Edge Devices</a> 
-> Today, Intel unveiled its family of Intel® Vision Accelerator Design Products targeted at artificial intelligence (AI) inference and analytics performance on edge devices, where data originates and is acted upon. The new acceleration solutions come in two forms: one that features an array of Intel® Movidius™ vision processors and one built on the high-performance Intel® Arria® 10 FPGA. 
+
+<blockquote>
+  <p>Today, Intel unveiled its family of Intel® Vision Accelerator Design Products targeted at artificial intelligence (AI) inference and analytics performance on edge devices, where data originates and is acted upon. The new acceleration solutions come in two forms: one that features an array of Intel® Movidius™ vision processors and one built on the high-performance Intel® Arria® 10 FPGA. </p>
+</blockquote>
 
 <a name="Intel_FPGA"></a>
 <div align="center"><h3>FPGA</h3></div>
@@ -147,7 +150,9 @@ Intel <a href="https://www.altera.com/products/design-software/embedded-software
 <a name="Loihi"></a>
 <div align="center"><h3>Loihi</h3></div>
 Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/">First-of-Its-Kind Self-Learning Chip</a>.
-> The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations.
+<blockquote>
+  <p>The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations. </p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 <a name="Qualcomm"></a>
@@ -155,12 +160,15 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <div align="center"><h3> </h3></div>
 
 <strong><a href="https://www.qualcomm.com/news/releases/2019/04/09/qualcomm-brings-power-efficient-artificial-intelligence-inference">Qualcomm Brings Power Efficient Artificial Intelligence Inference Processing to the Cloud</a></strong>
-> Qualcomm Technologies, Inc., a subsidiary of Qualcomm Incorporated (NASDAQ: QCOM), announced that it is bringing the Company’s artificial intelligence (AI) expertise to the cloud with the Qualcomm® Cloud AI 100. Built from the ground up to meet the explosive demand for AI inference processing in the cloud, the Qualcomm Cloud AI 100 utilizes the Company’s heritage in advanced signal processing and power efficiency. <br>
+<blockquote>
+  <p>Qualcomm Technologies, Inc., a subsidiary of Qualcomm Incorporated (NASDAQ: QCOM), announced that it is bringing the Company’s artificial intelligence (AI) expertise to the cloud with the Qualcomm® Cloud AI 100. Built from the ground up to meet the explosive demand for AI inference processing in the cloud, the Qualcomm Cloud AI 100 utilizes the Company’s heritage in advanced signal processing and power efficiency. </p>
+</blockquote>
 
 
 <a href="https://www.qualcomm.com/products/snapdragon-855-mobile-platform">Snapdragon 855 Mobile Platform</a>
-> Our 4th generation on-device AI engine is the ultimate personal assistant for camera, voice, XR and gaming – delivering smarter, faster and more secure experiences. Utilizing all cores, it packs 3 times the power of its predecessor for stellar on-device AI capabilities.
-> Greater than 7 trillion operations per second (TOPS)
+<blockquote>
+  <p>Our 4th generation on-device AI engine is the ultimate personal assistant for camera, voice, XR and gaming – delivering smarter, faster and more secure experiences. Utilizing all cores, it packs 3 times the power of its predecessor for stellar on-device AI capabilities... Greater than 7 trillion operations per second (TOPS)</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 <a name="Nvidia"></a>
