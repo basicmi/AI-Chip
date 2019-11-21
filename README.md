@@ -1,4 +1,5 @@
 <div align="center"><h1>AI Chip (ICs and IPs)</h1></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI-chips.png"></div>
 <div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a>(Linkedin)</div>
 <div align="center"><strong>Welcome to My Weichat Blog <a href="https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw">StarryHeavensAbove for more AI chip related articles</a></strong></div>
 <div align="center"><h1> </h1></div>
