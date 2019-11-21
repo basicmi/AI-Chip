@@ -4,7 +4,7 @@
 <div align="center"><strong>Welcome to My Weichat Blog <a href="https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw">StarryHeavensAbove for more AI chip related articles</a></strong></div>
 <div align="center"><h1> </h1></div>
 <br>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chip_Landscape_LowRes.jpg"></div>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chip_Landscape_LowRes.png"></div>
 <div align="center"><h1> </h1></div>
  
 <div align="center"><h2>Latest updates</h2></div>
