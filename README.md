@@ -127,11 +127,9 @@ table, th, td {
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
-<strong><a href="https://www.intel.ai/nervana-nnp/">Intel® Nervana™ Neural Network processors deliver the scale and efficiency demanded by deep learning model evolution</a></strong>
-
-<strong><a href="https://newsroom.intel.com/news/hot-chips-2019/">At Hot Chips, Intel Pushes ‘AI Everywhere’</a></strong>
-> At Hot Chips 2019, Intel revealed new details of upcoming high-performance artificial intelligence (AI) accelerators: Intel® Nervana™ neural network processors, with the NNP-T for training and the NNP-I for inference. Intel engineers also presented technical details on hybrid chip packaging technology, Intel® Optane™ DC persistent memory and chiplet technology for optical I/O.
-<br>
+<a name="Nervana"></a>
+<div align="center"><h3>Nervana</h3></div>
+<strong><a href="https://www.intel.ai/nervana-nnp/">Intel® Nervana™ Neural Network processors</a></strong>
 
 <a name="Mobileye"></a>
 <div align="center"><h3>Mobileye EyeQ</h3></div>
@@ -139,9 +137,8 @@ table, th, td {
 
 <a name="Movidius"></a>
 <div align="center"><h3>Movidius</h3></div>
-<a href="https://pdfs.semanticscholar.org/32d5/405ac92a13d7f38e2313574dfd6238125a94.pdf">MYRIAD 2</a> IS A MULTICORE, ALWAYS-ON SYSTEM ON CHIP THAT SUPPORTS COMPUTATIONAL IMAGING AND VISUAL AWARENESS FOR MOBILE, WEARABLE, AND EMBEDDED APPLICATIONS. THE VISION PROCESSING UNIT INCORPORATES PARALLELISM, INSTRUCTION SET ARCHITECTURE, AND MICROARCHITECTURAL FEATURES TO PROVIDE HIGHLY SUSTAINABLE PERFORMANCE EFFICIENCY ACROSS A RANGE OF COMPUTATIONAL IMAGING AND COMPUTER VISION APPLICATIONS, INCLUDING THOSE WITH LOW LATENCY REQUIREMENTS ON THE ORDER OF MILLISECONDS.
-
-<a href="https://www.movidius.com/myriadx">Myriad™ X</a> is the first VPU to feature the Neural Compute Engine - a dedicated hardware accelerator for running on-device deep neural network applications. Interfacing directly with other key components via the intelligent memory fabric, the Neural Compute Engine is able to deliver industry leading performance per Watt without encountering common data flow bottlenecks encountered by other architectures.
+<a href="https://newsroom.intel.com/news/new-intel-vision-accelerator-solutions-speed-deep-learning-artificial-intelligence-edge-devices/">New Intel Vision Accelerator Solutions Speed Deep Learning and Artificial Intelligence on Edge Devices</a> 
+> Today, Intel unveiled its family of Intel® Vision Accelerator Design Products targeted at artificial intelligence (AI) inference and analytics performance on edge devices, where data originates and is acted upon. The new acceleration solutions come in two forms: one that features an array of Intel® Movidius™ vision processors and one built on the high-performance Intel® Arria® 10 FPGA. 
 
 <a name="Intel_FPGA"></a>
 <div align="center"><h3>FPGA</h3></div>
