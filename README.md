@@ -11,6 +11,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a>.</li>
 <li>Thinci is now <a href="#Blaize">Blaize</a></li>
 <li>Check out <a href="https://mlperf.org/inference-results/">MLPerf Inference v0.5 Results</a>.</li>
 <li>Add startup <a href="#Rain">Rain Neuromorphics</a> and <a href="#ABR">Applied Brain Research</a>.</li>
@@ -957,21 +958,22 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www-wired-com.cdn.ampproject.org/c/s/www.wired.com/story/power-ai-startup-built-really-big-chip/amp">TO POWER AI, THIS STARTUP BUILT A REALLY, REALLY BIG CHIP</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2019/11/19/the-cerebras-cs-1-computes-deep-learning-ai-problems-by-being-bigger-bigger-and-bigger-than-any-other-chip/">The Cerebras CS-1 computes deep learning AI problems by being bigger, bigger, and bigger than any other chip</a></strong></p>
+<blockquote>
+  <p>Today, the company announced the launch of its end-user compute product, the Cerebras CS-1, and also announced its first customer of Argonne National Laboratory.</p>
+</blockquote>
 
+<p><strong><a href="https://www-wired-com.cdn.ampproject.org/c/s/www.wired.com/story/power-ai-startup-built-really-big-chip/amp">TO POWER AI, THIS STARTUP BUILT A REALLY, REALLY BIG CHIP</a></strong></p>
 <blockquote>
   <p>New artificial intelligence company Cerebras Systems is unveiling the largest semiconductor chip ever built.
 The Cerebras Wafer Scale Engine has 1.2 trillion transistors, the basic on-off electronic switches that are the building blocks of silicon chips. Intel’s first 4004 processor in 1971 had 2,300 transistors, and a recent Advanced Micro Devices processor has 32 billion transistors.</p>
 </blockquote>
 
 <p><strong><a href="https://venturebeat.com/2019/08/19/cerebras-systems-unveils-a-record-1-2-trillion-transistor-chip-for-ai/">Cerebras Systems unveils a record 1.2 trillion transistor chip for AI</a></strong></p>
-
 <blockquote>
   <p>Computer chips are usually small. The processor that powers the latest iPhones and iPads is smaller than a fingernail, and even the beefy devices used in cloud servers aren’t much bigger than a postage stamp. Then there’s a new chip from startup Cerebras: It’s bigger than an iPad all by itself.
 The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, making it likely the largest computer chip ever, and a monument to the tech industry’s hopes for artificial intelligence. Cerebras plans to offer it to tech companies trying to build smarter AI more quickly.</p>
 </blockquote>
-
-<p><a href="https://www.cerebras.net/">Cerebras</a> is notable due to its backing from Benchmark and that its founder was the CEO of SeaMicro. It appears to have <a href="https://techcrunch.com/2016/12/19/a-stealthy-startup-called-cerebras-raised-around-25-million-to-build-deep-learning-hardware/">raised $25M</a> and remains in stealth mode.</p>
 
 <div align="center"><h3> </h3></div>
 
@@ -988,14 +990,16 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <p><a name="Graphcore"></a></p>
 
+<p><strong><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></strong></p>
+<blockquote>
+  <p>Today we are very excited to share details of our collaboration with Microsoft, announcing preview of Graphcore® Intelligence Processing Units (IPUs) on Microsoft Azure. This is the first time a major public cloud vendor is offering Graphcore IPUs which are built from the ground up to support next generation machine learning. It’s a landmark moment for Graphcore and is testament to the maturity of our patented IPU technology, both of our IPU hardware and of our Poplar® software stack.</p>
+</blockquote>
+
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.graphcore.ai/">Graphcore</a> raised $30M of Series-A late last year to support the development of their Intelligence Processing Unit, or IPU. Resently, co-founder and Chief Technology Officer, Simon Knowles, was invited to give <a href="https://youtu.be/T8DvHnb3Y9g">a talk</a> at the 3rd Research and Applied AI Summit (RAAIS) in London, showing <a href="https://www.graphcore.ai/posts/how-to-build-a-processor-for-machine-intelligence-part-2">interesting ideas</a> behind their processor. <br><br>
-In a resent post, Graphcore shows <a href="https://www.graphcore.ai/posts/preliminary-ipu-benchmarks-providing-previously-unseen-performance-for-a-range-of-machine-learning-applications">"Preliminary IPU Benchmarks"</a>  <br><br></p>
 
-<p><strong>Simon Knowles, Graphcore CTO, spoke at the Scaled Machine Learning Conference at Stanford</strong> in March about '<a href="https://www.graphcore.ai/posts/video-scaling-throughput-processors-for-machine-intelligence">Scaling Throughput Processors for Machine Intelligence</a>'. </p>
 
 <p><a href="https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g">解密又一个xPU：Graphcore的IPU</a> give some analysis on its IPU architecture.</p>
 
