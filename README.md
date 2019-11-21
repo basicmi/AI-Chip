@@ -11,7 +11,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a>.</li>
+<li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
 <li>Thinci is now <a href="#Blaize">Blaize</a></li>
 <li>Check out <a href="https://mlperf.org/inference-results/">MLPerf Inference v0.5 Results</a>.</li>
 <li>Add startup <a href="#Rain">Rain Neuromorphics</a> and <a href="#ABR">Applied Brain Research</a>.</li>
@@ -126,6 +126,8 @@ table, th, td {
 <a name="Intel"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
+
+<strong><a href="https://www.intel.ai/nervana-nnp/">Intel® Nervana™ Neural Network processors deliver the scale and efficiency demanded by deep learning model evolution</a></strong>
 
 <strong><a href="https://newsroom.intel.com/news/hot-chips-2019/">At Hot Chips, Intel Pushes ‘AI Everywhere’</a></strong>
 > At Hot Chips 2019, Intel revealed new details of upcoming high-performance artificial intelligence (AI) accelerators: Intel® Nervana™ neural network processors, with the NNP-T for training and the NNP-I for inference. Intel engineers also presented technical details on hybrid chip packaging technology, Intel® Optane™ DC persistent memory and chiplet technology for optical I/O.
