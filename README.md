@@ -990,12 +990,13 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <p><a name="Graphcore"></a></p>
 
+<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
+
 <p><strong><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></strong></p>
 <blockquote>
   <p>Today we are very excited to share details of our collaboration with Microsoft, announcing preview of Graphcore® Intelligence Processing Units (IPUs) on Microsoft Azure. This is the first time a major public cloud vendor is offering Graphcore IPUs which are built from the ground up to support next generation machine learning. It’s a landmark moment for Graphcore and is testament to the maturity of our patented IPU technology, both of our IPU hardware and of our Poplar® software stack.</p>
 </blockquote>
 
-<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
 
