@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Updates of <a href="#Aimotive">AImotive</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
 <li>Thinci is now <a href="#Blaize">Blaize</a></li>
 <li>Check out <a href="https://mlperf.org/inference-results/">MLPerf Inference v0.5 Results</a>.</li>
@@ -1128,14 +1129,11 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.bdti.com/InsideDSP/2017/07/27/AImotive">This BDTi artical</a> shows some information of aiWare IP of <a href="https://aimotive.com/what-we-do/#aiware">Aimotive</a> .</p>
+<p><a href="https://aimotive.com/news/content/1223">aiWare3 Hardware IP Helps Drive Autonomous Vehicles To Production.</p>
 
 <blockquote>
-  <p>Speaking of chips, AImotive and partner VeriSilicon are in the process of designing a 22 nm FD-SOI test chip, which is forecast to come out of GlobalFoundries' fab in Q1 2018 (Figure 4). It will feature a 1 TMAC/sec aiWare core, consuming approximately 25 mm2 of silicon area; a Vivante VIP8000-derivative processor core will inhabit the other half of the die, and between 2-4 GBytes of DDR4 SDRAM will also be included in the multi-die package. The convolution-tailored LAM in this test chip, according to Feher, will have the following specifications (based on preliminary synthesis results):
-  2,048 8x8 MACs
-  Logic area (including input/output buffering logic, LAM control and MACs): 3.45mm2
-  Memory (on-chip buffer): in the range of 5-25mm2 depending on configuration (10-50 Mbits).
-  Another interesting activity of Aimotive is <a href="https://www.khronos.org/nnef">Neural Network Exchange Format (NNEF)</a>.</p>
+  <p>Latest technology enables scalable, low-power automotive inference engines with >50 TMAC/s NN processing power.</p>
+  <p>MOUNTAIN VIEW, Calif., October 30, 2018 – AImotive™, the global provider of full stack, vision-first self-driving technology, today announced the release of aiWare3™, the company’s 3rd generation, scalable, low-power, hardware Neural Network (NN) acceleration core. </p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
