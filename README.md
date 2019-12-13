@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Enflame">Enflame's DTU AI training chip</a>.</li>
 <li>Updates of <a href="#Aimotive">AImotive</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
 <li>Thinci is now <a href="#Blaize">Blaize</a></li>
@@ -909,6 +910,12 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <blockquote>
   <p>Enflame Tech is a startup company based in Shanghai, China. It was established in March 2018 with two R&D centers in Shanghai and Beijing. Enflame is developing the deep learning accelerator SoCs and software stack, targeting AI training platform solutions for the Cloud service provider and the data centers. </p>
+</blockquote>
+
+<p><strong><a href="https://www.hpcwire.com/off-the-wire/enflame-technology-announces-cloudblazer-with-dtu-chip-on-globalfoundries-12lp-finfet-platform-for-data-center-training/">Enflame Technology Announces CloudBlazer with DTU Chip on GLOBALFOUNDRIES 12LP FinFET Platform for Data Center Training</a></strong></p>
+
+<blockquote>
+  <p>SHANGHAI, China, Dec. 12, 2019 – In conjunction with the launch of Enflame’s CloudBlazer T10, Enflame Technology and GLOBALFOUNDRIES (GF) today announced a new high-performing deep learning accelerator solution for data center training. Designed to accelerate deep learning deployment, the accelerator’s core Deep Thinking Unit (DTU) is based on GF’s 12LP FinFET platform with 2.5D packaging to deliver fast, power-efficient data processing for cloud-based AI training platforms.</p>
 </blockquote>
 
 <p><a name="EEasy"></a></p>
