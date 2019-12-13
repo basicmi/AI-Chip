@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#Enflame">Enflame's DTU AI training chip</a>.</li>
+<li>Add news of <a href="#Enflame">Enflame's DTU data center training chip</a>.</li>
 <li>Updates of <a href="#Aimotive">AImotive</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
 <li>Thinci is now <a href="#Blaize">Blaize</a></li>
