@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Brainchip">BrainChip</a> and <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add news of <a href="#Enflame">Enflame's DTU data center training chip</a>.</li>
 <li>Updates of <a href="#Aimotive">AImotive</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
@@ -1126,6 +1127,11 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
+<p><a href="https://www.design-reuse.com/news/47498/brainchip-akida-neural-processing-ip-tinyml-summit-2020.html">BrainChip Showcases Vision and Learning Capabilities of its Akida Neural Processing IP and Device at tinyML Summit 2020</a> </p>
+<blockquote>
+  <p>BrainChip Holdings Ltd. (ASX: BRN), a leading provider of ultra-low power, high-performance edge AI technology, today announced that it will present its revolutionary new breed of neuromorphic processing IP and Device in two sessions at the tinyML Summit at the Samsung Strategy & Innovation Center in San Jose, California February 12-13.</p>
+</blockquote>
+
 <p>BrainChip Inc (CA. USA) was the first company to offer a <a href="http://www.brainchipinc.com/technology">Spiking Neural processor</a>, which was patented in 2008 (patent US 8,250,011). The current device, called the BrainChip Accelerator is a chip intended for rapid learning. It is offered as part of the BrainChip Studio software. BrainChip is a publicly listed company as part of BrainChip Holdings Ltd.</p>
 
 <div align="center"><h3> </h3></div>
@@ -1385,10 +1391,10 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.hpcwire.com/2018/05/23/silicon-startup-raises-prodigy-for-hyperscale-ai-workloads/">Silicon Startup Raises ‘Prodigy’ for Hyperscale AI Workloads</a></p>
+<p><a href="https://www.hpcwire.com/off-the-wire/tachyum-running-apache-is-a-key-milestone-for-prodigy-universal-processor-software-stack/">Tachyum Running Apache is a Key Milestone for Prodigy Universal Processor Software Stack</a></p>
 
 <blockquote>
-  <p>Silicon Valley-based Tachyum Inc., which has been emerging from stealth over the last year and a half, is unveiling a processor codenamed “Prodigy,” said to combine features of both CPUs and GPUs in a way that offers a purported 10x performance-per-watt advantage over current technologies. The company is primarily focused on the hyperscale datacenter market, but has aspirations to support brainier applications, noting that “Prodigy will enable a super-computational system for real-time full capacity human brain neural network simulation by 2020.”</p>
+  <p>Semiconductor startup Tachyum Inc. today announced that it has completed another critical stage in software development by successfully achieving an Apache web server port to Prodigy Universal Processor Instruction Set Architecture (ISA). This latest milestone by Tachyum’s software team brings the company’s Prodigy Universal Processor one step closer to being customer-ready in anticipation of its commercial launch in 2021.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
