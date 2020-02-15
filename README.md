@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#etacompute">Eta Compute</a>.</li>
 <li>Add news of <a href="#Brainchip">BrainChip</a> and <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add news of <a href="#Enflame">Enflame's DTU data center training chip</a>.</li>
 <li>Updates of <a href="#Aimotive">AImotive</a>.</li>
@@ -49,17 +50,6 @@
 <li>Add Chinese startup <a href="#Enflame">Enflame</a>.</li>
 <li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
 <li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
-<li>Add news of <a href="#Horizon_Robotics">Horizon Robotics</a>.</li>
-<li>Add startup <a href="#Anaflash">Anaflash</a>.</li>
-<li>Add Chinese startup <a href="#Canaan">Canaan</a>.</li>
-<li>Add startup <a href="#Cornami">Cornami</a>.</li>
-<li>Add startup <a href="#PFN">Preferred Network</a>.</li>
-<li>Add news of <a href="#MediaTek">Mediatek's Helio P90</a>.</li>
-<li>Add <a href="#Reference">"White Paper on AI Chip Technologies 2018" in Reference</a>.</li>
-<li>Add news of <a href="#Reference">MLPerf in Reference</a>.</li>
-<li>Add startup <a href="#Flexlogix">Flex Logix</a>.</li>
-<li>Add news of <a href="#Qualcomm">Qualcomm's Snapdragon 855 Mobile Platform</a>.</li>
-<li>Add startup <a href="#aiCTX">aiCTX</a>.</li>
 </ul>
 </font>
 
@@ -1531,8 +1521,12 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://spectrum.ieee.org/tech-talk/semiconductors/processors/eta-compute-debuts-spiking-neural-network-chip-for-edge-ai">Eta Compute Debuts Spiking Neural Network Chip for Edge AI</a></p>
+<p><a href="https://spectrum.ieee.org/tech-talk/semiconductors/processors/lowpower-ai-startup-eta-compute-delivers-first-commercial-chips">Low-Power AI Startup Eta Compute Delivers First Commercial Chips</a></p>
+<blockquote>
+  <p>The firm pivoted away from riskier spiking neural networks using a new power management scheme</p>
+</blockquote>
 
+<p><a href="https://spectrum.ieee.org/tech-talk/semiconductors/processors/eta-compute-debuts-spiking-neural-network-chip-for-edge-ai">Eta Compute Debuts Spiking Neural Network Chip for Edge AI</a></p>
 <blockquote>
   <p>Chip can learn on its own and inference at 100-microwatt scale, says company at Arm TechCon.</p>
 </blockquote>
