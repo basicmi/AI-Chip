@@ -1683,7 +1683,7 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <p><a name="DinoplusAI"></a></p>
 
-<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/DinoplusAI_logo.png" height="40"></a></div>
+<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/DinoplusAI_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
