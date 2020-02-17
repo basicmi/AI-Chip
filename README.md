@@ -1670,7 +1670,12 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://venturebeat.com/2020/02/12/xmos-unveils-xcore-ai-a-powerful-chip-designed-for-ai-processing-at-the-edge/">XMOS unveils Xcore.ai, a powerful chip designed for AI processing at the edge</a></strong></p>
+<p><strong><a href="https://www.eetimes.com/xmos-adapts-xcore-into-aiot-crossover-processor/">XMOS adapts Xcore into AIoT ‘crossover processor’</a></strong></p>
+<blockquote>
+  <p>EE Times exclusive! The new chip targets AI-powered voice interfaces in IoT devices — “the most important AI workload at the endpoint.”</p>
+</blockquote>
+
+<p><a href="https://venturebeat.com/2020/02/12/xmos-unveils-xcore-ai-a-powerful-chip-designed-for-ai-processing-at-the-edge/">XMOS unveils Xcore.ai, a powerful chip designed for AI processing at the edge</a></p>
 <blockquote>
   <p>The latest xcore.ai is a crossover chip designed to deliver high-performance AI, digital signal processing, control, and input/output in a single device with prices from $1.</p>
 </blockquote>
