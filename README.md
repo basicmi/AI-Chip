@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#Sambanova">SambaNova</a>.</li>
 <li>Add startup <a href="#DinoplusAI">DinoPlusAI</a>.</li>
 <li>Add startup <a href="#Xmos">XMOS</a>.</li>
 <li>Add news of <a href="#etacompute">Eta Compute</a>.</li>
@@ -1001,7 +1002,13 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
-<p><strong><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2020/02/24/graphcore-the-ai-chipmaker-raises-another-150m-at-a-1-95b-valuation/">Graphcore, the AI chipmaker, raises another $150M at a $1.95B valuation</a></strong></p>
+<blockquote>
+  <p>Graphcore, the Bristol-based startup that designs processors specifically for artificial intelligence applications, announced it has raised another $150 million in funding for R&D and to continue bringing on new customers. It’s valuation is now $1.95 billion.</p>
+</blockquote>
+
+
+<p><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></p>
 <blockquote>
   <p>Today we are very excited to share details of our collaboration with Microsoft, announcing preview of Graphcore® Intelligence Processing Units (IPUs) on Microsoft Azure. This is the first time a major public cloud vendor is offering Graphcore IPUs which are built from the ground up to support next generation machine learning. It’s a landmark moment for Graphcore and is testament to the maturity of our patented IPU technology, both of our IPU hardware and of our Poplar® software stack.</p>
 </blockquote>
@@ -1274,6 +1281,11 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 <div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://venturebeat.com/2020/02/25/sambanova-systems-raises-250-million-for-software-defined-ai-hardware/">SambaNova Systems raises $250 million for software-defined AI hardware</a></strong></p>
+<blockquote>
+  <p>The infrastructure required to handle AI workloads is often as complex as it is sprawling, but a cottage industry of startups has emerged whose focus is developing solutions for end customers. SambaNova Systems is one such startup — the Palo Alto, California-based firm, which was founded in 2017 by Rodrigo Liang and Stanford Professors Kunle Olukotun and Chris Ré, provides systems that run AI and data-intensive apps from the datacenter to the edge. In a reflection of investors’ ravenous appetite for the market, it today announced that it’s raised $250 million in series C funding.</p>
+</blockquote>
 
 <p>According to the linkedin page of its CEO, former SPARC developer in ORACLE, <a href="https://sambanovasystems.com/">SambaNova Systems</a> is a computing startup focused on building machine learning and big data analytics platforms. SambaNova's software-defined analytics platform enables optimum performance for any ML training, inference or analytics models.<br><br>
 <a href="https://techcrunch.com/2018/03/15/the-red-hot-ai-chip-space-gets-even-hotter-with-56m-for-a-startup-called-sambanova/">The red-hot AI hardware space gets even hotter with $56M for a startup called SambaNova Systems</a></p>
