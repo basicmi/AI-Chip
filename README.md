@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#Sambanova">SambaNova</a>.</li>
+<li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#DinoplusAI">DinoPlusAI</a>.</li>
 <li>Add startup <a href="#Xmos">XMOS</a>.</li>
 <li>Add news of <a href="#etacompute">Eta Compute</a>.</li>
@@ -1009,16 +1009,14 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 
 <p><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></p>
-<blockquote>
-  <p>Today we are very excited to share details of our collaboration with Microsoft, announcing preview of Graphcore® Intelligence Processing Units (IPUs) on Microsoft Azure. This is the first time a major public cloud vendor is offering Graphcore IPUs which are built from the ground up to support next generation machine learning. It’s a landmark moment for Graphcore and is testament to the maturity of our patented IPU technology, both of our IPU hardware and of our Poplar® software stack.</p>
-</blockquote>
-
 
 <div align="center"><h3> </h3></div>
 
-
-
 <p><a href="https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g">解密又一个xPU：Graphcore的IPU</a> give some analysis on its IPU architecture.</p>
+<p><a href="https://mp.weixin.qq.com/s/AMuqeaShqEv3DnibH3scEA">Graphcore AI芯片：更多分析</a> More analysis.</p>
+<p><a href="https://mp.weixin.qq.com/s/qP0zsSA7SQWXDqWGEAXmOg">深度剖析AI芯片初创公司Graphcore的IPU</a> In-depth analysis after more information was disclosed.</p>
+
+
 
 <div align="center"><h3> </h3></div>
 
