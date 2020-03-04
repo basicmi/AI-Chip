@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Furiosa">Furiosa AI</a>.</li>
 <li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#DinoplusAI">DinoPlusAI</a>.</li>
 <li>Add startup <a href="#Xmos">XMOS</a>.</li>
@@ -1699,6 +1700,16 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <blockquote>
   <p>We design and produce AI processors and the software to run them in data centers. Our unique approach optimizes for inference with the focus on performance, power efficiency, and ease of use; and at the same time our approach enables cost-effective training. </p>
+</blockquote>
+
+<p><a name="Furiosa"></a></p>
+
+<div align="center"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Furiosa_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>We build high-performance AI inference coprocessors that can be seamlessly integrated into various computing platforms including data centers, servers, desktops, automobiles and robots. </p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
