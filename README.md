@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Corerain">Corerain</a>.</li>
 <li>Add startup <a href="#Furiosa">Furiosa AI</a>.</li>
 <li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#DinoplusAI">DinoPlusAI</a>.</li>
@@ -78,7 +79,7 @@ table, th, td {
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
-    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a>, <a href="#Enflame">Enflame</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#WITINMEM">WITINMEM</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a></td><td>15</td>
+    <td><a href="#Cambricon">Cambricon</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#Canaan">Canaan</a>, <a href="#Enflame">Enflame</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#WITINMEM">WITINMEM</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a>, <a href="#Corerain">Corerain</a></td><td>16</td>
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
@@ -1710,6 +1711,16 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <blockquote>
   <p>We build high-performance AI inference coprocessors that can be seamlessly integrated into various computing platforms including data centers, servers, desktops, automobiles and robots. </p>
+</blockquote>
+
+<p><a name="Corerain"></a></p>
+
+<div align="center"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Corerain_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>Corerain provides ultra-high performance AI acceleration chips and the world's first streaming engine-based AI development platform.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
