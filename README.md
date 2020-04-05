@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#Corerain">Corerain</a>.</li>
 <li>Add startup <a href="#Furiosa">Furiosa AI</a>.</li>
 <li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#SambaNova">SambaNova</a>.</li>
@@ -1282,7 +1283,12 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://venturebeat.com/2020/02/25/sambanova-systems-raises-250-million-for-software-defined-ai-hardware/">SambaNova Systems raises $250 million for software-defined AI hardware</a></strong></p>
+<p><strong><a href="https://sambanova.ai/a-new-state-of-the-art-in-nlp-beyond-gpus/">A New State of the Art in NLP: Beyond GPUs</a></strong></p>
+<blockquote>
+  <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
+</blockquote>
+
+<p><a href="https://venturebeat.com/2020/02/25/sambanova-systems-raises-250-million-for-software-defined-ai-hardware/">SambaNova Systems raises $250 million for software-defined AI hardware</a></p>
 <blockquote>
   <p>The infrastructure required to handle AI workloads is often as complex as it is sprawling, but a cottage industry of startups has emerged whose focus is developing solutions for end customers. SambaNova Systems is one such startup — the Palo Alto, California-based firm, which was founded in 2017 by Rodrigo Liang and Stanford Professors Kunle Olukotun and Chris Ré, provides systems that run AI and data-intensive apps from the datacenter to the edge. In a reflection of investors’ ravenous appetite for the market, it today announced that it’s raised $250 million in series C funding.</p>
 </blockquote>
