@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#Corerain">Corerain</a>.</li>
 <li>Add startup <a href="#Furiosa">Furiosa AI</a>.</li>
@@ -1400,6 +1401,13 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 <div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><a href="https://www.nextplatform.com/2020/04/02/tachyum-starts-from-scratch-to-etch-a-universal-processor/">TACHYUM STARTS FROM SCRATCH TO ETCH A UNIVERSAL PROCESSOR</a></p>
+
+<blockquote>
+  <p>Only last week, we did a thought experiment about how we should have streamlined chiplets for very specific purposes, woven together inside of a single package or across sockets and nodes, co-designed to specifically run very precise workflows because any general purpose processor – mixing elements of CPUs, GPUs, TPUs, NNPs, and FPGAs – would be suboptimal on all fronts except volume economics. We think that this extreme co-design for datacenter compute is the way the world will ultimately go, and we are just getting the chiplet architectures and interconnects together to make this happen.
+Radoslav Danilak, co-founder and chief executive officer of processor upstart Tachyum, is having absolutely none of that. And in fact, the Prodigy “universal processor” that Tachyum has designed is going in exactly in the opposite direction.</p>
+</blockquote>
 
 <p><a href="https://www.hpcwire.com/off-the-wire/tachyum-running-apache-is-a-key-milestone-for-prodigy-universal-processor-software-stack/">Tachyum Running Apache is a Key Milestone for Prodigy Universal Processor Software Stack</a></p>
 
