@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum</a>.</li>
 <li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add startup <a href="#Corerain">Corerain</a>.</li>
@@ -1043,6 +1044,11 @@ After HotChips 2017, in the next plateform article "<a href="https://www.nextpla
 <div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><a href="https://www.forbes.com/sites/tiriasresearch/2020/04/06/perceive-exits-stealth-with-super-efficient-machine-learning-chip-for-smarter-devices/#259060006d9c">Tenstorrent Launches AI Chip With Conditional Execution</a></p>
+<blockquote>
+  <p>Now Tenstorrent’s claim to future fame and potentially the crown is all about reducing the computation required to get to a good answer, instead of throwing massive amounts of brute-force compute at the problem. The technique is called fine-grained conditional computation, and it is just the beginning of an optimization roadmap Tenstorrent CEO, Ljubisa Bajic, has up his sleeves.</p>
+</blockquote>
 
 <p><a href="http://tenstorrent.com/index.html">Tenstorrent</a> is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the <a href="http://www.cogniteventures.com/the-cognitive-computing-startup-list/">Cognitive 300 list</a>.</p>
 
