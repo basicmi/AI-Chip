@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
 <li>Add news of <a href="#Wave">Wave Computing</a>.</li>
 <li>Add startup <a href="#Perceive">Perceive</a>.</li>
 <li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
@@ -1806,7 +1807,8 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 2. <a href="http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/">12 AI Hardware Startups Building New AI Chips</a><br>
 3. <a href="http://eyeriss.mit.edu/tutorial.html">Tutorial on Hardware Architectures for Deep Neural Networks</a><br>
 4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
-5. <strong>"White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a></strong><br>
+5. "White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a><br>
+5. <strong>"What We Talk About When We Talk About AI Chip - Final Chapter". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
