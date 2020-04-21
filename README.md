@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Wave">Wave Computing</a>.</li>
 <li>Add startup <a href="#Perceive">Perceive</a>.</li>
 <li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum</a>.</li>
@@ -999,8 +1000,10 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
-<p>Wave’s Compute Appliance is capable to run TensorFlow at 2.9 PetaOPS/sec on their 3RU appliance. Wave refers to their processors at DPUs and an appliance has 16 DPUs. Wave uses processing elements it calls Coarse Grained Reconfigurable Arrays (CGRAs). It is unclear what bit width the 2.9 PetaOPS/s is referring to. Some details can be fund in their  <a href="http://wavecomp.ai/technology/">white paper</a>.<br><br>
-After HotChips 2017, in the next plateform article "<a href="https://www.nextplatform.com/2017/08/23/first-depth-view-wave-computings-dpu-architecture-systems/">First In-Depth View of Wave Computing’s DPU Architecture, Systems</a>", more details were discussed.</p>
+<p><strong><a href="https://semiwiki.com/ip/284876-wave-computing-and-mips-waves-goodbye/">Wave Computing and MIPS Wave Goodbye</a></strong></p>
+<blockquote>
+  <p>Word on the virtual street is that Wave Computing is closing down. The company has reportedly let all employees go and filed for Chapter 11. As one of the many promising new companies in the field of AI, Wave Computing was founded in 2008 with the mission “to revolutionize deep learning with real-time AI solutions that scale from the edge to the datacenter.”</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
