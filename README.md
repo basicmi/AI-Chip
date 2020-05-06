@@ -236,6 +236,12 @@ Xilinx provide "<a href="https://www.xilinx.com/applications/megatrends/machine-
   <p>"With POWER9, we’re moving to a new off-chip era, with advanced accelerators like GPUs and FPGAs driving modern workloads, including AI...POWER9 will be the first commercial platform loaded with on-chip support for NVIDIA’s next-generation NVLink, OpenCAPI 3.0 and PCI-Express 4.0. These technologies provide a giant hose to transfer data." </p>
 </blockquote>
 
+<p><a href="https://www.research.ibm.com/artificial-intelligence/ai-hardware-center/">AI Hardware Center</a></p>
+
+<blockquote>
+  <p>"The IBM Research AI Hardware Center is a global research hub headquartered in Albany, New York. The center is focused on enabling next-generation chips and systems that support the tremendous processing power and unprecedented speed that AI requires to realize its full potential.</p>
+</blockquote>
+
 <div align="center"><h3> </h3></div>
 
 <p><a name="STMicroelectronics"></a></p>
