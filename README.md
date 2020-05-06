@@ -28,39 +28,6 @@
 <li>Add news of <a href="#Enflame">Enflame's DTU data center training chip</a>.</li>
 <li>Updates of <a href="#Aimotive">AImotive</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
-<li>Thinci is now <a href="#Blaize">Blaize</a></li>
-<li>Check out <a href="https://mlperf.org/inference-results/">MLPerf Inference v0.5 Results</a>.</li>
-<li>Add startup <a href="#Rain">Rain Neuromorphics</a> and <a href="#ABR">Applied Brain Research</a>.</li>
-<li>Add startup <a href="#Untether">Untether AI</a> and <a href="#GrAI">GrAI Matter Lab</a>.</li>
-<li>Add startup <a href="#SiMa">SiMa.ai</a>.</li>
-<li>Remove DeepScale who was acquired by Tesla.</li> 
-<li>Add news of <a href="#Alibaba">Alibaba's cloud inference chip Hanguang 800</a>.</li>
-<li>Add startup <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>.</li>
-<li>Add news of <a href="#Nvidia">NVDLA Deep Learning Inference Compiler</a>.</li>
-<li>Add news of <a href="#Intel">Intel's AI chip</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras's huge WSE AI chip</a>.</li>
-<li>Add startup <a href="#Neuroblade">Neuroblade</a>.</li>
-<li>Add EEMBC MLMark Benchmark in  <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
-<li>Add news of <a href="#InnoGrit">InnoGrit</a>.</li>
-<li>Add startup <a href="#Areanna">Areanna AI</a>.</li>
-<li>Add links to <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Ambarella">Ambarella</a> and <a href="#Blacksesame">Black Sesame</a>.</li>
-<li>Add Chinese startup <a href="#WITINMEM">WITINMEM</a>.</li>
-<li><a href="#AIChipBenchmarks">MLPerf v0.5 Inference Benchmarks are here</a>.</li>
-<li>Add news of <a href="#Renesas_Electronics">Renesas Electronics's PIM AI Chip</a>.</li>
-<li>Add news of <a href="#Habana">Habana's Gaudi AI Training Chip</a>.</li>
-<li>Add news of <a href="#LG">LG's AI Chip</a>.</li>
-<li>Add <a href="#AIChipCompilers">The Tensor Algebra Compiler (taco)</a>.</li>
-<li>Add news of <a href="#Achronix">Achronix’s Speedster7t FPGA</a>.</li>
-<li>Add news of <a href="#Hailo">Hailo’s Hailo-8 chip</a>.</li>
-<li>Add MLIR in <a href="#AIChipCompilers">AI Compiler section</a> and news of <a href="#Tesla">Tesla's FSD chip.</a>.</li>
-<li>Add startup <a href="#etacompute">Eta Compute</a>.</li>
-<li>Add Compiler <a href="#AIChipCompilers">ONNC</a>.</li>
-<li>Add Chinese startup <a href="#EEasy">EEasy Tech</a>.</li>
-<li>Add startup <a href="#Optalysys">Optaylsys</a>.</li>
-<li>Add a new section of <a href="#AIChipCompilers">AI Chip Compilers</a>.</li>
-<li>Add Chinese startup <a href="#Enflame">Enflame</a>.</li>
-<li>Add news of <a href="#Google">Google Edge TPU</a>.</li>
-<li>Add a new section of <a href="#AIChipBenchmarks">AI Chip Benchmarks</a>.</li>
 </ul>
 </font>
 
@@ -89,7 +56,7 @@ table, th, td {
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Wave">Wave Computing</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Habana">Habana</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a></td><td>57</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a></td><td>55</td>
   </tr>
 </table>
 
@@ -110,7 +77,7 @@ table, th, td {
   </tr>
   <tr>
     <td><a href="#Intel">Intel</a>, <a href="#Nvidia">Nvidia</a>, <a href="#IBM">IBM</a>, <a href="#Xilinx">Xilinx</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Google">Google</a>, <a href="#Baidu">Baidu</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Bitmain">Bitmain</a>, <a href="#Wave">Wave Computing</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>, <a href="#Marvell">Marvell</a>, <a href="#Achronix">Achronix</a></td>  
-    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Habana">Habana</a>, <a href="#Enflame">Enflame</a></td>
+    <td><a href="#AMD">AMD</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>,<a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Thinkforce">Thinkforce</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#Adapteva">Adapteva</a>, <a href="#PEZY">PEZY</a>, <a href="#Enflame">Enflame</a></td>
     <td><a href="#Qualcomm">Qualcomm</a>, <a href="#Samsung">Samsung</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#MediaTek">MediaTek</a>, <a href="#Tesla">Tesla</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a>, <a href="#Horizon_Robotics">Horizon Robotics</a>, <a href="#Chipintelli">Chipintelli</a>, <a href="#Unisound">Unisound</a>, <a href="#AISpeech">AISpeech</a>, <a href="#Rokid">Rokid</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#DEEP_VISION">DEEP VISION</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Nextvpu">NextVPU</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Eesay">Eesay Tech</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#LG">LG</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#WITINMEM">WITINMEM</a>,  <a href="#Ambarella">Ambarella</a>, <a href="#Tsingmicro">TSING MICRO</a>,  <a href="#Blacksesame">Black Sesame</a>, <a href="#Areanna">Areanna AI</a>,  <a href="#Neuroblade">Neuroblade</a>, <a href="#SiMa">SiMa.ai</a>, <a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Xmos">XMOS</a></td>
   </tr>
 </table>
@@ -157,6 +124,14 @@ Intel <a href="https://www.altera.com/products/design-software/embedded-software
 Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/">First-of-Its-Kind Self-Learning Chip</a>.
 <blockquote>
   <p>The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations. </p>
+</blockquote>
+
+<p><a name="Habana"></a></p>
+<div align="center"><h3>Habana</h3></div>
+
+<p><a href="https://habana.ai/press/intel-acquires-artificial-intelligence-chipmaker-habana-labs/">Intel Acquires Artificial Intelligence Chipmaker Habana Labs</a></p>
+<blockquote>
+  <p>SANTA CLARA Calif., Dec. 16, 2019 – Intel Corporation today announced that it has acquired Habana Labs, an Israel-based developer of programmable deep learning accelerators for the data center for approximately $2 billion. The combination strengthens Intel’s artificial intelligence (AI) portfolio and accelerates its efforts in the nascent, fast-growing AI silicon market, which Intel expects to be greater than $25 billion by 20241.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -1441,28 +1416,6 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 <blockquote>
   <p>Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Habana"></a></p>
-
-<div align="center"><a href="https://habana.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Habana_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://habana.ai/press/habana-labs-announces-gaudi-ai-training-processor/">HABANA LABS Announces Gaudi AI Training Processor</a></strong></p>
-<blockquote>
-  <p>TEL-AVIV, ISRAEL and SAN JOSE, CA–June 17, 2019 – Habana Labs, Ltd. (www.habana.ai), a leading developer of AI processors, today announced the Habana Gaudi™ AI Training Processor. Training systems based on Gaudi processors will deliver an increase in throughput of up to four times over systems built with equivalent number GPUs.</p>
-</blockquote>
-
-<p><strong><a href="https://habana.ai/media-center/">You can also find the reports in the media</a></strong></p>
-
-<p><a href="https://www.eetimes.com/document.asp?doc_id=1333719">Startup’s AI Chip Beats GPU</a></p>
-
-<blockquote>
-  <p>The Goya chip can process 15,000 ResNet-50 images/second with 1.3-ms latency at a batch size of 10 while running at 100 W. That compares to 2,657 images/second for an Nvidia V100 and 1,225 for a dual-socket Xeon 8180. At a batch size of one, Goya handles 8,500 ResNet-50 images/second with a 0.27-ms latency.</p>
-</blockquote>
-
 
 <div align="center"><h3> </h3></div>
 
