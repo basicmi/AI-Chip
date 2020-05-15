@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#Nvida">Nvidia A100</a>.</li>
+<li>Add news of <a href="#Nvidia">Nvidia A100</a>.</li>
 <li>Add <a href="#Sony">Sony's Intelligent Vision Sensors</a>.</li>
 <li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
 <li>Add news of <a href="#Wave">Wave Computing</a>.</li>
@@ -367,7 +367,7 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><a name="Snoy"></a></p>
+<p><a name="Sony"></a></p>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Sony_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
