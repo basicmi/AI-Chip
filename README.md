@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Nvida">Nvidia A100</a>.</li>
 <li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
 <li>Add news of <a href="#Wave">Wave Computing</a>.</li>
 <li>Add startup <a href="#Perceive">Perceive</a>.</li>
@@ -95,6 +96,34 @@ table, th, td {
 <div align="center"><h1> </h1></div>
 
 <div align="center"><h3> </h3></div>
+<a name="Nvidia"></a>
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
+<div align="center"><h3> </h3></div>
+<div align="center"><h3>GPU</h3></div>
+
+<strong><a href="https://devblogs.nvidia.com/nvidia-ampere-architecture-in-depth/">NVIDIA Ampere Architecture In-Depth</a></strong>
+> Today, during the 2020 NVIDIA GTC keynote address, NVIDIA founder and CEO Jensen Huang introduced the new NVIDIA A100 GPU based on the new NVIDIA Ampere GPU architecture. This post gives you a look inside the new A100 GPU, and describes important new features of NVIDIA Ampere architecture GPUs.  
+
+<a href="https://devblogs.nvidia.com/nvdla/">NVDLA Deep Learning Inference Compiler is Now Open Source</a>
+> With the open-source release of NVDLA’s optimizing compiler on <a href="https://github.com/nvdla/sw/releases/tag/v1.2.0-OC">GitHub</a>, system architects and software teams now have a starting point with the complete source for the world’s first fully open software and hardware inference platform. 
+
+<a href="https://www.nvidia.com/en-us/data-center/tesla-t4/">NVIDIA TESLA T4 TENSOR CORE GPU</a>
+> Powering the TensorRT Hyperscale Inference Platform.
+
+<a href="https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture">NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, &amp; More</a>
+> at NVIDIA’s SIGGRAPH 2018 keynote presentation, company CEO Jensen Huang formally unveiled the company’s much awaited (and much rumored) Turing GPU architecture. The next generation of NVIDIA’s GPU designs, Turing will be incorporating a number of new features and is rolling out this year. 
+
+<div align="center"><h3>SoC</h3></div>
+On edge, Nvidia provide NVIDIA DRIVE™ PX, <a href="http://www.nvidia.com/object/drive-px.html">The AI Car Computer for Autonomous Driving</a> and JETSON TX1/TX2 MODULE, "<a href="http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html">The embedded platform for autonomous everything</a>".
+
+<div align="center"><h3>NVDLA</h3></div>
+Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read <a href="http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q">从Nvidia开源深度学习加速器说起</a>.
+
+<br> 
+Now the open source DLA is available on <a href="https://github.com/nvdla/">Github</a> and more information can be found <a href="http://nvdla.org/">here</a>.
+> The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
+
+<div align="center"><h3> </h3></div>
 <a name="Intel"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
@@ -149,41 +178,6 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <blockquote>
   <p>Our 4th generation on-device AI engine is the ultimate personal assistant for camera, voice, XR and gaming – delivering smarter, faster and more secure experiences. Utilizing all cores, it packs 3 times the power of its predecessor for stellar on-device AI capabilities... Greater than 7 trillion operations per second (TOPS)</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-<a name="Nvidia"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
-<div align="center"><h3> </h3></div>
-<div align="center"><h3>GPU</h3></div>
-
-<strong><a href="https://devblogs.nvidia.com/nvdla/">NVDLA Deep Learning Inference Compiler is Now Open Source</a></strong>
-> With the open-source release of NVDLA’s optimizing compiler on <a href="https://github.com/nvdla/sw/releases/tag/v1.2.0-OC">GitHub</a>, system architects and software teams now have a starting point with the complete source for the world’s first fully open software and hardware inference platform. 
-
-<strong><a href="https://www.nvidia.com/en-us/data-center/tesla-t4/">NVIDIA TESLA T4 TENSOR CORE GPU</a></strong>
-> Powering the TensorRT Hyperscale Inference Platform.
-
-<strong><a href="https://www.anandtech.com/show/13214/nvidia-reveals-next-gen-turing-gpu-architecture">NVIDIA Reveals Next-Gen Turing GPU Architecture: NVIDIA Doubles-Down on Ray Tracing, GDDR6, &amp; More</a></strong>
-> at NVIDIA’s SIGGRAPH 2018 keynote presentation, company CEO Jensen Huang formally unveiled the company’s much awaited (and much rumored) Turing GPU architecture. The next generation of NVIDIA’s GPU designs, Turing will be incorporating a number of new features and is rolling out this year. 
-
-<a href="https://www.nextplatform.com/2018/03/28/nvidia-dgx-2-system-packs-an-ai-performance-punch/">Nvidia’s DGX-2 System Packs An AI Performance Punch</a>
-
-<a href="https://www.nextplatform.com/2018/04/13/building-bigger-faster-gpu-clusters-using-nvswitches/">Building Bigger, Faster GPU Clusters Using NVSwitches</a>
-> Nvidia launched its second-generation DGX system in March. In order to build the 2 petaflops half-precision DGX-2, Nvidia had to first design and build a new NVLink 2.0 switch chip, named NVSwitch. While Nvidia is only shipping NVSwitch as an integral component of its DGX-2 systems today, Nvidia has not precluded selling NVSwitch chips to data center equipment manufacturers.
-
-<a href="https://www.nvidia.com/en-us/data-center/tesla-v100/">Nvidia's latest GPU</a> can do 15 TFlops of SP or 120 TFlops with its new Tensor core architecture which is a FP16 multiply and FP32 accumulate or add to suit ML.<br>
-<br>
-Nvidia is packing up 8 boards into their <a href="https://www.nvidia.com/en-us/data-center/dgx-server/">DGX-1</a>for 960 Tensor TFlops.<br><br>
-<a href="https://mp.weixin.qq.com/s/tEX4H7OEbZF4dKMI0ZOPmw">Nvidia Volta - 架构看点</a> gives some insights of Volta architecture.<br><br>
-
-<div align="center"><h3>SoC</h3></div>
-On edge, Nvidia provide NVIDIA DRIVE™ PX, <a href="http://www.nvidia.com/object/drive-px.html">The AI Car Computer for Autonomous Driving</a> and JETSON TX1/TX2 MODULE, "<a href="http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html">The embedded platform for autonomous everything</a>".
-
-<div align="center"><h3>NVDLA</h3></div>
-Nvidia anouced "XAVIER DLA NOW OPEN SOURCE" on GTC2017. We did not see Early Access verion yet. Hopefully, the general release will be avaliable on Sep. as promised. For more analysis, you may want to read <a href="http://mp.weixin.qq.com/s/XEb5xNeSV_oPs08kDgQg8Q">从Nvidia开源深度学习加速器说起</a>.
-
-<br> 
-Now the open source DLA is available on <a href="https://github.com/nvdla/">Github</a> and more information can be found <a href="http://nvdla.org/">here</a>.
-> The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
 
 <div align="center"><h3> </h3></div>
 <a name="Samsung"></a>
