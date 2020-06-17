@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="https://birenresearch.github.io/AIChip_Paper_List/">AIchip Paper List</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia A100</a>.</li>
 <li>Add <a href="#Sony">Sony's Intelligent Vision Sensors</a>.</li>
 <li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
@@ -1760,6 +1761,7 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 4. <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Inference</a><br>
 5. "White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a><br>
 5. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
+6. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
