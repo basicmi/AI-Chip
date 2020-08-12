@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li><strong>Add link to <a href="#AIChipBenchmarks">MLPerf Training Results 0.7</a>.</strong></li>
 <li>Add <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add <a href="https://birenresearch.github.io/AIChip_Paper_List/">AIchip Paper List</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia A100</a>.</li>
@@ -1740,7 +1741,7 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 
 1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
 2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. You can find MLPerf v0.5 results <a href="https://mlperf.org/results/">here.</a>. <strong><a href="https://mlperf.org/inference-overview/">MLPerf Inference Benchmarks is here</a></strong>.<br>
+3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. <strong>You can find MLPerf v0.7 results <a href="https://mlperf.org/training-results-0-7/">here.</a></strong>. <br>
 4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
 6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
