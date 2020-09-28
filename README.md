@@ -12,7 +12,8 @@
 
 <font color="Darkred">
 <ul>
-<li><strong>Add link to <a href="#AIChipBenchmarks">MLPerf Training Results 0.7</a>.</strong></li>
+<li><strong>Add news of <a href="#Qualcomm"> Qualcomm Cloud AI 100</a>.</strong></li>
+<li>Add link to <a href="#AIChipBenchmarks">MLPerf Training Results 0.7</a>.</li>
 <li>Add <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add <a href="https://birenresearch.github.io/AIChip_Paper_List/">AIchip Paper List</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia A100</a>.</li>
@@ -172,7 +173,12 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-<strong><a href="https://www.qualcomm.com/news/releases/2019/04/09/qualcomm-brings-power-efficient-artificial-intelligence-inference">Qualcomm Brings Power Efficient Artificial Intelligence Inference Processing to the Cloud</a></strong>
+<strong><a href="https://www.forbes.com/sites/moorinsights/2020/09/16/qualcomm-launches-cloud-ai-chip/">Qualcomm Launches Cloud AI Chip</a></strong>
+<blockquote>
+  <p>Last year, Qualcomm teased its Cloud AI100, promising strong performance and power efficiency to enable Artificial Intelligence in cloud edge computing, autonomous vehicles and 5G infrastructure. Today, the company announced it is now sampling the platform, with volume shipments planned for the first half of 2021. This begs the question: why would a company known for low-power cell-phone chips and IP decide to enter the data center market, which is full of players who have been there for decades?</p>
+</blockquote>
+
+<a href="https://www.qualcomm.com/news/releases/2019/04/09/qualcomm-brings-power-efficient-artificial-intelligence-inference">Qualcomm Brings Power Efficient Artificial Intelligence Inference Processing to the Cloud</a>
 <blockquote>
   <p>Qualcomm Technologies, Inc., a subsidiary of Qualcomm Incorporated (NASDAQ: QCOM), announced that it is bringing the Company’s artificial intelligence (AI) expertise to the cloud with the Qualcomm® Cloud AI 100. Built from the ground up to meet the explosive demand for AI inference processing in the cloud, the Qualcomm Cloud AI 100 utilizes the Company’s heritage in advanced signal processing and power efficiency. </p>
 </blockquote>
