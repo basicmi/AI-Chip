@@ -12,8 +12,9 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Mythic">Mythic</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">MLPerf Inference Results 0.7</a>.</li>
-<li><strong>Add news of <a href="#Qualcomm"> Qualcomm Cloud AI 100</a>.</strong></li>
+<li>Add news of <a href="#Qualcomm"> Qualcomm Cloud AI 100</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">MLPerf Training Results 0.7</a>.</li>
 <li>Add <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a> in <a href="#Reference">Reference</a>.</li>
 <li>Add <a href="https://birenresearch.github.io/AIChip_Paper_List/">AIchip Paper List</a> in <a href="#Reference">Reference</a>.</li>
@@ -1106,8 +1107,12 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
-<p>A battery powered neural chip from <a href="https://www.mythic-ai.com/technology/">Mythic</a> with 50x lower power.</p>
+<p><strong><a href="https://www.linkedin.com/pulse/era-analog-compute-has-arrived-michael-b-henry/">The Era of Analog Compute has Arrived!</a></strong> </p>
+<blockquote>
+  <p>ResNet-50 in our prototype analog AI processor. Production release will support 900-1000 fps and INT8 accuracy at 3W.</p>
+</blockquote>
 
+<p>A battery powered neural chip from <a href="https://www.mythic-ai.com/technology/">Mythic</a> with 50x lower power.</p>
 <blockquote>
   <p>Founded in 2012, Texas-based startup Mythic (formerly known as Isocline) has taken in $9.5 million in funding with Draper Fisher Jurvetson as the lead investor. Prior to receiving any funding, the startup has taken in <a href="https://techcrunch.com/2017/03/22/mythic-launches-a-chip-to-enable-computer-vision-and-voice-control-on-any-device/">$2.5 million in grants</a>. Mythic is developing an AI chip that “puts desktop GPU compute capabilities and deep neural networks onto a button-sized chip – with 50x higher battery life and far more data processing capabilities than competitors“. Essentially, that means you can give voice control and computer vision to any device locally without needing cloud connectivity.</p>
 </blockquote>
