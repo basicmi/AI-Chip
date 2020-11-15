@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Imagination">Imagination AI accelerator</a>.</li>
 <li>Add news of <a href="#Mythic">Mythic</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">MLPerf Inference Results 0.7</a>.</li>
 <li>Add news of <a href="#Qualcomm"> Qualcomm Cloud AI 100</a>.</li>
@@ -707,7 +708,7 @@ ARM also provide a open source <a href="https://developer.arm.com/technologies/c
 
 <p><a href="https://www.imgtec.com/powervr/vision/">PowerVR Series2NX Neural Network Accelerator</a></p>
 
-<p><strong><a href="https://www.anandtech.com/show/12931/imagination-announces-ax2185-ax2145-powervr-2nx-neural-network-accelerators">Imagination Announces First PowerVR Series2NX Neural Network Accelerator Cores: AX2185 and AX2145</a></strong></p>
+<p><strong><a href="https://www.imaginationtech.com/news/press-release/imagination-launches-multi-core-img-series4-nna-the-ultimate-ai-accelerator-delivering-industry-disruptive-performance-for-adas-and-autonomous-driving/">Imagination launches multi-core IMG Series4 NNA – the ultimate AI accelerator delivering industry-disruptive performance for ADAS and autonomous driving</a></strong></p>
 
 <blockquote>
   <p>the company is announcing the first products in the 2NX NNA family: the higher-performance AX2185 and lower-cost AX2145.</p>
