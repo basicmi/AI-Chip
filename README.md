@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#SKT">SK Telecom SAPEON X220</a>.</li>
 <li>Add news of <a href="#Imagination">Imagination AI accelerator</a>.</li>
 <li>Add news of <a href="#Mythic">Mythic</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">MLPerf Inference Results 0.7</a>.</li>
@@ -54,7 +55,7 @@ table, th, td {
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a>, <a href="#Sony">Sony</a></td><td>16</td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a></td><td>15</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a>, <a href="#SKT">SK Telecom</a></td><td>16</td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
@@ -657,6 +658,20 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 <blockquote>
   <p>New AI Processor with LG Neural Engine Designed for Use in Various Products
 Including Robot Vacuum Cleaners, Washing Machines and Refrigerators</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="SKT"></a></p>
+
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/skt_logo.png" height="50"></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.hpcwire.com/off-the-wire/skt-unveils-its-ai-chip-and-new-plans-for-ai-semiconductor-business/">SKT Unveils its AI Chip and New Plans for AI Semiconductor Business</a></strong></p>
+
+<blockquote>
+  <p>Nov. 25, 2020 — SK Telecom (SKT) today unveiled its self-developed artificial intelligence (AI) chip named ‘SAPEON X220’ and shared its AI semiconductor business vision.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
