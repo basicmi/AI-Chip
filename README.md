@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Amazon_AWS"> AWS Trainium</a>.</li>
 <li>Add startup <a href="#SimpleMachines">SimpleMachines</a>.</li>
 <li>Add news of <a href="#SKT">SK Telecom SAPEON X220</a>.</li>
 <li>Add news of <a href="#Imagination">Imagination AI accelerator</a>.</li>
@@ -452,7 +453,12 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://aws.amazon.com/cn/machine-learning/inferentia/">AWS Inferentia. High performance machine learning inference chip, custom designed by AWS.</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2020/12/01/aws-launches-trainium-its-new-custom-ml-training-chip/">AWS launches Trainium, its new custom ML training chip</a></strong></p>
+<blockquote>
+  <p>AAt its annual re:Invent developer conference, AWS  today announced the launch of <a href="https://aws.amazon.com/cn/machine-learning/trainium/">AWS Trainium</a>, the company’s next-gen custom chip dedicated to training machine learning models. The company promises that it can offer higher performance than any of its competitors in the cloud, with support for TensorFlow, PyTorch and MXNet.</p>
+</blockquote>
+
+<p><a href="https://aws.amazon.com/cn/machine-learning/inferentia/">AWS Inferentia. High performance machine learning inference chip, custom designed by AWS.</a></p>
 <blockquote>
   <p>AWS Inferentia provides high throughput, low latency inference performance at an extremely low cost. Each chip provides hundreds of TOPS (tera operations per second) of inference throughput to allow complex models to make fast predictions. For even more performance, multiple AWS Inferentia chips can be used together to drive thousands of TOPS of throughput. AWS Inferentia will be available for use with Amazon SageMaker, Amazon EC2, and Amazon Elastic Inference.</p>
 </blockquote>
