@@ -12,6 +12,8 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#SambaNova"> SambaNova</a>.</li>
+<li>Add news of <a href="#Esperanto"> Esperanto's ML Chip</a>.</li>
 <li>Add news of <a href="#Amazon_AWS"> AWS Trainium</a>.</li>
 <li>Add startup <a href="#SimpleMachines">SimpleMachines</a>.</li>
 <li>Add news of <a href="#SKT">SK Telecom SAPEON X220</a>.</li>
@@ -1292,11 +1294,17 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://www.hpcwire.com/2020/12/08/esperanto-unveils-ml-chip-with-nearly-1100-risc-v-cores/">Esperanto Unveils ML Chip with Nearly 1,100 RISC-V Cores</a></strong></p>
+<blockquote>
+  <p>At the RISC-V Summit today, Art Swift, CEO of Esperanto Technologies, announced a new, RISC-V based chip aimed at machine learning and containing nearly 1,100 low-power cores based on the open-source RISC-V architecture. </p>
+</blockquote>
+
 <p>According to this article, <a href="https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/">"Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"</a></p>
 
 <blockquote>
   <p>Although <a href="https://www.esperanto.ai/">Esperanto</a> will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.<br><br></p>
 </blockquote>
+
 
 <div align="center"><h3> </h3></div>
 
@@ -1306,22 +1314,16 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://sambanova.ai/a-new-state-of-the-art-in-nlp-beyond-gpus/">A New State of the Art in NLP: Beyond GPUs</a></strong></p>
+<p><strong><a href="https://sambanova.ai/articles/introducing-sambanova-systems-datascale-a-new-era-of-computing/">Introducing SambaNova Systems DataScale: A New Era of Computing</a></strong></p>
 <blockquote>
   <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
 </blockquote>
 
-<p><a href="https://venturebeat.com/2020/02/25/sambanova-systems-raises-250-million-for-software-defined-ai-hardware/">SambaNova Systems raises $250 million for software-defined AI hardware</a></p>
+<p><a href="https://sambanova.ai/a-new-state-of-the-art-in-nlp-beyond-gpus/">A New State of the Art in NLP: Beyond GPUs</a></p>
 <blockquote>
-  <p>The infrastructure required to handle AI workloads is often as complex as it is sprawling, but a cottage industry of startups has emerged whose focus is developing solutions for end customers. SambaNova Systems is one such startup — the Palo Alto, California-based firm, which was founded in 2017 by Rodrigo Liang and Stanford Professors Kunle Olukotun and Chris Ré, provides systems that run AI and data-intensive apps from the datacenter to the edge. In a reflection of investors’ ravenous appetite for the market, it today announced that it’s raised $250 million in series C funding.</p>
+  <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
 </blockquote>
 
-<p>According to the linkedin page of its CEO, former SPARC developer in ORACLE, <a href="https://sambanovasystems.com/">SambaNova Systems</a> is a computing startup focused on building machine learning and big data analytics platforms. SambaNova's software-defined analytics platform enables optimum performance for any ML training, inference or analytics models.<br><br>
-<a href="https://techcrunch.com/2018/03/15/the-red-hot-ai-chip-space-gets-even-hotter-with-56m-for-a-startup-called-sambanova/">The red-hot AI hardware space gets even hotter with $56M for a startup called SambaNova Systems</a></p>
-
-<blockquote>
-  <p>SambaNova is the product of technology from Kunle Olukotun and Chris Ré, two professors at Stanford, and led by former Oracle SVP of development Rodrigo Liang, who was also a VP at Sun for almost 8 years.</p>
-</blockquote>
 
 <div align="center"><h3> </h3></div>
 
