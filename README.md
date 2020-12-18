@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Synaptics"> Synaptics Katana Platform</a>.</li>
 <li>Add <a href="#Graphcore"> Graphcore MK2 PERFORMANCE BENCHMARKS</a>.</li>
 <li>Add news of <a href="#SambaNova"> SambaNova</a>.</li>
 <li>Add news of <a href="#Esperanto"> Esperanto's ML Chip</a>.</li>
@@ -29,20 +30,6 @@
 <li>Add <a href="#Sony">Sony's Intelligent Vision Sensors</a>.</li>
 <li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
 <li>Add news of <a href="#Wave">Wave Computing</a>.</li>
-<li>Add startup <a href="#Perceive">Perceive</a>.</li>
-<li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
-<li>Add news of <a href="#Tachyum">Tachyum</a>.</li>
-<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
-<li>Add startup <a href="#Corerain">Corerain</a>.</li>
-<li>Add startup <a href="#Furiosa">Furiosa AI</a>.</li>
-<li>Add news of <a href="#Graphcore">Graphcore</a> and <a href="#SambaNova">SambaNova</a>.</li>
-<li>Add startup <a href="#DinoplusAI">DinoPlusAI</a>.</li>
-<li>Add startup <a href="#Xmos">XMOS</a>.</li>
-<li>Add news of <a href="#etacompute">Eta Compute</a>.</li>
-<li>Add news of <a href="#Brainchip">BrainChip</a> and <a href="#Tachyum">Tachyum</a>.</li>
-<li>Add news of <a href="#Enflame">Enflame's DTU data center training chip</a>.</li>
-<li>Updates of <a href="#Aimotive">AImotive</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras</a> and <a href="#Graphcore">Graphcore</a> and <a href="#Intel">Intel</a>.</li>
 </ul>
 </font>
 
@@ -57,7 +44,7 @@ table, th, td {
 </style>
 <table style="width:100%">
   <tr>
-    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a>, <a href="#Sony">Sony</a></td><td>16</td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a>, <a href="#Sony">Sony</a>, <a href="#Synaptics"></td><td>17</td>
   </tr>
   <tr>
     <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a>, <a href="#SKT">SK Telecom</a></td><td>16</td>
@@ -391,6 +378,17 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.sony.net/SonyInfo/News/Press/202005/20-037E/">Sony to Release World's First Intelligent Vision Sensors with AI Processing Functionality</a></strong></p>
 
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Synaptics"></a></p>
+
+<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synaptics_logo.png" height="60"></div>
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.synaptics.com/company/news/katana">Synaptics Expands into Low Power Edge AI Applications with New Katana Platform</a></strong></p>
+<blockquote>
+  <p>SAN JOSE, Calif., Dec. 15, 2020 – Synaptics® Incorporated (Nasdaq: SYNA), today announced the Katana Edge AI™ platform, addressing a growing industry gap for solutions that enable battery powered devices for consumer and industrial IoT markets. The platform combines Synaptics’ proven low power SoC architecture with energy-efficient AI software, enabled by a partnership with Eta Compute. The Katana solution is optimized for a wide range of ultra-low power use cases in edge devices for office buildings, retail, factories, farms and smart homes. Typical applications include people or object recognition and counting, visual, voice or sound detection, asset or inventory tracking and environmental sensing.</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
