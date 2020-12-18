@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add <a href="#Graphcore"> Graphcore MK2 PERFORMANCE BENCHMARKS</a>.</li>
 <li>Add news of <a href="#SambaNova"> SambaNova</a>.</li>
 <li>Add news of <a href="#Esperanto"> Esperanto's ML Chip</a>.</li>
 <li>Add news of <a href="#Amazon_AWS"> AWS Trainium</a>.</li>
@@ -1033,7 +1034,9 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
-<p><strong><a href="https://techcrunch.com/2020/02/24/graphcore-the-ai-chipmaker-raises-another-150m-at-a-1-95b-valuation/">Graphcore, the AI chipmaker, raises another $150M at a $1.95B valuation</a></strong></p>
+<p><strong><a href="https://www.graphcore.ai/mk2-benchmarks">MK2 PERFORMANCE BENCHMARKS</a></strong></p>
+
+<p><a href="https://techcrunch.com/2020/02/24/graphcore-the-ai-chipmaker-raises-another-150m-at-a-1-95b-valuation/">Graphcore, the AI chipmaker, raises another $150M at a $1.95B valuation</a></p>
 <blockquote>
   <p>Graphcore, the Bristol-based startup that designs processors specifically for artificial intelligence applications, announced it has raised another $150 million in funding for R&D and to continue bringing on new customers. It’s valuation is now $1.95 billion.</p>
 </blockquote>
