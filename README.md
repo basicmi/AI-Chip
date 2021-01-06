@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tenstorrent"> Tenstorrent</a>.</li>
 <li>Add news of <a href="#Synaptics"> Synaptics Katana Platform</a>.</li>
 <li>Add <a href="#Graphcore"> Graphcore MK2 PERFORMANCE BENCHMARKS</a>.</li>
 <li>Add news of <a href="#SambaNova"> SambaNova</a>.</li>
@@ -1071,6 +1072,11 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 <div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><a href="https://www.anandtech.com/show/16354/jim-keller-becomes-cto-at-tenstorrent-the-most-promising-architecture-out-there">Jim Keller Becomes CTO at Tenstorrent: "The Most Promising Architecture Out There</a></p>
+<blockquote>
+  <p> Today Tenstorrent is announcing that Jim Keller, compute architect extraordinaire, has joined the company as its Chief Technology Officer, President, and joins the company board.</p>
+</blockquote>
 
 <p><a href="https://www.forbes.com/sites/tiriasresearch/2020/04/06/perceive-exits-stealth-with-super-efficient-machine-learning-chip-for-smarter-devices/#259060006d9c">Tenstorrent Launches AI Chip With Conditional Execution</a></p>
 <blockquote>
