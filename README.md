@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Update <a href="#AIChipCompilers"> AI Compiler section</a>.</li>
 <li>Add the article "TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware" in <a href="#Reference"> Reference section</a>.</li>
 <li>Add news of <a href="#Tenstorrent"> Tenstorrent</a>.</li>
 <li>Add news of <a href="#Synaptics"> Synaptics Katana Platform</a>.</li>
@@ -1786,8 +1787,11 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
 7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
 8. <a href="https://onnc.ai/">ONNC (Open Neural Network Compiler)</a><br>
-9. <a href="https://github.com/tensorflow/mlir/">Multi-Level Intermediate Representation</a><br>
+9. <a href="https://mlir.llvm.org/">MLIR: Multi-Level Intermediate Representation</a><br>
 10. <a href="http://tensor-compiler.org/">The Tensor Algebra Compiler (taco)</a><br>
+11. <a href="https://facebookresearch.github.io/TensorComprehensions/">Tensor Comprehensions</a><br>
+12. <a href="https://www.polymagelabs.com//">PolyMage Labs</a><br>
+13. <a href="https://octoml.ai/">OctoML</a><br>
 
 <div align="center"><h3> </h3></div>
 
