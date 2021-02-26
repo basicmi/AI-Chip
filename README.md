@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add the article "TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware" in <a href="#Reference"> Reference section</a>.</li>
 <li>Add news of <a href="#Tenstorrent"> Tenstorrent</a>.</li>
 <li>Add news of <a href="#Synaptics"> Synaptics Katana Platform</a>.</li>
 <li>Add <a href="#Graphcore"> Graphcore MK2 PERFORMANCE BENCHMARKS</a>.</li>
@@ -1822,6 +1823,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 5. "White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a><br>
 5. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
 6. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
+7. <strong><a href="https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38">TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware</a></strong><br>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
