@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Flexlogix"> Flex Logix</a>.</li>
 <li>Update <a href="#AIChipCompilers"> AI Compiler section</a>.</li>
 <li>Add the article "TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware" in <a href="#Reference"> Reference section</a>.</li>
 <li>Add news of <a href="#Tenstorrent"> Tenstorrent</a>.</li>
@@ -1496,10 +1497,10 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.zdnet.com/article/ai-startup-flex-logix-targets-nvidias-market-for-inference-chips/">AI startup Flex Logix touts vastly higher performance than Nvidia</a></strong></p>
+<p><strong><a href="https://www.zdnet.com/article/flex-logix-has-two-paths-to-making-a-lot-of-money-challenging-nvidia-in-ai/">Flex Logix has two paths to making a lot of money challenging Nvidia in AI</a></strong></p>
 
 <blockquote>
-  <p>Four-year-old startup Flex Logix has taken the wraps off its novel chip design for machine learning. CEO Geoff Tate describes how the chip may take advantage of an "explosion" of inferencing activity in "edge computing," and how Nvidia can't compete on performance.</p>
+  <p>The programmable chip company scores $55 million in venture backing, bringing its total haul to $82 million</p>
 </blockquote>
 
 <p><a name="PFN"></a></p>
