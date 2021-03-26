@@ -1257,7 +1257,7 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <p><a name="Deepvision"></a></p>
 
-<div align="center"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deepvision_logo.png" height="60"></a></div>
+<div align="center"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deepvision_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
