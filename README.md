@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Baidu">Baidu</a>.</li>
 <li>Updates of <a href="#Deepvision">Deep Vision</a>.</li>
 <li>Add news of <a href="#Flexlogix">Flex Logix</a>.</li>
 <li>Update <a href="#AIChipCompilers"> AI Compiler section</a>.</li>
@@ -549,16 +550,9 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/">AN EARLY LOOK AT BAIDU’S CUSTOM AI AND ANALYTICS PROCESSOR</a></p>
-
+<p><strong><a href="https://www.cnbc.com/2021/03/16/baidu-ai-chip-unit-valued-at-2-billion-after-funding.html">Baidu A.I. chip unit valued at $2 billion after funding and may become standalone business</a></strong></p>
 <blockquote>
-  <p>We’ve written much over the last few years about the company’s emphasis on streamlining deep learning processing, most notably with GPUs, but <a href="https://www.nextplatform.com/2017/08/22/first-look-baidus-custom-ai-analytics-processor/">Baidu has a new processor</a> up its sleeve called the XPU. For now, the device has just been demonstrated in FPGA, but if it continues to prove useful for AI, analytics, cloud, and autonomous driving the search giant could push it into a full-bore ASIC.</p>
-</blockquote>
-
-<p><strong><a href="https://www.zdnet.com/article/baidu-creates-kunlun-silicon-for-ai/">Baidu creates Kunlun silicon for AI</a></strong></p>
-
-<blockquote>
-  <p>A pair of chips from the Chinese search giant are aimed at cloud and edge use cases. The company said it started developing a field-programmable gate array AI accelerator in 2011, and that Kunlun is almost 30 times faster. The chips are made with Samsung's 14nm process, have 512GBps memory bandwidth, and are capable of 260 tera operations per second at 100 watts.</p>
+  <p>Baidu has raised money for its artificial intelligence (AI) semiconductor business at a valuation of $2 billion.The funding round was led by CPE, a Chinese asset management and private equity firm.Now that the Kunlun chip business has raised money, it could pave the way for the unit to be spun-off, but no final decision has been made.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
