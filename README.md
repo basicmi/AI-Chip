@@ -12,6 +12,8 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
+<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add news of <a href="#Baidu">Baidu</a>.</li>
 <li>Updates of <a href="#Deepvision">Deep Vision</a>.</li>
 <li>Add news of <a href="#Flexlogix">Flex Logix</a>.</li>
@@ -108,7 +110,12 @@ table, th, td {
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
-<strong><a href="https://devblogs.nvidia.com/nvidia-ampere-architecture-in-depth/">NVIDIA Ampere Architecture In-Depth</a></strong>
+<p><strong><a href="https://www.anandtech.com/show/16610/nvidia-unveils-grace-a-highperformance-arm-server-cpu-for-use-in-ai-systems">NVIDIA Unveils Grace: A High-Performance Arm Server CPU For Use In Big AI Systems</a></strong></p>
+<blockquote>
+  <p>Kicking off another busy Spring GPU Technology Conference for NVIDIA, this morning the graphics and accelerator designer is announcing that they are going to once again design their own Arm-based CPU/SoC. Dubbed Grace – after Grace Hopper, the computer programming pioneer and US Navy rear admiral – the CPU is NVIDIA’s latest stab at more fully vertically integrating their hardware stack by being able to offer a high-performance CPU alongside their regular GPU wares. According to NVIDIA, the chip is being designed specifically for large-scale neural network workloads, and is expected to become available in NVIDIA products in 2023.</p>
+</blockquote>
+
+<a href="https://devblogs.nvidia.com/nvidia-ampere-architecture-in-depth/">NVIDIA Ampere Architecture In-Depth</a>
 > Today, during the 2020 NVIDIA GTC keynote address, NVIDIA founder and CEO Jensen Huang introduced the new NVIDIA A100 GPU based on the new NVIDIA Ampere GPU architecture. This post gives you a look inside the new A100 GPU, and describes important new features of NVIDIA Ampere architecture GPUs.  
 
 <a href="https://devblogs.nvidia.com/nvdla/">NVDLA Deep Learning Inference Compiler is Now Open Source</a>
@@ -1323,7 +1330,12 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://sambanova.ai/articles/introducing-sambanova-systems-datascale-a-new-era-of-computing/">Introducing SambaNova Systems DataScale: A New Era of Computing</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2021/04/13/sambanova-raises-676m-at-a-5-1b-valuation-to-double-down-on-cloud-based-ai-software-for-enterprises/">SambaNova raises $676M at a $5.1B valuation to double down on cloud-based AI software for enterprises</a></strong></p>
+<blockquote>
+  <p>SambaNova — a startup building AI hardware and integrated systems that run on it that only officially came out of three years in stealth last December — is announcing a huge round of funding today to take its business out into the world. The company has closed on $676 million in financing, a Series D that co-founder and CEO Rodrigo Liang has confirmed values the company at $5.1 billion.</p>
+</blockquote>
+
+<p><a href="https://sambanova.ai/articles/introducing-sambanova-systems-datascale-a-new-era-of-computing/">Introducing SambaNova Systems DataScale: A New Era of Computing</a></p>
 <blockquote>
   <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
 </blockquote>
