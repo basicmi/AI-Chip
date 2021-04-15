@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Groq">Groq</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
 <li>Add news of <a href="#Baidu">Baidu</a>.</li>
@@ -1263,7 +1264,6 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 <div align="center"><h3> </h3></div>
 
 <p>According to this article, <a href="https://techcrunch.com/2020/11/16/deep-vision-announces-its-low-latency-ai-processor-for-the-edge/">"Deep Vision announces its low-latency AI processor for the edge"</a></p>
-
 <blockquote>
   <p>Deep Vision, a new AI startup that is building an AI inferencing chip for edge computing solutions, is coming out of stealth today. The six-year-old company’s new ARA-1 processors promise to strike the right balance between low latency, energy efficiency and compute power for use in anything from sensors to cameras and full-fledged edge servers.</p>
 </blockquote>
@@ -1276,7 +1276,10 @@ The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, 
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="groq.com">Groq's website</a> claims that its first chip will run 400 trillion operations per second with 8TOP/s per Watt power efficiency.</p>
+<p><strong><a href="https://www.forbes.com/sites/amyfeldman/2021/04/14/ai-chip-startup-groq-founded-by-ex-googlers-raises-300-million-to-power-autonomous-vehicles-and-data-centers/">AI Chip Startup Groq, Founded By Ex-Googlers, Raises $300 Million To Power Autonomous Vehicles And Data Centers</a></strong></p>
+<blockquote>
+  <p>Jonathan Ross left Google to launch next-generation semiconductor startup Groq in 2016. Today, the Mountain View, California-based firm said that it had raised $300 million led by Tiger Global Management and billionaire investor Dan Sundheim’s D1 Capital as it officially launched into public view. </p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
