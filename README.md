@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add news of <a href="#Groq">Groq</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
@@ -1003,7 +1004,12 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://techcrunch.com/2019/11/19/the-cerebras-cs-1-computes-deep-learning-ai-problems-by-being-bigger-bigger-and-bigger-than-any-other-chip/">The Cerebras CS-1 computes deep learning AI problems by being bigger, bigger, and bigger than any other chip</a></strong></p>
+<p><strong><a href="https://www.anandtech.com/show/16626/cerebras-unveils-wafer-scale-engine-two-wse2-26-trillion-transistors-100-yield">Cerebras Unveils Wafer Scale Engine Two (WSE2): 2.6 Trillion Transistors, 100% Yield</a></strong></p>
+<blockquote>
+  <p>Two years ago Cerebras unveiled a revolution in silicon design: a processor as big as your head, using as much area on a 12-inch wafer as a rectangular design would allow, built on 16nm, focused on both AI as well as HPC workloads. Today the company is launching its second generation product, built on TSMC 7nm, with more than double the cores and more than double of everything.</p>
+</blockquote>
+
+<p><a href="https://techcrunch.com/2019/11/19/the-cerebras-cs-1-computes-deep-learning-ai-problems-by-being-bigger-bigger-and-bigger-than-any-other-chip/">The Cerebras CS-1 computes deep learning AI problems by being bigger, bigger, and bigger than any other chip</a></p>
 <blockquote>
   <p>Today, the company announced the launch of its end-user compute product, the Cerebras CS-1, and also announced its first customer of Argonne National Laboratory.</p>
 </blockquote>
