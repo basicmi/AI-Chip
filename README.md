@@ -1014,18 +1014,6 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
   <p>Today, the company announced the launch of its end-user compute product, the Cerebras CS-1, and also announced its first customer of Argonne National Laboratory.</p>
 </blockquote>
 
-<p><strong><a href="https://www-wired-com.cdn.ampproject.org/c/s/www.wired.com/story/power-ai-startup-built-really-big-chip/amp">TO POWER AI, THIS STARTUP BUILT A REALLY, REALLY BIG CHIP</a></strong></p>
-<blockquote>
-  <p>New artificial intelligence company Cerebras Systems is unveiling the largest semiconductor chip ever built.
-The Cerebras Wafer Scale Engine has 1.2 trillion transistors, the basic on-off electronic switches that are the building blocks of silicon chips. Intel’s first 4004 processor in 1971 had 2,300 transistors, and a recent Advanced Micro Devices processor has 32 billion transistors.</p>
-</blockquote>
-
-<p><strong><a href="https://venturebeat.com/2019/08/19/cerebras-systems-unveils-a-record-1-2-trillion-transistor-chip-for-ai/">Cerebras Systems unveils a record 1.2 trillion transistor chip for AI</a></strong></p>
-<blockquote>
-  <p>Computer chips are usually small. The processor that powers the latest iPhones and iPads is smaller than a fingernail, and even the beefy devices used in cloud servers aren’t much bigger than a postage stamp. Then there’s a new chip from startup Cerebras: It’s bigger than an iPad all by itself.
-The silicon monster is almost 22 centimeters—roughly 9 inches—on each side, making it likely the largest computer chip ever, and a monument to the tech industry’s hopes for artificial intelligence. Cerebras plans to offer it to tech companies trying to build smarter AI more quickly.</p>
-</blockquote>
-
 <div align="center"><h3> </h3></div>
 
 <p><a name="Wave"></a></p>
