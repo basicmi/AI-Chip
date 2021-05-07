@@ -47,11 +47,7 @@
 
 <div align="center"><h2>Shortcut</h2></div>
 <HR>
-<style>
-table, th, td {
-    border: 1px solid black;
-}
-</style>
+
 <table style="width:100%">
   <tr>
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a>, <a href="#Sony">Sony</a>, <a href="#Synaptics"></td><td>17</td>
