@@ -1627,7 +1627,7 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.businesswire.com/news/home/20200512005313/en/SiMa.ai-Raises-30-Million-Series-Investment-Led"SiMa.ai Raises $30 Million in Series A Investment Round Led by Dell Technologies Capital</a></strong></p>
+<p><strong><a href="https://www.businesswire.com/news/home/20200512005313/en/SiMa.ai-Raises-30-Million-Series-Investment-Led">SiMa.ai Raises $30 Million in Series A Investment Round Led by Dell Technologies Capital</a></strong></p>
 <blockquote>
   <p>SAN JOSE, Calif.--(BUSINESS WIRE)--SiMa.ai, the company enabling high performance machine learning to go green, today announced its Machine Learning SoC (MLSoC) platform – the industry’s first unified solution to support traditional compute with high performance, lowest power, safe and secure machine learning inference. Delivering the highest frames per second per watt, SiMa.ai’s MLSoC is the first machine learning platform to break the 1000 FPS/W barrier for ResNet-501. In customer engagements, the company has demonstrated 10-30x improvement in FPS/W through its automated software flow across a wide range of embedded edge applications, over today’s competing solutions. The platform will provide machine learning solutions that range from 50 TOPs@5W to 200 TOPs@20W, delivering an industry first of 10 TOPs/W for high performance inference.</p>
 </blockquote>
