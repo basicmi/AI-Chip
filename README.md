@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Google">Google</a>.</li>
 <li>Add news of <a href="#SiMa">SiMa.ai</a>.</li>
 <li>Add startup <a href="#Neureality">Neureality</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
@@ -388,9 +389,14 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://venturebeat.com/2019/03/06/google-begins-selling-the-150-coral-dev-board-a-hardware-kit-for-accelerated-ai-edge-computing/">Google begins selling the $150 Coral Dev Board, a hardware kit for accelerated AI edge computing</a></strong></p>
+<p><strong><a href="https://www.hpcwire.com/2021/05/20/google-launches-tpu-v4-ai-chips/">Google Launches TPU v4 AI Chips</a></strong></p>
 <blockquote>
   <p>If you’re a software dev looking to get a head start on AI development at the edge, why not try on Google’s new hardware for size? The search company today made available the Coral Dev Board, a $150 computer featuring a removable system-on-module with one of its custom tensor processing unit (TPU) AI chips.</p>
+</blockquote>
+ 
+<p><a href="https://venturebeat.com/2019/03/06/google-begins-selling-the-150-coral-dev-board-a-hardware-kit-for-accelerated-ai-edge-computing/">Google begins selling the $150 Coral Dev Board, a hardware kit for accelerated AI edge computing</a></p>
+<blockquote>
+  <p>Google CEO Sundar Pichai spoke for only one minute and 42 seconds about the company’s latest TPU v4 Tensor Processing Units during his keynote at the Google I/O virtual conference this week, but it may have been the most important and awaited news from the event.</p>
 </blockquote>
 
 <p>Google's <a href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">original TPU</a> had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new <a href="https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/">TPU2</a> is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. <br><br>
