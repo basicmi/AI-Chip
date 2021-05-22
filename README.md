@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
 <li>Add news of <a href="#Google">Google</a>.</li>
 <li>Add news of <a href="#SiMa">SiMa.ai</a>.</li>
 <li>Add startup <a href="#Neureality">Neureality</a>.</li>
@@ -1048,6 +1049,11 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://www.prnewswire.com/news-releases/tenstorrent-raises-over-200-million-at-1-billion-valuation-to-create-programmable-high-performance-ai-computers-301295913.html">Tenstorrent Raises over $200 million at $1 billion Valuation to Create Programmable, High Performance AI Computers</a></strong></p>
+<blockquote>
+  <p>TORONTO, May 20, 2021 /PRNewswire/ - Tenstorrent, a hardware start-up developing next generation computers, announced today that it has raised over $200 million in a recent funding round that values the company at $1 billion. The round was led by Fidelity Management and Research Company and includes additional investments from Eclipse Ventures, Epic CG and Moore Capital. </p>
+</blockquote> 
+ 
 <p><a href="https://www.anandtech.com/show/16354/jim-keller-becomes-cto-at-tenstorrent-the-most-promising-architecture-out-there">Jim Keller Becomes CTO at Tenstorrent: "The Most Promising Architecture Out There</a></p>
 <blockquote>
   <p> Today Tenstorrent is announcing that Jim Keller, compute architect extraordinaire, has joined the company as its Chief Technology Officer, President, and joins the company board.</p>
