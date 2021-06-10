@@ -1784,11 +1784,9 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote>
  
 <p><a name="AnalogInference"></a></p>
-
-<div align="center"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-
 <p><strong><a href="https://www.eenewsanalog.com/news/analog-inference-startup-raises-106-million">Analog inference startup raises $10.6 million</a></strong></p>
 <blockquote>
   <p>The company is backed by Khosla Ventures and is developing its first generation of products for AI computing at the edge. The company raised $4.5 million shortly after its formation in March 2018, so the latest tranche brings the total raised to-date to $15.1 million</p>
