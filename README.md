@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#EdgeQ">EdgeQ</a>.</li>
 <li>Add startup <a href="#Quadric">Quadric</a>.</li>
 <li>Add startup <a href="#AnalogInference">Analog Inference</a>.</li>
 <li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
@@ -69,7 +70,7 @@
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups Worldwide</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#Deepvision">Deep Vision</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">>Analog Inference</a>, <a href="#Quadric">Quadric</a></td><td>58</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#Deepvision">Deep Vision</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">>Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a></td><td>60</td>
   </tr>
 </table>
 
@@ -1800,6 +1801,15 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <p><strong><a href=https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
 <blockquote>
   <p>BURLINGAME, Calif., June 22, 2021 — Quadric (quadric.io), an innovator in high-performance edge processing, has introduced a unified silicon and software platform that unlocks the power of on-device AI. </p>
+</blockquote> 
+
+<p><a name="EdgeQ"></a></p>
+<div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href=https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
+<blockquote>
+  <p>5G is the current revolution in wireless technology, and every chip company old and new is trying to burrow their way into this ultra-competitive — but extremely lucrative — market. One of the most interesting new players in the space is EdgeQ, a startup with a strong technical pedigree via Qualcomm that we covered last year after it raised a nearly $40 million Series A.</p>
 </blockquote> 
  
 <div align="center"><h3> </h3></div>
