@@ -1795,7 +1795,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote>
 
 <p><a name="Quadric"></a></p>
-<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Quadric_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Quatric_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href=https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
