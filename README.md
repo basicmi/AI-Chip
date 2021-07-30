@@ -1660,7 +1660,7 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://venturebeat.com/2021/07/20/untether-ai-nabs-125m-for-ai-acceleration-chips/">UUntether AI nabs $125M for AI acceleration chips</a></strong></p>
+<p><strong><a href="https://venturebeat.com/2021/07/20/untether-ai-nabs-125m-for-ai-acceleration-chips/">Untether AI nabs $125M for AI acceleration chips</a></strong></p>
 <blockquote>
   <p>Untether AI, a startup developing custom-built chips for AI inferencing workloads, today announced it has raised $125 million from Tracker Capital Management and Intel Capital. The round, which was oversubscribed and included participation from Canada Pension Plan Investment Board and Radical Ventures, will be used to support customer expansion.</p>
 </blockquote>
