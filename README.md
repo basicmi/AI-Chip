@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
 <li>Add news of <a href="#Untether">Untether AI</a>.</li>
 <li>Add startup <a href="#Innatera">Innatera Nanosystems</a>.</li>
 <li>Add startup <a href="#EdgeQ">EdgeQ</a>.</li>
@@ -630,10 +631,10 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.theverge.com/2019/4/22/18511594/tesla-new-self-driving-chip-is-here-and-this-is-your-best-look-yet/">Tesla’s new self-driving chip is here, and this is your best look yet</a></strong></p>
+<p><strong><a href="https://semianalysis.com/tesla-dojo-ai-super-computer-unique-packaging-and-chip-design-allow-an-order-magnitude-advantage-over-competing-ai-hardware/">Tesla Dojo – Unique Packaging and Chip Design Allow An Order Magnitude Advantage Over Competing AI Hardware</a></strong></p>
 
 <blockquote>
-  <p>...And today, at Tesla’s Autonomy Investor Day in Palo Alto, California, the company gave the world its first, detailed glimpse at what Musk is now calling “the best chip in the world” — a 260 square millimeter piece of silicon, with 6 billion transistors, that the company claims offers 21 times the performance of the Nvidia chips it was using before.</p>
+  <p>Tesla hosted their AI Day and revealed the innerworkings of their software and hardware infrastructure. Part of this reveal was the previously teased Dojo AI training chip. Tesla claims their D1 Dojo chip has a GPU level compute, CPU level flexibility, with networking switch IO. </p>
 </blockquote>
 
 <p><strong><a href="https://www.theverge.com/2019/4/24/18514308/tesla-full-self-driving-computer-chip-autonomy-day-specs">Tesla’s new AI chip isn’t a silver bullet for self-driving cars</a></strong></p>
