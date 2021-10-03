@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Intel">Intel Loihi 2</a>.</li>
 <li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
 <li>Add news of <a href="#Untether">Untether AI</a>.</li>
 <li>Add startup <a href="#Innatera">Innatera Nanosystems</a>.</li>
@@ -143,9 +144,9 @@ Intel <a href="https://www.altera.com/products/design-software/embedded-software
 
 <a name="Loihi"></a>
 <div align="center"><h3>Loihi</h3></div>
-Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/intels-new-self-learning-chip-promises-accelerate-artificial-intelligence/">First-of-Its-Kind Self-Learning Chip</a>.
+<p><a href="https://www.intel.com/content/www/us/en/newsroom/news/intel-unveils-neuromorphic-loihi-2-lava-software.html">Intel Advances Neuromorphic with Loihi 2, New Lava Software Framework and New Partners</a></p>
 <blockquote>
-  <p>The Loihi research test chip includes digital circuits that mimic the brain’s basic mechanics, making machine learning faster and more efficient while requiring lower compute power. Neuromorphic chip models draw inspiration from how neurons communicate and learn, using spikes and plastic synapses that can be modulated based on timing. This could help computers self-organize and make decisions based on patterns and associations. </p>
+  <p>Second-generation research chip uses pre-production Intel 4 process, grows to 1 million neurons. Intel adds open software framework to accelerate developer innovation and path to commercialization.</p>
 </blockquote>
 
 <p><a name="Habana"></a></p>
@@ -153,7 +154,7 @@ Intel's Loihi test chip is the <a href="https://newsroom.intel.com/editorials/in
 
 <p><a href="https://habana.ai/press/intel-acquires-artificial-intelligence-chipmaker-habana-labs/">Intel Acquires Artificial Intelligence Chipmaker Habana Labs</a></p>
 <blockquote>
-  <p>SANTA CLARA Calif., Dec. 16, 2019 – Intel Corporation today announced that it has acquired Habana Labs, an Israel-based developer of programmable deep learning accelerators for the data center for approximately $2 billion. The combination strengthens Intel’s artificial intelligence (AI) portfolio and accelerates its efforts in the nascent, fast-growing AI silicon market, which Intel expects to be greater than $25 billion by 20241.</p>
+  <p>SANTA CLARA Calif., Dec. 16, 2019 – Intel Corporation today announced that it has acquired Habana Labs, an Israel-based developer of programmable deep learning accelerators for the data center for approximately $2 billion. The combination strengthens Intel’s artificial intelligence (AI) portfolio and accelerates its efforts in the nascent, fast-growing AI silicon market, which Intel expects to be greater than $25 billion by 2024.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
