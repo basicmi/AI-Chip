@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Habana">Habana</a>.</li>
 <li>Add news of <a href="#Google">Google Tensor Chip</a>.</li>
 <li>Add news of <a href="#Intel">Intel Loihi 2</a>.</li>
 <li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
@@ -153,9 +154,9 @@ Intel <a href="https://www.altera.com/products/design-software/embedded-software
 <p><a name="Habana"></a></p>
 <div align="center"><h3>Habana</h3></div>
 
-<p><a href="https://habana.ai/press/intel-acquires-artificial-intelligence-chipmaker-habana-labs/">Intel Acquires Artificial Intelligence Chipmaker Habana Labs</a></p>
+<p><a href="https://habana.ai/aws-launches-ec2-dl1-instances/">Habana Gaudi debuts in the Amazon EC2 cloud</a></p>
 <blockquote>
-  <p>SANTA CLARA Calif., Dec. 16, 2019 – Intel Corporation today announced that it has acquired Habana Labs, an Israel-based developer of programmable deep learning accelerators for the data center for approximately $2 billion. The combination strengthens Intel’s artificial intelligence (AI) portfolio and accelerates its efforts in the nascent, fast-growing AI silicon market, which Intel expects to be greater than $25 billion by 2024.</p>
+  <p>The primary motivation to create this new training instance class was presented by Andy Jassy in the 2020 re:Invent: “To provide our end-customers with up to 40% better price-performance than the current generation of GPU-based instances.”</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
