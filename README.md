@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add news of <a href="#Habana">Habana</a>.</li>
 <li>Add news of <a href="#Google">Google Tensor Chip</a>.</li>
 <li>Add news of <a href="#Intel">Intel Loihi 2</a>.</li>
@@ -994,7 +995,12 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.anandtech.com/show/16626/cerebras-unveils-wafer-scale-engine-two-wse2-26-trillion-transistors-100-yield">Cerebras Unveils Wafer Scale Engine Two (WSE2): 2.6 Trillion Transistors, 100% Yield</a></strong></p>
+<p><strong><a href="https://www.anandtech.com/show/17061/cerebras-completes-series-f-funding-another-250m-for-4b-valuation">Cerebras Completes Series F Funding, Another $250M for $4B Valuation</a></strong></p>
+<blockquote>
+  <p>The new Series F funding round nets the company another $250m in capital, bringing the total raised through venture capital up to $720 million.</p>
+</blockquote> 
+ 
+<p><a href="https://www.anandtech.com/show/16626/cerebras-unveils-wafer-scale-engine-two-wse2-26-trillion-transistors-100-yield">Cerebras Unveils Wafer Scale Engine Two (WSE2): 2.6 Trillion Transistors, 100% Yield</a></p>
 <blockquote>
   <p>Two years ago Cerebras unveiled a revolution in silicon design: a processor as big as your head, using as much area on a 12-inch wafer as a rectangular design would allow, built on 16nm, focused on both AI as well as HPC workloads. Today the company is launching its second generation product, built on TSMC 7nm, with more than double the cores and more than double of everything.</p>
 </blockquote>
