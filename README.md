@@ -1362,7 +1362,7 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <p><a name="Lightelligence"></a></p>
 
-<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightelligence_logo.png" height="50"></a></div>
+<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightelligence_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
