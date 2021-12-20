@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Lightelligence">Lightelligence</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add news of <a href="#Habana">Habana</a>.</li>
@@ -1365,10 +1366,9 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.scientificamerican.com/article/light-powered-computers-brighten-ai-rsquo-s-future/">Light-Powered Computers Brighten AI’s Future</a></p>
-
+<p><strong><a href="https://www.eetimes.com/optical-computing-chip-runs-hardest-math-problems-100x-faster-than-gpus/">Optical Chip Solves Hardest Math Problems Faster than GPUs</a></strong></p>
 <blockquote>
-  <p>Optical computers may have finally found a use—improving artificial intelligence</p>
+  <p>Optical computing startup Lightelligence has demonstrated a silicon photonics accelerator running the Ising problem more than 100 times faster than a typical GPU setup.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
