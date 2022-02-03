@@ -1843,7 +1843,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ceremorphic_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-<p><strong><a href=https://www.eetimes.com/redpine-founder-launches-ai-processor-startup/">Redpine Founder Launches AI Processor Startup</a></strong></p>
+<p><strong><a href="https://www.eetimes.com/redpine-founder-launches-ai-processor-startup/">Redpine Founder Launches AI Processor Startup</a></strong></p>
 <blockquote>
   <p>Ceremorphic, an AI chip startup emerging from stealth mode this week, is readying a heterogeneous AI processor aimed at model training in data centers, automotive, high-performance computing, robotics and other emerging applications.</p>
 </blockquote> 
