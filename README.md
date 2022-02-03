@@ -1816,7 +1816,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Quatric_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-<p><strong><a href=https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
+<p><strong><a href="https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
 <blockquote>
   <p>BURLINGAME, Calif., June 22, 2021 — Quadric (quadric.io), an innovator in high-performance edge processing, has introduced a unified silicon and software platform that unlocks the power of on-device AI. </p>
 </blockquote> 
@@ -1825,7 +1825,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-<p><strong><a href=https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
 <blockquote>
   <p>5G is the current revolution in wireless technology, and every chip company old and new is trying to burrow their way into this ultra-competitive — but extremely lucrative — market. One of the most interesting new players in the space is EdgeQ, a startup with a strong technical pedigree via Qualcomm that we covered last year after it raised a nearly $40 million Series A.</p>
 </blockquote> 
@@ -1834,7 +1834,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innatera_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-<p><strong><a href=https://www.eetimes.com/innatera-unveils-neuromorphic-ai-chip-to-accelerate-spiking-networks/">Innatera Unveils Neuromorphic AI Chip to Accelerate Spiking Networks</a></strong></p>
+<p><strong><a href="https://www.eetimes.com/innatera-unveils-neuromorphic-ai-chip-to-accelerate-spiking-networks/">Innatera Unveils Neuromorphic AI Chip to Accelerate Spiking Networks</a></strong></p>
 <blockquote>
   <p>Innatera, the Dutch startup making neuromorphic AI accelerators for spiking neural networks, has produced its first chips, gauged their performance, and revealed details of their architecture.</p>
 </blockquote> 
