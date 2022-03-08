@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Graphcore">Graphcore</a>.</li>
 <li>Add startup <a href="#Ceremorphic">Ceremorphic</a>.</li>
 <li>Add news of <a href="#Lightelligence">Lightelligence</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
@@ -1032,15 +1033,18 @@ This nextplatform arcicle ["FPGA Startup Gathers Funding Force for Merged Hypers
 
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
-<p><strong><a href="https://www.graphcore.ai/mk2-benchmarks">MK2 PERFORMANCE BENCHMARKS</a></strong></p>
+<p><strong><a href="https://www.eetimes.com/graphcore-supercharges-ipu-with-wafer-on-wafer/">Graphcore Supercharges IPU with Wafer-on-Wafer</a></strong></p>
+<blockquote>
+  <p>Graphcore unveiled its third-generation intelligence processing unit (IPU), the first processor to be built using 3D wafer-on-wafer (WoW) technology.</p>
+</blockquote>
+ 
+<p><a href="https://www.graphcore.ai/mk2-benchmarks">MK2 PERFORMANCE BENCHMARKS</a></p>
 
 <p><a href="https://techcrunch.com/2020/02/24/graphcore-the-ai-chipmaker-raises-another-150m-at-a-1-95b-valuation/">Graphcore, the AI chipmaker, raises another $150M at a $1.95B valuation</a></p>
 <blockquote>
   <p>Graphcore, the Bristol-based startup that designs processors specifically for artificial intelligence applications, announced it has raised another $150 million in funding for R&D and to continue bringing on new customers. It’s valuation is now $1.95 billion.</p>
 </blockquote>
 
-
-<p><a href="https://www.graphcore.ai/posts/microsoft-and-graphcore-collaborate-to-accelerate-artificial-intelligence">Microsoft and Graphcore Colleborate to Accelerate Artificial Intelligence</a></p>
 
 <div align="center"><h3> </h3></div>
 
