@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Nvidia">Nvidia Hopper</a>.</li>
 <li>Add news of <a href="#Graphcore">Graphcore</a>.</li>
 <li>Add startup <a href="#Ceremorphic">Ceremorphic</a>.</li>
 <li>Add news of <a href="#Lightelligence">Lightelligence</a>.</li>
@@ -97,7 +98,13 @@
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
-<p><strong><a href="https://www.anandtech.com/show/16610/nvidia-unveils-grace-a-highperformance-arm-server-cpu-for-use-in-ai-systems">NVIDIA Unveils Grace: A High-Performance Arm Server CPU For Use In Big AI Systems</a></strong></p>
+
+<p><strong><a href="https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth">NVIDIA Hopper Architecture In-Depth</a></strong></p>
+<blockquote>
+  <p>Today during the 2022 NVIDIA GTC Keynote address, NVIDIA CEO Jensen Huang introduced the new NVIDIA H100 Tensor Core GPU based on the new NVIDIA Hopper GPU architecture. This post gives you a look inside the new H100 GPU and describes important new features of NVIDIA Hopper architecture GPUs.</p>
+</blockquote> 
+ 
+<p><a href="https://www.anandtech.com/show/16610/nvidia-unveils-grace-a-highperformance-arm-server-cpu-for-use-in-ai-systems">NVIDIA Unveils Grace: A High-Performance Arm Server CPU For Use In Big AI Systems</a></p>
 <blockquote>
   <p>Kicking off another busy Spring GPU Technology Conference for NVIDIA, this morning the graphics and accelerator designer is announcing that they are going to once again design their own Arm-based CPU/SoC. Dubbed Grace – after Grace Hopper, the computer programming pioneer and US Navy rear admiral – the CPU is NVIDIA’s latest stab at more fully vertically integrating their hardware stack by being able to offer a high-performance CPU alongside their regular GPU wares. According to NVIDIA, the chip is being designed specifically for large-scale neural network workloads, and is expected to become available in NVIDIA products in 2023.</p>
 </blockquote>
