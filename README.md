@@ -1716,4 +1716,213 @@ Radoslav Danilak, co-founder and chief executive officer of processor upstart Ta
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.cru
+<p><strong><a href="https://www.crunchbase.com/organization/rain-neuromorphics">Rain Neuromorphics on Crunchbase</a></strong></p>
+<blockquote>
+  <p>We build artificial intelligence processors, inspired by the brain. Our mission is to enable brain-scale intelligence.</p>
+</blockquote>
+
+<p><a name="ABR"></a></p>
+
+<div align="center"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ABR_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.crunchbase.com/organization/applied-brain-research">Applied Brain Research on Crunchbase</a></strong></p>
+<blockquote>
+  <p>ABR makes the world's most advanced neuromoprhic compiler, runtime and libraries for the emerging space of neuromorphic computing.</p>
+</blockquote>
+
+<p><a name="Xmos"></a></p>
+
+<div align="center"><a href="https://www.xmos.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xmos_logo.png" height="40"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.eetimes.com/xmos-adapts-xcore-into-aiot-crossover-processor/">XMOS adapts Xcore into AIoT ‘crossover processor’</a></strong></p>
+<blockquote>
+  <p>EE Times exclusive! The new chip targets AI-powered voice interfaces in IoT devices — “the most important AI workload at the endpoint.”</p>
+</blockquote>
+
+<p><a href="https://venturebeat.com/2020/02/12/xmos-unveils-xcore-ai-a-powerful-chip-designed-for-ai-processing-at-the-edge/">XMOS unveils Xcore.ai, a powerful chip designed for AI processing at the edge</a></p>
+<blockquote>
+  <p>The latest xcore.ai is a crossover chip designed to deliver high-performance AI, digital signal processing, control, and input/output in a single device with prices from $1.</p>
+</blockquote>
+
+<p><a name="DinoplusAI"></a></p>
+
+<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/DinoplusAI_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>We design and produce AI processors and the software to run them in data centers. Our unique approach optimizes for inference with the focus on performance, power efficiency, and ease of use; and at the same time our approach enables cost-effective training. </p>
+</blockquote>
+
+<p><a name="Furiosa"></a></p>
+
+<div align="center"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Furiosa_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>We build high-performance AI inference coprocessors that can be seamlessly integrated into various computing platforms including data centers, servers, desktops, automobiles and robots. </p>
+</blockquote>
+
+<p><a name="Corerain"></a></p>
+
+<div align="center"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Corerain_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<blockquote>
+  <p>Corerain provides ultra-high performance AI acceleration chips and the world's first streaming engine-based AI development platform.</p>
+</blockquote>
+
+<p><a name="Perceive"></a></p>
+
+<div align="center"><a href="https://perceive.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Perceive_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><a href="https://venturebeat.com/2020/03/31/perceive-emerges-from-stealth-with-ergo-edge-ai-chip/">Perceive emerges from stealth with Ergo edge AI chip</a></p>
+<blockquote>
+  <p>On-device computing solutions startup Perceive emerged from stealth today with its first product: the Ergo edge processor for AI inference. CEO Steve Teig claims the chip, which is designed for consumer devices like security cameras, connected appliances, and mobile phones, delivers “breakthrough” accuracy and performance in its class.</p>
+</blockquote>
+
+<p><a name="SimpleMachines"></a></p>
+
+<div align="center"><a href="https://www.simplemachines.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SimpleMachines_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><a href="https://www.design-reuse.com/news/49012/simplemachines-ai-chip-tsmc-16nm.html">SimpleMachines, Inc. Debuts First-of-its-Kind High Performance Chip</a></p>
+<blockquote>
+  <p>As traditional chip makers struggle to embrace the challenges presented by the rapidly evolving AI software landscape, a San Jose startup has announced it has working silicon and a whole new future-proof chip paradigm to address these issues.
+
+The SimpleMachines, Inc. (SMI) team – which includes leading research scientists and industry heavyweights formerly of Qualcomm, Intel and Sun Microsystems – has created a first-of-its-kind easily programmable, high-performance chip that will accelerate a wide variety of AI and machine-learning applications. </p>
+</blockquote>
+
+<p><a name="Neureality"></a></p>
+
+<div align="center"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Neureality_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.electronicsmedia.info/2021/05/06/neureality-unveiled-nr1-p-a-novel-ai-centric-inference-platform/">NeuReality unveiled NR1-P, A novel AI-centric inference platform</a></strong></p>
+<blockquote>
+  <p>NeuReality has unveiled NR1-P, a novel AI-centric inference platform. NeuReality has already started demonstrating its AI-centric platform to customers and partners. NeuReality has redefined today’s outdated AI system architecture by developing an AI-centric inference platform based on a new type of System-on-Chip (SoC). </p>
+</blockquote>
+
+<p><a href="https://techcrunch.com/2021/02/10/neureality-raises-8m-for-its-novel-ai-inferencing-platform/">NeuReality raises $8M for its novel AI inferencing platform</a></p>
+<blockquote>
+  <p>NeuReality, an Israeli AI hardware startup that is working on a novel approach to improving AI inferencing platforms by doing away with the current CPU-centric model, is coming out of stealth today and announcing an $8 million seed round. </p>
+</blockquote>
+ 
+<p><a name="AnalogInference"></a></p>
+<div align="center"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.eenewsanalog.com/news/analog-inference-startup-raises-106-million">Analog inference startup raises $10.6 million</a></strong></p>
+<blockquote>
+  <p>The company is backed by Khosla Ventures and is developing its first generation of products for AI computing at the edge. The company raised $4.5 million shortly after its formation in March 2018, so the latest tranche brings the total raised to-date to $15.1 million</p>
+</blockquote>
+
+<p><a name="Quadric"></a></p>
+<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Quatric_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
+<blockquote>
+  <p>BURLINGAME, Calif., June 22, 2021 — Quadric (quadric.io), an innovator in high-performance edge processing, has introduced a unified silicon and software platform that unlocks the power of on-device AI. </p>
+</blockquote> 
+
+<p><a name="EdgeQ"></a></p>
+<div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
+<blockquote>
+  <p>5G is the current revolution in wireless technology, and every chip company old and new is trying to burrow their way into this ultra-competitive — but extremely lucrative — market. One of the most interesting new players in the space is EdgeQ, a startup with a strong technical pedigree via Qualcomm that we covered last year after it raised a nearly $40 million Series A.</p>
+</blockquote> 
+ 
+<p><a name="Innatera"></a></p>
+<div align="center"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innatera_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.eetimes.com/innatera-unveils-neuromorphic-ai-chip-to-accelerate-spiking-networks/">Innatera Unveils Neuromorphic AI Chip to Accelerate Spiking Networks</a></strong></p>
+<blockquote>
+  <p>Innatera, the Dutch startup making neuromorphic AI accelerators for spiking neural networks, has produced its first chips, gauged their performance, and revealed details of their architecture.</p>
+</blockquote> 
+ 
+<p><a name="Ceremorphic"></a></p>
+<div align="center"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ceremorphic_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.eetimes.com/redpine-founder-launches-ai-processor-startup/">Redpine Founder Launches AI Processor Startup</a></strong></p>
+<blockquote>
+  <p>Ceremorphic, an AI chip startup emerging from stealth mode this week, is readying a heterogeneous AI processor aimed at model training in data centers, automotive, high-performance computing, robotics and other emerging applications.</p>
+</blockquote> 
+ 
+<div align="center"><h3> </h3></div>
+
+<p><a name="AIChipCompilers"></a></p>
+
+<div align="center"><h2>AI Chip Compilers</h2></div>
+
+<p><HR>
+1. <a href="https://github.com/pytorch/glow">pytorch/glow</a><br>
+2. <a href="https://tvm.ai/">TVM:End to End Deep Learning Compiler Stack</a><br>
+3. <a href="https://www.tensorflow.org/xla">Google Tensorflow XLA</a></strong><br>
+4. <a href="https://developer.nvidia.com/tensorrt">Nvidia TensorRT</a><br>
+5. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
+6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
+7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
+8. <a href="https://onnc.ai/">ONNC (Open Neural Network Compiler)</a><br>
+9. <a href="https://mlir.llvm.org/">MLIR: Multi-Level Intermediate Representation</a><br>
+10. <a href="http://tensor-compiler.org/">The Tensor Algebra Compiler (taco)</a><br>
+11. <a href="https://facebookresearch.github.io/TensorComprehensions/">Tensor Comprehensions</a><br>
+12. <a href="https://www.polymagelabs.com//">PolyMage Labs</a><br>
+13. <a href="https://octoml.ai/">OctoML</a><br>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="AIChipBenchmarks"></a></p>
+
+<div align="center"><h2>AI Chip Benchmarks</h2></div>
+
+<p><HR>
+
+1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
+2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
+3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. 
+<strong>You can find MLPerf training results v1.0 <a href="https://mlcommons.org/en/news/mlperf-training-v10/">here.</a></strong>. <br>
+<strong>You can find MLPerf inference results v1.1 <a href="https://mlcommons.org/en/news/mlperf-inference-v11/">here.</a></strong>. <br>
+<strong>You can find MLPerf HPC results v1.0 <a href="https://mlcommons.org/en/news/mlperf-hpc-v1/">here.</a></strong>. <br>
+<strong>You can find MLPerf training results v1.1 <a href="https://mlcommons.org/en/news/mlperf-training-v11/">here.</a></strong>. <br>
+4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
+5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
+6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
+7. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark Benchmark</a><br>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Reference"></a></p>
+
+<div align="center"><h2>Reference</h2></div>
+
+<p><HR>
+
+<div align="center"><h3> </h3></div>
+      
+1. <a href="https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html">FPGAs and AI processors: DNN and CNN for all</a><br>
+2. <a href="http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/">12 AI Hardware Startups Building New AI Chips</a><br>
+3. <a href="http://eyeriss.mit.edu/tutorial.html">Tutorial on Hardware Architectures for Deep Neural Networks</a><br>
+4. <strong><a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a></strong><br>
+5. "White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a><br>
+5. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
+6. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
+7. <strong><a href="https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38">TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware</a></strong><br>
+
+<div align="center">
+<a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
+</div>
