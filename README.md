@@ -39,30 +39,6 @@
 <li>Add news of <a href="#Groq">Groq</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
-<li>Add news of <a href="#Baidu">Baidu</a>.</li>
-<li>Updates of <a href="#Deepvision">Deep Vision</a>.</li>
-<li>Add news of <a href="#Flexlogix">Flex Logix</a>.</li>
-<li>Update <a href="#AIChipCompilers"> AI Compiler section</a>.</li>
-<li>Add the article "TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware" in <a href="#Reference"> Reference section</a>.</li>
-<li>Add news of <a href="#Tenstorrent"> Tenstorrent</a>.</li>
-<li>Add news of <a href="#Synaptics"> Synaptics Katana Platform</a>.</li>
-<li>Add <a href="#Graphcore"> Graphcore MK2 PERFORMANCE BENCHMARKS</a>.</li>
-<li>Add news of <a href="#SambaNova"> SambaNova</a>.</li>
-<li>Add news of <a href="#Esperanto"> Esperanto's ML Chip</a>.</li>
-<li>Add news of <a href="#Amazon_AWS"> AWS Trainium</a>.</li>
-<li>Add startup <a href="#SimpleMachines">SimpleMachines</a>.</li>
-<li>Add news of <a href="#SKT">SK Telecom SAPEON X220</a>.</li>
-<li>Add news of <a href="#Imagination">Imagination AI accelerator</a>.</li>
-<li>Add news of <a href="#Mythic">Mythic</a>.</li>
-<li>Add link to <a href="#AIChipBenchmarks">MLPerf Inference Results 0.7</a>.</li>
-<li>Add news of <a href="#Qualcomm"> Qualcomm Cloud AI 100</a>.</li>
-<li>Add link to <a href="#AIChipBenchmarks">MLPerf Training Results 0.7</a>.</li>
-<li>Add <a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a> in <a href="#Reference">Reference</a>.</li>
-<li>Add <a href="https://birenresearch.github.io/AIChip_Paper_List/">AIchip Paper List</a> in <a href="#Reference">Reference</a>.</li>
-<li>Add news of <a href="#Nvidia">Nvidia A100</a>.</li>
-<li>Add <a href="#Sony">Sony's Intelligent Vision Sensors</a>.</li>
-<li>Add a series of articles "What We Talk About When We Talk About AI Chip" in <a href="#Reference">Reference</a> section.</li>
-<li>Add news of <a href="#Wave">Wave Computing</a>.</li>
 </ul>
 </font>
 
