@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add startup <a href="#Modular">Modular AI in AI compiler section</a>.</li>
 <li>Add startup <a href="#Teramem">TeraMem</a>.</li>
 <li>Add startup <a href="#Aspinity">Aspinity</a>.</li>
 <li>Add news of <a href="#Synopsys">Synopsys DesignWare ARC NPX6 NPU IP</a>.</li>
@@ -1892,7 +1893,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <p><HR>
 1. <a href="https://github.com/pytorch/glow">pytorch/glow</a><br>
 2. <a href="https://tvm.ai/">TVM:End to End Deep Learning Compiler Stack</a><br>
-3. <a href="https://www.tensorflow.org/xla">Google Tensorflow XLA</a></strong><br>
+3. <a href="https://www.tensorflow.org/xla">Google Tensorflow XLA</a><br>
 4. <a href="https://developer.nvidia.com/tensorrt">Nvidia TensorRT</a><br>
 5. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
 6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
@@ -1903,6 +1904,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 11. <a href="https://facebookresearch.github.io/TensorComprehensions/">Tensor Comprehensions</a><br>
 12. <a href="https://www.polymagelabs.com//">PolyMage Labs</a><br>
 13. <a href="https://octoml.ai/">OctoML</a><br>
+14. <a href="https://www.modular.com/">Modular AI</a><br>
 
 <div align="center"><h3> </h3></div>
 
