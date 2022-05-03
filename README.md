@@ -58,7 +58,7 @@
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#PEZY">PEZY</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#Deepvision">Deep Vision</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem</a></td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Knowm">Knowm</a>, <a href="#Mythic">Mythic</a>, <a href="#Kalray">Kalray</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Aimotive">AImotive</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Krtkl">Krtkl</a>, <a href="#NovuMind">NovuMind</a>, <a href="#REM">REM</a>, <a href="#TERADEEP">TERADEEP</a>, <a href="#Deepvision">Deep Vision</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#ThinkSilicon">ThinkSilicon</a>, <a href="#Innogrit">Innogrit</a>, <a href="#Kortiq">Kortiq</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem</a></td>
   </tr>
 </table>
 
@@ -453,19 +453,6 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a name="Wave"></a></p>
-
-<div align="center"><a href="http://wavecomp.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Wave_Computing_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://semiwiki.com/ip/284876-wave-computing-and-mips-waves-goodbye/">Wave Computing and MIPS Wave Goodbye</a></strong></p>
-<blockquote>
-  <p>Word on the virtual street is that Wave Computing is closing down. The company has reportedly let all employees go and filed for Chapter 11. As one of the many promising new companies in the field of AI, Wave Computing was founded in 2008 with the mission “to revolutionize deep learning with real-time AI solutions that scale from the edge to the datacenter.”</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="Graphcore"></a></p>
 
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
@@ -489,47 +476,21 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 <p><a href="https://mp.weixin.qq.com/s/AMuqeaShqEv3DnibH3scEA">Graphcore AI芯片：更多分析</a> More analysis.</p>
 <p><a href="https://mp.weixin.qq.com/s/qP0zsSA7SQWXDqWGEAXmOg">深度剖析AI芯片初创公司Graphcore的IPU</a> In-depth analysis after more information was disclosed.</p>
 
-
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="PEZY"></a></p>
-
-<div align="center"><a href="http://pezy.co.jp/en/index.html"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PEZY_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://fuse.wikichip.org/news/191/the-2048-core-pezy-sc2-sets-a-green500-record/">The 2,048-core PEZY-SC2 sets a Green500 record</a></p>
-
-<blockquote>
-  <p>The SC2 is a second-generation chip featuring twice as many cores – i.e., 2,048 cores with 8-way SMT for a total of 16,384 threads. Operating at 1 GHz with 4 FLOPS per cycle per core as with the SC, the SC2 has a peak performance of 8.192 TFLOPS (single-precision). Both prior chips were manufactured on TSMC’s 28HPC+, however in order to enable the considerably higher core count within reasonable power consumption, PEZY decided to skip a generation and go directly to TSMC’s 16FF+ Technology.</p>
-</blockquote>
-
 <div align="center"><h3> </h3></div>
 
 <p><a name="Tenstorrent"></a></p>
 
-<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="70"></a></div>
+<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="100"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.prnewswire.com/news-releases/tenstorrent-raises-over-200-million-at-1-billion-valuation-to-create-programmable-high-performance-ai-computers-301295913.html">Tenstorrent Raises over $200 million at $1 billion Valuation to Create Programmable, High Performance AI Computers</a></strong></p>
+<p><a href="https://www.prnewswire.com/news-releases/tenstorrent-raises-over-200-million-at-1-billion-valuation-to-create-programmable-high-performance-ai-computers-301295913.html">Tenstorrent Raises over $200 million at $1 billion Valuation to Create Programmable, High Performance AI Computers</a></p>
 <blockquote>
   <p>TORONTO, May 20, 2021 /PRNewswire/ - Tenstorrent, a hardware start-up developing next generation computers, announced today that it has raised over $200 million in a recent funding round that values the company at $1 billion. The round was led by Fidelity Management and Research Company and includes additional investments from Eclipse Ventures, Epic CG and Moore Capital. </p>
 </blockquote> 
  
-<p><a href="https://www.anandtech.com/show/16354/jim-keller-becomes-cto-at-tenstorrent-the-most-promising-architecture-out-there">Jim Keller Becomes CTO at Tenstorrent: "The Most Promising Architecture Out There</a></p>
-<blockquote>
-  <p> Today Tenstorrent is announcing that Jim Keller, compute architect extraordinaire, has joined the company as its Chief Technology Officer, President, and joins the company board.</p>
-</blockquote>
-
-<p><a href="https://www.forbes.com/sites/tiriasresearch/2020/04/06/perceive-exits-stealth-with-super-efficient-machine-learning-chip-for-smarter-devices/#259060006d9c">Tenstorrent Launches AI Chip With Conditional Execution</a></p>
-<blockquote>
-  <p>Now Tenstorrent’s claim to future fame and potentially the crown is all about reducing the computation required to get to a good answer, instead of throwing massive amounts of brute-force compute at the problem. The technique is called fine-grained conditional computation, and it is just the beginning of an optimization roadmap Tenstorrent CEO, Ljubisa Bajic, has up his sleeves.</p>
-</blockquote>
-
-<p><a href="http://tenstorrent.com/index.html">Tenstorrent</a> is a small Canadian start-up in Toronto claiming an order of magnitude improvement in efficiency for deep learning, like most. No real public details but they're are on the <a href="http://www.cogniteventures.com/the-cognitive-computing-startup-list/">Cognitive 300 list</a>.</p>
-
+<p><a href="https://www.anandtech.com/show/16709/an-interview-with-tenstorrent-ceo-ljubisa-bajic-and-cto-jim-keller">An Interview with Tenstorrent: CEO Ljubisa Bajic and CTO Jim Keller</a></p>
+ 
 <div align="center"><h3> </h3></div>
 
 <p><a name="Blaize"></a></p>
@@ -538,10 +499,9 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://venturebeat.com/2019/11/12/blaize-emerges-from-stealth-with-87-million-for-its-custom-designed-ai-chips/">Blaize emerges from stealth with $87 million for its custom-designed AI chips</a></p>
-
+<p><a href="https://www.eetimes.com/automotive-ai-startup-blaize-closes-71-million-funding-round/">Automotive AI Startup Blaize Closes $71 Million Funding Round</a></p>
 <blockquote>
-  <p>The fierce competition isn’t deterring Blaize (formerly Thinci), which hopes to stand out from the crowd with a novel graph streaming architecture. The nine-year-old startup’s claimed system-on-chip performance is impressive, to be fair, which is likely why it’s raised nearly $100 million from investors including automotive component maker Denso.</p>
+  <p>Blaize, formerly ThinCI, has closed a Series D round of funding at $71 million. New investor Franklin Templeton and existing investor Temasek led the round, along with participation from Denso and other new and existing investors. This round brings Blaize’s total funding to around $155 million total.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -566,47 +526,21 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a href="http://www.adapteva.com/">Adapteva</a> has taken in $5.1 million in funding from investors that include mobile giant Ericsson. <a href="http://www.parallella.org/docs/e5_1024core_soc.pdf">The paper "Epiphany-V: A 1024 processor 64-bit RISC System-On-Chip"</a> describes the design of Adapteva's 1024-core processor chip in 16nm FinFet technology. </p>
 
-<div align="center"><h3> </h3></div>
-
-<p><a name="Knowm"></a></p>
-
-<div align="center"><a href="http://knowm.org/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Knowm_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="http://knowm.org/">Knowm</a> is actually setup as a .ORG but they appear to be pursuing a for-profit enterprise. The New Mexcio startup has taken in an undisclosed amount of seed funding so far to develop a new computational framework called <a href="http://knowm.org/ahah-computing/">AHaH Computing</a> (Anti-Hebbian and Hebbian). The gory details can be found in <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085175">this publication</a>, but the short story is that this technology aims to reduce the size and power consumption of intelligent machine learning applications by up to 9 orders of magnitude.</p>
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="Mythic"></a></p>
 
-<div align="center"><a href="https://www.mythic-ai.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="20"></a></div>
+<div align="center"><a href="https://mythic.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="20"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.linkedin.com/pulse/era-analog-compute-has-arrived-michael-b-henry/">The Era of Analog Compute has Arrived!</a></strong> </p>
+<p><a href="https://www.linkedin.com/pulse/era-analog-compute-has-arrived-michael-b-henry/">The Era of Analog Compute has Arrived!</a></p>
 <blockquote>
   <p>ResNet-50 in our prototype analog AI processor. Production release will support 900-1000 fps and INT8 accuracy at 3W.</p>
 </blockquote>
-
-<p>A battery powered neural chip from <a href="https://www.mythic-ai.com/technology/">Mythic</a> with 50x lower power.</p>
+ 
+<p><a href="https://venturebeat.com/2021/06/07/mythic-launches-analog-ai-processor-that-consumes-10-times-less-power/">Mythic launches analog AI processor that consumes 10 times less power</a></p>
 <blockquote>
-  <p>Founded in 2012, Texas-based startup Mythic (formerly known as Isocline) has taken in $9.5 million in funding with Draper Fisher Jurvetson as the lead investor. Prior to receiving any funding, the startup has taken in <a href="https://techcrunch.com/2017/03/22/mythic-launches-a-chip-to-enable-computer-vision-and-voice-control-on-any-device/">$2.5 million in grants</a>. Mythic is developing an AI chip that “puts desktop GPU compute capabilities and deep neural networks onto a button-sized chip – with 50x higher battery life and far more data processing capabilities than competitors“. Essentially, that means you can give voice control and computer vision to any device locally without needing cloud connectivity.</p>
+  <p>Analog AI processor company Mythic launched its M1076 Analog Matrix Processor today to provide low-power AI processing.</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Kalray"></a></p>
-
-<div align="center"><a href="http://www.kalrayinc.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kalray_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.hpcwire.com/off-the-wire/kalray-releases-the-kalray-neural-network-3-0/">Kalray Releases the Kalray Neural Network 3.0</a> </p>
-<blockquote>
-  <p>Kalray (Euronext Growth Paris – ALKAL), a pioneer in processors for new intelligent systems, has announced the launch of the Kalray Neural Network 3.0 (KaNN), a platform for Artificial Intelligence application development. KaNN allows developers to seamlessly port their AI-based algorithms from well-known machine learning frameworks including Caffe, Torch and TensorFlow onto Kalray’s Massively Parallel Processor Array (MPPA) intelligent processor.</p>
-</blockquote>
-
 
 <div align="center"><h3> </h3></div>
 
@@ -616,83 +550,10 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.design-reuse.com/news/47498/brainchip-akida-neural-processing-ip-tinyml-summit-2020.html">BrainChip Showcases Vision and Learning Capabilities of its Akida Neural Processing IP and Device at tinyML Summit 2020</a> </p>
+<p><a href="hhttps://venturebeat.com/2022/01/18/brainchip-launches-neuromorphic-process-for-ai-at-the-edge/">BrainChip launches neuromorphic process for AI at the edge</a> </p>
 <blockquote>
-  <p>BrainChip Holdings Ltd. (ASX: BRN), a leading provider of ultra-low power, high-performance edge AI technology, today announced that it will present its revolutionary new breed of neuromorphic processing IP and Device in two sessions at the tinyML Summit at the Samsung Strategy & Innovation Center in San Jose, California February 12-13.</p>
+  <p>BrainChip today announced the commercialization of its Akida neural networking processor. Aimed at a variety of edge and internet of things (IoT) applications, BrainChip claims to be the first commercial producer of neuromorphic AI chips, which could deliver benefits in ultra-low power and performance over conventional approaches.</p>
 </blockquote>
-
-<p>BrainChip Inc (CA. USA) was the first company to offer a <a href="http://www.brainchipinc.com/technology">Spiking Neural processor</a>, which was patented in 2008 (patent US 8,250,011). The current device, called the BrainChip Accelerator is a chip intended for rapid learning. It is offered as part of the BrainChip Studio software. BrainChip is a publicly listed company as part of BrainChip Holdings Ltd.</p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Aimotive"></a></p>
-
-<div align="center"><a href="https://aimotive.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aimotive_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://aimotive.com/news/content/1223">aiWare3 Hardware IP Helps Drive Autonomous Vehicles To Production.</p>
-
-<blockquote>
-  <p>Latest technology enables scalable, low-power automotive inference engines with >50 TMAC/s NN processing power.</p>
-  <p>MOUNTAIN VIEW, Calif., October 30, 2018 – AImotive™, the global provider of full stack, vision-first self-driving technology, today announced the release of aiWare3™, the company’s 3rd generation, scalable, low-power, hardware Neural Network (NN) acceleration core. </p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Leepmind"></a></p>
-
-<div align="center"><a href="https://leapmind.io/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Leepmind_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://leapmind.io/en/technology/">Leepmind</a> is carrying out research on original chip architectures in order to implement Neural Networks on a circuit enabling low power DeepLearning</p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Krtkl"></a></p>
-
-<div align="center"><a href="http://krtkl.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Krtkl_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<blockquote>
-  <p>A crowdfunding effort for Snickerdoodle raised $224,876 and they’re currenty shipping. If you pre-order one, they’ll deliver it by summer. The palm-sized unit uses the Zynq “System on Chip” (SoC) from Xilinix.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="NovuMind"></a></p>
-
-<div align="center"><a href="http://www.novumind.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Novumind_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<blockquote>
- 
-  <p>NovuMind combines big data, high-performance, and heterogeneous computing to change the Internet of Things (IoT) into the Intelligent Internet of Things (I²oT).
-  Here is a <a href="https://www.novumind.com/2019/05/29/moor-insights-paper-on-novumind/">paper from Moor Insights & Strategy, a global technology analyst and research firm.</a> about NovuMind</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="REM"></a></p>
-
-<div align="center"><a href="http://www.remicro.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/REM_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="http://www.remicro.com/">Reduced Energy Microsystems</a> are developing lower power asynchronous chips to suit CNN inference. REM was Y Combinator's first ASIC venture according to <a href="https://techcrunch.com/2017/03/16/reduced-energy-microsystems-pits-startup-chip-chops-against-industry-giants/">TechCrunch</a>.</p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="TERADEEP"></a></p>
-
-<div align="center"><a href="https://www.teradeep.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Teradeep_logo.png" height="80"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.teradeep.com/">TeraDeep</a> is building an AI Appliance using its deep learning FPGA’s acceleration. The company claims image recognition performance on AlexNet to achieve a 2X performance advantage compared with large GPUs, while consuming 5X less power. When compared to Intel’s Xeon processor, TeraDeep’s Accel technology delivers 10X the performance while consuming 5X less power.</p>
 
 <div align="center"><h3> </h3></div>
 
@@ -702,9 +563,9 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p>According to this article, <a href="https://techcrunch.com/2020/11/16/deep-vision-announces-its-low-latency-ai-processor-for-the-edge/">"Deep Vision announces its low-latency AI processor for the edge"</a></p>
+<p><a href="AI Processor Chipmaker Deep Vision Raises $35 Million in Series B Funding">AI Processor Chipmaker Deep Vision Raises $35 Million in Series B Funding</a></p>
 <blockquote>
-  <p>Deep Vision, a new AI startup that is building an AI inferencing chip for edge computing solutions, is coming out of stealth today. The six-year-old company’s new ARA-1 processors promise to strike the right balance between low latency, energy efficiency and compute power for use in anything from sensors to cameras and full-fledged edge servers.</p>
+  <p>Tiger Global Leads Series B Financing, Enabling Deep Vision to Expand Video Analytics and Natural Language Processing Capabilities in Edge Computing Applications</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -746,26 +607,6 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a name="Esperanto"></p>
-
-<div align="center"><a href="https://www.esperanto.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/esperanto_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://www.hpcwire.com/2020/12/08/esperanto-unveils-ml-chip-with-nearly-1100-risc-v-cores/">Esperanto Unveils ML Chip with Nearly 1,100 RISC-V Cores</a></strong></p>
-<blockquote>
-  <p>At the RISC-V Summit today, Art Swift, CEO of Esperanto Technologies, announced a new, RISC-V based chip aimed at machine learning and containing nearly 1,100 low-power cores based on the open-source RISC-V architecture. </p>
-</blockquote>
-
-<p>According to this article, <a href="https://fuse.wikichip.org/news/686/esperanto-exits-stealth-mode-aims-at-ai-with-a-4096-core-7nm-risc-v-monster/">"Esperanto exits stealth mode, aims at AI with a 4,096-core 7nm RISC-V monster"</a></p>
-
-<blockquote>
-  <p>Although <a href="https://www.esperanto.ai/">Esperanto</a> will be licensing the cores they have been designing, they do plan on producing their own products. The first product they want to deliver is the highest TeraFLOP per Watt machine learning computing system. Ditzel noted that the overall design is scalable in both performance and power. The chips will be designed in 7nm and will feature a heterogeneous multi-core architecture.<br><br></p>
-</blockquote>
-
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="SambaNova"></a></p>
 
 <div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
@@ -789,15 +630,13 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 
 <div align="center"><h3> </h3></div>
-
 <p><a name="GreenWaves"></a></p>
-
 <div align="center"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GreenWaves_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
-
+<p><a href="https://www.eetimes.eu/greenwaves-shows-off-advanced-audio-demos/">GreenWaves Shows Off Advanced Audio Demos</a></p>
 <blockquote>
-  <p>GreenWaves Technologies develops IoT Application Processors based on Open Source IP blocks enabling content understanding applications on embedded, battery-operated devices with unmatched energy efficiency. Our first product is GAP8. GAP8 provides an ultra-low power computing solution for edge devices carrying out inference from multiple, content rich sources such as images, sounds and motions. GAP8 can be used in a variety of different applications and industries.</p>
+  <p>The Gap9 processor, a successor to Gap8 which targets computer vision in IoT devices, is an ultra-low power neural network processor suitable for battery-powered devices. GreenWaves’ vice president of marketing Martin Croome told EE Times Europe that the company decided to focus Gap9 on the hearables market after receiving traction from this sector for Gap8.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -821,52 +660,10 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://techcrunch.com/2018/02/05/lightmatter-aims-to-reinvent-ai-specific-chips-with-photonic-computing-and-11m-in-funding/">Lightmatter aims to reinvent AI-specific chips with photonic computing and $11M in funding</a></p>
-
+<p><a href="https://www.eetimes.com/lightmatter-raises-more-funding-for-photonic-ai-chip/">Lightmatter Raises More Funding for Photonic AI Chip</a></p>
 <blockquote>
-  <p>It takes an immense amount of processing power to create and operate the “AI” features we all use so often, from playlist generation to voice recognition. Lightmatter  is a startup that is looking to change the way all that computation is done — and not in a small way. The company makes photonic chips that essentially perform calculations at the speed of light, leaving transistors in the dust. It just closed an $11 million Series A.</p>
+  <p>ightmatter, the MIT spinout building AI accelerators with a silicon photonics computing engine, announced a Series B funding round, raising an additional $80 million. The company’s technology is based on proprietary silicon photonics technology which manipulates coherent light inside a chip to perform calculations very quickly while using very little power</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="ThinkSilicon"></a></p>
-
-<div align="center"><a href="https://think-silicon.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ThinkSilicon_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://think-silicon.com/2018/02/21/1138-2/">First Low-Power AI-Inference Accelerator Vision Processing Unit From Think Silicon To Debut at Embedded World 2018</a></p>
-
-<blockquote>
-  <p>TORONTO, Canada/NUREMBERG, Germany – FEB 21st, 2018 – Think Silicon®, a leader in developing ultra-low power graphics IP technology, will demonstrate a prototype of NEMA® xNN, the world’s first low-power ‘Inference Accelerator’ Vision Processing Unit for artificial intelligence, convolutional neural networks at Embedded World 2018.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Innogrit"></a></p>
-
-<div align="center"><a href="https://innogritcorp.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innogrit_logo.png" height="35"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.eetimes.com/document.asp?doc_id=1334982#">Startup Puts AI Core in SSDs</a></p>
-<blockquote>
-  <p>Startup InnoGrit debuted a set of three controllers for solid-state drives (SSDs), including one for data centers that embeds a neural-network accelerator. They enter a crowded market with claims of power and performance advantages over rivals.</p>
-</blockquote>
-
-<p><a href="https://innogritcorp.com/technology">Innogrit Technologies Incorporated</a> is a startup seting out to solve the data storage and data transport problem in artificial intelligence and other big data applications through innovative integrated circuit (IC) and system solutions: Extracts intelligence from correlated data and unlocks the value in artificial intelligence systems; Reduces redundancy in big data and improves system efficiency for artificial intelligence applications; Brings networking capability to storage devices and offers unparalleled performance at large scales; Performs data computation within storage devices and boosts performance of large data centers.  </p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Kortiq"></a></p>
-
-<div align="center"><a href="http://www.kortiq.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kortiq_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="http://www.kortiq.com/">Kortiq</a> is a startup providing "FPGA based Neural Network Engine IP Core and The scalable Solution for Low Cost Edge Machine Learning Inference for Embedded Vision". Recently, they revealed some comparison data. You can also find the Preliminary Datasheet of their AIScaleCDP2 IP Core on their website.</p>
-
-<div align="center"><h3> </h3></div>
 
 <p><a name="Hailo"></a></p>
 
@@ -874,10 +671,9 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://venturebeat.com/2019/05/14/hailo-unveils-hailo-8-an-edge-chip-custom-designed-for-ai-workloads/amp/">Hailo unveils Hailo-8, an edge chip custom-designed for AI workloads</a></p>
-
+<p><a href="https://www.eetimes.com/unicorn-ai-chipmaker-hailo-raises-136-million/">‘Unicorn’ AI Chipmaker Hailo Raises $136 Million</a></p>
 <blockquote>
-  <p>......Hailo-8 is capable of 26 tera operations per second (TOPs) ...... In one preliminary test at an image resolution of 224 x 224, the Hailo-8 processed 672 frames per second compared with the Xavier AGX’s 656 frames and sucked down only 1.67 watts (equating to 2.8 TOPs per watt) versus the Nvidia chip’s 32 watts (0.14 TOPs per watt)......</p>
+  <p>Israeli AI chip startup Hailo has raised $136 million in a Series C funding round, bringing the company’s total to $224 million. The company has also reportedly reached “unicorn” status.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
