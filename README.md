@@ -48,13 +48,13 @@
 <HR>
 <table style="width:100%">
   <tr>
-    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#Xilinx">Xilinx</a>, <a href="#IBM">IBM</a>, <a href="#STMicroelectronics">STMicroelectronics</a>, <a href="#NXP">NXP</a>, <a href="#Marvell">Marvell</a>, <a href="#MediaTek">MediaTek</a>, <a href="#HiSilicon">HiSilicon</a>, <a href="#Rockchip">Rockchip</a>, <a href="#Renesas_Electronics">Renesas Electronics</a>, <a href="#Ambarella">Ambarella</a>, <a href="#Sony">Sony</a></td><td>17</td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>,<a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a></td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba_Cloud">Aliyun</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Baidu_Cloud">Baidu Cloud</a>, <a href="#HUAWEI">HUAWEI</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#HPE">HPE</a>, <a href="#Tesla">Tesla</a>, <a href="#LG">LG</a>, <a href="#SKT">SK Telecom</a></td><td>16</td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#Tesla">Tesla</a></td>
   </tr>
   <tr>
-    <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a>, <a href="#Videantis">Videantis</a></td><td>7</td>
+    <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td>
   </tr>
   <tr>
     <th><a href="#Startups_in_China">Startups in China</a></th>
@@ -359,19 +359,14 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="30"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><a href="http://pages.arm.com/dynamiq-technology.html">DynamIQ</a> is embedded IP giant's answer to AI age. It may not be a revolutionary design but is important for sure.<br><br>
-ARM also provide a open source <a href="https://developer.arm.com/technologies/compute-library">Compute Library</a> contains a comprehensive collection of software functions implemented for the Arm Cortex-A family of CPU processors and the Arm Mali family of GPUs.<br><br>
-<a href="https://developer.arm.com/products/processors/machine-learning/arm-ml-processor">Arm Machine Learning Processor</a></p>
-
+<a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-n78">NPU ETHOS-N78</a></p>
 <blockquote>
   <p>Specifically designed for inference at the edge, the ML processor gives an industry-leading performance of 4.6 TOPs, with a stunning efficiency of 3 TOPs/W for mobile devices and smart IP cameras.</p>
 </blockquote>
 
 <p><strong><a href="https://www.anandtech.com/show/12791/arm-details-project-trillium-mlp-architecture">ARM Details "Project Trillium" Machine Learning Processor Architecture</a></strong></p>
-
 <blockquote>
-  <p>Arm details more of the architecture of what Arm now seems to more consistently call their “machine learning processor” or MLP from here on now. The MLP IP started off a blank sheet in terms of architecture implementation and the team consists of engineers pulled off from the CPU and GPU teams.</p>
+  <p>Arm’s second-generation, highly scalable and efficient NPU, the Ethos-N78 enables new immersive applications with a 2.5x increase in single-core performance now scalable from 1 to 10 TOP/s and beyond through many-core technologies. It provides flexibility to optimize the ML capability with 90+ configurations.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -396,12 +391,9 @@ ARM also provide a open source <a href="https://developer.arm.com/technologies/c
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.imgtec.com/powervr/vision/">PowerVR Series2NX Neural Network Accelerator</a></p>
-
-<p><strong><a href="https://www.imaginationtech.com/news/press-release/imagination-launches-multi-core-img-series4-nna-the-ultimate-ai-accelerator-delivering-industry-disruptive-performance-for-adas-and-autonomous-driving/">Imagination launches multi-core IMG Series4 NNA – the ultimate AI accelerator delivering industry-disruptive performance for ADAS and autonomous driving</a></strong></p>
-
+<p><a href="https://www.imaginationtech.com/products/ai/">AI Processors</a></p>
 <blockquote>
-  <p>the company is announcing the first products in the 2NX NNA family: the higher-performance AX2185 and lower-cost AX2145.</p>
+  <p>Whether you want smartness residing in the palm of your hand, consumer products or industrial robots, or enabled by powerful servers in the cloud, we can help you achieve your vision. We enable the smartness in your products with our PowerVR Neural Network Accelerators (NNA) and GPUs. Our NC-SDK enables seamless deployment of AI acceleration on either our hardware IP either in isolation or combined. Our NNA provides maximum efficiency with a scalable architecture which enables a wide range of smart edge and end point devices from low performance IoT to high performance RoboTaxi.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -411,46 +403,28 @@ ARM also provide a open source <a href="https://developer.arm.com/technologies/c
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/CEVA_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><a href="http://www.ceva-dsp.com/product/ceva-xm6/">CEVA-XM6 Fifth-generation computer vision and deep learning embedded platform</a><br><br>
-<a href="http://mp.weixin.qq.com/s/rosyXJew4B0NvzY73uHz5w">处理器IP厂商的机器学习方案 - CEVA</a></p>
-
-<p><a href="https://www.anandtech.com/show/12217/ceva-announces-neupro-neural-network-ip">CEVA Announces NeuPro Neural Network IP</a></p>
-
+<p><a href="https://www.ceva-dsp.com/app/deep-learning/">Deep learning for the real-time embedded world</a></p>
 <blockquote>
-  <p>Ahead of CES CEVA announced a new specialised neural network accelerator IP called NeuPro.</p>
+  <p>One solution lies in supplying a dedicated low power AI processor for Deep Learning at the edge, combined with a deep neural network (DNN) graph compiler</p>
 </blockquote>
 
+
 <div align="center"><h3> </h3></div>
-
 <p><a name="Cadence"></a></p>
-
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cadence_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><a href="https://ip.cadence.com/vision&amp;CMP=TIP_BB_CDN_Vis_0501_C5_PP">Tensilica Vision DSPs for Imaging, Computer Vision, and Neural Networks</a></p>
+<p><a href="https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html">Tensilica AI Platform</a></p>
 
 <div align="center"><h3> </h3></div>
-
 <p><a name="VeriSilicon"></a></p>
-
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/VeriSilicon_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><a href="http://www.verisilicon.com/newsdetail_499_VivanteVIP8000.html">VeriSilicon’s Vivante VIP8000 Neural Network Processor IP Delivers Over 3 Tera MACs Per Second</a><br><br>
-<a href="https://mp.weixin.qq.com/s/1W8mAMR9xaljZPLyEW0Xmw">神经网络DSP核的一桌麻将终于凑齐了</a><br></p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Videantis"></a></p>
-
-<div align="center"><a href="http://www.videantis.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/videantis_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
-
-<p>The <a href="http://www.videantis.com/products/deep-learning">v-MP6000UDX processor from Videantis</a> is a scalable processor family that has been designed to run high-performance deep learning, computer vision, imaging and video coding applications in a low power footprint. </p>
+<p><a href="https://www.verisilicon.com/en/IPPortfolio/VivanteNPUIP">Vivante® NPU IP</a></p>
+<blockquote>
+  <p>VeriSilicon's Neural Network Processor (NPU) IP is a highly scalable, programmable computer vision and artificial intelligence processor that supports AI operations upgrades for endpoints, edge devices, and cloud devices. Designed to meet a variety of chip sizes and power budgets, the Vivante NPU IP is a cost-effective, high-quality neural network acceleration engine solution.</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
