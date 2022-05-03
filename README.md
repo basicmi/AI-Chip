@@ -102,18 +102,6 @@ Now the open source DLA is available on <a href="https://github.com/nvdla/">Gith
 <div align="center"><h3>Mobileye EyeQ</h3></div>
 > Mobileye is currently developing its fifth generation SoC, the <a href="https://www.mobileye.com/our-technology/evolution-eyeq-chip/">EyeQ®5</a>, to act as the vision central computer performing sensor fusion for Fully Autonomous Driving (Level 5) vehicles that will hit the road in 2020. To meet power consumption and performance targets, EyeQ® SoCs are designed in most advanced VLSI process technology nodes – down to 7nm FinFET in the 5th generation. 
 
-<a name="Movidius"></a>
-<div align="center"><h3>Movidius</h3></div>
-<a href="https://newsroom.intel.com/news/new-intel-vision-accelerator-solutions-speed-deep-learning-artificial-intelligence-edge-devices/">New Intel Vision Accelerator Solutions Speed Deep Learning and Artificial Intelligence on Edge Devices</a> 
-
-<blockquote>
-  <p>Today, Intel unveiled its family of Intel® Vision Accelerator Design Products targeted at artificial intelligence (AI) inference and analytics performance on edge devices, where data originates and is acted upon. The new acceleration solutions come in two forms: one that features an array of Intel® Movidius™ vision processors and one built on the high-performance Intel® Arria® 10 FPGA. </p>
-</blockquote>
-
-<a name="Intel_FPGA"></a>
-<div align="center"><h3>FPGA</h3></div>
-Intel <a href="https://www.altera.com/products/design-software/embedded-software-developers/opencl/overview.html">FPGA OpenCL</a> and <a href="https://www.altera.com/solutions/technology/artificial-intelligence/solutions.html">Solutions</a>.
-
 <a name="Loihi 2"></a>
 <div align="center"><h3>Loihi</h3></div>
 <p><a href="https://www.intel.com/content/www/us/en/newsroom/news/intel-unveils-neuromorphic-loihi-2-lava-software.html">Intel Advances Neuromorphic with Loihi 2, New Lava Software Framework and New Partners</a></p>
@@ -156,16 +144,6 @@ Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-op
 The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server-accelerators">AMD Instinct™ MI Series Accelerators</a>
 > AMD Instinct™ accelerators are engineered from the ground up for this new era of data center computing, supercharging HPC and AI workloads to propel new discoveries. The AMD Instinct™ family of accelerators can deliver industry leading performance for the data center at any scale from single server solutions up to the world’s largest supercomputers.1 With new innovations in AMD CDNA™ 2 architecture, AMD Infinity Fabric™ technology and packaging technology, the latest AMD Instinct™ accelerators are designed to power discoveries at exascale, enabling scientists to tackle our most pressing challenges.
 
-<div align="center"><h3> </h3></div>
-<a name="Xilinx"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xilinx_logo.png" height="35"></div>
-<div align="center"><h3> </h3></div>
-
-<strong><a href="https://www.xilinx.com/products/technology/ai-engine.html">Xilinx AI Engine Technology</a></strong>
-> Responding to this non-linear increase in demand by next-generation applications, like wireless beamforming and machine learning inference, Xilinx has developed a new innovative processing technology, the AI Engine, as part of the Versal® Adaptive Compute Acceleration Platform (ACAP) architecture.​
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="IBM"></a></p>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/IBM_logo.png" height="40"></div>
@@ -185,47 +163,8 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 </blockquote>
 
 <p><a href="https://www.research.ibm.com/artificial-intelligence/ai-hardware-center/">AI Hardware Center</a></p>
-
 <blockquote>
   <p>"The IBM Research AI Hardware Center is a global research hub headquartered in Albany, New York. The center is focused on enabling next-generation chips and systems that support the tremendous processing power and unprecedented speed that AI requires to realize its full potential.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="STMicroelectronics"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/STMicroelectronics_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="http://www.eenewseurope.com/news/st-preps-second-neural-network-ic-0">ST preps second neural network IC</a></p>
-
-<blockquote>
-  <p>STMicroelectronics is designing a second iteration of the neural networking technology that the company reported on at the International Solid-State Circuits Conference (ISSCC) in February 2017.  </p>
-</blockquote>
-
-<p><a href="http://mp.weixin.qq.com/s/POZ9k5INJC8SCKMNogzmXg">ISSCC2017 Deep-Learning Processors文章学习 （一）</a> is a reference.</p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="NXP"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/NXP_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong>S32 AUTOMOTIVE PLATFORM</strong>
-<br> <a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform:S32">S32 AUTOMOTIVE PLATFORM</a></p>
-
-<blockquote>
-  <p>The NXP S32 automotive platform is the world’s first scalable automotive computing architecture. It offers a unified hardware platform and an identical software environment across application domains to bring rich in-vehicle experiences and automated driving functions to market faster.  </p>
-</blockquote>
-
-<p><strong>ADAS Chip</strong>
-<br> <a href="https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/s32-automotive-platform/vision-processor-for-front-and-surround-view-camera-machine-learning-and-sensor-fusion-applications:S32V234?lang_cd=en">S32V234: Vision Processor for Front and Surround View Camera, Machine Learning and Sensor Fusion Applications</a></p>
-
-<blockquote>
-  <p>The S32V234 is our 2nd generation vision processor family designed to support computation intensive applications for image processing and offers an ISP, powerful 3D GPU, dual APEX-2 vision accelerators, security and supports SafeAssure™. S32V234 is suited for ADAS, NCAP front camera, object detection and recognition, surround view, machine learning and sensor fusion applications. S32V234 is engineered for automotive-grade reliability, functional safety and security measures to support vehicle and industrial automation.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -236,106 +175,9 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.marvell.com/company/news/pressDetail.do?releaseID=9976">Marvell Demonstrates Artificial Intelligence SSD Controller Architecture Solution</a></strong></p>
-
+<p><a href="https://www.marvell.com/products/data-processing-units.html">Data Processing Units</a></p>
 <blockquote>
-  <p>Marvell will demonstrate today at the Flash Memory Summit how it will provide artificial intelligence capabilities to a broad range of industries by incorporating NVIDIA’s Deep Learning Accelerator (NVDLA) technology in its family of data center and client SSD controllers. </p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="MediaTek"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/MediaTek_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://i.mediatek.com/p90">MediaTek announced Helio P90, highlighting AI processing.</a></strong></p>
-
-<p>This article, <strong><a href="https://www.anandtech.com/show/13718/mediatek-announces-new-premium-helio-p90-soc">"MediaTek Announces New Premium Helio P90 SoC"</a></strong>, from AnandTech has more in-deepth analysis. </p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="HiSilicon"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HiSilicon_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong>Kirin for Smart Phone</strong>
-<br> 
-<strong><a href="https://consumer.huawei.com/en/campaign/kirin980/">Kirin 980, the World's First 7nm Process Mobile AI Chipset</a></strong></p>
-
-<blockquote>
-  <p>Introducing the Kirin 980, the world's first 7nm process mobile phone SoC chipset, the world’s first cortex-A76 architecture chipset, the world’s first dual NPU design, and the world’s first chipset to support LTE Cat.21. The Kirin 980 combines multiple technological inFtions and leads the AI trend to provide users with impressive mobile performance and to create a more convenient and intelligent life.</p>
-</blockquote>
-
-<p>HiSilicon <a href="http://consumer.huawei.com/minisite/worldwide/huawei-ifa2017-global-launch-event-presentation/">Kirin 970 Processor</a> annouced fearturing with dedicated Neural-network Processing Unit. <br />
-In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-launch-on-october-16th-more-kirin-970-details">this article</a>,we can find more details about NPU in Kirin970.</p>
-
-<p><strong>Mobile Camera SoC</strong>
-<br>According to a Brief Data Sheet of <a href="http://www.hisilicon.com/cn/-/media/Hisilicon/pdf/Surveillance_mobilecam/Hi3559A%20V100.pdf">Hi3559A V100ESultra-HD Mobile Camera SoC</a>, it has:</p>
-
-<blockquote>
-  <p>Dual-core CNN@700 MHz neural network acceleration engine</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Rockchip"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rockchip_logo.png" height="50"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.prnewswire.com/news-releases/rockchip-released-its-first-ai-processor-rk3399pro----npu-performance-up-to-24tops-300578633.html">Rockchip Released Its First AI Processor RK3399Pro -- NPU Performance up to 2.4TOPs</a></p>
-
-<blockquote>
-  <p>RK3399Pro adopted exclusive AI hardware design. Its NPU computing performance reaches 2.4TOPs, and indexes of both high performance and low consumption keep ahead: the performance is 150% higher than other same type NPU processor; the power consumption is less than 1%, comparing with other solutions adopting GPU as AI computing unit. </p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Renesas_Electronics"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Renesas_Electronics_logo.png" height="30"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://www.renesas.com/eu/en/about/press-center/news/2019/news20190613.html">Renesas Electronics Develops New Processing-In-Memory Technology for Next-Generation AI Chips that Achieves AI Processing Performance of 8.8 TOPS/W</a></strong></p>
-
-<blockquote>
-  <p>Renesas Electronics Corporation (TSE: 6723), a premier supplier of advanced semiconductor solutions, today announced it has developed an AI accelerator that performs CNN (convolutional neural network) processing at high speeds and low power to move towards the next generation of Renesas embedded AI (e-AI), which will accelerate increased intelligence of endpoint devices. A Renesas test chip featuring this accelerator has achieved the power efficiency of 8.8 TOPS/W (Note 1), which is the industry's highest class of power efficiency. The Renesas accelerator is based on the processing-in-memory (PIM) architecture, an increasingly popular approach for AI technology, in which multiply-and-accumulate operations are performed in the memory circuit as data is read out from that memory. </p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Ambarella"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ambarella_logo.png" height="50"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.ambarella.com/">Intelligent Vision Processors For Edge Applications</a></p>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Sony"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Sony_logo.png" height="40"></div>
-<div align="center"><h3> </h3></div>
-<p><strong><a href="https://www.sony.net/SonyInfo/News/Press/202005/20-037E/">Sony to Release World's First Intelligent Vision Sensors with AI Processing Functionality</a></strong></p>
-
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="Synaptics"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synaptics_logo.png" height="60"></div>
-<div align="center"><h3> </h3></div>
-<p><strong><a href="https://www.synaptics.com/company/news/katana">Synaptics Expands into Low Power Edge AI Applications with New Katana Platform</a></strong></p>
-<blockquote>
-  <p>SAN JOSE, Calif., Dec. 15, 2020 – Synaptics® Incorporated (Nasdaq: SYNA), today announced the Katana Edge AI™ platform, addressing a growing industry gap for solutions that enable battery powered devices for consumer and industrial IoT markets. The platform combines Synaptics’ proven low power SoC architecture with energy-efficient AI software, enabled by a partnership with Eta Compute. The Katana solution is optimized for a wide range of ultra-low power use cases in edge devices for office buildings, retail, factories, farms and smart homes. Typical applications include people or object recognition and counting, visual, voice or sound detection, asset or inventory tracking and environmental sensing.</p>
+  <p>Built on seven generations of the industry’s first, most scalable and widely adopted data infrastructure processors, Marvell’s OCTEON™, OCTEON™ Fusion and ARMADA® platforms are optimized for wireless infrastructure, wireline carrier networks, enterprise and cloud data centers.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -362,27 +204,16 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
   <p>Google CEO Sundar Pichai spoke for only one minute and 42 seconds about the company’s latest TPU v4 Tensor Processing Units during his keynote at the Google I/O virtual conference this week, but it may have been the most important and awaited news from the event.</p>
 </blockquote>
  
-<p><a href="https://venturebeat.com/2019/03/06/google-begins-selling-the-150-coral-dev-board-a-hardware-kit-for-accelerated-ai-edge-computing/">Google begins selling the $150 Coral Dev Board, a hardware kit for accelerated AI edge computing</a></p>
+<p><a href="https://cloud.google.com/tpu">Cloud TPU</a></p>
 <blockquote>
-  <p>If you’re a software dev looking to get a head start on AI development at the edge, why not try on Google’s new hardware for size? The search company today made available the Coral Dev Board, a $150 computer featuring a removable system-on-module with one of its custom tensor processing unit (TPU) AI chips.</p>
+  <p>Machine learning has produced business and research breakthroughs ranging from network security to medical diagnoses. We built the Tensor Processing Unit (TPU) in order to make it possible for anyone to achieve similar breakthroughs. Cloud TPU is the custom-designed machine learning ASIC that powers Google products like Translate, Photos, Search, Assistant, and Gmail. Here’s how you can put the TPU and machine learning to work accelerating your company’s success, especially at scale.</p>
 </blockquote>
-
-<p>Google's <a href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">original TPU</a> had a big lead over GPUs and helped power DeepMind's AlphaGo victory over Lee Sedol in a Go tournament. The original 700MHz TPU is described as having 95 TFlops for 8-bit calculations or 23 TFlops for 16-bit whilst drawing only 40W. This was much faster than GPUs on release but is now slower than Nvidia's V100, but not on a per W basis. The new <a href="https://www.nextplatform.com/2017/05/22/hood-googles-tpu2-machine-learning-clusters/">TPU2</a> is referred to as a TPU device with four chips and can do around 180 TFlops. Each chip's performance has been doubled to 45 TFlops for 16-bits. You can see the gap to Nvidia's V100 is closing. You can't buy a TPU or TPU2. <br><br>
-<a href="https://cloudplatform.googleblog.com/2018/02/Cloud-TPU-machine-learning-accelerators-now-available-in-beta.html">Lately</a>, Google is making <a href="https://cloud.google.com/tpu/">Cloud TPUs</a> available for use in <a href="https://cloud.google.com/">Google Cloud Platform (GCP)</a>. Here you can find the latest <a href="https://blog.riseml.com/benchmarking-googles-new-tpuv2-121c03b71384">banchmark result of Google TPU2</a>.<br><br>
-<a href="https://www.blog.google/products/pixel/pixel-visual-core-image-processing-and-machine-learning-pixel-2/">Pixel Visual Core</a> is Google’s first custom-designed co-processor for consumer products. It’s built into every Pixel 2, and in the coming months, we’ll turn it on through a software update to enable more applications to use Pixel 2’s camera for taking HDR+ quality pictures.</p>
-
-<p><a href="https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor/">Tearing Apart Google’s TPU 3.0 AI Coprocessor</a></p>
-
+ 
+<p><a href="https://cloud.google.com/edge-tpu/">Edge TPU</a></p>
 <blockquote>
-  <p>Google did its best to impress this week at its annual IO conference. While Google rolled out a bunch of benchmarks that were run on its current Cloud TPU instances, based on TPUv2 chips, the company divulged a few skimpy details about its next generation TPU chip and its systems architecture. The company changed from version notation (TPUv2) to revision notation (TPU 3.0) with the update, but ironically the detail we have assembled shows that the step from TPUv2 to what we will call TPUv3 probably isn’t that big; it should probably be called TPU v2r5 or something like that.</p>
+  <p>AI is pervasive today, from consumer to enterprise applications. With the explosive growth of connected devices, combined with a demand for privacy/confidentiality, low latency, and bandwidth constraints, AI models trained in the cloud increasingly need to be run at the edge. Edge TPU is Google’s purpose-built ASIC designed to run AI at the edge. It delivers high performance in a small physical and power footprint, enabling the deployment of high-accuracy AI at the edge.</p>
 </blockquote>
-
-<p><strong><a href="https://cloud.google.com/edge-tpu/">Edge TPU</a></strong></p>
-
-<blockquote>
-  <p>AI is pervasive today, from consumer to enterprise applications. With the explosive growth of connected devices, combined with a demand for privacy/confidentiality, low latency and bandwidth constraints, AI models trained in the cloud increasingly need to be run at the edge. Edge TPU is Google’s purpose-built ASIC designed to run AI at the edge. It delivers high performance in a small physical and power footprint, enabling the deployment of high-accuracy AI at the edge.</p>
-</blockquote>
-
+ 
 <p>Other references are:<br>
 <a href="https://mp.weixin.qq.com/s/b22p26_delWfSpy9kDJKhA">Google TPU3 看点</a><br><br>
 <a href="https://mp.weixin.qq.com/s/Kf_L4u7JRxJ8kF3Pi8M5iw">Google TPU 揭密</a><br><br>
@@ -392,39 +223,20 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><a name="Amazon"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://techcrunch.com/2018/02/12/amazon-may-be-developing-ai-chips-for-alexa/">Amazon may be developing AI chips for Alexa</a></p>
-
-<blockquote>
-  <p>The Information has a report this morning that Amazon <a href="https://www.theinformation.com/amazon-is-becoming-an-ai-chip-maker-speeding-alexa-responses?shared=922dfb3ba4e3984e">is working on building AI chips for the Echo</a>, which would allow Alexa to more quickly parse information and get those answers.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="Amazon_AWS"></a></p>
 
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS.png" height="50"></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://techcrunch.com/2020/12/01/aws-launches-trainium-its-new-custom-ml-training-chip/">AWS launches Trainium, its new custom ML training chip</a></strong></p>
+<p><strong><a href="https://aws.amazon.com/cn/machine-learning/trainium/">AWS Trainium</a></strong></p>
 <blockquote>
-  <p>AAt its annual re:Invent developer conference, AWS  today announced the launch of <a href="https://aws.amazon.com/cn/machine-learning/trainium/">AWS Trainium</a>, the company’s next-gen custom chip dedicated to training machine learning models. The company promises that it can offer higher performance than any of its competitors in the cloud, with support for TensorFlow, PyTorch and MXNet.</p>
+  <p>AWS Trainium is the second custom machine learning (ML) chip designed by AWS that provides the best price performance for training deep learning models in the cloud.  Trainium offers the highest performance with the most teraflops (TFLOPS) of compute power for the fastest ML training in Amazon EC2 and enables a broader set of ML applications. The Trainium chip is specifically optimized for deep learning training workloads for applications including image classification, semantic search, translation, voice recognition, natural language processing and recommendation engines.</p>
 </blockquote>
 
 <p><a href="https://aws.amazon.com/cn/machine-learning/inferentia/">AWS Inferentia. High performance machine learning inference chip, custom designed by AWS.</a></p>
 <blockquote>
   <p>AWS Inferentia provides high throughput, low latency inference performance at an extremely low cost. Each chip provides hundreds of TOPS (tera operations per second) of inference throughput to allow complex models to make fast predictions. For even more performance, multiple AWS Inferentia chips can be used together to drive thousands of TOPS of throughput. AWS Inferentia will be available for use with Amazon SageMaker, Amazon EC2, and Amazon Elastic Inference.</p>
-</blockquote>
-
-<p><strong>AWS FPGA instance</strong></p>
-<blockquote>
-  <p><a href="https://aws.amazon.com/ec2/instance-types/f1/?nc1=h_ls">Amazon EC2 F1</a> is a compute instance with field programmable gate arrays (FPGAs) that you can program to create custom hardware accelerations for your application. F1 instances are easy to program and come with everything you need to develop, simulate, debug, and compile your hardware acceleration code, including an <a href="https://aws.amazon.com/marketplace/pp/B06VVYBLZZ">FPGA Developer AMI</a> and <a href="https://github.com/aws/aws-fpga">Hardware Developer Kit</a> (HDK). Once your FPGA design is complete, you can register it as an Amazon FPGA Image (AFI), and deploy it to your F1 instance in just a few clicks. You can reuse your AFIs as many times, and across as many F1 instances as you like.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -435,21 +247,6 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://channel9.msdn.com/Events/Build/2017/B8063">Inside the Microsoft FPGA-based configurable cloud</a> is also a good reference if want to know Microsoft's vision on FPGA in cloud.<br><br>
-<a href="http://mp.weixin.qq.com/s/Ti6N1SJ7UDRSQtl869Qvlg">This article "智慧云中的FPGA"</a> gives and overview about FPGA used in AI aceleration in the cloud.<br><br>
-<a href="https://www.nextplatform.com/2017/08/24/drilling-microsofts-brainwave-soft-deep-leaning-chip/">Drilling Into Microsoft’s BrainWave Soft Deep Learning Chip</a> shows more details based on Microsoft's presentation on Hot Chips 2017.<br><br>
-<a href="https://blogs.microsoft.com/ai/build-2018-project-brainwave/">Real-time AI: Microsoft announces preview of Project Brainwave</a></p>
-
-<blockquote>
-  <p>At Microsoft’s <a href="https://news.microsoft.com/2018/05/07/microsoft-build-highlights-new-opportunity-for-developers-at-the-edge-and-in-the-cloud/">Build developers conference in Seattle this week</a>, the company is announcing a preview of Project Brainwave integrated with Azure Machine Learning, which the company says will make Azure the most efficient cloud computing platform for AI.</p>
-</blockquote>
-
-<p><strong><a href="https://www.cnbc.com/2018/06/11/microsoft-hiring-engineers-for-cloud-ai-chip-design.html">Microsoft is hiring engineers to work on A.I. chip design for its cloud</a></strong></p>
-
-<blockquote>
-  <p>Microsoft is following Google's lead in designing a computer processor for artificial intelligence, according to recent job postings.</p>
-</blockquote>
-
 <div align="center"><h3> </h3></div>
 
 <p><a name="Apple"></a></p>
@@ -457,15 +254,6 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://www.apple.com/lae/iphone-xs/a12-bionic/">A12 Bionic The smartest, most powerful chip in a smartphone.</a></strong></p>
-
-<blockquote>
-  <p>A whole new level of intelligence. The A12 Bionic, with our next-generation Neural Engine, delivers incredible performance. It uses real-time machine learning to transform the way you experience photos, gaming, augmented reality, and more.</p>
-</blockquote>
-
-<p><br> Apple unveiled the new processor powering the new iPhone 8 and iPhone X - the A11 Bionic. <a href="https://en.wikipedia.org/wiki/Apple_A11">The A11</a> also includes dedicated neural network hardware that Apple calls a "neural engine", which can perform up to 600 billion operations per second.
-<br> <a href="https://developer.apple.com/machine-learning/">Core ML</a> is Apple's current sulotion for machine learning application.</p>
 
 <div align="center"><h3> </h3></div>
 
@@ -475,8 +263,7 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 
 <div align="center"><h3> </h3></div>
 
-<p>
-<strong><a href="https://medium.com/syncedreview/alibabas-new-ai-chip-can-process-nearly-80k-images-per-second-63412dec22a3">Alibaba’s New AI Chip Can Process Nearly 80K Images Per Second</a></strong></p>
+<p><a href="https://medium.com/syncedreview/alibabas-new-ai-chip-can-process-nearly-80k-images-per-second-63412dec22a3">Alibaba’s New AI Chip Can Process Nearly 80K Images Per Second</a></p>
 
 <blockquote>
   <p>At the Alibaba Cloud (Aliyun) Apsara Conference 2019, Pingtouge unveiled its first AI dedicated processor for cloud-based large-scale AI inferencing. The Hanguang 800 is the first semiconductor product in Alibaba’s 20-year history.</p>
@@ -489,9 +276,10 @@ In <a href="https://www.anandtech.com/show/11815/huawei-mate-10-and-mate-10-pro-
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tencent_Cloud_logo.png" height="30"></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><br />
-Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA instance</a>(Beta), with three different specifications based on Xilinx Kintex UltraScale KU115 FPGA. They will provide more choices equiped with Inter FPGA in the future.</p>
+<p><a href="https://www.datacenterdynamics.com/en/news/tencent-reveals-three-data-center-chips-for-ai-video-transcoding-and-networking/">Tencent reveals three data center chips - for AI, video transcoding, and networking</a></p>
+<blockquote>
+  <p>The company claims that the Zixiao AI chip is twice as good as comparable competing products, video transcoding chip Canghai was 30 percent better, and SmartNIC Xuanling was apparently four times as good. It did not provide external benchmarks or specific product details.</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
@@ -502,33 +290,9 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.cnbc.com/2021/03/16/baidu-ai-chip-unit-valued-at-2-billion-after-funding.html">Baidu A.I. chip unit valued at $2 billion after funding and may become standalone business</a></strong></p>
+<p><a href="https://www.reuters.com/technology/baidu-says-2nd-gen-kunlun-ai-chips-enter-mass-production-2021-08-18/">Baidu says 2nd-gen Kunlun AI chips enter mass production</a></p>
 <blockquote>
-  <p>Baidu has raised money for its artificial intelligence (AI) semiconductor business at a valuation of $2 billion.The funding round was led by CPE, a Chinese asset management and private equity firm.Now that the Kunlun chip business has raised money, it could pave the way for the unit to be spun-off, but no final decision has been made.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><br />
-<a name="HUAWEI"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HUAWEI_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><br />
-<strong><a href="https://www.cnbc.com/2018/10/10/huawei-unveils-ai-chips-taking-aim-at-giants-like-qualcomm-and-nvidia.html">Chinese tech giant Huawei unveils A.I. chips, taking aim at giants like Qualcomm and Nvidia</a></strong></p>
-
-<blockquote>
-  <p>Huawei unveils two new artificial intelligence (AI) chips called the Ascend 910 and Ascend 310.
-  The two chips are aimed at uses in data centers and internet-connected consumer devices, Rotating Chairman Eric Xu says at the Huawei Connect conference in Shanghai.
-  The move pits the Chinese tech giant against major chipmakers including Qualcomm and Nvidia.</p>
-</blockquote>
-
-<p><a href="http://www.hwclouds.com/product/fcs.html">FPGA Accelerated Cloud Server</a>, high performance FPGA instance is open for beta test.</p>
-
-<blockquote>
-  <p>FPGA云服务器提供CPU和FPGA直接的高达100Gbps PCIe互连通道，每节点提供8片Xilinx VU9P FPGA，同时提供FPGA之间高达200Gbps的Mesh光互连专用通道，让您的应用加速需求不再受到硬件限制。</p>
+  <p>Chinese tech giant Baidu said on Wednesday it had begun mass-producing second-generation Kunlun artificial intelligence (AI) chips, as it races to become a key player in the chip industry which Beijing is trying to strengthen.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -564,24 +328,9 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.bloomberg.com/news/articles/2018-04-18/facebook-is-forming-a-team-to-design-its-own-chips">Facebook Is Forming a Team to Design Its Own Chips</a></p>
-
+<p><a href="https://www.reuters.com/technology/facebook-developing-machine-learning-chip-information-2021-09-09/">Facebook developing machine learning chip - The Information</a></p>
 <blockquote>
-  <p>Facebook Inc. is building a team to design its own semiconductors, adding to a trend among technology companies to supply themselves and lower their dependence on chipmakers such as Intel Corp. and Qualcomm Inc., according to job listings and people familiar with the matter.</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="HPE"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/HPE_logo.png" height="80"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.nextplatform.com/2017/11/09/hpe-developing-low-power-neural-network-chips/">HPE DEVELOPING ITS OWN LOW POWER “NEURAL NETWORK” CHIPS</a></p>
-
-<blockquote>
-  <p>In the context of a broader discussion about the company’s Extreme Edge program focused on space-bound systems, HPE’s Dr. Tom Bradicich, VP and GM of Servers, Converged Edge, and IoT systems, described a future chip that would be ideally suited for high performance computing under intense power and physical space limitations characteristic of space missions. To be more clear, he told us as much as he could—very little is known about the architecture, but there was some key elements he described.</p>
+  <p>Facebook Inc (FB.O) is developing a machine learning chip to handle tasks such as content recommendation to users, The Information reported on Thursday, citing two people familiar with the project.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -593,44 +342,8 @@ Tencent cloud introduces <a href="https://cloud.tencent.com/product/fpga">FPGA i
 <div align="center"><h3> </h3></div>
 
 <p><strong><a href="https://semianalysis.com/tesla-dojo-ai-super-computer-unique-packaging-and-chip-design-allow-an-order-magnitude-advantage-over-competing-ai-hardware/">Tesla Dojo – Unique Packaging and Chip Design Allow An Order Magnitude Advantage Over Competing AI Hardware</a></strong></p>
-
 <blockquote>
   <p>Tesla hosted their AI Day and revealed the innerworkings of their software and hardware infrastructure. Part of this reveal was the previously teased Dojo AI training chip. Tesla claims their D1 Dojo chip has a GPU level compute, CPU level flexibility, with networking switch IO. </p>
-</blockquote>
-
-<p><strong><a href="https://www.theverge.com/2019/4/24/18514308/tesla-full-self-driving-computer-chip-autonomy-day-specs">Tesla’s new AI chip isn’t a silver bullet for self-driving cars</a></strong></p>
-
-<blockquote>
-  <p>Processing power is important, but building chips could be an expensive distraction for Tesla</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="LG"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/LG_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="http://www.lgnewsroom.com/2019/05/lg-to-accelerate-development-of-artificial-intelligence-with-own-ai-chip-2/">LG TO ACCELERATE DEVELOPMENT OF ARTIFICIAL INTELLIGENCE WITH OWN AI CHIP</a></strong></p>
-
-<blockquote>
-  <p>New AI Processor with LG Neural Engine Designed for Use in Various Products
-Including Robot Vacuum Cleaners, Washing Machines and Refrigerators</p>
-</blockquote>
-
-<div align="center"><h3> </h3></div>
-
-<p><a name="SKT"></a></p>
-
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/skt_logo.png" height="50"></div>
-
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://www.hpcwire.com/off-the-wire/skt-unveils-its-ai-chip-and-new-plans-for-ai-semiconductor-business/">SKT Unveils its AI Chip and New Plans for AI Semiconductor Business</a></strong></p>
-
-<blockquote>
-  <p>Nov. 25, 2020 — SK Telecom (SKT) today unveiled its self-developed artificial intelligence (AI) chip named ‘SAPEON X220’ and shared its AI semiconductor business vision.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
