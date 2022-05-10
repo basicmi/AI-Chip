@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Habana">Intel Habana Gaudi®2</a>.</li>
 <li>Add startup <a href="#Modular">Modular AI in AI compiler section</a>.</li>
 <li>Add startup <a href="#Teramem">TeraMem</a>.</li>
 <li>Add startup <a href="#Aspinity">Aspinity</a>.</li>
@@ -107,7 +108,11 @@ Now the open source DLA is available on <a href="https://github.com/nvdla/">Gith
 
 <p><a name="Habana"></a></p>
 <div align="center"><h3>Habana</h3></div>
-
+<p><strong><a href="https://www.intel.com/content/www/us/en/newsroom/news/vision-2022-habana-gaudi2-greco.html">Intel’s Habana Labs Launches Second-Generation AI Processors for Training and Inferencing</a></strong></p>
+<blockquote>
+  <p>Today at Intel Vision, Intel announced that Habana Labs, its data center team focused on AI deep learning processor technologies, launched its second-generation deep learning processors for training and inference: Habana® Gaudi®2 and Habana® Greco™. These new processors address an industry gap by providing customers with high-performance, high-efficiency deep learning compute choices for both training workloads and inference deployments in the data center while lowering the AI barrier to entry for companies of all sizes.</p>
+</blockquote>
+ 
 <p><a href="https://habana.ai/aws-launches-ec2-dl1-instances/">Habana Gaudi debuts in the Amazon EC2 cloud</a></p>
 <blockquote>
   <p>The primary motivation to create this new training instance class was presented by Andy Jassy in the 2020 re:Invent: “To provide our end-customers with up to 40% better price-performance than the current generation of GPU-based instances.”</p>
