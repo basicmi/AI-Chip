@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
 <li>Add news of <a href="#Habana">Intel Habana Gaudi®2</a>.</li>
 <li>Add startup <a href="#Modular">Modular AI in AI compiler section</a>.</li>
 <li>Add startup <a href="#Teramem">TeraMem</a>.</li>
@@ -689,17 +690,9 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.nextplatform.com/2020/04/02/tachyum-starts-from-scratch-to-etch-a-universal-processor/">TACHYUM STARTS FROM SCRATCH TO ETCH A UNIVERSAL PROCESSOR</a></p>
-
+<p><a href="https://www.hpcwire.com/off-the-wire/tachyum-launches-prodigy-universal-processor/">Tachyum Launches Prodigy Universal Processor</a></p>
 <blockquote>
-  <p>Only last week, we did a thought experiment about how we should have streamlined chiplets for very specific purposes, woven together inside of a single package or across sockets and nodes, co-designed to specifically run very precise workflows because any general purpose processor – mixing elements of CPUs, GPUs, TPUs, NNPs, and FPGAs – would be suboptimal on all fronts except volume economics. We think that this extreme co-design for datacenter compute is the way the world will ultimately go, and we are just getting the chiplet architectures and interconnects together to make this happen.
-Radoslav Danilak, co-founder and chief executive officer of processor upstart Tachyum, is having absolutely none of that. And in fact, the Prodigy “universal processor” that Tachyum has designed is going in exactly in the opposite direction.</p>
-</blockquote>
-
-<p><a href="https://www.hpcwire.com/off-the-wire/tachyum-running-apache-is-a-key-milestone-for-prodigy-universal-processor-software-stack/">Tachyum Running Apache is a Key Milestone for Prodigy Universal Processor Software Stack</a></p>
-
-<blockquote>
-  <p>Semiconductor startup Tachyum Inc. today announced that it has completed another critical stage in software development by successfully achieving an Apache web server port to Prodigy Universal Processor Instruction Set Architecture (ISA). This latest milestone by Tachyum’s software team brings the company’s Prodigy Universal Processor one step closer to being customer-ready in anticipation of its commercial launch in 2021.</p>
+  <p>May 11, 2021 — Tachyum today launched the world’s first universal processor, Prodigy, which unifies the functionality of a CPU, GPU and TPU in a single processor, creating a homogeneous architecture, while delivering massive performance improvements at a cost many times less than competing products</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
