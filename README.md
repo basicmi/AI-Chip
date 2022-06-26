@@ -12,6 +12,8 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
+<li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
 <li>Add news of <a href="#Habana">Intel Habana Gaudi®2</a>.</li>
 <li>Add startup <a href="#Modular">Modular AI in AI compiler section</a>.</li>
@@ -60,7 +62,7 @@
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem</a></td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem, <a href="#d-matrix">d-Matrix</a></a></td>
   </tr>
 </table>
 
@@ -441,8 +443,13 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 <div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://www.anandtech.com/show/17061/cerebras-completes-series-f-funding-another-250m-for-4b-valuation">Cerebras Completes Series F Funding, Another $250M for $4B Valuation</a></strong></p>
+ 
+<p><strong><a href="https://www.cerebras.net/blog/cerebras-sets-record-for-largest-ai-models-ever-trained-on-single-device">Cerebras Sets Record for Largest AI Models Ever Trained on Single Device</a></strong></p>
+<blockquote>
+  <p>We are announcing the largest models ever trained on a single device. Using the Cerebras Software Platform (CSoft), our customers can easily train state-of-the-art GPT language models (such as GPT-3[i] and GPT-J[ii]) with up to 20 billion parameters on a single CS-2 system. Running on a single CS-2, these models take minutes to set up and users can quickly move between models with just a few keystrokes. With clusters of GPUs, this takes months of engineering work.</p>
+</blockquote> 
+ 
+<p><a href="https://www.anandtech.com/show/17061/cerebras-completes-series-f-funding-another-250m-for-4b-valuation">Cerebras Completes Series F Funding, Another $250M for $4B Valuation</a></p>
 <blockquote>
   <p>The new Series F funding round nets the company another $250m in capital, bringing the total raised through venture capital up to $720 million.</p>
 </blockquote> 
@@ -1098,6 +1105,15 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <p><strong><a href="https://www.tetramem.com/posts/TetraMem-Technology-Debut-at-Linley">TetraMem enjoyed an exciting public debut of our analog in-memory compute technology at the Linley Spring 2022 Processor Conference.</a></strong></p>
 <blockquote>
   <p></p>
+</blockquote> 
+ 
+<p><a name="d-matrix"></a></p>
+<div align="center"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/d-matrix_logo.png" height="60"></a></div>
+
+<div align="center"><h3> </h3></div>
+<p><strong><a href="https://www.forbes.com/sites/karlfreund/2022/06/21/d-matrix-ai-chip-promises-efficient-transformer-processing/">D-Matrix AI chip promises efficient transformer processing</a></strong></p>
+<blockquote>
+  <p>The startup combines digital in-memory compute and chiplet implementations for data-center-grade inference.</p>
 </blockquote> 
  
 <div align="center"><h3> </h3></div>
