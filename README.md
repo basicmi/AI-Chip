@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
@@ -1149,10 +1150,9 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
 2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
 3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. 
-<strong>You can find MLPerf training results v1.0 <a href="https://mlcommons.org/en/news/mlperf-training-v10/">here.</a></strong>. <br>
-<strong>You can find MLPerf inference results v1.1 <a href="https://mlcommons.org/en/news/mlperf-inference-v11/">here.</a></strong>. <br>
-<strong>You can find MLPerf HPC results v1.0 <a href="https://mlcommons.org/en/news/mlperf-hpc-v1/">here.</a></strong>. <br>
-<strong>You can find MLPerf training results v1.1 <a href="https://mlcommons.org/en/news/mlperf-training-v11/">here.</a></strong>. <br>
+<strong>You can find MLPerf inference results v2.1 <a href="https://mlcommons.org/en/news/mlperf-inference-v21/">here.</a></strong>. <br>
+<strong>You can find MLPerf training results v1.0 <a href="https://mlcommons.org/en/news/mlperf-training-2q2022/">here.</a></strong>. <br>
+
 4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
 5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
 6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
