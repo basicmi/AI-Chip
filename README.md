@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#SynSense>SynSense</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
@@ -62,7 +63,7 @@
   </tr>
   <tr>  
     <th><a href="#Startups_Worldwide">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem, <a href="#d-matrix">d-Matrix</a></a></td>
+    <td><a href="#SynSense">SynSense (formerly aiCTX)</a>, <a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem, <a href="#d-matrix">d-Matrix</a></a></td>
   </tr>
 </table>
 
@@ -731,11 +732,17 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a name="aiCTX"></a></p>
+<p><a name="SynSense"></a></p>
 
-<div align="center"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/aiCTX_logo.png" height="40"></a></div>
+<div align="center"><a href="https://synsense.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SynSense_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.eetimes.com/cars-that-think-like-you/">BMW evaluates SynSense technology for smart cabins</a></strong></p>
+
+<blockquote>
+ <p>SynSense is working with BMW to advance the integration of neuromorphic chips into smart cockpits and explore related fields together. BMW will be evaluating SynSense’s Speck SoC, which combines SynSense’s neuromorphic vision processor with a 128 x 128–pixel event–based camera from Inivation. It can be used to capture real–time visual information, recognize and detect objects, and perform other vision–based detection and interaction functions.</p>
+</blockquote>
 
 <p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1333983">Baidu Backs Neuromorphic IC Developer</a></strong></p>
 
