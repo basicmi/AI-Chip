@@ -12,7 +12,7 @@
 
 <font color="Darkred">
 <ul>
-<li>Add news of <a href="#SynSense>SynSense</a>.</li>
+<li>Add news of <a href="#SynSense">SynSense</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
 <li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
