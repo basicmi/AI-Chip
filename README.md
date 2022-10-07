@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
@@ -346,7 +347,12 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://semianalysis.com/tesla-dojo-ai-super-computer-unique-packaging-and-chip-design-allow-an-order-magnitude-advantage-over-competing-ai-hardware/">Tesla Dojo – Unique Packaging and Chip Design Allow An Order Magnitude Advantage Over Competing AI Hardware</a></strong></p>
+<p><strong><a href="https://www.forbes.com/sites/jamesmorris/2022/10/06/teslas-biggest-news-at-ai-day-was-the-dojo-supercomputer-not-the-optimus-robot/">Tesla’s Biggest News At AI Day Was The Dojo Supercomputer, Not The Optimus Robot</a></strong></p>
+<blockquote>
+  <p>Elon Musk played AI Day to the crowd with the focus on the Optimus humanoid robot. But while this could have a huge impact on our lives and society if it does enter mass production at the price Musk suggested ($20,000), another part of the presentation will have more immediate effects. That was the status report on the Dojo supercomputer. It could really change the world much more quickly than a bipedal bot.</p>
+</blockquote>
+
+<p><a href="https://semianalysis.com/tesla-dojo-ai-super-computer-unique-packaging-and-chip-design-allow-an-order-magnitude-advantage-over-competing-ai-hardware/">Tesla Dojo – Unique Packaging and Chip Design Allow An Order Magnitude Advantage Over Competing AI Hardware</a></p>
 <blockquote>
   <p>Tesla hosted their AI Day and revealed the innerworkings of their software and hardware infrastructure. Part of this reveal was the previously teased Dojo AI training chip. Tesla claims their D1 Dojo chip has a GPU level compute, CPU level flexibility, with networking switch IO. </p>
 </blockquote>
