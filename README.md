@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#IBM">IBM AIU</a>.</li>
 <li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
@@ -156,16 +157,22 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.ibm.com/blogs/research/tag/truenorth/">TrueNorth</a> is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA <a href="https://en.wikipedia.org/wiki/SyNAPSE">SyNAPSE</a> program.</p>
+<p><a href="https://www.ibm.com/blogs/systems/ibm-telum-processor-the-next-gen-microprocessor-for-ibm-z-and-ibm-linuxone/">Meet the IBM Artificial Intelligence Unit</a></p>
 
 <blockquote>
-  <p>It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. <a href="https://en.wikipedia.org/wiki/TrueNorth">Wikipedia</a></p>
+  <p>It’s our first complete system-on-chip designed to run and train deep learning models faster and more efficiently than a general-purpose CPU.</p>
 </blockquote>
 
 <p><a href="https://www.ibm.com/blogs/systems/ibm-telum-processor-the-next-gen-microprocessor-for-ibm-z-and-ibm-linuxone/">IBM Telum Processor: the next-gen microprocessor for IBM Z and IBM LinuxONE</a></p>
 
 <blockquote>
   <p>The 7 nm microprocessor is engineered to meet the demands our clients face for gaining AI-based insights from their data without compromising response time for high volume transactional workloads. </p>
+</blockquote>
+
+<p><a href="https://www.ibm.com/blogs/research/tag/truenorth/">TrueNorth</a> is IBM's Neuromorphic CMOS ASIC developed in conjunction with the DARPA <a href="https://en.wikipedia.org/wiki/SyNAPSE">SyNAPSE</a> program.</p>
+
+<blockquote>
+  <p>It is a manycore processor network on a chip design, with 4096 cores, each one simulating 256 programmable silicon "neurons" for a total of just over a million neurons. In turn, each neuron has 256 programmable "synapses" that convey the signals between them. Hence, the total number of programmable synapses is just over 268 million (228). In terms of basic building blocks, its transistor count is 5.4 billion. Since memory, computation, and communication are handled in each of the 4096 neurosynaptic cores, TrueNorth circumvents the von-Neumann-architecture bottlenecks and is very energy-efficient, consuming 70 milliwatts, about 1/10,000th the power density of conventional microprocessors. <a href="https://en.wikipedia.org/wiki/TrueNorth">Wikipedia</a></p>
 </blockquote>
 
 <p><a href="https://www.research.ibm.com/artificial-intelligence/ai-hardware-center/">AI Hardware Center</a></p>
