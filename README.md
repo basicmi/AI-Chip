@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#IBM">IBM AIU</a>.</li>
 <li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
@@ -458,8 +459,13 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 <div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
- 
-<p><strong><a href="https://www.cerebras.net/blog/cerebras-sets-record-for-largest-ai-models-ever-trained-on-single-device">Cerebras Sets Record for Largest AI Models Ever Trained on Single Device</a></strong></p>
+
+<p><strong><a href="https://www.cerebras.net/press-release/cerebras-unveils-andromeda-a-13.5-million-core-ai-supercomputer-that-delivers-near-perfect-linear-scaling-for-large-language-models">Cerebras Unveils Andromeda, a 13.5 Million Core AI Supercomputer that Delivers Near-Perfect Linear Scaling for Large Language Models</a></strong></p>
+<blockquote>
+  <p>Delivering more than 1 Exaflop of AI compute and 120 Petaflops of dense compute, Andromeda is one of the largest AI supercomputers ever built, and is dead simple to use</p>
+</blockquote> 
+
+<p><a href="https://www.cerebras.net/blog/cerebras-sets-record-for-largest-ai-models-ever-trained-on-single-device">Cerebras Sets Record for Largest AI Models Ever Trained on Single Device</a></p>
 <blockquote>
   <p>We are announcing the largest models ever trained on a single device. Using the Cerebras Software Platform (CSoft), our customers can easily train state-of-the-art GPT language models (such as GPT-3[i] and GPT-J[ii]) with up to 20 billion parameters on a single CS-2 system. Running on a single CS-2, these models take minutes to set up and users can quickly move between models with just a few keystrokes. With clusters of GPUs, this takes months of engineering work.</p>
 </blockquote> 
