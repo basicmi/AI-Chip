@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Qualcomm">Qualcomm</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
@@ -132,6 +133,11 @@
 <a name="Qualcomm"></a>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
+
+<a href="https://www-forbes-com.cdn.ampproject.org/c/s/www.forbes.com/sites/karlfreund/2022/11/16/qualcomm-ups-the-snapgragon-ai-game/amp/">Qualcomm Ups The Snapgragon AI Game</a>
+<blockquote>
+  <p>The leader in premium mobile SoCs has applied AI across the entire platform.</p>
+</blockquote>
 
 <strong><a href="https://www.qualcomm.com/products/technology/processors/cloud-artificial-intelligence/cloud-ai-100">Qualcomm Cloud AI 100</a></strong>
 <blockquote>
