@@ -12,6 +12,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
 <li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
 <li>Add news of <a href="#IBM">IBM AIU</a>.</li>
@@ -83,6 +84,10 @@
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
 
+<p><a href="https://nvidianews.nvidia.com/news/nvidia-microsoft-accelerate-cloud-enterprise-ai">NVIDIA Teams With Microsoft to Build Massive Cloud AI Computer</a></p>
+<blockquote>
+  <p>Tens of Thousands of NVIDIA GPUs, NVIDIA Quantum-2 InfiniBand and Full Stack of NVIDIA AI Software Coming to Azure; NVIDIA, Microsoft and Global Enterprises to Use Platform for Rapid, Cost-Effective AI Development and Deployment</p>
+</blockquote> 
 
 <p><strong><a href="https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth">NVIDIA Hopper Architecture In-Depth</a></strong></p>
 <blockquote>
@@ -94,9 +99,6 @@
   <p>Kicking off another busy Spring GPU Technology Conference for NVIDIA, this morning the graphics and accelerator designer is announcing that they are going to once again design their own Arm-based CPU/SoC. Dubbed Grace – after Grace Hopper, the computer programming pioneer and US Navy rear admiral – the CPU is NVIDIA’s latest stab at more fully vertically integrating their hardware stack by being able to offer a high-performance CPU alongside their regular GPU wares. According to NVIDIA, the chip is being designed specifically for large-scale neural network workloads, and is expected to become available in NVIDIA products in 2023.</p>
 </blockquote>
 
-<br> 
-Now the open source DLA is available on <a href="https://github.com/nvdla/">Github</a> and more information can be found <a href="http://nvdla.org/">here</a>.
-> The NVIDIA Deep Learning Accelerator (NVDLA) is a free and open architecture that promotes a standard way to design deep learning inference accelerators. With its modular architecture, NVDLA is scalable, highly configurable, and designed to simplify integration and portability. The hardware supports a wide range of IoT devices. Delivered as an open source project under the NVIDIA Open NVDLA License, all of the software, hardware, and documentation will be available on GitHub. Contributions are welcome.
 
 <div align="center"><h3> </h3></div>
 <a name="Intel"></a>
