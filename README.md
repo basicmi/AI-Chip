@@ -2,8 +2,8 @@
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI-chips.png"></div>
 <br>
 <div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a>(Linkedin)</div>
-<div align="center"><strong>Welcome to My Wechat Blog <a href="https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw">StarryHeavensAbove for more AI chip related articles</a></strong></div>
-<div align="center"><strong>欢迎访问我的微信公众号 <a href="https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw">StarryHeavensAbove</a></strong></div>
+<div align="center"><strong>Welcome to My Wechat Blog <a href="[https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzI3MDQ2MjA3OA==&scene=1&album_id=1374108991751782402&count=3#wechat_redirect)">StarryHeavensAbove</a> for more AI chip related articles</strong></div>
+<div align="center"><strong>欢迎访问我的微信公众号 <a href="[https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzI3MDQ2MjA3OA==&scene=1&album_id=1374108991751782402&count=3#wechat_redirect)">StarryHeavensAbove</a></strong></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/qrcode_for_weichat_258.jpg" height="40"></div>
 <div align="center"><h1> </h1></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chip_Landscape_v0p7.png"></div>
