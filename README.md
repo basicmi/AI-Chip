@@ -14,6 +14,7 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#Neureality">Neureality</a>.</li>
 <li>Add news of <a href="#Qualcomm">Qualcomm</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
 <li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
@@ -1065,7 +1066,12 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.electronicsmedia.info/2021/05/06/neureality-unveiled-nr1-p-a-novel-ai-centric-inference-platform/">NeuReality unveiled NR1-P, A novel AI-centric inference platform</a></strong></p>
+<p><strong><a href="https://techcrunch.com/2022/12/06/neureality-ai-accelerator-chips-startup-raises-35m/">NeuReality lands $35M to bring AI accelerator chips to market</a></strong></p>
+<blockquote>
+  <p>NeuReality, a startup developing AI inferencing accelerator chips, has raised $35 million in new venture capital.</p>
+</blockquote>
+
+<p><a href="https://www.electronicsmedia.info/2021/05/06/neureality-unveiled-nr1-p-a-novel-ai-centric-inference-platform/">NeuReality unveiled NR1-P, A novel AI-centric inference platform</a></p>
 <blockquote>
   <p>NeuReality has unveiled NR1-P, a novel AI-centric inference platform. NeuReality has already started demonstrating its AI-centric platform to customers and partners. NeuReality has redefined today’s outdated AI system architecture by developing an AI-centric inference platform based on a new type of System-on-Chip (SoC). </p>
 </blockquote>
