@@ -14,6 +14,9 @@
 
 <font color="Darkred">
 <ul>
+<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
+<li>Add news of <a href="#Groq">Groq</a>.</li>
+<li>Add news of <a href="#d-matrix">d-Matrix</a>.</li>
 <li>Add news of <a href="#Neureality">Neureality</a>.</li>
 <li>Add news of <a href="#Qualcomm">Qualcomm</a>.</li>
 <li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
@@ -621,7 +624,12 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.forbes.com/sites/amyfeldman/2021/04/14/ai-chip-startup-groq-founded-by-ex-googlers-raises-300-million-to-power-autonomous-vehicles-and-data-centers/">AI Chip Startup Groq, Founded By Ex-Googlers, Raises $300 Million To Power Autonomous Vehicles And Data Centers</a></strong></p>
+<p><strong><a href="https://www.eetimes.com/groq-demos-fast-llms-on-4-year-old-silicon/">Groq Demonstrates Fast LLMs on 4-Year-Old Silicon</a></strong></p>
+<blockquote>
+  <p>MOUNTAIN VIEW, CALIF. — Groq has repositioned its first-generation AI inference chip as a language processing unit (LPU), and demonstrated Meta’s Llama-2 70-billion–parameter large language model (LLM) running inference at 240 tokens per second per user. Groq CEO Jonathan Ross told EE Times that the company had Llama-2 up and running on the company’s 10-rack (64-chip) cloud-based dev system in “a couple of days.” This system is based on the company’s first gen AI silicon, released four years ago.</p>
+</blockquote>
+
+<p><a href="https://www.forbes.com/sites/amyfeldman/2021/04/14/ai-chip-startup-groq-founded-by-ex-googlers-raises-300-million-to-power-autonomous-vehicles-and-data-centers/">AI Chip Startup Groq, Founded By Ex-Googlers, Raises $300 Million To Power Autonomous Vehicles And Data Centers</a></p>
 <blockquote>
   <p>Jonathan Ross left Google to launch next-generation semiconductor startup Groq in 2016. Today, the Mountain View, California-based firm said that it had raised $300 million led by Tiger Global Management and billionaire investor Dan Sundheim’s D1 Capital as it officially launched into public view. </p>
 </blockquote>
@@ -658,7 +666,12 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://techcrunch.com/2021/04/13/sambanova-raises-676m-at-a-5-1b-valuation-to-double-down-on-cloud-based-ai-software-for-enterprises/">SambaNova raises $676M at a $5.1B valuation to double down on cloud-based AI software for enterprises</a></strong></p>
+<p><strong><a href="https://venturebeat.com/ai/sambanova-unveils-new-ai-chip-to-power-full-stack-ai-platform/">SambaNova unveils new AI chip to power full-stack AI platform</a></strong></p>
+<blockquote>
+  <p>Today Palo-Alto-based SambaNova Systems unveiled a new AI chip, the SN40L, which will power its full-stack large language model (LLM) platform, the SambaNova Suite, that helps enterprises go from chip to model — building and deploying customized generative AI models.</p>
+</blockquote>
+
+<p><a href="https://techcrunch.com/2021/04/13/sambanova-raises-676m-at-a-5-1b-valuation-to-double-down-on-cloud-based-ai-software-for-enterprises/">SambaNova raises $676M at a $5.1B valuation to double down on cloud-based AI software for enterprises</a></p>
 <blockquote>
   <p>SambaNova — a startup building AI hardware and integrated systems that run on it that only officially came out of three years in stealth last December — is announcing a huge round of funding today to take its business out into the world. The company has closed on $676 million in financing, a Series D that co-founder and CEO Rodrigo Liang has confirmed values the company at $5.1 billion.</p>
 </blockquote>
@@ -1148,7 +1161,13 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/d-matrix_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
-<p><strong><a href="https://www.forbes.com/sites/karlfreund/2022/06/21/d-matrix-ai-chip-promises-efficient-transformer-processing/">D-Matrix AI chip promises efficient transformer processing</a></strong></p>
+
+<p><strong><a href="www.reuters.com/technology/ai-chip-startup-d-matrix-raises-110-mln-with-backing-microsoft-2023-09-06/">Exclusive: AI chip startup d-Matrix raises $110 million with backing from Microsoft</a></strong></p>
+<blockquote>
+  <p>Sept 6 (Reuters) - Silicon Valley-based artificial intelligence chip startup d-Matrix has raised $110 million from investors that include Microsoft Corp (MSFT.O) at a time when many chip companies are struggling to raise cash.</p>
+</blockquote> 
+
+<p><a href="https://www.forbes.com/sites/karlfreund/2022/06/21/d-matrix-ai-chip-promises-efficient-transformer-processing/">D-Matrix AI chip promises efficient transformer processing</a></p>
 <blockquote>
   <p>The startup combines digital in-memory compute and chiplet implementations for data-center-grade inference.</p>
 </blockquote> 
