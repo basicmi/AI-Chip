@@ -1193,6 +1193,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 12. <a href="https://www.polymagelabs.com//">PolyMage Labs</a><br>
 13. <a href="https://octoml.ai/">OctoML</a><br>
 14. <a href="https://www.modular.com/">Modular AI</a><br>
+15. <a href="https://github.com/nebuly-ai/nebullvm/tree/main/apps/accelerate/speedster">Speedster Inferrence Optimizer</a><br>
 
 <div align="center"><h3> </h3></div>
 
