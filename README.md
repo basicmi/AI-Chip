@@ -1,4 +1,4 @@
-<div align="center"><h1>AI Chip (ICs and IPs)</h1></div>
+Damarcus Jones Ai Chips<div align="center"><h1>AI Chip (ICs and IPs)</h1></div>
 <div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI-chips.png"></div>
 <br>
 <div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a>(Linkedin)</div>
