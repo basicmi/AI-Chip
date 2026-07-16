@@ -34,6 +34,9 @@
 <li><strong>MediaTek</strong>: <a href="#MediaTek">Dimensity 9400</a> NPU 890 / agentic on-device AI.</li>
 <li><strong>Broadcom / OpenAI</strong>: custom AI <a href="#Broadcom">XPU</a> partner; <a href="#OpenAI">Jalapeño</a> inference ASIC.</li>
 <li><strong>Marvell</strong>: noted role as custom AI ASIC partner (Trainium / Maia class programs).</li>
+<li><strong>Anthropic</strong>: multi-cloud compute on <a href="#Anthropic">TPU / Trainium / GPU</a> (Google–Broadcom GW-scale deals).</li>
+<li><strong>Graphcore</strong>: <a href="#Graphcore">acquired by SoftBank</a> (2024); continues IPU / next-gen work inside SoftBank.</li>
+<li><strong>Edge / ADAS</strong>: <a href="#SiMa">SiMa Modalix</a> Physical AI; <a href="#BlackSesame">Black Sesame Huashan</a> automotive SoCs.</li>
 <li><strong>Repo hygiene</strong>: Fixed asset links to this repository; cleaned header WeChat album links.</li>
 </ul>
 
@@ -46,7 +49,7 @@
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#MediaTek">MediaTek</a>, <a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a>, <a href="#Broadcom">Broadcom</a></td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#OpenAI">OpenAI</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Meta (Facebook)</a>, <a href="#Tesla">Tesla</a></td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#OpenAI">OpenAI</a>, <a href="#Anthropic">Anthropic</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Meta (Facebook)</a>, <a href="#Tesla">Tesla</a></td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td>
@@ -57,7 +60,7 @@
   </tr>
   <tr>
     <th><a href="#China_AI_Chips">China AI Accelerators</a></th>
-    <td><a href="#HuaweiAscend">Huawei Ascend</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Biren">Biren</a>, <a href="#MooreThreads">Moore Threads</a>, <a href="#Enflame">Enflame</a>, <a href="#Horizon">Horizon Robotics</a>, <a href="#Alibaba">Alibaba T-Head</a>, <a href="#Baidu">Baidu Kunlun</a></td>
+    <td><a href="#HuaweiAscend">Huawei Ascend</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Biren">Biren</a>, <a href="#MooreThreads">Moore Threads</a>, <a href="#MetaX">MetaX</a>, <a href="#Hygon">Hygon</a>, <a href="#Iluvatar">Iluvatar CoreX</a>, <a href="#Enflame">Enflame</a>, <a href="#Horizon">Horizon Robotics</a>, <a href="#BlackSesame">Black Sesame</a>, <a href="#Alibaba">Alibaba T-Head</a>, <a href="#Baidu">Baidu Kunlun</a></td>
   </tr>
 </table>
 
@@ -380,6 +383,20 @@
 
 <div align="center"><h3> </h3></div>
 
+
+<p><a name="Anthropic"></a></p>
+<div align="center"><h3>Anthropic</h3></div>
+
+<p><strong><a href="https://www.anthropic.com/news/google-broadcom-partnership-compute">Anthropic expands partnership with Google and Broadcom for next-generation compute</a></strong></p>
+<blockquote>
+  <p>Apr 2026 — Expanded agreement for multiple gigawatts of next-generation Google TPU capacity (Broadcom SEC filings cite ~3.5 GW), expected online from 2027, on top of prior &gt;1 GW TPU commitments. Anthropic emphasizes a multi-hardware strategy: AWS Trainium (incl. Project Rainier), Google TPUs, and NVIDIA GPUs.</p>
+</blockquote>
+
+<p><a href="https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus/">TechCrunch: Anthropic ups compute deal with Google and Broadcom</a> ·
+<a href="https://www.cnbc.com/2025/10/23/anthropic-google-cloud-deal-tpu.html">CNBC: Oct 2025 Google TPU cloud deal</a></p>
+
+<div align="center"><h3> </h3></div>
+
 <p><a name="Apple"></a></p>
 
 <div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Apple_logo.png" height="60"></div>
@@ -651,7 +668,14 @@
 
 <div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
-<p><strong><a href="https://www.eetimes.com/graphcore-supercharges-ipu-with-wafer-on-wafer/">Graphcore Supercharges IPU with Wafer-on-Wafer</a></strong></p>
+<p><strong><a href="https://www.graphcore.ai/posts/graphcore-joins-softbank-group-to-build-next-generation-of-ai-compute">Graphcore joins SoftBank Group to build next generation of AI compute</a></strong></p>
+<blockquote>
+  <p>Jul 2024 — SoftBank acquired Graphcore as a wholly owned subsidiary (terms undisclosed; press estimates ~$500M). Graphcore continues under its own brand, with SoftBank backing next-generation IPU / AI compute development (including SoftBank-ecosystem follow-on investment reporting into 2026).</p>
+</blockquote>
+
+<p><a href="https://www.reuters.com/technology/artificial-intelligence/japans-softbank-acquires-british-ai-chipmaker-graphcore-2024-07-11/">Reuters: SoftBank acquires Graphcore</a></p>
+
+<p><strong><a href="https://www.eetimes.com/graphcore-supercharges-ipu-with-wafer-on-wafer/">Graphcore Supercharges IPU with Wafer-on-Wafer</a></strong> (historical)</p>
 <blockquote>
   <p>Graphcore unveiled its third-generation intelligence processing unit (IPU), the first processor to be built using 3D wafer-on-wafer (WoW) technology.</p>
 </blockquote>
@@ -1099,11 +1123,19 @@
 
 <p><a name="SiMa"></a></p>
 
-<div align="center"><a href="http://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40"></a></div>
+<div align="center"><a href="https://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.businesswire.com/news/home/20200512005313/en/SiMa.ai-Raises-30-Million-Series-Investment-Led">SiMa.ai Raises $30 Million in Series A Investment Round Led by Dell Technologies Capital</a></strong></p>
+<p><strong><a href="https://sima.ai/press-release/sima-ai-next-gen-platform-for-physical-ai-in-production/">SiMa.ai Modalix platform for Physical AI in production</a></strong></p>
+<blockquote>
+  <p>Aug 2025 — Second-generation MLSoC Modalix ships for edge / Physical AI (robots, industrial, automotive, vision), targeting CNNs + Transformers/LLMs/GenAI under ~10W, with SoM/devkits and the LLiMa framework for on-device LLM deployment.</p>
+</blockquote>
+
+<p><a href="https://sima.ai/press-release/sima-ai-expands-one-platform-for-edge-ai-with-mlsoc-modalix/">MLSoC Modalix product family announcement</a> (2024) ·
+<a href="https://sima.ai/press-release/sima-ai-launches-modalix-pcie-card-for-industrial-edge-ai-llms/">Modalix PCIe card for industrial edge LLMs</a> (2026)</p>
+
+<p><a href="https://www.businesswire.com/news/home/20200512005313/en/SiMa.ai-Raises-30-Million-Series-Investment-Led">SiMa.ai Raises $30 Million in Series A</a> (historical)</p>
 <blockquote>
   <p>SAN JOSE, Calif.--(BUSINESS WIRE)--SiMa.ai, the company enabling high performance machine learning to go green, today announced its Machine Learning SoC (MLSoC) platform – the industry’s first unified solution to support traditional compute with high performance, lowest power, safe and secure machine learning inference. Delivering the highest frames per second per watt, SiMa.ai’s MLSoC is the first machine learning platform to break the 1000 FPS/W barrier for ResNet-501. In customer engagements, the company has demonstrated 10-30x improvement in FPS/W through its automated software flow across a wide range of embedded edge applications, over today’s competing solutions. The platform will provide machine learning solutions that range from 50 TOPs@5W to 200 TOPs@20W, delivering an industry first of 10 TOPs/W for high performance inference.</p>
 </blockquote>
@@ -1423,6 +1455,20 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <blockquote>
   <p>Leading China ADAS / autonomous-driving compute vendor with Journey-series BPU SoCs (Journey 6 adds BPU Nash with stronger Transformer support) widely designed into passenger vehicles; focuses on efficient vision/transformer perception at the edge rather than datacenter LLM training.</p>
 </blockquote>
+
+<div align="center"><h3> </h3></div>
+
+
+<p><a name="BlackSesame"></a></p>
+<div align="center"><a href="https://www.blacksesame.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blacksesame_logo.png" height="50"></a></div>
+<div align="center"><h3>Black Sesame Technologies (黑芝麻智能)</h3></div>
+
+<p><strong><a href="https://www.blacksesame.com/en/huashan-a1000/">Huashan A1000 automotive-grade ADAS / AD SoCs</a></strong></p>
+<blockquote>
+  <p>Hong Kong-listed (02533.HK, Aug 2024) automotive AI SoC vendor. Huashan A1000-family chips target L2+/L3 assisted driving with automotive-grade safety certifications and are reported in mass-production vehicle models; Huashan A2000 messaging extends toward higher-performance / cross-domain AI inference.</p>
+</blockquote>
+
+<p><a href="https://www.caixinglobal.com/2024-08-01/chinese-auto-chip-maker-black-sesame-to-raise-143-million-in-hong-kong-ipo-102222110.html">Caixin: Black Sesame Hong Kong IPO</a></p>
 
 <div align="center"><h3> </h3></div>
 
