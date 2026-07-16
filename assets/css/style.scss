@@ -125,7 +125,8 @@ a {
   margin: 0.75rem 0 1.25rem;
 }
 
-.updates-list {
+.updates-list,
+.glance-list {
   background: var(--ai-surface);
   border: 1px solid var(--ai-border);
   border-radius: 10px;
@@ -133,9 +134,52 @@ a {
   margin: 0.5rem 0 1.5rem;
 }
 
-.updates-list li {
-  margin: 0.35rem 0;
+.updates-list li,
+.glance-list li {
+  margin: 0.4rem 0;
   line-height: 1.45;
+}
+
+@media (min-width: 820px) {
+  .glance-list {
+    columns: 2;
+    column-gap: 1.75rem;
+  }
+
+  .glance-list li {
+    break-inside: avoid;
+  }
+}
+
+.glance-list a {
+  text-decoration: none;
+}
+
+.glance-list a:hover {
+  text-decoration: underline;
+}
+
+.vendor-blurb {
+  margin: 0.35rem 0 0.85rem;
+  line-height: 1.55;
+  color: var(--ai-ink);
+}
+
+.latest-label {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--ai-accent);
+}
+
+.latest-list {
+  margin: 0 0 1.35rem;
+  padding-left: 1.2rem;
+}
+
+.latest-list li {
+  margin: 0.4rem 0;
+  line-height: 1.5;
 }
 
 .shortcut-table {
