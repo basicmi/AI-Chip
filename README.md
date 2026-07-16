@@ -28,9 +28,12 @@
 <li><strong>Apple</strong>: <a href="#Apple">M4 / M5</a> Apple silicon Neural Engine &amp; GPU Neural Accelerators.</li>
 <li><strong>Samsung</strong>: <a href="#Samsung">Exynos 2500</a> on-device NPU (3nm GAA).</li>
 <li><strong>Qualcomm</strong>: <a href="#Qualcomm">Snapdragon 8 Elite</a> Hexagon NPU for on-device GenAI.</li>
-<li><strong>China accelerators</strong>: new section for <a href="#China_AI_Chips">Huawei Ascend</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Biren">Biren</a>, <a href="#MooreThreads">Moore Threads</a>, etc.</li>
+<li><strong>China accelerators</strong>: <a href="#China_AI_Chips">Huawei Ascend</a>, Cambricon, Biren, Moore Threads, <a href="#MetaX">MetaX</a>, <a href="#Hygon">Hygon DCU</a>, <a href="#Iluvatar">Iluvatar CoreX</a>, Enflame, Horizon.</li>
 <li><strong>Alibaba</strong>: T-Head <a href="#Alibaba">PPU / Zhenwu</a> cloud AI chips.</li>
 <li><strong>Startups</strong>: added <a href="#Etched">Etched</a> (transformer ASIC / Sohu).</li>
+<li><strong>MediaTek</strong>: <a href="#MediaTek">Dimensity 9400</a> NPU 890 / agentic on-device AI.</li>
+<li><strong>Broadcom / OpenAI</strong>: custom AI <a href="#Broadcom">XPU</a> partner; <a href="#OpenAI">Jalapeño</a> inference ASIC.</li>
+<li><strong>Marvell</strong>: noted role as custom AI ASIC partner (Trainium / Maia class programs).</li>
 <li><strong>Repo hygiene</strong>: Fixed asset links to this repository; cleaned header WeChat album links.</li>
 </ul>
 
@@ -40,10 +43,10 @@
 <HR>
 <table style="width:100%">
   <tr>
-    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>,<a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a></td>
+    <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#MediaTek">MediaTek</a>, <a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a>, <a href="#Broadcom">Broadcom</a></td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Meta (Facebook)</a>, <a href="#Tesla">Tesla</a></td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#OpenAI">OpenAI</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Meta (Facebook)</a>, <a href="#Tesla">Tesla</a></td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td>
@@ -168,6 +171,19 @@
   <p>Earlier on-device AI messaging around Exynos 9820 / 9810-era NPU features for AR/VR and mobile deep learning.</p>
 </blockquote>   
 
+
+<div align="center"><h3> </h3></div>
+<a name="MediaTek"></a>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/MediaTek_logo.png" height="40"></div>
+<div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.mediatek.com/press-room/mediateks-dimensity-9400-flagship-soc-offers-extreme-performance-and-efficiency-for-the-latest-ai-experiences">MediaTek Dimensity 9400 — 8th Gen NPU for agentic AI</a></strong></p>
+<blockquote>
+  <p>Oct 2024 — Flagship Dimensity 9400 (TSMC 3nm) pairs an all-big-core CPU with MediaTek’s 8th-generation NPU 890. MediaTek highlights on-device LoRA training, high-quality video generation, MoE LLM support, and the Dimensity Agentic AI Engine (DAE), with claimed large gains in LLM prompt / diffusion performance vs. Dimensity 9300.</p>
+</blockquote>
+
+<p><a href="https://www.mediatek.com/products/smartphones/mediatek-dimensity-9400">Dimensity 9400 product page</a></p>
+
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
 <div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png" height="35"></div>
@@ -224,12 +240,38 @@
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://www.marvell.com/products/data-processing-units.html">Custom AI ASICs + DPUs</a></strong></p>
+<blockquote>
+  <p>Beyond OCTEON / ARMADA DPUs for networking infrastructure, Marvell is a major custom AI accelerator design partner for hyperscalers (widely reported programs include AWS Trainium/Inferentia-class and Microsoft Maia-class silicon), complementing Broadcom’s XPU franchise.</p>
+</blockquote>
+
 <p><a href="https://www.marvell.com/products/data-processing-units.html">Data Processing Units</a></p>
 <blockquote>
-  <p>Built on seven generations of the industry’s first, most scalable and widely adopted data infrastructure processors, Marvell’s OCTEON™, OCTEON™ Fusion and ARMADA® platforms are optimized for wireless infrastructure, wireline carrier networks, enterprise and cloud data centers.</p>
+  <p>Marvell’s OCTEON™, OCTEON™ Fusion and ARMADA® platforms target wireless infrastructure, carrier networks, enterprise and cloud data centers.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
+
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Broadcom"></a></p>
+<div align="center"><h3>Broadcom</h3></div>
+
+<p><strong><a href="https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/">OpenAI and Broadcom announce strategic collaboration for custom AI accelerators</a></strong></p>
+<blockquote>
+  <p>Oct 2025 — Multi-year plan to deploy ~10 GW of OpenAI-designed accelerators co-developed with Broadcom (Ethernet scale-up/scale-out), with rack deployments targeted from H2 2026 through 2029.</p>
+</blockquote>
+
+<p><strong><a href="https://www.nasdaq.com/press-release/broadcom-announces-extended-partnership-meta-deploy-technology-support-multi">Broadcom extends partnership with Meta on MTIA custom silicon</a></strong></p>
+<blockquote>
+  <p>Apr 2026 — Broadcom’s XPU platform continues as the co-design / implementation backbone for Meta’s multi-generation MTIA accelerators and supporting Ethernet AI networking fabric.</p>
+</blockquote>
+
+<p><a href="https://www.hpcwire.com/2025/09/09/broadcom-steps-up-to-challenge-nvidia-in-ai-chip-arms-race/">Broadcom custom XPUs for hyperscaler AI</a></p>
+<blockquote>
+  <p>Broadcom co-designs customer-specific AI accelerators (XPUs) and pairs them with Tomahawk / Jericho Ethernet switching — a long-running model that began with Google TPU generations and now spans multiple frontier labs and cloud providers.</p>
+</blockquote>
 
 <div align="center"><h2><a name="Tech_Giants"></a>II. Tech Giants & HPC Vendors</h2></div>
 
@@ -322,6 +364,19 @@
 <blockquote>
   <p>Microsoft’s first in-house AI accelerator, Azure Maia 100 (5nm, advanced packaging), is co-designed for Azure AI / Copilot-class cloud workloads, with a software stack integrating PyTorch and ONNX Runtime.</p>
 </blockquote>
+
+<div align="center"><h3> </h3></div>
+
+
+<p><a name="OpenAI"></a></p>
+<div align="center"><h3>OpenAI</h3></div>
+
+<p><strong><a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/">OpenAI and Broadcom unveil Jalapeño LLM inference chip</a></strong> · <a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/">TechCrunch coverage</a></p>
+<blockquote>
+  <p>Jun 2026 — OpenAI’s first custom “Intelligence Processor,” Jalapeño, is an inference-optimized ASIC co-developed with Broadcom (networking + silicon implementation) for lower-cost, higher-utilization LLM serving. First step in a multi-generation platform with initial deployments targeted by end of 2026.</p>
+</blockquote>
+
+<p><a href="https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/">OpenAI–Broadcom 10 GW accelerator collaboration</a></p>
 
 <div align="center"><h3> </h3></div>
 
@@ -1367,6 +1422,41 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <p><strong><a href="https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6">Horizon Journey 6 / BPU Nash automotive AI processors</a></strong></p>
 <blockquote>
   <p>Leading China ADAS / autonomous-driving compute vendor with Journey-series BPU SoCs (Journey 6 adds BPU Nash with stronger Transformer support) widely designed into passenger vehicles; focuses on efficient vision/transformer perception at the edge rather than datacenter LLM training.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+
+<p><a name="MetaX"></a></p>
+<div align="center"><h3><a href="https://www.metax-tech.com/en/about/about.html">MetaX (沐曦)</a></h3></div>
+
+<p><strong><a href="https://www.caixinglobal.com/2026-03-26/chinese-gpu-maker-metax-doubles-revenue-amid-push-for-domestic-chips-102427800.html">Chinese GPU Maker MetaX Doubles Revenue Amid Push for Domestic Chips</a></strong></p>
+<blockquote>
+  <p>Shanghai MetaX (STAR: 688802.SH, listed Dec 2025) ships C-series training/inference GPUs (C500 mass production; C600 domestic-process follow-on) with the MXMACA software stack for AI clusters and intelligent-computing centers.</p>
+</blockquote>
+
+<p><a href="https://www.chinadaily.com.cn/a/202607/09/WS6a4f3978a310986e2b4645f5.html">MetaX scales production to meet rising AI chip demand</a></p>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Hygon"></a></p>
+<div align="center"><h3><a href="https://www.hygon.cn/">Hygon (海光) DCU</a></h3></div>
+
+<p><strong><a href="https://www.trendforce.com/news/2026/04/29/news-huawei-ascend-cambricon-and-hygon-completed-day-0-adaptation-to-deepseek-v4/">Hygon DCU completes Day-0 adaptation for DeepSeek-V4</a></strong></p>
+<blockquote>
+  <p>Hygon’s Deep Computing Unit (DCU) GPGPU-class accelerators and DTK software stack are widely used in China for large-model training/inference; 2025–2026 coverage highlights same-day DeepSeek model adaptations alongside Ascend and Cambricon.</p>
+</blockquote>
+
+<p><a href="https://github.com/HYGON-AI/dcu-inference-cookbook">HYGON-AI DCU inference cookbook</a> (open deployment guides)</p>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Iluvatar"></a></p>
+<div align="center"><h3><a href="https://www.iluvatar.com/">Iluvatar CoreX (天数智芯)</a></h3></div>
+
+<p><strong><a href="https://www.scmp.com/tech/big-tech/article/3341368/iluvatar-corex-targets-nvidias-rubin-gpu-road-map-amid-china-chip-push">Iluvatar CoreX targets Nvidia’s Rubin with GPU road map</a></strong></p>
+<blockquote>
+  <p>Jan 2026 — Hong Kong-listed Iluvatar CoreX outlined a multi-generation GPU architecture roadmap (Tianshu / Tianxuan / Tianji / Tianquan messaging) aiming to close the gap with Nvidia Hopper→Blackwell→Rubin class platforms, with BI-V150-class products already in AI training/inference deployments.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
