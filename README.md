@@ -12,34 +12,34 @@
 <p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: July 2026.</em></p>
 <hr class="section-rule" />
 <ul class="glance-list">
-<li><a href="#Nvidia"><strong>NVIDIA</strong></a> — Vera Rubin platform announced for H2 2026; Blackwell NVL72 in volume AI-factory deployments.</li>
-<li><a href="#Intel"><strong>Intel / Habana</strong></a> — Gaudi 3 shipping for enterprise GenAI train/infer with Ethernet scale-out OEM/cloud partners.</li>
+<li><a href="#Nvidia"><strong>NVIDIA</strong></a> — Vera Rubin platform targeted H2 2026; Blackwell NVL72 remains the volume AI-factory workhorse.</li>
+<li><a href="#Intel"><strong>Intel / Habana</strong></a> — Gaudi 3 generally available on IBM Cloud and Dell AI Factory for enterprise GenAI inference/fine-tune.</li>
 <li><a href="#AMD"><strong>AMD</strong></a> — Instinct MI350 shipping; Meta partnership expands multi-GW MI450 / Helios rack deployments.</li>
-<li><a href="#Qualcomm"><strong>Qualcomm</strong></a> — Snapdragon 8 Elite Hexagon NPU leads on-device GenAI; Cloud AI 100 remains the inference SKU.</li>
+<li><a href="#Qualcomm"><strong>Qualcomm</strong></a> — Snapdragon 8 Elite Gen 5 (Sep 2025) Hexagon NPU ~37% faster for on-device agentic AI / LLMs.</li>
 <li><a href="#Samsung"><strong>Samsung</strong></a> — Exynos 2500 (3nm GAA) ships with a substantially upgraded on-device NPU.</li>
-<li><a href="#MediaTek"><strong>MediaTek</strong></a> — Dimensity 9400 NPU 890 targets agentic on-device AI (LoRA, video, MoE LLMs).</li>
-<li><a href="#Marvell"><strong>Marvell</strong></a> — Major custom AI ASIC + DPU partner for hyperscaler accelerators (Trainium/Maia-class programs).</li>
+<li><a href="#MediaTek"><strong>MediaTek</strong></a> — Dimensity 9500 (Sep 2025) NPU 990 + Super Efficient CIM NPU for agentic on-device GenAI.</li>
+<li><a href="#Marvell"><strong>Marvell</strong></a> — Custom AI XPU partner for AWS Trainium / Microsoft Maia; 18+ custom projects and rising AI silicon revenue.</li>
 <li><a href="#Broadcom"><strong>Broadcom</strong></a> — OpenAI Jalapeño / multi-GW XPU deal; extended Meta MTIA partnership; long-time Google TPU partner.</li>
-<li><a href="#Google"><strong>Google</strong></a> — Ironwood (TPU v7) and Trillium (v6e) power Cloud TPU; multi-GW Anthropic capacity deals.</li>
-<li><a href="#Amazon_AWS"><strong>AWS</strong></a> — Trainium2 Trn2 UltraServers generally available; Inferentia2 continues cost-efficient LLM serving.</li>
-<li><a href="#Microsoft"><strong>Microsoft</strong></a> — Azure Maia 100 deployed for Azure AI / Copilot-class workloads; next Maia gens in design.</li>
+<li><a href="#Google"><strong>Google</strong></a> — Ironwood (TPU7x) generally available Mar 2026; Trillium (v6e) remains a volume Cloud TPU SKU.</li>
+<li><a href="#Amazon_AWS"><strong>AWS</strong></a> — Trainium3 / Trn3 UltraServers GA (Dec 2025); Trainium4 previewed with NVLink Fusion path.</li>
+<li><a href="#Microsoft"><strong>Microsoft</strong></a> — Maia 200 inference accelerator (Jan 2026) deploying in Azure for Copilot / Foundry token economics.</li>
 <li><a href="#OpenAI"><strong>OpenAI</strong></a> — First custom inference ASIC “Jalapeño” with Broadcom; initial deployments targeted end of 2026.</li>
 <li><a href="#Anthropic"><strong>Anthropic</strong></a> — Expanded Google TPU + Broadcom capacity (~3.5 GW from 2027) atop AWS Trainium and NVIDIA GPUs.</li>
 <li><a href="#Apple"><strong>Apple</strong></a> — M5 / M5 Pro / M5 Max add GPU Neural Accelerators and a faster Neural Engine for Apple Intelligence.</li>
 <li><a href="#Alibaba"><strong>Alibaba</strong></a> — T-Head PPU / Zhenwu family deployed in Alibaba Cloud and China Unicom-scale clusters.</li>
-<li><a href="#Baidu"><strong>Baidu</strong></a> — Kunlunxin P800-class GPUs remain core to Baidu Cloud / ERNIE train and serve.</li>
-<li><a href="#Tencent_Cloud"><strong>Tencent</strong></a> — Zixiao and partner accelerators continue scaling LLM/recommendation workloads on Tencent Cloud.</li>
+<li><a href="#Baidu"><strong>Baidu</strong></a> — Kunlunxin P800 10k-card clusters; key ERNIE 5.1 training on domestic stack; Tianchi 256-card supernode (2026).</li>
+<li><a href="#Tencent_Cloud"><strong>Tencent</strong></a> — Zixiao / partner accelerators continue scaling LLM and recommendation serving on Tencent Cloud (2025–2026).</li>
 <li><a href="#Facebook"><strong>Meta</strong></a> — Multi-generation MTIA (300–500 class) with Broadcom; modular chiplets through 2026–2027.</li>
 <li><a href="#Tesla"><strong>Tesla</strong></a> — AI5 taped out (Apr 2026); AI6 / Dojo3 in progress; vehicles near-term stay on AI4.</li>
-<li><a href="#ARM"><strong>Arm</strong></a> — Ethos-U85 micro-NPU adds native transformer ops for edge/IoT GenAI with Corstone-320.</li>
-<li><a href="#Synopsys"><strong>Synopsys</strong></a> — ARC NPX NPU IP scales multi-TOPS configurations for auto/consumer/datacenter SoCs.</li>
-<li><a href="#Imagination"><strong>Imagination</strong></a> — PowerVR NNA + Continuum software for edge/automotive transformer-class networks.</li>
-<li><a href="#CEVA"><strong>CEVA</strong></a> — NeuPro-class NPU IP and DNN compiler for embedded, automotive, and IoT inference.</li>
-<li><a href="#Cadence"><strong>Cadence</strong></a> — Tensilica AI Platform / NeuroWeave updates for on-device and automotive transformers.</li>
-<li><a href="#VeriSilicon"><strong>VeriSilicon</strong></a> — VIP/Acuity NPU IP and turnkey design services widely used in China and global edge SoCs.</li>
-<li><a href="#Cerebras"><strong>Cerebras</strong></a> — WSE-3 / CS-3 wafer-scale systems shipping for large-model train and high-throughput inference.</li>
-<li><a href="#Graphcore"><strong>Graphcore</strong></a> — Now a SoftBank subsidiary; continuing next-gen IPU / AI compute under SoftBank backing.</li>
-<li><a href="#Tenstorrent"><strong>Tenstorrent</strong></a> — Wormhole shipping; Blackhole next — Tensix chiplet meshes with open TT-Metalium software.</li>
+<li><a href="#ARM"><strong>Arm</strong></a> — Ethos-U85 + Corstone-320 IoT reference for edge transformer / GenAI; Armv9 SME path in mobile SoCs.</li>
+<li><a href="#Synopsys"><strong>Synopsys</strong></a> — ARC NPX NPU IP scaled for auto/consumer GenAI SoCs with ongoing 2025–2026 toolchain releases.</li>
+<li><a href="#Imagination"><strong>Imagination</strong></a> — PowerVR NNA + Continuum for edge/auto transformer networks; 2025–2026 licensee SoC ramps.</li>
+<li><a href="#CEVA"><strong>CEVA</strong></a> — NeuPro-class NPU IP for embedded/auto/IoT transformers; 2025–2026 DNN compiler updates.</li>
+<li><a href="#Cadence"><strong>Cadence</strong></a> — Tensilica AI Platform / NeuroWeave updates for on-device and automotive transformer SoCs (2025–2026).</li>
+<li><a href="#VeriSilicon"><strong>VeriSilicon</strong></a> — VIP/Acuity NPU IP and turnkey services for China/global edge GenAI SoCs (2025–2026).</li>
+<li><a href="#Cerebras"><strong>Cerebras</strong></a> — Nasdaq IPO (CBRS, May 2026); multi-year OpenAI inference capacity deal (&gt;$20B messaging).</li>
+<li><a href="#Graphcore"><strong>Graphcore</strong></a> — SoftBank injects ~$457M (2026); Izanagi next-gen IPU+CPU path aimed at Stargate-scale 2026 deployments.</li>
+<li><a href="#Tenstorrent"><strong>Tenstorrent</strong></a> — Galaxy Blackhole GA (Apr 2026): 32× Blackhole servers shipping for LLM inference and video gen.</li>
 <li><a href="#Etched"><strong>Etched</strong></a> — ~$5B valuation / ~$1B booked orders for transformer-specialized Sohu inference ASICs.</li>
 <li><a href="#Groq"><strong>Groq</strong></a> — LPU technology licensed into NVIDIA’s Vera Rubin AI-factory stack (GTC 2026).</li>
 <li><a href="#SambaNova"><strong>SambaNova</strong></a> — SN50 RDU for agentic AI; $350M+ Series E; SoftBank early deploy; Intel collab; H2 2026 ship.</li>
@@ -48,10 +48,10 @@
 <li><a href="#Furiosa"><strong>FuriosaAI</strong></a> — RNGD in mass production; Broadcom partnership for next-gen multi-die inference platform.</li>
 <li><a href="#Kinara"><strong>Kinara</strong></a> — NXP acquiring Kinara (ex–Deep Vision) for industrial/automotive edge NPU portfolio.</li>
 <li><a href="#SiMa"><strong>SiMa.ai</strong></a> — Modalix MLSoC in production for Physical AI (robots/industrial) under ~10W with LLiMa LLMs.</li>
-<li><a href="#d-matrix"><strong>d-Matrix</strong></a> — Corsair digital in-memory compute accelerators targeting efficient datacenter LLM inference.</li>
+<li><a href="#d-matrix"><strong>d-Matrix</strong></a> — Corsair inference platform in full production (Jun 2026); $275M Series C / ~$2B valuation.</li>
 <li><a href="#Blaize"><strong>Blaize</strong></a> — Nasdaq-listed (BZAI); GSP architecture for industrial/smart-city edge vision and GenAI.</li>
-<li><a href="#SynSense"><strong>SynSense</strong></a> — Speck/Xylo neuromorphic chips; iniVation collab extends event-based vision + edge AI.</li>
-<li><a href="#Sagence"><strong>Sagence AI</strong></a> — Rebranded from Analog Inference; analog CIM accelerators for efficient LLM/vision inference.</li>
+<li><a href="#SynSense"><strong>SynSense</strong></a> — Speck/Xylo neuromorphic + event-vision stack; 2025–2026 funding/collabs for ultra-low-power edge AI.</li>
+<li><a href="#Sagence"><strong>Sagence AI</strong></a> — Analog CIM accelerators for efficient LLM/vision inference; active 2025–2026 AI-infra engagements post-rebrand.</li>
 <li><a href="#HuaweiAscend"><strong>Huawei Ascend</strong></a> — Ascend 910B/910C + Atlas 900 A3 SuperPoD (CloudMatrix384-class); 950-class on roadmap.</li>
 <li><a href="#Cambricon"><strong>Cambricon</strong></a> — Targets ~500k AI chips in 2026; Siyuan 590 / next-gen 690 messaging for cloud customers.</li>
 <li><a href="#Biren"><strong>Biren</strong></a> — Hong Kong IPO (6082.HK, Jan 2026); BR100-class GPGPU/AI accelerators.</li>
@@ -59,9 +59,9 @@
 <li><a href="#MetaX"><strong>MetaX</strong></a> — STAR-listed (688802.SH); C500 in mass production, C600 domestic-process follow-on, MXMACA stack.</li>
 <li><a href="#Hygon"><strong>Hygon</strong></a> — DCU GPGPUs + DTK stack; Day-0 DeepSeek-V4 adaptation alongside Ascend and Cambricon.</li>
 <li><a href="#Iluvatar"><strong>Iluvatar CoreX</strong></a> — HK-listed; multi-gen GPU roadmap (Tianshu→Tianquan) aiming at Hopper–Rubin class gap; BI-V150 deployed.</li>
-<li><a href="#Enflame"><strong>Enflame</strong></a> — CloudBlazer / iGCU GPUs in China intelligent-computing centers; TopsRider LLM software updates.</li>
-<li><a href="#Horizon"><strong>Horizon Robotics</strong></a> — Journey 6 / BPU Nash designed into China L2+ vehicles with stronger Transformer support.</li>
-<li><a href="#BlackSesame"><strong>Black Sesame</strong></a> — HK-listed; Huashan A1000 in mass-production vehicles; A2000 messaging for higher-perf AD.</li>
+<li><a href="#Enflame"><strong>Enflame</strong></a> — CloudBlazer / iGCU GPUs in China ICC deployments; TopsRider LLM stack updates through 2025–2026.</li>
+<li><a href="#Horizon"><strong>Horizon Robotics</strong></a> — Journey 6 / BPU Nash mass-designed into China L2+ vehicles; stronger Transformer / E2E driving support.</li>
+<li><a href="#BlackSesame"><strong>Black Sesame</strong></a> — Huashan A1000 in mass-production vehicles; A2000 messaging for higher-perf / cross-domain AD (2025–2026).</li>
 </ul>
 
 <div align="center" class="section-title"><h2>Shortcut</h2></div>
@@ -121,8 +121,8 @@
 </ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">NVIDIA Rubin platform</a></strong> — CES 2026 — Vera Rubin for agentic AI and large MoE; vendor claims large gains in inference token cost and training GPU-efficiency vs. Blackwell; H2 2026 partner availability.</li>
-<li><strong><a href="https://nvidianews.nvidia.com/news/nvidia-blackwell-platform-arrives-to-power-a-new-era-of-computing">Blackwell platform</a></strong> — GTC 2024 — B200 / GB200 Grace Blackwell Superchip and NVL72 systems remain the volume train/serve platform while Rubin ramps.</li>
+<li><strong><a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">NVIDIA Rubin platform</a></strong> — CES/GTC 2026 — Vera Rubin for agentic AI and large MoE; partner availability targeted H2 2026; Groq-class LPU tech described in the AI-factory stack.</li>
+<li><strong><a href="https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/">Blackwell NVL72 in volume</a></strong> — 2025–2026 — B200 / GB200 NVL72 systems are the primary train/serve platform in AI factories while Rubin ramps.</li>
 </ul>
 <p><a href="https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth">Hopper in-depth</a> · <a href="https://www.nvidia.com/en-us/data-center/technologies/hopper-architecture/">Hopper</a> · <a href="https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/">Blackwell</a></p>
 
@@ -133,7 +133,8 @@
 <p class="vendor-blurb">Intel’s AI accelerator path consolidated around Habana Labs after the 2019 acquisition. Gaudi (training) and Goya (inference) established Ethernet-centric scale-out as an alternative to proprietary GPU fabrics; Gaudi 2 broadened LLM training, and Gaudi 3 (2024) targets enterprise generative AI with OEM and cloud availability. Intel also folds AI into Xeon AMX and Arc/Flex GPUs, but Gaudi remains the dedicated datacenter accelerator brand.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://newsroom.intel.com/artificial-intelligence/vision-2024-enterprise-ai-gaudi-3-open-systems-strategy">Gaudi 3 for enterprise AI</a></strong> — Intel Vision 2024 — Gaudi 3 for GenAI train/infer with Ethernet scale-out; positioned on price/performance vs. GPU alternatives via Dell, HPE, Lenovo, Supermicro and cloud partners.</li>
+<li><strong><a href="https://newsroom.intel.com/artificial-intelligence/ibm-cloud-first-service-provider-deploy-intel-gaudi-3">Gaudi 3 on IBM Cloud</a></strong> — Intel Vision 2025 — IBM Cloud is the first CSP with Gaudi 3 in production (Frankfurt, Washington D.C., Dallas) for enterprise GenAI price/performance.</li>
+<li><strong><a href="https://newsroom.intel.com/artificial-intelligence/intel-gaudi-3-expands-availability-drive-ai-innovation-scale">Dell AI Factory with Gaudi 3</a></strong> — 2025 — Dell AI platform / AI Factory ships validated Gaudi 3 systems for scalable enterprise GenAI with open Ethernet networking.</li>
 </ul>
 
 <a name="AMD"></a>
@@ -158,8 +159,8 @@
 <p class="vendor-blurb">Qualcomm’s AI silicon spans mobile Hexagon NPUs inside Snapdragon SoCs and Cloud AI inference accelerators for power-efficient serving. Hexagon evolved from DSP blocks into fused scalar/vector/tensor NPUs for on-device multimodal GenAI; Cloud AI 100 targets edge/cloud inference outside GPU clusters. Recent flagships (8 Gen 3 → 8 Elite) emphasize agentic and multimodal experiences at the handset.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.androidauthority.com/snapdragon-8-elite-3491805/">Snapdragon 8 Elite — Hexagon NPU</a></strong> — Snapdragon Summit 2024 — Oryon CPU + redesigned Hexagon NPU; Qualcomm cites ~45% faster NPU and better perf/W vs. 8 Gen 3 for on-device GenAI.</li>
-<li><strong><a href="https://www.qualcomm.com/products/technology/processors/cloud-artificial-intelligence/cloud-ai-100">Cloud AI 100</a></strong> — Cloud/edge inference accelerator focused on power-efficient deployment outside traditional GPU clusters.</li>
+<li><strong><a href="https://www.androidauthority.com/qualcomm-snapdragon-8-elite-gen-5-3599341/">Snapdragon 8 Elite Gen 5</a></strong> — Snapdragon Summit 2025 — next Hexagon NPU (~37% faster, ~16% better perf/W vs. 8 Elite) for on-device LLMs and agentic AI; Xiaomi 17 among first devices.</li>
+<li><strong><a href="https://markvena.medium.com/snapdragon-summit-2025-qualcomms-confident-leap-into-the-ai-future-989e0acc319a">Snapdragon X2 Elite NPU</a></strong> — Sep 2025 — X2 Elite / X2 Elite Extreme PC platforms with Hexagon NPU at ~80 TOPS for Copilot+ / on-device AI laptops.</li>
 </ul>
 
 <a name="Samsung"></a>
@@ -177,7 +178,7 @@
 <p class="vendor-blurb">MediaTek’s Dimensity flagship line pairs Arm CPUs with successive in-house NPUs for Android on-device AI. The NPU roadmap (through 8th-gen NPU 890 on Dimensity 9400) emphasizes generative and agentic workloads—LoRA adaptation, diffusion video, and MoE LLMs—alongside the Dimensity Agentic AI Engine software path.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.mediatek.com/press-room/mediateks-dimensity-9400-flagship-soc-offers-extreme-performance-and-efficiency-for-the-latest-ai-experiences">Dimensity 9400 — NPU 890</a></strong> — Oct 2024 — TSMC 3nm flagship with 8th-gen NPU; on-device LoRA, video generation, MoE LLMs, and Dimensity Agentic AI Engine vs. Dimensity 9300.</li>
+<li><strong><a href="https://www.mediatek.com/press-room/mediatek-dimensity-9500-unleashes-best-in-class-performance-ai-experiences-and-power-efficiency-for-the-next-generation-of-mobile-devices">Dimensity 9500 — NPU 990</a></strong> — Sep 2025 — 9th-gen NPU 990 with Generative AI Engine 2.0 (vendor: ~2× compute, 4K image gen, 128K-token LLM path) plus Super Efficient CIM NPU for always-on AI.</li>
 </ul>
 
 <a name="Marvell"></a>
@@ -186,7 +187,8 @@
 <p class="vendor-blurb">Marvell supplies DPUs (OCTEON / ARMADA) and, increasingly, co-designed custom AI accelerators for cloud providers. Alongside Broadcom’s XPU franchise, Marvell is widely reported as a design partner on AWS Trainium/Inferentia-class and Microsoft Maia-class silicon—making it a key “picks and shovels” vendor in the custom-ASIC wave.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.marvell.com/products/data-processing-units.html">Custom AI ASICs + DPUs</a></strong> — 2024–2026 — custom AI accelerator programs for hyperscalers complement OCTEON/ARMADA DPUs and Ethernet/optical connectivity.</li>
+<li><strong><a href="https://www.marvell.com/blogs/inside-marvell-expanding-custom-silicon-opportunity.html">Expanding custom silicon opportunity</a></strong> — Jul 2025 — Custom AI Investor Event: ~18 active custom projects (hyperscaler XPUs + attach) with TAM for custom XPUs growing into the tens of billions by 2028.</li>
+<li><strong><a href="https://www.marvell.com/products/data-processing-units.html">Hyperscaler AI ASIC programs</a></strong> — 2025–2026 — widely reported design partner on AWS Trainium-class and Microsoft Maia-class accelerators, plus AI optics/DPU attach silicon.</li>
 </ul>
 
 <a name="Broadcom"></a>
@@ -229,8 +231,8 @@
 </ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://cloud.google.com/blog/products/compute/introducing-trillium-6th-gen-tpus">Trillium (TPU v6e)</a></strong> — Sixth-generation Cloud TPU for foundation-model training and serving; large per-chip compute/efficiency gains vs. v5e.</li>
-<li><strong><a href="https://docs.cloud.google.com/tpu/docs/release-notes">Ironwood (TPU v7) notes</a></strong> — Seventh-generation Cloud TPU family for large-scale training and inference (LLMs, MoEs, diffusion).</li>
+<li><strong><a href="https://docs.cloud.google.com/tpu/docs/release-notes">Ironwood (TPU7x) GA</a></strong> — Mar 31, 2026 — TPU7x (Ironwood family) generally available for large-scale training and inference (LLMs, MoEs, diffusion); up to 9,216-chip pods.</li>
+<li><strong><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-google-tpu-things-to-know/">Ironwood for the age of inference</a></strong> — 2025–2026 — 7th-gen TPU purpose-built for high-volume low-latency inference/serving; Google cites large per-chip gains vs. prior gen.</li>
 </ul>
 <p><a href="https://cloud.google.com/transform/ai-specialized-chips-tpu-history-gen-ai">10 years of TPU</a> · <a href="https://docs.cloud.google.com/tpu/docs/v6e">v6e docs</a> · <a href="https://cloud.google.com/tpu">Cloud TPU</a> · <a href="https://cloud.google.com/edge-tpu/">Edge TPU</a></p>
 
@@ -240,7 +242,8 @@
 <p class="vendor-blurb">AWS builds first-party AI silicon for EC2: Inferentia for inference and Trainium for training, compiled via the Neuron SDK. Inferentia1/2 lowered LLM serving cost on Inf1/Inf2; Trainium1 and Trainium2 (Trn1/Trn2) plus UltraServers with NeuronLink scale-up target foundation-model training and large inference inside AWS regions—often co-designed with partners such as Marvell/Annapurna.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://aws.amazon.com/blogs/aws/amazon-ec2-trn2-instances-and-trn2-ultraservers-for-aiml-training-and-inference-is-now-available/">EC2 Trn2 / Trainium2 UltraServers</a></strong> — 2024–2025 — Trainium2 Trn2 instances and UltraServers for GenAI train/infer with NeuronLink; Inf2 remains the cost-efficient serving path.</li>
+<li><strong><a href="https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ec2-trn3-ultraservers/">EC2 Trn3 UltraServers (Trainium3)</a></strong> — Dec 2025 re:Invent — Trainium3 (first 3nm AWS AI chip) UltraServers GA; AWS cites up to ~4.4× compute and ~4× energy efficiency vs. Trn2 UltraServers.</li>
+<li><strong><a href="https://press.aboutamazon.com/2025/12/trainium3-ultraservers-now-available-enabling-customers-to-train-and-deploy-ai-models-faster-at-lower-cost">Trainium3 UltraServers details</a></strong> — Up to 144 Trainium3 chips / ~362 FP8 PFLOPs per UltraServer; Anthropic and Bedrock among early Trainium users; Trainium4 on the roadmap.</li>
 </ul>
 
 <a name="Microsoft"></a>
@@ -249,7 +252,8 @@
 <p class="vendor-blurb">Microsoft entered custom AI silicon with Azure Maia (accelerator) and Cobalt (Arm CPU) to optimize Azure OpenAI / Copilot economics. Maia 100 (5nm, advanced packaging) is co-designed for Azure AI cloud workloads with a PyTorch/ONNX Runtime software path; subsequent Maia generations are expected to deepen rack-level integration with Azure networking and cooling.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://azure.microsoft.com/en-us/blog/azure-maia-for-the-era-of-ai-from-silicon-to-software-to-systems/">Azure Maia for the era of AI</a></strong> — 2024 — first in-house AI accelerator Maia 100 for Azure AI / Copilot-class workloads, with PyTorch and ONNX Runtime integration.</li>
+<li><strong><a href="https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/">Maia 200 inference accelerator</a></strong> — Jan 2026 — TSMC 3nm inference ASIC with 216GB HBM3e; Microsoft cites ~30% better perf/$ vs. prior fleet hardware and FP4/FP8 leadership claims vs. other custom silicon.</li>
+<li><strong><a href="https://news.microsoft.com/source/emea/2026/01/microsoft-introduces-maia-200-new-inference-accelerator-enhances-ai-performance-in-azure/">Maia 200 Azure rollout</a></strong> — Deploying in US Central (then US West 3) for Superintelligence / Foundry / Copilot workloads; Maia SDK preview with PyTorch and Triton.</li>
 </ul>
 
 <a name="OpenAI"></a>
@@ -295,7 +299,8 @@
 <p class="vendor-blurb">Baidu’s Kunlunxin (昆仑芯) GPUs underpin ERNIE and Baidu Cloud AI services. From earlier Kunlun generations through P800-class training/inference cards, Baidu has iterated a full stack (hardware + software) as a China-domestic alternative for large-model workloads.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.baidu.com/">Kunlunxin P800-class</a></strong> — 2024–2026 — P800-class and follow-ons remain a core China train/infer option in Baidu Cloud / ERNIE deployments with ongoing software updates.</li>
+<li><strong><a href="https://www.jiemian.com/article/14421027.html">Kunlunxin trains key ERNIE 5.1 version</a></strong> — Baidu Create 2026 — P800 completed large-scale validation with multiple 10k-card clusters since 2025; fully domestic Kunlunxin cluster trained a key ERNIE 5.1 version (97% effective training rate claimed).</li>
+<li><strong><a href="https://www.jiemian.com/article/14421027.html">Tianchi 256-card supernode</a></strong> — May 2026 — Tianchi 256-card Kunlunxin supernode lit up, June launch messaging; +25% throughput / +50% inference efficiency claims vs. prior gen, HPN5.0 networking.</li>
 </ul>
 
 <a name="Tencent_Cloud"></a>
@@ -304,7 +309,7 @@
 <p class="vendor-blurb">Tencent deploys proprietary Zixiao-class and partner AI accelerators across Tencent Cloud for recommendation, multimodal, and LLM train/infer inside its China footprint—part of a broader mix that also includes merchant GPUs where available.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong>Tencent Cloud AI accelerators</strong> — 2024–2026 — continued proprietary and partner accelerator deployments for recommendation, multimodal, and LLM workloads on Tencent Cloud.</li>
+<li><strong>Tencent Cloud AI accelerators</strong> — 2025–2026 — proprietary Zixiao-class and partner AI accelerators deployed for recommendation, multimodal, and LLM train/infer inside Tencent Cloud.</li>
 </ul>
 
 <a name="Facebook"></a>
@@ -333,7 +338,8 @@
 <p class="vendor-blurb">Arm licenses Ethos NPU IP alongside Cortex CPUs for edge and IoT SoCs. The Ethos-U micro-NPU line (U55 → U65 → U85) scales MAC arrays and adds transformer operators while keeping the Vela/Ethos toolchain path; larger Ethos-N products address higher-TOPS vision/GenAI in Cortex-A systems.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85">Ethos-U85</a></strong> — Third-gen Ethos-U (128–2048 MACs, up to ~4 TOPS @ 1 GHz) with native transformer support; pairs with Cortex-M/A and Corstone-320.</li>
+<li><strong><a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85">Ethos-U85 micro-NPU</a></strong> — Third-gen Ethos-U (to ~4 TOPS @ 1 GHz) with native transformer ops for edge/IoT GenAI; Corstone-320 reference and Vela toolchain.</li>
+<li><strong><a href="https://www.techinsights.com/blog/dimensity-9500-debuts-arm-c1-cores-and-dual-npu">Arm C1 / SME2 in flagship SoCs</a></strong> — 2025 — Arm Lumex CSS (C1 cores + SME2) ships in MediaTek Dimensity 9500-class SoCs, accelerating on-CPU ML alongside NPUs.</li>
 </ul>
 
 <a name="Synopsys"></a>
@@ -342,7 +348,7 @@
 <p class="vendor-blurb">Synopsys DesignWare ARC NPX provides licensable neural processor IP for SoC integrators across automotive, consumer, and infrastructure. The family emphasizes scalable TOPS, functional-safety options, and toolchain continuity for DNN/transformer graphs.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.synopsys.com/designware-ip/processor-solutions/neural-processing-unit.html">ARC NPX NPU IP</a></strong> — 2024–2026 — scalable NPX configurations with ongoing toolchain updates for modern DNN / transformer workloads.</li>
+<li><strong><a href="https://www.synopsys.com/designware-ip/processor-solutions/neural-processing-unit.html">ARC NPX NPU IP</a></strong> — 2025–2026 — DesignWare ARC NPX neural processor IP for automotive/consumer/infrastructure SoCs; multi-TOPS configs and transformer-ready toolchain updates.</li>
 </ul>
 
 <a name="Imagination"></a>
@@ -351,7 +357,7 @@
 <p class="vendor-blurb">Imagination’s PowerVR Neural Network Accelerators (NNA) and GPU+NNA combinations target edge and automotive SoCs. IMG Continuum software maps CNN and transformer-class networks onto the NNA datapaths for licensees.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.imaginationtech.com/products/ai/">Imagination AI / NNA IP</a></strong> — 2024–2026 — PowerVR NNA and GPU+NNA IP with Continuum for edge and automotive transformer-class networks.</li>
+<li><strong><a href="https://www.imaginationtech.com/products/ai/">Imagination AI / NNA IP</a></strong> — 2025–2026 — PowerVR Neural Network Accelerators and GPU+NNA combinations for edge and automotive SoCs with Continuum software for transformer-class nets.</li>
 </ul>
 
 <a name="CEVA"></a>
@@ -360,7 +366,7 @@
 <p class="vendor-blurb">CEVA licenses low-power AI processor IP and DSP/NPU hybrids for real-time embedded, automotive, and IoT inference. NeuPro-class offerings and the CEVA DNN compiler add transformer-capable paths for on-device GenAI and vision.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.ceva-dsp.com/app/deep-learning/">CEVA edge AI / NPU IP</a></strong> — 2024–2026 — low-power AI IP and graph compiler including transformer-capable NeuPro-class products.</li>
+<li><strong><a href="https://www.ceva-dsp.com/app/deep-learning/">CEVA edge AI / NeuPro IP</a></strong> — 2025–2026 — low-power NeuPro-class AI processor IP and DNN graph compiler for real-time embedded, automotive, and IoT inference including transformers.</li>
 </ul>
 
 <a name="Cadence"></a>
@@ -369,7 +375,7 @@
 <p class="vendor-blurb">Cadence Tensilica offers configurable NPU and AI DSP IP for on-device and automotive SoCs. The NeuroWeave toolchain maps modern DNN and transformer graphs onto Tensilica datapaths used widely in vision, audio, and edge GenAI chips.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html">Tensilica AI Platform</a></strong> — 2024–2026 — Tensilica NPU/AI DSP IP with NeuroWeave updates for DNN / transformer workloads.</li>
+<li><strong><a href="https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html">Tensilica AI Platform</a></strong> — 2025–2026 — Tensilica NPU/AI DSP IP with NeuroWeave toolchain updates for modern DNN and transformer workloads in edge/auto SoCs.</li>
 </ul>
 
 <a name="VeriSilicon"></a>
@@ -378,7 +384,7 @@
 <p class="vendor-blurb">VeriSilicon provides VIP/Acuity NPU IP plus turnkey ASIC design services, especially strong in China edge and vision SoCs. The IP covers CNN through on-device GenAI use cases for consumer, automotive, and IoT customers.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.verisilicon.com/">VIP / NPU IP &amp; design services</a></strong> — 2024–2026 — Acuity/VIP NPU IP and turnkey services for vision and on-device GenAI SoCs.</li>
+<li><strong><a href="https://www.verisilicon.com/">VIP / NPU IP & design services</a></strong> — 2025–2026 — Acuity/VIP NPU IP plus turnkey ASIC design services widely used in China and global edge SoCs for vision and on-device GenAI.</li>
 </ul>
 
 <div align="center" class="section-title"><h2><a name="Startups"></a>IV. Startups</h2></div>
@@ -389,7 +395,8 @@
 <p class="vendor-blurb">Cerebras builds wafer-scale AI processors (WSE) that place an enormous on-wafer SRAM/compute fabric into CS systems, avoiding many multi-GPU communication bottlenecks. WSE-1/2 established the approach; WSE-3 (2024, 5nm) powers CS-3 for foundation-model training and high-throughput inference with cloud and on-prem deployments.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.cerebras.net/press-release/cerebras-announces-third-generation-wafer-scale-engine">WSE-3 announcement</a></strong> — Mar 2024 — WSE-3 (~4T transistors, ~900k AI cores, 125 petaflops peak AI) doubles WSE-2 performance at similar power/price for CS-3.</li>
+<li><strong><a href="https://www.cnbc.com/2026/05/16/cerebras-blockbuster-ipo-boosts-hype-for-spacex-openai-anthropic.html">Cerebras IPO (CBRS)</a></strong> — May 2026 — blockbuster Nasdaq debut after filing; WSE-3 / CS-3 wafer-scale systems power Training and Inference Cloud services.</li>
+<li><strong><a href="https://www.cnbc.com/2026/04/17/cerebras-new-ipo-ai-chips.html">OpenAI multi-year capacity deal</a></strong> — 2025–2026 — OpenAI commits to large inference capacity (filings cite 750MW committed, option to 2GW) plus $1B infrastructure loan / warrants.</li>
 </ul>
 
 <a name="Graphcore"></a>
@@ -398,7 +405,8 @@
 <p class="vendor-blurb">Graphcore pioneered Intelligence Processing Units (IPU) with fine-grained MIMD parallelism and large on-chip memory (Colossus Mk1/Mk2, Bow). After competing in the pre-LLM and early-LLM era, SoftBank acquired Graphcore (2024) as a wholly owned subsidiary to fund next-generation AI compute while keeping the Graphcore brand.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.graphcore.ai/posts/graphcore-joins-softbank-group-to-build-next-generation-of-ai-compute">Graphcore joins SoftBank Group</a></strong> — Jul 2024 — SoftBank acquisition (terms undisclosed; press estimates ~$500M); Graphcore continues under its brand with SoftBank-backed next-gen development.</li>
+<li><strong><a href="https://www.cnbc.com/2026/05/12/softbank-graphcore-ai-chip-investment.html">SoftBank $457M funding into Graphcore</a></strong> — May 2026 — SoftBank funnels ~$457M into Graphcore (wholly owned since Jul 2024) to fund next-gen AI silicon and SoftBank AI infra plans.</li>
+<li><strong><a href="https://www.jonpeddie.com/news/graphcores-ipu-doing-well-at-softbank/">Izanagi / SoftBank AI stack</a></strong> — 2025–2026 — next-gen accelerator work (Izanagi messaging) pairs Graphcore IPU heritage with SoftBank/Ampere Arm CPU stack for hyperscale deployment targets.</li>
 </ul>
 
 <a name="Tenstorrent"></a>
@@ -407,7 +415,8 @@
 <p class="vendor-blurb">Tenstorrent (Jim Keller–led) builds Tensix-based AI processors as scalable chiplet meshes with an open software stack (TT-Metalium). Wormhole-generation cards are shipping into developer and rack deployments; Blackhole is the next architecture step toward higher-density train/infer systems.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://tenstorrent.com/">Wormhole / Blackhole</a></strong> — 2024–2026 — Wormhole shipping; Blackhole next; open TT-Metalium and growing rack-scale deployments on chiplet meshes.</li>
+<li><strong><a href="https://tenstorrent.com/en/newsroom/tenstorrent-enables-ai-at-scale-with-industry-leading-performance">Galaxy Blackhole general availability</a></strong> — Apr 28, 2026 — 6U air-cooled Galaxy with 32 Blackhole chips shipping (vendor: 23 PFLOPS Block FP8, Ethernet scale-out); from ~$110k per server.</li>
+<li><strong><a href="https://tenstorrent.com/en/newsroom/tt-deploy">TT-Deploy production shipping</a></strong> — May 2026 — TT-Deploy: volume shipping, multi-Galaxy superclusters, open TT-Metalium stack, and third-party validated serving benchmarks.</li>
 </ul>
 
 <a name="Etched"></a>
@@ -490,7 +499,8 @@
 <p class="vendor-blurb">d-Matrix builds digital compute-in-memory accelerators (Corsair) for low-latency, high-efficiency datacenter LLM inference—contrasting analog CIM approaches with a digital datapath while still attacking the memory-wall bottleneck that dominates decode.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.d-matrix.ai/">Corsair inference accelerators</a></strong> — 2024–2026 — Corsair for datacenter LLM inference with expanding software and cloud-partner footprint.</li>
+<li><strong><a href="https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/">Corsair enters full production</a></strong> — Jun 2026 — Corsair digital in-memory inference platform in volume production (TSMC N6); shipping to priority hyperscalers, neoclouds, and frontier labs.</li>
+<li><strong><a href="https://cryptobriefing.com/d-matrix-corsair-challenges-nvidia-ai-inference/">Series C / $2B valuation</a></strong> — Nov 2025 — $275M Series C (incl. Microsoft M12) at ~$2B valuation to scale Corsair rack-scale inference.</li>
 </ul>
 
 <a name="Blaize"></a>
@@ -508,7 +518,7 @@
 <p class="vendor-blurb">SynSense (formerly aiCTX) builds neuromorphic and event-based sensing+compute chips (Speck, Xylo) for ultra-low-power always-on perception. Collaborations such as with iniVation extend event-camera + neuromorphic pipelines for edge AI.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.synsense.ai/">Neuromorphic / event-based products</a></strong> — 2024–2026 — Speck/Xylo-class chips; 2024 iniVation collaboration and funding extend event-based vision + edge AI offerings.</li>
+<li><strong><a href="https://www.synsense.ai/">SynSense neuromorphic products</a></strong> — 2025–2026 — Speck/Xylo-class neuromorphic chips and event-based vision+compute offerings (incl. prior iniVation collaboration) for always-on edge sensing.</li>
 </ul>
 
 <a name="Sagence"></a>
@@ -517,7 +527,7 @@
 <p class="vendor-blurb">Sagence AI (rebranded from Analog Inference in Nov 2024) develops analog compute-in-memory accelerators aimed at energy-efficient LLM and vision inference for datacenter and edge deployments—part of the broader analog-AI cohort seeking orders-of-magnitude efficiency vs. digital GPUs on inference.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.sagence.ai/">Analog in-memory compute platform</a></strong> — 2024–2026 — continues analog CIM accelerators after rebrand; active on the AI infra circuit for energy-efficient inference.</li>
+<li><strong><a href="https://www.sagence.ai/">Sagence AI analog CIM</a></strong> — 2025–2026 — continues analog compute-in-memory accelerators (ex–Analog Inference) aimed at energy-efficient datacenter/edge LLM and vision inference.</li>
 </ul>
 
 <div align="center" class="section-title"><h2><a name="China_AI_Chips"></a>V. China AI Accelerator Vendors</h2></div>
@@ -595,7 +605,7 @@
 <p class="vendor-blurb">Enflame (燧原) builds CloudBlazer / iGCU accelerators for domestic training and inference in intelligent-computing centers. The TopsRider software stack targets LLM workloads alongside hardware refreshes through 2024–2026.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.enflame-tech.com/">CloudBlazer / iGCU accelerators</a></strong> — 2024–2026 — domestic train/infer GPUs deployed in China ICC sites with TopsRider updates for LLM workloads.</li>
+<li><strong><a href="https://www.enflame-tech.com/">CloudBlazer / iGCU accelerators</a></strong> — 2025–2026 — domestic train/infer GPUs deployed in China intelligent-computing centers with TopsRider software updates for LLM workloads.</li>
 </ul>
 
 <a name="Horizon"></a>
@@ -604,7 +614,7 @@
 <p class="vendor-blurb">Horizon Robotics (地平线) is a leading China automotive AI SoC vendor. Journey-series chips (through Journey 6 with BPU Nash) power L2+ assisted driving in many passenger vehicles, with increasing Transformer support for BEV/occupancy and end-to-end driving models.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6">Journey 6 / BPU Nash</a></strong> — 2024–2026 — Journey 6 with stronger Transformer support widely designed into China passenger vehicles for L2+ ADAS.</li>
+<li><strong><a href="https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6">Journey 6 / BPU Nash</a></strong> — 2025–2026 — Journey 6 automotive AI SoCs with BPU Nash and stronger Transformer support widely designed into China passenger vehicles for L2+ ADAS.</li>
 </ul>
 
 <a name="BlackSesame"></a>
@@ -613,7 +623,7 @@
 <p class="vendor-blurb">Black Sesame Technologies (黑芝麻智能) designs automotive-grade ADAS/AD SoCs (Huashan family). Hong Kong-listed in 2024, the company focuses on safety-certified L2+/L3 platforms; A1000-family chips are reported in mass-production vehicles, with A2000 extending toward higher-performance and cross-domain AI.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.blacksesame.com/en/huashan-a1000/">Huashan A1000 family</a></strong> — HK 02533.HK (Aug 2024); A1000-family for L2+/L3 with automotive safety certifications; A2000 messaging for higher-perf / cross-domain inference.</li>
+<li><strong><a href="https://www.blacksesame.com/en/huashan-a1000/">Huashan A1000 / A2000 path</a></strong> — 2025–2026 — A1000-family chips reported in mass-production L2+/L3 vehicles; A2000 messaging extends toward higher-performance and cross-domain AI inference.</li>
 </ul>
 
 
