@@ -9,27 +9,27 @@
 </header>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
-<p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: July 2026.</em></p>
+<p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: July 2026 (incl. Qualcomm Dragonfly data-center AI).</em></p>
 <hr class="section-rule" />
 <ul class="glance-list">
-<li><a href="#Nvidia"><strong>NVIDIA</strong></a> — Vera Rubin platform targeted H2 2026; Blackwell NVL72 remains the volume AI-factory workhorse.</li>
+<li><a href="#Nvidia"><strong>NVIDIA</strong></a> — Vera Rubin platform in full production (GTC 2026); NVL72 partner shipments targeted H2 2026.</li>
 <li><a href="#Intel"><strong>Intel / Habana</strong></a> — Gaudi 3 generally available on IBM Cloud and Dell AI Factory for enterprise GenAI inference/fine-tune.</li>
-<li><a href="#AMD"><strong>AMD</strong></a> — Instinct MI350 shipping; Meta partnership expands multi-GW MI450 / Helios rack deployments.</li>
-<li><a href="#Qualcomm"><strong>Qualcomm</strong></a> — Snapdragon 8 Elite Gen 5 (Sep 2025) Hexagon NPU ~37% faster for on-device agentic AI / LLMs.</li>
-<li><a href="#Samsung"><strong>Samsung</strong></a> — Exynos 2500 (3nm GAA) ships with a substantially upgraded on-device NPU.</li>
+<li><a href="#AMD"><strong>AMD</strong></a> — Helios / MI455X rack-scale on track for H2 2026; Meta 6GW Instinct deal incl. custom MI450-class.</li>
+<li><a href="#Qualcomm"><strong>Qualcomm</strong></a> — Dragonfly data-center AI: AI200/AI250 (2026–27) + AI300/HBC; Meta multi-gen deal for Dragonfly C1000 CPU.</li>
+<li><a href="#Samsung"><strong>Samsung</strong></a> — Exynos 2600 (first 2nm GAA mobile SoC) ships in Galaxy S26 with large on-device GenAI NPU gains.</li>
 <li><a href="#MediaTek"><strong>MediaTek</strong></a> — Dimensity 9500 (Sep 2025) NPU 990 + Super Efficient CIM NPU for agentic on-device GenAI.</li>
 <li><a href="#Marvell"><strong>Marvell</strong></a> — Custom AI XPU partner for AWS Trainium / Microsoft Maia; 18+ custom projects and rising AI silicon revenue.</li>
-<li><a href="#Broadcom"><strong>Broadcom</strong></a> — OpenAI Jalapeño / multi-GW XPU deal; extended Meta MTIA partnership; long-time Google TPU partner.</li>
+<li><a href="#Broadcom"><strong>Broadcom</strong></a> — OpenAI Jalapeño Intelligence Processor unveiled; continues Google TPU + Meta MTIA XPU franchise.</li>
 <li><a href="#Google"><strong>Google</strong></a> — Ironwood (TPU7x) generally available Mar 2026; Trillium (v6e) remains a volume Cloud TPU SKU.</li>
 <li><a href="#Amazon_AWS"><strong>AWS</strong></a> — Trainium3 / Trn3 UltraServers GA (Dec 2025); Trainium4 previewed with NVLink Fusion path.</li>
 <li><a href="#Microsoft"><strong>Microsoft</strong></a> — Maia 200 inference accelerator (Jan 2026) deploying in Azure for Copilot / Foundry token economics.</li>
 <li><a href="#OpenAI"><strong>OpenAI</strong></a> — First custom inference ASIC “Jalapeño” with Broadcom; initial deployments targeted end of 2026.</li>
 <li><a href="#Anthropic"><strong>Anthropic</strong></a> — Expanded Google TPU + Broadcom capacity (~3.5 GW from 2027) atop AWS Trainium and NVIDIA GPUs.</li>
 <li><a href="#Apple"><strong>Apple</strong></a> — M5 / M5 Pro / M5 Max add GPU Neural Accelerators and a faster Neural Engine for Apple Intelligence.</li>
-<li><a href="#Alibaba"><strong>Alibaba</strong></a> — T-Head PPU / Zhenwu family deployed in Alibaba Cloud and China Unicom-scale clusters.</li>
+<li><a href="#Alibaba"><strong>Alibaba</strong></a> — Zhenwu M890 (144GB HBM3) in mass production; 560k+ Zhenwu shipments; roadmap to V900/J900.</li>
 <li><a href="#Baidu"><strong>Baidu</strong></a> — Kunlunxin P800 10k-card clusters; key ERNIE 5.1 training on domestic stack; Tianchi 256-card supernode (2026).</li>
 <li><a href="#Tencent_Cloud"><strong>Tencent</strong></a> — Zixiao / partner accelerators continue scaling LLM and recommendation serving on Tencent Cloud (2025–2026).</li>
-<li><a href="#Facebook"><strong>Meta</strong></a> — Multi-generation MTIA (300–500 class) with Broadcom; modular chiplets through 2026–2027.</li>
+<li><a href="#Facebook"><strong>Meta</strong></a> — MTIA “Iris” (v3) enters production Sep 2026 with Broadcom/TSMC; six-month chip cadence through 2027.</li>
 <li><a href="#Tesla"><strong>Tesla</strong></a> — AI5 taped out (Apr 2026); AI6 / Dojo3 in progress; vehicles near-term stay on AI4.</li>
 <li><a href="#ARM"><strong>Arm</strong></a> — Ethos-U85 + Corstone-320 IoT reference for edge transformer / GenAI; Armv9 SME path in mobile SoCs.</li>
 <li><a href="#Synopsys"><strong>Synopsys</strong></a> — ARC NPX NPU IP scaled for auto/consumer GenAI SoCs with ongoing 2025–2026 toolchain releases.</li>
@@ -52,8 +52,8 @@
 <li><a href="#Blaize"><strong>Blaize</strong></a> — Nasdaq-listed (BZAI); GSP architecture for industrial/smart-city edge vision and GenAI.</li>
 <li><a href="#SynSense"><strong>SynSense</strong></a> — Speck/Xylo neuromorphic + event-vision stack; 2025–2026 funding/collabs for ultra-low-power edge AI.</li>
 <li><a href="#Sagence"><strong>Sagence AI</strong></a> — Analog CIM accelerators for efficient LLM/vision inference; active 2025–2026 AI-infra engagements post-rebrand.</li>
-<li><a href="#HuaweiAscend"><strong>Huawei Ascend</strong></a> — Ascend 910B/910C + Atlas 900 A3 SuperPoD (CloudMatrix384-class); 950-class on roadmap.</li>
-<li><a href="#Cambricon"><strong>Cambricon</strong></a> — Targets ~500k AI chips in 2026; Siyuan 590 / next-gen 690 messaging for cloud customers.</li>
+<li><a href="#HuaweiAscend"><strong>Huawei Ascend</strong></a> — Atlas 950 SuperPoD / Ascend 950DT (up to 8,192 NPUs) debuts globally at MWC 2026; WAIC hardware showcase.</li>
+<li><a href="#Cambricon"><strong>Cambricon</strong></a> — Siyuan 690 in mass production/delivery; targets ~500k AI chips in 2026; Q1 profit surge on cloud demand.</li>
 <li><a href="#Biren"><strong>Biren</strong></a> — Hong Kong IPO (6082.HK, Jan 2026); BR100-class GPGPU/AI accelerators.</li>
 <li><a href="#MooreThreads"><strong>Moore Threads</strong></a> — STAR Market IPO Dec 2025; MTT S4000/S5000 AI GPUs with MUSA software stack.</li>
 <li><a href="#MetaX"><strong>MetaX</strong></a> — STAR-listed (688802.SH); C500 in mass production, C600 domestic-process follow-on, MXMACA stack.</li>
@@ -121,8 +121,8 @@
 </ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">NVIDIA Rubin platform</a></strong> — CES/GTC 2026 — Vera Rubin for agentic AI and large MoE; partner availability targeted H2 2026; Groq-class LPU tech described in the AI-factory stack.</li>
-<li><strong><a href="https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/">Blackwell NVL72 in volume</a></strong> — 2025–2026 — B200 / GB200 NVL72 systems are the primary train/serve platform in AI factories while Rubin ramps.</li>
+<li><strong><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Vera-Rubin-Opens-Agentic-AI-Frontier/default.aspx">Vera Rubin opens agentic AI frontier</a></strong> — GTC Mar 2026 — seven chips in full production (Vera CPU, Rubin GPU, NVLink 6, ConnectX-9, BlueField-4, Spectrum-6, Groq LPU); NVL72 on track for H2 2026 partner systems.</li>
+<li><strong><a href="https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/">Vera Rubin POD / rack-scale systems</a></strong> — Mar 2026 — POD-scale co-design across five rack systems; CEO later reiterated “giant amounts” of Vera Rubin production incoming for H2 2026.</li>
 </ul>
 <p><a href="https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth">Hopper in-depth</a> · <a href="https://www.nvidia.com/en-us/data-center/technologies/hopper-architecture/">Hopper</a> · <a href="https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/">Blackwell</a></p>
 
@@ -149,27 +149,28 @@
 </ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.amd.com/en/products/accelerators/instinct/mi350.html">Instinct MI350 Series</a></strong> — 4th Gen CDNA — MI350X/MI355X with large HBM3E and expanded low-precision support for GenAI train/infer; MI400/Helios on the 2026 roadmap.</li>
-<li><strong><a href="https://www.amd.com/en/newsroom/press-releases/2026-2-24-amd-and-meta-announce-expanded-strategic-partnersh.html">AMD–Meta strategic partnership</a></strong> — Feb 2026 — multi-generation Instinct deployments including custom MI450-class GPUs on Helios with ROCm, targeting multi-gigawatt scale.</li>
+<li><strong><a href="https://www.amd.com/en/newsroom/press-releases/2026-2-24-amd-and-meta-announce-expanded-strategic-partnersh.html">AMD–Meta 6GW Instinct partnership</a></strong> — Feb 2026 — up to 6GW multi-generation Instinct GPUs; custom MI450-class on Helios with ROCm; first-GW shipments targeted H2 2026.</li>
+<li><strong><a href="https://www.nextplatform.com/compute/2026/02/23/amd-says-helios-racks-and-mi400-series-gpus-on-track-for-2h-2026/4092199">Helios / MI400 series on track</a></strong> — 2026 — AMD says Helios racks and MI400/MI455X UALink systems remain on track for H2 2026 engineering/low-volume production alongside MI350 volume deployments.</li>
 </ul>
 
 <a name="Qualcomm"></a>
 <div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png" height="40" loading="lazy" alt="Qualcomm" /></div>
-<div align="center" class="vendor-title"><h3>Qualcomm — Hexagon NPU &amp; Cloud AI</h3></div>
-<p class="vendor-blurb">Qualcomm’s AI silicon spans mobile Hexagon NPUs inside Snapdragon SoCs and Cloud AI inference accelerators for power-efficient serving. Hexagon evolved from DSP blocks into fused scalar/vector/tensor NPUs for on-device multimodal GenAI; Cloud AI 100 targets edge/cloud inference outside GPU clusters. Recent flagships (8 Gen 3 → 8 Elite) emphasize agentic and multimodal experiences at the handset.</p>
+<div align="center" class="vendor-title"><h3>Qualcomm — Hexagon NPU &amp; Dragonfly data-center AI</h3></div>
+<p class="vendor-blurb">Qualcomm’s AI silicon now spans mobile Hexagon NPUs in Snapdragon SoCs and a full data-center Dragonfly portfolio for agentic inference. Hexagon evolved from DSP blocks into fused scalar/vector/tensor NPUs for on-device GenAI; Cloud AI 100 was an earlier inference SKU. In Oct 2025 Qualcomm launched rack-scale Dragonfly AI200/AI250 inference accelerators, then at Investor Day Jun 2026 added AI300 with High Bandwidth Compute (HBC), the Dragonfly C1000 server CPU (Meta multi-generation agreement), and a multi-year data-center revenue push.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.androidauthority.com/qualcomm-snapdragon-8-elite-gen-5-3599341/">Snapdragon 8 Elite Gen 5</a></strong> — Snapdragon Summit 2025 — next Hexagon NPU (~37% faster, ~16% better perf/W vs. 8 Elite) for on-device LLMs and agentic AI; Xiaomi 17 among first devices.</li>
-<li><strong><a href="https://markvena.medium.com/snapdragon-summit-2025-qualcomms-confident-leap-into-the-ai-future-989e0acc319a">Snapdragon X2 Elite NPU</a></strong> — Sep 2025 — X2 Elite / X2 Elite Extreme PC platforms with Hexagon NPU at ~80 TOPS for Copilot+ / on-device AI laptops.</li>
+<li><strong><a href="https://sg.finance.yahoo.com/news/qualcomm-unveils-comprehensive-data-center-193000894.html">Dragonfly AI300 / data-center roadmap</a></strong> — Jun 24, 2026 Investor Day — Dragonfly AI300 (3rd-gen rack inference with HBC Gen 2; sampling ~2028) joins AI200/AI250; Dragonfly C1000 CPU (250+ Oryon cores) with multi-generation Meta server deal; HBC near-memory compute for token efficiency.</li>
+<li><strong><a href="https://www.datacenterdynamics.com/en/news/qualcomm-launches-ai200-and-ai250-chip-offering-targeting-inferencing-workloads-at-rack-scale/">Dragonfly AI200 / AI250 launch</a></strong> — Oct 2025 — Hexagon-based rack-scale inference accelerators: AI200 (~768GB LPDDR/card, commercial ~2026) and AI250 (HBC Gen 1 near-memory, ~2027); Humain among early large deploy partners.</li>
 </ul>
 
 <a name="Samsung"></a>
 <div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png" height="35" loading="lazy" alt="Samsung" /></div>
 <div align="center" class="vendor-title"><h3>Samsung — Exynos NPU</h3></div>
-<p class="vendor-blurb">Samsung integrates NPUs into Exynos mobile SoCs and builds memory (HBM) that underpins datacenter AI GPUs. On the compute side, Exynos NPUs have scaled with each flagship generation for vision and on-device generative AI; Exynos 2500 on 3nm GAA is the current high-water mark for Samsung’s own mobile AI silicon.</p>
+<p class="vendor-blurb">Samsung integrates NPUs into Exynos mobile SoCs and builds HBM that underpins datacenter AI GPUs. Exynos NPUs scaled with each flagship for vision and on-device GenAI; Exynos 2500 (3nm GAA) was followed by Exynos 2600 — Samsung’s first 2nm GAA mobile SoC — powering Galaxy S26 with substantially higher generative-AI NPU performance and AI graphics features (ENSS).</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://semiconductor.samsung.com/processor/mobile-processor/exynos-2500/">Exynos 2500</a></strong> — 2025 flagship on 3nm GAA; Samsung cites up to ~59 TOPS NPU and large on-device AI gains vs. Exynos 2400 for GenAI inference.</li>
+<li><strong><a href="https://semiconductor.samsung.com/processor/mobile-processor/exynos-2600/">Exynos 2600</a></strong> — First 2nm GAA mobile SoC; Samsung cites ~113% generative-AI NPU gains vs. prior gen for larger on-device models; ships in Galaxy S26 / S26+.</li>
+<li><strong><a href="https://www.asiae.co.kr/en/article/2026042810393630443">ENSS AI graphics on Exynos 2600</a></strong> — Apr 2026 — Exynos Neural Super Sampling (ENSS) commercialized for AI upscaling/frame generation to cut GPU load on flagship gaming/graphics.</li>
 </ul>
 
 <a name="MediaTek"></a>
@@ -197,7 +198,7 @@
 <p class="vendor-blurb">Broadcom co-designs customer-specific AI accelerators (XPUs) and pairs them with Tomahawk/Jericho Ethernet switching. The model began with Google TPU generations and now spans Meta MTIA, OpenAI custom silicon, and other frontier/cloud programs—positioning Broadcom as the primary ASIC implementation partner opposite merchant GPUs.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/">OpenAI–Broadcom strategic collaboration</a></strong> — Oct 2025 — multi-year plan for ~10 GW of OpenAI-designed accelerators with Broadcom; rack deployments targeted H2 2026–2029.</li>
+<li><strong><a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/">OpenAI Jalapeño with Broadcom</a></strong> — Jun 2026 — OpenAI’s first custom LLM inference ASIC co-developed with Broadcom (Tomahawk networking); initial deployments targeted end of 2026 within multi-GW platform.</li>
 <li><strong><a href="https://www.nasdaq.com/press-release/broadcom-announces-extended-partnership-meta-deploy-technology-support-multi">Meta MTIA partnership extended</a></strong> — Apr 2026 — XPU platform continues as co-design backbone for multi-generation MTIA and Ethernet AI fabric.</li>
 </ul>
 
@@ -287,10 +288,11 @@
 <a name="Alibaba"></a>
 <div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/alibaba_logo.png" height="60" loading="lazy" alt="Alibaba" /></div>
 <div align="center" class="vendor-title"><h3>Alibaba — T-Head PPU</h3></div>
-<p class="vendor-blurb">Alibaba’s T-Head unit designs cloud AI accelerators for Alibaba Cloud under the PPU / Zhenwu family, aiming at domestic training and inference as GPU import constraints tighten. Reported SKUs emphasize large HBM capacity and chip-to-chip bandwidth for LLM clusters in China cloud and carrier deployments.</p>
+<p class="vendor-blurb">Alibaba’s T-Head unit designs cloud AI accelerators under the Zhenwu / PPU family for Alibaba Cloud and external customers as a domestic GPU-class alternative. After Zhenwu 810E-class SKUs, Zhenwu M890 (2026) raises HBM capacity and chip-to-chip bandwidth for agentic train/infer, paired with Panjiu AL128 servers, ICN Switch networking, and the SAIL software stack.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.eetimes.com/alibaba-unveils-own-ai-chip-mounting-direct-challenge-to-nvidia/">Alibaba unveils own AI chip</a></strong> — Sep 2025 — PPU / Zhenwu targets cloud train/infer; reports cite ~96GB HBM2e-class memory and large China Unicom / Alibaba Cloud deployments.</li>
+<li><strong><a href="https://www.alibabacloud.com/blog/alibaba-unveils-new-ai-chip-flagship-model-and-rebuilt-cloud-stack-ai-for-agentic-era_603151">Zhenwu M890 AI chip</a></strong> — May 2026 Cloud Summit — M890 triples prior-gen performance claims with 144GB HBM3 and 800GB/s chip-to-chip bandwidth; FP32→FP4; powers Panjiu AL128 with ICN Switch 1.0.</li>
+<li><strong><a href="https://thenextweb.com/news/alibaba-zhenwu-m890-t-head-china-ai-chip-nvidia">T-Head scale shipments</a></strong> — 2026 — T-Head cites 560,000+ Zhenwu AI chips shipped and 400+ external customers; further V900 (2027) / J900 (2028) roadmap messaging.</li>
 </ul>
 
 <a name="Baidu"></a>
@@ -318,7 +320,8 @@
 <p class="vendor-blurb">Meta’s MTIA (Meta Training and Inference Accelerator) is an in-house family for ranking, recommendation, and increasingly generative workloads at hyperscale. Built with Broadcom as implementation partner, MTIA has moved to a rapid multi-generation chiplet cadence (MTIA 300–500 class messaging) aimed at Meta’s production AI fleet rather than merchant sale.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/">Four MTIA chips in two years</a></strong> — Multi-generation MTIA roadmap with modular chiplets and accelerating deployment cadence through 2026–2027.</li>
+<li><strong><a href="https://techcrunch.com/2026/07/09/metas-new-ai-chips-will-begin-production-in-september/">MTIA Iris production September 2026</a></strong> — Jul 2026 reporting — next-gen MTIA chip (Iris / v3) cleared testing and targets September production with Broadcom design + TSMC 3nm; part of ~6-month cadence through 2027.</li>
+<li><strong><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/">Four MTIA chips in two years</a></strong> — Multi-generation MTIA roadmap (300–500 class) with modular chiplets; continues alongside AMD Instinct and NVIDIA GPU capacity.</li>
 </ul>
 
 <a name="Tesla"></a>
@@ -539,10 +542,11 @@
 &nbsp;&nbsp;
 <a href="https://www.hisilicon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png" height="40" loading="lazy" alt="HiSilicon logo" /></a></div>
 <div align="center" class="vendor-title"><h3>Huawei Ascend / HiSilicon</h3></div>
-<p class="vendor-blurb">Huawei’s Ascend line (HiSilicon) is China’s most widely deployed domestic training/inference accelerator family. Ascend 910 established the high-end; 910B/910C scaled under export controls into Atlas servers and SuperPoD / CloudMatrix supernodes. Cann/MindSpore software and Atlas systems form a full stack for China large-model train and serve; Ascend 950-class follow-ons are on the roadmap.</p>
+<p class="vendor-blurb">Huawei’s Ascend line (HiSilicon) is China’s most widely deployed domestic training/inference accelerator family. Ascend 910 established the high-end; 910B/910C scaled under export controls into Atlas servers and SuperPoD / CloudMatrix supernodes. Ascend 950-class (950DT training / 950PR inference messaging) and Atlas 950 SuperPoD push UnifiedBus optical scale-up to thousands of NPUs as a single logical node, with Cann/MindSpore as the software stack.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech">Atlas 900 A3 SuperPoD / Ascend 910C</a></strong> — 2025 — scaled 910B/910C deployments; Atlas 900 A3 SuperPoD (up to 384× Ascend 910C) / CloudMatrix384-class supernodes; Ascend 950-class on roadmap.</li>
+<li><strong><a href="https://www.huawei.com/en/news/2026/3/mwc-superpod-ai">Atlas 950 SuperPoD at MWC 2026</a></strong> — Mar 2026 — global debut of Atlas 950 SuperPoD on UnifiedBus; scales from 64 NPUs/cabinet toward up to 8,192 Ascend 950-class NPUs for large-model train/infer.</li>
+<li><strong><a href="https://it-news.uk/posts/huawei-atlas-950-superpod-waic-2026/">Atlas 950 SuperPoD at WAIC 2026</a></strong> — Jul 2026 — first public hardware demonstration planned at WAIC Shanghai; single-cabinet 64-card base with global unified memory addressing for trillion-parameter models.</li>
 </ul>
 
 <a name="Cambricon"></a>
@@ -551,7 +555,8 @@
 <p class="vendor-blurb">Cambricon is China’s leading pure-play AI-chip vendor, spanning edge IP/SoCs and cloud MLU / Siyuan accelerators. After an early edge-IP era, the company refocused on cloud training/inference cards for Chinese internet and intelligent-computing customers, with aggressive 2026 volume plans.</p>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push">500,000 AI chips target for 2026</a></strong> — Aggressive 2026 volume plans for Siyuan/MLU-class accelerators (Siyuan 590 and next-gen 690 messaging) for Chinese cloud/internet customers.</li>
+<li><strong><a href="https://en.shuziqushi.com/new343300.html">Siyuan 690 mass production</a></strong> — 2026 — next-gen Siyuan/MLU 690 cloud accelerators in mass production/delivery (reports: dual-die, ~196GB HBM3, &gt;700 TFLOPS FP16-class); Q1 profit surged on domestic cloud demand.</li>
+<li><strong><a href="https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push">500,000 AI chips target for 2026</a></strong> — Aggressive 2026 volume plans for Siyuan 590/690-class accelerators serving Chinese internet/cloud customers as a leading pure-play domestic AI-chip vendor.</li>
 </ul>
 
 <a name="Biren"></a>
