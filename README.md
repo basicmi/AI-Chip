@@ -1,63 +1,32 @@
 <div align="center"><h1>AI Chip (ICs and IPs)</h1></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI-chips.png"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI-chips.png"></div>
 <br>
-<div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a>(Linkedin)</div>
-<div align="center"><strong>Welcome to My Wechat Blog <a href="[https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzI3MDQ2MjA3OA==&scene=1&album_id=1374108991751782402&count=3#wechat_redirect)">StarryHeavensAbove</a> for more AI chip related articles</strong></div>
-<div align="center"><strong>欢迎访问我的微信公众号 <a href="[https://mp.weixin.qq.com/s/axfIBbQBDhTJ2Zt7U5WQBw](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzI3MDQ2MjA3OA==&scene=1&album_id=1374108991751782402&count=3#wechat_redirect)">StarryHeavensAbove</a></strong></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/qrcode_for_weichat_258.jpg" height="100"></div>
+<div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a> (LinkedIn)</div>
+<div align="center"><strong>Welcome to My WeChat Blog <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a> for more AI chip related articles</strong></div>
+<div align="center"><strong>欢迎访问我的微信公众号 <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a></strong></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100"></div>
 <div align="center"><h1> </h1></div>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AI_Chip_Landscape_v0p7.png"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p7.png"></div>
 <div align="center"><h1> </h1></div>
  
 <div align="center"><h2>Latest updates</h2></div>
+<p align="center"><em>Last refreshed: July 2026 — major vendor coverage updated for the generative-AI / LLM accelerator era.</em></p>
 <HR>
 
-<font color="Darkred">
 <ul>
-<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
-<li>Add news of <a href="#Groq">Groq</a>.</li>
-<li>Add news of <a href="#d-matrix">d-Matrix</a>.</li>
-<li>Add news of <a href="#Neureality">Neureality</a>.</li>
-<li>Add news of <a href="#Qualcomm">Qualcomm</a>.</li>
-<li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
-<li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
-<li>Add news of <a href="#IBM">IBM AIU</a>.</li>
-<li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
-<li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
-<li>Add startup <a href="#d-matrix">d-Matrix</a>.</li>
-<li>Add news of <a href="#Tachyum">Tachyum Prodigy Universal Processor</a>.</li>
-<li>Add news of <a href="#Habana">Intel Habana Gaudi®2</a>.</li>
-<li>Add startup <a href="#Modular">Modular AI in AI compiler section</a>.</li>
-<li>Add startup <a href="#Teramem">TeraMem</a>.</li>
-<li>Add startup <a href="#Aspinity">Aspinity</a>.</li>
-<li>Add news of <a href="#Synopsys">Synopsys DesignWare ARC NPX6 NPU IP</a>.</li>
-<li>Add news of <a href="#Nvidia">Nvidia Hopper</a>.</li>
-<li>Add news of <a href="#Graphcore">Graphcore</a>.</li>
-<li>Add startup <a href="#Ceremorphic">Ceremorphic</a>.</li>
-<li>Add news of <a href="#Lightelligence">Lightelligence</a>.</li>
-<li>Add link to <a href="#AIChipBenchmarks">Latest MLPerf Results from MLCommons</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
-<li>Add news of <a href="#Habana">Habana</a>.</li>
-<li>Add news of <a href="#Google">Google Tensor Chip</a>.</li>
-<li>Add news of <a href="#Intel">Intel Loihi 2</a>.</li>
-<li>Add news of <a href="#Tesla">Tesla Dojo</a>.</li>
-<li>Add news of <a href="#Untether">Untether AI</a>.</li>
-<li>Add startup <a href="#Innatera">Innatera Nanosystems</a>.</li>
-<li>Add startup <a href="#EdgeQ">EdgeQ</a>.</li>
-<li>Add startup <a href="#Quadric">Quadric</a>.</li>
-<li>Add startup <a href="#AnalogInference">Analog Inference</a>.</li>
-<li>Add news of <a href="#Tenstorrent">Tenstorrent</a>.</li>
-<li>Add news of <a href="#Google">Google</a>.</li>
-<li>Add news of <a href="#SiMa">SiMa.ai</a>.</li>
-<li>Add startup <a href="#Neureality">Neureality</a>.</li>
-<li>Add news of <a href="#Cerebras">Cerebras</a>.</li>
-<li>Add news of <a href="#Groq">Groq</a>.</li>
-<li>Add news of <a href="#Nvidia">Nvidia</a>.</li>
-<li>Add news of <a href="#SambaNova">SambaNova</a>.</li>
+<li><strong>NVIDIA</strong>: <a href="#Nvidia">Vera Rubin</a> platform (CES/GTC 2026) and <a href="#Nvidia">Blackwell</a> (B200 / GB200 NVL72).</li>
+<li><strong>AMD</strong>: <a href="#AMD">Instinct MI350</a> series (CDNA 4) and Meta partnership for Helios / MI450-class GPUs.</li>
+<li><strong>Intel</strong>: <a href="#Habana">Gaudi 3</a> AI accelerator for enterprise GenAI training and inference.</li>
+<li><strong>Google</strong>: Cloud TPU <a href="#Google">Trillium (v6e)</a> and <a href="#Google">Ironwood (TPU7x)</a>.</li>
+<li><strong>Amazon AWS</strong>: <a href="#Amazon_AWS">Trainium2</a> / Trn2 UltraServers and Inferentia2.</li>
+<li><strong>Microsoft</strong>: <a href="#Microsoft">Azure Maia 100</a> custom AI accelerator.</li>
+<li><strong>Meta</strong>: <a href="#Facebook">MTIA</a> custom training &amp; inference accelerators (multi-generation roadmap).</li>
+<li><strong>Cerebras</strong>: <a href="#Cerebras">WSE-3 / CS-3</a> wafer-scale engine.</li>
+<li><strong>Groq</strong>: LPU inference focus; technology licensed / team joined <a href="#Groq">NVIDIA</a> (late 2025).</li>
+<li><strong>Benchmarks</strong>: Links updated to <a href="#AIChipBenchmarks">MLPerf Inference v6.0</a> and <a href="#AIChipBenchmarks">Training v6.0</a>.</li>
+<li><strong>Compilers</strong>: Refreshed <a href="#AIChipCompilers">AI Chip Compilers</a> list (Triton, IREE, TensorRT-LLM, etc.).</li>
+<li><strong>Repo hygiene</strong>: Fixed asset links to this repository; cleaned header WeChat album links.</li>
 </ul>
-</font>
 
 <div align="center"><h1> </h1></div>
 
@@ -68,14 +37,14 @@
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>,<a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a></td>
   </tr>
   <tr>
-    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Facebook</a>, <a href="#Tesla">Tesla</a></td>
+    <th><a href="#Tech_Giants">Tech Giants & HPC Vendors</a></th><td><a href="#Google">Google</a>, <a href="#Amazon_AWS">Amazon_AWS</a>, <a href="#Microsoft">Microsoft</a>, <a href="#Apple">Apple</a>, <a href="#Alibaba">Alibaba Group</a>, <a href="#Tencent_Cloud">Tencent Cloud</a>, <a href="#Baidu">Baidu</a>, <a href="#Fujitsu">Fujitsu</a>, <a href="#Nokia">Nokia</a>, <a href="#Facebook">Meta (Facebook)</a>, <a href="#Tesla">Tesla</a></td>
   </tr>
   <tr>
     <th><a href="#IP_Vendors">IP Vendors</a></th><td><a href="#ARM">ARM</a>, <a href="#Synopsys">Synopsys</a>, <a href="#Imagination">Imagination</a>, <a href="#CEVA">CEVA</a>, <a href="#Cadence">Cadence</a>, <a href="#VeriSilicon">VeriSilicon</a></td>
   </tr>
   <tr>  
-    <th><a href="#Startups_Worldwide">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem, <a href="#d-matrix">d-Matrix</a></a></td>
+    <th><a href="#Startups">Startups</a></th>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem</a>, <a href="#d-matrix">d-Matrix</a></td>
   </tr>
 </table>
 
@@ -87,9 +56,19 @@
 
 <div align="center"><h3> </h3></div>
 <a name="Nvidia"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nvidia_logo.png" height="50"> </div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png" height="50"> </div>
 <div align="center"><h3> </h3></div>
 <div align="center"><h3>GPU</h3></div>
+
+<p><strong><a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">NVIDIA Kicks Off the Next Generation of AI With Rubin</a></strong></p>
+<blockquote>
+  <p>CES 2026 — NVIDIA launched the Rubin platform: Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9, BlueField-4 and Spectrum-6, codesigned for agentic AI and large MoE models. vs. Blackwell, NVIDIA claims up to 10x lower inference token cost and 4x fewer GPUs to train MoE models. Partner availability is targeted for H2 2026.</p>
+</blockquote>
+
+<p><strong><a href="https://nvidianews.nvidia.com/news/nvidia-blackwell-platform-arrives-to-power-a-new-era-of-computing">NVIDIA Blackwell Platform Arrives to Power a New Era of Computing</a></strong></p>
+<blockquote>
+  <p>GTC 2024 — Blackwell succeeds Hopper for trillion-parameter generative AI. The B200 Tensor Core GPU and GB200 Grace Blackwell Superchip power rack-scale GB200 NVL72 systems with fifth-generation NVLink, targeting large-scale training and real-time LLM inference.</p>
+</blockquote>
 
 <p><a href="https://nvidianews.nvidia.com/news/nvidia-microsoft-accelerate-cloud-enterprise-ai">NVIDIA Teams With Microsoft to Build Massive Cloud AI Computer</a></p>
 <blockquote>
@@ -109,7 +88,7 @@
 
 <div align="center"><h3> </h3></div>
 <a name="Intel"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Intel_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png" height="60"></div>
 <div align="center"><h3> </h3></div>
 
 <a name="Mobileye"></a>
@@ -125,6 +104,11 @@
 
 <p><a name="Habana"></a></p>
 <div align="center"><h3>Habana</h3></div>
+<p><strong><a href="https://newsroom.intel.com/artificial-intelligence/vision-2024-enterprise-ai-gaudi-3-open-systems-strategy">Intel Unleashes Enterprise AI with Gaudi 3</a></strong></p>
+<blockquote>
+  <p>Intel Vision 2024 — Gaudi 3 targets generative AI training and inference with Ethernet scale-out. Intel positions Gaudi 3 for enterprise GenAI price/performance vs. GPU alternatives, with OEM availability through Dell, HPE, Lenovo, Supermicro and cloud partners.</p>
+</blockquote>
+
 <p><strong><a href="https://www.intel.com/content/www/us/en/newsroom/news/vision-2022-habana-gaudi2-greco.html">Intel’s Habana Labs Launches Second-Generation AI Processors for Training and Inferencing</a></strong></p>
 <blockquote>
   <p>Today at Intel Vision, Intel announced that Habana Labs, its data center team focused on AI deep learning processor technologies, launched its second-generation deep learning processors for training and inference: Habana® Gaudi®2 and Habana® Greco™. These new processors address an industry gap by providing customers with high-performance, high-efficiency deep learning compute choices for both training workloads and inference deployments in the data center while lowering the AI barrier to entry for companies of all sizes.</p>
@@ -137,8 +121,13 @@
 
 <div align="center"><h3> </h3></div>
 <a name="Qualcomm"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Qualcomm_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.qualcomm.com/products/technology/processors/cloud-artificial-intelligence/cloud-ai-100">Qualcomm Cloud AI 100 / Hexagon NPU</a></strong></p>
+<blockquote>
+  <p>Qualcomm continues to push on-device and edge/cloud AI via Snapdragon platforms (Hexagon NPU) and Cloud AI accelerators for efficient inference outside traditional GPU clusters.</p>
+</blockquote>
 
 <a href="https://www-forbes-com.cdn.ampproject.org/c/s/www.forbes.com/sites/karlfreund/2022/11/16/qualcomm-ups-the-snapgragon-ai-game/amp/">Qualcomm Ups The Snapgragon AI Game</a>
 <blockquote>
@@ -152,7 +141,7 @@
 
 <div align="center"><h3> </h3></div>
 <a name="Samsung"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Samsung_logo.png" height="35"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
 <strong><a href="https://news.samsung.com/global/samsung-brings-on-device-ai-processing-for-premium-mobile-devices-with-exynos-9-series-9820-processor">Samsung Brings On-device AI Processing for Premium Mobile Devices with Exynos 9 Series 9820 Processor</a></strong>
 > Fourth-generation custom core and 2.0Gbps LTE Advanced Pro modem enables enriched mobile experiences including AR and VR applications 
@@ -162,14 +151,26 @@ Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-op
 
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AMD_logo.png" height="35"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
-The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server-accelerators">AMD Instinct™ MI Series Accelerators</a>
-> AMD Instinct™ accelerators are engineered from the ground up for this new era of data center computing, supercharging HPC and AI workloads to propel new discoveries. The AMD Instinct™ family of accelerators can deliver industry leading performance for the data center at any scale from single server solutions up to the world’s largest supercomputers.1 With new innovations in AMD CDNA™ 2 architecture, AMD Infinity Fabric™ technology and packaging technology, the latest AMD Instinct™ accelerators are designed to power discoveries at exascale, enabling scientists to tackle our most pressing challenges.
+<p><strong><a href="https://www.amd.com/en/products/accelerators/instinct/mi350.html">AMD Instinct™ MI350 Series GPUs</a></strong></p>
+<blockquote>
+  <p>Built on 4th Gen AMD CDNA™ architecture, MI350X / MI355X deliver large HBM3E capacity (up to 288GB) and high bandwidth for generative AI training and inference, with expanded low-precision datatype support (including MXFP6 / MXFP4). MI400-series / Helios rack-scale systems are on AMD’s 2026 roadmap.</p>
+</blockquote>
+
+<p><strong><a href="https://www.amd.com/en/newsroom/press-releases/2026-2-24-amd-and-meta-announce-expanded-strategic-partnersh.html">AMD and Meta Announce Expanded Strategic Partnership to Deploy 6 Gigawatts of AMD GPUs</a></strong></p>
+<blockquote>
+  <p>Feb 2026 — AMD and Meta expanded their partnership for multi-generation Instinct GPU deployments, including custom MI450-class GPUs on the Helios rack architecture with ROCm software.</p>
+</blockquote>
+
+<p><a href="https://www.amd.com/en/products/accelerators/instinct.html">AMD Instinct™ MI Series Accelerators</a></p>
+<blockquote>
+  <p>AMD Instinct accelerators target data-center HPC and AI, combining CDNA architecture, Infinity Fabric interconnect, and the open ROCm software stack for training and inference at scale.</p>
+</blockquote>
 
 <p><a name="IBM"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/IBM_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/IBM_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -200,7 +201,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Marvell"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Marvell_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Marvell_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -219,9 +220,21 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Google"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Google_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://cloud.google.com/blog/products/compute/introducing-trillium-6th-gen-tpus">Introducing Trillium, sixth-generation TPUs</a></strong></p>
+<blockquote>
+  <p>Google Cloud’s TPU v6e (Trillium) delivers up to 4.7× peak compute per chip vs. TPU v5e, with doubled HBM capacity/bandwidth and improved energy efficiency for foundation-model training and serving.</p>
+</blockquote>
+
+<p><strong><a href="https://docs.cloud.google.com/tpu/docs/release-notes">Cloud TPU Ironwood (TPU7x) generally available</a></strong></p>
+<blockquote>
+  <p>Ironwood is Google Cloud’s seventh-generation TPU family for large-scale training and inference (LLMs, MoEs, diffusion). See Cloud TPU docs / release notes for TPU7x availability and configurations.</p>
+</blockquote>
+
+<p><a href="https://docs.cloud.google.com/tpu/docs/v6e">TPU v6e (Trillium) architecture documentation</a></p>
 
 <p><strong><a href="https://www.zdnet.com/article/google-tensor-everything-you-need-to-know-about-the-pixel-6-chip/">Google Tensor: Everything you need to know about the Pixel 6 chip</a></strong></p>
 <blockquote>
@@ -254,9 +267,19 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Amazon_AWS"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Amazon_AWS.png" height="50"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png" height="50"></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://aws.amazon.com/blogs/aws/amazon-ec2-trn2-instances-and-trn2-ultraservers-for-aiml-training-and-inference-is-now-available/">Amazon EC2 Trn2 Instances and Trn2 UltraServers</a></strong></p>
+<blockquote>
+  <p>Powered by AWS Trainium2, Trn2 instances target generative AI training and inference with large HBM capacity and NeuronLink chip-to-chip interconnect. AWS positions Trn2 for strong price/performance vs. GPU instances; UltraServers scale to dozens of Trainium2 chips.</p>
+</blockquote>
+
+<p><a href="https://aws.amazon.com/ec2/instance-types/inf2/">Amazon EC2 Inf2 (Inferentia2)</a></p>
+<blockquote>
+  <p>Inferentia2-powered Inf2 instances improve throughput and latency for large-model inference vs. first-generation Inferentia, with multi-chip scale-out via NeuronLink.</p>
+</blockquote>
 
 <p><strong><a href="https://aws.amazon.com/cn/machine-learning/trainium/">AWS Trainium</a></strong></p>
 <blockquote>
@@ -272,15 +295,20 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Microsoft"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Microsoft_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://azure.microsoft.com/en-us/blog/azure-maia-for-the-era-of-ai-from-silicon-to-software-to-systems/">Azure Maia for the era of AI: From silicon to software to systems</a></strong></p>
+<blockquote>
+  <p>Microsoft’s first in-house AI accelerator, Azure Maia 100 (5nm, advanced packaging), is co-designed for Azure AI / Copilot-class cloud workloads, with a software stack integrating PyTorch and ONNX Runtime.</p>
+</blockquote>
 
 <div align="center"><h3> </h3></div>
 
 <p><a name="Apple"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Apple_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Apple_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -288,7 +316,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Alibaba"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/alibaba_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/alibaba_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -302,7 +330,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Tencent_Cloud"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tencent_Cloud_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tencent_Cloud_logo.png" height="30"></div>
 
 <div align="center"><h3> </h3></div>
 <p><a href="https://www.datacenterdynamics.com/en/news/tencent-reveals-three-data-center-chips-for-ai-video-transcoding-and-networking/">Tencent reveals three data center chips - for AI, video transcoding, and networking</a></p>
@@ -315,7 +343,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 <p><br />
 <a name="Baidu"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Baidu_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Baidu_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -328,7 +356,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Fujitsu"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Fujitsu_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Fujitsu_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -341,7 +369,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Nokia"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Nokia_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nokia_logo.png" height="30"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -353,20 +381,30 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Facebook"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/facebook_logo.png" height="50"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png" height="50"></div>
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.reuters.com/technology/facebook-developing-machine-learning-chip-information-2021-09-09/">Facebook developing machine learning chip - The Information</a></p>
+<p><strong><a href="https://ai.meta.com/blog/next-generation-meta-training-inference-accelerator-AI-MTIA/">Our next generation Meta Training and Inference Accelerator (MTIA)</a></strong></p>
 <blockquote>
-  <p>Facebook Inc (FB.O) is developing a machine learning chip to handle tasks such as content recommendation to users, The Information reported on Thursday, citing two people familiar with the project.</p>
+  <p>Meta’s custom MTIA family targets ranking/recommendation and broader AI workloads. Newer generations expand coverage toward GenAI inference and training, complementing GPU capacity in Meta’s AI infrastructure.</p>
+</blockquote>
+
+<p><strong><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/">Four MTIA Chips in Two Years: Scaling AI Experiences for Billions</a></strong></p>
+<blockquote>
+  <p>Meta describes a multi-generation MTIA roadmap (including MTIA 300–500 class chips) with modular chiplet designs and accelerating deployment cadence through 2026–2027.</p>
+</blockquote>
+
+<p><a href="https://www.reuters.com/technology/facebook-developing-machine-learning-chip-information-2021-09-09/">Facebook developing machine learning chip - The Information</a> (historical, 2021)</p>
+<blockquote>
+  <p>Early reporting on Meta/Facebook’s in-house ML chip efforts for recommendation workloads.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
 
 <p><a name="Tesla"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tesla_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tesla_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -390,7 +428,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="ARM"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ARM_logo.png" height="30"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ARM_logo.png" height="30"></div>
 
 <div align="center"><h3> </h3></div>
 <a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-n78">NPU ETHOS-N78</a></p>
@@ -407,7 +445,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Synopsys"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Synopsys_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Synopsys_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -421,7 +459,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Imagination"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Imagination_logo.png" height="60"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Imagination_logo.png" height="60"></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -434,7 +472,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="CEVA"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/CEVA_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/CEVA_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 <p><a href="https://www.ceva-dsp.com/app/deep-learning/">Deep learning for the real-time embedded world</a></p>
@@ -445,14 +483,14 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 <p><a name="Cadence"></a></p>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cadence_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cadence_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 <p><a href="https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html">Tensilica AI Platform</a></p>
 
 <div align="center"><h3> </h3></div>
 <p><a name="VeriSilicon"></a></p>
-<div align="center"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/VeriSilicon_logo.png" height="40"></div>
+<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/VeriSilicon_logo.png" height="40"></div>
 
 <div align="center"><h3> </h3></div>
 <p><a href="https://www.verisilicon.com/en/IPPortfolio/VivanteNPUIP">Vivante® NPU IP</a></p>
@@ -470,9 +508,14 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Cerebras"></a></p>
 
-<div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
+<div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://www.cerebras.net/press-release/cerebras-announces-third-generation-wafer-scale-engine">Cerebras Systems Unveils World’s Fastest AI Chip with 4 Trillion Transistors (WSE-3)</a></strong></p>
+<blockquote>
+  <p>March 2024 — WSE-3 (5nm) powers the CS-3 system with ~900,000 AI-optimized cores and 125 petaflops peak AI performance, doubling WSE-2 performance at the same power/price point for large-model training and high-throughput inference.</p>
+</blockquote>
 
 <p><strong><a href="https://www.cerebras.net/press-release/cerebras-unveils-andromeda-a-13.5-million-core-ai-supercomputer-that-delivers-near-perfect-linear-scaling-for-large-language-models">Cerebras Unveils Andromeda, a 13.5 Million Core AI Supercomputer that Delivers Near-Perfect Linear Scaling for Large Language Models</a></strong></p>
 <blockquote>
@@ -503,7 +546,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Graphcore"></a></p>
 
-<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
+<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
 
 <p><strong><a href="https://www.eetimes.com/graphcore-supercharges-ipu-with-wafer-on-wafer/">Graphcore Supercharges IPU with Wafer-on-Wafer</a></strong></p>
 <blockquote>
@@ -528,9 +571,14 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Tenstorrent"></a></p>
 
-<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tenstorrent_logo.png" height="100"></a></div>
+<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png" height="100"></a></div>
 
 <div align="center"><h3> </h3></div>
+
+<p><strong><a href="https://tenstorrent.com/">Tenstorrent Blackhole / Wormhole AI processors</a></strong></p>
+<blockquote>
+  <p>Tenstorrent builds RISC-V based AI computers (Wormhole, Blackhole) with an open software stack, targeting datacenter and edge deployments under Jim Keller’s architecture leadership.</p>
+</blockquote>
 
 <p><a href="https://www.prnewswire.com/news-releases/tenstorrent-raises-over-200-million-at-1-billion-valuation-to-create-programmable-high-performance-ai-computers-301295913.html">Tenstorrent Raises over $200 million at $1 billion Valuation to Create Programmable, High Performance AI Computers</a></p>
 <blockquote>
@@ -543,7 +591,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Blaize"></a></p>
 
-<div align="center"><a href="https://www.blaize.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Blaize_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.blaize.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blaize_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -556,7 +604,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Koniku"></a></p>
 
-<div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Koniku_logo.png" height="50"></a></div>
+<div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Koniku_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -568,7 +616,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Adapteva"></a></p>
 
-<div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Adapteva_logo.png" height="70"></a></div>
+<div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Adapteva_logo.png" height="70"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -576,7 +624,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Mythic"></a></p>
 
-<div align="center"><a href="https://mythic.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Mythic_logo.png" height="20"></a></div>
+<div align="center"><a href="https://mythic.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Mythic_logo.png" height="20"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -594,7 +642,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Brainchip"></a></p>
 
-<div align="center"><a href="http://www.brainchipinc.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Brainchip_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.brainchipinc.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Brainchip_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -607,7 +655,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Deepvision"></a></p>
 
-<div align="center"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Deepvision_logo.png" height="40"></a></div>
+<div align="center"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -624,6 +672,11 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Vera-Rubin-Opens-Agentic-AI-Frontier/default.aspx">NVIDIA Vera Rubin Opens Agentic AI Frontier (includes Groq LPU)</a></strong></p>
+<blockquote>
+  <p>In late 2025 NVIDIA licensed Groq’s LPU technology and brought on key engineering talent. At GTC 2026, NVIDIA described integrating Groq-class LPU engines into the Vera Rubin AI factory stack for low-latency / high-efficiency token generation alongside Rubin GPUs.</p>
+</blockquote>
+
 <p><strong><a href="https://www.eetimes.com/groq-demos-fast-llms-on-4-year-old-silicon/">Groq Demonstrates Fast LLMs on 4-Year-Old Silicon</a></strong></p>
 <blockquote>
   <p>MOUNTAIN VIEW, CALIF. — Groq has repositioned its first-generation AI inference chip as a language processing unit (LPU), and demonstrated Meta’s Llama-2 70-billion–parameter large language model (LLM) running inference at 240 tokens per second per user. Groq CEO Jonathan Ross told EE Times that the company had Llama-2 up and running on the company’s 10-rack (64-chip) cloud-based dev system in “a couple of days.” This system is based on the company’s first gen AI silicon, released four years ago.</p>
@@ -638,7 +691,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Kneron"></a></p>
 
-<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Kneron_logo.png" height="60"></a></div>
+<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Kneron_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -648,7 +701,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://www.gyrfalcontech.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GTI_Logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.gyrfalcontech.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GTI_Logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -662,7 +715,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="SambaNova"></a></p>
 
-<div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
+<div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -689,7 +742,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <div align="center"><h3> </h3></div>
 <p><a name="GreenWaves"></a></p>
-<div align="center"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GreenWaves_logo.png" height="50"></a></div>
+<div align="center"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GreenWaves_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><a href="https://www.eetimes.eu/greenwaves-shows-off-advanced-audio-demos/">GreenWaves Shows Off Advanced Audio Demos</a></p>
@@ -701,7 +754,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Lightelligence"></a></p>
 
-<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightelligence_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightelligence_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -714,7 +767,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Lightmatter"></a></p>
 
-<div align="center"><a href="https://www.lightmatter.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Lightmatter_logo.png" height="50"></a></div>
+<div align="center"><a href="https://www.lightmatter.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightmatter_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -725,7 +778,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Hailo"></a></p>
 
-<div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Hailo_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Hailo_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -738,7 +791,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Tachyum"></a></p>
 
-<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -751,7 +804,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Alphaics"></a></p>
 
-<div align="center"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Alphaics_logo.png" height="50"></a></div>
+<div align="center"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Alphaics_logo.png" height="50"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -764,7 +817,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Syntiant"></a></p>
 
-<div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Syntiant_logo.png" height="30"></a></div>
+<div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Syntiant_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -778,7 +831,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="aiCTX"></a></p>
 
-<div align="center"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/aiCTX_logo.png" height="40"></a></div>
+<div align="center"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/aiCTX_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -790,7 +843,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Flexlogix"></a></p>
 
-<div align="center"><a href="http://www.flex-logix.com/nmax"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/flexlogix_logo.png" height="40"></a></div>
+<div align="center"><a href="http://www.flex-logix.com/nmax"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/flexlogix_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -802,7 +855,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="PFN"></a></p>
 
-<div align="center"><a href="https://projects.preferred.jp/mn-core/en/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/PFN_logo.png" height="40"></a></div>
+<div align="center"><a href="https://projects.preferred.jp/mn-core/en/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/PFN_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -815,7 +868,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Cornami"></a></p>
 
-<div align="center"><a href="http://cornami.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Cornami_logo.jpg" height="30"></a></div>
+<div align="center"><a href="http://cornami.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cornami_logo.jpg" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -828,7 +881,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Anaflash"></a></p>
 
-<div align="center"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Anaflash_logo.png" height="40"></a></div>
+<div align="center"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Anaflash_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -841,7 +894,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Optalysys"></a></p>
 
-<div align="center"><a href="https://www.optalysys.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Optalysys_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.optalysys.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Optalysys_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -854,7 +907,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="etacompute"></a></p>
 
-<div align="center"><a href="https://etacompute.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/etacompute_logo.png" height="80"></a></div>
+<div align="center"><a href="https://etacompute.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/etacompute_logo.png" height="80"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -870,7 +923,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Achronix"></a></p>
 
-<div align="center"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Achronix_logo.png" height="30"></a></div>
+<div align="center"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Achronix_logo.png" height="30"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -882,7 +935,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Areanna"></a></p>
 
-<div align="center"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Areanna_logo.png" height="60"></a></div>
+<div align="center"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Areanna_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -894,7 +947,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Neuroblade"></a></p>
 
-<div align="center"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Neuroblade_logo.png" height="120"></a></div>
+<div align="center"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neuroblade_logo.png" height="120"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -906,7 +959,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Luminous"></a></p>
 
-<div align="center"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Luminous_logo.png" height="90"></a></div>
+<div align="center"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Luminous_logo.png" height="90"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -918,7 +971,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Efinix"></a></p>
 
-<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Efinix_logo.png" height="25"></a></div>
+<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Efinix_logo.png" height="25"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -930,7 +983,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="AIstorm"></a></p>
 
-<div align="center"><a href="https://aistorm.ai"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AIstorm_logo.png" height="60"></a></div>
+<div align="center"><a href="https://aistorm.ai"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AIstorm_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -943,7 +996,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="SiMa"></a></p>
 
-<div align="center"><a href="http://sima.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SiMa_logo.png" height="40"></a></div>
+<div align="center"><a href="http://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -959,7 +1012,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Untether"></a></p>
 
-<div align="center"><a href="https://untether.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Untether_logo.png" height="40"></a></div>
+<div align="center"><a href="https://untether.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Untether_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -971,7 +1024,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="GrAI"></a></p>
 
-<div align="center"><a href="https://www.graimatterlabs.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/GrAI_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.graimatterlabs.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GrAI_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -983,7 +1036,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Rain"></a></p>
 
-<div align="center"><a href="http://rain-neuromorphics.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Rain_logo.png" height="40"></a></div>
+<div align="center"><a href="http://rain-neuromorphics.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Rain_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -994,7 +1047,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="ABR"></a></p>
 
-<div align="center"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/ABR_logo.png" height="40"></a></div>
+<div align="center"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ABR_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1005,7 +1058,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Xmos"></a></p>
 
-<div align="center"><a href="https://www.xmos.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Xmos_logo.png" height="40"></a></div>
+<div align="center"><a href="https://www.xmos.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Xmos_logo.png" height="40"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1021,7 +1074,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="DinoplusAI"></a></p>
 
-<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/DinoplusAI_logo.png" height="60"></a></div>
+<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/DinoplusAI_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1031,7 +1084,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Furiosa"></a></p>
 
-<div align="center"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Furiosa_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1041,7 +1094,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Corerain"></a></p>
 
-<div align="center"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Corerain_logo.png" height="60"></a></div>
+<div align="center"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Corerain_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1051,7 +1104,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="Perceive"></a></p>
 
-<div align="center"><a href="https://perceive.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Perceive_logo.png" height="60"></a></div>
+<div align="center"><a href="https://perceive.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Perceive_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1062,7 +1115,7 @@ The soon to be released <a href="https://www.amd.com/en/graphics/instinct-server
 
 <p><a name="SimpleMachines"></a></p>
 
-<div align="center"><a href="https://www.simplemachines.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/SimpleMachines_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.simplemachines.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SimpleMachines_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1075,7 +1128,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a name="Neureality"></a></p>
 
-<div align="center"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Neureality_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neureality_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1095,7 +1148,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote>
  
 <p><a name="AnalogInference"></a></p>
-<div align="center"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eenewsanalog.com/news/analog-inference-startup-raises-106-million">Analog inference startup raises $10.6 million</a></strong></p>
@@ -1104,7 +1157,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote>
 
 <p><a name="Quadric"></a></p>
-<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Quatric_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Quatric_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
@@ -1113,7 +1166,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
 
 <p><a name="EdgeQ"></a></p>
-<div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
+<div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
@@ -1122,7 +1175,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
  
 <p><a name="Innatera"></a></p>
-<div align="center"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Innatera_logo.png" height="60"></a></div>
+<div align="center"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Innatera_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eetimes.com/innatera-unveils-neuromorphic-ai-chip-to-accelerate-spiking-networks/">Innatera Unveils Neuromorphic AI Chip to Accelerate Spiking Networks</a></strong></p>
@@ -1131,7 +1184,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
  
 <p><a name="Ceremorphic"></a></p>
-<div align="center"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Ceremorphic_logo.png" height="60"></a></div>
+<div align="center"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Ceremorphic_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eetimes.com/redpine-founder-launches-ai-processor-startup/">Redpine Founder Launches AI Processor Startup</a></strong></p>
@@ -1140,7 +1193,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
  
 <p><a name="Aspinity"></a></p>
-<div align="center"><a href="https://www.aspinity.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Aspinity_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.aspinity.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Aspinity_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://embeddedcomputing.com/technology/analog-and-power/analog-semicundoctors-sensors/aspinity-analog-ml-chip-allows-battery-powered-always-on">Aspinity Analog ML Chip Allows Battery-Powered “Always On”</a></strong></p>
@@ -1149,7 +1202,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
  
 <p><a name="Teramem"></a></p>
-<div align="center"><a href="https://www.tetramem.com/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/Teramem_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.tetramem.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Teramem_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.tetramem.com/posts/TetraMem-Technology-Debut-at-Linley">TetraMem enjoyed an exciting public debut of our analog in-memory compute technology at the Linley Spring 2022 Processor Conference.</a></strong></p>
@@ -1158,7 +1211,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote> 
  
 <p><a name="d-matrix"></a></p>
-<div align="center"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/Deep-Learning-Processor-List/raw/master/resource/d-matrix_logo.png" height="60"></a></div>
+<div align="center"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/d-matrix_logo.png" height="60"></a></div>
 
 <div align="center"><h3> </h3></div>
 
@@ -1179,20 +1232,24 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <div align="center"><h2>AI Chip Compilers</h2></div>
 
 <p><HR>
-1. <a href="https://github.com/pytorch/glow">pytorch/glow</a><br>
-2. <a href="https://tvm.ai/">TVM:End to End Deep Learning Compiler Stack</a><br>
-3. <a href="https://www.tensorflow.org/xla">Google Tensorflow XLA</a><br>
-4. <a href="https://developer.nvidia.com/tensorrt">Nvidia TensorRT</a><br>
-5. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
-6. <a href="https://github.com/NervanaSystems/ngraph">nGraph</a><br>
-7. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu compiler</a><br>
-8. <a href="https://onnc.ai/">ONNC (Open Neural Network Compiler)</a><br>
-9. <a href="https://mlir.llvm.org/">MLIR: Multi-Level Intermediate Representation</a><br>
-10. <a href="http://tensor-compiler.org/">The Tensor Algebra Compiler (taco)</a><br>
-11. <a href="https://facebookresearch.github.io/TensorComprehensions/">Tensor Comprehensions</a><br>
-12. <a href="https://www.polymagelabs.com//">PolyMage Labs</a><br>
-13. <a href="https://octoml.ai/">OctoML</a><br>
-14. <a href="https://www.modular.com/">Modular AI</a><br>
+<strong>Actively used / widely referenced (2024–2026)</strong><br>
+1. <a href="https://mlir.llvm.org/">MLIR</a> — Multi-Level Intermediate Representation (LLVM)<br>
+2. <a href="https://tvm.apache.org/">Apache TVM</a> — end-to-end ML compiler stack<br>
+3. <a href="https://www.tensorflow.org/xla">XLA</a> — TensorFlow / JAX compiler<br>
+4. <a href="https://github.com/triton-lang/triton">OpenAI Triton</a> — GPU kernel DSL widely used for LLM kernels<br>
+5. <a href="https://iree.dev/">IREE</a> — MLIR-based end-to-end compiler &amp; runtime<br>
+6. <a href="https://developer.nvidia.com/tensorrt">NVIDIA TensorRT</a> / <a href="https://github.com/NVIDIA/TensorRT-LLM">TensorRT-LLM</a><br>
+7. <a href="https://awsdocs-neuron.readthedocs-hosted.com/">AWS Neuron</a> — Trainium / Inferentia compiler stack<br>
+8. <a href="https://rocm.docs.amd.com/">AMD ROCm</a> / composable kernel ecosystem<br>
+9. <a href="https://www.modular.com/max/mojo">Modular MAX / Mojo</a><br>
+10. <a href="https://onnxruntime.ai/">ONNX Runtime</a> — cross-vendor inference<br>
+<br>
+<strong>Historical / research compilers</strong><br>
+11. <a href="https://github.com/pytorch/glow">PyTorch Glow</a><br>
+12. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
+13. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu</a><br>
+14. <a href="http://tensor-compiler.org/">TACO (Tensor Algebra Compiler)</a><br>
+15. <a href="https://github.com/NervanaSystems/ngraph">Intel nGraph</a> (archived)<br>
 
 <div align="center"><h3> </h3></div>
 
@@ -1202,17 +1259,16 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><HR>
 
-1. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench:An End-to-End Deep Learning Benchmark and Competition Image Classification (ImageNet)</a><br>
-2. <a href="https://github.com/rdadolf/fathom">Fathom:Reference workloads for modern deep learning methods</a><br>
-3. <a href="https://mlperf.org/">MLPerf:A broad ML benchmark suite for measuring performance of ML software frameworks, ML hardware accelerators, and ML cloud platforms</a>. 
-<strong>You can find latest MLPerf results: training 2.1, HPC 2.0, inference tiny 1.0 <a href="https://mlcommons.org/en/news/mlperf-training-4q2022/">here.</a></strong>. <br>
-<strong>You can find MLPerf inference results v2.1 <a href="https://mlcommons.org/en/news/mlperf-inference-v21/">here.</a></strong>. <br>
-<strong>You can find MLPerf training results v1.0 <a href="https://mlcommons.org/en/news/mlperf-training-2q2022/">here.</a></strong>. <br>
-
-4. <a href="https://aimatrix.ai/en-us/index.html">AI Matrix</a><br>
-5. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a><br>
-6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIABenchmark</a><br>
-7. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark Benchmark</a><br>
+1. <a href="https://mlcommons.org/benchmarks/">MLPerf (MLCommons)</a> — industry-standard training, inference, HPC, and client benchmarks.<br>
+<strong>Latest results (2026):</strong>
+<a href="https://mlcommons.org/2026/04/mlperf-inference-v6-0-results/">Inference v6.0</a> ·
+<a href="https://mlcommons.org/2026/06/mlperf-training-v6-0-results/">Training v6.0</a> ·
+<a href="https://mlcommons.org/visualizer">Results visualizer</a><br>
+2. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench</a> (historical end-to-end ImageNet benchmark)<br>
+3. <a href="https://github.com/rdadolf/fathom">Fathom</a> — reference workloads for modern deep learning methods<br>
+4. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a> — mobile / edge AI scores<br>
+5. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark</a><br>
+6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIA DNN Benchmark</a><br>
 
 <div align="center"><h3> </h3></div>
 
@@ -1229,10 +1285,10 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 3. <a href="http://eyeriss.mit.edu/tutorial.html">Tutorial on Hardware Architectures for Deep Neural Networks</a><br>
 4. <strong><a href="https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/">Neural Network Accelerator Comparison</a></strong><br>
 5. "White Paper on AI Chip Technologies 2018". You can download it from <a href="https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1">here</a>, or <a href="https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm">Google drive.</a><br>
-5. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
-6. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
-7. <strong><a href="https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38">TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware</a></strong><br>
+6. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
+7. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
+8. <strong><a href="https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38">TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware</a></strong><br>
 
 <div align="center">
-<a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/Deep-Learning-Processor-List/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
+<a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/AI-Chip/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>
 </div>
