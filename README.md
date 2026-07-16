@@ -25,6 +25,12 @@
 <li><strong>Groq</strong>: LPU inference focus; technology licensed / team joined <a href="#Groq">NVIDIA</a> (late 2025).</li>
 <li><strong>Benchmarks</strong>: Links updated to <a href="#AIChipBenchmarks">MLPerf Inference v6.0</a> and <a href="#AIChipBenchmarks">Training v6.0</a>.</li>
 <li><strong>Compilers</strong>: Refreshed <a href="#AIChipCompilers">AI Chip Compilers</a> list (Triton, IREE, TensorRT-LLM, etc.).</li>
+<li><strong>Apple</strong>: <a href="#Apple">M4 / M5</a> Apple silicon Neural Engine &amp; GPU Neural Accelerators.</li>
+<li><strong>Samsung</strong>: <a href="#Samsung">Exynos 2500</a> on-device NPU (3nm GAA).</li>
+<li><strong>Qualcomm</strong>: <a href="#Qualcomm">Snapdragon 8 Elite</a> Hexagon NPU for on-device GenAI.</li>
+<li><strong>China accelerators</strong>: new section for <a href="#China_AI_Chips">Huawei Ascend</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Biren">Biren</a>, <a href="#MooreThreads">Moore Threads</a>, etc.</li>
+<li><strong>Alibaba</strong>: T-Head <a href="#Alibaba">PPU / Zhenwu</a> cloud AI chips.</li>
+<li><strong>Startups</strong>: added <a href="#Etched">Etched</a> (transformer ASIC / Sohu).</li>
 <li><strong>Repo hygiene</strong>: Fixed asset links to this repository; cleaned header WeChat album links.</li>
 </ul>
 
@@ -44,7 +50,11 @@
   </tr>
   <tr>  
     <th><a href="#Startups">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Blaize">Blaize</a>, <a href="#Koniku">Koniku</a>, <a href="#Adapteva">Adapteva</a>, <a href="#Mythic">Mythic</a>, <a href="#Brainchip">BrainChip</a>, <a href="#Leepmind">Leepmind</a>, <a href="#Groq">Groq</a>, <a href="#Kneron">Kneron</a>, <a href="#Esperanto">Esperanto Technologies</a>, <a href="#GTI">Gyrfalcon Technology</a>, <a href="#SambaNova">SambaNova Systems</a>, <a href="#GreenWaves">GreenWaves Technology</a>, <a href="#Lightelligence">Lightelligence</a>, <a href="#Lightmatter">Lightmatter</a>, <a href="#Hailo">Hailo</a>,<a href="#Tachyum">Tachyum</a>,<a href="#Alphaics">AlphaICs</a>,<a href="#Syntiant">Syntiant</a>, <a href="#aiCTX">aiCTX</a>, <a href="#Flexlogix">Flex Logix</a>, <a href="#PFN">Preferred Network</a>, <a href="#Cornami">Cornami</a>, <a href="#Anaflash">Anaflash</a>, <a href="#Optalysys">Optaylsys</a>, <a href="#etacompute">Eta Compute</a>, <a href="#Achronix">Achronix</a>, <a href="#Areanna">Areanna AI</a>, <a href="#Neuroblade">Neuroblade</a>, <a href="#Luminous">Luminous Computing</a>, <a href="#Efinix">Efinix</a>, <a href="#AIstorm">AISTORM</a>, <a href="#SiMa">SiMa.ai</a>,<a href="#Untether">Untether AI</a>, <a href="#GrAI">GrAI Matter Lab</a>, <a href="#Rain">Rain Neuromorphics</a>, <a href="#ABR">Applied Brain Research</a>, <a href="#Xmos">XMOS</a>, <a href="#DinoplusAI">DinoPlusAI</a>, <a href="#Furiosa">Furiosa AI</a>, <a href="#Perceive">Perceive</a>, <a href="#SimpleMachines">SimpleMachines</a>, <a href="#Neureality">Neureality</a>, <a href="#AnalogInference">Analog Inference</a>, <a href="#Quadric">Quadric</a>, <a href="#EdgeQ">EdgeQ</a>, <a href="#Innatera">Innatera Nanosystems</a>, <a href="#Ceremorphic">Ceremorphic</a>, <a href="#Aspinity">Aspinity</a>, <a href="#Teramem">TeraMem</a>, <a href="#d-matrix">d-Matrix</a></td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Etched">Etched</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova</a>, <a href="#d-matrix">d-Matrix</a>, <a href="#Furiosa">Furiosa AI</a>, … (full list in section IV)</td>
+  </tr>
+  <tr>
+    <th><a href="#China_AI_Chips">China AI Accelerators</a></th>
+    <td><a href="#HuaweiAscend">Huawei Ascend</a>, <a href="#Cambricon">Cambricon</a>, <a href="#Biren">Biren</a>, <a href="#MooreThreads">Moore Threads</a>, <a href="#Enflame">Enflame</a>, <a href="#Horizon">Horizon Robotics</a>, <a href="#Alibaba">Alibaba T-Head</a>, <a href="#Baidu">Baidu Kunlun</a></td>
   </tr>
 </table>
 
@@ -124,9 +134,14 @@
 <div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png" height="40"></div>
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="https://www.qualcomm.com/products/technology/processors/cloud-artificial-intelligence/cloud-ai-100">Qualcomm Cloud AI 100 / Hexagon NPU</a></strong></p>
+<p><strong><a href="https://www.androidauthority.com/snapdragon-8-elite-3491805/">Snapdragon 8 Elite — Hexagon NPU for on-device GenAI</a></strong></p>
 <blockquote>
-  <p>Qualcomm continues to push on-device and edge/cloud AI via Snapdragon platforms (Hexagon NPU) and Cloud AI accelerators for efficient inference outside traditional GPU clusters.</p>
+  <p>Snapdragon Summit 2024 — custom Oryon CPU plus a redesigned Hexagon NPU (fused scalar/vector/tensor accelerators). Qualcomm cites ~45% faster NPU performance and better perf/W vs. Snapdragon 8 Gen 3 for multimodal on-device generative AI.</p>
+</blockquote>
+
+<p><a href="https://www.qualcomm.com/products/technology/processors/cloud-artificial-intelligence/cloud-ai-100">Qualcomm Cloud AI 100</a></p>
+<blockquote>
+  <p>Cloud/edge inference accelerator focused on power-efficient deployment outside traditional GPU clusters.</p>
 </blockquote>
 
 <a href="https://www-forbes-com.cdn.ampproject.org/c/s/www.forbes.com/sites/karlfreund/2022/11/16/qualcomm-ups-the-snapgragon-ai-game/amp/">Qualcomm Ups The Snapgragon AI Game</a>
@@ -143,11 +158,15 @@
 <a name="Samsung"></a>
 <div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png" height="35"></div>
 <div align="center"><h3> </h3></div>
-<strong><a href="https://news.samsung.com/global/samsung-brings-on-device-ai-processing-for-premium-mobile-devices-with-exynos-9-series-9820-processor">Samsung Brings On-device AI Processing for Premium Mobile Devices with Exynos 9 Series 9820 Processor</a></strong>
-> Fourth-generation custom core and 2.0Gbps LTE Advanced Pro modem enables enriched mobile experiences including AR and VR applications 
+<p><strong><a href="https://semiconductor.samsung.com/processor/mobile-processor/exynos-2500/">Samsung Exynos 2500</a></strong></p>
+<blockquote>
+  <p>Flagship mobile SoC on Samsung 3nm GAA process with a substantially upgraded NPU (Samsung cites up to ~59 TOPS and ~39% better on-device AI vs. Exynos 2400) for generative AI and privacy-preserving on-device inference.</p>
+</blockquote>
 
-<br> 
-Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-optimizes-premium-exynos-9-series-9810-for-ai-applications-and-richer-multimedia-content">The new Exynos 9810 brings premium features with a 2.9GHz custom CPU, an industry-first 6CA LTE modem and deep learning processing capabilities</a>”.   
+<p><a href="https://news.samsung.com/global/samsung-brings-on-device-ai-processing-for-premium-mobile-devices-with-exynos-9-series-9820-processor">Samsung Brings On-device AI Processing… Exynos 9 Series 9820</a> (historical)</p>
+<blockquote>
+  <p>Earlier on-device AI messaging around Exynos 9820 / 9810-era NPU features for AR/VR and mobile deep learning.</p>
+</blockquote>   
 
 <div align="center"><h3> </h3></div>
 <a name="AMD"></a>
@@ -312,6 +331,21 @@ Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-op
 
 <div align="center"><h3> </h3></div>
 
+<p><strong><a href="https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/">Apple unleashes M5, the next big leap in AI performance for Apple silicon</a></strong></p>
+<blockquote>
+  <p>Oct 2025 — M5 (3nm) adds Neural Accelerators in each GPU core and a faster 16-core Neural Engine, targeting on-device Apple Intelligence and local AI workloads across MacBook Pro, iPad Pro, and Vision Pro.</p>
+</blockquote>
+
+<p><strong><a href="https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/">Apple debuts M5 Pro and M5 Max</a></strong></p>
+<blockquote>
+  <p>Mar 2026 — Fusion Architecture scales GPU AI compute and unified memory bandwidth (up to 128GB / ~614GB/s on M5 Max) for local LLM prompt processing and pro creative AI workflows.</p>
+</blockquote>
+
+<p><a href="https://www.apple.com/newsroom/2024/05/apple-introduces-m4-chip/">Apple introduces M4 chip</a></p>
+<blockquote>
+  <p>May 2024 — M4 Neural Engine up to ~38 TOPS, with CPU ML accelerators and high-bandwidth unified memory for on-device AI on iPad Pro and later Macs.</p>
+</blockquote>
+
 <div align="center"><h3> </h3></div>
 
 <p><a name="Alibaba"></a></p>
@@ -320,10 +354,19 @@ Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-op
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://medium.com/syncedreview/alibabas-new-ai-chip-can-process-nearly-80k-images-per-second-63412dec22a3">Alibaba’s New AI Chip Can Process Nearly 80K Images Per Second</a></p>
-
+<p><strong><a href="https://www.eetimes.com/alibaba-unveils-own-ai-chip-mounting-direct-challenge-to-nvidia/">Alibaba Unveils Own AI Chip, Mounting Direct Challenge to Nvidia</a></strong></p>
 <blockquote>
-  <p>At the Alibaba Cloud (Aliyun) Apsara Conference 2019, Pingtouge unveiled its first AI dedicated processor for cloud-based large-scale AI inferencing. The Hanguang 800 is the first semiconductor product in Alibaba’s 20-year history.</p>
+  <p>Sep 2025 — Alibaba’s T-Head Parallel Processing Unit (PPU / Zhenwu family) targets cloud AI training and inference as a domestic alternative under export-control constraints. Reports cite ~96GB HBM2e-class memory and high chip-to-chip bandwidth; deployed in large China Unicom / Alibaba Cloud clusters.</p>
+</blockquote>
+
+<p><a href="https://www.alibabacloud.com/blog/alibaba-unveils-new-ai-chip-flagship-model-and-rebuilt-cloud-stack-ai-for-agentic-era_603151">Alibaba Cloud Summit: Zhenwu M890 and agentic AI stack</a></p>
+<blockquote>
+  <p>T-Head’s newer Zhenwu-class accelerators (e.g. M890 messaging) emphasize larger on-package memory, low-precision formats (down to FP4), and cluster interconnect / SAIL software for agentic cloud workloads.</p>
+</blockquote>
+
+<p><a href="https://medium.com/syncedreview/alibabas-new-ai-chip-can-process-nearly-80k-images-per-second-63412dec22a3">Alibaba’s Hanguang 800</a> (historical, 2019)</p>
+<blockquote>
+  <p>Pingtouge / T-Head’s first AI inference ASIC, highlighted for high images-per-second inference throughput at Apsara Conference 2019.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -347,9 +390,14 @@ Samsung resently unveiled “<a href="https://news.samsung.com/global/samsung-op
 
 <div align="center"><h3> </h3></div>
 
-<p><a href="https://www.reuters.com/technology/baidu-says-2nd-gen-kunlun-ai-chips-enter-mass-production-2021-08-18/">Baidu says 2nd-gen Kunlun AI chips enter mass production</a></p>
+<p><strong><a href="https://www.reuters.com/technology/baidu-says-2nd-gen-kunlun-ai-chips-enter-mass-production-2021-08-18/">Baidu Kunlun / Kunlunxin AI accelerators</a></strong></p>
 <blockquote>
-  <p>Chinese tech giant Baidu said on Wednesday it had begun mass-producing second-generation Kunlun artificial intelligence (AI) chips, as it races to become a key player in the chip industry which Beijing is trying to strengthen.</p>
+  <p>Baidu’s Kunlunxin line (Kunlun chips) continues as a domestic cloud/training &amp; inference option alongside hyperscaler custom silicon. 2nd-gen Kunlun entered mass production in 2021; later generations target large-model clusters inside China.</p>
+</blockquote>
+
+<p><a href="https://www.reuters.com/technology/baidu-says-2nd-gen-kunlun-ai-chips-enter-mass-production-2021-08-18/">Baidu says 2nd-gen Kunlun AI chips enter mass production</a> (2021)</p>
+<blockquote>
+  <p>Early mass-production milestone for Baidu’s second-generation Kunlun AI chips.</p>
 </blockquote>
 
 <div align="center"><h3> </h3></div>
@@ -1215,7 +1263,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <div align="center"><h3> </h3></div>
 
-<p><strong><a href="www.reuters.com/technology/ai-chip-startup-d-matrix-raises-110-mln-with-backing-microsoft-2023-09-06/">Exclusive: AI chip startup d-Matrix raises $110 million with backing from Microsoft</a></strong></p>
+<p><strong><a href="https://www.reuters.com/technology/ai-chip-startup-d-matrix-raises-110-mln-with-backing-microsoft-2023-09-06/">Exclusive: AI chip startup d-Matrix raises $110 million with backing from Microsoft</a></strong></p>
 <blockquote>
   <p>Sept 6 (Reuters) - Silicon Valley-based artificial intelligence chip startup d-Matrix has raised $110 million from investors that include Microsoft Corp (MSFT.O) at a time when many chip companies are struggling to raise cash.</p>
 </blockquote> 
@@ -1225,6 +1273,102 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>The startup combines digital in-memory compute and chiplet implementations for data-center-grade inference.</p>
 </blockquote> 
  
+<div align="center"><h3> </h3></div>
+
+
+<p><a name="Etched"></a></p>
+<div align="center"><h3><a href="https://www.etched.com/">Etched</a></h3></div>
+
+<p><strong><a href="https://techcrunch.com/2026/06/30/nvidia-competitor-etched-hits-5b-valuation-1b-in-sales-for-ai-chip/">Nvidia competitor Etched hits $5B valuation, $1B in sales for AI chip</a></strong></p>
+<blockquote>
+  <p>Jun 2026 — Etched reports TSMC-manufactured transformer-specialized ASICs powering “frontier inference clusters,” with ~$800M raised to date (including a $500M round at a $5B valuation) and ~$1B in booked system orders.</p>
+</blockquote>
+
+<p><a href="https://techcrunch.com/2024/06/25/etched-is-building-an-ai-chip-that-only-runs-transformer-models/">Etched is building an AI chip that only runs one type of model</a></p>
+<blockquote>
+  <p>2024 Series A coverage of Sohu: an ASIC purpose-built for Transformer inference (rather than general-purpose GPU programmability), aiming for higher tokens/sec and better energy efficiency on LLM serving.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+
+<div align="center"><h2><a name="China_AI_Chips"></a>V. China AI Accelerator Vendors</h2></div>
+<p><HR></p>
+<p>Domestic training/inference accelerators have become central under export-control and procurement policies. Coverage below highlights widely reported product lines; treat performance claims as vendor-/press-reported unless independently benchmarked.</p>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="HuaweiAscend"></a></p>
+<div align="center"><a href="https://www.huawei.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HUAWEI_logo.png" height="40"></a>
+&nbsp;&nbsp;
+<a href="https://www.hisilicon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png" height="40"></a></div>
+<div align="center"><h3>Huawei Ascend / HiSilicon</h3></div>
+
+<p><strong><a href="https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech">Huawei Atlas 900 A3 SuperPoD / Ascend 910C</a></strong></p>
+<blockquote>
+  <p>2025 — Huawei scaled Ascend 910B/910C deployments and launched Atlas 900 A3 SuperPoD (up to 384× Ascend 910C), also referred to in cloud form as CloudMatrix384-class supernodes, for large-model training and serving. Ascend 950-class follow-ons are on Huawei’s roadmap.</p>
+</blockquote>
+
+<p><a href="https://arxiv.org/abs/2506.12708">Serving Large Language Models on Huawei CloudMatrix384</a> (technical paper)</p>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Cambricon"></a></p>
+<div align="center"><a href="https://www.cambricon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png" height="50"></a></div>
+<div align="center"><h3>Cambricon (寒武纪)</h3></div>
+
+<p><strong><a href="https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push">Cambricon targets 500,000 AI chips in 2026</a></strong></p>
+<blockquote>
+  <p>Reports describe aggressive 2026 volume plans for Siyuan / MLU-class accelerators (including Siyuan 590 and next-gen 690 messaging), serving Chinese internet/cloud customers as a leading pure-play domestic AI-chip vendor.</p>
+</blockquote>
+
+<p><a href="https://awesomeagents.ai/hardware/cambricon-mlu590/">Cambricon MLU590 overview</a></p>
+<blockquote>
+  <p>MLU500-series cloud accelerator commonly cited for China data-center training/inference deployments with MLU-Link multi-card interconnect and Cambricon’s NeuWare / BANG software stack.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Biren"></a></p>
+<div align="center"><h3><a href="https://www.birentech.com/">Biren Technology (壁仞)</a></h3></div>
+
+<p><strong><a href="https://www.reuters.com/world/asia-pacific/china-ai-chipmaker-biren-surges-82-hong-kong-debut-kicking-off-2026-listings-2026-01-02/">China AI chipmaker Biren soars in Hong Kong debut</a></strong></p>
+<blockquote>
+  <p>Jan 2026 — Shanghai Biren Technology listed in Hong Kong (6082.HK), raising ~HK$5.58B. Best known for BR100-class GPGPU / AI accelerators positioned as high-performance domestic alternatives.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="MooreThreads"></a></p>
+<div align="center"><h3><a href="https://www.mthreads.com/">Moore Threads (摩尔线程)</a></h3></div>
+
+<p><strong><a href="https://www.cnbc.com/2025/12/05/china-nvidia-moore-threads-trading-debut-1-billion-listing-ipo-shanghai-gpu-enflame-biren.html">Moore Threads surges over 400% on Shanghai trading debut</a></strong></p>
+<blockquote>
+  <p>Dec 2025 — Full-function GPU vendor (MTT S4000 / S5000 class AI cards, MUSA software stack) completed a ~$1.1B STAR Market IPO amid China’s domestic GPU push.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Enflame"></a></p>
+<div align="center"><a href="https://github.com/EnflameTechnology"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Enflame_logo.png" height="50"></a></div>
+<div align="center"><h3>Enflame (燧原)</h3></div>
+
+<p><strong><a href="https://www.hpcwire.com/off-the-wire/enflame-technology-announces-cloudblazer-with-dtu-chip-on-globalfoundries-12lp-finfet-platform-for-data-center-training/">Enflame CloudBlazer / DTU AI accelerators</a></strong></p>
+<blockquote>
+  <p>Shanghai-based accelerator vendor offering CloudBlazer training/inference products (DTU architecture) for domestic intelligent-computing centers; frequently grouped with China’s “GPU dragons” alongside Biren, Moore Threads, and MetaX. Open-source ecosystem links: <a href="https://github.com/EnflameTechnology">EnflameTechnology on GitHub</a>.</p>
+</blockquote>
+
+<div align="center"><h3> </h3></div>
+
+<p><a name="Horizon"></a></p>
+<div align="center"><a href="https://www.horizon.auto/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Horizon_Robotics_logo.png" height="50"></a></div>
+<div align="center"><h3>Horizon Robotics (地平线)</h3></div>
+
+<p><strong><a href="https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6">Horizon Journey 6 / BPU Nash automotive AI processors</a></strong></p>
+<blockquote>
+  <p>Leading China ADAS / autonomous-driving compute vendor with Journey-series BPU SoCs (Journey 6 adds BPU Nash with stronger Transformer support) widely designed into passenger vehicles; focuses on efficient vision/transformer perception at the edge rather than datacenter LLM training.</p>
+</blockquote>
+
 <div align="center"><h3> </h3></div>
 
 <p><a name="AIChipCompilers"></a></p>
