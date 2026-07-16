@@ -1,19 +1,19 @@
-<div align="center"><h1>AI Chip (ICs and IPs)</h1></div>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI-chips.png"></div>
-<br>
-<div align="center">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a> (LinkedIn)</div>
-<div align="center"><strong>Welcome to My WeChat Blog <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a> for more AI chip related articles</strong></div>
-<div align="center"><strong>欢迎访问我的微信公众号 <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a></strong></div>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100"></div>
-<div align="center"><h1> </h1></div>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p7.png"></div>
-<div align="center"><h1> </h1></div>
- 
-<div align="center"><h2>Latest updates</h2></div>
-<p align="center"><em>Last refreshed: July 2026 — major vendor coverage updated for the generative-AI / LLM accelerator era.</em></p>
-<HR>
+<header class="page-header" align="center">
+<h1 class="site-brand">AI Chip (ICs and IPs)</h1>
+<div class="hero-art"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI-chips.png" loading="lazy" alt="AI chips illustration" /></div>
+<p class="editor-line">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a> (LinkedIn)</p>
+<p class="wechat-line"><strong>WeChat / 微信公众号</strong> · <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a> — AI chip articles</p>
+<div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
+<div class="landscape-map"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p7.png" loading="lazy" alt="AI Chip Landscape map" /></div>
+<p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — hyperscaler custom silicon, GPU/NPU vendors, IP houses, startups, and China domestic accelerators. Prefer official / primary sources; performance claims are often vendor-reported.</p>
+</header>
 
-<ul>
+ 
+<div align="center" class="section-title"><h2>Latest updates</h2></div>
+<p class="refresh-note" align="center"><em>Last refreshed: July 2026 — major vendor coverage updated for the generative-AI / LLM accelerator era.</em></p>
+<hr class="section-rule" />
+
+<ul class="updates-list">
 <li><strong>NVIDIA</strong>: <a href="#Nvidia">Vera Rubin</a> platform (CES/GTC 2026) and <a href="#Nvidia">Blackwell</a> (B200 / GB200 NVL72).</li>
 <li><strong>AMD</strong>: <a href="#AMD">Instinct MI350</a> series (CDNA 4) and Meta partnership for Helios / MI450-class GPUs.</li>
 <li><strong>Intel</strong>: <a href="#Habana">Gaudi 3</a> AI accelerator for enterprise GenAI training and inference.</li>
@@ -37,14 +37,18 @@
 <li><strong>Anthropic</strong>: multi-cloud compute on <a href="#Anthropic">TPU / Trainium / GPU</a> (Google–Broadcom GW-scale deals).</li>
 <li><strong>Graphcore</strong>: <a href="#Graphcore">acquired by SoftBank</a> (2024); continues IPU / next-gen work inside SoftBank.</li>
 <li><strong>Edge / ADAS</strong>: <a href="#SiMa">SiMa Modalix</a> Physical AI; <a href="#BlackSesame">Black Sesame Huashan</a> automotive SoCs.</li>
-<li><strong>Repo hygiene</strong>: Fixed asset links to this repository; cleaned header WeChat album links.</li>
+<li><strong>Tesla</strong>: <a href="#Tesla">AI5 tape-out</a> (2026); Dojo / AI4 lineage retained as historical context.</li>
+<li><strong>FuriosaAI</strong>: <a href="#Furiosa">RNGD</a> mass production + Broadcom next-gen partnership; Equinix Europe deploy.</li>
+<li><strong>Hailo</strong>: <a href="#Hailo">Hailo-10H</a> edge GenAI accelerator (LLM/VLM) generally available.</li>
+<li><strong>Arm</strong>: <a href="#ARM">Ethos-U85</a> micro-NPU with native transformer support (edge / IoT GenAI).</li>
+<li><strong>SambaNova</strong>: <a href="#SambaNova">SN50 RDU</a> agentic inference chip + Intel collaboration / Series E.</li>
+<li><strong>Mythic</strong>: <a href="#Mythic">$125M Series D</a> + Videantis acquisition for hybrid analog/digital AI platform.</li>
+<li><strong>Pages UX</strong>: HTML structure cleanup + custom CSS on GitHub Pages (section chrome, shortcut table, vendor logo blocks).</li>
 </ul>
 
-<div align="center"><h1> </h1></div>
-
-<div align="center"><h2>Shortcut</h2></div>
-<HR>
-<table style="width:100%">
+<div align="center" class="section-title"><h2>Shortcut</h2></div>
+<hr class="section-rule" />
+<table class="shortcut-table">
   <tr>
     <th><a href="#IC_Vendors">IC Vendors</a></th><td><a href="#Intel">Intel</a>, <a href="#Qualcomm">Qualcomm</a>, <a href="#Nvidia">Nvidia</a>, <a href="#Samsung">Samsung</a>, <a href="#AMD">AMD</a>, <a href="#MediaTek">MediaTek</a>, <a href="#IBM">IBM</a>, <a href="#Marvell">Marvell</a>, <a href="#Broadcom">Broadcom</a></td>
   </tr>
@@ -56,7 +60,7 @@
   </tr>
   <tr>  
     <th><a href="#Startups">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Etched">Etched</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova</a>, <a href="#d-matrix">d-Matrix</a>, <a href="#Furiosa">Furiosa AI</a>, … (full list in section IV)</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Etched">Etched</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova</a>, <a href="#Mythic">Mythic</a>, <a href="#Hailo">Hailo</a>, <a href="#Furiosa">FuriosaAI</a>, <a href="#d-matrix">d-Matrix</a>, <a href="#SiMa">SiMa</a>, … (full list in section IV)</td>
   </tr>
   <tr>
     <th><a href="#China_AI_Chips">China AI Accelerators</a></th>
@@ -64,16 +68,11 @@
   </tr>
 </table>
 
-<div align="center"><h1> </h1></div>
+<div align="center" class="section-title"><h2><a name="IC_Vendors"></a>I. IC Vendors</h2></div>
+<hr class="section-rule" />
 
-<div align="center"><h2><a name="IC_Vendors"></a>I. IC Vendors</h2></div>
-<HR>
-<div align="center"><h1> </h1></div>
-
-<div align="center"><h3> </h3></div>
 <a name="Nvidia"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png" height="50"> </div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png" height="50" loading="lazy" alt="NVIDIA" /> </div>
 <div align="center"><h3>GPU</h3></div>
 
 <p><strong><a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">NVIDIA Kicks Off the Next Generation of AI With Rubin</a></strong></p>
@@ -101,11 +100,8 @@
   <p>Kicking off another busy Spring GPU Technology Conference for NVIDIA, this morning the graphics and accelerator designer is announcing that they are going to once again design their own Arm-based CPU/SoC. Dubbed Grace – after Grace Hopper, the computer programming pioneer and US Navy rear admiral – the CPU is NVIDIA’s latest stab at more fully vertically integrating their hardware stack by being able to offer a high-performance CPU alongside their regular GPU wares. According to NVIDIA, the chip is being designed specifically for large-scale neural network workloads, and is expected to become available in NVIDIA products in 2023.</p>
 </blockquote>
 
-
-<div align="center"><h3> </h3></div>
 <a name="Intel"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png" height="60"></div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png" height="60" loading="lazy" alt="Intel" /></div>
 
 <a name="Mobileye"></a>
 <div align="center"><h3>Mobileye EyeQ</h3></div>
@@ -135,10 +131,8 @@
   <p>The primary motivation to create this new training instance class was presented by Andy Jassy in the 2020 re:Invent: “To provide our end-customers with up to 40% better price-performance than the current generation of GPU-based instances.”</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
 <a name="Qualcomm"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png" height="40"></div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png" height="40" loading="lazy" alt="Qualcomm" /></div>
 
 <p><strong><a href="https://www.androidauthority.com/snapdragon-8-elite-3491805/">Snapdragon 8 Elite — Hexagon NPU for on-device GenAI</a></strong></p>
 <blockquote>
@@ -160,10 +154,8 @@
   <p>The Qualcomm Cloud AI 100, designed for AI inference acceleration, addresses unique requirements in the cloud, including power efficiency, scale, process node advancements, and signal processing—facilitating the ability of datacenters to run inference on the edge cloud faster and more efficiently. Qualcomm Cloud AI 100 is designed to be a leading solution for datacenters who increasingly rely on infrastructure at the edge-cloud.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
 <a name="Samsung"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png" height="35"></div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png" height="35" loading="lazy" alt="Samsung" /></div>
 <p><strong><a href="https://semiconductor.samsung.com/processor/mobile-processor/exynos-2500/">Samsung Exynos 2500</a></strong></p>
 <blockquote>
   <p>Flagship mobile SoC on Samsung 3nm GAA process with a substantially upgraded NPU (Samsung cites up to ~59 TOPS and ~39% better on-device AI vs. Exynos 2400) for generative AI and privacy-preserving on-device inference.</p>
@@ -174,11 +166,8 @@
   <p>Earlier on-device AI messaging around Exynos 9820 / 9810-era NPU features for AR/VR and mobile deep learning.</p>
 </blockquote>   
 
-
-<div align="center"><h3> </h3></div>
 <a name="MediaTek"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/MediaTek_logo.png" height="40"></div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/MediaTek_logo.png" height="40" loading="lazy" alt="MediaTek" /></div>
 
 <p><strong><a href="https://www.mediatek.com/press-room/mediateks-dimensity-9400-flagship-soc-offers-extreme-performance-and-efficiency-for-the-latest-ai-experiences">MediaTek Dimensity 9400 — 8th Gen NPU for agentic AI</a></strong></p>
 <blockquote>
@@ -187,10 +176,8 @@
 
 <p><a href="https://www.mediatek.com/products/smartphones/mediatek-dimensity-9400">Dimensity 9400 product page</a></p>
 
-<div align="center"><h3> </h3></div>
 <a name="AMD"></a>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png" height="35"></div>
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png" height="35" loading="lazy" alt="AMD" /></div>
 <p><strong><a href="https://www.amd.com/en/products/accelerators/instinct/mi350.html">AMD Instinct™ MI350 Series GPUs</a></strong></p>
 <blockquote>
   <p>Built on 4th Gen AMD CDNA™ architecture, MI350X / MI355X deliver large HBM3E capacity (up to 288GB) and high bandwidth for generative AI training and inference, with expanded low-precision datatype support (including MXFP6 / MXFP4). MI400-series / Helios rack-scale systems are on AMD’s 2026 roadmap.</p>
@@ -208,9 +195,7 @@
 
 <p><a name="IBM"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/IBM_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/IBM_logo.png" height="40" loading="lazy" alt="IBM" /></div>
 
 <p><a href="https://www.ibm.com/blogs/systems/ibm-telum-processor-the-next-gen-microprocessor-for-ibm-z-and-ibm-linuxone/">Meet the IBM Artificial Intelligence Unit</a></p>
 
@@ -235,13 +220,9 @@
   <p>"The IBM Research AI Hardware Center is a global research hub headquartered in Albany, New York. The center is focused on enabling next-generation chips and systems that support the tremendous processing power and unprecedented speed that AI requires to realize its full potential.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Marvell"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Marvell_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Marvell_logo.png" height="60" loading="lazy" alt="Marvell" /></div>
 
 <p><strong><a href="https://www.marvell.com/products/data-processing-units.html">Custom AI ASICs + DPUs</a></strong></p>
 <blockquote>
@@ -252,11 +233,6 @@
 <blockquote>
   <p>Marvell’s OCTEON™, OCTEON™ Fusion and ARMADA® platforms target wireless infrastructure, carrier networks, enterprise and cloud data centers.</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-
-
-<div align="center"><h3> </h3></div>
 
 <p><a name="Broadcom"></a></p>
 <div align="center"><h3>Broadcom</h3></div>
@@ -276,17 +252,13 @@
   <p>Broadcom co-designs customer-specific AI accelerators (XPUs) and pairs them with Tomahawk / Jericho Ethernet switching — a long-running model that began with Google TPU generations and now spans multiple frontier labs and cloud providers.</p>
 </blockquote>
 
-<div align="center"><h2><a name="Tech_Giants"></a>II. Tech Giants & HPC Vendors</h2></div>
+<div align="center" class="section-title"><h2><a name="Tech_Giants"></a>II. Tech Giants & HPC Vendors</h2></div>
 
-<p><HR></p>
-
-<div align="center"><h3> </h3></div>
+<hr class="section-rule" />
 
 <p><a name="Google"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png" height="40" loading="lazy" alt="Google" /></div>
 
 <p><strong><a href="https://cloud.google.com/blog/products/compute/introducing-trillium-6th-gen-tpus">Introducing Trillium, sixth-generation TPUs</a></strong></p>
 <blockquote>
@@ -327,13 +299,9 @@
 <a href="https://mp.weixin.qq.com/s/g-BDlvSy-cx4AKItcWF7jQ">脉动阵列 - 因Google TPU获得新生</a><br><br>
 <a href="https://www.linkedin.com/pulse/should-we-all-embrace-systolic-arrays-chien-ping-lu">Should We All Embrace Systolic Arrays?</a><br></p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Amazon_AWS"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png" height="50"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png" height="50" loading="lazy" alt="Amazon AWS" /></div>
 
 <p><strong><a href="https://aws.amazon.com/blogs/aws/amazon-ec2-trn2-instances-and-trn2-ultraservers-for-aiml-training-and-inference-is-now-available/">Amazon EC2 Trn2 Instances and Trn2 UltraServers</a></strong></p>
 <blockquote>
@@ -355,21 +323,14 @@
   <p>AWS Inferentia provides high throughput, low latency inference performance at an extremely low cost. Each chip provides hundreds of TOPS (tera operations per second) of inference throughput to allow complex models to make fast predictions. For even more performance, multiple AWS Inferentia chips can be used together to drive thousands of TOPS of throughput. AWS Inferentia will be available for use with Amazon SageMaker, Amazon EC2, and Amazon Elastic Inference.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Microsoft"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png" height="60" loading="lazy" alt="Microsoft" /></div>
 
 <p><strong><a href="https://azure.microsoft.com/en-us/blog/azure-maia-for-the-era-of-ai-from-silicon-to-software-to-systems/">Azure Maia for the era of AI: From silicon to software to systems</a></strong></p>
 <blockquote>
   <p>Microsoft’s first in-house AI accelerator, Azure Maia 100 (5nm, advanced packaging), is co-designed for Azure AI / Copilot-class cloud workloads, with a software stack integrating PyTorch and ONNX Runtime.</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
-
 
 <p><a name="OpenAI"></a></p>
 <div align="center"><h3>OpenAI</h3></div>
@@ -380,9 +341,6 @@
 </blockquote>
 
 <p><a href="https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/">OpenAI–Broadcom 10 GW accelerator collaboration</a></p>
-
-<div align="center"><h3> </h3></div>
-
 
 <p><a name="Anthropic"></a></p>
 <div align="center"><h3>Anthropic</h3></div>
@@ -395,13 +353,9 @@
 <p><a href="https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus/">TechCrunch: Anthropic ups compute deal with Google and Broadcom</a> ·
 <a href="https://www.cnbc.com/2025/10/23/anthropic-google-cloud-deal-tpu.html">CNBC: Oct 2025 Google TPU cloud deal</a></p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Apple"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Apple_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Apple_logo.png" height="60" loading="lazy" alt="Apple" /></div>
 
 <p><strong><a href="https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/">Apple unleashes M5, the next big leap in AI performance for Apple silicon</a></strong></p>
 <blockquote>
@@ -418,13 +372,9 @@
   <p>May 2024 — M4 Neural Engine up to ~38 TOPS, with CPU ML accelerators and high-bandwidth unified memory for on-device AI on iPad Pro and later Macs.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Alibaba"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/alibaba_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/alibaba_logo.png" height="60" loading="lazy" alt="Alibaba" /></div>
 
 <p><strong><a href="https://www.eetimes.com/alibaba-unveils-own-ai-chip-mounting-direct-challenge-to-nvidia/">Alibaba Unveils Own AI Chip, Mounting Direct Challenge to Nvidia</a></strong></p>
 <blockquote>
@@ -441,26 +391,19 @@
   <p>Pingtouge / T-Head’s first AI inference ASIC, highlighted for high images-per-second inference throughput at Apsara Conference 2019.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Tencent_Cloud"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tencent_Cloud_logo.png" height="30"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tencent_Cloud_logo.png" height="30" loading="lazy" alt="Tencent Cloud" /></div>
 
-<div align="center"><h3> </h3></div>
 <p><a href="https://www.datacenterdynamics.com/en/news/tencent-reveals-three-data-center-chips-for-ai-video-transcoding-and-networking/">Tencent reveals three data center chips - for AI, video transcoding, and networking</a></p>
 <blockquote>
   <p>The company claims that the Zixiao AI chip is twice as good as comparable competing products, video transcoding chip Canghai was 30 percent better, and SmartNIC Xuanling was apparently four times as good. It did not provide external benchmarks or specific product details.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><br />
 <a name="Baidu"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Baidu_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Baidu_logo.png" height="40" loading="lazy" alt="Baidu" /></div>
 
 <p><strong><a href="https://www.reuters.com/technology/baidu-says-2nd-gen-kunlun-ai-chips-enter-mass-production-2021-08-18/">Baidu Kunlun / Kunlunxin AI accelerators</a></strong></p>
 <blockquote>
@@ -472,38 +415,26 @@
   <p>Early mass-production milestone for Baidu’s second-generation Kunlun AI chips.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Fujitsu"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Fujitsu_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Fujitsu_logo.png" height="40" loading="lazy" alt="Fujitsu" /></div>
 
 <blockquote>
   <p>This <a href="https://www.nextplatform.com/2017/08/09/fujitsu-bets-deep-leaning-hpc-divergence/">DLU that Fujitsu is creating</a> is done from scratch, and it is not based on either the Sparc or ARM instruction set and, in fact, it has its own instruction set and a new data format specifically for deep learning, which were created from scratch. 
   Japanese computing giant Fujitsu. Which knows a thing or two about making a very efficient and highly scalable system for HPC workloads, as evidenced by the K supercomputer, does not believe that the HPC and AI architectures will converge. Rather, the company is banking on the fact that these architectures will diverge and will require very specialized functions. </p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Nokia"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nokia_logo.png" height="30"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Nokia_logo.png" height="30" loading="lazy" alt="Nokia" /></div>
 
 <blockquote>
   <p>Nokia has developed the <a href="https://networks.nokia.com/5g/reefshark">ReefShark chipsets</a> for its 5G network solutions. AI is implemented in the ReefShark design for radio and embedded in the baseband to use augmented deep learning to trigger smart, rapid actions by the autonomous, cognitive network, enhancing network optimization and increasing business opportunities.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Facebook"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png" height="50"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png" height="50" loading="lazy" alt="Meta" /></div>
 
 <p><strong><a href="https://ai.meta.com/blog/next-generation-meta-training-inference-accelerator-AI-MTIA/">Our next generation Meta Training and Inference Accelerator (MTIA)</a></strong></p>
 <blockquote>
@@ -520,15 +451,18 @@
   <p>Early reporting on Meta/Facebook’s in-house ML chip efforts for recommendation workloads.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Tesla"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tesla_logo.png" height="60"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tesla_logo.png" height="60" loading="lazy" alt="Tesla" /></div>
 
-<div align="center"><h3> </h3></div>
+<p><strong><a href="https://electrek.co/2026/04/15/tesla-ai5-chip-taped-out-musk-ai6-dojo3/">Tesla AI5 chip taped out</a></strong></p>
+<blockquote>
+  <p>Apr 2026 — Elon Musk announced Tesla’s next-generation AI5 inference/training SoC has taped out, with AI6 / Dojo3 also mentioned as in progress. Volume production and broad vehicle deployment remain gated (reports point to mid–late 2027+); near-term vehicles continue on AI4 / interim upgrades, while AI5 is also positioned for Optimus and internal clusters.</p>
+</blockquote>
 
-<p><strong><a href="https://www.forbes.com/sites/jamesmorris/2022/10/06/teslas-biggest-news-at-ai-day-was-the-dojo-supercomputer-not-the-optimus-robot/">Tesla’s Biggest News At AI Day Was The Dojo Supercomputer, Not The Optimus Robot</a></strong></p>
+<p><a href="https://www.trendforce.com/news/2026/07/13/news-samsung-reportedly-completes-tesla-ai5-tape-out-paving-the-way-for-2nm-ramp-at-taylor-fab/">TrendForce: Samsung foundry path for AI5 / Taylor 2nm messaging</a></p>
+
+<p><strong><a href="https://www.forbes.com/sites/jamesmorris/2022/10/06/teslas-biggest-news-at-ai-day-was-the-dojo-supercomputer-not-the-optimus-robot/">Tesla AI Day — Dojo supercomputer</a></strong> (historical)</p>
 <blockquote>
   <p>Elon Musk played AI Day to the crowd with the focus on the Optimus humanoid robot. But while this could have a huge impact on our lives and society if it does enter mass production at the price Musk suggested ($20,000), another part of the presentation will have more immediate effects. That was the status report on the Dojo supercomputer. It could really change the world much more quickly than a bipedal bot.</p>
 </blockquote>
@@ -538,99 +472,75 @@
   <p>Tesla hosted their AI Day and revealed the innerworkings of their software and hardware infrastructure. Part of this reveal was the previously teased Dojo AI training chip. Tesla claims their D1 Dojo chip has a GPU level compute, CPU level flexibility, with networking switch IO. </p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
+<div align="center" class="section-title"><h2><a name="IP_Vendors"></a>III. Traditional IP Vendors</h2></div>
 
-<div align="center"><h2><a name="IP_Vendors"></a>III. Traditional IP Vendors</h2></div>
-
-<p><HR></p>
-
-<div align="center"><h3> </h3></div>
+<hr class="section-rule" />
 
 <p><a name="ARM"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ARM_logo.png" height="30"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ARM_logo.png" height="30" loading="lazy" alt="Arm" /></div>
 
-<div align="center"><h3> </h3></div>
-<a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-n78">NPU ETHOS-N78</a></p>
+<p><strong><a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85">Arm Ethos-U85</a></strong> — third-generation Ethos-U micro-NPU</p>
 <blockquote>
-  <p>Specifically designed for inference at the edge, the ML processor gives an industry-leading performance of 4.6 TOPs, with a stunning efficiency of 3 TOPs/W for mobile devices and smart IP cameras.</p>
+  <p>Scales from 128–2048 MACs (up to ~4 TOPS @ 1 GHz) with native transformer operator support for edge / IoT generative and vision models; ~20% more energy efficient than Ethos-U65 and pairs with Cortex-M or Cortex-A hosts (Corstone-320 reference). Same Ethos toolchain / Vela compiler path as prior U-series.</p>
 </blockquote>
 
-<p><strong><a href="https://www.anandtech.com/show/12791/arm-details-project-trillium-mlp-architecture">ARM Details "Project Trillium" Machine Learning Processor Architecture</a></strong></p>
+<p><a href="https://newsroom.arm.com/news/iot-reference-design-platform-2024">Arm newsroom: Ethos-U85 + Corstone-320 IoT reference platform</a></p>
+
+<p><strong><a href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-n78">Ethos-N78</a></strong> (legacy application-class NPU)</p>
 <blockquote>
-  <p>Arm’s second-generation, highly scalable and efficient NPU, the Ethos-N78 enables new immersive applications with a 2.5x increase in single-core performance now scalable from 1 to 10 TOP/s and beyond through many-core technologies. It provides flexibility to optimize the ML capability with 90+ configurations.</p>
+  <p>Second-generation Ethos-N series for immersive edge inference; single-core performance scalable from ~1 to 10+ TOPS via many-core configurations (historical product line still referenced in many SoCs).</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
+<p><a href="https://www.anandtech.com/show/12791/arm-details-project-trillium-mlp-architecture">ARM Details "Project Trillium" Machine Learning Processor Architecture</a> (historical)</p>
 
 <p><a name="Synopsys"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Synopsys_logo.png" height="40"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Synopsys_logo.png" height="40" loading="lazy" alt="Synopsys" /></div>
 
 <p><strong><a href="https://news.synopsys.com/2022-04-19-Synopsys-Introduces-Industrys-Highest-Performance-Neural-Processor-IP">Synopsys Introduces Industry's Highest Performance Neural Processor IP</a></strong></p>
 <blockquote>
   <p>New DesignWare ARC NPX6 NPU IP Delivers Up to 3,500 TOPS Performance for Automotive, Consumer and Data Center Chip Designs</p>
 </blockquote>
 
-
-<div align="center"><h3> </h3></div>
-
 <p><a name="Imagination"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Imagination_logo.png" height="60"></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Imagination_logo.png" height="60" loading="lazy" alt="Imagination" /></div>
 
 <p><a href="https://www.imaginationtech.com/products/ai/">AI Processors</a></p>
 <blockquote>
   <p>Whether you want smartness residing in the palm of your hand, consumer products or industrial robots, or enabled by powerful servers in the cloud, we can help you achieve your vision. We enable the smartness in your products with our PowerVR Neural Network Accelerators (NNA) and GPUs. Our NC-SDK enables seamless deployment of AI acceleration on either our hardware IP either in isolation or combined. Our NNA provides maximum efficiency with a scalable architecture which enables a wide range of smart edge and end point devices from low performance IoT to high performance RoboTaxi.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="CEVA"></a></p>
 
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/CEVA_logo.png" height="40"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/CEVA_logo.png" height="40" loading="lazy" alt="CEVA" /></div>
 
-<div align="center"><h3> </h3></div>
 <p><a href="https://www.ceva-dsp.com/app/deep-learning/">Deep learning for the real-time embedded world</a></p>
 <blockquote>
   <p>One solution lies in supplying a dedicated low power AI processor for Deep Learning at the edge, combined with a deep neural network (DNN) graph compiler</p>
 </blockquote>
 
-
-<div align="center"><h3> </h3></div>
 <p><a name="Cadence"></a></p>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cadence_logo.png" height="40"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cadence_logo.png" height="40" loading="lazy" alt="Cadence" /></div>
 
-<div align="center"><h3> </h3></div>
 <p><a href="https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html">Tensilica AI Platform</a></p>
 
-<div align="center"><h3> </h3></div>
 <p><a name="VeriSilicon"></a></p>
-<div align="center"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/VeriSilicon_logo.png" height="40"></div>
+<div align="center" class="vendor-logo"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/VeriSilicon_logo.png" height="40" loading="lazy" alt="VeriSilicon" /></div>
 
-<div align="center"><h3> </h3></div>
 <p><a href="https://www.verisilicon.com/en/IPPortfolio/VivanteNPUIP">Vivante® NPU IP</a></p>
 <blockquote>
   <p>VeriSilicon's Neural Network Processor (NPU) IP is a highly scalable, programmable computer vision and artificial intelligence processor that supports AI operations upgrades for endpoints, edge devices, and cloud devices. Designed to meet a variety of chip sizes and power budgets, the Vivante NPU IP is a cost-effective, high-quality neural network acceleration engine solution.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
+<div align="center" class="section-title"><h2><a name="Startups"></a>IV. Startups</h2></div>
 
-<div align="center"><h2><a name="Startups"></a>IV. Startups</h2></div>
-
-<p><HR></p>
-
-<div align="center"><h3> </h3></div>
+<hr class="section-rule" />
 
 <p><a name="Cerebras"></a></p>
 
-<div align="center"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png" height="50"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.cerebras.net/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png" height="50" loading="lazy" alt="Cerebras" /></a></div>
 
 <p><strong><a href="https://www.cerebras.net/press-release/cerebras-announces-third-generation-wafer-scale-engine">Cerebras Systems Unveils World’s Fastest AI Chip with 4 Trillion Transistors (WSE-3)</a></strong></p>
 <blockquote>
@@ -662,11 +572,9 @@
   <p>Today, the company announced the launch of its end-user compute product, the Cerebras CS-1, and also announced its first customer of Argonne National Laboratory.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Graphcore"></a></p>
 
-<div align="center"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70" loading="lazy" alt="Graphcore" /></a></div>
 
 <p><strong><a href="https://www.graphcore.ai/posts/graphcore-joins-softbank-group-to-build-next-generation-of-ai-compute">Graphcore joins SoftBank Group to build next generation of AI compute</a></strong></p>
 <blockquote>
@@ -687,20 +595,13 @@
   <p>Graphcore, the Bristol-based startup that designs processors specifically for artificial intelligence applications, announced it has raised another $150 million in funding for R&D and to continue bringing on new customers. It’s valuation is now $1.95 billion.</p>
 </blockquote>
 
-
-<div align="center"><h3> </h3></div>
-
 <p><a href="https://mp.weixin.qq.com/s/CH9h8dUtoNK_2ZfkK5YU0g">解密又一个xPU：Graphcore的IPU</a> give some analysis on its IPU architecture.</p>
 <p><a href="https://mp.weixin.qq.com/s/AMuqeaShqEv3DnibH3scEA">Graphcore AI芯片：更多分析</a> More analysis.</p>
 <p><a href="https://mp.weixin.qq.com/s/qP0zsSA7SQWXDqWGEAXmOg">深度剖析AI芯片初创公司Graphcore的IPU</a> In-depth analysis after more information was disclosed.</p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Tenstorrent"></a></p>
 
-<div align="center"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png" height="100"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png" height="100" loading="lazy" alt="Tenstorrent" /></a></div>
 
 <p><strong><a href="https://tenstorrent.com/">Tenstorrent Blackhole / Wormhole AI processors</a></strong></p>
 <blockquote>
@@ -714,90 +615,68 @@
  
 <p><a href="https://www.anandtech.com/show/16709/an-interview-with-tenstorrent-ceo-ljubisa-bajic-and-cto-jim-keller">An Interview with Tenstorrent: CEO Ljubisa Bajic and CTO Jim Keller</a></p>
  
-<div align="center"><h3> </h3></div>
 
 <p><a name="Blaize"></a></p>
 
-<div align="center"><a href="https://www.blaize.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blaize_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.blaize.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blaize_logo.png" height="40" loading="lazy" alt="Blaize" /></a></div>
 
 <p><a href="https://www.eetimes.com/automotive-ai-startup-blaize-closes-71-million-funding-round/">Automotive AI Startup Blaize Closes $71 Million Funding Round</a></p>
 <blockquote>
   <p>Blaize, formerly ThinCI, has closed a Series D round of funding at $71 million. New investor Franklin Templeton and existing investor Temasek led the round, along with participation from Denso and other new and existing investors. This round brings Blaize’s total funding to around $155 million total.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Koniku"></a></p>
 
-<div align="center"><a href="http://koniku.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Koniku_logo.png" height="50"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://koniku.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Koniku_logo.png" height="50" loading="lazy" alt="Koniku" /></a></div>
 
 <blockquote>
   <p>Founded in 2014, Newark, California startup <a href="http://koniku.io/">Koniku</a> has taken in $1.65 million in funding so far to become “the world’s first neurocomputation company“. The idea is that since the brain is the most powerful computer ever devised, why not reverse engineer it? Simple, right? Koniku is actually integrating biological neurons onto chips and has made enough progress that they claim to have AstraZeneca as a customer. Boeing has also signed on with a letter of intent to use the technology in chemical-detecting drones.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Adapteva"></a></p>
 
-<div align="center"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Adapteva_logo.png" height="70"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://www.adapteva.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Adapteva_logo.png" height="70" loading="lazy" alt="Adapteva" /></a></div>
 
 <p><a href="http://www.adapteva.com/">Adapteva</a> has taken in $5.1 million in funding from investors that include mobile giant Ericsson. <a href="http://www.parallella.org/docs/e5_1024core_soc.pdf">The paper "Epiphany-V: A 1024 processor 64-bit RISC System-On-Chip"</a> describes the design of Adapteva's 1024-core processor chip in 16nm FinFet technology. </p>
 
 <p><a name="Mythic"></a></p>
 
-<div align="center"><a href="https://mythic.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Mythic_logo.png" height="20"></a></div>
+<div align="center" class="vendor-logo"><a href="https://mythic.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Mythic_logo.png" height="20" loading="lazy" alt="Mythic" /></a></div>
 
-<div align="center"><h3> </h3></div>
-
-<p><a href="https://www.linkedin.com/pulse/era-analog-compute-has-arrived-michael-b-henry/">The Era of Analog Compute has Arrived!</a></p>
+<p><strong><a href="https://www.businesswire.com/news/home/20251217546249/en/Mythic-to-Challenge-AIs-GPU-Pantheon-with-100x-Energy-Advantage-and-Oversubscribed-%24125M-Raise">Mythic raises $125M Series D for analog AI compute</a></strong></p>
 <blockquote>
-  <p>ResNet-50 in our prototype analog AI processor. Production release will support 900-1000 fps and INT8 accuracy at 3W.</p>
-</blockquote>
- 
-<p><a href="https://venturebeat.com/2021/06/07/mythic-launches-analog-ai-processor-that-consumes-10-times-less-power/">Mythic launches analog AI processor that consumes 10 times less power</a></p>
-<blockquote>
-  <p>Analog AI processor company Mythic launched its M1076 Analog Matrix Processor today to provide low-power AI processing.</p>
+  <p>Dec 2025 — Oversubscribed round led by DCVC (strategic participation including Honda and Lockheed Martin) to scale Mythic’s Analog Processing Units (APUs) — flash-based compute-in-memory for energy-efficient inference at the edge and in data centers. Roadmap emphasizes chiplet-based next-gen APUs for robotics, automotive, and defense.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
+<p><strong><a href="https://mythic.ai/whats-new/mythic-acquires-videantis-one-of-europes-leading-digital-processor-ip-companies-to-build-the-worlds-most-energy-efficient-ai-compute-platform/">Mythic acquires Videantis for hybrid analog/digital AI platform</a></strong></p>
+<blockquote>
+  <p>May 2026 — Acquisition of Videantis GmbH adds a production digital processor IP + software stack alongside Mythic’s analog in-memory compute, targeting a hybrid platform with large claimed efficiency gains vs. conventional GPU inference.</p>
+</blockquote>
+
+<p><a href="https://mythic.ai/products/m1076-analog-matrix-processor/">M1076 Analog Matrix Processor</a> (shipping product context) ·
+<a href="https://venturebeat.com/2021/06/07/mythic-launches-analog-ai-processor-that-consumes-10-times-less-power/">VentureBeat: M1076 launch</a> (historical)</p>
 
 <p><a name="Brainchip"></a></p>
 
-<div align="center"><a href="http://www.brainchipinc.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Brainchip_logo.png" height="40"></a></div>
+<div align="center" class="vendor-logo"><a href="http://www.brainchipinc.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Brainchip_logo.png" height="40" loading="lazy" alt="BrainChip" /></a></div>
 
-<div align="center"><h3> </h3></div>
-
-<p><a href="hhttps://venturebeat.com/2022/01/18/brainchip-launches-neuromorphic-process-for-ai-at-the-edge/">BrainChip launches neuromorphic process for AI at the edge</a> </p>
+<p><a href="https://venturebeat.com/2022/01/18/brainchip-launches-neuromorphic-process-for-ai-at-the-edge/">BrainChip launches neuromorphic process for AI at the edge</a> </p>
 <blockquote>
   <p>BrainChip today announced the commercialization of its Akida neural networking processor. Aimed at a variety of edge and internet of things (IoT) applications, BrainChip claims to be the first commercial producer of neuromorphic AI chips, which could deliver benefits in ultra-low power and performance over conventional approaches.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Deepvision"></a></p>
 
-<div align="center"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png" height="40"></a></div>
+<div align="center" class="vendor-logo"><a href="https://deepvision.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png" height="40" loading="lazy" alt="Deep Vision" /></a></div>
 
-<div align="center"><h3> </h3></div>
-
-<p><a href="AI Processor Chipmaker Deep Vision Raises $35 Million in Series B Funding">AI Processor Chipmaker Deep Vision Raises $35 Million in Series B Funding</a></p>
+<p><a href="https://www.businesswire.com/news/home/20210928005270/en/AI-Processor-Chipmaker-Deep-Vision-Raises-35-Million-in-Series-B-Funding">AI Processor Chipmaker Deep Vision Raises $35 Million in Series B Funding</a></p>
 <blockquote>
   <p>Tiger Global Leads Series B Financing, Enabling Deep Vision to Expand Video Analytics and Natural Language Processing Capabilities in Edge Computing Applications</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Groq"></a></p>
 
-<div align="center"><h2><a href="http://groq.com/">Groq</a></h2></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-title"><h3><a href="https://groq.com/">Groq</a></h3></div>
 
 <p><strong><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Vera-Rubin-Opens-Agentic-AI-Frontier/default.aspx">NVIDIA Vera Rubin Opens Agentic AI Frontier (includes Groq LPU)</a></strong></p>
 <blockquote>
@@ -814,23 +693,15 @@
   <p>Jonathan Ross left Google to launch next-generation semiconductor startup Groq in 2016. Today, the Mountain View, California-based firm said that it had raised $300 million led by Tiger Global Management and billionaire investor Dan Sundheim’s D1 Capital as it officially launched into public view. </p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Kneron"></a></p>
 
-<div align="center"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Kneron_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://www.kneron.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Kneron_logo.png" height="60" loading="lazy" alt="Kneron" /></a></div>
 
 <p><a href="https://www.prnewswire.com/news-releases/kneron-to-accelerate-edge-ai-development-with-more-than-10-million-usd-series-a-financing-300556674.html">Kneron to Accelerate Edge AI Development with more than 10 Million USD Series A Financing</a></p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="GTI"></a></p>
 
-<div align="center"><a href="https://www.gyrfalcontech.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GTI_Logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.gyrfalcontech.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GTI_Logo.png" height="40" loading="lazy" alt="Gyrfalcon" /></a></div>
 
 <p>According to this article, <a href="https://www.prnewswire.com/news-releases/gyrfalcon-offers-automotive-ai-chip-technology-300860069.html">"Gyrfalcon offers Automotive AI Chip Technology"</a></p>
 
@@ -838,65 +709,46 @@
   <p>Gyrfalcon Technology Inc. (GTI), has been promoting matrix-based application specific chips for all forms of AI since offering their production versions of AI accelerator chips in September 2017. Through the licensing of its proprietary technology, the company is confident it can help automakers bring highly competitive AI chips to production for use in vehicles within 18 months, along with significant gains in AI performance, improvements in power dissipation and cost advantages.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="SambaNova"></a></p>
 
-<div align="center"><a href="https://sambanovasystems.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SambaNova_logo.png" height="40"></a></div>
+<div align="center" class="vendor-logo"><a href="https://sambanova.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SambaNova_logo.png" height="40" loading="lazy" alt="SambaNova" /></a></div>
 
-<div align="center"><h3> </h3></div>
-
-<p><strong><a href="https://venturebeat.com/ai/sambanova-unveils-new-ai-chip-to-power-full-stack-ai-platform/">SambaNova unveils new AI chip to power full-stack AI platform</a></strong></p>
+<p><strong><a href="https://sambanova.ai/press/sambanova-unveils-fastest-chip-for-agentic-ai-collaborates-with-intel-and-raises-350m">SambaNova unveils SN50 RDU for agentic AI, Intel collaboration, $350M+ Series E</a></strong></p>
 <blockquote>
-  <p>Today Palo-Alto-based SambaNova Systems unveiled a new AI chip, the SN40L, which will power its full-stack large language model (LLM) platform, the SambaNova Suite, that helps enterprises go from chip to model — building and deploying customized generative AI models.</p>
+  <p>Feb 2026 — Fifth-generation Reconfigurable Dataflow Unit (SN50) targets large-scale agentic inference (vendor claims up to ~5× compute and ~4× network bandwidth vs. SN40L; scales toward 256 accelerators). SoftBank named as an early deploy partner; shipping targeted for H2 2026. Planned multi-year collaboration with Intel for heterogeneous inference stacks; oversubscribed Series E led with Vista / Cambium participation including Intel Capital.</p>
 </blockquote>
 
-<p><a href="https://techcrunch.com/2021/04/13/sambanova-raises-676m-at-a-5-1b-valuation-to-double-down-on-cloud-based-ai-software-for-enterprises/">SambaNova raises $676M at a $5.1B valuation to double down on cloud-based AI software for enterprises</a></p>
+<p><a href="https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference">Introducing the SN50 RDU</a> ·
+<a href="https://sambanova.ai/products/rdu-ai-chips">RDU product page</a></p>
+
+<p><strong><a href="https://venturebeat.com/ai/sambanova-unveils-new-ai-chip-to-power-full-stack-ai-platform/">SN40L RDU powers SambaNova Suite</a></strong> (prior gen)</p>
 <blockquote>
-  <p>SambaNova — a startup building AI hardware and integrated systems that run on it that only officially came out of three years in stealth last December — is announcing a huge round of funding today to take its business out into the world. The company has closed on $676 million in financing, a Series D that co-founder and CEO Rodrigo Liang has confirmed values the company at $5.1 billion.</p>
+  <p>Fourth-generation SN40L RDU with three-tier memory (SRAM / HBM / DRAM) for full-stack LLM platforms — still the primary shipping generation ahead of SN50.</p>
 </blockquote>
 
-<p><a href="https://sambanova.ai/articles/introducing-sambanova-systems-datascale-a-new-era-of-computing/">Introducing SambaNova Systems DataScale: A New Era of Computing</a></p>
-<blockquote>
-  <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
-</blockquote>
+<p><a href="https://techcrunch.com/2021/04/13/sambanova-raises-676m-at-a-5-1b-valuation-to-double-down-on-cloud-based-ai-software-for-enterprises/">Series D funding context</a> (historical) ·
+<a href="https://sambanova.ai/articles/introducing-sambanova-systems-datascale-a-new-era-of-computing/">DataScale systems</a></p>
 
-<p><a href="https://sambanova.ai/a-new-state-of-the-art-in-nlp-beyond-gpus/">A New State of the Art in NLP: Beyond GPUs</a></p>
-<blockquote>
-  <p>SambaNova has been working closely with many organizations the past few months and has established a new state of the art in NLP. This advancement in NLP deep learning is illustrated by a GPU-crushing, world record performance result achieved on SambaNova Systems’ Dataflow-optimized system. </p>
-</blockquote>
-
-
-<div align="center"><h3> </h3></div>
 <p><a name="GreenWaves"></a></p>
-<div align="center"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GreenWaves_logo.png" height="50"></a></div>
+<div align="center" class="vendor-logo"><a href="https://greenwaves-technologies.com/en/greenwaves-technologies-2/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GreenWaves_logo.png" height="50" loading="lazy" alt="GreenWaves" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><a href="https://www.eetimes.eu/greenwaves-shows-off-advanced-audio-demos/">GreenWaves Shows Off Advanced Audio Demos</a></p>
 <blockquote>
   <p>The Gap9 processor, a successor to Gap8 which targets computer vision in IoT devices, is an ultra-low power neural network processor suitable for battery-powered devices. GreenWaves’ vice president of marketing Martin Croome told EE Times Europe that the company decided to focus Gap9 on the hearables market after receiving traction from this sector for Gap8.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Lightelligence"></a></p>
 
-<div align="center"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightelligence_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.lightelligence.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightelligence_logo.png" height="60" loading="lazy" alt="Lightelligence" /></a></div>
 
 <p><strong><a href="https://www.eetimes.com/optical-computing-chip-runs-hardest-math-problems-100x-faster-than-gpus/">Optical Chip Solves Hardest Math Problems Faster than GPUs</a></strong></p>
 <blockquote>
   <p>Optical computing startup Lightelligence has demonstrated a silicon photonics accelerator running the Ising problem more than 100 times faster than a typical GPU setup.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Lightmatter"></a></p>
 
-<div align="center"><a href="https://www.lightmatter.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightmatter_logo.png" height="50"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.lightmatter.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Lightmatter_logo.png" height="50" loading="lazy" alt="Lightmatter" /></a></div>
 
 <p><a href="https://www.eetimes.com/lightmatter-raises-more-funding-for-photonic-ai-chip/">Lightmatter Raises More Funding for Photonic AI Chip</a></p>
 <blockquote>
@@ -905,48 +757,42 @@
 
 <p><a name="Hailo"></a></p>
 
-<div align="center"><a href="https://www.hailotech.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Hailo_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://hailo.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Hailo_logo.png" height="60" loading="lazy" alt="Hailo" /></a></div>
 
-<div align="center"><h3> </h3></div>
+<p><strong><a href="https://hailo.ai/company-overview/newsroom/news/hailo-announces-general-availability-of-hailo-10h-edge-ai-accelerator-with-generative-ai-capabilities/">Hailo-10H generally available for edge generative AI</a></strong></p>
+<blockquote>
+  <p>Jul 2025 — Second-generation Hailo-10H brings on-device LLM / VLM / GenAI capabilities to the edge (~40 TOPS INT4 class, ~2.5W typical), while retaining vision workloads from the Hailo-8 generation. Automotive-qualified (AEC-Q100 Grade 2) with 2026 SOP targeting for some designs.</p>
+</blockquote>
 
-<p><a href="https://www.eetimes.com/unicorn-ai-chipmaker-hailo-raises-136-million/">‘Unicorn’ AI Chipmaker Hailo Raises $136 Million</a></p>
+<p><a href="https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/">Hailo-10H product page</a> ·
+<a href="https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/">Hailo-8</a></p>
+
+<p><a href="https://www.eetimes.com/unicorn-ai-chipmaker-hailo-raises-136-million/">‘Unicorn’ AI Chipmaker Hailo Raises $136 Million</a> (historical)</p>
 <blockquote>
   <p>Israeli AI chip startup Hailo has raised $136 million in a Series C funding round, bringing the company’s total to $224 million. The company has also reportedly reached “unicorn” status.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Tachyum"></a></p>
 
-<div align="center"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tachyum_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://www.tachyum.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tachyum_logo.png" height="40" loading="lazy" alt="Tachyum" /></a></div>
 
 <p><a href="https://www.hpcwire.com/off-the-wire/tachyum-launches-prodigy-universal-processor/">Tachyum Launches Prodigy Universal Processor</a></p>
 <blockquote>
   <p>May 11, 2021 — Tachyum today launched the world’s first universal processor, Prodigy, which unifies the functionality of a CPU, GPU and TPU in a single processor, creating a homogeneous architecture, while delivering massive performance improvements at a cost many times less than competing products</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Alphaics"></a></p>
 
-<div align="center"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Alphaics_logo.png" height="50"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.alphaics.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Alphaics_logo.png" height="50" loading="lazy" alt="AlphaICs" /></a></div>
 
 <p><a href="https://www.eetimes.com/alphaics-begins-sampling-its-deep-learning-co-processor/">AlphaICs Begins Sampling Its Deep Learning Co-Processor</a></p>
 <blockquote>
   <p>AlphaICs, a startup developing edge AI and learning silicon aimed at smart vision applications, is sampling its deep learning co-processor, Gluon, that also comes with a software development kit.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Syntiant"></a></p>
 
-<div align="center"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Syntiant_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.syntiant.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Syntiant_logo.png" height="30" loading="lazy" alt="Syntiant" /></a></div>
 
 <p><a href="https://semiengineering.com/syntiant-analog-deep-learning-chips/">Syntiant: Analog Deep Learning Chips</a></p>
 
@@ -954,13 +800,9 @@
   <p>Startup Syntiant Corp. is an Irvine, Calif. semiconductor company led by former top Broadcom engineers with experience in both innovative design and in producing chips designed to be produced in the billions, according to company CEO Kurt Busch.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="aiCTX"></a></p>
 
-<div align="center"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/aiCTX_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://aictx.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/aiCTX_logo.png" height="40" loading="lazy" alt="aiCTX" /></a></div>
 
 <p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1333983">Baidu Backs Neuromorphic IC Developer</a></strong></p>
 
@@ -970,9 +812,7 @@
 
 <p><a name="Flexlogix"></a></p>
 
-<div align="center"><a href="http://www.flex-logix.com/nmax"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/flexlogix_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://www.flex-logix.com/nmax"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/flexlogix_logo.png" height="40" loading="lazy" alt="Flex Logix" /></a></div>
 
 <p><strong><a href="https://www.zdnet.com/article/flex-logix-has-two-paths-to-making-a-lot-of-money-challenging-nvidia-in-ai/">Flex Logix has two paths to making a lot of money challenging Nvidia in AI</a></strong></p>
 
@@ -982,9 +822,7 @@
 
 <p><a name="PFN"></a></p>
 
-<div align="center"><a href="https://projects.preferred.jp/mn-core/en/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/PFN_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://projects.preferred.jp/mn-core/en/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/PFN_logo.png" height="40" loading="lazy" alt="Preferred Networks" /></a></div>
 
 <p><strong><a href="https://www.preferred-networks.jp/en/news">Preferred Networks develops a custom deep learning processor MN-Core for use in MN-3, a new large-scale cluster, in spring 2020</a></strong></p>
 
@@ -995,9 +833,7 @@
 
 <p><a name="Cornami"></a></p>
 
-<div align="center"><a href="http://cornami.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cornami_logo.jpg" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://cornami.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cornami_logo.jpg" height="30" loading="lazy" alt="Cornami" /></a></div>
 
 <p><strong><a href="https://www.zdnet.com/article/ai-startup-cornami-reveals-details-of-neural-net-chip/">AI Startup Cornami reveals details of neural net chip</a></strong></p>
 
@@ -1008,9 +844,7 @@
 
 <p><a name="Anaflash"></a></p>
 
-<div align="center"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Anaflash_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://anaflash.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Anaflash_logo.png" height="40" loading="lazy" alt="Anaflash" /></a></div>
 
 <p><strong><a href="https://www.smart2zero.com/news/ai-chip-startup-offers-new-edge-computing-solution">AI chip startup offers new edge computing solution</a></strong></p>
 
@@ -1021,9 +855,7 @@
 
 <p><a name="Optalysys"></a></p>
 
-<div align="center"><a href="https://www.optalysys.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Optalysys_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.optalysys.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Optalysys_logo.png" height="40" loading="lazy" alt="Optalysys" /></a></div>
 
 <p><strong><a href="https://www.globenewswire.com/news-release/2019/03/07/1749510/0/en/Optalysys-launches-world-s-first-commercial-optical-processing-system-the-FT-X-2000.html">Optalysys launches world’s first commercial optical processing system, the FT:X 2000</a></strong></p>
 
@@ -1034,9 +866,7 @@
 
 <p><a name="etacompute"></a></p>
 
-<div align="center"><a href="https://etacompute.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/etacompute_logo.png" height="80"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://etacompute.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/etacompute_logo.png" height="80" loading="lazy" alt="Eta Compute" /></a></div>
 
 <p><a href="https://spectrum.ieee.org/tech-talk/semiconductors/processors/lowpower-ai-startup-eta-compute-delivers-first-commercial-chips">Low-Power AI Startup Eta Compute Delivers First Commercial Chips</a></p>
 <blockquote>
@@ -1050,9 +880,7 @@
 
 <p><a name="Achronix"></a></p>
 
-<div align="center"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Achronix_logo.png" height="30"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.achronix.com/product/speedster7t/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Achronix_logo.png" height="30" loading="lazy" alt="Achronix" /></a></div>
 
 <p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1334717">Achronix Rolls 7-nm FPGAs for AI</a></strong></p>
 
@@ -1062,9 +890,7 @@
 
 <p><a name="Areanna"></a></p>
 
-<div align="center"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Areanna_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://areanna-ai.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Areanna_logo.png" height="60" loading="lazy" alt="Areanna" /></a></div>
 
 <p><strong><a href="https://www.eetimes.com/document.asp?doc_id=1334947#">Startup Runs AI in Novel SRAM</a></strong></p>
 
@@ -1074,9 +900,7 @@
 
 <p><a name="Neuroblade"></a></p>
 
-<div align="center"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neuroblade_logo.png" height="120"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.neuroblade.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neuroblade_logo.png" height="120" loading="lazy" alt="NeuroBlade" /></a></div>
 
 <p><strong><a href="https://www.eetasia.com/news/article/NeuroBlade-Preps-Inference-Chip">NeuroBlade Preps Inference Chip</a></strong></p>
 
@@ -1086,9 +910,7 @@
 
 <p><a name="Luminous"></a></p>
 
-<div align="center"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Luminous_logo.png" height="90"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.luminouscomputing.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Luminous_logo.png" height="90" loading="lazy" alt="Luminous" /></a></div>
 
 <p><strong><a href="https://www.technologyreview.com/s/613668/ai-chips-uses-optical-semiconductor-machine-learning/">Bill Gates just backed a chip startup that uses light to turbocharge AI</a></strong></p>
 
@@ -1098,9 +920,7 @@
 
 <p><a name="Efinix"></a></p>
 
-<div align="center"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Efinix_logo.png" height="25"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.efinixinc.com"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Efinix_logo.png" height="25" loading="lazy" alt="Efinix" /></a></div>
 
 <p><strong><a href="https://www.zdnet.com/article/chip-startup-efinix-hopes-to-bootstrap-ai-efforts-in-iot/">Chip startup Efinix hopes to bootstrap AI efforts in IoT</a></strong></p>
 
@@ -1110,9 +930,7 @@
 
 <p><a name="AIstorm"></a></p>
 
-<div align="center"><a href="https://aistorm.ai"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AIstorm_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://aistorm.ai"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AIstorm_logo.png" height="60" loading="lazy" alt="AIstorm" /></a></div>
 
 <p><strong><a href="https://venturebeat.com/2019/02/11/aistorm-raises-13-2-million-for-ai-edge-computing-chips/">AIStorm raises $13.2 million for AI edge computing chips</a></strong></p>
 
@@ -1120,12 +938,9 @@
   <p>David Schie, a former senior executive at Maxim, Micrel, and Semtech, thinks both markets are ripe for disruption. He — along with WSI, Toshiba, and Arm veterans Robert Barker, Andreas Sibrai, and Cesar Matias — in 2011 cofounded AIStorm, a San Jose-based artificial intelligence (AI) startup that develops chipsets that can directly process data from wearables, handsets, automotive devices, smart speakers, and other internet of things (IoT) devices. </p>
 </blockquote>
 
-
 <p><a name="SiMa"></a></p>
 
-<div align="center"><a href="https://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40" loading="lazy" alt="SiMa.ai" /></a></div>
 
 <p><strong><a href="https://sima.ai/press-release/sima-ai-next-gen-platform-for-physical-ai-in-production/">SiMa.ai Modalix platform for Physical AI in production</a></strong></p>
 <blockquote>
@@ -1147,21 +962,16 @@
 
 <p><a name="Untether"></a></p>
 
-<div align="center"><a href="https://untether.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Untether_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://untether.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Untether_logo.png" height="40" loading="lazy" alt="Untether AI" /></a></div>
 
 <p><strong><a href="https://venturebeat.com/2021/07/20/untether-ai-nabs-125m-for-ai-acceleration-chips/">Untether AI nabs $125M for AI acceleration chips</a></strong></p>
 <blockquote>
   <p>Untether AI, a startup developing custom-built chips for AI inferencing workloads, today announced it has raised $125 million from Tracker Capital Management and Intel Capital. The round, which was oversubscribed and included participation from Canada Pension Plan Investment Board and Radical Ventures, will be used to support customer expansion.</p>
 </blockquote>
 
-
 <p><a name="GrAI"></a></p>
 
-<div align="center"><a href="https://www.graimatterlabs.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GrAI_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.graimatterlabs.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/GrAI_logo.png" height="40" loading="lazy" alt="GrAI Matter Labs" /></a></div>
 
 <p><strong><a href="https://venturebeat.com/2019/09/18/grai-matter-labs-reveals-neuronflow-technology-and-announces-graiflow-sdk/">GrAI Matter Labs Reveals NeuronFlow Technology and Announces GrAIFlow SDK</a></strong></p>
 
@@ -1171,9 +981,7 @@
 
 <p><a name="Rain"></a></p>
 
-<div align="center"><a href="http://rain-neuromorphics.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Rain_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://rain-neuromorphics.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Rain_logo.png" height="40" loading="lazy" alt="Rain" /></a></div>
 
 <p><strong><a href="https://www.crunchbase.com/organization/rain-neuromorphics">Rain Neuromorphics on Crunchbase</a></strong></p>
 <blockquote>
@@ -1182,9 +990,7 @@
 
 <p><a name="ABR"></a></p>
 
-<div align="center"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ABR_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://appliedbrainresearch.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/ABR_logo.png" height="40" loading="lazy" alt="Applied Brain Research" /></a></div>
 
 <p><strong><a href="https://www.crunchbase.com/organization/applied-brain-research">Applied Brain Research on Crunchbase</a></strong></p>
 <blockquote>
@@ -1193,9 +999,7 @@
 
 <p><a name="Xmos"></a></p>
 
-<div align="center"><a href="https://www.xmos.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Xmos_logo.png" height="40"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.xmos.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Xmos_logo.png" height="40" loading="lazy" alt="XMOS" /></a></div>
 
 <p><strong><a href="https://www.eetimes.com/xmos-adapts-xcore-into-aiot-crossover-processor/">XMOS adapts Xcore into AIoT ‘crossover processor’</a></strong></p>
 <blockquote>
@@ -1209,9 +1013,7 @@
 
 <p><a name="DinoplusAI"></a></p>
 
-<div align="center"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/DinoplusAI_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://dinoplus.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/DinoplusAI_logo.png" height="60" loading="lazy" alt="DinoplusAI" /></a></div>
 
 <blockquote>
   <p>We design and produce AI processors and the software to run them in data centers. Our unique approach optimizes for inference with the focus on performance, power efficiency, and ease of use; and at the same time our approach enables cost-effective training. </p>
@@ -1219,19 +1021,23 @@
 
 <p><a name="Furiosa"></a></p>
 
-<div align="center"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png" height="60" loading="lazy" alt="FuriosaAI" /></a></div>
 
-<div align="center"><h3> </h3></div>
-
+<p><strong><a href="https://furiosa.ai/blog/rngd-enters-mass-production-the-high-performance-ai-accelerator-for-any-data-center">RNGD enters mass production for data-center AI inference</a></strong></p>
 <blockquote>
-  <p>We build high-performance AI inference coprocessors that can be seamlessly integrated into various computing platforms including data centers, servers, desktops, automobiles and robots. </p>
+  <p>Jan 2026 — FuriosaAI’s RNGD (Tensor Contraction Processor, TSMC 5nm, ~180W PCIe) entered volume shipment for LLM / agentic inference; NXT RNGD servers pack multiple cards into air-cooled, ~3kW-class systems.</p>
 </blockquote>
+
+<p><strong><a href="https://furiosa.ai/blog/furiosaai-partners-with-broadcom-to-build-next-generation-inference-platform-for-the-agentic-era">FuriosaAI partners with Broadcom on next-generation inference platform</a></strong></p>
+<blockquote>
+  <p>May 2026 — Strategic collaboration to evolve TCP into a scale-up multi-die inference platform with Broadcom Ethernet/PCIe switching for hyperscale agentic workloads.</p>
+</blockquote>
+
+<p><a href="https://furiosa.ai/blog/furiosaai-equinixs-lisbon-data-center-press-release">Equinix Lisbon RNGD deployment</a> (Jul 2026)</p>
 
 <p><a name="Corerain"></a></p>
 
-<div align="center"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Corerain_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="http://www.corerain.com/en"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Corerain_logo.png" height="60" loading="lazy" alt="Corerain" /></a></div>
 
 <blockquote>
   <p>Corerain provides ultra-high performance AI acceleration chips and the world's first streaming engine-based AI development platform.</p>
@@ -1239,9 +1045,7 @@
 
 <p><a name="Perceive"></a></p>
 
-<div align="center"><a href="https://perceive.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Perceive_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://perceive.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Perceive_logo.png" height="60" loading="lazy" alt="Perceive" /></a></div>
 
 <p><a href="https://venturebeat.com/2020/03/31/perceive-emerges-from-stealth-with-ergo-edge-ai-chip/">Perceive emerges from stealth with Ergo edge AI chip</a></p>
 <blockquote>
@@ -1250,9 +1054,7 @@
 
 <p><a name="SimpleMachines"></a></p>
 
-<div align="center"><a href="https://www.simplemachines.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SimpleMachines_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.simplemachines.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SimpleMachines_logo.png" height="60" loading="lazy" alt="SimpleMachines" /></a></div>
 
 <p><a href="https://www.design-reuse.com/news/49012/simplemachines-ai-chip-tsmc-16nm.html">SimpleMachines, Inc. Debuts First-of-its-Kind High Performance Chip</a></p>
 <blockquote>
@@ -1263,9 +1065,7 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a name="Neureality"></a></p>
 
-<div align="center"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neureality_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.neureality.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Neureality_logo.png" height="60" loading="lazy" alt="NeuReality" /></a></div>
 
 <p><strong><a href="https://techcrunch.com/2022/12/06/neureality-ai-accelerator-chips-startup-raises-35m/">NeuReality lands $35M to bring AI accelerator chips to market</a></strong></p>
 <blockquote>
@@ -1283,72 +1083,63 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 </blockquote>
  
 <p><a name="AnalogInference"></a></p>
-<div align="center"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AnalogInference_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.analog-inference.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AnalogInference_logo.png" height="60" loading="lazy" alt="Analog Inference" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eenewsanalog.com/news/analog-inference-startup-raises-106-million">Analog inference startup raises $10.6 million</a></strong></p>
 <blockquote>
   <p>The company is backed by Khosla Ventures and is developing its first generation of products for AI computing at the edge. The company raised $4.5 million shortly after its formation in March 2018, so the latest tranche brings the total raised to-date to $15.1 million</p>
 </blockquote>
 
 <p><a name="Quadric"></a></p>
-<div align="center"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Quatric_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.quadric.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Quatric_logo.png" height="60" loading="lazy" alt="Quadric" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.hpcwire.com/off-the-wire/quadric-announces-unified-silicon-and-software-platform-optimized-for-on-device-ai/">Quadric Announces Unified Silicon and Software Platform Optimized for On-Device AI</a></strong></p>
 <blockquote>
   <p>BURLINGAME, Calif., June 22, 2021 — Quadric (quadric.io), an innovator in high-performance edge processing, has introduced a unified silicon and software platform that unlocks the power of on-device AI. </p>
 </blockquote> 
 
 <p><a name="EdgeQ"></a></p>
-<div align="center"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/EdgeQ_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://edgeq.io/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/EdgeQ_logo.png" height="60" loading="lazy" alt="EdgeQ" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://techcrunch.com/2021/01/26/edgeq-reveals-more-details-behind-its-next-gen-5g-ai-chip/">EdgeQ reveals more details behind its next-gen 5G/AI chip</a></strong></p>
 <blockquote>
   <p>5G is the current revolution in wireless technology, and every chip company old and new is trying to burrow their way into this ultra-competitive — but extremely lucrative — market. One of the most interesting new players in the space is EdgeQ, a startup with a strong technical pedigree via Qualcomm that we covered last year after it raised a nearly $40 million Series A.</p>
 </blockquote> 
  
 <p><a name="Innatera"></a></p>
-<div align="center"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Innatera_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="http://www.innatera.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Innatera_logo.png" height="60" loading="lazy" alt="Innatera" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eetimes.com/innatera-unveils-neuromorphic-ai-chip-to-accelerate-spiking-networks/">Innatera Unveils Neuromorphic AI Chip to Accelerate Spiking Networks</a></strong></p>
 <blockquote>
   <p>Innatera, the Dutch startup making neuromorphic AI accelerators for spiking neural networks, has produced its first chips, gauged their performance, and revealed details of their architecture.</p>
 </blockquote> 
  
 <p><a name="Ceremorphic"></a></p>
-<div align="center"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Ceremorphic_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://ceremorphic.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Ceremorphic_logo.png" height="60" loading="lazy" alt="Ceremorphic" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.eetimes.com/redpine-founder-launches-ai-processor-startup/">Redpine Founder Launches AI Processor Startup</a></strong></p>
 <blockquote>
   <p>Ceremorphic, an AI chip startup emerging from stealth mode this week, is readying a heterogeneous AI processor aimed at model training in data centers, automotive, high-performance computing, robotics and other emerging applications.</p>
 </blockquote> 
  
 <p><a name="Aspinity"></a></p>
-<div align="center"><a href="https://www.aspinity.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Aspinity_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.aspinity.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Aspinity_logo.png" height="60" loading="lazy" alt="Aspinity" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://embeddedcomputing.com/technology/analog-and-power/analog-semicundoctors-sensors/aspinity-analog-ml-chip-allows-battery-powered-always-on">Aspinity Analog ML Chip Allows Battery-Powered “Always On”</a></strong></p>
 <blockquote>
   <p>Machine learning (ML) is all about massive amounts of processing, DSP, etc., right? Maybe not, according to the team at Aspinity. The company continues to push ahead on the analog front. The latest member of the company’s analogML family, the AML100, operates completely in the analog domain. As a result, it can reduce always-on system power by 95% (for the record, we had to walk through this a couple of times before I believed them).</p>
 </blockquote> 
  
 <p><a name="Teramem"></a></p>
-<div align="center"><a href="https://www.tetramem.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Teramem_logo.png" height="60"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.tetramem.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Teramem_logo.png" height="60" loading="lazy" alt="TetraMem" /></a></div>
 
-<div align="center"><h3> </h3></div>
 <p><strong><a href="https://www.tetramem.com/posts/TetraMem-Technology-Debut-at-Linley">TetraMem enjoyed an exciting public debut of our analog in-memory compute technology at the Linley Spring 2022 Processor Conference.</a></strong></p>
 <blockquote>
   <p></p>
 </blockquote> 
  
 <p><a name="d-matrix"></a></p>
-<div align="center"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/d-matrix_logo.png" height="60"></a></div>
-
-<div align="center"><h3> </h3></div>
+<div align="center" class="vendor-logo"><a href="https://www.d-matrix.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/d-matrix_logo.png" height="60" loading="lazy" alt="d-Matrix" /></a></div>
 
 <p><strong><a href="https://www.reuters.com/technology/ai-chip-startup-d-matrix-raises-110-mln-with-backing-microsoft-2023-09-06/">Exclusive: AI chip startup d-Matrix raises $110 million with backing from Microsoft</a></strong></p>
 <blockquote>
@@ -1360,8 +1151,6 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>The startup combines digital in-memory compute and chiplet implementations for data-center-grade inference.</p>
 </blockquote> 
  
-<div align="center"><h3> </h3></div>
-
 
 <p><a name="Etched"></a></p>
 <div align="center"><h3><a href="https://www.etched.com/">Etched</a></h3></div>
@@ -1376,19 +1165,14 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>2024 Series A coverage of Sohu: an ASIC purpose-built for Transformer inference (rather than general-purpose GPU programmability), aiming for higher tokens/sec and better energy efficiency on LLM serving.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
-
-<div align="center"><h2><a name="China_AI_Chips"></a>V. China AI Accelerator Vendors</h2></div>
-<p><HR></p>
+<div align="center" class="section-title"><h2><a name="China_AI_Chips"></a>V. China AI Accelerator Vendors</h2></div>
+<hr class="section-rule" />
 <p>Domestic training/inference accelerators have become central under export-control and procurement policies. Coverage below highlights widely reported product lines; treat performance claims as vendor-/press-reported unless independently benchmarked.</p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="HuaweiAscend"></a></p>
-<div align="center"><a href="https://www.huawei.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HUAWEI_logo.png" height="40"></a>
+<div align="center" class="vendor-logo"><a href="https://www.huawei.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HUAWEI_logo.png" height="40" loading="lazy" alt="HUAWEI logo" /></a>
 &nbsp;&nbsp;
-<a href="https://www.hisilicon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png" height="40"></a></div>
+<a href="https://www.hisilicon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png" height="40" loading="lazy" alt="HiSilicon logo" /></a></div>
 <div align="center"><h3>Huawei Ascend / HiSilicon</h3></div>
 
 <p><strong><a href="https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech">Huawei Atlas 900 A3 SuperPoD / Ascend 910C</a></strong></p>
@@ -1398,10 +1182,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a href="https://arxiv.org/abs/2506.12708">Serving Large Language Models on Huawei CloudMatrix384</a> (technical paper)</p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Cambricon"></a></p>
-<div align="center"><a href="https://www.cambricon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png" height="50"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.cambricon.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png" height="50" loading="lazy" alt="Cambricon" /></a></div>
 <div align="center"><h3>Cambricon (寒武纪)</h3></div>
 
 <p><strong><a href="https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push">Cambricon targets 500,000 AI chips in 2026</a></strong></p>
@@ -1414,8 +1196,6 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>MLU500-series cloud accelerator commonly cited for China data-center training/inference deployments with MLU-Link multi-card interconnect and Cambricon’s NeuWare / BANG software stack.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Biren"></a></p>
 <div align="center"><h3><a href="https://www.birentech.com/">Biren Technology (壁仞)</a></h3></div>
 
@@ -1423,8 +1203,6 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 <blockquote>
   <p>Jan 2026 — Shanghai Biren Technology listed in Hong Kong (6082.HK), raising ~HK$5.58B. Best known for BR100-class GPGPU / AI accelerators positioned as high-performance domestic alternatives.</p>
 </blockquote>
-
-<div align="center"><h3> </h3></div>
 
 <p><a name="MooreThreads"></a></p>
 <div align="center"><h3><a href="https://www.mthreads.com/">Moore Threads (摩尔线程)</a></h3></div>
@@ -1434,10 +1212,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>Dec 2025 — Full-function GPU vendor (MTT S4000 / S5000 class AI cards, MUSA software stack) completed a ~$1.1B STAR Market IPO amid China’s domestic GPU push.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Enflame"></a></p>
-<div align="center"><a href="https://github.com/EnflameTechnology"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Enflame_logo.png" height="50"></a></div>
+<div align="center" class="vendor-logo"><a href="https://github.com/EnflameTechnology"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Enflame_logo.png" height="50" loading="lazy" alt="Enflame" /></a></div>
 <div align="center"><h3>Enflame (燧原)</h3></div>
 
 <p><strong><a href="https://www.hpcwire.com/off-the-wire/enflame-technology-announces-cloudblazer-with-dtu-chip-on-globalfoundries-12lp-finfet-platform-for-data-center-training/">Enflame CloudBlazer / DTU AI accelerators</a></strong></p>
@@ -1445,10 +1221,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>Shanghai-based accelerator vendor offering CloudBlazer training/inference products (DTU architecture) for domestic intelligent-computing centers; frequently grouped with China’s “GPU dragons” alongside Biren, Moore Threads, and MetaX. Open-source ecosystem links: <a href="https://github.com/EnflameTechnology">EnflameTechnology on GitHub</a>.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Horizon"></a></p>
-<div align="center"><a href="https://www.horizon.auto/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Horizon_Robotics_logo.png" height="50"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.horizon.auto/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Horizon_Robotics_logo.png" height="50" loading="lazy" alt="Horizon Robotics" /></a></div>
 <div align="center"><h3>Horizon Robotics (地平线)</h3></div>
 
 <p><strong><a href="https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6">Horizon Journey 6 / BPU Nash automotive AI processors</a></strong></p>
@@ -1456,11 +1230,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
   <p>Leading China ADAS / autonomous-driving compute vendor with Journey-series BPU SoCs (Journey 6 adds BPU Nash with stronger Transformer support) widely designed into passenger vehicles; focuses on efficient vision/transformer perception at the edge rather than datacenter LLM training.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
-
 <p><a name="BlackSesame"></a></p>
-<div align="center"><a href="https://www.blacksesame.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blacksesame_logo.png" height="50"></a></div>
+<div align="center" class="vendor-logo"><a href="https://www.blacksesame.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Blacksesame_logo.png" height="50" loading="lazy" alt="Black Sesame" /></a></div>
 <div align="center"><h3>Black Sesame Technologies (黑芝麻智能)</h3></div>
 
 <p><strong><a href="https://www.blacksesame.com/en/huashan-a1000/">Huashan A1000 automotive-grade ADAS / AD SoCs</a></strong></p>
@@ -1470,11 +1241,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a href="https://www.caixinglobal.com/2024-08-01/chinese-auto-chip-maker-black-sesame-to-raise-143-million-in-hong-kong-ipo-102222110.html">Caixin: Black Sesame Hong Kong IPO</a></p>
 
-<div align="center"><h3> </h3></div>
-
-
 <p><a name="MetaX"></a></p>
-<div align="center"><h3><a href="https://www.metax-tech.com/en/about/about.html">MetaX (沐曦)</a></h3></div>
+<div align="center" class="vendor-title"><h3><a href="https://www.metax-tech.com/en/about/about.html">MetaX (沐曦)</a></h3></div>
 
 <p><strong><a href="https://www.caixinglobal.com/2026-03-26/chinese-gpu-maker-metax-doubles-revenue-amid-push-for-domestic-chips-102427800.html">Chinese GPU Maker MetaX Doubles Revenue Amid Push for Domestic Chips</a></strong></p>
 <blockquote>
@@ -1483,10 +1251,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a href="https://www.chinadaily.com.cn/a/202607/09/WS6a4f3978a310986e2b4645f5.html">MetaX scales production to meet rising AI chip demand</a></p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Hygon"></a></p>
-<div align="center"><h3><a href="https://www.hygon.cn/">Hygon (海光) DCU</a></h3></div>
+<div align="center" class="vendor-title"><h3><a href="https://www.hygon.cn/">Hygon (海光) DCU</a></h3></div>
 
 <p><strong><a href="https://www.trendforce.com/news/2026/04/29/news-huawei-ascend-cambricon-and-hygon-completed-day-0-adaptation-to-deepseek-v4/">Hygon DCU completes Day-0 adaptation for DeepSeek-V4</a></strong></p>
 <blockquote>
@@ -1495,23 +1261,20 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 
 <p><a href="https://github.com/HYGON-AI/dcu-inference-cookbook">HYGON-AI DCU inference cookbook</a> (open deployment guides)</p>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="Iluvatar"></a></p>
-<div align="center"><h3><a href="https://www.iluvatar.com/">Iluvatar CoreX (天数智芯)</a></h3></div>
+<div align="center" class="vendor-title"><h3><a href="https://www.iluvatar.com/">Iluvatar CoreX (天数智芯)</a></h3></div>
 
 <p><strong><a href="https://www.scmp.com/tech/big-tech/article/3341368/iluvatar-corex-targets-nvidias-rubin-gpu-road-map-amid-china-chip-push">Iluvatar CoreX targets Nvidia’s Rubin with GPU road map</a></strong></p>
 <blockquote>
   <p>Jan 2026 — Hong Kong-listed Iluvatar CoreX outlined a multi-generation GPU architecture roadmap (Tianshu / Tianxuan / Tianji / Tianquan messaging) aiming to close the gap with Nvidia Hopper→Blackwell→Rubin class platforms, with BI-V150-class products already in AI training/inference deployments.</p>
 </blockquote>
 
-<div align="center"><h3> </h3></div>
-
 <p><a name="AIChipCompilers"></a></p>
 
-<div align="center"><h2>AI Chip Compilers</h2></div>
+<div align="center" class="section-title"><h2 id="compilers-heading">AI Chip Compilers</h2></div>
+<div class="resource-list">
 
-<p><HR>
+<hr class="section-rule" />
 <strong>Actively used / widely referenced (2024–2026)</strong><br>
 1. <a href="https://mlir.llvm.org/">MLIR</a> — Multi-Level Intermediate Representation (LLVM)<br>
 2. <a href="https://tvm.apache.org/">Apache TVM</a> — end-to-end ML compiler stack<br>
@@ -1531,13 +1294,14 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 14. <a href="http://tensor-compiler.org/">TACO (Tensor Algebra Compiler)</a><br>
 15. <a href="https://github.com/NervanaSystems/ngraph">Intel nGraph</a> (archived)<br>
 
-<div align="center"><h3> </h3></div>
+</div>
 
 <p><a name="AIChipBenchmarks"></a></p>
 
-<div align="center"><h2>AI Chip Benchmarks</h2></div>
+<div align="center" class="section-title"><h2 id="benchmarks-heading">AI Chip Benchmarks</h2></div>
+<div class="resource-list">
 
-<p><HR>
+<hr class="section-rule" />
 
 1. <a href="https://mlcommons.org/benchmarks/">MLPerf (MLCommons)</a> — industry-standard training, inference, HPC, and client benchmarks.<br>
 <strong>Latest results (2026):</strong>
@@ -1550,15 +1314,15 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 5. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark</a><br>
 6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIA DNN Benchmark</a><br>
 
-<div align="center"><h3> </h3></div>
+</div>
 
 <p><a name="Reference"></a></p>
 
-<div align="center"><h2>Reference</h2></div>
+<div align="center" class="section-title"><h2>Reference</h2></div>
 
-<p><HR>
+<hr class="section-rule" />
 
-<div align="center"><h3> </h3></div>
+<div class="resource-list">
       
 1. <a href="https://meanderful.blogspot.jp/2017/06/fpgas-and-ai-processors-dnn-and-cnn-for.html">FPGAs and AI processors: DNN and CNN for all</a><br>
 2. <a href="http://www.nanalyze.com/2017/05/12-ai-hardware-startups-new-ai-chips/">12 AI Hardware Startups Building New AI Chips</a><br>
@@ -1568,6 +1332,8 @@ The SimpleMachines, Inc. (SMI) team – which includes leading research scientis
 6. <strong>"What We Talk About When We Talk About AI Chip". <a href="https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ">#1</a>,  <a href="https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg">#2</a>,  <a href="https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw">#3</a>,  <a href="https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw">#4</a></strong><br>
 7. <strong><a href="https://birenresearch.github.io/AIChip_Paper_List/">AI Chip Paper List</a></strong><br>
 8. <strong><a href="https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38">TPU vs GPU vs Cerebras vs Graphcore: A Fair Comparison between ML Hardware</a></strong><br>
+
+</div>
 
 <div align="center">
 <a href="http://www.reliablecounter.com" target="_blank"><img src="http://www.reliablecounter.com/count.php?page=https://basicmi.github.io/AI-Chip/&digit=style/plain/3/&reloads=1" alt="laptop" title="laptop" border="0"></a>

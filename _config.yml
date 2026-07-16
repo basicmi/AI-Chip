@@ -1,1 +1,6 @@
+title: AI Chip (ICs and IPs)
+description: A curated directory of ICs and IPs for AI, machine learning, and deep learning — covering hyperscaler custom silicon, GPUs/NPUs, IP vendors, startups, and China accelerators.
 theme: jekyll-theme-modernist
+show_downloads: false
+plugins:
+  - jekyll-seo-tag
