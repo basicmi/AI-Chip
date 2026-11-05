@@ -22,6 +22,10 @@ class HardwareIdentityTests(unittest.TestCase):
                          ("NVIDIA", "nvidia-gpu", "gb200-nvl72"))
         self.assertEqual(hardware_identity("Intel Gaudi 3"),
                          ("Intel", "intel-gaudi", "gaudi3"))
+        self.assertEqual(hardware_identity("Cerebras WSE-2"),
+                         ("Cerebras", "cerebras-wse", "wse2"))
+        self.assertEqual(hardware_identity("Cerebras CS-3"),
+                         ("Cerebras", "cerebras-wse", None))
         self.assertEqual(hardware_identity("Unknown accelerator"), (None, None, None))
 
 
