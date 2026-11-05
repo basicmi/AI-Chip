@@ -607,3 +607,32 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+
+/* Workload Explorer */
+.site-nav a[href*="workloads"] { white-space: nowrap; }
+.workload-stat-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .8rem; margin: 1.7rem 0; }
+.workload-filters { display: grid; grid-template-columns: 1.5fr repeat(3,minmax(150px,1fr)); gap: .8rem; margin-top: 1.1rem; }
+.workload-filters label { display: flex; flex-direction: column; gap: .35rem; color: var(--muted); font-size: 11px; font-weight: 700; }
+.workload-filters input,.workload-filters select { min-width: 0; min-height: 42px; box-sizing: border-box; padding: .55rem .7rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 12px; }
+.workload-results-heading { display:flex; justify-content:space-between; align-items:end; gap:1rem; margin:2rem 0 1rem; }
+.workload-results-heading h2 { margin:0; font-size:1.55rem; }
+.workload-results-heading h2 span { color:var(--teal); }
+.workload-results-heading > p { margin:0; color:var(--muted); font-size:11px; }
+.workload-path-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; align-items:start; }
+.workload-path-card,.workload-definition-card { min-width:0; padding:1.15rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; }
+.workload-path-head { display:flex; justify-content:space-between; align-items:flex-start; gap:.8rem; }
+.workload-path-head h3 { margin:.1rem 0 0; font-size:1.25rem; }
+.workload-path-scope { margin:.85rem 0; font-size:12px; line-height:1.6; }
+.workload-catalog-section { margin-top:3rem; padding-top:2rem; border-top:1px solid var(--line); }
+.workload-catalog { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.workload-definition-card h3 { margin:.1rem 0 .5rem; }
+.workload-definition-description { font-size:12px; }
+.workload-definition-list { margin-top:.8rem; padding-top:.65rem; border-top:1px solid var(--line); }
+.workload-definition-list strong { color:var(--ink); font-size:10px; letter-spacing:.04em; }
+.workload-definition-list ul { margin:.4rem 0 0; padding-left:1.15rem; color:var(--muted); font-size:11px; }
+.workload-definition-list li { margin:.2rem 0; }
+.workload-metric-list { margin:.35rem 0 0; font-size:11px; }
+@media(max-width:1050px) { .workload-filters { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:760px) { .workload-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .workload-path-grid,.workload-catalog { grid-template-columns:1fr; } .workload-results-heading { display:block; } .workload-results-heading > p { margin-top:.5rem; } }
+@media(max-width:420px) { .workload-filters { grid-template-columns:1fr; } .workload-path-head { flex-direction:column; } }
