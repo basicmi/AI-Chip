@@ -28,6 +28,7 @@ The benchmark validator checks catalogue structure, category references, require
 ## Company profiles and evidence registry
 
 - `company-profiles.json`: structured identity index for the company profiles in `directory.md`, including category, stable directory anchor, logo, summary and carried-over source links.
+- `/products/` (`products.md` + `assets/js/product-explorer.js`): searchable product catalogue and source-linked comparison workspace powered by `company-profiles.json`.
 - `schemas/company-profiles.schema.json`: JSON Schema for company, product, claim, reference and evidence records.
 - `scripts/validate_company_profiles.py`: validates profile IDs, directory anchors, source URLs, freshness metadata and claim-to-evidence relationships.
 
@@ -49,4 +50,4 @@ Numeric claims may carry a `metric_context` object describing:
 - `measurement_scope`: die, chip, package, module, board, server, rack, pod, cluster, or system.
 - `operation` and optional `directionality`, `configuration`, `workload_id`, and `benchmark_project_id`.
 
-The root `comparison_policy` requires precision, sparsity, measurement scope, and measurement type to match before comparing values. System-level aggregates must not be compared with per-chip values. Original source units are preserved; display-layer unit conversion must retain the original value and unit.
+The root `comparison_policy` requires precision, sparsity, measurement scope, and measurement type to match before comparing values. System-level aggregates must not be compared with per-chip values. Original source units are preserved; display-layer unit conversion must retain the original value and unit. The Product Explorer uses these fields to align only like-for-like rows; it keeps unmatched scopes and units separate and does not produce a composite ranking.
