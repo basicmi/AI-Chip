@@ -97,9 +97,13 @@
   const finishIndex = (database) => {
     const profiles = Array.isArray(database?.companies) ? database.companies : [];
     const byAnchor = new Map(profiles.map((profile) => [profile.directory_anchor, profile]));
+    const byName = new Map(profiles.map((profile) => [profile.display_name, profile]));
+    let matchedProfiles = 0;
     entries.forEach((entry) => {
-      const profile = byAnchor.get(entry.anchor);
+      // The name fallback protects against anchor normalization by the Markdown renderer.
+      const profile = byAnchor.get(entry.anchor) || byName.get(entry.name);
       if (!profile) return;
+      matchedProfiles += 1;
       entry.profile = profile;
       entry.description = profile.summary || entry.description;
       entry.referenceCount = Array.isArray(profile.references) ? profile.references.length : 0;
@@ -127,6 +131,7 @@
       " source links carried over · " + totalEvidence + " audited evidence records · " +
       totalClaims + " structured claims · " + pending + " profiles not yet reviewed.";
     root.dataset.profileRegistryLoaded = "true";
+    root.dataset.profileMatchedCount = String(matchedProfiles);
     root.dataset.profileCount = String(profiles.length);
     root.dataset.referenceCount = String(totalReferences);
     root.dataset.evidenceCount = String(totalEvidence);
