@@ -36,7 +36,8 @@
           "claim_ids": [
             "b200-memory-capacity",
             "b200-memory-bandwidth",
-            "b200-nvlink-bandwidth"
+            "b200-nvlink-bandwidth",
+            "b200-architecture"
           ]
         }
       ],
@@ -88,6 +89,21 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "System topology figure; retain the HGX B200 configuration boundary."
+        },
+        {
+          "id": "b200-architecture",
+          "topic": "architecture",
+          "statement": "NVIDIA identifies HGX B200 as a Blackwell platform built around B200 GPUs.",
+          "value": "Blackwell",
+          "scope": "Architecture family for the B200 GPU in the HGX B200 platform.",
+          "notes": "Vendor product architecture description.",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05"
         }
       ],
       "evidence": [
@@ -216,7 +232,8 @@
             "mi355x-memory-capacity",
             "mi355x-memory-bandwidth",
             "mi355x-mxfp4-peak",
-            "mi355x-tbp"
+            "mi355x-tbp",
+            "mi355x-process-node"
           ]
         }
       ],
@@ -299,6 +316,21 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "TBP is not a measured wall-power value for a full server."
+        },
+        {
+          "id": "mi355x-process-node",
+          "topic": "process_node",
+          "statement": "AMD lists TSMC 3nm and 6nm FinFET lithography for MI355X.",
+          "value": "TSMC 3nm | 6nm FinFET",
+          "scope": "Process technologies listed in AMD's MI355X product specifications.",
+          "notes": "Vendor-published lithography information; the page does not assign each process node to a specific die in this record.",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05"
         }
       ],
       "evidence": [
@@ -527,7 +559,8 @@
             "tpu7x-ici-bandwidth",
             "tpu7x-bf16-compute",
             "tpu7x-fp8-compute",
-            "tpu7x-pod-scale"
+            "tpu7x-pod-scale",
+            "tpu7x-architecture"
           ]
         }
       ],
@@ -627,6 +660,21 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent."
+        },
+        {
+          "id": "tpu7x-architecture",
+          "topic": "architecture",
+          "statement": "Google Cloud identifies TPU7x as the Ironwood TPU version.",
+          "value": "TPU7x / Ironwood",
+          "scope": "Google Cloud TPU version and machine-series nomenclature.",
+          "notes": "Official Google Cloud documentation.",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05"
         }
       ],
       "evidence": [
