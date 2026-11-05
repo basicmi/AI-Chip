@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -181,6 +181,43 @@ const { chromium } = require("playwright");
   }
   await page.locator("[data-directory-reset]").click();
 
+  await page.goto(base + "/products/", { waitUntil: "networkidle" });
+  await page.waitForFunction(() => {
+    const root = document.querySelector("[data-product-explorer]");
+    const products = document.querySelector('[data-product-stat="products"]');
+    return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "16";
+  }, null, { timeout: 15000 });
+  const productStats = await page.locator(".product-stat strong").allTextContents();
+  if (productStats.join(",") !== "50,16,70,17") {
+    throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
+  }
+  await page.locator("[data-product-search]").fill("Trainium2");
+  if (await page.locator(".product-card-title").count() !== 1 ||
+      !(await page.locator(".product-card-title").first().textContent()).includes("Trainium2")) {
+    throw new Error("Product Explorer search did not isolate Trainium2");
+  }
+  await page.locator('[data-compare-product="trainium2"]').click();
+  await page.locator("[data-product-search]").fill("Trainium3");
+  if (await page.locator(".product-card-title").count() !== 1) {
+    throw new Error("Product Explorer search did not isolate Trainium3");
+  }
+  await page.locator('[data-compare-product="trainium3"]').click();
+  const compareTable = page.locator("[data-product-compare-table]");
+  await compareTable.waitFor({ state: "visible" });
+  if (await compareTable.locator("thead th").count() !== 3) {
+    throw new Error("Product comparison should show a metric column and two selected products");
+  }
+  const comparisonText = (await compareTable.textContent()).toLowerCase();
+  if (!comparisonText.includes("fp8") || !comparisonText.includes("dense") ||
+      !comparisonText.includes("structured sparse") ||
+      !comparisonText.includes("96 gib hbm") || !comparisonText.includes("144 gib hbm3e")) {
+    throw new Error("Product comparison did not preserve dense/sparse precision and memory context");
+  }
+  await page.locator("[data-product-compare-clear]").click();
+  if (await page.locator("[data-product-compare-table]").isVisible()) {
+    throw new Error("Product comparison did not clear selected products");
+  }
+
   await page.goto(base + "/compatibility/", { waitUntil: "networkidle" });
   await waitForDataset({
     name: "Compatibility",
@@ -247,7 +284,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: six routes, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: seven routes, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);

@@ -839,3 +839,329 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   line-height: 1.4;
   font-weight: 700;
 }
+
+
+/* Product Explorer */
+.product-explorer { display: grid; gap: 1.1rem; }
+.product-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .65rem;
+}
+.product-stat {
+  min-width: 0;
+  padding: .85rem .95rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.product-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+.product-stat strong {
+  display: block;
+  margin-top: .25rem;
+  color: var(--ink);
+  font: 700 1.45rem/1.1 "Source Serif 4", Georgia, serif;
+  font-variant-numeric: tabular-nums;
+}
+.product-filter-panel,
+.product-compare-panel {
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.product-filter-heading,
+.product-compare-heading,
+.product-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+}
+.product-filter-heading h2,
+.product-compare-heading h2 {
+  margin: .1rem 0 0;
+  color: var(--ink);
+  font: 700 1.35rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.product-filter-heading .eyebrow,
+.product-compare-heading .eyebrow {
+  margin: 0;
+  color: var(--teal);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .11em;
+}
+.product-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) repeat(4, minmax(125px, 1fr));
+  gap: .65rem;
+  margin-top: .9rem;
+}
+.product-filters label {
+  display: grid;
+  align-content: start;
+  gap: .3rem;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+.product-filters input,
+.product-filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  padding: .5rem .6rem;
+  color: var(--ink);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font: 500 12px/1.3 "Source Sans 3", sans-serif;
+}
+.product-results-heading { margin-top: .15rem; }
+.product-results-heading p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+.product-results-heading span {
+  color: var(--muted);
+  font-size: 10px;
+}
+.product-results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+.product-card {
+  min-width: 0;
+  max-width: none;
+  padding: .9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.product-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+}
+.product-vendor { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+.product-vendor-logo {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 34px;
+  padding: .15rem;
+  object-fit: contain;
+  background: var(--surface-soft);
+  border-radius: 6px;
+}
+.product-vendor-copy { display: grid; min-width: 0; gap: .1rem; }
+.product-vendor-category {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.product-vendor-name {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.product-status {
+  flex: 0 0 auto;
+  padding: .22rem .45rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+}
+.product-status-production { color: var(--teal); border-color: var(--teal); }
+.product-card-title {
+  margin: .8rem 0 .25rem;
+  color: var(--ink);
+  font: 700 1.2rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.product-card-meta,
+.product-card-segment {
+  margin: .2rem 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+.product-card-segment { color: var(--ink); }
+.product-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .55rem 0; }
+.product-tag {
+  padding: .18rem .4rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+.product-key-specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .45rem;
+  margin-top: .7rem;
+}
+.product-key-spec {
+  min-width: 0;
+  padding: .5rem .55rem;
+  background: var(--surface-soft);
+  border-radius: 7px;
+}
+.product-key-label,
+.product-key-context { display: block; color: var(--muted); font-size: 9px; line-height: 1.35; }
+.product-key-value {
+  display: block;
+  margin: .15rem 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.product-key-context { font-size: 8px; }
+.product-no-specs { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 11px; }
+.product-card-actions { display: grid; gap: .6rem; margin-top: .8rem; }
+.product-compare-toggle {
+  justify-self: start;
+  min-height: 32px;
+  padding: .35rem .65rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--ink);
+  background: var(--surface-soft);
+  font: 700 10px/1.2 "Source Sans 3", sans-serif;
+  cursor: pointer;
+}
+.product-compare-toggle[aria-pressed="true"] {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+.product-compare-toggle:disabled { opacity: .45; cursor: not-allowed; }
+.product-details {
+  padding-top: .55rem;
+  border-top: 1px solid var(--line);
+}
+.product-details summary {
+  color: var(--link, var(--ai-link));
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.product-claim-list { margin: .55rem 0 0; padding: 0; list-style: none; }
+.product-claim-item {
+  max-width: none;
+  margin: 0;
+  padding: .55rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.product-claim-item:last-child { border-bottom: 0; }
+.product-claim-value { display: block; color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
+.product-claim-topic { display: block; margin-top: .1rem; color: var(--muted); font-size: 8px; line-height: 1.4; }
+.product-claim-statement,
+.product-claim-scope { margin: .25rem 0 0; color: var(--muted); font-size: 9px; line-height: 1.45; }
+.product-evidence-links { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .3rem; }
+.product-evidence-links a,
+.product-compare-sources a { color: var(--ai-link); font-size: 9px; }
+.product-empty-state,
+.product-compare-empty {
+  padding: 1rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+  font-size: 11px;
+}
+.product-empty-state strong { color: var(--ink); }
+.product-empty-state p { margin: .25rem 0 0; }
+.product-compare-actions { display: flex; align-items: center; gap: .7rem; color: var(--muted); font-size: 10px; }
+.product-compare-note {
+  margin: .6rem 0 .8rem;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.product-compare-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.product-compare-table {
+  width: 100%;
+  min-width: 720px;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+.product-compare-table th,
+.product-compare-table td {
+  padding: .6rem .65rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.product-compare-table thead th {
+  color: var(--ink);
+  background: var(--surface-soft);
+  font-size: 10px;
+}
+.product-compare-table tbody tr:last-child th,
+.product-compare-table tbody tr:last-child td { border-bottom: 0; }
+.product-compare-metric { min-width: 170px; }
+.product-compare-metric strong,
+.product-compare-metric small { display: block; }
+.product-compare-metric strong { color: var(--ink); font-size: 10px; }
+.product-compare-metric small { margin-top: .15rem; color: var(--muted); font-size: 8px; line-height: 1.4; }
+.product-compare-cell { min-width: 130px; }
+.product-compare-value { display: block; color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
+.product-compare-status { display: block; margin-top: .15rem; color: var(--muted); font-size: 8px; }
+.product-compare-sources { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .25rem; }
+.product-compare-missing { color: var(--muted); }
+.product-method-note {
+  display: grid;
+  grid-template-columns: minmax(190px, .8fr) minmax(0, 1.4fr);
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.product-method-note .eyebrow { margin: 0; color: var(--teal); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+.product-method-note h2 { margin: .2rem 0 0; color: var(--ink); font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif; }
+.product-method-note p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+@media (max-width: 900px) {
+  .product-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-search { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .product-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-results-grid { grid-template-columns: 1fr; }
+  .product-filters { grid-template-columns: 1fr; }
+  .product-search { grid-column: auto; }
+  .product-filter-heading,
+  .product-compare-heading,
+  .product-results-heading { align-items: flex-start; }
+  .product-compare-heading { flex-direction: column; }
+  .product-method-note { grid-template-columns: 1fr; gap: .6rem; }
+}

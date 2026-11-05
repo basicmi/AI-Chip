@@ -64,6 +64,8 @@ jobs:
         run: |
           test -s _site/assets/js/benchmark-explorer.js
           test -s _site/assets/js/directory-explorer.js
+          test -s _site/assets/js/product-explorer.js
+          test -s _site/products/index.html
           test -s _site/data/company-profiles.json
           test -s _site/resource/AI_Chip_Landscape_v0p9p1.svg
           python3 - <<'PY'
