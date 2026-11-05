@@ -59,6 +59,11 @@ jobs:
         run: bundle install
       - name: Build GitHub Pages site
         run: bundle exec jekyll build
+      - name: Verify benchmark explorer asset in generated site
+        run: |
+          test -s _site/assets/js/benchmark-explorer.js
+          echo "Benchmark explorer asset found in _site/assets/js/"
+          find _site/assets/js -maxdepth 1 -type f -printf '%f\\n' | sort
       - name: Install browser test dependency
         run: npm install --no-save playwright
       - name: Install Chromium
