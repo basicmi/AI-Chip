@@ -90,7 +90,8 @@ This layer is strategically important: it defines the abstraction boundary betwe
 | [DeepGEMM](https://github.com/deepseek-ai/DeepGEMM) | Low-precision GEMM for MoE / LLM workloads | A useful reference for specialized GEMM and low-precision kernel engineering. |
 | [AITer](https://github.com/ROCm/aiter) | AMD inference and training kernels | Optimized operator library within the ROCm ecosystem. |
 | [oneDNN](https://github.com/uxlfoundation/oneDNN) | CPU and accelerator primitives | Cross-platform performance library with hardware-specific optimizations. |
-| [Liger Kernel](https://github.com/linkedin/Liger-Kernel) | Fused LLM training kernels | PyTorch-oriented fused kernels intended to reduce memory use and improve training efficiency. |\n| [FlagGems](https://github.com/flagos-ai/FlagGems) | Generic Triton operator library | FlagOS project with PyTorch ATen integration and a multi-backend kernel collection; its README reports more than ten backend integrations. Backend maturity is not uniform. |
+| [Liger Kernel](https://github.com/linkedin/Liger-Kernel) | Fused LLM training kernels | PyTorch-oriented fused kernels intended to reduce memory use and improve training efficiency. |
+| [FlagGems](https://github.com/flagos-ai/FlagGems) | Generic Triton operator library | FlagOS project with PyTorch ATen integration and a multi-backend kernel collection; its README reports more than ten backend integrations. Backend maturity is not uniform. |
 
 ## 5. Runtime and inference engines
 
