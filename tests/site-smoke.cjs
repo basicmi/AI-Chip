@@ -54,9 +54,9 @@ const { chromium } = require("playwright");
     width: image.naturalWidth,
     height: image.naturalHeight
   }));
-  if (!landscapeInfo.src.includes("AI_Chip_Landscape_v0p9.svg") ||
+  if (!landscapeInfo.src.includes("AI_Chip_Landscape_v0p9p1.svg") ||
       landscapeInfo.width < 1800 || landscapeInfo.height < 1200) {
-    throw new Error("Landscape image did not load the expected high-resolution v0.9 asset: " +
+    throw new Error("Landscape image did not load the expected high-resolution v0.9.1 asset: " +
       JSON.stringify(landscapeInfo));
   }
 
