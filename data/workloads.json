@@ -1,0 +1,521 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.05-1",
+  "last_reviewed": "2026-11-05",
+  "scope": "Workload taxonomy and candidate hardware/software execution paths. A path may only document a software integration or vendor report; it is not a certification of workload support. Only explicit workload tests or benchmark records can establish workload-specific validation.",
+  "status_definitions": {
+    "integration_only": "A software-to-platform integration is documented, but no workload-specific model/configuration validation is attached.",
+    "vendor_reported": "A vendor publicly reports a workload or model adaptation; independent reproduction and benchmark comparability are not established.",
+    "workload_tested": "A specific workload configuration has passed a documented correctness or functional test; performance is not implied.",
+    "benchmark_reported": "A workload benchmark result is published with configuration and measurement metadata, but is not independently reproduced here.",
+    "independently_benchmarked": "A benchmark result has been independently reproduced under a documented methodology."
+  },
+  "workloads": [
+    {
+      "id": "llm-serving",
+      "name": "LLM inference & serving",
+      "category": "llm_inference",
+      "phase": "online_serving",
+      "description": "End-to-end online generation under a request-serving policy. Keep prefill and decode behavior visible rather than reducing the workload to a single tokens-per-second number.",
+      "representative_models": [
+        "Decoder-only transformer LLMs",
+        "Dense and mixture-of-experts models (pin the exact architecture and revision in each test)"
+      ],
+      "key_dimensions": [
+        "Prompt and output token lengths",
+        "Concurrency and arrival pattern",
+        "Batching and scheduling policy",
+        "KV-cache capacity, reuse and offload",
+        "Quantization and attention backend",
+        "TP / PP / EP topology and interconnect"
+      ],
+      "metrics_to_report": [
+        "TTFT",
+        "TPOT / inter-token latency",
+        "Request throughput and output tokens/s",
+        "P50 / P95 / P99 latency",
+        "Goodput under an SLO",
+        "Cost per million output tokens"
+      ]
+    },
+    {
+      "id": "llm-prefill",
+      "name": "LLM prefill",
+      "category": "llm_inference",
+      "phase": "prefill",
+      "description": "Prompt ingestion and context processing. Compare compute throughput, memory traffic and time-to-first-token under explicitly stated prompt lengths.",
+      "representative_models": [
+        "Decoder-only transformer prefill"
+      ],
+      "key_dimensions": [
+        "Input token length",
+        "Chunked prefill policy",
+        "Batch size and concurrency",
+        "Attention implementation",
+        "Prefix / prompt cache hit rate",
+        "Weight and activation precision"
+      ],
+      "metrics_to_report": [
+        "Prefill tokens/s",
+        "Time to first token",
+        "Latency by input length",
+        "Peak memory and bandwidth utilization"
+      ]
+    },
+    {
+      "id": "llm-decode",
+      "name": "LLM decode",
+      "category": "llm_inference",
+      "phase": "decode",
+      "description": "Autoregressive token generation, where KV-cache movement, memory bandwidth, batching and communication often dominate.",
+      "representative_models": [
+        "Dense and MoE autoregressive LLM decode"
+      ],
+      "key_dimensions": [
+        "KV-cache sequence length",
+        "Active sequences and decode batch",
+        "KV-cache dtype and layout",
+        "Speculative decoding method",
+        "TP / EP and all-to-all topology",
+        "Memory bandwidth and cache residency"
+      ],
+      "metrics_to_report": [
+        "TPOT / TBT",
+        "Output tokens/s per device and per system",
+        "Concurrent sequences at target latency",
+        "KV-cache bytes per token",
+        "Interconnect traffic and utilization"
+      ]
+    },
+    {
+      "id": "llm-pretraining",
+      "name": "LLM pretraining",
+      "category": "llm_training",
+      "phase": "pretraining",
+      "description": "Large-scale distributed training from initialization. A valid comparison must preserve model shape, token budget, parallelism and convergence target.",
+      "representative_models": [
+        "Dense transformer pretraining",
+        "Mixture-of-experts pretraining"
+      ],
+      "key_dimensions": [
+        "Parameter count and active parameters",
+        "Training tokens and sequence length",
+        "DP / TP / PP / CP / EP topology",
+        "Optimizer and precision",
+        "Checkpointing and recomputation",
+        "Network topology and collective implementation"
+      ],
+      "metrics_to_report": [
+        "Tokens/s and time-to-train",
+        "MFU / HFU with stated definition",
+        "Step time and scaling efficiency",
+        "Communication / compute overlap",
+        "Energy and cost per training token"
+      ]
+    },
+    {
+      "id": "llm-finetuning",
+      "name": "LLM fine-tuning",
+      "category": "llm_training",
+      "phase": "finetuning",
+      "description": "Full-parameter and parameter-efficient fine-tuning. Separate software-framework availability from validated recipes, convergence and end-to-end throughput.",
+      "representative_models": [
+        "Supervised fine-tuning",
+        "LoRA / QLoRA",
+        "Preference optimization and post-training"
+      ],
+      "key_dimensions": [
+        "Trainable parameter fraction",
+        "Sequence length and batch size",
+        "Optimizer state and activation memory",
+        "FSDP / ZeRO / TP strategy",
+        "Precision and quantization",
+        "Dataset and convergence criteria"
+      ],
+      "metrics_to_report": [
+        "Training tokens/s",
+        "Step time and time-to-quality",
+        "Peak memory",
+        "Scaling efficiency",
+        "Cost per fine-tuning run"
+      ]
+    },
+    {
+      "id": "llm-model-porting",
+      "name": "LLM model porting & adaptation",
+      "category": "model_porting",
+      "phase": "model_porting",
+      "description": "Port a model architecture and its operators to a new hardware/software stack. A model loading demo is not equivalent to a validated serving or benchmark result.",
+      "representative_models": [
+        "New model architecture or model revision",
+        "Vendor-specific accelerator adaptation"
+      ],
+      "key_dimensions": [
+        "Operator coverage and fallback ratio",
+        "Numerical parity and accuracy tolerance",
+        "Attention / MoE / quantization kernels",
+        "Checkpoint conversion and weight layout",
+        "Runtime and compiler versions",
+        "Reproducible launch and test recipe"
+      ],
+      "metrics_to_report": [
+        "Operator pass rate",
+        "Numerical parity / task quality",
+        "Model load and first-token success",
+        "Fallback ratio",
+        "End-to-end throughput after correctness passes"
+      ]
+    },
+    {
+      "id": "multimodal-serving",
+      "name": "Multimodal / VLM serving",
+      "category": "multimodal_inference",
+      "phase": "multimodal_serving",
+      "description": "Online inference for models combining text with image, audio or video inputs. Preserve modality-specific preprocessing and sequence expansion.",
+      "representative_models": [
+        "Vision-language models",
+        "Audio-language models",
+        "Video-language models"
+      ],
+      "key_dimensions": [
+        "Image resolution / patch count",
+        "Audio duration and sampling rate",
+        "Video frame count and sampling policy",
+        "Text context and generated tokens",
+        "Preprocessing placement",
+        "Multimodal KV-cache and batching"
+      ],
+      "metrics_to_report": [
+        "End-to-end latency by modality",
+        "Input items/s and output tokens/s",
+        "TTFT / TPOT",
+        "Preprocessing and encoder latency",
+        "Quality under a fixed evaluation set"
+      ]
+    },
+    {
+      "id": "embedding-reranking",
+      "name": "Embedding & reranking",
+      "category": "retrieval",
+      "phase": "retrieval",
+      "description": "Vector embedding and relevance reranking for retrieval-augmented generation and search. Compare throughput only at a fixed model, sequence length and quality target.",
+      "representative_models": [
+        "Text embedding models",
+        "Cross-encoder rerankers",
+        "Multilingual retrieval models"
+      ],
+      "key_dimensions": [
+        "Query / document length",
+        "Vector dimension",
+        "Batch size and concurrency",
+        "Pooling and normalization",
+        "Index and retrieval implementation",
+        "Quality dataset and recall target"
+      ],
+      "metrics_to_report": [
+        "Queries/s and documents/s",
+        "P50 / P95 latency",
+        "Recall@K / NDCG",
+        "Throughput at a fixed quality target",
+        "Memory footprint"
+      ]
+    },
+    {
+      "id": "diffusion-generation",
+      "name": "Diffusion image & video generation",
+      "category": "generative_inference",
+      "phase": "generative_inference",
+      "description": "Image and video generation pipelines. Separate text encoder, denoising, VAE and video temporal components when reporting latency.",
+      "representative_models": [
+        "Text-to-image diffusion",
+        "Image editing and image-to-video",
+        "Video diffusion models"
+      ],
+      "key_dimensions": [
+        "Resolution and frame count",
+        "Denoising steps and sampler",
+        "Batch size",
+        "Precision and quantization",
+        "Attention / convolution kernels",
+        "Pipeline and model parallelism"
+      ],
+      "metrics_to_report": [
+        "Seconds per image / video",
+        "Images/s or frames/s",
+        "Peak memory",
+        "Quality score under a fixed evaluator",
+        "Energy per generated output"
+      ]
+    },
+    {
+      "id": "edge-vision",
+      "name": "Edge vision & perception",
+      "category": "edge_inference",
+      "phase": "edge_inference",
+      "description": "On-device and embedded vision workloads under power, thermal, memory and real-time constraints.",
+      "representative_models": [
+        "Image classification",
+        "Object detection and segmentation",
+        "Video perception"
+      ],
+      "key_dimensions": [
+        "Input resolution and frame rate",
+        "Batch size and real-time deadline",
+        "Precision and sparsity",
+        "Host-device data movement",
+        "Thermal envelope and cooling",
+        "Camera / sensor preprocessing"
+      ],
+      "metrics_to_report": [
+        "FPS and end-to-end latency",
+        "Power and energy per frame",
+        "Accuracy / mAP",
+        "Memory footprint",
+        "Sustained performance under thermal limits"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "id": "path-nvidia-vllm",
+      "platform_id": "nvidia-gpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "nvidia-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-nvidia-sglang",
+      "platform_id": "nvidia-gpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "nvidia-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-amd-vllm",
+      "platform_id": "amd-gpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "amd-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-amd-sglang",
+      "platform_id": "amd-gpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "amd-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-intel-vllm",
+      "platform_id": "intel-xpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "intel-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-intel-sglang",
+      "platform_id": "intel-xpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "intel-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-ascend-vllm",
+      "platform_id": "huawei-ascend",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "ascend-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-ascend-sglang",
+      "platform_id": "huawei-ascend",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "ascend-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-mthreads-vllm",
+      "platform_id": "moore-threads",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "mthreads-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-mthreads-sglang",
+      "platform_id": "moore-threads",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "mthreads-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-metax-vllm",
+      "platform_id": "metax",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "metax-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-metax-sglang",
+      "platform_id": "metax",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "metax-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-hygon-sglang",
+      "platform_id": "hygon",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "hygon-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-cambricon-sglang",
+      "platform_id": "cambricon",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "cambricon-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-iluvatar-vllm",
+      "platform_id": "iluvatar",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "iluvatar-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-iluvatar-sglang",
+      "platform_id": "iluvatar",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "iluvatar-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "The cited source documents a software integration for this accelerator. It does not establish end-to-end support for a specific model, precision, context length, parallelism mode or workload feature.",
+      "limitations": "No workload-specific model recipe, device count, precision, sequence-length configuration, correctness run or performance measurement is attached to this path yet.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-biren-deepseek-v4-port",
+      "platform_id": "biren",
+      "workload_id": "llm-model-porting",
+      "integration_ids": [
+        "biren-deepseek-v4-port"
+      ],
+      "status": "vendor_reported",
+      "scope": "Vendor-reported adaptation of a DeepSeek-V4 preview model on BR166. The public claim is a model-porting report, not an independently reproducible benchmark or proof of a general-purpose serving backend.",
+      "limitations": "No reproducible batch / sequence / precision configuration, correctness protocol, performance metrics or independent verification is attached to the current public record.",
+      "configuration": {
+        "model": "DeepSeek-V4 preview",
+        "device_scope": "Biren BR166"
+      },
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    }
+  ]
+}
