@@ -18,7 +18,7 @@ permalink: /directory/
 </section>
 
 
-<section class="directory-explorer" data-directory-explorer>
+<section class="directory-explorer" data-directory-explorer data-profile-source="{{ '/data/company-profiles.json' | relative_url }}">
   <div class="directory-explorer-heading">
     <div>
       <p class="eyebrow">SEARCH THE LANDSCAPE</p>
@@ -34,9 +34,20 @@ permalink: /directory/
     <label>Company group
       <select data-directory-group><option value="">All groups</option></select>
     </label>
+    <label>Evidence freshness
+      <select data-directory-evidence-filter>
+        <option value="">All evidence states</option>
+        <option value="not_reviewed">Not reviewed</option>
+        <option value="fresh">Fresh (≤90 days)</option>
+        <option value="review_due">Review due (91–180 days)</option>
+        <option value="stale">Stale (>180 days)</option>
+        <option value="disputed">Disputed</option>
+      </select>
+    </label>
     <button type="button" class="text-button" data-directory-reset>Reset filters</button>
   </div>
   <p class="directory-results-summary" data-directory-summary aria-live="polite">Building company index…</p>
+  <p class="directory-review-summary" data-directory-review-summary aria-live="polite">Loading structured company profiles and evidence freshness…</p>
   <div class="directory-result-grid" data-directory-results hidden></div>
   <div class="directory-empty-state" data-directory-empty hidden>
     <strong>No matching companies</strong>

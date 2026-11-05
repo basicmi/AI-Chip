@@ -1,0 +1,2392 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.05-1",
+  "registry_reviewed_at": "2026-11-05",
+  "scope": "Structured identity and source-link index for the company profiles published in directory.md. Summaries and reference links are inherited from the existing directory. They are not claim-level evidence and have not been independently audited.",
+  "freshness_policy": {
+    "fresh_within_days": 90,
+    "stale_after_days": 180,
+    "missing_checked_at_means": "unreviewed",
+    "notes": "Fresh means checked within 90 days; review due means 91–180 days; stale means older than 180 days. A missing checked_at is always unreviewed. Freshness describes source recency, not whether a claim is true."
+  },
+  "profile_status_definitions": {
+    "not_reviewed": "The directory profile is indexed, but no structured claim-level evidence audit has been completed.",
+    "partially_reviewed": "Some products or claims have been structured and reviewed; profile coverage is incomplete.",
+    "reviewed": "The currently published structured profile has been reviewed. Individual claims retain their own evidence status."
+  },
+  "companies": [
+    {
+      "id": "nvidia",
+      "display_name": "NVIDIA — GPU / AI accelerator lineage",
+      "category": "IC Vendors",
+      "directory_anchor": "Nvidia",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png",
+      "summary": "NVIDIA turned GPUs into the default AI training/inference substrate via CUDA (2007) and successive datacenter architectures. From Pascal/Volta Tensor Cores through Ampere and Hopper, the stack evolved into rack-scale Grace+Blackwell systems; Rubin extends that AI-factory model into 2026.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "b200-sxm",
+          "name": "NVIDIA B200 SXM",
+          "product_type": "gpu",
+          "architecture": "Blackwell",
+          "generation": "Blackwell / B200",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "b200-memory-capacity",
+            "b200-memory-bandwidth",
+            "b200-nvlink-bandwidth",
+            "b200-architecture"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "b200-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists 180 GB of HBM3e memory per B200 SXM GPU.",
+          "value": 180,
+          "unit": "GB HBM3e",
+          "scope": "Per B200 SXM GPU in the HGX B200 8-GPU baseboard.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor specification; not a measured application result."
+        },
+        {
+          "id": "b200-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists up to 8 TB/s GPU memory bandwidth for B200 SXM.",
+          "value": 8,
+          "unit": "TB/s",
+          "scope": "Per B200 SXM GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Peak bandwidth; actual application bandwidth depends on workload and implementation."
+        },
+        {
+          "id": "b200-nvlink-bandwidth",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "interconnect",
+          "statement": "HGX B200 documentation lists 1.8 TB/s GPU-to-GPU bandwidth.",
+          "value": 1.8,
+          "unit": "TB/s",
+          "scope": "GPU-to-GPU bandwidth in the HGX B200 8-GPU baseboard; not external network bandwidth.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "System topology figure; retain the HGX B200 configuration boundary."
+        },
+        {
+          "id": "b200-architecture",
+          "topic": "architecture",
+          "statement": "NVIDIA identifies HGX B200 as a Blackwell platform built around B200 GPUs.",
+          "value": "Blackwell",
+          "scope": "Architecture family for the B200 GPU in the HGX B200 platform.",
+          "notes": "Vendor product architecture description.",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "nvidia-hgx-b200-docs",
+          "title": "NVIDIA HGX AI Factory — B200 component specifications",
+          "url": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-08-31",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The documentation page states it was last updated on 2026-08-31."
+        }
+      ],
+      "references": [
+        {
+          "id": "ref-nvidia-1",
+          "label": "Vera Rubin opens agentic AI frontier",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Vera-Rubin-Opens-Agentic-AI-Frontier/default.aspx",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-nvidia-2",
+          "label": "Vera Rubin POD / rack-scale systems",
+          "url": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-nvidia-3",
+          "label": "Hopper in-depth",
+          "url": "https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-nvidia-4",
+          "label": "Hopper",
+          "url": "https://www.nvidia.com/en-us/data-center/technologies/hopper-architecture/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-nvidia-5",
+          "label": "Blackwell",
+          "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "habana",
+      "display_name": "Intel / Habana Gaudi",
+      "category": "IC Vendors",
+      "directory_anchor": "Habana",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png",
+      "summary": "Intel’s AI accelerator path consolidated around Habana Labs after the 2019 acquisition. Gaudi (training) and Goya (inference) established Ethernet-centric scale-out as an alternative to proprietary GPU fabrics; Gaudi 2 broadened LLM training, and Gaudi 3 (2024) targets enterprise generative AI with OEM and cloud availability. Intel also folds AI into Xeon AMX and Arc/Flex GPUs, but Gaudi remains the dedicated datacenter accelerator brand.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-habana-1",
+          "label": "Gaudi 3 on IBM Cloud",
+          "url": "https://newsroom.intel.com/artificial-intelligence/ibm-cloud-first-service-provider-deploy-intel-gaudi-3",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-habana-2",
+          "label": "Dell AI Factory with Gaudi 3",
+          "url": "https://newsroom.intel.com/artificial-intelligence/intel-gaudi-3-expands-availability-drive-ai-innovation-scale",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "amd",
+      "display_name": "AMD — Instinct AI GPUs",
+      "category": "IC Vendors",
+      "directory_anchor": "AMD",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png",
+      "summary": "AMD’s datacenter AI story runs through the Instinct line on CDNA architecture (distinct from RDNA gaming GPUs), with ROCm as the software stack. MI100/MI200 established HBM-heavy training SKUs; MI300A/X (CDNA 3, 2023) brought chiplet APU/GPU designs into large LLM clusters. MI350 (CDNA 4, 2025) pushes HBM3E capacity and low-precision datatypes; MI400 / Helios rack systems headline the 2026 roadmap alongside deep hyperscaler partnerships.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "mi355x",
+          "name": "AMD Instinct MI355X",
+          "product_type": "gpu",
+          "architecture": "CDNA 4",
+          "generation": "Instinct MI350 Series",
+          "process_node": "TSMC 3nm | 6nm FinFET",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "mi355x-architecture",
+            "mi355x-memory-capacity",
+            "mi355x-memory-bandwidth",
+            "mi355x-mxfp4-peak",
+            "mi355x-tbp",
+            "mi355x-process-node"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "mi355x-architecture",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "architecture",
+          "statement": "AMD identifies MI355X as based on its 4th-generation CDNA architecture.",
+          "value": "CDNA 4",
+          "scope": "GPU architecture.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor product specification."
+        },
+        {
+          "id": "mi355x-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "memory_capacity",
+          "statement": "AMD lists 288 GB of HBM3E memory for MI355X.",
+          "value": 288,
+          "unit": "GB HBM3E",
+          "scope": "Per MI355X GPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor product specification."
+        },
+        {
+          "id": "mi355x-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "memory_bandwidth",
+          "statement": "AMD lists peak memory bandwidth of 8 TB/s for MI355X.",
+          "value": 8,
+          "unit": "TB/s",
+          "scope": "Per MI355X GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Peak bandwidth; not an application measurement."
+        },
+        {
+          "id": "mi355x-mxfp4-peak",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "compute",
+          "statement": "AMD lists 10.1 PFLOPs peak MXFP4 matrix performance for MI355X.",
+          "value": 10.1,
+          "unit": "PFLOPs",
+          "scope": "Per MI355X GPU; peak MXFP4 matrix specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; keep precision and matrix-operation context when comparing."
+        },
+        {
+          "id": "mi355x-tbp",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "power",
+          "statement": "AMD lists typical board power (TBP) of 1,400 W for MI355X.",
+          "value": 1400,
+          "unit": "W TBP",
+          "scope": "MI355X OAM module; vendor-listed TBP.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "TBP is not a measured wall-power value for a full server."
+        },
+        {
+          "id": "mi355x-process-node",
+          "topic": "process_node",
+          "statement": "AMD lists TSMC 3nm and 6nm FinFET lithography for MI355X.",
+          "value": "TSMC 3nm | 6nm FinFET",
+          "scope": "Process technologies listed in AMD's MI355X product specifications.",
+          "notes": "Vendor-published lithography information; the page does not assign each process node to a specific die in this record.",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "amd-mi355x-product-page",
+          "title": "AMD Instinct MI355X product specifications",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi355x.html",
+          "publisher": "AMD",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements."
+        }
+      ],
+      "references": [
+        {
+          "id": "ref-amd-1",
+          "label": "AMD–Meta 6GW Instinct partnership",
+          "url": "https://www.amd.com/en/newsroom/press-releases/2026-2-24-amd-and-meta-announce-expanded-strategic-partnersh.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-amd-2",
+          "label": "Helios / MI400 series on track",
+          "url": "https://www.nextplatform.com/compute/2026/02/23/amd-says-helios-racks-and-mi400-series-gpus-on-track-for-2h-2026/4092199",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "qualcomm",
+      "display_name": "Qualcomm — Hexagon NPU & Dragonfly data-center AI",
+      "category": "IC Vendors",
+      "directory_anchor": "Qualcomm",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Qualcomm_logo.png",
+      "summary": "Qualcomm’s AI silicon now spans mobile Hexagon NPUs in Snapdragon SoCs and a full data-center Dragonfly portfolio for agentic inference. Hexagon evolved from DSP blocks into fused scalar/vector/tensor NPUs for on-device GenAI; Cloud AI 100 was an earlier inference SKU. In Oct 2025 Qualcomm launched rack-scale Dragonfly AI200/AI250 inference accelerators, then at Investor Day Jun 2026 added AI300 with High Bandwidth Compute (HBC), the Dragonfly C1000 server CPU (Meta multi-generation agreement), and a multi-year data-center revenue push.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-qualcomm-1",
+          "label": "Dragonfly AI300 / data-center roadmap",
+          "url": "https://sg.finance.yahoo.com/news/qualcomm-unveils-comprehensive-data-center-193000894.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-qualcomm-2",
+          "label": "Dragonfly AI200 / AI250 launch",
+          "url": "https://www.datacenterdynamics.com/en/news/qualcomm-launches-ai200-and-ai250-chip-offering-targeting-inferencing-workloads-at-rack-scale/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "samsung",
+      "display_name": "Samsung — Exynos NPU",
+      "category": "IC Vendors",
+      "directory_anchor": "Samsung",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Samsung_logo.png",
+      "summary": "Samsung integrates NPUs into Exynos mobile SoCs and builds HBM that underpins datacenter AI GPUs. Exynos NPUs scaled with each flagship for vision and on-device GenAI; Exynos 2500 (3nm GAA) was followed by Exynos 2600 — Samsung’s first 2nm GAA mobile SoC — powering Galaxy S26 with substantially higher generative-AI NPU performance and AI graphics features (ENSS).",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-samsung-1",
+          "label": "Exynos 2600",
+          "url": "https://semiconductor.samsung.com/processor/mobile-processor/exynos-2600/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-samsung-2",
+          "label": "ENSS AI graphics on Exynos 2600",
+          "url": "https://www.asiae.co.kr/en/article/2026042810393630443",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "media-tek",
+      "display_name": "MediaTek — Dimensity NPU",
+      "category": "IC Vendors",
+      "directory_anchor": "MediaTek",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/MediaTek_logo.png",
+      "summary": "MediaTek’s Dimensity flagship line pairs Arm CPUs with successive in-house NPUs for Android on-device AI. The NPU roadmap (through 8th-gen NPU 890 on Dimensity 9400) emphasizes generative and agentic workloads—LoRA adaptation, diffusion video, and MoE LLMs—alongside the Dimensity Agentic AI Engine software path.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-media-tek-1",
+          "label": "Dimensity 9500 — NPU 990",
+          "url": "https://www.mediatek.com/press-room/mediatek-dimensity-9500-unleashes-best-in-class-performance-ai-experiences-and-power-efficiency-for-the-next-generation-of-mobile-devices",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "marvell",
+      "display_name": "Marvell — custom AI ASICs & DPUs",
+      "category": "IC Vendors",
+      "directory_anchor": "Marvell",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Marvell_logo.png",
+      "summary": "Marvell supplies DPUs (OCTEON / ARMADA) and, increasingly, co-designed custom AI accelerators for cloud providers. Alongside Broadcom’s XPU franchise, Marvell is widely reported as a design partner on AWS Trainium/Inferentia-class and Microsoft Maia-class silicon—making it a key “picks and shovels” vendor in the custom-ASIC wave.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-marvell-1",
+          "label": "Expanding custom silicon opportunity",
+          "url": "https://www.marvell.com/blogs/inside-marvell-expanding-custom-silicon-opportunity.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-marvell-2",
+          "label": "Hyperscaler AI ASIC programs",
+          "url": "https://www.marvell.com/products/data-processing-units.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "broadcom",
+      "display_name": "Broadcom — custom XPUs",
+      "category": "IC Vendors",
+      "directory_anchor": "Broadcom",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Broadcom_logo.png",
+      "summary": "Broadcom co-designs customer-specific AI accelerators (XPUs) and pairs them with Tomahawk/Jericho Ethernet switching. The model began with Google TPU generations and now spans Meta MTIA, OpenAI custom silicon, and other frontier/cloud programs—positioning Broadcom as the primary ASIC implementation partner opposite merchant GPUs.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-broadcom-1",
+          "label": "OpenAI Jalapeño with Broadcom",
+          "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-broadcom-2",
+          "label": "Meta MTIA partnership extended",
+          "url": "https://www.nasdaq.com/press-release/broadcom-announces-extended-partnership-meta-deploy-technology-support-multi",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "google",
+      "display_name": "Google — TPU lineage",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Google",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png",
+      "summary": "Google invented the modern custom-AI-ASIC pattern with TPU v1 (2015) for production inference, then opened Cloud TPU for external training. Each generation scaled systolic MXUs, HBM, and pod interconnect; v4/v5 pods trained many Google foundation models, while Trillium (v6e) and Ironwood (v7) address GenAI train/serve economics. Edge TPU (Coral) and Pixel Tensor are related but separate product lines.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "tpu7x-ironwood",
+          "name": "Google TPU7x (Ironwood)",
+          "product_type": "asic",
+          "architecture": "TPU7x / Ironwood",
+          "generation": "7th-generation TPU",
+          "market_segment": "Google Cloud AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "tpu7x-memory-capacity",
+            "tpu7x-memory-bandwidth",
+            "tpu7x-ici-bandwidth",
+            "tpu7x-bf16-compute",
+            "tpu7x-fp8-compute",
+            "tpu7x-pod-scale",
+            "tpu7x-architecture"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "tpu7x-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "memory_capacity",
+          "statement": "Google Cloud lists 192 GiB of TPU memory per TPU7x (Ironwood) chip.",
+          "value": 192,
+          "unit": "GiB",
+          "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Cloud product documentation; preserve GiB units."
+        },
+        {
+          "id": "tpu7x-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "memory_bandwidth",
+          "statement": "Google Cloud lists 7,380 GB/s TPU memory bandwidth for TPU7x (Ironwood).",
+          "value": 7380,
+          "unit": "GB/s",
+          "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor-published specification."
+        },
+        {
+          "id": "tpu7x-ici-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "interconnect",
+          "statement": "Google Cloud lists 1,200 GB/s interconnect (ICI) bandwidth per TPU7x chip.",
+          "value": 1200,
+          "unit": "GB/s",
+          "scope": "Per TPU7x chip; ICI bandwidth, not data-center network bandwidth.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor-published ICI figure; do not compare directly with Ethernet or InfiniBand bandwidth."
+        },
+        {
+          "id": "tpu7x-bf16-compute",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "compute",
+          "statement": "Google Cloud lists 2,307 TFLOPs peak BF16 compute per TPU7x chip.",
+          "value": 2307,
+          "unit": "TFLOPs BF16",
+          "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+        },
+        {
+          "id": "tpu7x-fp8-compute",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "compute",
+          "statement": "Google Cloud lists 4,614 TFLOPs peak FP8 compute per TPU7x chip.",
+          "value": 4614,
+          "unit": "TFLOPs FP8",
+          "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+        },
+        {
+          "id": "tpu7x-pod-scale",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "deployment",
+          "statement": "Google Cloud lists up to 9,216 TPU7x chips per pod.",
+          "value": 9216,
+          "unit": "chips per pod",
+          "scope": "Maximum TPU7x pod scale in the Google Cloud TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent."
+        },
+        {
+          "id": "tpu7x-architecture",
+          "topic": "architecture",
+          "statement": "Google Cloud identifies TPU7x as the Ironwood TPU version.",
+          "value": "TPU7x / Ironwood",
+          "scope": "Google Cloud TPU version and machine-series nomenclature.",
+          "notes": "Official Google Cloud documentation.",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "google-cloud-tpu7x-specs",
+          "title": "Google Cloud — Understand TPUs",
+          "url": "https://docs.cloud.google.com/docs/compute-area/tpus?hl=en",
+          "publisher": "Google Cloud",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The TPU7x values are taken from the published TPU version and machine-series table."
+        }
+      ],
+      "references": [
+        {
+          "id": "ref-google-1",
+          "label": "Ironwood (TPU7x) GA",
+          "url": "https://docs.cloud.google.com/tpu/docs/release-notes",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-2",
+          "label": "Ironwood for the age of inference",
+          "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-google-tpu-things-to-know/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-3",
+          "label": "10 years of TPU",
+          "url": "https://cloud.google.com/transform/ai-specialized-chips-tpu-history-gen-ai",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-4",
+          "label": "v6e docs",
+          "url": "https://docs.cloud.google.com/tpu/docs/v6e",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-5",
+          "label": "Cloud TPU",
+          "url": "https://cloud.google.com/tpu",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-6",
+          "label": "Edge TPU",
+          "url": "https://cloud.google.com/edge-tpu/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "amazon-aws",
+      "display_name": "Amazon AWS — Trainium & Inferentia",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Amazon_AWS",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png",
+      "summary": "AWS builds first-party AI silicon for EC2: Inferentia for inference and Trainium for training, compiled via the Neuron SDK. Inferentia1/2 lowered LLM serving cost on Inf1/Inf2; Trainium1 and Trainium2 (Trn1/Trn2) plus UltraServers with NeuronLink scale-up target foundation-model training and large inference inside AWS regions—often co-designed with partners such as Marvell/Annapurna.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-amazon-aws-1",
+          "label": "EC2 Trn3 UltraServers (Trainium3)",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ec2-trn3-ultraservers/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-amazon-aws-2",
+          "label": "Trainium3 UltraServers details",
+          "url": "https://press.aboutamazon.com/2025/12/trainium3-ultraservers-now-available-enabling-customers-to-train-and-deploy-ai-models-faster-at-lower-cost",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "microsoft",
+      "display_name": "Microsoft — Azure Maia",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Microsoft",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png",
+      "summary": "Microsoft entered custom AI silicon with Azure Maia (accelerator) and Cobalt (Arm CPU) to optimize Azure OpenAI / Copilot economics. Maia 100 (5nm, advanced packaging) is co-designed for Azure AI cloud workloads with a PyTorch/ONNX Runtime software path; subsequent Maia generations are expected to deepen rack-level integration with Azure networking and cooling.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-microsoft-1",
+          "label": "Maia 200 inference accelerator",
+          "url": "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-microsoft-2",
+          "label": "Maia 200 Azure rollout",
+          "url": "https://news.microsoft.com/source/emea/2026/01/microsoft-introduces-maia-200-new-inference-accelerator-enhances-ai-performance-in-azure/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "open-ai",
+      "display_name": "OpenAI — custom Intelligence Processors",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "OpenAI",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/OpenAI_logo.png",
+      "summary": "Long dependent on NVIDIA GPUs (and Azure capacity), OpenAI moved into custom inference silicon to cut serving cost and diversify supply. Jalapeño—co-developed with Broadcom—is the first “Intelligence Processor,” optimized for LLM inference rather than general training, as the opening move in a multi-generation, multi-gigawatt Broadcom collaboration.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-open-ai-1",
+          "label": "Jalapeño LLM inference chip",
+          "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "anthropic",
+      "display_name": "Anthropic — multi-hardware compute",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Anthropic",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Anthropic_logo.png",
+      "summary": "Anthropic does not tape out a merchant chip brand; it co-designs capacity across AWS Trainium (Project Rainier), Google TPUs (Broadcom-implemented), and NVIDIA GPUs. The strategy is deliberate multi-sourcing for Claude training and serving at gigawatt scale, with long-term TPU commitments expanding through 2027+.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-anthropic-1",
+          "label": "Google & Broadcom compute partnership",
+          "url": "https://www.anthropic.com/news/google-broadcom-partnership-compute",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "apple",
+      "display_name": "Apple — Neural Engine & Apple silicon AI",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Apple",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Apple_logo.png",
+      "summary": "Apple’s on-device AI runs on the Neural Engine and, increasingly, GPU Neural Accelerators inside Apple silicon—not discrete datacenter GPUs. From A11’s first Neural Engine through M1–M4, Apple scaled unified-memory ML performance for privacy-preserving inference; M5 (2025) and M5 Pro/Max (2026) explicitly target Apple Intelligence and local LLM/creative AI workflows.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-apple-1",
+          "label": "Apple M5",
+          "url": "https://www.apple.com/newsroom/2025/10/apple-unleashes-m5-the-next-big-leap-in-ai-performance-for-apple-silicon/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-apple-2",
+          "label": "M5 Pro and M5 Max",
+          "url": "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "alibaba",
+      "display_name": "Alibaba — T-Head PPU",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Alibaba",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/alibaba_logo.png",
+      "summary": "Alibaba’s T-Head unit designs cloud AI accelerators under the Zhenwu / PPU family for Alibaba Cloud and external customers as a domestic GPU-class alternative. After Zhenwu 810E-class SKUs, Zhenwu M890 (2026) raises HBM capacity and chip-to-chip bandwidth for agentic train/infer, paired with Panjiu AL128 servers, ICN Switch networking, and the SAIL software stack.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-alibaba-1",
+          "label": "Zhenwu M890 AI chip",
+          "url": "https://www.alibabacloud.com/blog/alibaba-unveils-new-ai-chip-flagship-model-and-rebuilt-cloud-stack-ai-for-agentic-era_603151",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-alibaba-2",
+          "label": "T-Head scale shipments",
+          "url": "https://thenextweb.com/news/alibaba-zhenwu-m890-t-head-china-ai-chip-nvidia",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "baidu",
+      "display_name": "Baidu — Kunlunxin",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Baidu",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Baidu_logo.png",
+      "summary": "Baidu’s Kunlunxin (昆仑芯) GPUs underpin ERNIE and Baidu Cloud AI services. From earlier Kunlun generations through P800-class training/inference cards, Baidu has iterated a full stack (hardware + software) as a China-domestic alternative for large-model workloads.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-baidu-1",
+          "label": "Tianchi 256-card supernode",
+          "url": "https://www.jiemian.com/article/14421027.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "tencent-cloud",
+      "display_name": "Tencent Cloud — Zixiao / custom AI",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Tencent_Cloud",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Tencent_Cloud_logo.png",
+      "summary": "Tencent deploys proprietary Zixiao-class and partner AI accelerators across Tencent Cloud for recommendation, multimodal, and LLM train/infer inside its China footprint—part of a broader mix that also includes merchant GPUs where available.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": []
+    },
+    {
+      "id": "facebook",
+      "display_name": "Meta — MTIA",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Facebook",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png",
+      "summary": "Meta’s MTIA (Meta Training and Inference Accelerator) is an in-house family for ranking, recommendation, and increasingly generative workloads at hyperscale. Built with Broadcom as implementation partner, MTIA has moved to a rapid multi-generation chiplet cadence (MTIA 300–500 class messaging) aimed at Meta’s production AI fleet rather than merchant sale.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-facebook-1",
+          "label": "MTIA Iris production September 2026",
+          "url": "https://techcrunch.com/2026/07/09/metas-new-ai-chips-will-begin-production-in-september/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-facebook-2",
+          "label": "Four MTIA chips in two years",
+          "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "tesla",
+      "display_name": "Tesla — HW / AI inference & Dojo",
+      "category": "Tech Giants & HPC Vendors",
+      "directory_anchor": "Tesla",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Tesla_logo.png",
+      "summary": "Tesla designs FSD/AI inference SoCs for vehicles (HW3 → HW4/AI4 → AI5) and pursued Dojo training tiles for internal vision-model training. The vertical stack ties cars, Optimus, and data-center inference together; AI5 is the next major SoC step after AI4, with Dojo3 still on the longer training roadmap.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-tesla-1",
+          "label": "Tesla AI5 taped out",
+          "url": "https://electrek.co/2026/04/15/tesla-ai5-chip-taped-out-musk-ai6-dojo3/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "arm",
+      "display_name": "Arm — Ethos NPU IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "ARM",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/ARM_logo.png",
+      "summary": "Arm licenses Ethos NPU IP alongside Cortex CPUs for edge and IoT SoCs. The Ethos-U micro-NPU line (U55 → U65 → U85) scales MAC arrays and adds transformer operators while keeping the Vela/Ethos toolchain path; larger Ethos-N products address higher-TOPS vision/GenAI in Cortex-A systems.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-arm-1",
+          "label": "Ethos-U85 micro-NPU",
+          "url": "https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-arm-2",
+          "label": "Arm C1 / SME2 in flagship SoCs",
+          "url": "https://www.techinsights.com/blog/dimensity-9500-debuts-arm-c1-cores-and-dual-npu",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "synopsys",
+      "display_name": "Synopsys — ARC NPX NPU IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "Synopsys",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Synopsys_logo.png",
+      "summary": "Synopsys DesignWare ARC NPX provides licensable neural processor IP for SoC integrators across automotive, consumer, and infrastructure. The family emphasizes scalable TOPS, functional-safety options, and toolchain continuity for DNN/transformer graphs.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-synopsys-1",
+          "label": "ARC NPX NPU IP",
+          "url": "https://www.synopsys.com/designware-ip/processor-solutions/neural-processing-unit.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "imagination",
+      "display_name": "Imagination — NNA IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "Imagination",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Imagination_logo.png",
+      "summary": "Imagination’s PowerVR Neural Network Accelerators (NNA) and GPU+NNA combinations target edge and automotive SoCs. IMG Continuum software maps CNN and transformer-class networks onto the NNA datapaths for licensees.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-imagination-1",
+          "label": "Imagination AI / NNA IP",
+          "url": "https://www.imaginationtech.com/products/ai/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "ceva",
+      "display_name": "CEVA — NeuPro / edge AI IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "CEVA",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/CEVA_logo.png",
+      "summary": "CEVA licenses low-power AI processor IP and DSP/NPU hybrids for real-time embedded, automotive, and IoT inference. NeuPro-class offerings and the CEVA DNN compiler add transformer-capable paths for on-device GenAI and vision.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-ceva-1",
+          "label": "CEVA edge AI / NeuPro IP",
+          "url": "https://www.ceva-dsp.com/app/deep-learning/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "cadence",
+      "display_name": "Cadence — Tensilica AI IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "Cadence",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cadence_logo.png",
+      "summary": "Cadence Tensilica offers configurable NPU and AI DSP IP for on-device and automotive SoCs. The NeuroWeave toolchain maps modern DNN and transformer graphs onto Tensilica datapaths used widely in vision, audio, and edge GenAI chips.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-cadence-1",
+          "label": "Tensilica AI Platform",
+          "url": "https://www.cadence.com/en_US/home/tools/ip/tensilica-ip/tensilica-ai-platform.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "veri-silicon",
+      "display_name": "VeriSilicon — VIP NPU IP",
+      "category": "Traditional IP Vendors",
+      "directory_anchor": "VeriSilicon",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/VeriSilicon_logo.png",
+      "summary": "VeriSilicon provides VIP/Acuity NPU IP plus turnkey ASIC design services, especially strong in China edge and vision SoCs. The IP covers CNN through on-device GenAI use cases for consumer, automotive, and IoT customers.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-veri-silicon-1",
+          "label": "VIP / NPU IP & design services",
+          "url": "https://www.verisilicon.com/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "cerebras",
+      "display_name": "Cerebras — wafer-scale engine",
+      "category": "Startups",
+      "directory_anchor": "Cerebras",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png",
+      "summary": "Cerebras builds wafer-scale AI processors (WSE) that place an enormous on-wafer SRAM/compute fabric into CS systems, avoiding many multi-GPU communication bottlenecks. WSE-1/2 established the approach; WSE-3 (2024, 5nm) powers CS-3 for foundation-model training and high-throughput inference with cloud and on-prem deployments.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-cerebras-1",
+          "label": "Cerebras IPO (CBRS)",
+          "url": "https://www.cnbc.com/2026/05/16/cerebras-blockbuster-ipo-boosts-hype-for-spacex-openai-anthropic.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-cerebras-2",
+          "label": "OpenAI multi-year capacity deal",
+          "url": "https://www.cnbc.com/2026/04/17/cerebras-new-ipo-ai-chips.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "graphcore",
+      "display_name": "Graphcore — IPU",
+      "category": "Startups",
+      "directory_anchor": "Graphcore",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png",
+      "summary": "Graphcore pioneered Intelligence Processing Units (IPU) with fine-grained MIMD parallelism and large on-chip memory (Colossus Mk1/Mk2, Bow). After competing in the pre-LLM and early-LLM era, SoftBank acquired Graphcore (2024) as a wholly owned subsidiary to fund next-generation AI compute while keeping the Graphcore brand.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-graphcore-1",
+          "label": "SoftBank $457M funding into Graphcore",
+          "url": "https://www.cnbc.com/2026/05/12/softbank-graphcore-ai-chip-investment.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-graphcore-2",
+          "label": "Izanagi / SoftBank AI stack",
+          "url": "https://www.jonpeddie.com/news/graphcores-ipu-doing-well-at-softbank/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "tenstorrent",
+      "display_name": "Tenstorrent — Wormhole / Blackhole",
+      "category": "Startups",
+      "directory_anchor": "Tenstorrent",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png",
+      "summary": "Tenstorrent (Jim Keller–led) builds Tensix-based AI processors as scalable chiplet meshes with an open software stack (TT-Metalium). Wormhole-generation cards are shipping into developer and rack deployments; Blackhole is the next architecture step toward higher-density train/infer systems.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-tenstorrent-1",
+          "label": "Galaxy Blackhole general availability",
+          "url": "https://tenstorrent.com/en/newsroom/tenstorrent-enables-ai-at-scale-with-industry-leading-performance",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-tenstorrent-2",
+          "label": "TT-Deploy production shipping",
+          "url": "https://tenstorrent.com/en/newsroom/tt-deploy",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "etched",
+      "display_name": "Etched — transformer ASICs",
+      "category": "Startups",
+      "directory_anchor": "Etched",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Etched_logo.png",
+      "summary": "Etched builds ASICs purpose-built for Transformer inference (Sohu) rather than general-purpose GPU programmability—betting that specialization wins tokens/sec and energy efficiency for LLM serving. TSMC-manufactured silicon and “frontier inference cluster” messaging mark a fast rise from 2024 Series A through 2026 scale-up.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-etched-1",
+          "label": "Etched hits $5B valuation",
+          "url": "https://techcrunch.com/2026/06/30/nvidia-competitor-etched-hits-5b-valuation-1b-in-sales-for-ai-chip/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "groq",
+      "display_name": "Groq — LPU",
+      "category": "Startups",
+      "directory_anchor": "Groq",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Groq_logo.png",
+      "summary": "Groq’s Language Processing Unit (LPU) uses a deterministic, compiler-scheduled architecture for ultra-low-latency LLM token generation. After building a cloud inference service on LPU racks, Groq’s technology was licensed by NVIDIA (late 2025), with key talent joining NVIDIA; GTC 2026 described LPU-class engines inside the Vera Rubin AI factory for efficient decode alongside Rubin GPUs.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-groq-1",
+          "label": "NVIDIA Vera Rubin includes Groq LPU",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Vera-Rubin-Opens-Agentic-AI-Frontier/default.aspx",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "samba-nova",
+      "display_name": "SambaNova — RDU",
+      "category": "Startups",
+      "directory_anchor": "SambaNova",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/SambaNova_logo.png",
+      "summary": "SambaNova’s Reconfigurable Dataflow Unit (RDU) maps full model graphs onto a dataflow fabric for enterprise and agentic inference. SN40L established the GenAI-era platform; SN50 (5th gen) scales compute and network bandwidth for large agentic deployments with SambaNova’s full-stack software.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-samba-nova-1",
+          "label": "SN50 RDU, Intel collab, $350M+ Series E",
+          "url": "https://sambanova.ai/press/sambanova-unveils-fastest-chip-for-agentic-ai-collaborates-with-intel-and-raises-350m",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "mythic",
+      "display_name": "Mythic — analog compute-in-memory",
+      "category": "Startups",
+      "directory_anchor": "Mythic",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Mythic_logo.png",
+      "summary": "Mythic builds Analog Processing Units (APUs) that use flash-based compute-in-memory for energy-efficient inference at the edge and in data centers. After years of analog AI development, 2025–2026 funding and the Videantis acquisition add digital processor IP for a hybrid analog/digital platform aimed at robotics, automotive, and defense.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-mythic-1",
+          "label": "$125M Series D",
+          "url": "https://www.businesswire.com/news/home/20251217546249/en/Mythic-to-Challenge-AIs-GPU-Pantheon-with-100x-Energy-Advantage-and-Oversubscribed-%24125M-Raise",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-mythic-2",
+          "label": "Acquires Videantis",
+          "url": "https://mythic.ai/whats-new/mythic-acquires-videantis-one-of-europes-leading-digital-processor-ip-companies-to-build-the-worlds-most-energy-efficient-ai-compute-platform/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "hailo",
+      "display_name": "Hailo — edge AI accelerators",
+      "category": "Startups",
+      "directory_anchor": "Hailo",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Hailo_logo.png",
+      "summary": "Hailo designs high-efficiency edge AI accelerators for vision and, with Hailo-10, on-device generative AI. Hailo-8 established the structure-sparsity / efficient-NPU brand in smart cameras and industrial vision; Hailo-10H adds LLM/VLM-class GenAI at low watts with automotive qualification paths.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-hailo-1",
+          "label": "Hailo-10H GA for edge GenAI",
+          "url": "https://hailo.ai/company-overview/newsroom/news/hailo-announces-general-availability-of-hailo-10h-edge-ai-accelerator-with-generative-ai-capabilities/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "furiosa",
+      "display_name": "FuriosaAI — RNGD / TCP",
+      "category": "Startups",
+      "directory_anchor": "Furiosa",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png",
+      "summary": "Korea-based FuriosaAI builds Tensor Contraction Processor (TCP) accelerators for datacenter inference. After earlier Warboy edge/vision chips, RNGD (TSMC 5nm) targets LLM and agentic serving in air-cooled multi-card servers, with a Broadcom collaboration to scale into multi-die Ethernet/PCIe platforms.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-furiosa-1",
+          "label": "RNGD mass production",
+          "url": "https://furiosa.ai/blog/rngd-enters-mass-production-the-high-performance-ai-accelerator-for-any-data-center",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-furiosa-2",
+          "label": "Broadcom inference partnership",
+          "url": "https://furiosa.ai/blog/furiosaai-partners-with-broadcom-to-build-next-generation-inference-platform-for-the-agentic-era",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "kinara",
+      "display_name": "Kinara (ex–Deep Vision)",
+      "category": "Startups",
+      "directory_anchor": "Kinara",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png",
+      "summary": "Kinara (formerly Deep Vision) builds Ara/Prisma-class edge NPUs for vision and on-device GenAI inference. The company rebranded and scaled edge AI SKUs before NXP announced an acquisition (2025) to fold Kinara into NXP’s industrial and automotive edge AI portfolio.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-kinara-1",
+          "label": "NXP to acquire Kinara",
+          "url": "https://www.nxp.com/company/about-nxp/newsroom/NW-NXP-TO-ACQUIRE-KINARA",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "si-ma",
+      "display_name": "SiMa.ai — Modalix MLSoC",
+      "category": "Startups",
+      "directory_anchor": "SiMa",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png",
+      "summary": "SiMa.ai builds MLSoC platforms for edge / Physical AI—robots, industrial, automotive, and vision—combining CPU, ML accelerator, and software (Palette / LLiMa) for CNN through Transformer/LLM workloads at low power. Modalix is the second-generation production platform after the first MLSoC.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-si-ma-1",
+          "label": "Modalix platform in production",
+          "url": "https://sima.ai/press-release/sima-ai-next-gen-platform-for-physical-ai-in-production/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "d-matrix",
+      "display_name": "d-Matrix — Corsair",
+      "category": "Startups",
+      "directory_anchor": "d-matrix",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/d-matrix_logo.png",
+      "summary": "d-Matrix builds digital compute-in-memory accelerators (Corsair) for low-latency, high-efficiency datacenter LLM inference—contrasting analog CIM approaches with a digital datapath while still attacking the memory-wall bottleneck that dominates decode.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-d-matrix-1",
+          "label": "Corsair enters full production",
+          "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-d-matrix-2",
+          "label": "Series C / $2B valuation",
+          "url": "https://cryptobriefing.com/d-matrix-corsair-challenges-nvidia-ai-inference/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "blaize",
+      "display_name": "Blaize — Graph Streaming Processor",
+      "category": "Startups",
+      "directory_anchor": "Blaize",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Blaize_logo.png",
+      "summary": "Blaize’s Graph Streaming Processor (GSP) targets graph-native edge AI for vision and GenAI in industrial and smart-city deployments. After years as a private edge-AI vendor, Blaize listed via SPAC (Nasdaq: BZAI) in 2025 to scale product and go-to-market.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-blaize-1",
+          "label": "Blaize AI edge platforms",
+          "url": "https://www.blaize.com/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "syn-sense",
+      "display_name": "SynSense (ex–aiCTX)",
+      "category": "Startups",
+      "directory_anchor": "SynSense",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/aiCTX_logo.png",
+      "summary": "SynSense (formerly aiCTX) builds neuromorphic and event-based sensing+compute chips (Speck, Xylo) for ultra-low-power always-on perception. Collaborations such as with iniVation extend event-camera + neuromorphic pipelines for edge AI.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-syn-sense-1",
+          "label": "SynSense neuromorphic products",
+          "url": "https://www.synsense.ai/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "sagence",
+      "display_name": "Sagence AI (ex–Analog Inference)",
+      "category": "Startups",
+      "directory_anchor": "Sagence",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/AnalogInference_logo.png",
+      "summary": "Sagence AI (rebranded from Analog Inference in Nov 2024) develops analog compute-in-memory accelerators aimed at energy-efficient LLM and vision inference for datacenter and edge deployments—part of the broader analog-AI cohort seeking orders-of-magnitude efficiency vs. digital GPUs on inference.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-sagence-1",
+          "label": "Sagence AI analog CIM",
+          "url": "https://www.sagence.ai/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "huawei-ascend",
+      "display_name": "Huawei Ascend / HiSilicon",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "HuaweiAscend",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png",
+      "summary": "Huawei’s Ascend line (HiSilicon) is China’s most widely deployed domestic training/inference accelerator family. Ascend 910 established the high-end; 910B/910C scaled under export controls into Atlas servers and SuperPoD / CloudMatrix supernodes. Ascend 950-class (950DT training / 950PR inference messaging) and Atlas 950 SuperPoD push UnifiedBus optical scale-up to thousands of NPUs as a single logical node, with Cann/MindSpore as the software stack.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-huawei-ascend-1",
+          "label": "Atlas 950 SuperPoD at MWC 2026",
+          "url": "https://www.huawei.com/en/news/2026/3/mwc-superpod-ai",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-huawei-ascend-2",
+          "label": "Atlas 950 SuperPoD at WAIC 2026",
+          "url": "https://it-news.uk/posts/huawei-atlas-950-superpod-waic-2026/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "cambricon",
+      "display_name": "Cambricon (寒武纪)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Cambricon",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png",
+      "summary": "Cambricon is China’s leading pure-play AI-chip vendor, spanning edge IP/SoCs and cloud MLU / Siyuan accelerators. After an early edge-IP era, the company refocused on cloud training/inference cards for Chinese internet and intelligent-computing customers, with aggressive 2026 volume plans.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-cambricon-1",
+          "label": "Siyuan 690 mass production",
+          "url": "https://en.shuziqushi.com/new343300.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-cambricon-2",
+          "label": "500,000 AI chips target for 2026",
+          "url": "https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "biren",
+      "display_name": "Biren Technology (壁仞科技)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Biren",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Biren_logo.png",
+      "summary": "Biren develops general-purpose GPU-class accelerators for data-center AI training and inference. The BR100 family established its high-performance GPGPU direction; subsequent BR-series products and system offerings should be tracked by exact SKU and deployment status rather than treating the family as one device. The company listed in Hong Kong in January 2026 (6082.HK).",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-biren-1",
+          "label": "Hong Kong listing",
+          "url": "https://www.reuters.com/world/asia-pacific/china-ai-chipmaker-biren-surges-82-hong-kong-debut-kicking-off-2026-listings-2026-01-02/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-biren-2",
+          "label": "Biren official site",
+          "url": "https://www.birentech.com/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "moore-threads",
+      "display_name": "Moore Threads (摩尔线程)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "MooreThreads",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/MooreThreads_logo.png",
+      "summary": "Moore Threads develops full-function GPUs for graphics and AI (MTT S-series) with the MUSA software stack. The company completed a large STAR Market IPO in late 2025 amid China’s domestic GPU push, targeting intelligent-computing centers and PC/GPU markets.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-moore-threads-1",
+          "label": "Shanghai trading debut",
+          "url": "https://www.cnbc.com/2025/12/05/china-nvidia-moore-threads-trading-debut-1-billion-listing-ipo-shanghai-gpu-enflame-biren.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "meta-x",
+      "display_name": "MetaX (沐曦)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "MetaX",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/MetaX_logo.png",
+      "summary": "MetaX (沐曦) ships C-series GPUs for training and inference with the MXMACA software stack for AI clusters and intelligent-computing centers. After listing on STAR in Dec 2025, the company reported strong revenue growth into 2026 as domestic GPU demand rose.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-meta-x-1",
+          "label": "MetaX doubles revenue",
+          "url": "https://www.caixinglobal.com/2026-03-26/chinese-gpu-maker-metax-doubles-revenue-amid-push-for-domestic-chips-102427800.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "hygon",
+      "display_name": "Hygon (海光) DCU",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Hygon",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Hygon_logo.png",
+      "summary": "Hygon’s Deep Computing Unit (DCU) accelerators are GPGPU-class chips widely used in China for large-model training and inference, paired with the DTK software stack. Hygon also ships x86 CPUs; the DCU line is the AI-relevant product for intelligent-computing centers.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-hygon-1",
+          "label": "DeepSeek-V4 Day-0 adaptation",
+          "url": "https://www.trendforce.com/news/2026/04/29/news-huawei-ascend-cambricon-and-hygon-completed-day-0-adaptation-to-deepseek-v4/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "iluvatar",
+      "display_name": "Iluvatar CoreX (天数智芯)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Iluvatar",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Iluvatar_logo.png",
+      "summary": "Iluvatar CoreX develops general-purpose GPU products for AI training and inference. Its public product portfolio spans the TianGai (天垓) training-GPU family, ZhiKai (智铠) inference products, and TongYang (彤央) edge-computing products. Product comparisons should be SKU-specific and distinguish announced roadmap items from shipping products.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-iluvatar-1",
+          "label": "ixRT open-source components",
+          "url": "https://github.com/Deep-Spark/iluvatar-corex-ixrt",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-iluvatar-2",
+          "label": "DeepSparkInference",
+          "url": "https://github.com/Deep-Spark/DeepSparkInference",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-iluvatar-3",
+          "label": "Deep-Spark GitHub organization",
+          "url": "https://github.com/Deep-Spark",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-iluvatar-4",
+          "label": "CoreX software platform",
+          "url": "https://www.iluvatar.com/software?fullCode=cpjs-rj-rjz",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "enflame",
+      "display_name": "Enflame (燧原科技)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Enflame",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Enflame_logo.png",
+      "summary": "Enflame develops CloudBlazer (云燧) GCU accelerators and systems for data-center AI training and inference. Its portfolio includes separate training and inference product directions; system offerings and product availability should be distinguished from silicon announcements and roadmap claims.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-enflame-1",
+          "label": "torch-gcu open-source repository",
+          "url": "https://github.com/EnflameTechnology/torch-gcu",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-enflame-2",
+          "label": "Enflame official site",
+          "url": "https://www.enflame-tech.com/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "horizon",
+      "display_name": "Horizon Robotics (地平线)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "Horizon",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Horizon_Robotics_logo.png",
+      "summary": "Horizon Robotics (地平线) is a leading China automotive AI SoC vendor. Journey-series chips (through Journey 6 with BPU Nash) power L2+ assisted driving in many passenger vehicles, with increasing Transformer support for BEV/occupancy and end-to-end driving models.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-horizon-1",
+          "label": "Journey 6 / BPU Nash",
+          "url": "https://www.horizon.auto/en/solutions/horizon-journey/horizon-journey6",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "black-sesame",
+      "display_name": "Black Sesame Technologies (黑芝麻智能)",
+      "category": "China AI Accelerator Vendors",
+      "directory_anchor": "BlackSesame",
+      "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Blacksesame_logo.png",
+      "summary": "Black Sesame Technologies (黑芝麻智能) designs automotive-grade ADAS/AD SoCs (Huashan family). Hong Kong-listed in 2024, the company focuses on safety-certified L2+/L3 platforms; A1000-family chips are reported in mass-production vehicles, with A2000 extending toward higher-performance and cross-domain AI.",
+      "profile_status": "not_reviewed",
+      "last_reviewed": null,
+      "products": [],
+      "claims": [],
+      "evidence": [],
+      "references": [
+        {
+          "id": "ref-black-sesame-1",
+          "label": "Huashan A1000 / A2000 path",
+          "url": "https://www.blacksesame.com/en/huashan-a1000/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-2",
+          "label": "MLIR",
+          "url": "https://mlir.llvm.org/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-3",
+          "label": "OpenXLA / XLA",
+          "url": "https://openxla.org/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-4",
+          "label": "Apache TVM",
+          "url": "https://tvm.apache.org/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-5",
+          "label": "IREE",
+          "url": "https://iree.dev/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-6",
+          "label": "TorchInductor",
+          "url": "https://pytorch.org/docs/stable/torch.compiler.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-7",
+          "label": "Triton",
+          "url": "https://github.com/triton-lang/triton",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-8",
+          "label": "TileLang",
+          "url": "https://github.com/tile-ai/tilelang",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-9",
+          "label": "TIRx",
+          "url": "https://tvm.apache.org/docs/tirx/overview.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-10",
+          "label": "Helion",
+          "url": "https://github.com/pytorch/helion",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-11",
+          "label": "CuTe / CUTLASS DSL",
+          "url": "https://github.com/NVIDIA/cutlass",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-12",
+          "label": "JAX Pallas",
+          "url": "https://docs.jax.dev/en/latest/pallas/index.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-13",
+          "label": "FlashAttention",
+          "url": "https://github.com/Dao-AILab/flash-attention",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-14",
+          "label": "FlashInfer",
+          "url": "https://github.com/flashinfer-ai/flashinfer",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-15",
+          "label": "DeepGEMM",
+          "url": "https://github.com/deepseek-ai/DeepGEMM",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-16",
+          "label": "AITer",
+          "url": "https://github.com/ROCm/aiter",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-17",
+          "label": "Composable Kernel",
+          "url": "https://github.com/ROCm/composable_kernel",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-18",
+          "label": "vLLM",
+          "url": "https://github.com/vllm-project/vllm",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-19",
+          "label": "SGLang",
+          "url": "https://github.com/sgl-project/sglang",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-20",
+          "label": "TensorRT-LLM",
+          "url": "https://github.com/NVIDIA/TensorRT-LLM",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-21",
+          "label": "MLC-LLM",
+          "url": "https://github.com/mlc-ai/mlc-llm",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-22",
+          "label": "llama.cpp",
+          "url": "https://github.com/ggml-org/llama.cpp",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-23",
+          "label": "NVIDIA Dynamo",
+          "url": "https://github.com/ai-dynamo/dynamo",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-24",
+          "label": "llm-d",
+          "url": "https://github.com/llm-d/llm-d",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-25",
+          "label": "Mooncake",
+          "url": "https://github.com/kvcache-ai/Mooncake",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-26",
+          "label": "NIXL",
+          "url": "https://github.com/ai-dynamo/nixl",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-27",
+          "label": "NCCL",
+          "url": "https://github.com/NVIDIA/nccl",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-28",
+          "label": "RCCL",
+          "url": "https://github.com/ROCm/rccl",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-29",
+          "label": "MLPerf / MLCommons",
+          "url": "https://mlcommons.org/benchmarks/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-30",
+          "label": "SemiAnalysis InferenceX",
+          "url": "https://inferencex.semianalysis.com/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-31",
+          "label": "KernelBench",
+          "url": "https://github.com/ScalingIntelligence/KernelBench",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-32",
+          "label": "NCCL Tests",
+          "url": "https://github.com/NVIDIA/nccl-tests",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-33",
+          "label": "OSU Micro-Benchmarks",
+          "url": "https://mvapich.cse.ohio-state.edu/benchmarks/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-34",
+          "label": "AI Chip Paper List",
+          "url": "https://birenresearch.github.io/AIChip_Paper_List/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-35",
+          "label": "Neural Network Accelerator Comparison",
+          "url": "https://nicsefc.ee.tsinghua.edu.cn/projects/neural-network-accelerator/",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-36",
+          "label": "Tutorial on Hardware Architectures for Deep Neural Networks",
+          "url": "http://eyeriss.mit.edu/tutorial.html",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-37",
+          "label": "#1",
+          "url": "https://mp.weixin.qq.com/s/SbX5yz5d3GXaLcl15DO6OQ",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-38",
+          "label": "#2",
+          "url": "https://mp.weixin.qq.com/s/zvgDgKpIMIRLFUEW0fFOeg",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-39",
+          "label": "#3",
+          "url": "https://mp.weixin.qq.com/s/CKHs5yblcMur4h2BwUBICw",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-40",
+          "label": "#4",
+          "url": "https://mp.weixin.qq.com/s/hFnHhaWWYTFRUsD3HlMbLw",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-41",
+          "label": "TPU vs GPU vs Cerebras vs Graphcore",
+          "url": "https://khairy2011.medium.com/tpu-vs-gpu-vs-cerebras-vs-graphcore-a-fair-comparison-between-ml-hardware-3f5a19d89e38",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-42",
+          "label": "download",
+          "url": "https://cloud.tsinghua.edu.cn/f/9aa0a4f0a5684cc48495/?dl=1",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-43",
+          "label": "Google Drive",
+          "url": "https://drive.google.com/open?id=1ieDm0bpjVWl5MnSESRs92EcmoSzG5vcm",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-black-sesame-44",
+          "label": "External reference",
+          "url": "http://www.reliablecounter.com",
+          "source_type": "unknown",
+          "review_status": "unreviewed",
+          "published_at": null,
+          "checked_at": null,
+          "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    }
+  ]
+}
