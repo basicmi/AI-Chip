@@ -24,6 +24,7 @@
         <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-site-nav>
           <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active" aria-current="page"{% endif %}>Overview</a>
           <a href="{{ '/directory/' | relative_url }}"{% if page.url contains '/directory' %} class="is-active" aria-current="page"{% endif %}>Hardware</a>
+          <a href="{{ '/products/' | relative_url }}"{% if page.url contains '/products' %} class="is-active" aria-current="page"{% endif %}>Products</a>
           <a href="{{ '/software-ecosystem/' | relative_url }}"{% if page.url contains '/software-ecosystem' %} class="is-active" aria-current="page"{% endif %}>Software</a>
           <a href="{{ '/compatibility/' | relative_url }}"{% if page.url contains '/compatibility' %} class="is-active" aria-current="page"{% endif %}>Compatibility</a>
           <a href="{{ '/workloads/' | relative_url }}"{% if page.url contains '/workloads' %} class="is-active" aria-current="page"{% endif %}>Workloads</a>
