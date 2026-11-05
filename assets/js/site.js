@@ -9,7 +9,18 @@
   const preferredTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   const setTheme = (theme) => {
     root.dataset.theme = theme;
-    if (themeButton) {
+    const homeStats = document.querySelector("[data-home-stats]");
+  if (homeStats) {
+    const compatibilityUrl = homeStats.dataset.compatSource;
+    const workloadsUrl = homeStats.dataset.workloadSource;
+    Promise.all([fetch(compatibilityUrl).then(r => { if (!r.ok) throw new Error("compatibility"); return r.json(); }), fetch(workloadsUrl).then(r => { if (!r.ok) throw new Error("workloads"); return r.json(); })])
+      .then(([compatibility, workloads]) => {
+        const values = [compatibility.platforms.length, compatibility.integrations.length, workloads.workloads.length];
+        homeStats.querySelectorAll("strong").forEach((node, index) => { if (values[index] !== undefined) node.textContent = values[index]; });
+      }).catch(() => { homeStats.setAttribute("data-stats-stale", "true"); });
+  }
+
+  if (themeButton) {
       themeButton.textContent = theme === "dark" ? "Light mode" : "Dark mode";
       themeButton.setAttribute("aria-pressed", String(theme === "dark"));
     }
