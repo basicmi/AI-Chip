@@ -11,7 +11,8 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
     <h1>Navigate the<br><span>AI accelerator</span> landscape.</h1>
     <p class="home-hero-lede">A curated, evidence-led map of the chips, software stacks and benchmarks shaping modern AI infrastructure — from silicon and IP to kernels, runtimes and serving systems.</p>
     <div class="home-actions">
-      <a class="button button-primary" href="{{ '/directory/' | relative_url }}">Explore hardware <span aria-hidden="true">↗</span></a>
+      <a class="button button-primary" href="{{ '/products/' | relative_url }}">Compare products <span aria-hidden="true">↗</span></a>
+      <a class="button button-secondary" href="{{ '/directory/' | relative_url }}">Explore hardware</a>
       <a class="button button-secondary" href="{{ '/compatibility/' | relative_url }}">Open compatibility explorer</a>
     </div>
     <div class="home-metrics" aria-label="Current database coverage" data-home-stats data-compat-source="{{ '/data/compatibility.json' | relative_url }}" data-workload-source="{{ '/data/workloads.json' | relative_url }}" data-benchmark-source="{{ '/data/benchmark-projects.json' | relative_url }}">
