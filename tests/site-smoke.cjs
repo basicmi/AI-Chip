@@ -46,6 +46,7 @@ const { chromium } = require("playwright");
     await page.locator("main#main-content").waitFor();
   }
 
+  homeDataRequests.length = 0;
   await page.goto(base + "/", { waitUntil: "networkidle" });
   const landscape = page.locator(".hero-visual-frame img");
   await landscape.waitFor();
@@ -64,7 +65,6 @@ const { chromium } = require("playwright");
       JSON.stringify(landscapeInfo));
   }
 
-  homeDataRequests.length = 0;
   await page.waitForFunction(() => {
     const stats = document.querySelector("[data-home-stats]");
     return stats && stats.dataset.statsLoaded === "true";
