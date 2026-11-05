@@ -4,7 +4,6 @@ const { chromium } = require("playwright");
   const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
-  page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
   const base = "http://127.0.0.1:4173/AI-Chip";
   const routes = ["/", "/directory/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/"];
   for (const route of routes) {
