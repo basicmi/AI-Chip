@@ -109,7 +109,7 @@ const { chromium } = require("playwright");
   }
   const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!mi355Evidence.includes("Fresh evidence") ||
-      !mi355Evidence.includes("1 evidence records") ||
+      !mi355Evidence.includes("1 evidence record") ||
       !mi355Evidence.includes("5 audited claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
   }
