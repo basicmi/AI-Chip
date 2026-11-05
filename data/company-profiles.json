@@ -22,11 +22,88 @@
       "directory_anchor": "Nvidia",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png",
       "summary": "NVIDIA turned GPUs into the default AI training/inference substrate via CUDA (2007) and successive datacenter architectures. From Pascal/Volta Tensor Cores through Ampere and Hopper, the stack evolved into rack-scale Grace+Blackwell systems; Rubin extends that AI-factory model into 2026.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "b200-sxm",
+          "name": "NVIDIA B200 SXM",
+          "product_type": "gpu",
+          "architecture": "Blackwell",
+          "generation": "Blackwell / B200",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "b200-memory-capacity",
+            "b200-memory-bandwidth",
+            "b200-nvlink-bandwidth"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "b200-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists 180 GB of HBM3e memory per B200 SXM GPU.",
+          "value": 180,
+          "unit": "GB HBM3e",
+          "scope": "Per B200 SXM GPU in the HGX B200 8-GPU baseboard.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor specification; not a measured application result."
+        },
+        {
+          "id": "b200-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists up to 8 TB/s GPU memory bandwidth for B200 SXM.",
+          "value": 8,
+          "unit": "TB/s",
+          "scope": "Per B200 SXM GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Peak bandwidth; actual application bandwidth depends on workload and implementation."
+        },
+        {
+          "id": "b200-nvlink-bandwidth",
+          "subject_type": "product",
+          "subject_id": "b200-sxm",
+          "topic": "interconnect",
+          "statement": "HGX B200 documentation lists 1.8 TB/s GPU-to-GPU bandwidth.",
+          "value": 1.8,
+          "unit": "TB/s",
+          "scope": "GPU-to-GPU bandwidth in the HGX B200 8-GPU baseboard; not external network bandwidth.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-hgx-b200-docs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "System topology figure; retain the HGX B200 configuration boundary."
+        }
+      ],
+      "evidence": [
+        {
+          "id": "nvidia-hgx-b200-docs",
+          "title": "NVIDIA HGX AI Factory — B200 component specifications",
+          "url": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-08-31",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The documentation page states it was last updated on 2026-08-31."
+        }
+      ],
       "references": [
         {
           "id": "ref-nvidia-1",
@@ -122,11 +199,122 @@
       "directory_anchor": "AMD",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png",
       "summary": "AMD’s datacenter AI story runs through the Instinct line on CDNA architecture (distinct from RDNA gaming GPUs), with ROCm as the software stack. MI100/MI200 established HBM-heavy training SKUs; MI300A/X (CDNA 3, 2023) brought chiplet APU/GPU designs into large LLM clusters. MI350 (CDNA 4, 2025) pushes HBM3E capacity and low-precision datatypes; MI400 / Helios rack systems headline the 2026 roadmap alongside deep hyperscaler partnerships.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "mi355x",
+          "name": "AMD Instinct MI355X",
+          "product_type": "gpu",
+          "architecture": "CDNA 4",
+          "generation": "Instinct MI350 Series",
+          "process_node": "TSMC 3nm | 6nm FinFET",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "mi355x-architecture",
+            "mi355x-memory-capacity",
+            "mi355x-memory-bandwidth",
+            "mi355x-mxfp4-peak",
+            "mi355x-tbp"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "mi355x-architecture",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "architecture",
+          "statement": "AMD identifies MI355X as based on its 4th-generation CDNA architecture.",
+          "value": "CDNA 4",
+          "scope": "GPU architecture.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor product specification."
+        },
+        {
+          "id": "mi355x-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "memory_capacity",
+          "statement": "AMD lists 288 GB of HBM3E memory for MI355X.",
+          "value": 288,
+          "unit": "GB HBM3E",
+          "scope": "Per MI355X GPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor product specification."
+        },
+        {
+          "id": "mi355x-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "memory_bandwidth",
+          "statement": "AMD lists peak memory bandwidth of 8 TB/s for MI355X.",
+          "value": 8,
+          "unit": "TB/s",
+          "scope": "Per MI355X GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Peak bandwidth; not an application measurement."
+        },
+        {
+          "id": "mi355x-mxfp4-peak",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "compute",
+          "statement": "AMD lists 10.1 PFLOPs peak MXFP4 matrix performance for MI355X.",
+          "value": 10.1,
+          "unit": "PFLOPs",
+          "scope": "Per MI355X GPU; peak MXFP4 matrix specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; keep precision and matrix-operation context when comparing."
+        },
+        {
+          "id": "mi355x-tbp",
+          "subject_type": "product",
+          "subject_id": "mi355x",
+          "topic": "power",
+          "statement": "AMD lists typical board power (TBP) of 1,400 W for MI355X.",
+          "value": 1400,
+          "unit": "W TBP",
+          "scope": "MI355X OAM module; vendor-listed TBP.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi355x-product-page"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "TBP is not a measured wall-power value for a full server."
+        }
+      ],
+      "evidence": [
+        {
+          "id": "amd-mi355x-product-page",
+          "title": "AMD Instinct MI355X product specifications",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi355x.html",
+          "publisher": "AMD",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements."
+        }
+      ],
       "references": [
         {
           "id": "ref-amd-1",
@@ -322,11 +510,139 @@
       "directory_anchor": "Google",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png",
       "summary": "Google invented the modern custom-AI-ASIC pattern with TPU v1 (2015) for production inference, then opened Cloud TPU for external training. Each generation scaled systolic MXUs, HBM, and pod interconnect; v4/v5 pods trained many Google foundation models, while Trillium (v6e) and Ironwood (v7) address GenAI train/serve economics. Edge TPU (Coral) and Pixel Tensor are related but separate product lines.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "tpu7x-ironwood",
+          "name": "Google TPU7x (Ironwood)",
+          "product_type": "asic",
+          "architecture": "TPU7x / Ironwood",
+          "generation": "7th-generation TPU",
+          "market_segment": "Google Cloud AI training and inference",
+          "availability": "shipping",
+          "claim_ids": [
+            "tpu7x-memory-capacity",
+            "tpu7x-memory-bandwidth",
+            "tpu7x-ici-bandwidth",
+            "tpu7x-bf16-compute",
+            "tpu7x-fp8-compute",
+            "tpu7x-pod-scale"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "tpu7x-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "memory_capacity",
+          "statement": "Google Cloud lists 192 GiB of TPU memory per TPU7x (Ironwood) chip.",
+          "value": 192,
+          "unit": "GiB",
+          "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Cloud product documentation; preserve GiB units."
+        },
+        {
+          "id": "tpu7x-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "memory_bandwidth",
+          "statement": "Google Cloud lists 7,380 GB/s TPU memory bandwidth for TPU7x (Ironwood).",
+          "value": 7380,
+          "unit": "GB/s",
+          "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor-published specification."
+        },
+        {
+          "id": "tpu7x-ici-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "interconnect",
+          "statement": "Google Cloud lists 1,200 GB/s interconnect (ICI) bandwidth per TPU7x chip.",
+          "value": 1200,
+          "unit": "GB/s",
+          "scope": "Per TPU7x chip; ICI bandwidth, not data-center network bandwidth.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor-published ICI figure; do not compare directly with Ethernet or InfiniBand bandwidth."
+        },
+        {
+          "id": "tpu7x-bf16-compute",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "compute",
+          "statement": "Google Cloud lists 2,307 TFLOPs peak BF16 compute per TPU7x chip.",
+          "value": 2307,
+          "unit": "TFLOPs BF16",
+          "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+        },
+        {
+          "id": "tpu7x-fp8-compute",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "compute",
+          "statement": "Google Cloud lists 4,614 TFLOPs peak FP8 compute per TPU7x chip.",
+          "value": 4614,
+          "unit": "TFLOPs FP8",
+          "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+        },
+        {
+          "id": "tpu7x-pod-scale",
+          "subject_type": "product",
+          "subject_id": "tpu7x-ironwood",
+          "topic": "deployment",
+          "statement": "Google Cloud lists up to 9,216 TPU7x chips per pod.",
+          "value": 9216,
+          "unit": "chips per pod",
+          "scope": "Maximum TPU7x pod scale in the Google Cloud TPU version table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent."
+        }
+      ],
+      "evidence": [
+        {
+          "id": "google-cloud-tpu7x-specs",
+          "title": "Google Cloud — Understand TPUs",
+          "url": "https://docs.cloud.google.com/docs/compute-area/tpus?hl=en",
+          "publisher": "Google Cloud",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The TPU7x values are taken from the published TPU version and machine-series table."
+        }
+      ],
       "references": [
         {
           "id": "ref-google-1",
