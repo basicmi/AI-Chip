@@ -62,7 +62,7 @@ def hardware_identity(name: str | None):
         (("maia 100",), "Microsoft", "microsoft-maia", "maia100"),
         (("mtia 300",), "Meta", "meta-mtia", "mtia-300"),
         (("mtia v2", "mtia-v2"), "Meta", "meta-mtia", "mtia-v2"),
-        (("wse-3", "cerebras"), "Cerebras", "cerebras-wse", "wse3"),
+        (("wse-3",), "Cerebras", "cerebras-wse", "wse3"),
         (("wse-2",), "Cerebras", "cerebras-wse", "wse2"),
     ]
     for needles, vendor, platform_id, product_id in rules:
@@ -74,6 +74,8 @@ def hardware_identity(name: str | None):
         return "AMD", "amd-gpu", None
     if "intel" in text or "arc" in text:
         return "Intel", "intel-xpu", None
+    if "cerebras" in text:
+        return "Cerebras", "cerebras-wse", None
     return None, None, None
 
 
