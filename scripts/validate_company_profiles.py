@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "company-profiles.json"
 DIRECTORY = ROOT / "directory.md"
 WORKLOADS = ROOT / "data" / "workloads.json"
-BENCHMARKS = ROOT / "data" / "benchmark-projects.json
+BENCHMARKS = ROOT / "data" / "benchmark-projects.json"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CATEGORIES = {
     "IC Vendors", "Tech Giants & HPC Vendors", "Traditional IP Vendors",
