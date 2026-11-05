@@ -297,6 +297,11 @@ const { chromium } = require("playwright");
     throw new Error("Like-for-like MLPerf filters did not return AMD DeepSeek R1 Server results");
   }
   await page.locator("[data-results-reset]").click();
+  await page.locator("[data-results-inferred]").selectOption("true");
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 125) {
+    throw new Error("Inferred-submission filter should isolate the 125 source-marked inferred rows");
+  }
+  await page.locator("[data-results-reset]").click();
   const resultDetails = page.locator("[data-results-rows] .benchmark-result-details").first();
   await resultDetails.locator("summary").click();
   if (!(await resultDetails.locator(".benchmark-result-detail-links a").count())) {
