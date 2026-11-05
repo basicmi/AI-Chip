@@ -13,16 +13,18 @@ description: Explore and compare AI accelerator products using source-linked spe
     <span>Registry <strong data-product-version>Loading…</strong></span>
     <span>Last reviewed <strong data-product-reviewed>—</strong></span>
     <a href="{{ '/data/company-profiles.json' | relative_url }}">Raw product registry ↗</a>
-    <a href="https://github.com/basicmi/AI-Chip/blob/master/schemas/company-profiles.schema.json" target="_blank" rel="noopener noreferrer">Schema v1.1 ↗</a>
+    <a href="https://github.com/basicmi/AI-Chip/blob/master/schemas/company-profiles.schema.json" target="_blank" rel="noopener noreferrer">Schema v1.2 ↗</a>
   </div>
 </section>
 
-<section class="product-explorer" data-product-explorer data-source="{{ '/data/company-profiles.json' | relative_url }}">
+<section class="product-explorer" data-product-explorer data-source="{{ '/data/company-profiles.json' | relative_url }}" data-compatibility-source="{{ '/data/compatibility.json' | relative_url }}" data-workloads-source="{{ '/data/workloads.json' | relative_url }}" data-benchmarks-href="{{ '/benchmarks/' | relative_url }}">
   <div class="product-stat-grid" aria-label="Product registry summary">
     <div class="product-stat"><span>Companies in directory</span><strong data-product-stat="companies">—</strong></div>
     <div class="product-stat"><span>Structured products</span><strong data-product-stat="products">—</strong></div>
     <div class="product-stat"><span>Structured claims</span><strong data-product-stat="claims">—</strong></div>
     <div class="product-stat"><span>Reviewed source records</span><strong data-product-stat="evidence">—</strong></div>
+    <div class="product-stat"><span>Software integrations</span><strong data-product-stat="integrations">—</strong></div>
+    <div class="product-stat"><span>Workload paths</span><strong data-product-stat="workloadPaths">—</strong></div>
   </div>
 
   <section class="product-filter-panel">

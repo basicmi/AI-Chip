@@ -13,6 +13,7 @@ DATA = ROOT / "data" / "company-profiles.json"
 DIRECTORY = ROOT / "directory.md"
 WORKLOADS = ROOT / "data" / "workloads.json"
 BENCHMARKS = ROOT / "data" / "benchmark-projects.json"
+COMPATIBILITY = ROOT / "data" / "compatibility.json"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CATEGORIES = {
     "IC Vendors", "Tech Giants & HPC Vendors", "Traditional IP Vendors",
@@ -72,6 +73,7 @@ def main():
         directory = unescape(DIRECTORY.read_text(encoding="utf-8"))
         workload_db = json.loads(WORKLOADS.read_text(encoding="utf-8"))
         benchmark_db = json.loads(BENCHMARKS.read_text(encoding="utf-8"))
+        compatibility_db = json.loads(COMPATIBILITY.read_text(encoding="utf-8"))
     except Exception as exc:
         print(f"FAIL: cannot read company profile registry or directory: {exc}", file=sys.stderr)
         return 2
@@ -81,7 +83,7 @@ def main():
                  "profile_status_definitions", "companies"], "root")
     if not isinstance(db, dict):
         return 2
-    check(db.get("schema_version") == "1.1", "root: schema_version must be 1.1")
+    check(db.get("schema_version") == "1.2", "root: schema_version must be 1.2")
     check(valid_date(db.get("registry_reviewed_at")), "root: invalid registry_reviewed_at")
     policy = db.get("freshness_policy", {})
     require(policy, ["fresh_within_days", "stale_after_days",
@@ -110,6 +112,7 @@ def main():
 
     workload_ids = {item.get("id") for item in workload_db.get("workloads", []) if isinstance(item, dict)}
     benchmark_ids = {item.get("id") for item in benchmark_db.get("projects", []) if isinstance(item, dict)}
+    compatibility_platform_ids = {item.get("id") for item in compatibility_db.get("platforms", []) if isinstance(item, dict)}
 
     companies = db.get("companies", [])
     check(isinstance(companies, list) and len(companies) > 0,
@@ -264,6 +267,15 @@ def main():
                       f"{pwhere}: die_count must be a positive integer")
             related = product.get("related_product_ids", [])
             check(isinstance(related, list), f"{pwhere}: related_product_ids must be an array")
+            compatibility_refs = product.get("compatibility_platform_ids", [])
+            check(isinstance(compatibility_refs, list),
+                  f"{pwhere}: compatibility_platform_ids must be an array")
+            if isinstance(compatibility_refs, list):
+                check(len(compatibility_refs) == len(set(compatibility_refs)),
+                      f"{pwhere}: compatibility_platform_ids must be unique")
+                for platform_id in compatibility_refs:
+                    check(platform_id in compatibility_platform_ids,
+                          f"{pwhere}: unknown compatibility platform {platform_id}")
             check(isinstance(product.get("claim_ids"), list), f"{pwhere}: claim_ids must be an array")
             product_claim_refs.update(product.get("claim_ids", []))
 

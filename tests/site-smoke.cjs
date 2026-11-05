@@ -120,7 +120,7 @@ const { chromium } = require("playwright");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.1" || productCount !== 16 ||
+  if (profileRegistry.schema_version !== "1.2" || productCount !== 16 ||
       claimCount !== 70 || evidenceCount !== 17 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
@@ -188,13 +188,22 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "16";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "50,16,70,17") {
+  if (productStats.join(",") !== "50,16,70,17,27,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
   await page.locator("[data-product-search]").fill("Trainium2");
   if (await page.locator(".product-card-title").count() !== 1 ||
       !(await page.locator(".product-card-title").first().textContent()).includes("Trainium2")) {
     throw new Error("Product Explorer search did not isolate Trainium2");
+  }
+  const trainiumCardText = (await page.locator(".product-card").first().textContent()).toLowerCase();
+  if (!trainiumCardText.includes("torchneuron") ||
+      !trainiumCardText.includes("vllm neuron") ||
+      !trainiumCardText.includes("llm serving") ||
+      !trainiumCardText.includes("llm pretraining") ||
+      !trainiumCardText.includes("integration only") ||
+      !trainiumCardText.includes("no product-specific benchmark result")) {
+    throw new Error("Product Explorer did not show platform software, workload and benchmark evidence boundaries");
   }
   await page.locator('[data-compare-product="trainium2"]').click();
   await page.locator("[data-product-search]").fill("Trainium3");

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.05-1",
+  "database_version": "2026.11.05-2",
   "last_reviewed": "2026-11-05",
   "scope": "Workload taxonomy and candidate hardware/software execution paths. A path may only document a software integration or vendor report; it is not a certification of workload support. Only explicit workload tests or benchmark records can establish workload-specific validation.",
   "status_definitions": {
@@ -514,6 +514,160 @@
         "model": "DeepSeek-V4 preview",
         "device_scope": "Biren BR166"
       },
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-intel-gaudi-vllm",
+      "platform_id": "intel-gaudi",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "intel-gaudi-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "Gaudi documentation lists a vLLM hardware-plugin path for Gaudi 2 and Gaudi 3.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-google-tpu-torchpytorch-pretraining",
+      "platform_id": "google-tpu",
+      "workload_id": "llm-pretraining",
+      "integration_ids": [
+        "google-tpu-torchtpu"
+      ],
+      "status": "integration_only",
+      "scope": "Google Cloud documents PyTorch training on Cloud TPU through TorchTPU; this is an integration record, not a measured training result.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-google-tpu-torchpytorch-finetuning",
+      "platform_id": "google-tpu",
+      "workload_id": "llm-finetuning",
+      "integration_ids": [
+        "google-tpu-torchtpu"
+      ],
+      "status": "integration_only",
+      "scope": "Google Cloud documents fine-tuning open models on Cloud TPU through its PyTorch-native TPU stack; no product-specific benchmark is attached.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-google-tpu-vllm-serving",
+      "platform_id": "google-tpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "google-tpu-vllm"
+      ],
+      "status": "integration_only",
+      "scope": "Google Cloud documents vLLM serving on Cloud TPU through the TorchTPU backend; exact model recipes and TPU generation support vary.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-google-tpu-sglang-serving",
+      "platform_id": "google-tpu",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "google-tpu-sglang"
+      ],
+      "status": "integration_only",
+      "scope": "Google Cloud documents SGLang serving on Cloud TPU through the TorchTPU backend; exact model recipes and TPU generation support vary.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-aws-trainium-torchneuron-pretraining",
+      "platform_id": "aws-trainium",
+      "workload_id": "llm-pretraining",
+      "integration_ids": [
+        "aws-trainium-torch-neuron"
+      ],
+      "status": "integration_only",
+      "scope": "AWS Neuron documents PyTorch training on Trainium through TorchNeuron; TorchNeuron is public beta in Neuron 2.33.0.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-aws-trainium-torchneuron-finetuning",
+      "platform_id": "aws-trainium",
+      "workload_id": "llm-finetuning",
+      "integration_ids": [
+        "aws-trainium-torch-neuron"
+      ],
+      "status": "integration_only",
+      "scope": "AWS Neuron documents training and fine-tuning paths on Trainium; this record does not assert a workload test or benchmark.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-aws-trainium-vllm-serving",
+      "platform_id": "aws-trainium",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "aws-trainium-vllm-neuron"
+      ],
+      "status": "integration_only",
+      "scope": "AWS Neuron documents vLLM Neuron as an LLM serving path for Trainium2 and Trainium3; model coverage is recipe-specific.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-cerebras-pytorch-pretraining",
+      "platform_id": "cerebras-wse",
+      "workload_id": "llm-pretraining",
+      "integration_ids": [
+        "cerebras-pytorch-modelzoo"
+      ],
+      "status": "integration_only",
+      "scope": "Cerebras documents PyTorch and ModelZoo training workflows on wafer-scale systems; no measured result is attached to this path.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-cerebras-pytorch-finetuning",
+      "platform_id": "cerebras-wse",
+      "workload_id": "llm-finetuning",
+      "integration_ids": [
+        "cerebras-pytorch-modelzoo"
+      ],
+      "status": "integration_only",
+      "scope": "Cerebras documents fine-tuning workflows through its PyTorch and ModelZoo stack; hardware and model coverage are release-specific.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
+      "metrics": [],
+      "last_checked": "2026-11-05"
+    },
+    {
+      "id": "path-cerebras-inference",
+      "platform_id": "cerebras-wse",
+      "workload_id": "llm-serving",
+      "integration_ids": [
+        "cerebras-inference-sdk"
+      ],
+      "status": "integration_only",
+      "scope": "Cerebras documents an Inference SDK; this path records public software entry points, not a product-specific benchmark.",
+      "limitations": "This is a documented software/workload path only. No product-specific correctness run, configuration, throughput, latency, power or independent benchmark result is attached. Do not interpret this as workload-tested or benchmarked support.",
+      "configuration": {},
       "metrics": [],
       "last_checked": "2026-11-05"
     }

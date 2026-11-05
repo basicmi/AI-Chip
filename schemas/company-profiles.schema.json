@@ -17,7 +17,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "database_version": {
       "type": "string",
@@ -351,6 +351,13 @@
           "$ref": "#/$defs/nullable_date"
         },
         "related_product_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "compatibility_platform_ids": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/id"
