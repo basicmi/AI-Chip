@@ -62,16 +62,16 @@ jobs:
       - name: Verify static assets in generated site
         run: |
           test -s _site/assets/js/benchmark-explorer.js
-          test -s _site/resource/AI_Chip_Landscape_v0p9.svg
+          test -s _site/resource/AI_Chip_Landscape_v0p9p1.svg
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
-          path = "resource/AI_Chip_Landscape_v0p9.svg"
+          path = "resource/AI_Chip_Landscape_v0p9p1.svg"
           root = ET.parse(path).getroot()
           assert root.tag.endswith("svg"), "Landscape asset is not an SVG document"
           assert root.attrib.get("viewBox") == "0 0 2000 1260", "Unexpected landscape canvas"
           images = root.findall("{http://www.w3.org/2000/svg}image")
-          assert len(images) == 10, f"Expected 10 embedded brand marks, found {len(images)}"
-          print(f"PASS: landscape SVG parsed; {len(images)} embedded logo images.")
+          assert len(images) == 48, f"Expected 10 embedded brand marks, found {len(images)}"
+          assert all(image.attrib.get('{http://www.w3.org/1999/xlink}href', '').startswith('data:image/') for image in images), 'All company logos must be embedded data URIs'\n          print(f"PASS: landscape SVG parsed; {len(images)} embedded company logos.")
           PY
           echo "Benchmark explorer and landscape assets found in generated site."
       - name: Install browser test dependency
