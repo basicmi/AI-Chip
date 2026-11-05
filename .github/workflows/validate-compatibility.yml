@@ -1,0 +1,33 @@
+name: Validate compatibility database
+
+on:
+  pull_request:
+    paths:
+      - "data/compatibility.json"
+      - "schemas/compatibility.schema.json"
+      - "scripts/validate_compatibility.py"
+      - ".github/workflows/validate-compatibility.yml"
+  push:
+    branches:
+      - master
+    paths:
+      - "data/compatibility.json"
+      - "schemas/compatibility.schema.json"
+      - "scripts/validate_compatibility.py"
+      - ".github/workflows/validate-compatibility.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate compatibility records
+        run: python3 scripts/validate_compatibility.py
