@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "database_version": "2026.11.05-1",
+  "schema_version": "1.1",
+  "database_version": "2026.11.05-2",
   "registry_reviewed_at": "2026-11-05",
   "scope": "Structured identity and source-link index for the company profiles published in directory.md. Summaries and reference links are inherited from the existing directory. They are not claim-level evidence and have not been independently audited.",
   "freshness_policy": {
@@ -39,6 +39,27 @@
             "b200-nvlink-bandwidth",
             "b200-architecture"
           ]
+        },
+        {
+          "id": "gb200-nvl72",
+          "name": "NVIDIA GB200 NVL72",
+          "product_type": "system",
+          "architecture": "Grace Blackwell / Blackwell",
+          "generation": "Blackwell / GB200",
+          "family": "NVIDIA GB200",
+          "market_segment": "Rack-scale AI training and inference",
+          "availability": "shipping",
+          "form_factor": "Liquid-cooled rack-scale system",
+          "system_configuration": "36 Grace CPUs + 72 Blackwell GPUs; one 72-GPU NVLink domain",
+          "notes": "System-level record. Aggregate rack specifications must not be compared directly with per-chip GPU specifications.",
+          "claim_ids": [
+            "gb200-gpu-count",
+            "gb200-hbm-capacity",
+            "gb200-hbm-bandwidth",
+            "gb200-nvlink-bandwidth",
+            "gb200-nvfp4-sparse",
+            "gb200-nvfp4-dense"
+          ]
         }
       ],
       "claims": [
@@ -56,7 +77,12 @@
             "nvidia-hgx-b200-docs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor specification; not a measured application result."
+          "notes": "Vendor specification; not a measured application result.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
         },
         {
           "id": "b200-memory-bandwidth",
@@ -72,7 +98,12 @@
             "nvidia-hgx-b200-docs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Peak bandwidth; actual application bandwidth depends on workload and implementation."
+          "notes": "Peak bandwidth; actual application bandwidth depends on workload and implementation.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
         },
         {
           "id": "b200-nvlink-bandwidth",
@@ -88,7 +119,14 @@
             "nvidia-hgx-b200-docs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "System topology figure; retain the HGX B200 configuration boundary."
+          "notes": "System topology figure; retain the HGX B200 configuration boundary.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "unspecified",
+            "configuration": "Per GPU NVLink bandwidth in HGX B200 8-GPU baseboard."
+          }
         },
         {
           "id": "b200-architecture",
@@ -104,6 +142,133 @@
             "nvidia-hgx-b200-docs"
           ],
           "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gb200-gpu-count",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "deployment",
+          "statement": "NVIDIA specifies 72 Blackwell GPUs in a GB200 NVL72 rack.",
+          "value": 72,
+          "unit": "GPUs",
+          "scope": "Per GB200 NVL72 rack.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gb200-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists 13.4 TB of HBM3E GPU memory for GB200 NVL72.",
+          "value": 13.4,
+          "unit": "TB HBM3E",
+          "scope": "Aggregate GPU memory across 72 GPUs in one rack.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gb200-hbm-bandwidth",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists up to 576 TB/s aggregate GPU memory bandwidth for GB200 NVL72.",
+          "value": 576,
+          "unit": "TB/s",
+          "scope": "Aggregate HBM bandwidth across the 72-GPU rack.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gb200-nvlink-bandwidth",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "interconnect",
+          "statement": "NVIDIA lists 130 TB/s NVLink bandwidth for the GB200 NVL72 rack.",
+          "value": 130,
+          "unit": "TB/s",
+          "scope": "NVLink fabric bandwidth for the 72-GPU rack.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "interconnect",
+            "directionality": "unspecified"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gb200-nvfp4-sparse",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "compute",
+          "statement": "NVIDIA lists up to 1,440 PFLOPs NVFP4 Tensor Core performance for GB200 NVL72 with sparsity.",
+          "value": 1440,
+          "unit": "PFLOPs NVFP4",
+          "scope": "Aggregate rack-level Tensor Core peak; sparse specification.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "rack",
+            "operation": "matrix",
+            "precision": "NVFP4",
+            "sparsity": "structured_sparse"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Sparse vendor peak. The corresponding dense figure is half the sparse specification."
+        },
+        {
+          "id": "gb200-nvfp4-dense",
+          "subject_type": "product",
+          "subject_id": "gb200-nvl72",
+          "topic": "compute",
+          "statement": "The dense NVFP4 Tensor Core peak corresponding to NVIDIA's 1,440 PFLOPs sparse figure is 720 PFLOPs.",
+          "value": 720,
+          "unit": "PFLOPs NVFP4",
+          "scope": "Aggregate rack-level Tensor Core peak; dense specification derived from NVIDIA's published sparse/dense footnote.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "rack",
+            "operation": "matrix",
+            "precision": "NVFP4",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-gb200-nvl72-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Derived by applying NVIDIA's explicit footnote that dense performance is one-half of the sparse figure; not a separate measured result."
         }
       ],
       "evidence": [
@@ -118,6 +283,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The documentation page states it was last updated on 2026-08-31."
+        },
+        {
+          "id": "nvidia-gb200-nvl72-specs",
+          "title": "NVIDIA GB200 NVL72 official specifications",
+          "url": "https://www.nvidia.com/en-us/data-center/gb200-nvl72/",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official NVIDIA product page. Rack-level values describe the complete 72-GPU GB200 NVL72 system; tensor performance figures are published with sparsity unless stated otherwise."
         }
       ],
       "references": [
@@ -180,11 +357,218 @@
       "directory_anchor": "Habana",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png",
       "summary": "Intel’s AI accelerator path consolidated around Habana Labs after the 2019 acquisition. Gaudi (training) and Goya (inference) established Ethernet-centric scale-out as an alternative to proprietary GPU fabrics; Gaudi 2 broadened LLM training, and Gaudi 3 (2024) targets enterprise generative AI with OEM and cloud availability. Intel also folds AI into Xeon AMX and Arc/Flex GPUs, but Gaudi remains the dedicated datacenter accelerator brand.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "gaudi2",
+          "name": "Intel Gaudi 2",
+          "product_type": "asic",
+          "architecture": "Habana Gaudi2",
+          "generation": "Gaudi 2",
+          "family": "Intel Gaudi",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "form_factor": "OAM accelerator module",
+          "claim_ids": [
+            "gaudi2-memory-capacity",
+            "gaudi2-memory-bandwidth",
+            "gaudi2-network-bandwidth"
+          ]
+        },
+        {
+          "id": "gaudi3",
+          "name": "Intel Gaudi 3",
+          "product_type": "asic",
+          "architecture": "Habana Gaudi3",
+          "generation": "Gaudi 3",
+          "family": "Intel Gaudi",
+          "process_node": "TSMC 5nm",
+          "market_segment": "Enterprise generative AI training and inference",
+          "availability": "shipping",
+          "form_factor": "OAM accelerator / PCIe card",
+          "notes": "White-paper figures refer to the Gaudi 3 accelerator architecture; distinguish OAM and PCIe product configurations where board power or I/O differs.",
+          "claim_ids": [
+            "gaudi3-memory-capacity",
+            "gaudi3-memory-bandwidth",
+            "gaudi3-fp8-peak",
+            "gaudi3-rdma-ports"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "gaudi2-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "gaudi2",
+          "topic": "memory_capacity",
+          "statement": "Intel specifies 96 GB of HBM2E memory per Gaudi2 accelerator.",
+          "value": 96,
+          "unit": "GB HBM2E",
+          "scope": "Per Gaudi2 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi2-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "gaudi2",
+          "topic": "memory_bandwidth",
+          "statement": "Intel specifies 2.45 TB/s HBM bandwidth for Gaudi2.",
+          "value": 2.45,
+          "unit": "TB/s",
+          "scope": "Per Gaudi2 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi2-network-bandwidth",
+          "subject_type": "product",
+          "subject_id": "gaudi2",
+          "topic": "interconnect",
+          "statement": "Intel specifies 2.4 Tb/s native networking bandwidth from 24 integrated 100 Gb/s RoCE NICs.",
+          "value": 2.4,
+          "unit": "Tb/s",
+          "scope": "Aggregate integrated NIC bandwidth per Gaudi2 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "aggregate",
+            "configuration": "24 x 100 Gb/s RoCE v2 NICs"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi3-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "gaudi3",
+          "topic": "memory_capacity",
+          "statement": "Intel specifies 128 GB of HBM2E memory for Gaudi3.",
+          "value": 128,
+          "unit": "GB HBM2E",
+          "scope": "Per Gaudi3 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi3-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi3-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "gaudi3",
+          "topic": "memory_bandwidth",
+          "statement": "Intel specifies 3.7 TB/s HBM bandwidth for Gaudi3.",
+          "value": 3.7,
+          "unit": "TB/s",
+          "scope": "Per Gaudi3 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi3-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi3-fp8-peak",
+          "subject_type": "product",
+          "subject_id": "gaudi3",
+          "topic": "compute",
+          "statement": "Intel specifies 1.8 PFLOPs peak FP8 compute for Gaudi3.",
+          "value": 1.8,
+          "unit": "PFLOPs FP8",
+          "scope": "Per Gaudi3 accelerator; vendor peak specification.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "module",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi3-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "gaudi3-rdma-ports",
+          "subject_type": "product",
+          "subject_id": "gaudi3",
+          "topic": "interconnect",
+          "statement": "Intel specifies 24 integrated 200 Gb/s RDMA NIC ports on Gaudi3.",
+          "value": 24,
+          "unit": "ports x 200 Gb/s",
+          "scope": "Integrated NIC port count per Gaudi3 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "aggregate"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-gaudi3-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "intel-gaudi2-whitepaper",
+          "title": "Intel Gaudi2 AI Accelerators White Paper",
+          "url": "https://cdrdv2-public.intel.com/839363/Intel-Gaudi2-AI-Accelerators-whitepaper.pdf",
+          "publisher": "Intel",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Intel/Habana white paper. Memory and networking figures are per accelerator; 2.4 Tb/s is aggregate native networking capacity from 24 x 100 Gb/s RoCE NICs."
+        },
+        {
+          "id": "intel-gaudi3-whitepaper",
+          "title": "Intel Gaudi 3 AI Accelerator White Paper",
+          "url": "https://cdrdv2-public.intel.com/817486/gaudi-3-ai-accelerator-white-paper.pdf",
+          "publisher": "Intel",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Intel white paper. Describes Gaudi 3's two compute dies, 128 GB HBM2e, 3.7 TB/s bandwidth and 1.8 PFLOPs FP8/BF16 peak compute."
+        }
+      ],
       "references": [
         {
           "id": "ref-habana-1",
@@ -235,6 +619,25 @@
             "mi355x-tbp",
             "mi355x-process-node"
           ]
+        },
+        {
+          "id": "mi350x",
+          "name": "AMD Instinct MI350X",
+          "product_type": "gpu",
+          "architecture": "CDNA 4",
+          "generation": "Instinct MI350 Series",
+          "family": "AMD Instinct MI350",
+          "process_node": "TSMC 3nm | 6nm FinFET",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "shipping",
+          "form_factor": "OAM accelerator module",
+          "notes": "Per-GPU OAM product record; keep separate from the 8-GPU UBB platform.",
+          "claim_ids": [
+            "mi350x-memory-capacity",
+            "mi350x-memory-bandwidth",
+            "mi350x-mxfp4-peak",
+            "mi350x-fp8-peak"
+          ]
         }
       ],
       "claims": [
@@ -267,7 +670,12 @@
             "amd-mi355x-product-page"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor product specification."
+          "notes": "Vendor product specification.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          }
         },
         {
           "id": "mi355x-memory-bandwidth",
@@ -283,7 +691,12 @@
             "amd-mi355x-product-page"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Peak bandwidth; not an application measurement."
+          "notes": "Peak bandwidth; not an application measurement.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          }
         },
         {
           "id": "mi355x-mxfp4-peak",
@@ -299,7 +712,14 @@
             "amd-mi355x-product-page"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor theoretical peak; keep precision and matrix-operation context when comparing."
+          "notes": "Vendor theoretical peak; keep precision and matrix-operation context when comparing.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "module",
+            "operation": "matrix",
+            "precision": "MXFP4",
+            "sparsity": "dense"
+          }
         },
         {
           "id": "mi355x-tbp",
@@ -315,7 +735,12 @@
             "amd-mi355x-product-page"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "TBP is not a measured wall-power value for a full server."
+          "notes": "TBP is not a measured wall-power value for a full server.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "power"
+          }
         },
         {
           "id": "mi355x-process-node",
@@ -331,6 +756,91 @@
             "amd-mi355x-product-page"
           ],
           "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mi350x-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "mi350x",
+          "topic": "memory_capacity",
+          "statement": "AMD lists 288 GB of HBM3E memory per MI350X GPU.",
+          "value": 288,
+          "unit": "GB HBM3E",
+          "scope": "Per MI350X GPU.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi350-series-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mi350x-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mi350x",
+          "topic": "memory_bandwidth",
+          "statement": "AMD lists 8 TB/s peak memory bandwidth per MI350X GPU.",
+          "value": 8,
+          "unit": "TB/s",
+          "scope": "Per MI350X GPU; peak theoretical specification.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi350-series-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mi350x-mxfp4-peak",
+          "subject_type": "product",
+          "subject_id": "mi350x",
+          "topic": "compute",
+          "statement": "AMD lists 9.2 PFLOPs peak theoretical MXFP4 matrix performance for MI350X.",
+          "value": 9.2,
+          "unit": "PFLOPs MXFP4",
+          "scope": "Per MI350X GPU; dense matrix performance.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "module",
+            "operation": "matrix",
+            "precision": "MXFP4",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi350-series-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mi350x-fp8-peak",
+          "subject_type": "product",
+          "subject_id": "mi350x",
+          "topic": "compute",
+          "statement": "AMD lists 4.6 PFLOPs peak theoretical MXFP8/OCP-FP8 matrix performance for MI350X.",
+          "value": 4.6,
+          "unit": "PFLOPs MXFP8/OCP-FP8",
+          "scope": "Per MI350X GPU; dense matrix performance as presented in AMD's MI350 Series table.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "module",
+            "operation": "matrix",
+            "precision": "MXFP8",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi350-series-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "AMD presents MXFP8/OCP-FP8 together in this table; retain the combined source wording in the unit and statement."
         }
       ],
       "evidence": [
@@ -345,6 +855,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements."
+        },
+        {
+          "id": "amd-mi350-series-specs",
+          "title": "AMD Instinct MI350 Series specifications",
+          "url": "https://www.amd.com/en/blogs/2025/amd-instinct-mi350-series-and-beyond-accelerating-the-future-of-ai-and-hpc.html",
+          "publisher": "AMD",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-06-12",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official AMD product-family article. The table labels performance values as peak theoretical; dense matrix values are kept separate from sparse figures."
         }
       ],
       "references": [
@@ -562,6 +1084,24 @@
             "tpu7x-pod-scale",
             "tpu7x-architecture"
           ]
+        },
+        {
+          "id": "tpu-v6e-trillium",
+          "name": "Google Cloud TPU v6e (Trillium)",
+          "product_type": "asic",
+          "architecture": "TPU v6e / Trillium",
+          "generation": "6th-generation TPU",
+          "family": "Google Cloud TPU",
+          "market_segment": "Cloud AI training, fine-tuning and serving",
+          "availability": "shipping",
+          "form_factor": "Cloud TPU accelerator chip",
+          "claim_ids": [
+            "tpu-v6e-memory-capacity",
+            "tpu-v6e-memory-bandwidth",
+            "tpu-v6e-bf16-peak",
+            "tpu-v6e-ici-bandwidth",
+            "tpu-v6e-pod-scale"
+          ]
         }
       ],
       "claims": [
@@ -579,7 +1119,12 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Cloud product documentation; preserve GiB units."
+          "notes": "Cloud product documentation; preserve GiB units.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
         },
         {
           "id": "tpu7x-memory-bandwidth",
@@ -595,7 +1140,12 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor-published specification."
+          "notes": "Vendor-published specification.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
         },
         {
           "id": "tpu7x-ici-bandwidth",
@@ -611,7 +1161,13 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor-published ICI figure; do not compare directly with Ethernet or InfiniBand bandwidth."
+          "notes": "Vendor-published ICI figure; do not compare directly with Ethernet or InfiniBand bandwidth.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "bidirectional"
+          }
         },
         {
           "id": "tpu7x-bf16-compute",
@@ -627,7 +1183,14 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "dense"
+          }
         },
         {
           "id": "tpu7x-fp8-compute",
@@ -643,7 +1206,14 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Vendor theoretical peak; retain precision and chip-level scope."
+          "notes": "Vendor theoretical peak; retain precision and chip-level scope.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "dense"
+          }
         },
         {
           "id": "tpu7x-pod-scale",
@@ -659,7 +1229,12 @@
             "google-cloud-tpu7x-specs"
           ],
           "last_reviewed": "2026-11-05",
-          "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent."
+          "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "pod",
+            "operation": "system_configuration"
+          }
         },
         {
           "id": "tpu7x-architecture",
@@ -673,6 +1248,109 @@
           "claim_status": "vendor_reported",
           "evidence_ids": [
             "google-cloud-tpu7x-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "tpu-v6e-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "tpu-v6e-trillium",
+          "topic": "memory_capacity",
+          "statement": "Google Cloud specifies 32 GB of HBM per TPU v6e chip.",
+          "value": 32,
+          "unit": "GB HBM",
+          "scope": "Per TPU v6e chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-tpu-v6e-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "tpu-v6e-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu-v6e-trillium",
+          "topic": "memory_bandwidth",
+          "statement": "Google Cloud specifies 1,638 GB/s HBM bandwidth per TPU v6e chip.",
+          "value": 1638,
+          "unit": "GB/s",
+          "scope": "Per TPU v6e chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-tpu-v6e-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "tpu-v6e-bf16-peak",
+          "subject_type": "product",
+          "subject_id": "tpu-v6e-trillium",
+          "topic": "compute",
+          "statement": "Google Cloud specifies 918 TFLOPs peak BF16 compute per TPU v6e chip.",
+          "value": 918,
+          "unit": "TFLOPs BF16",
+          "scope": "Per TPU v6e chip; peak compute specification.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-tpu-v6e-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "tpu-v6e-ici-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tpu-v6e-trillium",
+          "topic": "interconnect",
+          "statement": "Google Cloud specifies 800 GB/s bidirectional ICI bandwidth per TPU v6e chip.",
+          "value": 800,
+          "unit": "GB/s",
+          "scope": "Per TPU v6e chip; bidirectional inter-chip interconnect bandwidth.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "bidirectional"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-tpu-v6e-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "tpu-v6e-pod-scale",
+          "subject_type": "product",
+          "subject_id": "tpu-v6e-trillium",
+          "topic": "deployment",
+          "statement": "Google Cloud specifies a 256-chip TPU v6e Pod.",
+          "value": 256,
+          "unit": "chips per Pod",
+          "scope": "Maximum documented TPU v6e Pod size.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "pod",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "google-tpu-v6e-specs"
           ],
           "last_reviewed": "2026-11-05"
         }
@@ -689,6 +1367,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official vendor documentation checked on 2026-11-05. These are vendor-published specifications, not independent benchmark measurements. The TPU7x values are taken from the published TPU version and machine-series table."
+        },
+        {
+          "id": "google-tpu-v6e-specs",
+          "title": "Google Cloud TPU v6e (Trillium) architecture and specifications",
+          "url": "https://docs.cloud.google.com/tpu/docs/v6e",
+          "publisher": "Google Cloud",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Google Cloud TPU documentation. Values are per TPU v6e chip unless the scope explicitly says Pod."
         }
       ],
       "references": [
@@ -761,11 +1451,288 @@
       "directory_anchor": "Amazon_AWS",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png",
       "summary": "AWS builds first-party AI silicon for EC2: Inferentia for inference and Trainium for training, compiled via the Neuron SDK. Inferentia1/2 lowered LLM serving cost on Inf1/Inf2; Trainium1 and Trainium2 (Trn1/Trn2) plus UltraServers with NeuronLink scale-up target foundation-model training and large inference inside AWS regions—often co-designed with partners such as Marvell/Annapurna.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "trainium2",
+          "name": "AWS Trainium2",
+          "product_type": "asic",
+          "architecture": "NeuronCore-v3",
+          "generation": "2nd-generation Trainium",
+          "family": "AWS Trainium",
+          "market_segment": "AWS cloud AI training and inference",
+          "availability": "shipping",
+          "form_factor": "AWS EC2 accelerator chip",
+          "claim_ids": [
+            "trainium2-memory-capacity",
+            "trainium2-memory-bandwidth",
+            "trainium2-fp8-dense",
+            "trainium2-fp8-sparse",
+            "trainium2-neuroncores"
+          ]
+        },
+        {
+          "id": "trainium3",
+          "name": "AWS Trainium3",
+          "product_type": "asic",
+          "architecture": "NeuronCore-v4",
+          "generation": "4th-generation Trainium",
+          "family": "AWS Trainium",
+          "process_node": "TSMC 3nm",
+          "market_segment": "AWS cloud AI training and inference",
+          "availability": "shipping",
+          "form_factor": "AWS EC2 accelerator chip",
+          "announced_at": "2025-12-02",
+          "first_available_at": "2025-12-02",
+          "claim_ids": [
+            "trainium3-memory-capacity",
+            "trainium3-memory-bandwidth",
+            "trainium3-fp8-peak",
+            "trainium3-bf16-peak",
+            "trainium3-neuronlink"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "trainium2-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "trainium2",
+          "topic": "memory_capacity",
+          "statement": "AWS specifies 96 GiB of HBM per Trainium2 chip.",
+          "value": 96,
+          "unit": "GiB HBM",
+          "scope": "Per Trainium2 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium2-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium2-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "trainium2",
+          "topic": "memory_bandwidth",
+          "statement": "AWS specifies 2.9 TB/s HBM bandwidth per Trainium2 chip.",
+          "value": 2.9,
+          "unit": "TB/s",
+          "scope": "Per Trainium2 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium2-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium2-fp8-dense",
+          "subject_type": "product",
+          "subject_id": "trainium2",
+          "topic": "compute",
+          "statement": "AWS specifies up to 1.3 PFLOPs dense FP8 compute per Trainium2 chip.",
+          "value": 1.3,
+          "unit": "PFLOPs FP8",
+          "scope": "Per Trainium2 chip; dense FP8 peak.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium2-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium2-fp8-sparse",
+          "subject_type": "product",
+          "subject_id": "trainium2",
+          "topic": "compute",
+          "statement": "AWS specifies up to 5.2 PFLOPs sparse FP8 compute per Trainium2 chip.",
+          "value": 5.2,
+          "unit": "PFLOPs FP8",
+          "scope": "Per Trainium2 chip; sparse FP8 peak.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "structured_sparse"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium2-specs"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Sparse result is kept separate from dense FP8; do not compare directly with dense-only figures."
+        },
+        {
+          "id": "trainium2-neuroncores",
+          "subject_type": "product",
+          "subject_id": "trainium2",
+          "topic": "architecture",
+          "statement": "AWS specifies eight NeuronCore-v3 cores per Trainium2 chip.",
+          "value": 8,
+          "unit": "NeuronCore-v3 cores",
+          "scope": "Per Trainium2 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium2-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium3-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "trainium3",
+          "topic": "memory_capacity",
+          "statement": "AWS specifies 144 GiB of device memory per Trainium3 chip.",
+          "value": 144,
+          "unit": "GiB HBM3e",
+          "scope": "Per Trainium3 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium3-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium3-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "trainium3",
+          "topic": "memory_bandwidth",
+          "statement": "AWS specifies 4.9 TB/s device-memory bandwidth per Trainium3 chip.",
+          "value": 4.9,
+          "unit": "TB/s",
+          "scope": "Per Trainium3 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium3-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium3-fp8-peak",
+          "subject_type": "product",
+          "subject_id": "trainium3",
+          "topic": "compute",
+          "statement": "AWS specifies 2,517 TFLOPs peak FP8 compute per Trainium3 chip.",
+          "value": 2517,
+          "unit": "TFLOPs FP8",
+          "scope": "Per Trainium3 chip; peak FP8 specification.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium3-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "trainium3-bf16-peak",
+          "subject_type": "product",
+          "subject_id": "trainium3",
+          "topic": "compute",
+          "statement": "AWS specifies 671 TFLOPs BF16/FP16/TF32 compute per Trainium3 chip.",
+          "value": 671,
+          "unit": "TFLOPs BF16/FP16/TF32",
+          "scope": "Per Trainium3 chip; AWS groups these formats in the architecture table.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "mixed",
+            "sparsity": "dense"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium3-architecture"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "The source reports a combined BF16/FP16/TF32 figure; preserve the combined source wording rather than assigning it to a single precision."
+        },
+        {
+          "id": "trainium3-neuronlink",
+          "subject_type": "product",
+          "subject_id": "trainium3",
+          "topic": "interconnect",
+          "statement": "AWS specifies 2.56 TB/s NeuronLink-v4 bandwidth per Trainium3 device.",
+          "value": 2.56,
+          "unit": "TB/s",
+          "scope": "Per Trainium3 device.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "unspecified"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "aws-trainium3-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "aws-trainium2-specs",
+          "title": "Amazon EC2 Trn2 instances and Trn2 UltraServers",
+          "url": "https://aws.amazon.com/blogs/aws/amazon-ec2-trn2-instances-and-trn2-ultraservers-for-aiml-training-and-inference-is-now-available/",
+          "publisher": "Amazon Web Services",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official AWS News Blog. Trainium2 figures are per chip; dense and sparse FP8 performance are separate claims."
+        },
+        {
+          "id": "aws-trainium3-architecture",
+          "title": "AWS Neuron — Trainium3 Architecture",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trainium3.html",
+          "publisher": "AWS Neuron",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official AWS Neuron architecture documentation. It distinguishes FP8, MXFP8/MXFP4, BF16 and sparse modes; only like-for-like modes should be compared."
+        }
+      ],
       "references": [
         {
           "id": "ref-amazon-aws-1",
@@ -796,11 +1763,224 @@
       "directory_anchor": "Microsoft",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png",
       "summary": "Microsoft entered custom AI silicon with Azure Maia (accelerator) and Cobalt (Arm CPU) to optimize Azure OpenAI / Copilot economics. Maia 100 (5nm, advanced packaging) is co-designed for Azure AI cloud workloads with a PyTorch/ONNX Runtime software path; subsequent Maia generations are expected to deepen rack-level integration with Azure networking and cooling.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "maia100",
+          "name": "Microsoft Azure Maia 100",
+          "product_type": "asic",
+          "architecture": "Microsoft Maia 100",
+          "generation": "Maia 100",
+          "family": "Azure Maia",
+          "process_node": "TSMC N5",
+          "market_segment": "Azure cloud AI training and inference",
+          "availability": "shipping",
+          "form_factor": "Azure cloud accelerator",
+          "claim_ids": [
+            "maia100-memory-capacity",
+            "maia100-memory-bandwidth",
+            "maia100-provisioned-power",
+            "maia100-process"
+          ]
+        },
+        {
+          "id": "maia200",
+          "name": "Microsoft Azure Maia 200",
+          "product_type": "asic",
+          "architecture": "Microsoft Maia 200",
+          "generation": "Maia 200",
+          "family": "Azure Maia",
+          "process_node": "TSMC 3nm",
+          "market_segment": "Azure cloud generative AI inference",
+          "availability": "announced",
+          "form_factor": "Azure cloud inference accelerator",
+          "announced_at": "2026-01-26",
+          "claim_ids": [
+            "maia200-memory-capacity",
+            "maia200-memory-bandwidth",
+            "maia200-sram-capacity",
+            "maia200-process"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "maia100-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "maia100",
+          "topic": "memory_capacity",
+          "statement": "Microsoft specifies 64 GB of HBM2E memory for Maia 100.",
+          "value": 64,
+          "unit": "GB HBM2E",
+          "scope": "Per Maia 100 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia100-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia100-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "maia100",
+          "topic": "memory_bandwidth",
+          "statement": "Microsoft specifies 1.8 TB/s HBM bandwidth for Maia 100.",
+          "value": 1.8,
+          "unit": "TB/s",
+          "scope": "Per Maia 100 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia100-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia100-provisioned-power",
+          "subject_type": "product",
+          "subject_id": "maia100",
+          "topic": "power",
+          "statement": "Microsoft says Maia 100 is designed for up to 700 W TDP and provisioned at 500 W.",
+          "value": 500,
+          "unit": "W provisioned",
+          "scope": "Per Maia 100 accelerator; provisioned operating configuration, not design maximum.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "power",
+            "configuration": "700 W design TDP; 500 W provisioned"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia100-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia100-process",
+          "subject_type": "product",
+          "subject_id": "maia100",
+          "topic": "process_node",
+          "statement": "Microsoft identifies TSMC N5 as the Maia 100 process technology.",
+          "value": "TSMC N5",
+          "scope": "Maia 100 SoC process technology.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia100-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia200-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "maia200",
+          "topic": "memory_capacity",
+          "statement": "Microsoft specifies 216 GB of HBM3e memory for Maia 200.",
+          "value": 216,
+          "unit": "GB HBM3e",
+          "scope": "Per Maia 200 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia200-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia200-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "maia200",
+          "topic": "memory_bandwidth",
+          "statement": "Microsoft specifies 7 TB/s HBM bandwidth for Maia 200.",
+          "value": 7,
+          "unit": "TB/s",
+          "scope": "Per Maia 200 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia200-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia200-sram-capacity",
+          "subject_type": "product",
+          "subject_id": "maia200",
+          "topic": "memory_capacity",
+          "statement": "Microsoft specifies 272 MB of on-chip SRAM for Maia 200.",
+          "value": 272,
+          "unit": "MB SRAM",
+          "scope": "On-chip SRAM per Maia 200 accelerator.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia200-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia200-process",
+          "subject_type": "product",
+          "subject_id": "maia200",
+          "topic": "process_node",
+          "statement": "Microsoft identifies TSMC 3nm as the Maia 200 process technology.",
+          "value": "TSMC 3nm",
+          "scope": "Maia 200 SoC process technology.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia200-specs"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "microsoft-maia100-specs",
+          "title": "Inside Maia 100 — Microsoft Azure Infrastructure Blog",
+          "url": "https://techcommunity.microsoft.com/blog/azureinfrastructureblog/inside-maia-100-revolutionizing-ai-workloads-with-microsofts-custom-ai-accelerat/4229118",
+          "publisher": "Microsoft",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Microsoft engineering article. It distinguishes 700 W design TDP from the 500 W provisioned operating configuration."
+        },
+        {
+          "id": "microsoft-maia200-specs",
+          "title": "Maia 200: The AI accelerator built for inference",
+          "url": "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/",
+          "publisher": "Microsoft",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-01-26",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Microsoft announcement. HBM capacity, bandwidth, SRAM and process node are vendor-reported specifications."
+        }
+      ],
       "references": [
         {
           "id": "ref-microsoft-1",
@@ -990,11 +2170,161 @@
       "directory_anchor": "Facebook",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png",
       "summary": "Meta’s MTIA (Meta Training and Inference Accelerator) is an in-house family for ranking, recommendation, and increasingly generative workloads at hyperscale. Built with Broadcom as implementation partner, MTIA has moved to a rapid multi-generation chiplet cadence (MTIA 300–500 class messaging) aimed at Meta’s production AI fleet rather than merchant sale.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "mtia-v2",
+          "name": "Meta MTIA v2",
+          "product_type": "asic",
+          "architecture": "Meta MTIA v2",
+          "generation": "MTIA v2",
+          "family": "Meta MTIA",
+          "market_segment": "Ranking and recommendation inference",
+          "availability": "announced",
+          "form_factor": "Meta data-center accelerator",
+          "claim_ids": [
+            "mtia-v2-target-workload"
+          ]
+        },
+        {
+          "id": "mtia-300",
+          "name": "Meta MTIA 300",
+          "product_type": "asic",
+          "architecture": "MTIA 300 with integrated NIC chiplets and communication offload",
+          "generation": "MTIA 300",
+          "family": "Meta MTIA",
+          "market_segment": "Ranking and recommendation model training",
+          "availability": "production",
+          "form_factor": "Meta data-center accelerator",
+          "announced_at": "2026-08-24",
+          "claim_ids": [
+            "mtia300-message-engines",
+            "mtia300-pe-grid",
+            "mtia300-reduction-throughput",
+            "mtia300-nic-chiplets"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "mtia-v2-target-workload",
+          "subject_type": "product",
+          "subject_id": "mtia-v2",
+          "topic": "deployment",
+          "statement": "Meta identifies MTIA v2 as a chip intended to power ranking and recommendation ads models.",
+          "value": "Ranking and recommendation ads models",
+          "scope": "Meta's internal ranking and recommendation workloads.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia-v2-roadmap"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Meta's article does not publish a complete MTIA v2 numerical specification table; no unreported compute or memory figures are inferred."
+        },
+        {
+          "id": "mtia300-message-engines",
+          "subject_type": "product",
+          "subject_id": "mtia-300",
+          "topic": "architecture",
+          "statement": "Meta specifies 16 dedicated message engines on MTIA 300 for communication offload.",
+          "value": 16,
+          "unit": "message engines",
+          "scope": "Per MTIA 300 chip.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mtia300-pe-grid",
+          "subject_type": "product",
+          "subject_id": "mtia-300",
+          "topic": "architecture",
+          "statement": "Meta describes a 12 x 6 grid of processing elements on MTIA 300.",
+          "value": "12 x 6",
+          "unit": "PE grid",
+          "scope": "On-chip compute grid.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mtia300-reduction-throughput",
+          "subject_type": "product",
+          "subject_id": "mtia-300",
+          "topic": "interconnect",
+          "statement": "Meta reports more than 2.8 TB/s aggregate reduction throughput from MTIA 300's near-memory compute blocks.",
+          "value": 2.8,
+          "unit": "TB/s lower bound",
+          "scope": "Aggregate on-chip reduction throughput; greater than the stated lower bound.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "communication",
+            "directionality": "aggregate"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-architecture"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "The source says more than 2.8 TB/s; value is stored as the published lower bound, not an exact measured equality."
+        },
+        {
+          "id": "mtia300-nic-chiplets",
+          "subject_type": "product",
+          "subject_id": "mtia-300",
+          "topic": "architecture",
+          "statement": "Meta identifies MTIA 300 as its first training chip with built-in NIC chiplets and communication-offloading engines.",
+          "value": "Integrated NIC chiplets and communication offload",
+          "scope": "Chip-level architecture description.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-architecture"
+          ],
+          "last_reviewed": "2026-11-05"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "meta-mtia-v2-roadmap",
+          "title": "Meta's Infrastructure Evolution and the Advent of AI",
+          "url": "https://engineering.fb.com/2025/09/29/data-infrastructure/metas-infrastructure-evolution-and-the-advent-of-ai/",
+          "publisher": "Engineering at Meta",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-09-29",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Meta engineering article. It identifies MTIA v2 as the chip intended for ranking and recommendation ads models; it does not publish a complete numerical specification table."
+        },
+        {
+          "id": "meta-mtia300-architecture",
+          "title": "MTIA 300: Meta's First Training Chip with Built-in NICs and Communication-Offloading Engines",
+          "url": "https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/",
+          "publisher": "Engineering at Meta",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-08-24",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Meta engineering article. It describes the 12x6 processing-element grid, 16 dedicated message engines and more than 2.8 TB/s reduction throughput."
+        }
+      ],
       "references": [
         {
           "id": "ref-facebook-1",
@@ -1210,11 +2540,253 @@
       "directory_anchor": "Cerebras",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png",
       "summary": "Cerebras builds wafer-scale AI processors (WSE) that place an enormous on-wafer SRAM/compute fabric into CS systems, avoiding many multi-GPU communication bottlenecks. WSE-1/2 established the approach; WSE-3 (2024, 5nm) powers CS-3 for foundation-model training and high-throughput inference with cloud and on-prem deployments.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-05",
+      "products": [
+        {
+          "id": "wse2",
+          "name": "Cerebras Wafer Scale Engine 2 (WSE-2)",
+          "product_type": "asic",
+          "architecture": "Wafer-scale mesh of compute cores and on-chip SRAM",
+          "generation": "WSE-2",
+          "family": "Cerebras WSE",
+          "market_segment": "Wafer-scale AI training and inference",
+          "availability": "shipping",
+          "form_factor": "Wafer-scale processor",
+          "claim_ids": [
+            "wse2-core-count",
+            "wse2-sram-capacity",
+            "wse2-memory-bandwidth",
+            "wse2-fabric-bandwidth"
+          ]
+        },
+        {
+          "id": "wse3",
+          "name": "Cerebras Wafer Scale Engine 3 (WSE-3)",
+          "product_type": "asic",
+          "architecture": "5nm wafer-scale engine",
+          "generation": "WSE-3",
+          "family": "Cerebras WSE",
+          "process_node": "5nm",
+          "market_segment": "Wafer-scale foundation-model training and inference",
+          "availability": "shipping",
+          "form_factor": "Wafer-scale processor",
+          "announced_at": "2024-03-13",
+          "claim_ids": [
+            "wse3-core-count",
+            "wse3-sram-capacity",
+            "wse3-memory-bandwidth",
+            "wse3-peak-ai-compute"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "wse2-core-count",
+          "subject_type": "product",
+          "subject_id": "wse2",
+          "topic": "architecture",
+          "statement": "Cerebras specifies 850,000 cores in WSE-2.",
+          "value": 850000,
+          "unit": "cores",
+          "scope": "Entire WSE-2 wafer-scale processor.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse2-sram-capacity",
+          "subject_type": "product",
+          "subject_id": "wse2",
+          "topic": "memory_capacity",
+          "statement": "Cerebras specifies 40 GB of on-chip SRAM in WSE-2.",
+          "value": 40,
+          "unit": "GB SRAM",
+          "scope": "On-chip SRAM across the WSE-2 processor.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse2-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "wse2",
+          "topic": "memory_bandwidth",
+          "statement": "Cerebras specifies 20 PB/s on-chip memory bandwidth for WSE-2.",
+          "value": 20,
+          "unit": "PB/s",
+          "scope": "Aggregate on-wafer memory bandwidth.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory",
+            "directionality": "aggregate"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse2-fabric-bandwidth",
+          "subject_type": "product",
+          "subject_id": "wse2",
+          "topic": "interconnect",
+          "statement": "Cerebras specifies 220 Pbit/s fabric bandwidth for WSE-2.",
+          "value": 220,
+          "unit": "Pbit/s",
+          "scope": "Aggregate on-wafer fabric bandwidth.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "aggregate"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse2-whitepaper"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse3-core-count",
+          "subject_type": "product",
+          "subject_id": "wse3",
+          "topic": "architecture",
+          "statement": "Cerebras specifies 900,000 AI-optimized compute cores in WSE-3.",
+          "value": 900000,
+          "unit": "AI cores",
+          "scope": "Entire WSE-3 wafer-scale processor.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "system_configuration"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3-release"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse3-sram-capacity",
+          "subject_type": "product",
+          "subject_id": "wse3",
+          "topic": "memory_capacity",
+          "statement": "Cerebras specifies 44 GB of on-chip SRAM in WSE-3.",
+          "value": 44,
+          "unit": "GB SRAM",
+          "scope": "On-chip SRAM across the WSE-3 processor.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3-release"
+          ],
+          "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "wse3-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "wse3",
+          "topic": "memory_bandwidth",
+          "statement": "Cerebras reports 21 PB/s on-chip memory bandwidth for WSE-3.",
+          "value": 21,
+          "unit": "PB/s",
+          "scope": "Aggregate on-wafer memory bandwidth.",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory",
+            "directionality": "aggregate"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3-sec-filing"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Issuer-reported figure in an SEC filing; not independently benchmarked."
+        },
+        {
+          "id": "wse3-peak-ai-compute",
+          "subject_type": "product",
+          "subject_id": "wse3",
+          "topic": "compute",
+          "statement": "Cerebras specifies 125 PFLOPs peak AI performance for WSE-3.",
+          "value": 125,
+          "unit": "PFLOPs peak AI performance",
+          "scope": "WSE-3 processor; the source does not state a directly comparable precision in this summary figure.",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "unspecified",
+            "sparsity": "unspecified"
+          },
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3-release"
+          ],
+          "last_reviewed": "2026-11-05",
+          "notes": "Precision and operation mix are not specified in the announcement; do not compare directly with precision-specific GPU/ASIC FLOPs."
+        }
+      ],
+      "evidence": [
+        {
+          "id": "cerebras-wse2-whitepaper",
+          "title": "Cerebras CS-2 Whitepaper — WSE-2 architecture",
+          "url": "https://cerebras.ai/wp-content/uploads/2021/04/Cerebras-CS-2-Whitepaper.pdf",
+          "publisher": "Cerebras",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Cerebras white paper. WSE-2 figures describe the wafer-scale processor, not a conventional packaged GPU or server."
+        },
+        {
+          "id": "cerebras-wse3-release",
+          "title": "Cerebras announces third-generation Wafer-Scale Engine",
+          "url": "https://www.cerebras.ai/press-release/cerebras-announces-third-generation-wafer-scale-engine",
+          "publisher": "Cerebras",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2024-03-13",
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Official Cerebras announcement. The source lists 4 trillion transistors, 900,000 AI cores, 125 PFLOPs peak AI performance and 44 GB on-chip SRAM."
+        },
+        {
+          "id": "cerebras-wse3-sec-filing",
+          "title": "Cerebras Systems SEC filing — WSE-3 architecture description",
+          "url": "https://www.sec.gov/Archives/edgar/data/2021728/000162828026025762/cerebras-sx1april2026.htm",
+          "publisher": "U.S. Securities and Exchange Commission (issuer filing)",
+          "source_type": "government_or_regulatory",
+          "independence": "official",
+          "published_at": null,
+          "checked_at": "2026-11-05",
+          "review_status": "reviewed",
+          "notes": "Cerebras issuer-filed SEC document. The 21 PB/s memory-bandwidth figure is issuer-reported in a regulatory filing, not an independent benchmark."
+        }
+      ],
       "references": [
         {
           "id": "ref-cerebras-1",
@@ -2388,5 +3960,14 @@
         }
       ]
     }
-  ]
+  ],
+  "comparison_policy": {
+    "precision_must_match": true,
+    "sparsity_must_match": true,
+    "measurement_scope_must_match": true,
+    "metric_type_must_match": true,
+    "system_and_chip_metrics_must_not_be_mixed": true,
+    "source_units_must_be_preserved": true,
+    "notes": "Do not compare peak compute across different precisions or dense/sparse modes. Do not mix chip, module, board, server, rack, pod or cluster scope. Keep theoretical/vendor specifications separate from measured results. Preserve source units; any UI conversion must retain the original value and unit."
+  }
 }

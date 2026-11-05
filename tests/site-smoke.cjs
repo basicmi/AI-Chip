@@ -98,10 +98,38 @@ const { chromium } = require("playwright");
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
       !registrySummary.includes("126 source links") ||
-      !registrySummary.includes("3 audited evidence records") ||
-      !registrySummary.includes("17 structured claims") ||
-      !registrySummary.includes("47 profiles not yet reviewed")) {
+      !registrySummary.includes("17 audited evidence records") ||
+      !registrySummary.includes("70 structured claims") ||
+      !registrySummary.includes("42 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
+  }
+  const profileRegistry = await page.evaluate(async () => {
+    const root = document.querySelector("[data-directory-explorer]");
+    const response = await fetch(root.dataset.profileSource);
+    if (!response.ok) throw new Error("Company profile registry request failed");
+    return response.json();
+  });
+  const productCount = profileRegistry.companies.reduce((sum, company) => sum + company.products.length, 0);
+  const claimCount = profileRegistry.companies.reduce((sum, company) => sum + company.claims.length, 0);
+  const evidenceCount = profileRegistry.companies.reduce((sum, company) => sum + company.evidence.length, 0);
+  const metricContextCount = profileRegistry.companies.reduce((sum, company) =>
+    sum + company.claims.filter(claim => claim.metric_context).length, 0);
+  const nvidiaProfile = profileRegistry.companies.find(company => company.id === "nvidia");
+  const gb200 = nvidiaProfile.products.find(product => product.id === "gb200-nvl72");
+  const gb200Bandwidth = nvidiaProfile.claims.find(claim => claim.id === "gb200-hbm-bandwidth");
+  const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
+  const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
+  const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
+  if (profileRegistry.schema_version !== "1.1" || productCount !== 16 ||
+      claimCount !== 70 || evidenceCount !== 17 || metricContextCount < 40 ||
+      !profileRegistry.comparison_policy.precision_must_match ||
+      !profileRegistry.comparison_policy.sparsity_must_match ||
+      !profileRegistry.comparison_policy.measurement_scope_must_match ||
+      gb200.product_type !== "system" ||
+      gb200Bandwidth.metric_context.measurement_scope !== "rack" ||
+      trainium2Dense.metric_context.sparsity !== "dense" ||
+      trainium2Sparse.metric_context.sparsity !== "structured_sparse") {
+    throw new Error("Product registry v1.1 comparison metadata is inconsistent");
   }
   await page.locator("[data-directory-search]").fill("MI355X");
   const mi355Matches = await page.locator(".directory-result-title").allTextContents();
@@ -114,14 +142,14 @@ const { chromium } = require("playwright");
   }
   const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!mi355Evidence.includes("Fresh evidence") ||
-      !mi355Evidence.includes("1 evidence record") ||
-      !mi355Evidence.includes("6 reviewed claims")) {
+      !mi355Evidence.includes("2 evidence records") ||
+      !mi355Evidence.includes("10 reviewed claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
   }
   await page.locator("[data-directory-search]").fill("");
   await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
-  if (await page.locator(".directory-result-title").count() !== 3) {
-    throw new Error("Freshness filter should return the three audited example profiles");
+  if (await page.locator(".directory-result-title").count() !== 8) {
+    throw new Error("Freshness filter should return the eight audited first-wave company profiles");
   }
   await page.locator("[data-directory-search]").fill("FuriosaAI");
   await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");

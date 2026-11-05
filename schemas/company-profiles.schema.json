@@ -11,12 +11,13 @@
     "scope",
     "freshness_policy",
     "profile_status_definitions",
-    "companies"
+    "companies",
+    "comparison_policy"
   ],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.0"
+      "const": "1.1"
     },
     "database_version": {
       "type": "string",
@@ -46,6 +47,43 @@
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/company"
+      }
+    },
+    "comparison_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precision_must_match",
+        "sparsity_must_match",
+        "measurement_scope_must_match",
+        "metric_type_must_match",
+        "system_and_chip_metrics_must_not_be_mixed",
+        "source_units_must_be_preserved",
+        "notes"
+      ],
+      "properties": {
+        "precision_must_match": {
+          "type": "boolean"
+        },
+        "sparsity_must_match": {
+          "type": "boolean"
+        },
+        "measurement_scope_must_match": {
+          "type": "boolean"
+        },
+        "metric_type_must_match": {
+          "type": "boolean"
+        },
+        "system_and_chip_metrics_must_not_be_mixed": {
+          "type": "boolean"
+        },
+        "source_units_must_be_preserved": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     }
   },
@@ -285,6 +323,39 @@
         },
         "notes": {
           "type": "string"
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "form_factor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_configuration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "die_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "announced_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "first_available_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "related_product_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
         }
       }
     },
@@ -331,7 +402,14 @@
             "availability",
             "deployment",
             "performance",
-            "other"
+            "other",
+            "memory_type",
+            "packaging",
+            "die_count",
+            "form_factor",
+            "system_scale",
+            "networking",
+            "thermal"
           ]
         },
         "statement": {
@@ -378,6 +456,9 @@
         },
         "notes": {
           "type": "string"
+        },
+        "metric_context": {
+          "$ref": "#/$defs/metric_context"
         }
       }
     },
@@ -461,6 +542,114 @@
           "items": {
             "$ref": "#/$defs/reference"
           }
+        }
+      }
+    },
+    "metric_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric_type",
+        "measurement_scope",
+        "operation"
+      ],
+      "properties": {
+        "metric_type": {
+          "type": "string",
+          "enum": [
+            "specification",
+            "theoretical_peak",
+            "vendor_measured",
+            "independent_measured",
+            "production_observed",
+            "derived"
+          ]
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "FP64",
+            "FP32",
+            "TF32",
+            "BF16",
+            "FP16",
+            "FP8",
+            "FP6",
+            "FP4",
+            "MXFP8",
+            "MXFP6",
+            "MXFP4",
+            "NVFP4",
+            "INT8",
+            "INT4",
+            "INT2",
+            "mixed",
+            "not_applicable",
+            "unspecified"
+          ]
+        },
+        "sparsity": {
+          "type": "string",
+          "enum": [
+            "dense",
+            "structured_sparse",
+            "unstructured_sparse",
+            "not_applicable",
+            "unspecified"
+          ]
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "matrix",
+            "vector",
+            "scalar",
+            "memory",
+            "interconnect",
+            "communication",
+            "power",
+            "area",
+            "system_configuration",
+            "other"
+          ]
+        },
+        "measurement_scope": {
+          "type": "string",
+          "enum": [
+            "die",
+            "chip",
+            "package",
+            "module",
+            "board",
+            "server",
+            "rack",
+            "pod",
+            "cluster",
+            "system"
+          ]
+        },
+        "directionality": {
+          "type": "string",
+          "enum": [
+            "unidirectional",
+            "bidirectional",
+            "aggregate",
+            "not_applicable",
+            "unspecified"
+          ]
+        },
+        "configuration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workload_id": {
+          "$ref": "#/$defs/id"
+        },
+        "benchmark_project_id": {
+          "$ref": "#/$defs/id"
+        },
+        "notes": {
+          "type": "string"
         }
       }
     }

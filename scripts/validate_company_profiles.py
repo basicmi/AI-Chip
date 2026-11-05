@@ -11,6 +11,8 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "company-profiles.json"
 DIRECTORY = ROOT / "directory.md"
+WORKLOADS = ROOT / "data" / "workloads.json"
+BENCHMARKS = ROOT / "data" / "benchmark-projects.json"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CATEGORIES = {
     "IC Vendors", "Tech Giants & HPC Vendors", "Traditional IP Vendors",
@@ -26,6 +28,12 @@ CLAIM_STATUSES = {
     "vendor_reported", "source_confirmed", "independently_verified",
     "disputed", "superseded",
 }
+METRIC_TYPES = {"specification", "theoretical_peak", "vendor_measured", "independent_measured", "production_observed", "derived"}
+PRECISIONS = {"FP64", "FP32", "TF32", "BF16", "FP16", "FP8", "FP6", "FP4", "MXFP8", "MXFP6", "MXFP4", "NVFP4", "INT8", "INT4", "INT2", "mixed", "not_applicable", "unspecified"}
+SPARSITY_MODES = {"dense", "structured_sparse", "unstructured_sparse", "not_applicable", "unspecified"}
+MEASUREMENT_SCOPES = {"die", "chip", "package", "module", "board", "server", "rack", "pod", "cluster", "system"}
+METRIC_OPERATIONS = {"matrix", "vector", "scalar", "memory", "interconnect", "communication", "power", "area", "system_configuration", "other"}
+DIRECTIONS = {"unidirectional", "bidirectional", "aggregate", "not_applicable", "unspecified"}
 ERRORS = []
 
 def check(condition, message):
@@ -62,15 +70,18 @@ def main():
     try:
         db = json.loads(DATA.read_text(encoding="utf-8"))
         directory = unescape(DIRECTORY.read_text(encoding="utf-8"))
+        workload_db = json.loads(WORKLOADS.read_text(encoding="utf-8"))
+        benchmark_db = json.loads(BENCHMARKS.read_text(encoding="utf-8"))
     except Exception as exc:
         print(f"FAIL: cannot read company profile registry or directory: {exc}", file=sys.stderr)
         return 2
 
     require(db, ["schema_version", "database_version", "registry_reviewed_at",
-                 "scope", "freshness_policy", "profile_status_definitions", "companies"], "root")
+                 "scope", "freshness_policy", "comparison_policy",
+                 "profile_status_definitions", "companies"], "root")
     if not isinstance(db, dict):
         return 2
-    check(db.get("schema_version") == "1.0", "root: schema_version must be 1.0")
+    check(db.get("schema_version") == "1.1", "root: schema_version must be 1.1")
     check(valid_date(db.get("registry_reviewed_at")), "root: invalid registry_reviewed_at")
     policy = db.get("freshness_policy", {})
     require(policy, ["fresh_within_days", "stale_after_days",
@@ -83,6 +94,22 @@ def main():
               "freshness_policy: stale_after_days must exceed fresh_within_days")
         check(policy.get("missing_checked_at_means") == "unreviewed",
               "freshness_policy: missing checked_at must mean unreviewed")
+
+    comparison = db.get("comparison_policy", {})
+    comparison_fields = ["precision_must_match", "sparsity_must_match",
+                         "measurement_scope_must_match", "metric_type_must_match",
+                         "system_and_chip_metrics_must_not_be_mixed",
+                         "source_units_must_be_preserved"]
+    require(comparison, comparison_fields + ["notes"], "comparison_policy")
+    if isinstance(comparison, dict):
+        for field in comparison_fields:
+            check(comparison.get(field) is True,
+                  f"comparison_policy: {field} must remain true")
+        check(isinstance(comparison.get("notes"), str) and bool(comparison["notes"].strip()),
+              "comparison_policy: notes must be non-empty")
+
+    workload_ids = {item.get("id") for item in workload_db.get("workloads", []) if isinstance(item, dict)}
+    benchmark_ids = {item.get("id") for item in benchmark_db.get("projects", []) if isinstance(item, dict)}
 
     companies = db.get("companies", [])
     check(isinstance(companies, list) and len(companies) > 0,
@@ -225,6 +252,18 @@ def main():
                 "announced", "sampling", "shipping", "production",
                 "roadmap", "discontinued", "unknown"
             }, f"{pwhere}: invalid availability")
+            for field in ("family", "form_factor", "package", "system_configuration"):
+                if field in product:
+                    check(isinstance(product[field], str) and bool(product[field].strip()),
+                          f"{pwhere}: {field} must be a non-empty string")
+            for field in ("announced_at", "first_available_at"):
+                if field in product:
+                    check(valid_date(product[field], nullable=True), f"{pwhere}: invalid {field}")
+            if "die_count" in product:
+                check(isinstance(product["die_count"], int) and product["die_count"] > 0,
+                      f"{pwhere}: die_count must be a positive integer")
+            related = product.get("related_product_ids", [])
+            check(isinstance(related, list), f"{pwhere}: related_product_ids must be an array")
             check(isinstance(product.get("claim_ids"), list), f"{pwhere}: claim_ids must be an array")
             product_claim_refs.update(product.get("claim_ids", []))
 
@@ -250,12 +289,57 @@ def main():
             check(claim.get("topic") in {
                 "product_identity", "architecture", "process_node", "compute",
                 "memory_capacity", "memory_bandwidth", "interconnect", "power",
-                "software_support", "availability", "deployment", "performance", "other"
+                "software_support", "availability", "deployment", "performance",
+                "memory_type", "packaging", "die_count", "form_factor",
+                "system_scale", "networking", "thermal", "other"
             }, f"{cwhere}: invalid topic")
             check(bool(claim.get("statement")) and bool(claim.get("scope")),
                   f"{cwhere}: statement and scope are required")
             check(claim.get("claim_status") in CLAIM_STATUSES, f"{cwhere}: invalid claim_status")
             check(valid_date(claim.get("last_reviewed")), f"{cwhere}: invalid last_reviewed")
+
+            metric_context = claim.get("metric_context")
+            numeric_value = isinstance(claim.get("value"), (int, float)) and not isinstance(claim.get("value"), bool)
+            metric_topics = {"compute", "memory_capacity", "memory_bandwidth", "interconnect", "power"}
+            if claim.get("topic") in metric_topics and numeric_value:
+                check(isinstance(metric_context, dict),
+                      f"{cwhere}: numeric {claim.get('topic')} claim needs metric_context")
+            if metric_context is not None:
+                require(metric_context, ["metric_type", "measurement_scope", "operation"],
+                        f"{cwhere}.metric_context")
+                if isinstance(metric_context, dict):
+                    check(metric_context.get("metric_type") in METRIC_TYPES,
+                          f"{cwhere}: invalid metric_context.metric_type")
+                    check(metric_context.get("measurement_scope") in MEASUREMENT_SCOPES,
+                          f"{cwhere}: invalid metric_context.measurement_scope")
+                    check(metric_context.get("operation") in METRIC_OPERATIONS,
+                          f"{cwhere}: invalid metric_context.operation")
+                    if "precision" in metric_context:
+                        check(metric_context["precision"] in PRECISIONS,
+                              f"{cwhere}: invalid metric_context.precision")
+                    if "sparsity" in metric_context:
+                        check(metric_context["sparsity"] in SPARSITY_MODES,
+                              f"{cwhere}: invalid metric_context.sparsity")
+                    if "directionality" in metric_context:
+                        check(metric_context["directionality"] in DIRECTIONS,
+                              f"{cwhere}: invalid metric_context.directionality")
+                    if claim.get("topic") == "compute" and numeric_value:
+                        check(metric_context.get("precision") in PRECISIONS,
+                              f"{cwhere}: compute claim needs a precision label")
+                        check(metric_context.get("sparsity") in SPARSITY_MODES,
+                              f"{cwhere}: compute claim needs a sparsity label")
+                    expected_operations = {"memory_capacity": {"memory"}, "memory_bandwidth": {"memory"},
+                                           "interconnect": {"interconnect", "communication"},
+                                           "power": {"power"}}
+                    if claim.get("topic") in expected_operations:
+                        check(metric_context.get("operation") in expected_operations[claim.get("topic")],
+                              f"{cwhere}: invalid metric_context.operation for {claim.get('topic')}")
+                    if metric_context.get("workload_id") is not None:
+                        check(metric_context["workload_id"] in workload_ids,
+                              f"{cwhere}: unknown workload_id {metric_context['workload_id']}")
+                    if metric_context.get("benchmark_project_id") is not None:
+                        check(metric_context["benchmark_project_id"] in benchmark_ids,
+                              f"{cwhere}: unknown benchmark_project_id {metric_context['benchmark_project_id']}")
             ev_ids = claim.get("evidence_ids", [])
             check(isinstance(ev_ids, list) and bool(ev_ids), f"{cwhere}: evidence_ids must be non-empty")
             for eid in ev_ids if isinstance(ev_ids, list) else []:
@@ -273,6 +357,9 @@ def main():
                 subject = claim_subjects.get(claim_id)
                 check(subject == ("product", product.get("id")),
                       f"{where}: product claim {claim_id} has mismatched subject")
+            for related_id in product.get("related_product_ids", []):
+                check(related_id in product_ids and related_id != product.get("id"),
+                      f"{where}: related_product_ids contains unknown or self reference {related_id}")
 
     if ERRORS:
         print(f"FAIL: {len(ERRORS)} validation error(s)")
