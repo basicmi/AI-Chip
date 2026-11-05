@@ -97,10 +97,29 @@ const { chromium } = require("playwright");
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
       !registrySummary.includes("126 source links") ||
-      !registrySummary.includes("0 audited evidence records") ||
-      !registrySummary.includes("0 structured claims")) {
+      !registrySummary.includes("3 audited evidence records") ||
+      !registrySummary.includes("14 structured claims") ||
+      !registrySummary.includes("47 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
+  await page.locator("[data-directory-search]").fill("MI355X");
+  const mi355Matches = await page.locator(".directory-result-title").allTextContents();
+  if (mi355Matches.length !== 1 || !mi355Matches[0].includes("AMD")) {
+    throw new Error("Structured company search did not locate AMD MI355X");
+  }
+  const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
+  if (!mi355Evidence.includes("Fresh evidence") ||
+      !mi355Evidence.includes("1 evidence records") ||
+      !mi355Evidence.includes("5 audited claims")) {
+    throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
+  }
+  await page.locator("[data-directory-search]").fill("");
+  await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
+  if (await page.locator(".directory-result-title").count() !== 3) {
+    throw new Error("Freshness filter should return the three audited example profiles");
+  }
+  await page.locator("[data-directory-search]").fill("FuriosaAI");
+  await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
   await page.locator("[data-directory-search]").fill("FuriosaAI");
   const companyMatches = await page.locator(".directory-result-title").allTextContents();
   if (!companyMatches.some(name => name.includes("FuriosaAI"))) {
@@ -109,6 +128,7 @@ const { chromium } = require("playwright");
   const profileEvidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!profileEvidence.includes("Not reviewed") ||
       !profileEvidence.includes("2 source links") ||
+      !profileEvidence.includes("0 evidence records") ||
       !profileEvidence.includes("0 audited claims")) {
     throw new Error("Company card did not show profile evidence state: " + profileEvidence);
   }
