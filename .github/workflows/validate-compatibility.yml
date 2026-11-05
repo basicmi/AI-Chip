@@ -1,0 +1,76 @@
+name: Validate and build AI Chip site
+
+on:
+  pull_request:
+    paths:
+      - "**.md"
+      - "_config.yml"
+      - "_layouts/**"
+      - "assets/**"
+      - "data/**"
+      - "schemas/**"
+      - "scripts/**"
+      - "tests/**"
+      - "Gemfile"
+      - ".github/workflows/**"
+  push:
+    branches: [master]
+    paths:
+      - "**.md"
+      - "_config.yml"
+      - "_layouts/**"
+      - "assets/**"
+      - "data/**"
+      - "schemas/**"
+      - "scripts/**"
+      - "tests/**"
+      - "Gemfile"
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate compatibility and workload databases
+        run: |
+          python3 scripts/validate_compatibility.py
+          python3 scripts/validate_workloads.py
+
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install GitHub Pages dependencies
+        run: bundle install
+      - name: Build GitHub Pages site
+        run: bundle exec jekyll build
+      - name: Install browser test dependency
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Serve generated site
+        run: |
+          python3 tests/serve_site.py > /tmp/ai-chip-site.log 2>&1 &
+          echo $! > /tmp/ai-chip-site.pid
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/AI-Chip/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ai-chip-site.log
+          exit 1
+      - name: Browser smoke tests
+        run: node tests/site-smoke.cjs

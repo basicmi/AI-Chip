@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/compatibility.schema.json",
+  "title": "AI Chip Software Compatibility Database",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "database_version",
+    "last_reviewed",
+    "scope",
+    "status_definitions",
+    "platforms",
+    "integrations"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status_definitions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/platform"
+      },
+      "minItems": 1
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/integration"
+      },
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "vendor",
+        "name",
+        "hardware_scope",
+        "vendor_stack",
+        "evidence_urls"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardware_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "vendor_stack": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_urls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/url"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "url",
+        "checked_at",
+        "claim"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "upstream_docs",
+            "repository_readme",
+            "vendor_announcement",
+            "release_note",
+            "ci",
+            "benchmark",
+            "paper",
+            "issue",
+            "other"
+          ]
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "platform_id",
+        "layer",
+        "project",
+        "project_url",
+        "maintainer_type",
+        "status",
+        "confidence",
+        "hardware_scope",
+        "versions",
+        "limitations",
+        "last_checked",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "platform_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer": {
+          "type": "string",
+          "enum": [
+            "framework",
+            "compiler",
+            "kernel_dsl",
+            "operator_library",
+            "serving",
+            "communication",
+            "runtime",
+            "model_porting",
+            "benchmark",
+            "other"
+          ]
+        },
+        "project": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_url": {
+          "$ref": "#/$defs/url"
+        },
+        "maintainer_type": {
+          "type": "string",
+          "enum": [
+            "upstream_project",
+            "project_community",
+            "vendor_plugin",
+            "vendor",
+            "community",
+            "research"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "upstream_supported",
+            "vendor_plugin_supported",
+            "vendor_framework",
+            "experimental",
+            "in_progress",
+            "needs_review",
+            "vendor_reported"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "hardware_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "versions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean"
+            ]
+          }
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_checked": {
+          "type": "string",
+          "format": "date"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

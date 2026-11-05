@@ -1,0 +1,91 @@
+---
+layout: default
+title: AI Chip Landscape
+permalink: /
+description: An evidence-led map of AI accelerator hardware, software ecosystems, compatibility and benchmarks.
+---
+
+<section class="home-hero">
+  <div class="home-hero-copy">
+    <p class="eyebrow">AI COMPUTING · HARDWARE · SOFTWARE · SYSTEMS</p>
+    <h1>Navigate the<br><span>AI accelerator</span> landscape.</h1>
+    <p class="home-hero-lede">A curated, evidence-led map of the chips, software stacks and benchmarks shaping modern AI infrastructure — from silicon and IP to kernels, runtimes and serving systems.</p>
+    <div class="home-actions">
+      <a class="button button-primary" href="{{ '/directory/' | relative_url }}">Explore hardware <span aria-hidden="true">↗</span></a>
+      <a class="button button-secondary" href="{{ '/compatibility/' | relative_url }}">Open compatibility explorer</a>
+    </div>
+    <div class="home-metrics" aria-label="Current database coverage" data-home-stats data-compat-source="{{ '/data/compatibility.json' | relative_url }}" data-workload-source="{{ '/data/workloads.json' | relative_url }}">
+      <div><strong>11</strong><span>accelerator platforms</span></div>
+      <div><strong>18</strong><span>software integrations</span></div>
+      <div><strong>10</strong><span>workload definitions</span></div>
+    </div>
+  </div>
+  <div class="home-hero-visual">
+    <div class="hero-visual-frame">
+      <img src="{{ '/resource/AI_Chip_Landscape_v0p8.png' | relative_url }}" alt="AI chip landscape map, version 0.8" loading="lazy">
+    </div>
+    <p class="visual-caption"><span class="status-dot"></span> Landscape snapshot · November 2026</p>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">EXPLORE THE ECOSYSTEM</p>
+      <h2>Five views. One connected landscape.</h2>
+    </div>
+    <p>Move from a vendor or chip to its software support, then compare the benchmarks that matter.</p>
+  </div>
+  <div class="feature-grid">
+    <a class="feature-card" href="{{ '/directory/' | relative_url }}">
+      <span class="feature-number">01 / HARDWARE</span>
+      <span class="feature-icon" aria-hidden="true">◈</span>
+      <h3>Chip &amp; IP directory</h3>
+      <p>Explore GPUs, NPUs, custom AI silicon, edge accelerators and semiconductor IP vendors.</p>
+      <span class="feature-link">Browse the directory <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="feature-card" href="{{ '/software-ecosystem/' | relative_url }}">
+      <span class="feature-number">02 / SOFTWARE</span>
+      <span class="feature-icon" aria-hidden="true">⌘</span>
+      <h3>Software ecosystem</h3>
+      <p>Map compilers, IRs, kernel DSLs, operator libraries, runtimes, communication and serving engines.</p>
+      <span class="feature-link">Explore software layers <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="feature-card feature-card-highlight" href="{{ '/compatibility/' | relative_url }}">
+      <span class="feature-number">03 / COMPATIBILITY</span>
+      <span class="feature-icon" aria-hidden="true">⌗</span>
+      <h3>Compatibility explorer</h3>
+      <p>Search hardware-to-software integration records, version pins, support status and primary evidence.</p>
+      <span class="feature-link">Query compatibility <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="feature-card feature-card-highlight" href="{{ '/workloads/' | relative_url }}">
+      <span class="feature-number">04 / WORKLOADS</span>
+      <span class="feature-icon" aria-hidden="true">⌁</span>
+      <h3>Workload explorer</h3>
+      <p>Connect model families and workload phases to candidate hardware/software paths, with evidence maturity made explicit.</p>
+      <span class="feature-link">Explore execution paths <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="feature-card" href="{{ '/benchmarks/' | relative_url }}">
+      <span class="feature-number">05 / BENCHMARKS</span>
+      <span class="feature-icon" aria-hidden="true">▥</span>
+      <h3>Benchmark landscape</h3>
+      <p>Understand model, serving, kernel, memory, interconnect, power and cost benchmarks.</p>
+      <span class="feature-link">Explore benchmarks <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</section>
+
+<section class="home-bottom-grid">
+  <div class="home-note-card">
+    <p class="eyebrow">EDITORIAL PRINCIPLES</p>
+    <h2>Evidence before rankings.</h2>
+    <p>Compatibility and performance are workload-, device- and version-specific. We distinguish upstream support, vendor plugins, experimental branches and vendor-reported results rather than collapsing them into a single score.</p>
+    <a href="{{ '/compatibility/' | relative_url }}">See how support is classified <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="home-note-card home-note-card-muted">
+    <p class="eyebrow">PROJECT &amp; CONTRIBUTIONS</p>
+    <h2>A living technical reference.</h2>
+    <p>Primary sources are preferred. Version snapshots are dated, compatibility claims carry evidence links, and unresolved documentation conflicts remain visible for review.</p>
+    <a href="https://github.com/basicmi/AI-Chip" target="_blank" rel="noopener noreferrer">View the project on GitHub <span aria-hidden="true">↗</span></a>
+  </div>
+</section>

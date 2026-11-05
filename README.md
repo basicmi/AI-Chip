@@ -6,10 +6,11 @@
 <div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
 <div class="landscape-map"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p8.png" loading="lazy" alt="AI Chip Landscape v0.8 (2026)" /></div>
 <p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro (plus lineage where relevant) and 1–2 latest updates. Prefer official / primary sources; performance claims are often vendor-reported.</p>
+<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a></p>
 </header>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
-<p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: July 2026 (incl. Qualcomm Dragonfly data-center AI).</em></p>
+<p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: November 2026. Detailed software and benchmark maps are maintained in dedicated pages.</em></p>
 <hr class="section-rule" />
 <ul class="glance-list">
 <li><a href="#Nvidia"><strong>NVIDIA</strong></a> — Vera Rubin platform in full production (GTC 2026); NVL72 partner shipments targeted H2 2026.</li>
@@ -561,12 +562,25 @@
 
 <a name="Biren"></a>
 <div align="center" class="vendor-logo"><a href="https://www.birentech.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Biren_logo.png" height="48" loading="lazy" alt="Biren" /></a></div>
-<div align="center" class="vendor-title"><h3>Biren Technology (壁仞)</h3></div>
-<p class="vendor-blurb">Biren builds high-performance GPGPU / AI accelerators (BR100 class) positioned as domestic alternatives for training and inference. After years of product development under export-control pressure, Biren listed in Hong Kong in early 2026, raising capital to scale production and software.</p>
+<div align="center" class="vendor-title"><h3>Biren Technology (壁仞科技)</h3></div>
+<p class="vendor-blurb">Biren develops general-purpose GPU-class accelerators for data-center AI training and inference. The BR100 family established its high-performance GPGPU direction; subsequent BR-series products and system offerings should be tracked by exact SKU and deployment status rather than treating the family as one device. The company listed in Hong Kong in January 2026 (6082.HK).</p>
+<p><strong>Hardware and system direction</strong></p>
+<ul>
+<li><strong>BR100 family</strong> — multi-die GPGPU architecture and high-bandwidth memory, an important reference point in Biren's early data-center product roadmap.</li>
+<li><strong>BR-series product updates</strong> — track each announced board / OAM / PCIe SKU separately, including memory configuration, cooling, power envelope, supported server platforms, and whether it is sampling, shipping, or deployed.</li>
+<li><strong>Cluster and interconnect</strong> — evaluate multi-accelerator scaling, collective communication, and system-level integration rather than comparing peak compute alone.</li>
+</ul>
+<p><strong>Software ecosystem: BIRENSUPA</strong></p>
+<ul>
+<li><strong>BIRENSUPA</strong> — Biren's software development platform; track compiler, runtime, operator libraries, framework integrations, profiling and debugging tools as separately versioned components.</li>
+<li><strong>Compatibility evidence</strong> — record exact accelerator SKU, SDK release, framework version, model coverage, and tested serving engine. Do not infer upstream vLLM / SGLang support from a general platform announcement.</li>
+</ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.reuters.com/world/asia-pacific/china-ai-chipmaker-biren-surges-82-hong-kong-debut-kicking-off-2026-listings-2026-01-02/">Hong Kong listing debut</a></strong> — Jan 2026 — listed 6082.HK, raising ~HK$5.58B; BR100-class accelerators as high-performance domestic alternatives.</li>
+<li><strong><a href="https://www.reuters.com/world/asia-pacific/china-ai-chipmaker-biren-surges-82-hong-kong-debut-kicking-off-2026-listings-2026-01-02/">Hong Kong listing</a></strong> — Jan 2026 — listed as 6082.HK; financing and production scale-up are important company milestones.</li>
+<li><strong><a href="https://www.birentech.com/">Biren official site</a></strong> — use the product and platform pages as the primary source for current BR-series SKUs and BIRENSUPA capabilities.</li>
 </ul>
+<p><em>Editorial note: publish numerical performance, memory and power specifications only when tied to an identifiable SKU and a primary source. Vendor-reported figures must be labeled as such.</em></p>
 
 <a name="MooreThreads"></a>
 <div align="center" class="vendor-logo"><a href="https://www.mthreads.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/MooreThreads_logo.png" height="48" loading="lazy" alt="Moore Threads" /></a></div>
@@ -598,20 +612,50 @@
 <a name="Iluvatar"></a>
 <div align="center" class="vendor-logo"><a href="https://www.iluvatar.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Iluvatar_logo.png" height="48" loading="lazy" alt="Iluvatar CoreX" /></a></div>
 <div align="center" class="vendor-title"><h3>Iluvatar CoreX (天数智芯)</h3></div>
-<p class="vendor-blurb">Iluvatar CoreX (天数智芯) designs general-purpose GPUs for AI training and inference (BI-V series) with a multi-generation architecture roadmap. Hong Kong-listed, the company publicly frames Tianshu / Tianxuan / Tianji / Tianquan messaging against NVIDIA Hopper→Blackwell→Rubin class platforms.</p>
+<p class="vendor-blurb">Iluvatar CoreX develops general-purpose GPU products for AI training and inference. Its public product portfolio spans the TianGai (天垓) training-GPU family, ZhiKai (智铠) inference products, and TongYang (彤央) edge-computing products. Product comparisons should be SKU-specific and distinguish announced roadmap items from shipping products.</p>
+<p><strong>Product families</strong></p>
+<ul>
+<li><strong>TianGai (天垓)</strong> — data-center GPU family for AI training and general-purpose acceleration; track generations such as BI-V-series by exact model and system availability.</li>
+<li><strong>ZhiKai (智铠)</strong> — inference-oriented GPU products; record model support, precision, memory, and serving-engine integration separately from training products.</li>
+<li><strong>TongYang (彤央)</strong> — edge-computing product family, distinct from the data-center training / inference portfolio.</li>
+</ul>
+<p><strong>Software ecosystem</strong></p>
+<ul>
+<li><strong>CoreX SDK</strong> — vendor development environment for programming, compiling, debugging, and deploying on CoreX accelerators.</li>
+<li><strong>ixRT</strong> — inference runtime components; public source: <a href="https://github.com/Deep-Spark/iluvatar-corex-ixrt">iluvatar-corex-ixrt</a>.</li>
+<li><strong>IGIE / DeepSparkInference</strong> — inference engine and model deployment examples in the <a href="https://github.com/Deep-Spark/DeepSparkInference">DeepSparkInference</a> repository.</li>
+<li><strong>DeepSpark</strong> — open-source ecosystem and model adaptation work: <a href="https://github.com/Deep-Spark">Deep-Spark GitHub organization</a>.</li>
+</ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.scmp.com/tech/big-tech/article/3341368/iluvatar-corex-targets-nvidias-rubin-gpu-road-map-amid-china-chip-push">Roadmap vs. NVIDIA Rubin</a></strong> — Jan 2026 — multi-generation GPU roadmap; BI-V150-class products already in AI train/infer deployments.</li>
+<li><strong><a href="https://www.iluvatar.com/software?fullCode=cpjs-rj-rjz">CoreX software platform</a></strong> — official software overview; use the vendor page for current SDK modules and supported product families.</li>
+<li><strong><a href="https://github.com/Deep-Spark/iluvatar-corex-ixrt">ixRT open-source components</a></strong> — inspect release tags, supported devices, framework dependencies, and CI before assigning production-support status.</li>
 </ul>
+<p><em>Editorial note: upstream vLLM, SGLang, llama.cpp, and other serving support must be recorded per repository, release, device, and model. An example or community patch is not equivalent to full upstream support.</em></p>
 
 <a name="Enflame"></a>
 <div align="center" class="vendor-logo"><a href="https://www.enflame-tech.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Enflame_logo.png" height="48" loading="lazy" alt="Enflame" /></a></div>
-<div align="center" class="vendor-title"><h3>Enflame (燧原)</h3></div>
-<p class="vendor-blurb">Enflame (燧原) builds CloudBlazer / iGCU accelerators for domestic training and inference in intelligent-computing centers. The TopsRider software stack targets LLM workloads alongside hardware refreshes through 2024–2026.</p>
+<div align="center" class="vendor-title"><h3>Enflame (燧原科技)</h3></div>
+<p class="vendor-blurb">Enflame develops CloudBlazer (云燧) GCU accelerators and systems for data-center AI training and inference. Its portfolio includes separate training and inference product directions; system offerings and product availability should be distinguished from silicon announcements and roadmap claims.</p>
+<p><strong>Hardware and system direction</strong></p>
+<ul>
+<li><strong>CloudBlazer training products</strong> — track the T-series generations by exact SKU, supported server platform, memory configuration, and deployment status.</li>
+<li><strong>Inference products</strong> — track the I-series and newer inference accelerators separately, including the target workload and software release.</li>
+<li><strong>Multi-accelerator systems</strong> — record the number of GCU devices, interconnect topology, cooling and power envelope, and whether a system is announced, sampling, or deployed.</li>
+</ul>
+<p><strong>Software ecosystem: TopsRider</strong></p>
+<ul>
+<li><strong>TopsRuntime / TopsCompiler</strong> — execution and compilation components of the vendor platform.</li>
+<li><strong>TopsAten</strong> — operator integration and PyTorch-facing functionality.</li>
+<li><strong>ECCL</strong> — collective communication library for multi-GCU workloads.</li>
+<li><strong>torch-gcu</strong> — public PyTorch extension: <a href="https://github.com/EnflameTechnology/torch-gcu">EnflameTechnology/torch-gcu</a>. Its README documents PyTorch integration, AMP, profiling, GCU Graph, ECCL, `torch.compile`, and CUDA migration helpers; consult its current hardware / software compatibility table before deployment.</li>
+</ul>
 <p class="latest-label"><strong>Latest</strong></p>
 <ul class="latest-list">
-<li><strong><a href="https://www.enflame-tech.com/">CloudBlazer / iGCU accelerators</a></strong> — 2025–2026 — domestic train/infer GPUs deployed in China intelligent-computing centers with TopsRider software updates for LLM workloads.</li>
+<li><strong><a href="https://github.com/EnflameTechnology/torch-gcu">torch-gcu open-source repository</a></strong> — a concrete public entry point for evaluating framework integration, version compatibility, examples, and CI evidence.</li>
+<li><strong><a href="https://www.enflame-tech.com/">Enflame official site</a></strong> — primary source for current CloudBlazer product and system announcements.</li>
 </ul>
+<p><em>Editorial note: do not infer that every TopsRider component or serving framework supports every CloudBlazer SKU. Record the exact device and SDK release; distinguish public repository support from vendor-only deployment support.</em></p>
 
 <a name="Horizon"></a>
 <div align="center" class="vendor-logo"><a href="https://www.horizon.auto/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Horizon_Robotics_logo.png" height="50" loading="lazy" alt="Horizon Robotics" /></a></div>
@@ -633,50 +677,32 @@
 
 
 <a name="AIChipCompilers"></a>
-
-<div align="center" class="section-title"><h2 id="compilers-heading">AI Chip Compilers</h2></div>
+<div align="center" class="section-title"><h2 id="compilers-heading">AI Accelerator Software Ecosystem</h2></div>
 <div class="resource-list">
-
-<hr class="section-rule" />
-<strong>Actively used / widely referenced (2024–2026)</strong><br>
-1. <a href="https://mlir.llvm.org/">MLIR</a> — Multi-Level Intermediate Representation (LLVM)<br>
-2. <a href="https://tvm.apache.org/">Apache TVM</a> — end-to-end ML compiler stack<br>
-3. <a href="https://www.tensorflow.org/xla">XLA</a> — TensorFlow / JAX compiler<br>
-4. <a href="https://github.com/triton-lang/triton">OpenAI Triton</a> — GPU kernel DSL widely used for LLM kernels<br>
-5. <a href="https://iree.dev/">IREE</a> — MLIR-based end-to-end compiler &amp; runtime<br>
-6. <a href="https://developer.nvidia.com/tensorrt">NVIDIA TensorRT</a> / <a href="https://github.com/NVIDIA/TensorRT-LLM">TensorRT-LLM</a><br>
-7. <a href="https://awsdocs-neuron.readthedocs-hosted.com/">AWS Neuron</a> — Trainium / Inferentia compiler stack<br>
-8. <a href="https://rocm.docs.amd.com/">AMD ROCm</a> / composable kernel ecosystem<br>
-9. <a href="https://www.modular.com/max/mojo">Modular MAX / Mojo</a><br>
-10. <a href="https://onnxruntime.ai/">ONNX Runtime</a> — cross-vendor inference<br>
-<br>
-<strong>Historical / research compilers</strong><br>
-11. <a href="https://github.com/pytorch/glow">PyTorch Glow</a><br>
-12. <a href="https://github.com/plaidml/plaidml">PlaidML</a><br>
-13. <a href="https://github.com/Tiramisu-Compiler/tiramisu">MIT Tiramisu</a><br>
-14. <a href="http://tensor-compiler.org/">TACO (Tensor Algebra Compiler)</a><br>
-15. <a href="https://github.com/NervanaSystems/ngraph">Intel nGraph</a> (archived)<br>
-
+<p>The software landscape now spans graph compilers, kernel DSLs, operator libraries, inference runtimes, distributed serving, communication, and vendor SDKs. A flat compiler list no longer captures the real software stack.</p>
+<ul>
+<li><strong>Compiler / IR:</strong> <a href="https://mlir.llvm.org/">MLIR</a>, <a href="https://openxla.org/">OpenXLA / XLA</a>, <a href="https://tvm.apache.org/">Apache TVM</a>, <a href="https://iree.dev/">IREE</a>, <a href="https://pytorch.org/docs/stable/torch.compiler.html">TorchInductor</a>.</li>
+<li><strong>Kernel DSL:</strong> <a href="https://github.com/triton-lang/triton">Triton</a>, <a href="https://github.com/tile-ai/tilelang">TileLang</a>, <a href="https://tvm.apache.org/docs/tirx/overview.html">TIRx</a>, <a href="https://github.com/pytorch/helion">Helion</a>, <a href="https://github.com/NVIDIA/cutlass">CuTe / CUTLASS DSL</a>, <a href="https://docs.jax.dev/en/latest/pallas/index.html">JAX Pallas</a>.</li>
+<li><strong>Kernel / operator libraries:</strong> <a href="https://github.com/Dao-AILab/flash-attention">FlashAttention</a>, <a href="https://github.com/flashinfer-ai/flashinfer">FlashInfer</a>, <a href="https://github.com/deepseek-ai/DeepGEMM">DeepGEMM</a>, <a href="https://github.com/ROCm/aiter">AITer</a>, <a href="https://github.com/ROCm/composable_kernel">Composable Kernel</a>.</li>
+<li><strong>Serving:</strong> <a href="https://github.com/vllm-project/vllm">vLLM</a>, <a href="https://github.com/sgl-project/sglang">SGLang</a>, <a href="https://github.com/NVIDIA/TensorRT-LLM">TensorRT-LLM</a>, <a href="https://github.com/mlc-ai/mlc-llm">MLC-LLM</a>, <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>.</li>
+<li><strong>Distributed serving / data movement:</strong> <a href="https://github.com/ai-dynamo/dynamo">NVIDIA Dynamo</a>, <a href="https://github.com/llm-d/llm-d">llm-d</a>, <a href="https://github.com/kvcache-ai/Mooncake">Mooncake</a>, <a href="https://github.com/ai-dynamo/nixl">NIXL</a>, <a href="https://github.com/NVIDIA/nccl">NCCL</a>, <a href="https://github.com/ROCm/rccl">RCCL</a>.</li>
+<li><strong>China vendor stacks:</strong> Huawei CANN, Cambricon Neuware, Hygon DTK, Biren BIRENSUPA, Iluvatar CoreX SDK / ixRT, Enflame TopsRider, Moore Threads MUSA, MetaX MXMACA.</li>
+</ul>
+<p><a href="/AI-Chip/software-ecosystem/"><strong>Open the full Software Ecosystem guide →</strong></a> — includes layer-by-layer descriptions, public repositories, vendor integration notes, and a compatibility / maturity matrix.</p>
 </div>
 
 <a name="AIChipBenchmarks"></a>
-
-<div align="center" class="section-title"><h2 id="benchmarks-heading">AI Chip Benchmarks</h2></div>
+<div align="center" class="section-title"><h2 id="benchmarks-heading">AI Accelerator Benchmarks</h2></div>
 <div class="resource-list">
-
-<hr class="section-rule" />
-
-1. <a href="https://mlcommons.org/benchmarks/">MLPerf (MLCommons)</a> — industry-standard training, inference, HPC, and client benchmarks.<br>
-<strong>Latest results (2026):</strong>
-<a href="https://mlcommons.org/2026/04/mlperf-inference-v6-0-results/">Inference v6.0</a> ·
-<a href="https://mlcommons.org/2026/06/mlperf-training-v6-0-results/">Training v6.0</a> ·
-<a href="https://mlcommons.org/visualizer">Results visualizer</a><br>
-2. <a href="https://dawn.cs.stanford.edu/benchmark/index.html">DAWNBench</a> (historical end-to-end ImageNet benchmark)<br>
-3. <a href="https://github.com/rdadolf/fathom">Fathom</a> — reference workloads for modern deep learning methods<br>
-4. <a href="http://ai-benchmark.com/index.html">AI-Benchmark</a> — mobile / edge AI scores<br>
-5. <a href="https://www.eembc.org/mlmark/">EEMBC MLMark</a><br>
-6. <a href="https://github.com/AIIABenchmark/AIIA-DNN-benchmark">AIIA DNN Benchmark</a><br>
-
+<p>Benchmark coverage should include model-level performance, serving latency, kernel efficiency, communication, memory, power, and cost. Results are comparable only when workload and measurement conditions are disclosed.</p>
+<ul>
+<li><strong>Training / standardized inference:</strong> <a href="https://mlcommons.org/benchmarks/">MLPerf / MLCommons</a>.</li>
+<li><strong>LLM serving:</strong> <a href="https://inferencex.semianalysis.com/">SemiAnalysis InferenceX</a>, vLLM and SGLang benchmark tools.</li>
+<li><strong>Kernel / operator:</strong> <a href="https://github.com/ScalingIntelligence/KernelBench">KernelBench</a>, Triton / FlashInfer benchmark suites, CUTLASS profiler, Composable Kernel.</li>
+<li><strong>Memory / interconnect:</strong> <a href="https://github.com/NVIDIA/nccl-tests">NCCL Tests</a>, RCCL, <a href="https://mvapich.cse.ohio-state.edu/benchmarks/">OSU Micro-Benchmarks</a>, STREAM.</li>
+<li><strong>Power / cost:</strong> MLPerf Power, SPECpower, Green500, and transparent cost-per-token models.</li>
+</ul>
+<p><a href="/AI-Chip/benchmarks/"><strong>Open the full Benchmark guide →</strong></a> — includes taxonomy, result schema, evidence classes, hardware coverage matrix, and methodology caveats.</p>
 </div>
 
 <a name="Reference"></a>

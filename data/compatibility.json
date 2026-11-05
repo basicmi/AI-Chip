@@ -1,0 +1,674 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.05-1",
+  "last_reviewed": "2026-11-05",
+  "scope": "Publicly documented accelerator software compatibility and integration evidence. Entries are not certification or production-readiness claims.",
+  "status_definitions": {
+    "upstream_supported": "The upstream project documentation lists the hardware platform as supported.",
+    "vendor_plugin_supported": "A vendor or project-maintained out-of-tree plugin documents a released integration and its scope.",
+    "vendor_framework": "A vendor-maintained framework backend or SDK documents the integration and version matrix.",
+    "experimental": "A development branch, preview, or upgrade candidate exists, but its own documentation does not yet mark it as a supported release.",
+    "in_progress": "The upstream project explicitly marks the integration as in progress.",
+    "needs_review": "Public documentation contains conflicting or incomplete version mapping; do not use as a validated compatibility claim.",
+    "vendor_reported": "A vendor has publicly reported a model port or validation case; independent reproduction is not established."
+  },
+  "platforms": [
+    {
+      "id": "nvidia-gpu",
+      "vendor": "NVIDIA",
+      "name": "NVIDIA GPU",
+      "hardware_scope": [
+        "NVIDIA CUDA GPUs; exact SKU and architecture support is release-specific"
+      ],
+      "vendor_stack": [
+        "CUDA",
+        "TensorRT",
+        "NCCL"
+      ],
+      "evidence_urls": [
+        "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "amd-gpu",
+      "vendor": "AMD",
+      "name": "AMD GPU",
+      "hardware_scope": [
+        "Instinct MI300X / MI325X / MI350X / MI355X as listed by SGLang; verify each engine release"
+      ],
+      "vendor_stack": [
+        "ROCm",
+        "HIP",
+        "RCCL"
+      ],
+      "evidence_urls": [
+        "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "intel-xpu",
+      "vendor": "Intel",
+      "name": "Intel GPU / CPU",
+      "hardware_scope": [
+        "Arc and Arc Pro B-Series GPUs; Xeon CPUs as listed by SGLang"
+      ],
+      "vendor_stack": [
+        "oneAPI",
+        "OpenVINO",
+        "oneDNN"
+      ],
+      "evidence_urls": [
+        "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "huawei-ascend",
+      "vendor": "Huawei",
+      "name": "Ascend NPU",
+      "hardware_scope": [
+        "Atlas A2 / A3 systems; Atlas 300I Duo is marked experimental in vLLM-Ascend prerequisites",
+        "SGLang README separately lists A2 / A3 / 950PR / DT"
+      ],
+      "vendor_stack": [
+        "CANN",
+        "torch-npu",
+        "HCCL"
+      ],
+      "evidence_urls": [
+        "https://github.com/vllm-project/vllm-ascend/blob/main/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "moore-threads",
+      "vendor": "Moore Threads",
+      "name": "MUSA GPU",
+      "hardware_scope": [
+        "MTT S5000"
+      ],
+      "vendor_stack": [
+        "MUSA",
+        "torch_musa",
+        "MATE",
+        "torchada"
+      ],
+      "evidence_urls": [
+        "https://github.com/MooreThreads/vllm-musa/blob/v0.32.0-dev/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "metax",
+      "vendor": "MetaX",
+      "name": "MetaX GPU",
+      "hardware_scope": [
+        "MetaX C-series as listed by the vLLM-MetaX plugin"
+      ],
+      "vendor_stack": [
+        "MACA",
+        "MXMACA"
+      ],
+      "evidence_urls": [
+        "https://github.com/MetaX-MACA/vLLM-metax/blob/master/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "hygon",
+      "vendor": "Hygon",
+      "name": "Hygon HCU / DCU",
+      "hardware_scope": [
+        "Hygon HCU / DCU; SGLang marks integration in progress"
+      ],
+      "vendor_stack": [
+        "DTK",
+        "torch-dcu"
+      ],
+      "evidence_urls": [
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "cambricon",
+      "vendor": "Cambricon",
+      "name": "Cambricon MLU",
+      "hardware_scope": [
+        "Cambricon MLU; SGLang marks integration in progress"
+      ],
+      "vendor_stack": [
+        "Neuware",
+        "CNToolkit",
+        "torch_mlu"
+      ],
+      "evidence_urls": [
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "iluvatar",
+      "vendor": "Iluvatar CoreX",
+      "name": "Iluvatar CoreX GPU",
+      "hardware_scope": [
+        "CoreX GPUs; plugin build examples identify ivcore11 and ivcore30 architectures"
+      ],
+      "vendor_stack": [
+        "CoreX runtime",
+        "IXUCA SDK",
+        "ixRT",
+        "IGIE",
+        "ixformer"
+      ],
+      "evidence_urls": [
+        "https://github.com/Deep-Spark/vllm-iluvatar/blob/release/v0.27.1/README.md",
+        "https://github.com/Deep-Spark/DeepSparkInference/blob/master/README.md",
+        "https://github.com/sgl-project/sglang/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "enflame",
+      "vendor": "Enflame",
+      "name": "Enflame GCU",
+      "hardware_scope": [
+        "CloudBlazer Inference S60 as listed in torch-gcu README"
+      ],
+      "vendor_stack": [
+        "TopsRider",
+        "TopsRuntime",
+        "TopsAten",
+        "ECCL",
+        "torch-gcu"
+      ],
+      "evidence_urls": [
+        "https://github.com/EnflameTechnology/torch-gcu/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "biren",
+      "vendor": "Biren",
+      "name": "Biren GPU",
+      "hardware_scope": [
+        "BR166 for the vendor-reported DeepSeek-V4 preview adaptation example"
+      ],
+      "vendor_stack": [
+        "BIRENSUPA",
+        "br_pytorch",
+        "AIModelMaster"
+      ],
+      "evidence_urls": [
+        "https://www.birentech.com/news/lo81mr3idb49bsdjf8hdd2bb/",
+        "https://www.birentech.com/news/otr0bf5evzdwwivrjt6h3322/"
+      ]
+    }
+  ],
+  "integrations": [
+    {
+      "id": "nvidia-vllm",
+      "platform_id": "nvidia-gpu",
+      "layer": "serving",
+      "project": "vLLM",
+      "project_url": "https://github.com/vllm-project/vllm",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "NVIDIA CUDA GPU path; exact model, GPU generation, CUDA and kernel coverage remain release-specific.",
+      "versions": {
+        "framework_release": "v0.33.0rc3 (release candidate; latest release checked 2026-11-05)"
+      },
+      "limitations": "The upstream installation guide lists NVIDIA CUDA as a core hardware path. This entry does not imply every model or feature works on every GPU.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Upstream installation documentation lists NVIDIA CUDA as a supported hardware platform."
+        }
+      ]
+    },
+    {
+      "id": "nvidia-sglang",
+      "platform_id": "nvidia-gpu",
+      "layer": "serving",
+      "project": "SGLang",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "NVIDIA GPU families listed in the current upstream hardware table; verify exact SKU and feature coverage.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
+      },
+      "limitations": "The upstream hardware table is broader than any single tested model / feature combination.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "NVIDIA is listed in SGLang Supported Hardware."
+        }
+      ]
+    },
+    {
+      "id": "amd-vllm",
+      "platform_id": "amd-gpu",
+      "layer": "serving",
+      "project": "vLLM ROCm",
+      "project_url": "https://github.com/vllm-project/vllm",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "AMD ROCm hardware path; exact GPU generation, ROCm version and feature support must be checked against the release docs.",
+      "versions": {
+        "framework_release": "v0.33.0rc3 (release candidate; latest release checked 2026-11-05)"
+      },
+      "limitations": "Core platform support is not a guarantee of feature parity with CUDA.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Upstream installation documentation lists AMD ROCm as a supported hardware platform."
+        }
+      ]
+    },
+    {
+      "id": "amd-sglang",
+      "platform_id": "amd-gpu",
+      "layer": "serving",
+      "project": "SGLang",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "Instinct MI300X, MI325X, MI350X and MI355X as listed by SGLang.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
+      },
+      "limitations": "Validate exact ROCm release, GPU generation, attention backend and model support.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "SGLang Supported Hardware table lists MI300X / MI325X / MI350X / MI355X."
+        }
+      ]
+    },
+    {
+      "id": "intel-vllm",
+      "platform_id": "intel-xpu",
+      "layer": "serving",
+      "project": "vLLM Intel XPU",
+      "project_url": "https://github.com/vllm-project/vllm",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "Intel XPU hardware path; exact GPU model and feature coverage are release-specific.",
+      "versions": {
+        "framework_release": "v0.33.0rc3 (release candidate; latest release checked 2026-11-05)"
+      },
+      "limitations": "Do not conflate Intel XPU GPU support with Intel CPU support; they have separate execution paths.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Upstream installation documentation lists Intel XPU as a supported GPU platform."
+        }
+      ]
+    },
+    {
+      "id": "intel-sglang",
+      "platform_id": "intel-xpu",
+      "layer": "serving",
+      "project": "SGLang Intel GPU / CPU",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "Arc / Arc Pro B-Series GPUs and Xeon CPUs as listed by SGLang.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
+      },
+      "limitations": "GPU and CPU support are separate paths; validate model, dtype and operator coverage independently.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "SGLang hardware table lists Intel Arc / Arc Pro B-Series GPUs and Xeon CPUs."
+        }
+      ]
+    },
+    {
+      "id": "ascend-vllm",
+      "platform_id": "huawei-ascend",
+      "layer": "serving",
+      "project": "vLLM Ascend",
+      "project_url": "https://github.com/vllm-project/vllm-ascend",
+      "maintainer_type": "project_community",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Atlas A2 / A3 inference and training systems; Atlas 300I Duo is explicitly experimental in prerequisites.",
+      "versions": {
+        "plugin_release": "v0.30.0rc1 recommended quick-start release",
+        "vllm": "same version as vllm-ascend",
+        "cann": "9.1.0",
+        "pytorch": "2.10.0",
+        "torch_npu": "2.10.0.post4"
+      },
+      "limitations": "The project describes itself as a community-maintained plugin. Use the plugin's own support matrix and versioning policy; do not mix arbitrary upstream vLLM versions.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/vllm-project/vllm-ascend/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "README lists prerequisites and recommended v0.30.0rc1 quick-start, and describes the project as a community-maintained hardware plugin."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.vllm.ai/projects/ascend/en/latest/user_guide/support_matrix/",
+          "checked_at": "2026-11-05",
+          "claim": "Project-maintained support matrix for models and features."
+        }
+      ]
+    },
+    {
+      "id": "ascend-sglang",
+      "platform_id": "huawei-ascend",
+      "layer": "serving",
+      "project": "SGLang Ascend",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "A2, A3 and 950PR / DT NPUs as listed in SGLang README.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
+      },
+      "limitations": "SGLang's platform-level support does not imply feature parity across all Ascend generations.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Huawei Ascend row lists A2, A3, 950PR / DT."
+        }
+      ]
+    },
+    {
+      "id": "mthreads-vllm",
+      "platform_id": "moore-threads",
+      "layer": "serving",
+      "project": "vLLM-MUSA",
+      "project_url": "https://github.com/MooreThreads/vllm-musa",
+      "maintainer_type": "vendor_plugin",
+      "status": "experimental",
+      "confidence": "high",
+      "hardware_scope": "MUSA GPUs; current README includes S5000 model recipes.",
+      "versions": {
+        "development_branch": "v0.32.0-dev",
+        "pytorch": "2.11.0.post2",
+        "torch_musa": "2.11.0.post2",
+        "musa": "5.2.0",
+        "mate": "0.2.8.post1",
+        "torchada": "0.1.105",
+        "release_image": "v0.32.0 (published image; verify exact package pins separately)"
+      },
+      "limitations": "README explicitly calls the v0.32.0-dev branch an upgrade candidate and says promotion requires build and model-smoke validation. Do not treat the development branch as a validated supported release.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/MooreThreads/vllm-musa/blob/v0.32.0-dev/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "README documents the pinned stack and labels the development branch an upgrade candidate."
+        }
+      ]
+    },
+    {
+      "id": "mthreads-sglang",
+      "platform_id": "moore-threads",
+      "layer": "serving",
+      "project": "SGLang Moore Threads",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "upstream_supported",
+      "confidence": "high",
+      "hardware_scope": "MTT S5000 GPUs as listed by SGLang.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
+      },
+      "limitations": "Validate exact MUSA software stack and model / kernel coverage.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Moore Threads row lists MTT S5000 in Supported Hardware."
+        }
+      ]
+    },
+    {
+      "id": "metax-vllm",
+      "platform_id": "metax",
+      "layer": "serving",
+      "project": "vLLM-MetaX",
+      "project_url": "https://github.com/MetaX-MACA/vLLM-metax",
+      "maintainer_type": "vendor_plugin",
+      "status": "needs_review",
+      "confidence": "medium",
+      "hardware_scope": "MetaX C-series; deployment README currently points to MetaX developer-community Docker images.",
+      "versions": {
+        "plugin_release": "v0.28.0 (latest release note checked 2026-11-05)",
+        "framework_version_claim": "vLLM v0.28.0 in release notes",
+        "python": "3.10–3.12",
+        "backend": "MACA"
+      },
+      "limitations": "The README's release notes say plugin v0.28.0 aligns with upstream vLLM v0.28.0, but its maintained-branch table maps releases/v0.28.0 to vLLM v0.26.0. This conflict must be resolved before treating the version pair as validated.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/MetaX-MACA/vLLM-metax/blob/master/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "README describes the plugin, C-series hardware, Docker-only deployment, release notes and a conflicting branch compatibility table."
+        }
+      ]
+    },
+    {
+      "id": "metax-sglang",
+      "platform_id": "metax",
+      "layer": "serving",
+      "project": "SGLang MetaX integration",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "in_progress",
+      "confidence": "high",
+      "hardware_scope": "MetaX integration; no generally supported device family is claimed by the SGLang README.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); integration status read from current main README"
+      },
+      "limitations": "SGLang explicitly lists MetaX under integrations in progress.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "MetaX is listed under integrations in progress."
+        }
+      ]
+    },
+    {
+      "id": "hygon-sglang",
+      "platform_id": "hygon",
+      "layer": "serving",
+      "project": "SGLang Hygon HCU / DCU integration",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "in_progress",
+      "confidence": "high",
+      "hardware_scope": "Hygon HCU / DCU integration.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); integration status read from current main README"
+      },
+      "limitations": "SGLang explicitly lists Hygon HCU / DCU under integrations in progress.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Hygon HCU / DCU is listed under integrations in progress."
+        }
+      ]
+    },
+    {
+      "id": "cambricon-sglang",
+      "platform_id": "cambricon",
+      "layer": "serving",
+      "project": "SGLang Cambricon MLU integration",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "in_progress",
+      "confidence": "high",
+      "hardware_scope": "Cambricon MLU integration.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); integration status read from current main README"
+      },
+      "limitations": "SGLang explicitly lists Cambricon MLU under integrations in progress.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Cambricon MLU is listed under integrations in progress."
+        }
+      ]
+    },
+    {
+      "id": "iluvatar-vllm",
+      "platform_id": "iluvatar",
+      "layer": "serving",
+      "project": "vLLM-Iluvatar",
+      "project_url": "https://github.com/Deep-Spark/vllm-iluvatar",
+      "maintainer_type": "vendor_plugin",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Iluvatar CoreX GPUs; build instructions give ivcore11 and ivcore30 as example architecture targets.",
+      "versions": {
+        "plugin_branch": "release/v0.27.1",
+        "vllm": ">=0.27.1,<0.28.0",
+        "corex_runtime_driver": ">=5.0.0",
+        "corex_pytorch": ">=2.10.0",
+        "ixformer": ">=0.7.0",
+        "python": ">=3.10"
+      },
+      "limitations": "The plugin pins an older vLLM range and CoreX-specific packages are supplied separately. Compatibility with vLLM 0.33.0rc3 is not established.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/Deep-Spark/vllm-iluvatar/blob/release/v0.27.1/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "README lists exact vLLM, CoreX runtime, CoreX PyTorch, ixformer and Python requirements."
+        }
+      ]
+    },
+    {
+      "id": "iluvatar-sglang",
+      "platform_id": "iluvatar",
+      "layer": "serving",
+      "project": "SGLang Iluvatar CoreX integration",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "in_progress",
+      "confidence": "high",
+      "hardware_scope": "Iluvatar CoreX integration.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-05); integration status read from current main README"
+      },
+      "limitations": "SGLang explicitly lists Iluvatar CoreX under integrations in progress.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "Iluvatar CoreX is listed under integrations in progress."
+        }
+      ]
+    },
+    {
+      "id": "enflame-torch-gcu",
+      "platform_id": "enflame",
+      "layer": "framework",
+      "project": "torch-gcu",
+      "project_url": "https://github.com/EnflameTechnology/torch-gcu",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "CloudBlazer Inference S60, the hardware model named in the public README.",
+      "versions": {
+        "torch_gcu": "2.10.0",
+        "pytorch": "2.10.0",
+        "topsrider": "v3.7.1",
+        "python": "3.9, 3.10, 3.12"
+      },
+      "limitations": "This is a PyTorch backend integration, not evidence of vLLM or SGLang production support. The README documents torch.compile / Inductor, AMP, profiler, GCU Graph, ECCL and CUDA migration.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/EnflameTechnology/torch-gcu/blob/main/README.md",
+          "checked_at": "2026-11-05",
+          "claim": "README lists the PyTorch / Python matrix, TopsRider compatibility and S60 hardware support."
+        }
+      ]
+    },
+    {
+      "id": "biren-deepseek-v4-port",
+      "platform_id": "biren",
+      "layer": "model_porting",
+      "project": "DeepSeek-V4 preview adaptation on BR166",
+      "project_url": "https://www.birentech.com/news/lo81mr3idb49bsdjf8hdd2bb/",
+      "maintainer_type": "vendor",
+      "status": "vendor_reported",
+      "confidence": "medium",
+      "hardware_scope": "Biren BR166 GPU.",
+      "versions": {
+        "model": "DeepSeek-V4 preview",
+        "reported_date": "2026-04-28"
+      },
+      "limitations": "Vendor-reported adaptation / inference validation. Public evidence in this review does not establish an independently maintained upstream vLLM or SGLang backend, full model coverage or reproducible benchmark data.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "vendor_announcement",
+          "url": "https://www.birentech.com/news/lo81mr3idb49bsdjf8hdd2bb/",
+          "checked_at": "2026-11-05",
+          "claim": "Biren reported DeepSeek-V4 preview adaptation and inference validation on BR166."
+        },
+        {
+          "type": "vendor_announcement",
+          "url": "https://www.birentech.com/news/otr0bf5evzdwwivrjt6h3322/",
+          "checked_at": "2026-11-05",
+          "claim": "A separate vendor case describes SenseNova U1 adaptation using br_pytorch, BIRENSUPA and AIModelMaster."
+        }
+      ]
+    }
+  ]
+}

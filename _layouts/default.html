@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fb">
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-frame">
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand-lockup" href="{{ '/' | relative_url }}" aria-label="AI Chip home">
+          <span class="brand-mark" aria-hidden="true"><span>AI</span><i></i></span>
+          <span class="brand-text"><strong>AI Chip</strong><small>Hardware · Software · Systems</small></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-site-nav>
+          <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active" aria-current="page"{% endif %}>Overview</a>
+          <a href="{{ '/directory/' | relative_url }}"{% if page.url contains '/directory' %} class="is-active" aria-current="page"{% endif %}>Hardware</a>
+          <a href="{{ '/software-ecosystem/' | relative_url }}"{% if page.url contains '/software-ecosystem' %} class="is-active" aria-current="page"{% endif %}>Software</a>
+          <a href="{{ '/compatibility/' | relative_url }}"{% if page.url contains '/compatibility' %} class="is-active" aria-current="page"{% endif %}>Compatibility</a>
+          <a href="{{ '/workloads/' | relative_url }}"{% if page.url contains '/workloads' %} class="is-active" aria-current="page"{% endif %}>Workloads</a>
+          <a href="{{ '/benchmarks/' | relative_url }}"{% if page.url contains '/benchmarks' %} class="is-active" aria-current="page"{% endif %}>Benchmarks</a>
+        </nav>
+        <div class="header-actions">
+          <a class="github-link" href="https://github.com/basicmi/AI-Chip" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme">Dark mode</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <a class="footer-brand" href="{{ '/' | relative_url }}">AI Chip <span>·</span> Technical landscape</a>
+        <p>Curated technical reference · Prefer primary sources · Compatibility claims are version-specific</p>
+        <a href="https://github.com/basicmi/AI-Chip" target="_blank" rel="noopener noreferrer">Contribute on GitHub ↗</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
