@@ -10,6 +10,18 @@ permalink: /benchmarks/
 
 **Last reviewed: 2026-11-05** · A benchmark name alone is not a comparable result. Always preserve its workload, software stack, hardware configuration, measurement method, and source.
 
+## Structured benchmark database
+
+The benchmark catalogue and result records are maintained separately:
+
+- [Benchmark suite catalogue]({{ '/data/benchmark-suites.json' | relative_url }}) — what each suite measures and how its results should be interpreted.
+- [Benchmark result database]({{ '/data/benchmark-results.json' | relative_url }}) — append-only measured records with configuration and provenance.
+- [Result JSON Schema]({{ '/schemas/benchmark-results.schema.json' | relative_url }}) — machine-readable result contract.
+
+The result database currently starts empty. This is intentional: suite availability, vendor claims and software compatibility are not benchmark measurements. A result must pin hardware, driver/runtime, framework, model revision, precision, workload parameters, warm-up and measurement iterations, metric units, source/run link and reproduction status.
+
+**Evidence classes:** `vendor_reported`, `upstream_ci`, and `independently_reproduced`. These must not be blended into a single ranking.
+
 ## 1.1 Benchmark project status snapshot
 
 Repository metadata and releases checked on **2026-11-05**. For projects without a tagged release, record the commit SHA used for a run rather than inventing a version.
@@ -116,7 +128,9 @@ Suggested workload dimensions:
 |---|---|---|---|
 | [KernelBench](https://github.com/ScalingIntelligence/KernelBench) | AI-generated GPU kernels | Correctness and speed of generated kernels against reference implementations | Useful for measuring code-generation capability; pin tasks, baseline, hardware, and evaluator. |
 | [TritonBench](https://github.com/meta-pytorch/tritonbench) | PyTorch operator benchmark suite for Triton and related kernels | A benchmark harness with operator implementations and submodules including TileLang, FlashAttention and AITer | BSD-3-Clause; record submodule versions and hardware backend. |
-| [FlagGems](https://github.com/flagos-ai/FlagGems) | Multi-backend Triton operator library | PyTorch ATen-compatible operator library targeting diverse accelerators; includes benchmark scripts | Apache-2.0; backend coverage and maturity vary. Not a universal TritonBench leaderboard. |\n| [KernelBench-Verified](https://github.com/facebookresearch/kernel_bench_verified) | Verified GPU kernel generation benchmark | Adds a verification-oriented task / evaluation track for generated GPU kernels | MIT; distinct from the original KernelBench task suite. |\n| [KernelBenchX](https://github.com/BonnieW05/KernelBenchX) | Expanded GPU kernel benchmark | Broader task coverage and evaluation dimensions; inspect paper and current task definitions before comparing scores | Apache-2.0; research benchmark, not yet a standardized industry leaderboard. |
+| [FlagGems](https://github.com/flagos-ai/FlagGems) | Multi-backend Triton operator library | PyTorch ATen-compatible operator library targeting diverse accelerators; includes benchmark scripts | Apache-2.0; backend coverage and maturity vary. Not a universal TritonBench leaderboard. |
+| [KernelBench-Verified](https://github.com/facebookresearch/kernel_bench_verified) | Verified GPU kernel generation benchmark | Adds a verification-oriented task / evaluation track for generated GPU kernels | MIT; distinct from the original KernelBench task suite. |
+| [KernelBenchX](https://github.com/BonnieW05/KernelBenchX) | Expanded GPU kernel benchmark | Broader task coverage and evaluation dimensions; inspect paper and current task definitions before comparing scores | Apache-2.0; research benchmark, not yet a standardized industry leaderboard. |
 | [Triton tutorials and testing](https://github.com/triton-lang/triton) | DSL and compiler regression | Backend correctness and performance behavior | Compiler test suite is not a standalone cross-vendor leaderboard. |
 | [FlashInfer](https://github.com/flashinfer-ai/flashinfer) | LLM inference kernels | Attention, KV cache, GEMM, MoE and related primitives | Use its benchmark scripts for kernel-level comparisons; record GPU, CUDA, compiler and shape. |
 | [CUTLASS profiler](https://github.com/NVIDIA/cutlass) | NVIDIA GEMM / convolution kernels | Kernel configurations and measured performance | NVIDIA-specific; not a vendor-neutral benchmark. |
