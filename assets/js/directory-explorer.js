@@ -190,6 +190,11 @@
       description.className = "directory-result-description";
       const text = entry.description;
       description.textContent = text.length > 190 ? text.slice(0, 187) + "…" : text;
+      const productLabel = document.createElement("span");
+      productLabel.className = "directory-result-products";
+      const productNames = (entry.profile?.products || []).map((product) => product.name);
+      productLabel.textContent = productNames.length ? "Structured products: " + productNames.join(" · ") : "";
+      productLabel.hidden = productNames.length === 0;
       const evidence = document.createElement("span");
       evidence.className = "directory-result-evidence";
       const freshnessLabels = {
@@ -202,8 +207,8 @@
       const evidenceLabel = entry.evidenceCount === 1 ? "evidence record" : "evidence records";
       evidence.textContent = freshnessLabels[entry.freshnessStatus] + " · " +
         entry.referenceCount + " source links · " + entry.evidenceCount + " " + evidenceLabel +
-        " · " + entry.claimCount + " audited claims";
-      copy.append(categoryLabel, title, description, evidence);
+        " · " + entry.claimCount + " reviewed claims";
+      copy.append(categoryLabel, title, description, productLabel, evidence);
       link.append(copy);
       card.append(link);
       results.append(card);
