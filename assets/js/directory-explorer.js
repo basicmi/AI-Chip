@@ -199,9 +199,10 @@
         stale: "Stale evidence",
         disputed: "Disputed evidence"
       };
+      const evidenceLabel = entry.evidenceCount === 1 ? "evidence record" : "evidence records";
       evidence.textContent = freshnessLabels[entry.freshnessStatus] + " · " +
-        entry.referenceCount + " source links · " + entry.evidenceCount + " evidence records · " +
-        entry.claimCount + " audited claims";
+        entry.referenceCount + " source links · " + entry.evidenceCount + " " + evidenceLabel +
+        " · " + entry.claimCount + " audited claims";
       copy.append(categoryLabel, title, description, evidence);
       link.append(copy);
       card.append(link);
