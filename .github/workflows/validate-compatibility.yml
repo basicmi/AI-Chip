@@ -42,6 +42,7 @@ jobs:
         run: |
           python3 scripts/validate_compatibility.py
           python3 scripts/validate_workloads.py
+          python3 scripts/validate_benchmarks.py
 
   build-and-smoke-test:
     runs-on: ubuntu-latest
