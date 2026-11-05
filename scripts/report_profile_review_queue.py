@@ -121,6 +121,16 @@ def build_review_queue(profiles, compatibility, workloads, today: date | None = 
 
     lines.extend([
         "",
+        "## Software integration maturity",
+        "",
+        "| Status | Integrations |",
+        "|---|---:|",
+    ])
+    for status, count in sorted(integration_counts.items()):
+        lines.append(f"| {status} | {count} |")
+
+    lines.extend([
+        "",
         "## Workload-path maturity",
         "",
         "| Status | Paths |",
