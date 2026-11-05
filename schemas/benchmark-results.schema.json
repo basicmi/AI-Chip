@@ -1,0 +1,441 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/benchmark-results.schema.json",
+  "title": "AI Chip Landscape Benchmark Results Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "database_version",
+    "last_imported_at",
+    "scope",
+    "sources",
+    "summary",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_imported_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "summary": {
+      "type": "object"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  },
+  "$defs": {
+    "httpUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "nullableUrl": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/httpUrl"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "name",
+        "publisher",
+        "source_class",
+        "record_count",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_class": {
+          "enum": [
+            "standardized_public_submission",
+            "third_party_public_benchmark",
+            "vendor_reported",
+            "independent_measurement",
+            "research_evaluation"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publication_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "results_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "release_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "dataset_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "repository_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "api_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "availability_endpoint": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "benchmark_endpoint": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "record_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "import_status": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "system": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "nodes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "host_processor_model": {
+          "type": "string"
+        },
+        "host_processors_per_node": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "host_processor_core_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "accelerator_model": {
+          "type": "string"
+        },
+        "accelerators_per_node": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "total_accelerators": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "platform": {
+          "type": "string"
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "physical_prefill_gpus": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "physical_decode_gpus": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "is_multinode": {
+          "type": "boolean"
+        }
+      }
+    },
+    "software": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "operating_system": {
+          "type": "string"
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "recipe_fingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source_id",
+        "source_class",
+        "evidence_level",
+        "benchmark_suite",
+        "benchmark_version",
+        "publication_date",
+        "submitter",
+        "accelerator_vendor",
+        "platform_id",
+        "product_id",
+        "system_type",
+        "system_name",
+        "division",
+        "availability",
+        "model",
+        "scenario",
+        "result_value",
+        "result_unit",
+        "accuracy_text",
+        "inferred",
+        "power_metrics_available",
+        "design_power_watts",
+        "system",
+        "software",
+        "notes",
+        "compliance",
+        "errors",
+        "weight_data_types",
+        "source_record_key",
+        "source_location",
+        "source_url",
+        "dataset_url",
+        "release_url"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_class": {
+          "enum": [
+            "standardized_public_submission",
+            "third_party_public_benchmark",
+            "vendor_reported",
+            "independent_measurement",
+            "research_evaluation"
+          ]
+        },
+        "evidence_level": {
+          "type": "string",
+          "minLength": 1
+        },
+        "benchmark_suite": {
+          "type": "string",
+          "minLength": 1
+        },
+        "benchmark_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publication_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "submitter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accelerator_vendor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "platform_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "system_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "division": {
+          "type": "string",
+          "minLength": 1
+        },
+        "availability": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "result_unit": {
+          "type": "string"
+        },
+        "accuracy_text": {
+          "type": "string"
+        },
+        "inferred": {
+          "type": "boolean"
+        },
+        "power_metrics_available": {
+          "type": "boolean"
+        },
+        "design_power_watts": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "system": {
+          "$ref": "#/$defs/system"
+        },
+        "software": {
+          "$ref": "#/$defs/software"
+        },
+        "workload": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "weight_data_types": {
+          "type": "string"
+        },
+        "source_record_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_location": {
+          "type": "string"
+        },
+        "source_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "detail_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "dataset_url": {
+          "$ref": "#/$defs/nullableUrl"
+        },
+        "release_url": {
+          "$ref": "#/$defs/nullableUrl"
+        }
+      }
+    }
+  }
+}
