@@ -38,6 +38,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
       <label>Model<select data-results-model><option value="">All models</option></select></label>
       <label>Scenario<select data-results-scenario><option value="">All scenarios</option></select></label>
       <label>Availability<select data-results-availability><option value="">All statuses</option></select></label>
+      <label>Submission type<select data-results-inferred><option value="">All submission types</option></select></label>
       <label>Division<select data-results-division><option value="">All divisions</option></select></label>
       <label>System type<select data-results-system><option value="">All system types</option></select></label>
     </div>
