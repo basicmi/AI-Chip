@@ -136,6 +136,12 @@ const { chromium } = require("playwright");
     statSelector: '[data-benchmark-stat="projects"]',
     countSelector: "[data-benchmark-count]"
   });
+  const benchmarkVersion = (await page.locator("[data-benchmark-version]").textContent()).trim();
+  const benchmarkReviewed = (await page.locator("[data-benchmark-reviewed]").textContent()).trim();
+  if (!benchmarkVersion || benchmarkVersion === "Loading…" ||
+      !benchmarkReviewed || benchmarkReviewed === "—") {
+    throw new Error("Benchmark page metadata did not render");
+  }
   await page.locator("[data-benchmark-search]").fill("InferenceX");
   if (Number(await page.locator("[data-benchmark-count]").textContent()) < 1) {
     throw new Error("Benchmark search did not return InferenceX");
