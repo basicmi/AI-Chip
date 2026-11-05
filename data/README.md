@@ -26,3 +26,11 @@ The validator checks JSON parsing, unique IDs, platform references, controlled s
 6. Never infer support from a product announcement, marketing compatibility logo, or repository name.
 7. Do not overwrite historical claims silently: update `last_checked`, replace / append evidence, and describe the change in the PR.
 8. Version strings are evidence snapshots, not a promise that arbitrary combinations work.
+
+## Workload data
+
+- `workloads.json`: workload taxonomy and candidate hardware/software execution paths.
+- `../schemas/workloads.schema.json`: JSON Schema (Draft 2020-12).
+- `../scripts/validate_workloads.py`: validator for workload IDs, path references, evidence maturity and metric provenance.
+
+The workload taxonomy is not a compatibility certification. `integration_only` means the underlying software integration is documented, but no workload-specific correctness or performance test is attached. `vendor_reported` records a public vendor claim without independent reproduction. Metric records must include a numeric value, unit, method, source URL, date and evidence type. Empty metric arrays are intentional where no comparable evidence is available.
