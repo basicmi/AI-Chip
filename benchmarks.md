@@ -10,6 +10,23 @@ permalink: /benchmarks/
 
 **Last reviewed: 2026-11-05** · A benchmark name alone is not a comparable result. Always preserve its workload, software stack, hardware configuration, measurement method, and source.
 
+## 1.1 Benchmark project status snapshot
+
+Repository metadata and releases checked on **2026-11-05**. For projects without a tagged release, record the commit SHA used for a run rather than inventing a version.
+
+| Project | Checked release / revision | Repository license | Interpretation |
+|---|---|---|---|
+| [MLPerf](https://mlcommons.org/benchmarks/) | Versioned result rounds | Rules and benchmark components have suite-specific terms | Standardized submissions; follow the current rules for each suite. |
+| [KernelBench](https://github.com/ScalingIntelligence/KernelBench) | No GitHub release found; pin commit | MIT | Research benchmark; task set and evaluator policy matter. |
+| [KernelBench-Verified](https://github.com/facebookresearch/kernel_bench_verified) | No GitHub release found; pin commit | MIT | Verification-oriented complementary benchmark; do not merge scores with the original KernelBench. |
+| [KernelBenchX](https://github.com/BonnieW05/KernelBenchX) | No GitHub release found; pin commit | Apache-2.0 | Expanded research benchmark; task mix differs from KernelBench. |
+| [TritonBench](https://github.com/meta-pytorch/tritonbench) | Active main branch; no GitHub release found | BSD-3-Clause | Operator harness; it uses submodules and can default to a PyTorch nightly / bundled Triton, so pin the full environment. |
+| [FlagGems](https://github.com/flagos-ai/FlagGems/releases/tag/v5.4.0) | v5.4.0 (2026-09-28) | Apache-2.0 | Operator library and evaluation scripts, not a neutral leaderboard. |
+| [vLLM](https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3) | v0.33.0rc3 (2026-11-02) | Apache-2.0 | Serving engine benchmark tools; note that this is a release candidate. |
+| [SGLang](https://github.com/sgl-project/sglang/releases/tag/v0.5.23) | v0.5.23 (2026-11-02) | Apache-2.0 | Serving engine benchmark tools; record exact model and hardware path. |
+| [torch-gcu](https://github.com/EnflameTechnology/torch-gcu/releases/tag/v2.10.0) | v2.10.0 (2026-08-07) | BSD-style 3-Clause terms | Vendor framework integration; not itself a neutral benchmark. |
+| [DeepSparkInference](https://github.com/Deep-Spark/DeepSparkInference/releases/tag/26.09) | 26.09 (2026-09-22) | Apache-2.0 | Vendor ecosystem model examples and results; classify performance as vendor-reported unless independently reproduced. |
+
 ## 1. Benchmark taxonomy
 
 | Category | What it measures | Typical questions |
@@ -71,11 +88,11 @@ Recommended fields:
 | Project / resource | Role | Use |
 |---|---|---|
 | [MLPerf Inference](https://mlcommons.org/benchmarks/) | Standardized inference suite | Comparable results under published rules and scenarios. |
-| [GenAI-Perf](https://github.com/NVIDIA/GenAI-Perf) | LLM / GenAI serving performance measurement within NVIDIA Triton tooling | Latency and throughput measurements for supported serving endpoints. |
+| [GenAI-Perf / Perf Analyzer](https://github.com/triton-inference-server/perf_analyzer) | LLM / GenAI serving performance measurement within NVIDIA Triton tooling | Latency and throughput measurements for supported serving endpoints. |
 | [vLLM benchmark tools](https://docs.vllm.ai/) | Serving-engine benchmark utilities | Reproducible request, throughput, and latency measurements; pin vLLM version and workload. |
 | [SGLang benchmark tools](https://docs.sglang.ai/) | Serving-engine benchmark utilities | Evaluate engine-specific features and workloads; retain exact configuration. |
 | [llmperf](https://github.com/ray-project/llmperf) | LLM API load / performance testing | Useful for request-level latency and throughput; results depend on client and server setup. |
-| [NVIDIA GenAI-Perf](https://github.com/triton-inference-server/perf_analyzer) | LLM endpoint benchmarking | Includes request-level and token-level metrics; verify version and endpoint mode. |
+| [GenAI-Perf / Perf Analyzer](https://github.com/triton-inference-server/perf_analyzer) | LLM endpoint benchmarking | Includes request-level and token-level metrics; verify version and endpoint mode. |
 
 ### Agentic and multi-turn inference
 
@@ -98,7 +115,7 @@ Suggested workload dimensions:
 | Project | Focus | What it evaluates | Notes |
 |---|---|---|---|
 | [KernelBench](https://github.com/ScalingIntelligence/KernelBench) | AI-generated GPU kernels | Correctness and speed of generated kernels against reference implementations | Useful for measuring code-generation capability; pin tasks, baseline, hardware, and evaluator. |
-| [FlagGems](https://github.com/FlagOpen/FlagGems) | Triton-compatible operator library and evaluation workloads | Operator correctness and performance across representative workloads | This is an operator-library ecosystem, not a universal TritonBench leaderboard. |
+| [TritonBench](https://github.com/meta-pytorch/tritonbench) | PyTorch operator benchmark suite for Triton and related kernels | A benchmark harness with operator implementations and submodules including TileLang, FlashAttention and AITer | BSD-3-Clause; record submodule versions and hardware backend. |\n| [FlagGems](https://github.com/flagos-ai/FlagGems) | Multi-backend Triton operator library | PyTorch ATen-compatible operator library targeting diverse accelerators; includes benchmark scripts | Apache-2.0; backend coverage and maturity vary. Not a universal TritonBench leaderboard. |\n| [KernelBench-Verified](https://github.com/facebookresearch/kernel_bench_verified) | Verified GPU kernel generation benchmark | Adds a verification-oriented task / evaluation track for generated GPU kernels | MIT; distinct from the original KernelBench task suite. |\n| [KernelBenchX](https://github.com/BonnieW05/KernelBenchX) | Expanded GPU kernel benchmark | Broader task coverage and evaluation dimensions; inspect paper and current task definitions before comparing scores | Apache-2.0; research benchmark, not yet a standardized industry leaderboard. |
 | [Triton tutorials and testing](https://github.com/triton-lang/triton) | DSL and compiler regression | Backend correctness and performance behavior | Compiler test suite is not a standalone cross-vendor leaderboard. |
 | [FlashInfer](https://github.com/flashinfer-ai/flashinfer) | LLM inference kernels | Attention, KV cache, GEMM, MoE and related primitives | Use its benchmark scripts for kernel-level comparisons; record GPU, CUDA, compiler and shape. |
 | [CUTLASS profiler](https://github.com/NVIDIA/cutlass) | NVIDIA GEMM / convolution kernels | Kernel configurations and measured performance | NVIDIA-specific; not a vendor-neutral benchmark. |
