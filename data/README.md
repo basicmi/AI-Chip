@@ -20,6 +20,7 @@ From the repository root:
 python3 scripts/validate_compatibility.py
 python3 scripts/validate_workloads.py
 python3 scripts/validate_benchmarks.py
+python3 scripts/validate_company_profiles.py
 ```
 
 The benchmark validator checks catalogue structure, category references, required descriptive fields and source URLs. It does not run experiments or validate the truth of vendor claims; reviewers should inspect primary sources.
@@ -38,4 +39,4 @@ Products are separate records. Technical specifications and status statements be
 
 Freshness is computed from `checked_at`: fresh within 90 days, review due after 90 days, stale after 180 days. Missing dates mean unreviewed, never fresh. Staleness means a source needs rechecking; it does not by itself prove a claim is false.
 
-The initial registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. Three first-pass examples now demonstrate the full product → claim → evidence relationship: NVIDIA B200, AMD Instinct MI355X and Google TPU7x (Ironwood). They contain 14 structured claims linked to three reviewed primary vendor documents. These remain explicitly `vendor_reported` specifications, not independent benchmark measurements. The other 47 company profiles have no audited evidence or structured claims yet. This is deliberate: no chip specifications, process nodes, bandwidth figures or performance claims are invented to fill the schema.
+The initial registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. Three first-pass examples now demonstrate the full product → claim → evidence relationship: NVIDIA B200, AMD Instinct MI355X and Google TPU7x (Ironwood). They contain 17 structured claims linked to three reviewed primary vendor documents. These remain explicitly `vendor_reported` specifications, not independent benchmark measurements. The other 47 company profiles have no reviewed evidence or structured claims yet. This is deliberate: no chip specifications, process nodes, bandwidth figures or performance claims are invented to fill the schema.
