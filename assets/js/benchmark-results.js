@@ -209,8 +209,10 @@
       card.append(make("p", "benchmark-source-publisher", source.publisher + " · " + source.source_class.replaceAll("_", " ")));
       card.append(make("p", "benchmark-source-notes", source.notes));
       const links = make("div", "benchmark-result-detail-links");
-      addLink(links, source.results_url, "Results ↗");
-      addLink(links, source.dataset_url || source.api_url, source.record_count ? "Raw data ↗" : "Public API ↗");
+      addLink(links, source.results_url, source.record_count ? "Published results ↗" :
+        (source.id === "mlperf-power" ? "Methodology ↗" : "Overview ↗"));
+      if (source.dataset_url) addLink(links, source.dataset_url, "Raw data ↗");
+      else if (source.api_url) addLink(links, source.api_url, "Public API ↗");
       card.append(links);
       if (!source.record_count) {
         card.append(make("p", "benchmark-result-warning", "No rows are cached in this snapshot. The repository importer supports this public source; it is not silently treated as zero performance."));
