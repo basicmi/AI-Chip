@@ -110,6 +110,8 @@ python3 -m unittest discover -s tests -p "test_benchmark_results.py"
 
 The InferenceX importer uses its documented unauthenticated read API. It preserves the raw scalar metric keys, workload shape, precision, parallelism, image, recipe fingerprint, date and producer run URL. InferenceX time metrics are in seconds; throughput metrics are tokens/s per GPU unless the metric name states otherwise. Strict energy comparisons require both `power_valid=1` and `power_metric_schema_version=2`. The importer does not calculate a universal score.
 
+A manual GitHub Actions workflow, `.github/workflows/refresh-benchmark-results.yml`, can refresh MLPerf, InferenceX or both and open a pull request containing the updated snapshot. It validates the result registry before proposing the data update; the workflow does not push benchmark data directly to the default branch.
+
 ### Comparability rules
 
 1. Keep benchmark suite and version fixed.
