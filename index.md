@@ -14,10 +14,10 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <a class="button button-primary" href="{{ '/directory/' | relative_url }}">Explore hardware <span aria-hidden="true">↗</span></a>
       <a class="button button-secondary" href="{{ '/compatibility/' | relative_url }}">Open compatibility explorer</a>
     </div>
-    <div class="home-metrics" aria-label="Current database coverage">
+    <div class="home-metrics" aria-label="Current database coverage" data-home-stats data-compat-source="{{ '/data/compatibility.json' | relative_url }}" data-workload-source="{{ '/data/workloads.json' | relative_url }}">
       <div><strong>11</strong><span>accelerator platforms</span></div>
       <div><strong>18</strong><span>software integrations</span></div>
-      <div><strong>03</strong><span>research dimensions</span></div>
+      <div><strong>10</strong><span>workload definitions</span></div>
     </div>
   </div>
   <div class="home-hero-visual">
@@ -32,7 +32,7 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
   <div class="section-heading">
     <div>
       <p class="eyebrow">EXPLORE THE ECOSYSTEM</p>
-      <h2>Four views. One connected landscape.</h2>
+      <h2>Five views. One connected landscape.</h2>
     </div>
     <p>Move from a vendor or chip to its software support, then compare the benchmarks that matter.</p>
   </div>
@@ -58,8 +58,15 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <p>Search hardware-to-software integration records, version pins, support status and primary evidence.</p>
       <span class="feature-link">Query compatibility <span aria-hidden="true">→</span></span>
     </a>
+    <a class="feature-card feature-card-highlight" href="{{ '/workloads/' | relative_url }}">
+      <span class="feature-number">04 / WORKLOADS</span>
+      <span class="feature-icon" aria-hidden="true">⌁</span>
+      <h3>Workload explorer</h3>
+      <p>Connect model families and workload phases to candidate hardware/software paths, with evidence maturity made explicit.</p>
+      <span class="feature-link">Explore execution paths <span aria-hidden="true">→</span></span>
+    </a>
     <a class="feature-card" href="{{ '/benchmarks/' | relative_url }}">
-      <span class="feature-number">04 / BENCHMARKS</span>
+      <span class="feature-number">05 / BENCHMARKS</span>
       <span class="feature-icon" aria-hidden="true">▥</span>
       <h3>Benchmark landscape</h3>
       <p>Understand model, serving, kernel, memory, interconnect, power and cost benchmarks.</p>
