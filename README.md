@@ -6,7 +6,7 @@
 <div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
 <div class="landscape-map"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p8.png" loading="lazy" alt="AI Chip Landscape v0.8 (2026)" /></div>
 <p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro (plus lineage where relevant) and 1–2 latest updates. Prefer official / primary sources; performance claims are often vendor-reported.</p>
-<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a></p>
+<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/data/compatibility/">Compatibility data (JSON)</a></p>
 </header>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
