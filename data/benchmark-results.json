@@ -1,7 +1,0 @@
-{
-  "schema_version": "1.0",
-  "database_version": "2026.11.05-1",
-  "last_reviewed": "2026-11-05",
-  "scope": "Append-only benchmark records. Initially empty: only measured, sourced and configuration-complete results may be added.",
-  "results": []
-}
