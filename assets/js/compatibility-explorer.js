@@ -77,8 +77,14 @@
     root.querySelector('[data-stat="integrations"]').textContent = database.integrations.length;
     root.querySelector('[data-stat="documented"]').textContent = documented;
     root.querySelector('[data-stat="review"]').textContent = review;
-    root.querySelector("[data-database-version]").textContent = database.database_version || "Current snapshot";
-    root.querySelector("[data-last-reviewed]").textContent = database.last_reviewed || "Not specified";
+    // Dataset metadata lives in the page heading, outside the explorer root.
+    const databaseVersion = document.querySelector("[data-database-version]");
+    const lastReviewed = document.querySelector("[data-last-reviewed]");
+    if (!databaseVersion || !lastReviewed) {
+      throw new Error("Compatibility page metadata elements are missing.");
+    }
+    databaseVersion.textContent = database.database_version || "Current snapshot";
+    lastReviewed.textContent = database.last_reviewed || "Not specified";
   };
 
   const renderVersions = (versions) => {
