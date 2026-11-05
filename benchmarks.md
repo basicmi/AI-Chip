@@ -71,7 +71,7 @@ Recommended fields:
 | Project / resource | Role | Use |
 |---|---|---|
 | [MLPerf Inference](https://mlcommons.org/benchmarks/) | Standardized inference suite | Comparable results under published rules and scenarios. |
-| [GenAI-Perf](https://github.com/triton-inference-server/perf_analyzer) | LLM / GenAI serving performance measurement within NVIDIA Triton tooling | Latency and throughput measurements for supported serving endpoints. |
+| [GenAI-Perf](https://github.com/NVIDIA/GenAI-Perf) | LLM / GenAI serving performance measurement within NVIDIA Triton tooling | Latency and throughput measurements for supported serving endpoints. |
 | [vLLM benchmark tools](https://docs.vllm.ai/) | Serving-engine benchmark utilities | Reproducible request, throughput, and latency measurements; pin vLLM version and workload. |
 | [SGLang benchmark tools](https://docs.sglang.ai/) | Serving-engine benchmark utilities | Evaluate engine-specific features and workloads; retain exact configuration. |
 | [llmperf](https://github.com/ray-project/llmperf) | LLM API load / performance testing | Useful for request-level latency and throughput; results depend on client and server setup. |
@@ -98,7 +98,7 @@ Suggested workload dimensions:
 | Project | Focus | What it evaluates | Notes |
 |---|---|---|---|
 | [KernelBench](https://github.com/ScalingIntelligence/KernelBench) | AI-generated GPU kernels | Correctness and speed of generated kernels against reference implementations | Useful for measuring code-generation capability; pin tasks, baseline, hardware, and evaluator. |
-| [TritonBench](https://github.com/FlagOpen/FlagGems) | Triton / operator workloads | Operator correctness and performance across representative workloads | Check the exact benchmark harness and task set in the repository. |
+| [FlagGems](https://github.com/FlagOpen/FlagGems) | Triton-compatible operator library and evaluation workloads | Operator correctness and performance across representative workloads | This is an operator-library ecosystem, not a universal TritonBench leaderboard. |
 | [Triton tutorials and testing](https://github.com/triton-lang/triton) | DSL and compiler regression | Backend correctness and performance behavior | Compiler test suite is not a standalone cross-vendor leaderboard. |
 | [FlashInfer](https://github.com/flashinfer-ai/flashinfer) | LLM inference kernels | Attention, KV cache, GEMM, MoE and related primitives | Use its benchmark scripts for kernel-level comparisons; record GPU, CUDA, compiler and shape. |
 | [CUTLASS profiler](https://github.com/NVIDIA/cutlass) | NVIDIA GEMM / convolution kernels | Kernel configurations and measured performance | NVIDIA-specific; not a vendor-neutral benchmark. |
