@@ -1,0 +1,481 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.05-2",
+  "last_reviewed": "2026-11-05",
+  "scope": "Curated directory of public AI accelerator benchmark suites, result portals and measurement tools. This catalogue records publicly available information; it does not run benchmarks or claim that a listed tool supports every accelerator.",
+  "categories": [
+    {
+      "id": "training_inference",
+      "label": "Training & inference"
+    },
+    {
+      "id": "llm_serving",
+      "label": "LLM serving & agentic"
+    },
+    {
+      "id": "kernel_operator",
+      "label": "Kernel & operator"
+    },
+    {
+      "id": "memory_interconnect",
+      "label": "Memory & interconnect"
+    },
+    {
+      "id": "edge_mobile",
+      "label": "Edge & mobile"
+    },
+    {
+      "id": "power_efficiency",
+      "label": "Power & efficiency"
+    }
+  ],
+  "projects": [
+    {
+      "id": "mlperf",
+      "name": "MLPerf",
+      "category": "training_inference",
+      "kind": "standardized_suite",
+      "maintainer": "MLCommons",
+      "description": "A family of standardized AI system benchmarks spanning training, inference, client/mobile, Tiny, HPC and power. Results are submitted under suite-specific rules.",
+      "official_url": "https://mlcommons.org/benchmarks/",
+      "repository_url": "https://github.com/mlcommons/inference",
+      "results_url": "https://mlcommons.org/benchmarks/",
+      "metrics": [
+        "accuracy",
+        "throughput",
+        "latency",
+        "time-to-train",
+        "power"
+      ],
+      "comparability": "Compare only within the same suite version, scenario, division, accuracy target and system boundary."
+    },
+    {
+      "id": "inferencex",
+      "name": "SemiAnalysis InferenceX / AgentX",
+      "category": "llm_serving",
+      "kind": "public_benchmark",
+      "maintainer": "SemiAnalysis",
+      "description": "Public benchmark and analysis of real inference systems, including interactive LLM serving and agentic workloads where published.",
+      "official_url": "https://inferencex.semianalysis.com/",
+      "repository_url": null,
+      "results_url": "https://inferencex.semianalysis.com/",
+      "metrics": [
+        "TTFT",
+        "TPOT / inter-token latency",
+        "tokens/s per user",
+        "aggregate throughput",
+        "goodput",
+        "cost",
+        "energy"
+      ],
+      "comparability": "Pin model, recipe, hardware, software stack, precision, parallelism, input/output lengths, concurrency and SLO. Keep AgentX separate from fixed-prompt decode."
+    },
+    {
+      "id": "genai-perf",
+      "name": "GenAI-Perf / Perf Analyzer",
+      "category": "llm_serving",
+      "kind": "measurement_harness",
+      "maintainer": "NVIDIA Triton ecosystem",
+      "description": "Client-side tools for generating inference traffic and measuring request-level and token-level latency and throughput.",
+      "official_url": "https://github.com/triton-inference-server/perf_analyzer",
+      "repository_url": "https://github.com/triton-inference-server/perf_analyzer",
+      "results_url": null,
+      "metrics": [
+        "TTFT",
+        "inter-token latency",
+        "request throughput",
+        "output tokens/s"
+      ],
+      "comparability": "A measurement tool, not a neutral leaderboard. Client version, request distribution, load model and server configuration affect results."
+    },
+    {
+      "id": "vllm-bench",
+      "name": "vLLM benchmark tools",
+      "category": "llm_serving",
+      "kind": "measurement_harness",
+      "maintainer": "vLLM Project",
+      "description": "Benchmark scripts and serving workloads used to evaluate vLLM throughput, latency and scheduling behavior.",
+      "official_url": "https://docs.vllm.ai/",
+      "repository_url": "https://github.com/vllm-project/vllm",
+      "results_url": null,
+      "metrics": [
+        "TTFT",
+        "TPOT",
+        "request throughput",
+        "output tokens/s",
+        "goodput"
+      ],
+      "comparability": "Pin vLLM release/commit, model revision, hardware, backend, quantization, request distribution and benchmark command."
+    },
+    {
+      "id": "sglang-bench",
+      "name": "SGLang benchmark tools",
+      "category": "llm_serving",
+      "kind": "measurement_harness",
+      "maintainer": "SGLang Project",
+      "description": "Benchmark tooling and recipes for evaluating SGLang serving performance and runtime features.",
+      "official_url": "https://docs.sglang.ai/",
+      "repository_url": "https://github.com/sgl-project/sglang",
+      "results_url": null,
+      "metrics": [
+        "TTFT",
+        "inter-token latency",
+        "throughput",
+        "request latency"
+      ],
+      "comparability": "Record exact SGLang version, model, attention backend, scheduler, cache policy, workload and hardware."
+    },
+    {
+      "id": "llmperf",
+      "name": "llmperf",
+      "category": "llm_serving",
+      "kind": "measurement_harness",
+      "maintainer": "Ray Project",
+      "description": "Open-source load testing and performance measurement for LLM APIs and serving endpoints.",
+      "official_url": "https://github.com/ray-project/llmperf",
+      "repository_url": "https://github.com/ray-project/llmperf",
+      "results_url": null,
+      "metrics": [
+        "request latency",
+        "throughput",
+        "tokens/s"
+      ],
+      "comparability": "Results depend on client load generation, request distribution, endpoint behavior and server configuration."
+    },
+    {
+      "id": "kernelbench",
+      "name": "KernelBench",
+      "category": "kernel_operator",
+      "kind": "research_benchmark",
+      "maintainer": "Scaling Intelligence",
+      "description": "Evaluates correctness and performance of AI-generated GPU kernels against reference implementations.",
+      "official_url": "https://github.com/ScalingIntelligence/KernelBench",
+      "repository_url": "https://github.com/ScalingIntelligence/KernelBench",
+      "results_url": null,
+      "metrics": [
+        "correctness",
+        "latency",
+        "speedup",
+        "compile time"
+      ],
+      "comparability": "Pin task set, evaluator, timeout, compilation policy, correctness tolerance and target hardware."
+    },
+    {
+      "id": "kernelbench-verified",
+      "name": "KernelBench-Verified",
+      "category": "kernel_operator",
+      "kind": "research_benchmark",
+      "maintainer": "Meta Research",
+      "description": "Verification-oriented GPU kernel generation benchmark designed to strengthen correctness and evaluation confidence.",
+      "official_url": "https://github.com/facebookresearch/kernel_bench_verified",
+      "repository_url": "https://github.com/facebookresearch/kernel_bench_verified",
+      "results_url": null,
+      "metrics": [
+        "correctness",
+        "latency",
+        "verification rate"
+      ],
+      "comparability": "Do not merge results with original KernelBench without a task/evaluator mapping."
+    },
+    {
+      "id": "kernelbenchx",
+      "name": "KernelBenchX",
+      "category": "kernel_operator",
+      "kind": "research_benchmark",
+      "maintainer": "Community research project",
+      "description": "Expanded GPU kernel benchmark with a different task mix and evaluation scope from the original KernelBench.",
+      "official_url": "https://github.com/BonnieW05/KernelBenchX",
+      "repository_url": "https://github.com/BonnieW05/KernelBenchX",
+      "results_url": null,
+      "metrics": [
+        "correctness",
+        "latency",
+        "speedup"
+      ],
+      "comparability": "Treat as a separate benchmark. Inspect current paper, task set and evaluator before comparing."
+    },
+    {
+      "id": "tritonbench",
+      "name": "TritonBench",
+      "category": "kernel_operator",
+      "kind": "measurement_harness",
+      "maintainer": "Meta / PyTorch ecosystem",
+      "description": "Operator-level benchmark suite for Triton and related kernel implementations, with multiple submodules and backends.",
+      "official_url": "https://github.com/meta-pytorch/tritonbench",
+      "repository_url": "https://github.com/meta-pytorch/tritonbench",
+      "results_url": null,
+      "metrics": [
+        "operator latency",
+        "throughput",
+        "memory"
+      ],
+      "comparability": "Pin submodule revisions, PyTorch, Triton, compiler, backend, shapes, dtypes and hardware."
+    },
+    {
+      "id": "flaggems",
+      "name": "FlagGems",
+      "category": "kernel_operator",
+      "kind": "vendor_ecosystem",
+      "maintainer": "FlagOS community",
+      "description": "Multi-backend Triton operator library with benchmark scripts and accelerator backend integrations.",
+      "official_url": "https://github.com/flagos-ai/FlagGems",
+      "repository_url": "https://github.com/flagos-ai/FlagGems",
+      "results_url": null,
+      "metrics": [
+        "operator correctness",
+        "latency",
+        "throughput"
+      ],
+      "comparability": "An operator library and its tests, not a neutral cross-vendor leaderboard. Backend maturity and coverage vary."
+    },
+    {
+      "id": "flashinfer",
+      "name": "FlashInfer benchmarks",
+      "category": "kernel_operator",
+      "kind": "measurement_harness",
+      "maintainer": "FlashInfer project",
+      "description": "Kernel and operator benchmarks for LLM inference primitives including attention, KV cache, GEMM and MoE.",
+      "official_url": "https://github.com/flashinfer-ai/flashinfer",
+      "repository_url": "https://github.com/flashinfer-ai/flashinfer",
+      "results_url": null,
+      "metrics": [
+        "kernel latency",
+        "throughput",
+        "memory"
+      ],
+      "comparability": "Pin GPU, CUDA/ROCm, compiler, kernel version, tensor shapes, sequence lengths and precision."
+    },
+    {
+      "id": "cutlass-profiler",
+      "name": "CUTLASS Profiler",
+      "category": "kernel_operator",
+      "kind": "vendor_tool",
+      "maintainer": "NVIDIA",
+      "description": "Profiling and benchmarking utilities for NVIDIA GEMM, convolution and related GPU kernels.",
+      "official_url": "https://github.com/NVIDIA/cutlass",
+      "repository_url": "https://github.com/NVIDIA/cutlass",
+      "results_url": null,
+      "metrics": [
+        "kernel latency",
+        "FLOP/s",
+        "memory throughput"
+      ],
+      "comparability": "NVIDIA-specific tooling. Compare only matched operation, shape, precision and measurement settings."
+    },
+    {
+      "id": "composable-kernel",
+      "name": "Composable Kernel",
+      "category": "kernel_operator",
+      "kind": "vendor_tool",
+      "maintainer": "AMD",
+      "description": "AMD GPU kernel programming and performance infrastructure, including examples and benchmark paths.",
+      "official_url": "https://github.com/ROCm/composable_kernel",
+      "repository_url": "https://github.com/ROCm/composable_kernel",
+      "results_url": null,
+      "metrics": [
+        "kernel latency",
+        "throughput"
+      ],
+      "comparability": "AMD/ROCm-specific. Pin ROCm version, target architecture, kernel revision, shapes and precision."
+    },
+    {
+      "id": "stream",
+      "name": "STREAM",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "University of Virginia / STREAM authors",
+      "description": "Measures sustainable memory bandwidth using standard vector kernels.",
+      "official_url": "https://www.cs.virginia.edu/stream/",
+      "repository_url": null,
+      "results_url": null,
+      "metrics": [
+        "memory bandwidth"
+      ],
+      "comparability": "Record CPU/GPU implementation, NUMA placement, thread count, data size and compiler options."
+    },
+    {
+      "id": "bandwidth-test",
+      "name": "CUDA bandwidthTest",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "NVIDIA CUDA Samples",
+      "description": "Measures host-to-device, device-to-host and device-to-device transfer bandwidth.",
+      "official_url": "https://github.com/NVIDIA/cuda-samples",
+      "repository_url": "https://github.com/NVIDIA/cuda-samples",
+      "results_url": null,
+      "metrics": [
+        "copy bandwidth",
+        "transfer latency"
+      ],
+      "comparability": "CUDA-specific. Record transfer size, pinned/pageable memory, topology, peer access and software versions."
+    },
+    {
+      "id": "nccl-tests",
+      "name": "NCCL Tests",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "NVIDIA",
+      "description": "Collective communication benchmarks for NCCL operations across GPUs and nodes.",
+      "official_url": "https://github.com/NVIDIA/nccl-tests",
+      "repository_url": "https://github.com/NVIDIA/nccl-tests",
+      "results_url": null,
+      "metrics": [
+        "AllReduce",
+        "AllGather",
+        "ReduceScatter",
+        "Broadcast",
+        "latency",
+        "bandwidth"
+      ],
+      "comparability": "Record ranks, message size, topology, algorithm, transport, concurrency and intra-/inter-node boundary."
+    },
+    {
+      "id": "rccl",
+      "name": "RCCL",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "AMD",
+      "description": "ROCm collective communication library and associated test infrastructure for AMD GPUs.",
+      "official_url": "https://github.com/ROCm/rccl",
+      "repository_url": "https://github.com/ROCm/rccl",
+      "results_url": null,
+      "metrics": [
+        "collective latency",
+        "bandwidth"
+      ],
+      "comparability": "AMD-specific. Match operation, rank count, message size, topology and software versions."
+    },
+    {
+      "id": "osu-micro-benchmarks",
+      "name": "OSU Micro-Benchmarks",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "Ohio State University",
+      "description": "MPI point-to-point and collective communication benchmarks, including selected GPU-aware paths.",
+      "official_url": "https://mvapich.cse.ohio-state.edu/benchmarks/",
+      "repository_url": "https://github.com/ROCm/OSU_Microbenchmarks",
+      "results_url": null,
+      "metrics": [
+        "MPI latency",
+        "bandwidth",
+        "collective performance"
+      ],
+      "comparability": "Record MPI implementation, transport, process placement, message sizes and GPU-aware settings."
+    },
+    {
+      "id": "intel-mpi-benchmarks",
+      "name": "Intel MPI Benchmarks",
+      "category": "memory_interconnect",
+      "kind": "microbenchmark",
+      "maintainer": "Intel",
+      "description": "MPI point-to-point, collective and one-sided communication benchmark suite.",
+      "official_url": "https://github.com/intel/mpi-benchmarks",
+      "repository_url": "https://github.com/intel/mpi-benchmarks",
+      "results_url": null,
+      "metrics": [
+        "MPI latency",
+        "bandwidth",
+        "collective performance"
+      ],
+      "comparability": "Pin MPI library, compiler, rank placement, network and message sizes."
+    },
+    {
+      "id": "nvshmem",
+      "name": "NVSHMEM",
+      "category": "memory_interconnect",
+      "kind": "vendor_tool",
+      "maintainer": "NVIDIA",
+      "description": "GPU-centric communication library and performance examples for inter-GPU and cluster communication.",
+      "official_url": "https://developer.nvidia.com/nvshmem",
+      "repository_url": "https://github.com/NVIDIA/nvshmem",
+      "results_url": null,
+      "metrics": [
+        "GPU-initiated communication latency",
+        "bandwidth"
+      ],
+      "comparability": "NVIDIA ecosystem. Distinguish library microbenchmarks from end-to-end distributed training/inference."
+    },
+    {
+      "id": "ai-benchmark",
+      "name": "AI-Benchmark",
+      "category": "edge_mobile",
+      "kind": "public_benchmark",
+      "maintainer": "AI Benchmark project",
+      "description": "Android/mobile AI benchmark covering on-device neural-network workloads across supported devices.",
+      "official_url": "https://ai-benchmark.com/",
+      "repository_url": "https://github.com/ai-benchmark/ai-benchmark",
+      "results_url": null,
+      "metrics": [
+        "inference latency",
+        "throughput",
+        "device score"
+      ],
+      "comparability": "Record device, SoC, OS, runtime, thermal state and benchmark version."
+    },
+    {
+      "id": "mlmark",
+      "name": "EEMBC MLMark",
+      "category": "edge_mobile",
+      "kind": "standardized_suite",
+      "maintainer": "EEMBC",
+      "description": "Embedded machine-learning benchmark suite for evaluating constrained edge platforms.",
+      "official_url": "https://www.eembc.org/mlmark/",
+      "repository_url": null,
+      "results_url": null,
+      "metrics": [
+        "performance",
+        "energy",
+        "accuracy"
+      ],
+      "comparability": "Check current suite availability, workload version, licensing and measurement rules."
+    },
+    {
+      "id": "specpower",
+      "name": "SPECpower_ssj2008",
+      "category": "power_efficiency",
+      "kind": "standardized_suite",
+      "maintainer": "SPEC",
+      "description": "Server-side Java workload used to evaluate server performance and power efficiency.",
+      "official_url": "https://www.spec.org/power_ssj2008/",
+      "repository_url": null,
+      "results_url": null,
+      "metrics": [
+        "performance per watt",
+        "power"
+      ],
+      "comparability": "Not an AI-specific benchmark. Useful only as broader server energy context; do not treat as accelerator AI performance."
+    },
+    {
+      "id": "green500",
+      "name": "Green500",
+      "category": "power_efficiency",
+      "kind": "ranking",
+      "maintainer": "TOP500 organization",
+      "description": "Ranks supercomputers by measured energy efficiency on the LINPACK workload.",
+      "official_url": "https://www.top500.org/green500/",
+      "repository_url": null,
+      "results_url": null,
+      "metrics": [
+        "FLOP/s per watt"
+      ],
+      "comparability": "LINPACK efficiency is not representative of LLM inference or all AI workloads; retain the workload context."
+    },
+    {
+      "id": "deepsparkinference",
+      "name": "DeepSparkInference",
+      "category": "training_inference",
+      "kind": "vendor_ecosystem",
+      "maintainer": "Deep-Spark community / ecosystem",
+      "description": "Model adaptation, inference examples and published results across supported accelerator ecosystems.",
+      "official_url": "https://github.com/Deep-Spark/DeepSparkInference",
+      "repository_url": "https://github.com/Deep-Spark/DeepSparkInference",
+      "results_url": null,
+      "metrics": [
+        "model latency",
+        "throughput",
+        "accuracy (where published)"
+      ],
+      "comparability": "Classify results by original publisher and exact hardware/software configuration. Ecosystem examples are not neutral cross-vendor rankings."
+    }
+  ]
+}

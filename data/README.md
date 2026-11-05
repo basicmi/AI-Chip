@@ -1,10 +1,16 @@
-# Software compatibility data
+# Data directory
 
-This directory contains the machine-readable compatibility dataset used by the AI Chip landscape.
+This directory contains curated public information datasets used by the AI Chip landscape.
 
-- `compatibility.json`: current public evidence snapshot.
-- `../schemas/compatibility.schema.json`: JSON Schema (Draft 2020-12).
-- `../scripts/validate_compatibility.py`: standard-library structural and referential validator.
+- `compatibility.json`: version-scoped public evidence for software/platform integrations.
+- `workloads.json`: descriptive workload taxonomy and public software-path references.
+- `benchmark-projects.json`: directory of public benchmark suites, result portals, measurement tools and microbenchmarks.
+
+## Editorial scope
+
+AI Chip is an information and research directory. It does not run benchmark experiments, host a benchmark runner, certify hardware, or generate performance scores. All published benchmark results must link to their original public source and retain the publisher's attribution and methodology.
+
+A benchmark suite, a measurement harness, a vendor-reported result and an independently published result are different kinds of resources. Do not combine them into one ranking. When comparing public results, preserve the exact model, workload, hardware, software versions, measurement definition and system boundary.
 
 ## Validate
 
@@ -12,25 +18,8 @@ From the repository root:
 
 ```bash
 python3 scripts/validate_compatibility.py
+python3 scripts/validate_workloads.py
+python3 scripts/validate_benchmarks.py
 ```
 
-The validator checks JSON parsing, unique IDs, platform references, controlled status / layer / maintainer / evidence vocabularies, ISO dates, and HTTP(S) evidence URLs. It does not prove that an upstream compatibility claim is true; reviewers must inspect the linked primary evidence.
-
-## Contribution rules
-
-1. One record represents one project × platform × integration layer × version scope.
-2. Use a specific hardware SKU / generation where public evidence permits.
-3. Every integration must contain at least one dated evidence record and a non-empty limitations field.
-4. Distinguish upstream support, vendor plugins, vendor frameworks, experimental branches, work in progress, and vendor-reported examples.
-5. If public documents disagree, use `needs_review`; preserve the conflict in `limitations`.
-6. Never infer support from a product announcement, marketing compatibility logo, or repository name.
-7. Do not overwrite historical claims silently: update `last_checked`, replace / append evidence, and describe the change in the PR.
-8. Version strings are evidence snapshots, not a promise that arbitrary combinations work.
-
-## Workload data
-
-- `workloads.json`: workload taxonomy and candidate hardware/software execution paths.
-- `../schemas/workloads.schema.json`: JSON Schema (Draft 2020-12).
-- `../scripts/validate_workloads.py`: validator for workload IDs, path references, evidence maturity and metric provenance.
-
-The workload taxonomy is not a compatibility certification. `integration_only` means the underlying software integration is documented, but no workload-specific correctness or performance test is attached. `vendor_reported` records a public vendor claim without independent reproduction. Metric records must include a numeric value, unit, method, source URL, date and evidence type. Empty metric arrays are intentional where no comparable evidence is available.
+The benchmark validator checks catalogue structure, category references, required descriptive fields and source URLs. It does not run experiments or validate the truth of vendor claims; reviewers should inspect primary sources.
