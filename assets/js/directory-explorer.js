@@ -18,7 +18,7 @@
     let category = "Other";
     sectionHeadings.forEach((heading) => {
       if (heading.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING) {
-        category = heading.textContent.trim().replace(/^[IVXLCDM]+\\.\\s*/, "");
+        category = heading.textContent.trim().replace(/^[IVXLCDM]+\.\s*/, "");
       }
     });
     return category;
@@ -250,7 +250,7 @@
     .catch((error) => {
       reviewSummary.textContent = "Structured company registry unavailable: " + error.message;
       root.dataset.profileRegistryError = "true";
-      finishIndex({companies:[],freshness_policy:{fresh_within_days:90,stale_after_days:180}});
+      root.dataset.profileRegistryLoaded = "true";
       initialize();
     });
 })();
