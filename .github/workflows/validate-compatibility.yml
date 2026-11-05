@@ -54,6 +54,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install GitHub Pages dependencies
+        run: bundle install
       - name: Build GitHub Pages site
         run: bundle exec jekyll build
       - name: Install browser test dependency
