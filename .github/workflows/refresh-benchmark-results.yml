@@ -1,0 +1,67 @@
+name: Refresh public benchmark results
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Public benchmark source to refresh
+        type: choice
+        required: true
+        default: all
+        options:
+          - all
+          - mlperf
+          - inferencex
+      models:
+        description: Optional comma-separated InferenceX display models (blank imports all available models)
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Import public benchmark data
+        env:
+          SOURCE: ${{ inputs.source }}
+          MODELS: ${{ inputs.models }}
+        run: |
+          args=(--source "$SOURCE")
+          if [[ -n "$MODELS" ]]; then
+            IFS=',' read -r -a model_list <<< "$MODELS"
+            for model in "${model_list[@]}"; do
+              trimmed="$(echo "$model" | xargs)"
+              if [[ -n "$trimmed" ]]; then args+=(--model "$trimmed"); fi
+            done
+          fi
+          python3 scripts/import_benchmark_results.py "${args[@]}"
+      - name: Validate imported result registry
+        run: |
+          python3 scripts/validate_benchmark_results.py
+          python3 -m unittest discover -s tests -p "test_benchmark_results.py"
+      - name: Create pull request for refreshed data
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/benchmark-results-refresh
+          delete-branch: true
+          add-paths: data/benchmark-results.json
+          commit-message: "Refresh public benchmark result snapshot"
+          title: "Refresh public benchmark results"
+          body: |
+            Automated refresh of the source-linked benchmark results registry.
+
+            - Re-imports the selected public benchmark source(s).
+            - Preserves source, workload, system and software provenance.
+            - Runs the benchmark registry validator and normalization tests.
+            - Does not compute cross-suite scores or promote missing power data.
