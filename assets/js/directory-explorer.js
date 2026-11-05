@@ -4,8 +4,10 @@
 
   const search = root.querySelector("[data-directory-search]");
   const group = root.querySelector("[data-directory-group]");
+  const evidenceFilter = root.querySelector("[data-directory-evidence-filter]");
   const count = root.querySelector("[data-directory-count]");
   const summary = root.querySelector("[data-directory-summary]");
+  const reviewSummary = root.querySelector("[data-directory-review-summary]");
   const results = root.querySelector("[data-directory-results]");
   const empty = root.querySelector("[data-directory-empty]");
   const reset = root.querySelector("[data-directory-reset]");
@@ -16,7 +18,7 @@
     let category = "Other";
     sectionHeadings.forEach((heading) => {
       if (heading.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING) {
-        category = heading.textContent.trim().replace(/^[IVXLCDM]+\.\s*/, "");
+        category = heading.textContent.trim().replace(/^[IVXLCDM]+\\.\\s*/, "");
       }
     });
     return category;
@@ -59,12 +61,78 @@
       logoSrc: logo?.getAttribute("src") || "",
       logoAlt: logo?.getAttribute("alt") || name,
       description,
-      searchable
+      searchable,
+      profile: null,
+      referenceCount: 0,
+      evidenceCount: 0,
+      claimCount: 0,
+      freshnessStatus: "not_reviewed"
     };
   });
 
   const categories = [...new Set(entries.map((entry) => entry.category))]
     .sort((a, b) => a.localeCompare(b));
+
+  const freshnessFor = (profile, policy) => {
+    if (!profile || profile.profile_status === "not_reviewed" ||
+        !Array.isArray(profile.claims) || profile.claims.length === 0 ||
+        !Array.isArray(profile.evidence) || profile.evidence.length === 0) {
+      return "not_reviewed";
+    }
+    if (profile.claims.some((claim) => claim.claim_status === "disputed") ||
+        profile.evidence.some((item) => item.review_status === "disputed")) {
+      return "disputed";
+    }
+    const ages = profile.evidence.map((item) => {
+      if (!item.checked_at) return Infinity;
+      return Math.floor((Date.now() - new Date(item.checked_at + "T00:00:00Z").getTime()) / 86400000);
+    });
+    const oldestAge = Math.max(...ages);
+    if (!Number.isFinite(oldestAge)) return "not_reviewed";
+    if (oldestAge > policy.stale_after_days) return "stale";
+    if (oldestAge > policy.fresh_within_days) return "review_due";
+    return "fresh";
+  };
+
+  const finishIndex = (database) => {
+    const profiles = Array.isArray(database?.companies) ? database.companies : [];
+    const byAnchor = new Map(profiles.map((profile) => [profile.directory_anchor, profile]));
+    entries.forEach((entry) => {
+      const profile = byAnchor.get(entry.anchor);
+      if (!profile) return;
+      entry.profile = profile;
+      entry.description = profile.summary || entry.description;
+      entry.referenceCount = Array.isArray(profile.references) ? profile.references.length : 0;
+      entry.evidenceCount = Array.isArray(profile.evidence) ? profile.evidence.length : 0;
+      entry.claimCount = Array.isArray(profile.claims) ? profile.claims.length : 0;
+      entry.freshnessStatus = freshnessFor(profile, database.freshness_policy || {
+        fresh_within_days: 90, stale_after_days: 180
+      });
+      entry.searchable = [
+        entry.searchable,
+        profile.display_name,
+        profile.summary,
+        ...(profile.references || []).map((item) => item.label),
+        ...(profile.products || []).map((item) => item.name),
+        ...(profile.claims || []).map((item) => item.statement)
+      ].join(" ").toLowerCase();
+    });
+
+    const totalReferences = profiles.reduce((sum, profile) => sum + (profile.references?.length || 0), 0);
+    const totalEvidence = profiles.reduce((sum, profile) => sum + (profile.evidence?.length || 0), 0);
+    const totalClaims = profiles.reduce((sum, profile) => sum + (profile.claims?.length || 0), 0);
+    const pending = profiles.filter((profile) => profile.profile_status === "not_reviewed").length;
+
+    reviewSummary.textContent = profiles.length + " profiles · " + totalReferences +
+      " source links carried over · " + totalEvidence + " audited evidence records · " +
+      totalClaims + " structured claims · " + pending + " profiles not yet reviewed.";
+    root.dataset.profileRegistryLoaded = "true";
+    root.dataset.profileCount = String(profiles.length);
+    root.dataset.referenceCount = String(totalReferences);
+    root.dataset.evidenceCount = String(totalEvidence);
+    root.dataset.claimCount = String(totalClaims);
+  };
+
   categories.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
@@ -72,16 +140,13 @@
     group.append(option);
   });
 
-  count.textContent = entries.length + " companies · " + categories.length + " groups";
-  count.dataset.count = String(entries.length);
-  count.dataset.ready = "true";
-  summary.textContent = entries.length + " companies across " + categories.length +
-    " groups. Search company names, chips, architectures or recent updates.";
-
   const render = () => {
     const query = search.value.trim().toLowerCase();
     const selectedGroup = group.value;
-    if (!query && !selectedGroup) {
+    const selectedFreshness = evidenceFilter.value;
+    const hasFilter = Boolean(query || selectedGroup || selectedFreshness);
+
+    if (!hasFilter) {
       results.hidden = true;
       empty.hidden = true;
       summary.textContent = entries.length + " companies across " + categories.length +
@@ -91,6 +156,7 @@
 
     const matches = entries.filter((entry) => {
       if (selectedGroup && entry.category !== selectedGroup) return false;
+      if (selectedFreshness && entry.freshnessStatus !== selectedFreshness) return false;
       return !query || entry.searchable.includes(query);
     });
 
@@ -124,7 +190,18 @@
       description.className = "directory-result-description";
       const text = entry.description;
       description.textContent = text.length > 190 ? text.slice(0, 187) + "…" : text;
-      copy.append(categoryLabel, title, description);
+      const evidence = document.createElement("span");
+      evidence.className = "directory-result-evidence";
+      const freshnessLabels = {
+        not_reviewed: "Not reviewed",
+        fresh: "Fresh evidence",
+        review_due: "Review due",
+        stale: "Stale evidence",
+        disputed: "Disputed evidence"
+      };
+      evidence.textContent = freshnessLabels[entry.freshnessStatus] + " · " +
+        entry.referenceCount + " source links · " + entry.claimCount + " audited claims";
+      copy.append(categoryLabel, title, description, evidence);
       link.append(copy);
       card.append(link);
       results.append(card);
@@ -132,16 +209,48 @@
 
     results.hidden = matches.length === 0;
     empty.hidden = matches.length > 0;
+    const statusLabel = selectedFreshness
+      ? " · " + selectedFreshness.replace("_", " ")
+      : "";
     summary.textContent = matches.length + " of " + entries.length + " companies" +
-      (selectedGroup ? " · " + selectedGroup : "");
+      (selectedGroup ? " · " + selectedGroup : "") + statusLabel;
   };
 
-  search.addEventListener("input", render);
-  group.addEventListener("change", render);
-  reset.addEventListener("click", () => {
-    search.value = "";
-    group.value = "";
+  const initialize = () => {
+    count.textContent = entries.length + " companies · " + categories.length + " groups";
+    count.dataset.count = String(entries.length);
+    count.dataset.ready = "true";
+    summary.textContent = entries.length + " companies across " + categories.length +
+      " groups. Search company names, chips, architectures or recent updates.";
+    search.addEventListener("input", render);
+    group.addEventListener("change", render);
+    evidenceFilter.addEventListener("change", render);
+    reset.addEventListener("click", () => {
+      search.value = "";
+      group.value = "";
+      evidenceFilter.value = "";
+      render();
+      search.focus();
+    });
     render();
-    search.focus();
-  });
+  };
+
+  fetch(root.dataset.profileSource)
+    .then((response) => {
+      if (!response.ok) throw new Error("Company profile registry request failed: " + response.status);
+      return response.json();
+    })
+    .then((database) => {
+      if (!Array.isArray(database.companies) || !database.freshness_policy) {
+        throw new Error("Company profile registry has an invalid structure.");
+      }
+      finishIndex(database);
+      initialize();
+    })
+    .catch((error) => {
+      reviewSummary.textContent = "Structured company registry unavailable: " + error.message;
+      root.dataset.profileRegistryError = "true";
+      finishIndex({companies:[],freshness_policy:{fresh_within_days:90,stale_after_days:180}});
+      initialize();
+    });
 })();

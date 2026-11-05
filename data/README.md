@@ -23,3 +23,19 @@ python3 scripts/validate_benchmarks.py
 ```
 
 The benchmark validator checks catalogue structure, category references, required descriptive fields and source URLs. It does not run experiments or validate the truth of vendor claims; reviewers should inspect primary sources.
+
+## Company profiles and evidence registry
+
+- `company-profiles.json`: structured identity index for the company profiles in `directory.md`, including category, stable directory anchor, logo, summary and carried-over source links.
+- `schemas/company-profiles.schema.json`: JSON Schema for company, product, claim, reference and evidence records.
+- `scripts/validate_company_profiles.py`: validates profile IDs, directory anchors, source URLs, freshness metadata and claim-to-evidence relationships.
+
+### Evidence policy
+
+A link copied from the directory is a **reference**, not automatically evidence for every statement in a company summary. References begin as `unreviewed`; they become evidence only after a reviewer checks the source, records its publisher/type and review date, and links it to one or more explicit claims.
+
+Products are separate records. Technical specifications and status statements belong in claim records scoped to a specific product or company. Every structured claim must cite at least one evidence record. A claim may be marked `independently_verified` only when at least one linked source is classified as independent.
+
+Freshness is computed from `checked_at`: fresh within 90 days, review due after 90 days, stale after 180 days. Missing dates mean unreviewed, never fresh. Staleness means a source needs rechecking; it does not by itself prove a claim is false.
+
+The initial registry intentionally carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. Product records, audited evidence and structured claims start empty until reviewed. This is deliberate: no chip specifications, process nodes, bandwidth figures or performance claims are invented to fill the schema.

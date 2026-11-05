@@ -807,3 +807,26 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .directory-filters,
   .directory-result-grid { grid-template-columns: 1fr; }
 }
+
+/* Company profile registry and evidence freshness */
+.directory-review-summary {
+  margin: .55rem 0 0;
+  padding: .65rem .8rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 1.55;
+}
+.directory-result-evidence {
+  display: block;
+  margin-top: .5rem;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+@media (max-width: 760px) {
+  .directory-review-summary { font-size: 10px; }
+}
