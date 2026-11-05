@@ -206,7 +206,7 @@
       if (precisionFilter.value && !product.claims.some(claim => claim.metric_context?.precision === precisionFilter.value)) return false;
       if (query) {
         const haystack = [
-          product.name, product.company.display_name, product.company.summary,
+          product.name, product.company.display_name,
           product.architecture, product.generation, product.family, product.market_segment,
           ...product.claims.map(claim => claim.statement)
         ].filter(Boolean).join(" ").toLowerCase();
