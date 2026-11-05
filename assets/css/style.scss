@@ -700,7 +700,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 }
 .directory-filters {
   display: grid;
-  grid-template-columns: minmax(220px, 1.6fr) minmax(180px, 1fr) auto;
+  grid-template-columns: minmax(220px, 1.6fr) minmax(160px, 1fr) minmax(170px, 1fr) auto;
   align-items: end;
   gap: .8rem;
   margin-top: 1.1rem;
