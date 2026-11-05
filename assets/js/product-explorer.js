@@ -3,6 +3,10 @@
   if (!root) return;
 
   const source = root.dataset.source;
+  const compatibilitySource = root.dataset.compatibilitySource;
+  const workloadsSource = root.dataset.workloadsSource;
+  const benchmarksHref = root.dataset.benchmarksHref;
+  let workloadNames = new Map();
   const search = root.querySelector("[data-product-search]");
   const companyFilter = root.querySelector("[data-product-company]");
   const typeFilter = root.querySelector("[data-product-type]");
@@ -162,6 +166,11 @@
       specs.append(make("p", "product-no-specs", "No reviewed technical claims yet."));
     }
     card.append(specs);
+    const platformSummary = product.platforms.map(platform => platform.name).join(", ");
+    card.append(make("p", "product-platform-summary",
+      product.integrations.length + " platform-level software integrations · " +
+      product.workloadPaths.length + " workload paths" +
+      (platformSummary ? " · " + platformSummary : "")));
 
     const actions = make("div", "product-card-actions");
     const compareButton = make("button", "button button-secondary product-compare-toggle",
@@ -192,6 +201,53 @@
       list.append(item);
     });
     details.append(list);
+
+    const softwareSection = make("section", "product-system-details");
+    softwareSection.append(make("h4", "", "Software integrations (" + product.integrations.length + ")"));
+    softwareSection.append(make("p", "product-system-caveat",
+      "These are platform-level records, not a guarantee for every SKU, model or feature."));
+    if (product.integrations.length) {
+      const integrationList = make("ul", "product-system-list");
+      product.integrations.forEach(integration => {
+        const item = make("li", "product-system-item");
+        const heading = make("div", "product-system-item-heading");
+        addLink(heading, integration.project_url, integration.project, "");
+        heading.append(make("span", "product-system-status",
+          integration.layer + " · " + integration.status.replaceAll("_", " ")));
+        item.append(heading);
+        item.append(make("p", "product-system-limitation", integration.limitations));
+        integrationList.append(item);
+      });
+      softwareSection.append(integrationList);
+    } else {
+      softwareSection.append(make("p", "product-system-empty",
+        "No public software integration record is linked to this platform in the current registry. This is not a claim that the hardware is unsupported."));
+    }
+    details.append(softwareSection);
+
+    const workloadSection = make("section", "product-system-details");
+    workloadSection.append(make("h4", "", "Documented workload paths (" + product.workloadPaths.length + ")"));
+    if (product.workloadPaths.length) {
+      const pathList = make("ul", "product-system-list");
+      product.workloadPaths.forEach(path => {
+        const item = make("li", "product-system-item");
+        const workloadName = workloadNames.get(path.workload_id) || path.workload_id;
+        item.append(make("strong", "product-system-workload", workloadName));
+        item.append(make("span", "product-system-status", path.status.replaceAll("_", " ")));
+        item.append(make("p", "product-system-limitation", path.scope));
+        pathList.append(item);
+      });
+      workloadSection.append(pathList);
+    } else {
+      workloadSection.append(make("p", "product-system-empty",
+        "No workload path is currently recorded for this platform."));
+    }
+    details.append(workloadSection);
+
+    const benchmarkNote = make("p", "product-benchmark-note",
+      "No product-specific benchmark result is linked yet. The benchmark catalogue lists test projects; it does not imply this SKU has been measured.");
+    addLink(benchmarkNote, benchmarksHref, "Browse benchmark catalogue", "");
+    details.append(benchmarkNote);
     actions.append(details);
     card.append(actions);
     return card;
@@ -322,17 +378,36 @@
 
   const load = async () => {
     try {
-      const response = await fetch(source, { cache: "no-cache" });
-      if (!response.ok) throw new Error("HTTP " + response.status);
-      database = await response.json();
+      const [registryResponse, compatibilityResponse, workloadsResponse] = await Promise.all([
+        fetch(source, { cache: "no-cache" }),
+        fetch(compatibilitySource, { cache: "no-cache" }),
+        fetch(workloadsSource, { cache: "no-cache" })
+      ]);
+      for (const response of [registryResponse, compatibilityResponse, workloadsResponse]) {
+        if (!response.ok) throw new Error("HTTP " + response.status + " while loading linked datasets");
+      }
+      database = await registryResponse.json();
+      const compatibility = await compatibilityResponse.json();
+      const workloadData = await workloadsResponse.json();
       const companies = Array.isArray(database.companies) ? database.companies : [];
+      const platformMap = new Map((compatibility.platforms || []).map(platform => [platform.id, platform]));
+      workloadNames = new Map((workloadData.workloads || []).map(workload => [workload.id, workload.name]));
       products = companies.flatMap(company => (company.products || []).map(product => {
         const claims = (company.claims || []).filter(claim =>
           product.claim_ids.includes(claim.id) &&
           claim.subject_type === "product" &&
           claim.subject_id === product.id
         );
-        return { ...product, company, claims, evidence: company.evidence || [] };
+        const platformIds = product.compatibility_platform_ids || [];
+        return {
+          ...product,
+          company,
+          claims,
+          evidence: company.evidence || [],
+          platforms: platformIds.map(id => platformMap.get(id)).filter(Boolean),
+          integrations: (compatibility.integrations || []).filter(item => platformIds.includes(item.platform_id)),
+          workloadPaths: (workloadData.paths || []).filter(path => platformIds.includes(path.platform_id))
+        };
       }));
 
       version.textContent = database.database_version || database.schema_version || "—";
@@ -343,6 +418,8 @@
         companies.reduce((sum, company) => sum + (company.claims?.length || 0), 0);
       root.querySelector('[data-product-stat="evidence"]').textContent =
         companies.reduce((sum, company) => sum + (company.evidence?.length || 0), 0);
+      root.querySelector('[data-product-stat="integrations"]').textContent = compatibility.integrations.length;
+      root.querySelector('[data-product-stat="workloadPaths"]').textContent = workloadData.paths.length;
 
       populate(companyFilter, companies
         .filter(company => products.some(product => product.company.id === company.id))
