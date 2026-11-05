@@ -29,7 +29,7 @@ const { chromium } = require("playwright");
 
     const total = (await page.locator(statSelector).textContent()).trim();
     const visible = (await page.locator(countSelector).textContent()).trim();
-    if (!/^\\d+$/.test(total) || visible !== total) {
+    if (!/^\d+$/.test(total) || visible !== total) {
       throw new Error(name + " count mismatch: visible=" + visible + ", dataset total=" + total);
     }
   };
@@ -49,6 +49,11 @@ const { chromium } = require("playwright");
     statSelector: '[data-stat="integrations"]',
     countSelector: "[data-result-count]"
   });
+  const databaseVersion = (await page.locator("[data-database-version]").textContent()).trim();
+  const lastReviewed = (await page.locator("[data-last-reviewed]").textContent()).trim();
+  if (!databaseVersion || databaseVersion === "Loading…" || !lastReviewed || lastReviewed === "—") {
+    throw new Error("Compatibility page metadata did not render");
+  }
   await page.locator("[data-filter-search]").fill("vLLM");
   if (Number(await page.locator("[data-result-count]").textContent()) < 1) {
     throw new Error("Compatibility search did not return vLLM records");
@@ -83,7 +88,7 @@ const { chromium } = require("playwright");
     throw new Error("Mobile nav did not close after navigation");
   }
 
-  if (errors.length) throw new Error("Browser errors:\\n" + errors.join("\\n"));
+  if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
   console.log("PASS: six routes, dataset loading and count consistency, compatibility search, workload search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
