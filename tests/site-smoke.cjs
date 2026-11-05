@@ -98,7 +98,7 @@ const { chromium } = require("playwright");
   if (!registrySummary.includes("50 profiles") ||
       !registrySummary.includes("126 source links") ||
       !registrySummary.includes("3 audited evidence records") ||
-      !registrySummary.includes("14 structured claims") ||
+      !registrySummary.includes("17 structured claims") ||
       !registrySummary.includes("47 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
@@ -107,10 +107,14 @@ const { chromium } = require("playwright");
   if (mi355Matches.length !== 1 || !mi355Matches[0].includes("AMD")) {
     throw new Error("Structured company search did not locate AMD MI355X");
   }
+  const mi355Product = (await page.locator(".directory-result-products").first().textContent()).trim();
+  if (!mi355Product.includes("AMD Instinct MI355X")) {
+    throw new Error("Directory result did not display the structured MI355X product: " + mi355Product);
+  }
   const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!mi355Evidence.includes("Fresh evidence") ||
       !mi355Evidence.includes("1 evidence record") ||
-      !mi355Evidence.includes("5 audited claims")) {
+      !mi355Evidence.includes("6 reviewed claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
   }
   await page.locator("[data-directory-search]").fill("");
@@ -129,7 +133,7 @@ const { chromium } = require("playwright");
   if (!profileEvidence.includes("Not reviewed") ||
       !profileEvidence.includes("2 source links") ||
       !profileEvidence.includes("0 evidence records") ||
-      !profileEvidence.includes("0 audited claims")) {
+      !profileEvidence.includes("0 reviewed claims")) {
     throw new Error("Company card did not show profile evidence state: " + profileEvidence);
   }
   await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
