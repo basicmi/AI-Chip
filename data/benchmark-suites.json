@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.05-1",
+  "last_reviewed": "2026-11-05",
+  "suites": [
+    {
+      "id": "mlperf-inference",
+      "name": "MLPerf Inference",
+      "category": "standardized_inference",
+      "maintainer": "MLCommons",
+      "url": "https://mlcommons.org/benchmarks/",
+      "repository": "https://github.com/mlcommons/inference",
+      "comparability": "Official submissions; compare only same suite version, scenario, division and accuracy target.",
+      "metrics": [
+        "throughput",
+        "latency",
+        "accuracy",
+        "power"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "inferencex-e2e",
+      "name": "InferenceX E2E / AgentX",
+      "category": "llm_serving",
+      "maintainer": "SemiAnalysis",
+      "url": "https://inferencex.semianalysis.com/",
+      "repository": "https://github.com/SemiAnalysisAI/InferenceX",
+      "comparability": "Pin recipe commit, model, framework, precision, parallelism, sequence lengths, concurrency and hardware; keep AgentX separate.",
+      "metrics": [
+        "ttft_p99",
+        "inter_token_latency",
+        "tokens_per_second_per_user",
+        "tokens_per_second_per_chip",
+        "goodput",
+        "cost_per_million_tokens",
+        "joules_per_token"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "kernelbench",
+      "name": "KernelBench",
+      "category": "kernel_operator",
+      "maintainer": "Project maintainers",
+      "url": "https://github.com/ScalingIntelligence/KernelBench",
+      "repository": "https://github.com/ScalingIntelligence/KernelBench",
+      "comparability": "Pin task set, evaluator, timeout, compilation policy, hardware and correctness tolerances.",
+      "metrics": [
+        "correctness",
+        "latency",
+        "speedup",
+        "compile_time"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "kernelbench-verified",
+      "name": "KernelBench-Verified",
+      "category": "kernel_operator",
+      "maintainer": "Project maintainers",
+      "url": "https://github.com/facebookresearch/kernel_bench_verified",
+      "repository": "https://github.com/facebookresearch/kernel_bench_verified",
+      "comparability": "Do not merge with original KernelBench scores without an explicit task and evaluator mapping.",
+      "metrics": [
+        "correctness",
+        "latency",
+        "verification_rate"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "tritonbench",
+      "name": "TritonBench",
+      "category": "kernel_operator",
+      "maintainer": "Project maintainers",
+      "url": "https://github.com/meta-pytorch/tritonbench",
+      "repository": "https://github.com/meta-pytorch/tritonbench",
+      "comparability": "Pin submodules, PyTorch, Triton, compiler, backend, operation shapes and hardware.",
+      "metrics": [
+        "latency",
+        "throughput",
+        "memory"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "genai-perf",
+      "name": "GenAI-Perf / Perf Analyzer",
+      "category": "llm_serving",
+      "maintainer": "Project maintainers",
+      "url": "https://github.com/triton-inference-server/perf_analyzer",
+      "repository": "https://github.com/triton-inference-server/perf_analyzer",
+      "comparability": "Record request distribution, load model, concurrency, endpoint, client version and server configuration.",
+      "metrics": [
+        "ttft",
+        "inter_token_latency",
+        "request_throughput",
+        "output_tokens_per_second"
+      ],
+      "status": "active"
+    }
+  ],
+  "principles": [
+    "A suite definition is not a benchmark result.",
+    "Do not compare different suite versions, scenarios, model revisions or measurement boundaries without explicit normalization.",
+    "Vendor reports, upstream CI runs and independent reproductions are separate evidence classes.",
+    "Every result links to its exact run, recipe or raw artifact.",
+    "Missing metrics are never estimated."
+  ]
+}
