@@ -830,3 +830,12 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 760px) {
   .directory-review-summary { font-size: 10px; }
 }
+
+.directory-result-products {
+  display: block;
+  margin-top: .45rem;
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 700;
+}
