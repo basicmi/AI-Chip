@@ -39,4 +39,14 @@ Products are separate records. Technical specifications and status statements be
 
 Freshness is computed from `checked_at`: fresh within 90 days, review due after 90 days, stale after 180 days. Missing dates mean unreviewed, never fresh. Staleness means a source needs rechecking; it does not by itself prove a claim is false.
 
-The initial registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. Three first-pass examples now demonstrate the full product → claim → evidence relationship: NVIDIA B200, AMD Instinct MI355X and Google TPU7x (Ironwood). They contain 17 structured claims linked to three reviewed primary vendor documents. These remain explicitly `vendor_reported` specifications, not independent benchmark measurements. The other 47 company profiles have no reviewed evidence or structured claims yet. This is deliberate: no chip specifications, process nodes, bandwidth figures or performance claims are invented to fill the schema.
+The registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. The first audited wave covers eight companies and 16 products: NVIDIA B200 / GB200 NVL72; AMD MI350X / MI355X; Intel Gaudi 2 / Gaudi 3; Google TPU v6e / TPU7x; AWS Trainium2 / Trainium3; Microsoft Maia 100 / Maia 200; Meta MTIA v2 / MTIA 300; and Cerebras WSE-2 / WSE-3. The registry currently contains 70 structured claims linked to 17 reviewed source records. Claims are explicitly classified as vendor-reported or derived from a stated vendor specification; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
+
+## Comparison metadata (schema v1.1)
+
+Numeric claims may carry a `metric_context` object describing:
+- `metric_type`: specification, theoretical peak, vendor-measured, independently measured, production-observed, or derived.
+- `precision` and `sparsity`: required for numeric compute claims so FP4/FP8/BF16 and dense/sparse figures remain distinct.
+- `measurement_scope`: die, chip, package, module, board, server, rack, pod, cluster, or system.
+- `operation` and optional `directionality`, `configuration`, `workload_id`, and `benchmark_project_id`.
+
+The root `comparison_policy` requires precision, sparsity, measurement scope, and measurement type to match before comparing values. System-level aggregates must not be compared with per-chip values. Original source units are preserved; display-layer unit conversion must retain the original value and unit.
