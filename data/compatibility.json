@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.05-1",
+  "database_version": "2026.11.05-2",
   "last_reviewed": "2026-11-05",
   "scope": "Publicly documented accelerator software compatibility and integration evidence. Entries are not certification or production-readiness claims.",
   "status_definitions": {
@@ -200,6 +200,115 @@
       "evidence_urls": [
         "https://www.birentech.com/news/lo81mr3idb49bsdjf8hdd2bb/",
         "https://www.birentech.com/news/otr0bf5evzdwwivrjt6h3322/"
+      ]
+    },
+    {
+      "id": "intel-gaudi",
+      "vendor": "Intel",
+      "name": "Intel Gaudi",
+      "hardware_scope": [
+        "Intel Gaudi 2 and Gaudi 3 accelerators; exact SKU, board form factor and software release support are version-specific."
+      ],
+      "vendor_stack": [
+        "Intel Gaudi Software",
+        "SynapseAI",
+        "PyTorch bridge",
+        "HCCL",
+        "vLLM Hardware Plugin for Intel Gaudi"
+      ],
+      "evidence_urls": [
+        "https://docs.habana.ai/en/latest/",
+        "https://docs.habana.ai/en/latest/Release_Notes/GAUDI_Release_Notes.html"
+      ]
+    },
+    {
+      "id": "google-tpu",
+      "vendor": "Google",
+      "name": "Google Cloud TPU",
+      "hardware_scope": [
+        "TPU v6e (Trillium) and TPU7x (Ironwood); runtime and framework support differ by TPU generation."
+      ],
+      "vendor_stack": [
+        "JAX",
+        "XLA",
+        "TorchTPU",
+        "vLLM-TorchTPU",
+        "SGLang-TorchTPU",
+        "GKE / XPK"
+      ],
+      "evidence_urls": [
+        "https://docs.cloud.google.com/tpu/docs/pytorch-on-tpu",
+        "https://docs.cloud.google.com/tpu/docs/tpu-inference",
+        "https://docs.cloud.google.com/tpu/docs/runtimes"
+      ]
+    },
+    {
+      "id": "aws-trainium",
+      "vendor": "Amazon Web Services",
+      "name": "AWS Trainium",
+      "hardware_scope": [
+        "Trainium2 (Trn2) and Trainium3 (Trn3) instances; Neuron SDK and model support are release-specific."
+      ],
+      "vendor_stack": [
+        "AWS Neuron SDK",
+        "TorchNeuron",
+        "vLLM Neuron",
+        "Neuron Kernel Interface (NKI)",
+        "JAX Neuron plugin"
+      ],
+      "evidence_urls": [
+        "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/index.html",
+        "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/inference.html"
+      ]
+    },
+    {
+      "id": "microsoft-maia",
+      "vendor": "Microsoft",
+      "name": "Microsoft Azure Maia",
+      "hardware_scope": [
+        "Azure Maia 100 and Maia 200 accelerators in Microsoft-operated Azure infrastructure."
+      ],
+      "vendor_stack": [
+        "Azure infrastructure software",
+        "Microsoft internal compiler/runtime stack; public developer compatibility details remain limited."
+      ],
+      "evidence_urls": [
+        "https://techcommunity.microsoft.com/blog/azureinfrastructureblog/inside-maia-100-revolutionizing-ai-workloads-with-microsofts-custom-ai-accelerat/4229118",
+        "https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/"
+      ]
+    },
+    {
+      "id": "meta-mtia",
+      "vendor": "Meta",
+      "name": "Meta MTIA",
+      "hardware_scope": [
+        "Meta MTIA v2 and MTIA 300 internal data-center accelerators."
+      ],
+      "vendor_stack": [
+        "Meta internal PyTorch / MTIA stack",
+        "Public external SDK and compatibility matrix not identified in the reviewed sources."
+      ],
+      "evidence_urls": [
+        "https://engineering.fb.com/2025/09/29/data-infrastructure/metas-infrastructure-evolution-and-the-advent-of-ai/",
+        "https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/"
+      ]
+    },
+    {
+      "id": "cerebras-wse",
+      "vendor": "Cerebras",
+      "name": "Cerebras Wafer-Scale Engine",
+      "hardware_scope": [
+        "Cerebras WSE-2 and WSE-3 wafer-scale systems; exact deployment SKU and service availability are configuration-specific."
+      ],
+      "vendor_stack": [
+        "Cerebras PyTorch",
+        "Cerebras ModelZoo",
+        "Cerebras SDK",
+        "Cerebras Inference SDK"
+      ],
+      "evidence_urls": [
+        "https://docs.cerebras.ai/",
+        "https://github.com/Cerebras/modelzoo"
       ]
     }
   ],
@@ -667,6 +776,262 @@
           "url": "https://www.birentech.com/news/otr0bf5evzdwwivrjt6h3322/",
           "checked_at": "2026-11-05",
           "claim": "A separate vendor case describes SenseNova U1 adaptation using br_pytorch, BIRENSUPA and AIModelMaster."
+        }
+      ]
+    },
+    {
+      "id": "intel-gaudi-pytorch",
+      "platform_id": "intel-gaudi",
+      "layer": "framework",
+      "project": "Intel Gaudi PyTorch bridge",
+      "project_url": "https://docs.habana.ai/en/latest/PyTorch/index.html",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Gaudi 2 and Gaudi 3; exact operator and model support is tied to the versioned Gaudi support matrix.",
+      "versions": {
+        "gaudi_software": "1.24.2",
+        "execution_mode": "Eager + torch.compile recommended; Lazy mode legacy"
+      },
+      "limitations": "Vendor-provided PyTorch integration. Check the versioned support matrix and known limitations for the exact model, operator, OS and accelerator. Current documentation recommends Eager mode with torch.compile; Lazy mode is a legacy fallback.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.habana.ai/en/latest/PyTorch/index.html",
+          "checked_at": "2026-11-05",
+          "claim": "Intel Gaudi documentation describes the PyTorch bridge, training and inference paths for Gaudi accelerators."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.habana.ai/en/latest/PyTorch/Reference/PyTorch_Gaudi_Theory_of_Operations.html",
+          "checked_at": "2026-11-05",
+          "claim": "The current Gaudi PyTorch documentation describes Eager mode with torch.compile as recommended and Lazy mode as legacy."
+        }
+      ]
+    },
+    {
+      "id": "intel-gaudi-vllm",
+      "platform_id": "intel-gaudi",
+      "layer": "serving",
+      "project": "vLLM Hardware Plugin for Intel Gaudi",
+      "project_url": "https://docs.habana.ai/en/latest/PyTorch/Inference_on_PyTorch/Model_Serving.html",
+      "maintainer_type": "vendor_plugin",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Gaudi 2 and Gaudi 3 subject to the matching Gaudi software and plugin release.",
+      "versions": {
+        "gaudi_software": "1.24.2",
+        "vllm_plugin": "0.30.0",
+        "vllm_base": "0.30.0"
+      },
+      "limitations": "Vendor-maintained hardware plugin. Model, quantization, kernel and feature coverage are release-specific; plugin support is not equivalent to every upstream vLLM feature working on every Gaudi SKU.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "release_note",
+          "url": "https://docs.habana.ai/en/latest/Release_Notes/GAUDI_Release_Notes.html",
+          "checked_at": "2026-11-05",
+          "claim": "Gaudi 1.24.2 release notes identify compatibility with vLLM Hardware Plugin 0.30.0 based on upstream vLLM 0.30.0."
+        }
+      ]
+    },
+    {
+      "id": "google-tpu-torchtpu",
+      "platform_id": "google-tpu",
+      "layer": "framework",
+      "project": "TorchTPU",
+      "project_url": "https://docs.cloud.google.com/tpu/docs/pytorch-on-tpu",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Cloud TPU v6e and TPU7x with generation-specific runtime images and software versions.",
+      "versions": {
+        "framework": "PyTorch",
+        "backend": "TorchTPU"
+      },
+      "limitations": "TorchTPU is the current PyTorch-native TPU backend described by Google Cloud. Do not treat legacy PyTorch/XLA instructions as the recommended path for new workloads; runtime versions and TPU generation support must be checked separately.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cloud.google.com/tpu/docs/pytorch-on-tpu",
+          "checked_at": "2026-11-05",
+          "claim": "Google Cloud documents TorchTPU as an open-source PyTorch-native backend co-developed with the PyTorch team and recommends it for new PyTorch workloads."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cloud.google.com/tpu/docs/runtimes",
+          "checked_at": "2026-11-05",
+          "claim": "Google Cloud documents generation-specific TPU runtime versions for PyTorch and JAX."
+        }
+      ]
+    },
+    {
+      "id": "google-tpu-vllm",
+      "platform_id": "google-tpu",
+      "layer": "serving",
+      "project": "vLLM-TorchTPU backend",
+      "project_url": "https://docs.cloud.google.com/tpu/docs/tpu-inference",
+      "maintainer_type": "vendor_plugin",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Cloud TPU through the TorchTPU backend; model support and runtime versions are backend- and generation-specific.",
+      "versions": {
+        "serving_engine": "vLLM",
+        "backend": "TorchTPU"
+      },
+      "limitations": "This is the TPU-specific PyTorch backend, not the CUDA or ROCm path. Confirm the model recipe, TPU generation and runtime version before assuming feature parity.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cloud.google.com/tpu/docs/tpu-inference",
+          "checked_at": "2026-11-05",
+          "claim": "Google Cloud documents vLLM inference on Cloud TPU through vLLM-TorchTPU for PyTorch models."
+        }
+      ]
+    },
+    {
+      "id": "google-tpu-sglang",
+      "platform_id": "google-tpu",
+      "layer": "serving",
+      "project": "SGLang-TorchTPU backend",
+      "project_url": "https://docs.cloud.google.com/tpu/docs/pytorch-on-tpu",
+      "maintainer_type": "vendor_plugin",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Cloud TPU through the TorchTPU backend; model support and runtime versions are backend- and generation-specific.",
+      "versions": {
+        "serving_engine": "SGLang",
+        "backend": "TorchTPU"
+      },
+      "limitations": "This is a TPU-specific backend. Confirm model recipes, runtime compatibility and the selected TPU generation; do not infer support from CUDA/ROCm SGLang paths.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cloud.google.com/tpu/docs/pytorch-on-tpu",
+          "checked_at": "2026-11-05",
+          "claim": "Google Cloud documents SGLang-TorchTPU as a PyTorch backend for Cloud TPU inference."
+        }
+      ]
+    },
+    {
+      "id": "aws-trainium-torch-neuron",
+      "platform_id": "aws-trainium",
+      "layer": "framework",
+      "project": "TorchNeuron",
+      "project_url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/torch/",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Trainium2 (Trn2) and Trainium3 (Trn3) instances.",
+      "versions": {
+        "neuron_sdk": "2.33.0",
+        "release_status": "public beta",
+        "framework": "PyTorch"
+      },
+      "limitations": "TorchNeuron is documented as public beta in Neuron 2.33.0. Verify operator, distributed feature and model coverage for the exact Neuron release and instance type.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/torch/",
+          "checked_at": "2026-11-05",
+          "claim": "AWS Neuron documentation says TorchNeuron is a public-beta native PyTorch backend supported on Trn2 and Trn3."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/index.html",
+          "checked_at": "2026-11-05",
+          "claim": "AWS Neuron 2.33.0 documentation describes the Neuron SDK and native PyTorch support for Trainium."
+        }
+      ]
+    },
+    {
+      "id": "aws-trainium-vllm-neuron",
+      "platform_id": "aws-trainium",
+      "layer": "serving",
+      "project": "vLLM Neuron plugin",
+      "project_url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/what-is-neuron.html",
+      "maintainer_type": "vendor_plugin",
+      "status": "vendor_plugin_supported",
+      "confidence": "high",
+      "hardware_scope": "Trainium2 (Trn2) and Trainium3 (Trn3) for documented model recipes.",
+      "versions": {
+        "neuron_sdk": "2.33.0",
+        "serving_engine": "vLLM"
+      },
+      "limitations": "The Neuron plugin provides a Trainium-specific serving path. Model-family recipes and features are version-specific; this record does not imply all upstream vLLM features are supported on all models.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/what-is-neuron.html",
+          "checked_at": "2026-11-05",
+          "claim": "AWS Neuron documents vLLM Neuron as the recommended LLM serving plugin for Trainium2 and Trainium3."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/inference.html",
+          "checked_at": "2026-11-05",
+          "claim": "AWS Neuron documents inference paths and model-specific serving support on Trainium."
+        }
+      ]
+    },
+    {
+      "id": "cerebras-pytorch-modelzoo",
+      "platform_id": "cerebras-wse",
+      "layer": "framework",
+      "project": "Cerebras PyTorch and ModelZoo",
+      "project_url": "https://github.com/Cerebras/modelzoo",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Cerebras wafer-scale training systems; exact system generation, deployment mode and model support depend on the documented release.",
+      "versions": {
+        "framework": "PyTorch",
+        "project": "Cerebras ModelZoo"
+      },
+      "limitations": "Vendor-maintained training framework and model examples. This record documents a public software entry point, not a product-specific benchmark or universal WSE-2/WSE-3 model-compatibility guarantee.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "repository_readme",
+          "url": "https://github.com/Cerebras/modelzoo",
+          "checked_at": "2026-11-05",
+          "claim": "Cerebras ModelZoo provides PyTorch-based model training workflows for Cerebras systems."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cerebras.ai/",
+          "checked_at": "2026-11-05",
+          "claim": "Cerebras developer documentation covers training, fine-tuning, PyTorch/ModelZoo and SDK workflows."
+        }
+      ]
+    },
+    {
+      "id": "cerebras-inference-sdk",
+      "platform_id": "cerebras-wse",
+      "layer": "serving",
+      "project": "Cerebras Inference SDK",
+      "project_url": "https://docs.cerebras.ai/",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Cerebras inference service and supported wafer-scale deployments; exact service SKU and model availability are service-specific.",
+      "versions": {
+        "sdk": "Cerebras Inference SDK"
+      },
+      "limitations": "Public inference SDK documentation does not imply arbitrary customer control of WSE hardware or identical availability across on-premises and hosted deployments.",
+      "last_checked": "2026-11-05",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cerebras.ai/",
+          "checked_at": "2026-11-05",
+          "claim": "Cerebras developer documentation describes the Inference SDK for building applications on Cerebras inference."
         }
       ]
     }
