@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "database_version": "2026.11.05-2",
+  "schema_version": "1.2",
+  "database_version": "2026.11.05-3",
   "registry_reviewed_at": "2026-11-05",
   "scope": "Structured identity and source-link index for the company profiles published in directory.md. Summaries and reference links are inherited from the existing directory. They are not claim-level evidence and have not been independently audited.",
   "freshness_policy": {
@@ -38,6 +38,9 @@
             "b200-memory-bandwidth",
             "b200-nvlink-bandwidth",
             "b200-architecture"
+          ],
+          "compatibility_platform_ids": [
+            "nvidia-gpu"
           ]
         },
         {
@@ -59,6 +62,9 @@
             "gb200-nvlink-bandwidth",
             "gb200-nvfp4-sparse",
             "gb200-nvfp4-dense"
+          ],
+          "compatibility_platform_ids": [
+            "nvidia-gpu"
           ]
         }
       ],
@@ -374,6 +380,9 @@
             "gaudi2-memory-capacity",
             "gaudi2-memory-bandwidth",
             "gaudi2-network-bandwidth"
+          ],
+          "compatibility_platform_ids": [
+            "intel-gaudi"
           ]
         },
         {
@@ -393,6 +402,9 @@
             "gaudi3-memory-bandwidth",
             "gaudi3-fp8-peak",
             "gaudi3-rdma-ports"
+          ],
+          "compatibility_platform_ids": [
+            "intel-gaudi"
           ]
         }
       ],
@@ -618,6 +630,9 @@
             "mi355x-mxfp4-peak",
             "mi355x-tbp",
             "mi355x-process-node"
+          ],
+          "compatibility_platform_ids": [
+            "amd-gpu"
           ]
         },
         {
@@ -637,6 +652,9 @@
             "mi350x-memory-bandwidth",
             "mi350x-mxfp4-peak",
             "mi350x-fp8-peak"
+          ],
+          "compatibility_platform_ids": [
+            "amd-gpu"
           ]
         }
       ],
@@ -1083,6 +1101,9 @@
             "tpu7x-fp8-compute",
             "tpu7x-pod-scale",
             "tpu7x-architecture"
+          ],
+          "compatibility_platform_ids": [
+            "google-tpu"
           ]
         },
         {
@@ -1101,6 +1122,9 @@
             "tpu-v6e-bf16-peak",
             "tpu-v6e-ici-bandwidth",
             "tpu-v6e-pod-scale"
+          ],
+          "compatibility_platform_ids": [
+            "google-tpu"
           ]
         }
       ],
@@ -1470,6 +1494,9 @@
             "trainium2-fp8-dense",
             "trainium2-fp8-sparse",
             "trainium2-neuroncores"
+          ],
+          "compatibility_platform_ids": [
+            "aws-trainium"
           ]
         },
         {
@@ -1491,6 +1518,9 @@
             "trainium3-fp8-peak",
             "trainium3-bf16-peak",
             "trainium3-neuronlink"
+          ],
+          "compatibility_platform_ids": [
+            "aws-trainium"
           ]
         }
       ],
@@ -1782,6 +1812,9 @@
             "maia100-memory-bandwidth",
             "maia100-provisioned-power",
             "maia100-process"
+          ],
+          "compatibility_platform_ids": [
+            "microsoft-maia"
           ]
         },
         {
@@ -1801,6 +1834,9 @@
             "maia200-memory-bandwidth",
             "maia200-sram-capacity",
             "maia200-process"
+          ],
+          "compatibility_platform_ids": [
+            "microsoft-maia"
           ]
         }
       ],
@@ -2185,6 +2221,9 @@
           "form_factor": "Meta data-center accelerator",
           "claim_ids": [
             "mtia-v2-target-workload"
+          ],
+          "compatibility_platform_ids": [
+            "meta-mtia"
           ]
         },
         {
@@ -2203,6 +2242,9 @@
             "mtia300-pe-grid",
             "mtia300-reduction-throughput",
             "mtia300-nic-chiplets"
+          ],
+          "compatibility_platform_ids": [
+            "meta-mtia"
           ]
         }
       ],
@@ -2558,6 +2600,9 @@
             "wse2-sram-capacity",
             "wse2-memory-bandwidth",
             "wse2-fabric-bandwidth"
+          ],
+          "compatibility_platform_ids": [
+            "cerebras-wse"
           ]
         },
         {
@@ -2577,6 +2622,9 @@
             "wse3-sram-capacity",
             "wse3-memory-bandwidth",
             "wse3-peak-ai-compute"
+          ],
+          "compatibility_platform_ids": [
+            "cerebras-wse"
           ]
         }
       ],
