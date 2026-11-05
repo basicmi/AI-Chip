@@ -42,6 +42,24 @@ const { chromium } = require("playwright");
     await page.locator("main#main-content").waitFor();
   }
 
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const landscape = page.locator(".hero-visual-frame img");
+  await landscape.waitFor();
+  await page.waitForFunction(() => {
+    const image = document.querySelector(".hero-visual-frame img");
+    return image && image.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
+  }, { timeout: 10000 });
+  const landscapeInfo = await landscape.evaluate(image => ({
+    src: image.currentSrc,
+    width: image.naturalWidth,
+    height: image.naturalHeight
+  }));
+  if (!landscapeInfo.src.includes("AI_Chip_Landscape_v0p9.svg") ||
+      landscapeInfo.width < 1800 || landscapeInfo.height < 1200) {
+    throw new Error("Landscape image did not load the expected high-resolution v0.9 asset: " +
+      JSON.stringify(landscapeInfo));
+  }
+
   await page.goto(base + "/compatibility/", { waitUntil: "networkidle" });
   await waitForDataset({
     name: "Compatibility",
@@ -89,7 +107,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: six routes, dataset loading and count consistency, compatibility search, workload search, theme toggle and mobile navigation.");
+  console.log("PASS: six routes, v0.9 landscape asset, dataset loading and count consistency, compatibility search, workload search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);

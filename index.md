@@ -22,9 +22,11 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
   </div>
   <div class="home-hero-visual">
     <div class="hero-visual-frame">
-      <img src="{{ '/resource/AI_Chip_Landscape_v0p8.png' | relative_url }}" alt="AI chip landscape map, version 0.8" loading="lazy">
+      <a class="landscape-full-link" href="{{ '/resource/AI_Chip_Landscape_v0p9.svg' | relative_url }}" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size AI Chip Landscape">
+        <img src="{{ '/resource/AI_Chip_Landscape_v0p9.svg' | relative_url }}" alt="AI Chip Landscape, version 0.9. A map of global AI accelerator companies, software ecosystems and benchmarks." loading="lazy">
+      </a>
     </div>
-    <p class="visual-caption"><span class="status-dot"></span> Landscape snapshot · November 2026</p>
+    <p class="visual-caption"><span class="status-dot"></span> Landscape snapshot · November 2026 · Open full-size ↗</p>
   </div>
 </section>
 

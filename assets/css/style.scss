@@ -659,3 +659,11 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .benchmark-source-link{font-weight:700}
 .benchmark-editorial-note{margin-top:2.5rem}
 @media(max-width:760px){.benchmark-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.benchmark-filters,.benchmark-card-grid{grid-template-columns:1fr}.benchmark-results-heading{display:block}.benchmark-results-heading>p{margin-top:.5rem}}
+
+/* Landscape image opens the full-resolution vector map */
+.landscape-full-link { display: block; cursor: zoom-in; }
+.landscape-full-link img { transition: transform .2s ease, filter .2s ease; }
+.landscape-full-link:hover img { filter: saturate(1.04); }
+.visual-caption { display: flex; align-items: center; justify-content: center; gap: .45rem; flex-wrap: wrap; }
+.visual-caption a { color: var(--accent, #256D85); font-weight: 700; text-decoration: none; }
+.visual-caption a:hover { text-decoration: underline; }
