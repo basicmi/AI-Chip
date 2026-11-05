@@ -50,14 +50,17 @@ def hardware_identity(name: str | None):
     rules = [
         (("mi350x",), "AMD", "amd-gpu", "mi350x"),
         (("mi355x",), "AMD", "amd-gpu", "mi355x"),
+        (("mi300x", "mi325x"), "AMD", "amd-gpu", None),
         (("gb200",), "NVIDIA", "nvidia-gpu", "gb200-nvl72"),
+        (("gb300", "rubin"), "NVIDIA", "nvidia-gpu", None),
         (("b200",), "NVIDIA", "nvidia-gpu", "b200-sxm"),
+        (("h100", "h200", "b100", "a100"), "NVIDIA", "nvidia-gpu", None),
         (("gaudi 3", "gaudi3"), "Intel", "intel-gaudi", "gaudi3"),
         (("gaudi 2", "gaudi2"), "Intel", "intel-gaudi", "gaudi2"),
         (("tpu7x", "ironwood"), "Google", "google-tpu", "tpu7x-ironwood"),
         (("tpu v6e", "trillium"), "Google", "google-tpu", "tpu-v6e-trillium"),
-        (("trainium3",), "AWS", "aws-trainium", "trainium3"),
-        (("trainium2",), "AWS", "aws-trainium", "trainium2"),
+        (("trainium3", "trn3"), "AWS", "aws-trainium", "trainium3"),
+        (("trainium2", "trn2"), "AWS", "aws-trainium", "trainium2"),
         (("maia 200",), "Microsoft", "microsoft-maia", "maia200"),
         (("maia 100",), "Microsoft", "microsoft-maia", "maia100"),
         (("mtia 300",), "Meta", "meta-mtia", "mtia-300"),
@@ -74,6 +77,20 @@ def hardware_identity(name: str | None):
         return "AMD", "amd-gpu", None
     if "intel" in text or "arc" in text:
         return "Intel", "intel-xpu", None
+    if "gaudi" in text:
+        return "Intel", "intel-gaudi", None
+    if "tpu" in text:
+        return "Google", "google-tpu", None
+    if "trainium" in text or text.startswith("trn"):
+        return "AWS", "aws-trainium", None
+    if "mtia" in text:
+        return "Meta", "meta-mtia", None
+    if "maia" in text:
+        return "Microsoft", "microsoft-maia", None
+    if "nvidia" in text or any(code in text for code in ("h100", "h200", "b100", "b200", "gb200", "gb300")):
+        return "NVIDIA", "nvidia-gpu", None
+    if "amd" in text:
+        return "AMD", "amd-gpu", None
     if "cerebras" in text:
         return "Cerebras", "cerebras-wse", None
     return None, None, None
