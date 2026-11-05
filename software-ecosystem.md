@@ -10,6 +10,8 @@ permalink: /software-ecosystem/
 
 **Last reviewed: 2026-11-05** · Links point to upstream projects or vendor-maintained documentation. Support status is workload-, device-, and release-specific; a project appearing here does not imply production support on every listed accelerator.
 
+Explore the [interactive Compatibility Explorer](/AI-Chip/compatibility/) to filter platform × software integrations, version pins, support status and source evidence. The underlying [machine-readable dataset](/AI-Chip/data/compatibility.json) is maintained with a JSON Schema and automated validation.
+
 ## Release and license snapshot
 
 The following is a dated snapshot of selected upstream releases checked on **2026-11-05**. It is not a compatibility guarantee; pin the exact device, framework, driver, and runtime versions before deployment.
