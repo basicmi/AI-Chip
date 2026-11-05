@@ -28,7 +28,7 @@ The benchmark validator checks catalogue structure, category references, require
 ## Company profiles and evidence registry
 
 - `company-profiles.json`: structured identity index for the company profiles in `directory.md`, including category, stable directory anchor, logo, summary and carried-over source links.
-- `/products/` (`products.md` + `assets/js/product-explorer.js`): searchable product catalogue and source-linked comparison workspace powered by `company-profiles.json`.
+- `/products/` (`products.md` + `assets/js/product-explorer.js`): searchable product catalogue and source-linked comparison workspace powered by `company-profiles.json`, `compatibility.json` and `workloads.json`.
 - `schemas/company-profiles.schema.json`: JSON Schema for company, product, claim, reference and evidence records.
 - `scripts/validate_company_profiles.py`: validates profile IDs, directory anchors, source URLs, freshness metadata and claim-to-evidence relationships.
 
@@ -42,7 +42,7 @@ Freshness is computed from `checked_at`: fresh within 90 days, review due after 
 
 The registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. The first audited wave covers eight companies and 16 products: NVIDIA B200 / GB200 NVL72; AMD MI350X / MI355X; Intel Gaudi 2 / Gaudi 3; Google TPU v6e / TPU7x; AWS Trainium2 / Trainium3; Microsoft Maia 100 / Maia 200; Meta MTIA v2 / MTIA 300; and Cerebras WSE-2 / WSE-3. The registry currently contains 70 structured claims linked to 17 reviewed source records. Claims are explicitly classified as vendor-reported or derived from a stated vendor specification; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
 
-## Comparison metadata (schema v1.1)
+## Comparison metadata (schema v1.2)
 
 Numeric claims may carry a `metric_context` object describing:
 - `metric_type`: specification, theoretical peak, vendor-measured, independently measured, production-observed, or derived.
@@ -51,3 +51,11 @@ Numeric claims may carry a `metric_context` object describing:
 - `operation` and optional `directionality`, `configuration`, `workload_id`, and `benchmark_project_id`.
 
 The root `comparison_policy` requires precision, sparsity, measurement scope, and measurement type to match before comparing values. System-level aggregates must not be compared with per-chip values. Original source units are preserved; display-layer unit conversion must retain the original value and unit. The Product Explorer uses these fields to align only like-for-like rows; it keeps unmatched scopes and units separate and does not produce a composite ranking.
+
+## Product-to-system relationships
+
+Product records may reference `compatibility_platform_ids`. These IDs connect product cards to the platform-level entries in `compatibility.json`; the explorer then displays the software integrations and workload paths associated with that platform. These are platform-level relationships, not a guarantee that every SKU, model, precision or feature is supported. Always read the integration's version and limitation notes.
+
+The current first-wave registry links 16 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
+
+The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
