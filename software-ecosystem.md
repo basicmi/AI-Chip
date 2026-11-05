@@ -221,7 +221,26 @@ This is a navigation aid, not a certification matrix. "Upstream" means the proje
 | Enflame GCU | TopsRider 3.7.1, torch-gcu 2.10.0 | No current upstream vLLM / SGLang support verified | Public torch-gcu README lists PyTorch 2.10.0 and S60; do not extrapolate to other GCU models. |
 | Biren GPU | BIRENSUPA, br_pytorch, AIModelMaster | Vendor model-adaptation examples; no upstream plugin verified | Official BR166 DeepSeek-V4 and SenseNova U1 examples are vendor-reported; record exact software and SKU. |
 
-## 10. How to maintain this page
+## 10. Machine-readable compatibility database
+
+The curated compatibility matrix is also maintained as structured data:
+
+- [Compatibility database (JSON)](https://github.com/basicmi/AI-Chip/blob/master/data/compatibility.json)
+- [JSON Schema](https://github.com/basicmi/AI-Chip/blob/master/schemas/compatibility.schema.json)
+- [Validation script](https://github.com/basicmi/AI-Chip/blob/master/scripts/validate_compatibility.py)
+- [Dataset contribution guide](https://github.com/basicmi/AI-Chip/blob/master/data/README.md)
+
+The dataset separates platform records from integration records. Each integration is scoped to a project, platform, software layer, version range, support status, and dated evidence. The status is intentionally more precise than a binary supported / unsupported flag.
+
+To validate locally, run:
+
+```bash
+python3 scripts/validate_compatibility.py
+```
+
+The script uses only the Python standard library. It checks JSON structure, unique identifiers, platform references, controlled vocabularies, dates, URLs, and evidence records. It does not automatically certify technical claims.
+
+## 11. How to maintain this page
 
 For every project, record:
 
