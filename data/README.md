@@ -34,3 +34,12 @@ The validator checks JSON parsing, unique IDs, platform references, controlled s
 - `../scripts/validate_workloads.py`: validator for workload IDs, path references, evidence maturity and metric provenance.
 
 The workload taxonomy is not a compatibility certification. `integration_only` means the underlying software integration is documented, but no workload-specific correctness or performance test is attached. `vendor_reported` records a public vendor claim without independent reproduction. Metric records must include a numeric value, unit, method, source URL, date and evidence type. Empty metric arrays are intentional where no comparable evidence is available.
+
+## Benchmark data
+
+- `benchmark-suites.json`: benchmark suite catalogue and comparability notes.
+- `benchmark-results.json`: append-only measured result records. Empty until a fully sourced measurement is added.
+- `../schemas/benchmark-results.schema.json`: result record schema.
+- `../scripts/validate_benchmarks.py`: validates suite identifiers, references to workloads/platforms and mandatory result provenance.
+
+A benchmark suite entry is not a result. Do not copy vendor marketing figures into measured results without classifying them as vendor-reported and preserving their original source and measurement scope.
