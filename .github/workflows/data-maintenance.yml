@@ -1,0 +1,42 @@
+name: Weekly evidence and data maintenance
+
+on:
+  schedule:
+    - cron: "30 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review-and-link-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate all structured registries
+        run: |
+          python3 scripts/validate_compatibility.py
+          python3 scripts/validate_workloads.py
+          python3 scripts/validate_benchmarks.py
+          python3 scripts/validate_company_profiles.py
+          python3 -m unittest discover -s tests -p "test_data_maintenance.py"
+      - name: Generate weekly review queue
+        run: python3 scripts/report_profile_review_queue.py >> "$GITHUB_STEP_SUMMARY"
+      - name: Audit public source links (advisory)
+        run: |
+          python3 scripts/check_evidence_links.py \
+            --timeout 8 \
+            --workers 12 \
+            --output "$RUNNER_TEMP/ai-chip-link-audit.md"
+      - name: Upload link audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-chip-source-link-audit
+          path: ${{ runner.temp }}/ai-chip-link-audit.md
+          if-no-files-found: ignore
+          retention-days: 30
