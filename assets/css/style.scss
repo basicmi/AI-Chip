@@ -1335,10 +1335,10 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   text-transform: uppercase;
   letter-spacing: .05em;
 }
-.benchmark-status-available { border-color: #3f8c69; color: #28734f; }
-.benchmark-status-preview { border-color: #b48a3c; color: #946a1e; }
-.benchmark-status-rdi { border-color: #8b829a; color: #71677e; }
-.benchmark-status-published { border-color: #557d9e; color: #426d91; }
+.benchmark-status-available { border-color: var(--green); color: var(--green); }
+.benchmark-status-preview { border-color: var(--amber); color: var(--amber); }
+.benchmark-status-rdi { border-color: var(--muted); color: var(--muted); }
+.benchmark-status-published { border-color: var(--blue); color: var(--blue); }
 .benchmark-division { text-transform: capitalize; }
 .benchmark-result-details { margin-top: .45rem; }
 .benchmark-result-details summary {
