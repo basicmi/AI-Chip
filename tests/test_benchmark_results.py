@@ -20,6 +20,10 @@ class HardwareIdentityTests(unittest.TestCase):
                          ("AMD", "amd-gpu", "mi355x"))
         self.assertEqual(hardware_identity("NVIDIA GB200"),
                          ("NVIDIA", "nvidia-gpu", "gb200-nvl72"))
+        self.assertEqual(hardware_identity("h200_sxm"),
+                         ("NVIDIA", "nvidia-gpu", None))
+        self.assertEqual(hardware_identity("mi355x"),
+                         ("AMD", "amd-gpu", "mi355x"))
         self.assertEqual(hardware_identity("Intel Gaudi 3"),
                          ("Intel", "intel-gaudi", "gaudi3"))
         self.assertEqual(hardware_identity("Cerebras WSE-2"),
