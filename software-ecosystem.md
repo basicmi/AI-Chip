@@ -10,6 +10,34 @@ permalink: /software-ecosystem/
 
 **Last reviewed: 2026-11-05** · Links point to upstream projects or vendor-maintained documentation. Support status is workload-, device-, and release-specific; a project appearing here does not imply production support on every listed accelerator.
 
+## Release and license snapshot
+
+The following is a dated snapshot of selected upstream releases checked on **2026-11-05**. It is not a compatibility guarantee; pin the exact device, framework, driver, and runtime versions before deployment.
+
+| Project | Latest GitHub release checked | Release date | Repository-level license |
+|---|---:|---:|---|
+| [Triton](https://github.com/triton-lang/triton/releases/tag/v3.9.0) | v3.9.0 | 2026-10-27 | MIT |
+| [TileLang](https://github.com/tile-ai/tilelang/releases/tag/v0.1.15) | v0.1.15 | 2026-09-30 | MIT; see historical collaboration note in LICENSE |
+| [Apache TVM](https://github.com/apache/tvm/releases/tag/v0.27.0.post1) | v0.27.0.post1 | 2026-09-29 | Apache-2.0 |
+| [Helion](https://github.com/pytorch/helion/releases/tag/v1.5.2) | v1.5.2 | 2026-11-01 | BSD-3-Clause |
+| [FlashInfer](https://github.com/flashinfer-ai/flashinfer/releases/tag/v0.7.3) | v0.7.3 | 2026-11-04 | Apache-2.0 |
+| [vLLM](https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3) | v0.33.0rc3 (release candidate) | 2026-11-02 | Apache-2.0 |
+| [SGLang](https://github.com/sgl-project/sglang/releases/tag/v0.5.23) | v0.5.23 | 2026-11-02 | Apache-2.0 |
+| [FlagGems](https://github.com/flagos-ai/FlagGems/releases/tag/v5.4.0) | v5.4.0 | 2026-09-28 | Apache-2.0 |
+| [NVIDIA Dynamo](https://github.com/ai-dynamo/dynamo/releases/tag/v1.6.1) | v1.6.1 | 2026-10-27 | Apache-2.0 base; bundled test data has separate notices |
+| [llm-d](https://github.com/llm-d/llm-d/releases/tag/v1.0.0) | v1.0.0 | 2026-10-20 | Apache-2.0 |
+| [Mooncake](https://github.com/kvcache-ai/Mooncake/releases/tag/v0.3.14) | v0.3.14 | 2026-11-03 | Apache-2.0 |
+| [NIXL](https://github.com/ai-dynamo/nixl/releases/tag/v1.5.2) | v1.5.2 | 2026-10-29 | Apache-2.0 base; bundled DeepEP example has a separate MIT notice |
+| [llama.cpp](https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0) | v0.9.0 | 2026-11-04 | MIT |
+| [AITer](https://github.com/ROCm/aiter/releases/tag/v0.1.27) | v0.1.27 | 2026-10-26 | MIT |
+| [vLLM Ascend](https://github.com/vllm-project/vllm-ascend/releases/tag/v0.30.0) | v0.30.0 | 2026-10-29 | Apache-2.0 |
+| [DeepSparkInference](https://github.com/Deep-Spark/DeepSparkInference/releases/tag/26.09) | 26.09 | 2026-09-22 | Apache-2.0 |
+| [torch-gcu](https://github.com/EnflameTechnology/torch-gcu/releases/tag/v2.10.0) | v2.10.0 | 2026-08-07 | BSD-style 3-Clause terms |
+
+**License caution:** repository metadata sometimes reports `NOASSERTION` even when a root LICENSE exists. The checked files show, for example, that TileLang's MIT license includes a dated collaboration-terms note for 2024-12-01 through 2025-03-14; TensorRT-LLM and NCCL include third-party license notices; Dynamo and NIXL identify separate licenses for some bundled test / example material. The Enflame `torch-gcu` and Ascend `pytorch` LICENSE files retain PyTorch-derived BSD 3-Clause terms. A repository-level label is not a substitute for reviewing individual files and dependencies before redistribution.
+
+Projects without a tagged GitHub release at the audit date (including TritonBench and MLC-LLM) should be tracked by commit / tag rather than assigned an invented version.
+
 ## 1. How to read the software stack
 
 | Layer | Main responsibility | Representative projects |
@@ -17,7 +45,7 @@ permalink: /software-ecosystem/
 | Framework and graph capture | Model authoring, graph capture, graph-level transformations | PyTorch, JAX, TensorFlow, ONNX |
 | Compiler and IR | Graph lowering, scheduling, code generation, target-specific optimization | MLIR, OpenXLA/XLA, TVM, IREE, TorchInductor |
 | Kernel programming | Express tiled operations, memory movement, synchronization, and pipelines | Triton, TileLang, TIRx, CuTe DSL, Helion, Pallas, Mojo |
-| Kernel and operator libraries | Hand-tuned primitives for GEMM, attention, MoE, collectives, quantization | CUTLASS, Composable Kernel, FlashAttention, FlashInfer, AITER |
+| Kernel and operator libraries | Hand-tuned primitives for GEMM, attention, MoE, collectives, quantization | CUTLASS, Composable Kernel, FlashAttention, FlashInfer, AITER, FlagGems |
 | Runtime and inference engine | Load models, execute graphs, manage memory and batching | TensorRT-LLM, vLLM, SGLang, ONNX Runtime, OpenVINO, MLC-LLM, llama.cpp |
 | Distributed serving and data movement | Scheduling, disaggregation, KV-cache movement, collectives, cluster integration | Dynamo, llm-d, Mooncake, NIXL, NCCL, RCCL |
 | Vendor platform SDK | Driver, runtime, compiler, libraries, profiler, framework integration | CUDA, ROCm, Neuron, CANN, Neuware, DTK, BIRENSUPA, CoreX SDK, TopsRider |
@@ -43,13 +71,13 @@ This layer is strategically important: it defines the abstraction boundary betwe
 |---|---|---|---|
 | [Triton](https://github.com/triton-lang/triton) | Python-based GPU kernel DSL | Widely used for custom GPU kernels; supports NVIDIA and AMD backends with architecture-dependent features. | Active upstream project. Check the release compatibility matrix before pinning PyTorch/Triton versions. |
 | [TileLang](https://github.com/tile-ai/tilelang) | Tile-based kernel DSL and compiler | Makes tile layouts, memory scopes, pipelining, and hardware mapping more explicit than a purely high-level tensor API. | Multi-backend project. Its README distinguishes primary, supported, experimental, and ecosystem-adapter backends; do not treat them as equally mature. |
-| [TIRx](https://tvm.apache.org/docs/tirx/overview.html) | Hardware-native kernel DSL and compiler built on TVM | Exposes pipeline structure, synchronization, role assignment, memory placement, and backend intrinsics for frontier kernels and agentic kernel programming. | Introduced by the Apache TVM community in June 2026; evolving compiler foundation, not a drop-in replacement for every existing DSL. |
+| [TIRx](https://tvm.apache.org/docs/tirx/overview.html) | Hardware-native kernel DSL and compiler built on TVM | Exposes pipeline structure, synchronization, role assignment, memory placement, and backend intrinsics for frontier kernels and agentic kernel programming. | An evolving low-level IR in the TVM ecosystem. TileLang's 2026 project notes record migration to TVM TIRx; treat TIRx as a compiler representation / programming substrate, not simply another standalone Python DSL. |
 | [Helion](https://github.com/pytorch/helion) | PyTorch-oriented kernel authoring and tuning | Provides a higher-level way to author and tune kernels while targeting lower-level implementations. | Active research-to-engineering project; backend and feature coverage should be checked per release. |
 | [CuTe / CUTLASS DSL](https://github.com/NVIDIA/cutlass) | Hardware-aware tiled programming | Exposes detailed control over layouts, data movement, and execution on NVIDIA GPUs. | NVIDIA-specific programming path; not a cross-vendor abstraction. |
 | [JAX Pallas](https://docs.jax.dev/en/latest/pallas/index.html) | Kernel programming within JAX | Provides a lower-level kernel authoring model for GPU and TPU workloads. | Backend capabilities and semantics differ by target. |
 | [Mojo](https://www.modular.com/mojo) | Systems and AI programming language | Aims to combine high-level productivity with low-level control. | Evolving language and toolchain; evaluate maturity and compatibility for each use case. |
 
-**Recent direction:** TileLang's repository documents a modular multi-backend architecture, including CUDA, HIP, Ascend, Metal, and experimental LLVM CPU / CuTe DSL paths. TIRx takes a more hardware-native approach, deliberately exposing low-level orchestration and compiler IR for expert- and agent-written kernels. These are complementary design points, not simply competing versions of Triton.
+**Recent direction:** TileLang v0.1.15 is the latest checked release. Its project notes document a native Ascend 950 backend and migration toward TVM TIRx. This makes TileLang relevant to multi-vendor kernel development, but individual backends still have different levels of maturity and should be tested independently.
 
 ## 4. Kernel and operator libraries
 
@@ -62,7 +90,7 @@ This layer is strategically important: it defines the abstraction boundary betwe
 | [DeepGEMM](https://github.com/deepseek-ai/DeepGEMM) | Low-precision GEMM for MoE / LLM workloads | A useful reference for specialized GEMM and low-precision kernel engineering. |
 | [AITer](https://github.com/ROCm/aiter) | AMD inference and training kernels | Optimized operator library within the ROCm ecosystem. |
 | [oneDNN](https://github.com/uxlfoundation/oneDNN) | CPU and accelerator primitives | Cross-platform performance library with hardware-specific optimizations. |
-| [Liger Kernel](https://github.com/linkedin/Liger-Kernel) | Fused LLM training kernels | PyTorch-oriented fused kernels intended to reduce memory use and improve training efficiency. |
+| [Liger Kernel](https://github.com/linkedin/Liger-Kernel) | Fused LLM training kernels | PyTorch-oriented fused kernels intended to reduce memory use and improve training efficiency. |\n| [FlagGems](https://github.com/flagos-ai/FlagGems) | Generic Triton operator library | FlagOS project with PyTorch ATen integration and a multi-backend kernel collection; its README reports more than ten backend integrations. Backend maturity is not uniform. |
 
 ## 5. Runtime and inference engines
 
@@ -87,6 +115,27 @@ A hardware backend can be in one of several states:
 - **In progress / experimental:** code exists or work is announced, but broad production support is not established.
 
 For example, vLLM's main installation documentation distinguishes core GPU support from third-party hardware plugins. SGLang's current support table separately identifies supported hardware and integrations in progress. Always consult the live compatibility pages before claiming that a chip is supported.
+
+### Hardware-plugin status: distinguish official from out-of-tree
+
+vLLM explicitly supports out-of-tree platform plugins. Its current plugin-design documentation separates official device plugins from non-official / community plugins.
+
+| vLLM plugin class | Public examples | Interpretation |
+|---|---|---|
+| Official device plugins | [vLLM Ascend](https://github.com/vllm-project/vllm-ascend), [vLLM Gaudi](https://github.com/vllm-project/vllm-gaudi), [vLLM Neuron](https://github.com/vllm-project/vllm-neuron), [vLLM Spyre](https://github.com/vllm-project/vllm-spyre), [vLLM Metal](https://github.com/vllm-project/vllm-metal) | Maintained / recognized in the upstream vLLM documentation; still version- and device-specific. |
+| Non-official / community plugins | [vLLM-MUSA](https://github.com/MooreThreads/vllm-musa), [vLLM-MetaX](https://github.com/MetaX-MACA/vLLM-metax), [vLLM-Kunlun](https://github.com/baidu/vLLM-Kunlun), [vLLM-Iluvatar](https://github.com/Deep-Spark/vllm-iluvatar) | Separate projects; verify maintainer, supported vLLM range, device generation, model coverage, and test evidence. |
+
+The Iluvatar plugin's current README specifies `vLLM >=0.27.1,<0.28.0`, CoreX runtime / driver `>=5.0.0`, CoreX PyTorch `>=2.10.0`, and ixformer `>=0.7.0`. Its repository's default branch is `release/v0.27.1`. This is evidence of a working plugin path, **not evidence of compatibility with the current vLLM 0.33.0rc3 release**.
+
+### SGLang hardware status from its upstream README
+
+SGLang's upstream README currently lists the following as supported representative platforms:
+
+- NVIDIA GPUs; AMD Instinct MI300 / MI325 / MI350 families.
+- Google TPU v6e / v7; Intel Arc / Arc Pro B-series GPUs and Xeon CPUs.
+- Apple Silicon; Huawei Ascend A2 / A3 / 950PR / DT; Moore Threads MTT S5000.
+
+It separately marks AWS Trainium, Alibaba T-Head PPU, Cambricon MLU, Qualcomm QAIC, MetaX, Hygon HCU / DCU, and Iluvatar CoreX as **integrations in progress**. These must not be placed in the same "supported" category until the upstream status changes and the relevant release / device matrix is published.
 
 ## 6. Distributed inference, KV cache, and communication
 
@@ -115,8 +164,8 @@ For example, vLLM's main installation documentation distinguishes core GPU suppo
 | Cambricon | Neuware, CNToolkit, torch_mlu | [Neuware](https://www.cambricon.com/) · [torch_mlu](https://github.com/Cambricon/torch_mlu) | Vendor SDK and PyTorch integration; check supported MLU generation and framework versions. |
 | Hygon | DTK, torch-dcu | [Hygon](https://www.hygon.cn/) | DCU software stack; public compatibility depends on release and model. |
 | Biren | BIRENSUPA | [Biren official site](https://www.birentech.com/) | Vendor describes BIRENSUPA as its software development platform. Publicly available third-party framework and operator coverage should be verified per product. |
-| Iluvatar CoreX | CoreX SDK, ixRT, IGIE, DeepSpark | [ixRT source](https://github.com/Deep-Spark/iluvatar-corex-ixrt) · [DeepSpark](https://github.com/Deep-Spark/DeepSpark) | Public OSS components include ixRT plugins, deployment tools, examples, and model-inference projects. |
-| Enflame | TopsRider, TopsRuntime, TopsAten, ECCL, torch-gcu | [torch-gcu](https://github.com/EnflameTechnology/torch-gcu) | Public PyTorch extension documents `torch.compile`, AMP, profiler, GCU Graph, ECCL, and CUDA migration helpers; current README lists S60 hardware support. |
+| Iluvatar CoreX | 天数智算软件栈 / IXUCA SDK, ixRT, IGIE, DeepSparkInference | [ixRT](https://github.com/Deep-Spark/iluvatar-corex-ixrt) · [DeepSparkInference](https://github.com/Deep-Spark/DeepSparkInference) · [Developer portal](https://developer.iluvatar.com/) | Public examples include ixRT / IGIE and selected vLLM deployments; check the exact IXUCA SDK, CoreX runtime, and model matrix. |
+| Enflame | TopsRider, TopsRuntime, TopsAten, ECCL, torch-gcu | [torch-gcu](https://github.com/EnflameTechnology/torch-gcu) | Public `torch-gcu` v2.10.0 pairs with PyTorch 2.10.0 / TopsRider 3.7.1 and lists S60 as its hardware target; do not generalize to all GCU products. |
 | Moore Threads | MUSA | [MUSA](https://github.com/MooreThreads) | Vendor software stack for MTT GPUs; backend coverage varies across upstream projects. |
 | MetaX | MACA, MXMACA | [MetaX](https://www.metax-tech.com/) | Vendor GPU software ecosystem; upstream integration should be checked by framework and release. |
 
@@ -124,28 +173,34 @@ For example, vLLM's main installation documentation distinguishes core GPU suppo
 
 The following are useful concrete entry points rather than a claim that all frameworks are equally mature.
 
-### Biren Technology — BIRENSUPA
+### Biren Technology — BIRENSUPA and AIModelMaster
 
-Biren's official site identifies BIRENSUPA as its proprietary software development platform and describes software/hardware co-optimization. The company also highlights GPU-to-OCS optical interconnect work. Publicly visible software artifacts and third-party framework support are less transparent than CUDA / ROCm; the landscape should therefore link to vendor documentation and avoid inferring broad upstream compatibility.
+Biren's official material identifies BIRENSUPA as its software platform and documents model adaptation on the BR166 family. In April 2026 it reported DeepSeek-V4 preview adaptation and inference validation on BR166; a separate official case describes SenseNova U1 adaptation using `br_pytorch`, BIRENSUPA, and the AIModelMaster full-stack GPU agent.
 
-- [Biren official platform and products](https://www.birentech.com/)
-- [Biren optical-interconnect / LightSphere X announcement](https://www.birentech.com/news/uk3x1bhhagcrtf5bqkurbnsa/)
+- [Biren official site](https://www.birentech.com/)
+- [DeepSeek-V4 adaptation on BR166 — 2026-04-28](https://www.birentech.com/news/lo81mr3idb49bsdjf8hdd2bb/)
+- [SenseNova U1 adaptation / AIModelMaster](https://www.birentech.com/news/otr0bf5evzdwwivrjt6h3322/)
 
-### Iluvatar CoreX — CoreX SDK, ixRT, IGIE, DeepSpark
+These are vendor-reported model-adaptation examples. Public evidence for a maintained upstream vLLM or SGLang device plugin was not found in this review; record BIRENSUPA / `br_pytorch` support by exact SKU, SDK, model, and release instead of inferring upstream compatibility.
 
-- [Official software-stack overview](https://www.iluvatar.com/software?fullCode=cpjs-rj-rjz)
+### Iluvatar CoreX — 天垓 / 智铠 / 彤央, IXUCA SDK, ixRT, IGIE
+
+Iluvatar's official product pages list the TianGai training family (including TianGai 100 / 150 / 300), ZhiKai 100 inference product, and TongYang edge family. The official TianGai 150 page lists 64GB HBM and a 350W board power figure; treat these as vendor-published specifications.
+
+- [Official product-series overview](https://www.iluvatar.com/serias)
+- [TianGai 150 product page](https://www.iluvatar.com/productDetails?fullCode=cpjs-yj-xlxl-tg150)
+- [Official developer portal](https://developer.iluvatar.com/)
 - [ixRT open-source components](https://github.com/Deep-Spark/iluvatar-corex-ixrt)
-- [DeepSparkInference](https://github.com/Deep-Spark/DeepSparkInference)
-- [DeepSpark open-source ecosystem](https://github.com/Deep-Spark/DeepSpark)
+- [DeepSparkInference model library](https://github.com/Deep-Spark/DeepSparkInference)
 
-The public DeepSpark materials distinguish ixRT (Iluvatar's inference runtime) from IGIE (an inference engine based on TVM). DeepSparkInference includes examples using ixRT / IGIE and mainstream inference engines such as vLLM. This is a useful basis for tracking actual model coverage, not just SDK naming.
+DeepSparkInference contains model deployment examples for vLLM, ixRT, and IGIE, with SDK versions recorded per model. The separate [vLLM-Iluvatar plugin](https://github.com/Deep-Spark/vllm-iluvatar) documents a vLLM 0.27.1 compatibility range; it should be considered a version-pinned out-of-tree plugin, not broad upstream support.
 
 ### Enflame — TopsRider and torch-gcu
 
 - [torch-gcu source and documentation](https://github.com/EnflameTechnology/torch-gcu)
 - [Chinese README](https://github.com/EnflameTechnology/torch-gcu/blob/main/README_zh.md)
 
-The public repository documents dependencies on TopsRider, TopsRuntime, TopsAten, and ECCL. It also documents PyTorch integration, `torch.compile`, AMP, profiling, GCU Graph, LibTorch, and CUDA-code migration. Its current public hardware-support table names the S60 inference product; do not extrapolate this exact open-source support table to every Enflame card or system.
+The public README currently pairs torch-gcu 2.10.0 with PyTorch 2.10.0 and TopsRider 3.7.1. It lists CloudBlazer inference S60 as the supported hardware model and documents ATen operator dispatch, CPU fallback, `torch.compile` / Inductor, AMP, profiler, GCU Graph, ECCL collectives / P2P, LibTorch, and CUDA migration. The public repository does not establish vLLM or SGLang production support for the full Enflame product family.
 
 ## 9. Compatibility and maturity matrix
 
@@ -156,12 +211,14 @@ This is a navigation aid, not a certification matrix. "Upstream" means the proje
 | NVIDIA GPU | CUDA, Triton, TileLang, CuTe, TensorRT | vLLM, SGLang, TensorRT-LLM, MLC-LLM | Broad upstream and vendor support; still version / architecture dependent. |
 | AMD GPU | ROCm, HIP, Triton, TileLang, Composable Kernel | vLLM, SGLang | Upstream support; feature coverage varies by architecture and ROCm release. |
 | Intel GPU | oneAPI / XPU stack, OpenVINO | vLLM, SGLang | Upstream or vendor-supported paths; confirm device generation and feature coverage. |
-| Huawei Ascend | CANN, torch-npu, TileLang Ascend backend | vLLM-Ascend, SGLang | Vendor and upstream/plugin integrations; verify model, kernel, and device-generation coverage. |
-| Moore Threads | MUSA | SGLang; selected kernel-generation ecosystem | Vendor integration and selected upstream projects; verify release compatibility. |
-| Hygon DCU | DTK | Selected vLLM / SGLang integrations | Vendor and community integrations; verify exact branch and feature status. |
-| Iluvatar CoreX | CoreX SDK, ixRT, IGIE | DeepSparkInference; selected vLLM examples | Vendor ecosystem and selected open-source projects; not equivalent to full upstream vLLM support. |
-| Enflame GCU | TopsRider, torch-gcu | Vendor examples and selected serving integrations | Public torch-gcu currently documents S60; verify other devices and engines separately. |
-| Biren GPU | BIRENSUPA | Verify by product and framework | Vendor platform is publicly described; avoid asserting upstream vLLM / SGLang support without a maintained backend and tested release. |
+| Huawei Ascend | CANN, torch-npu, TileLang Ascend backend | vLLM-Ascend; SGLang supported | Public plugin / upstream paths exist; check the exact CANN, PyTorch, vLLM, model, and Ascend generation matrix. |
+| Moore Threads | MUSA | vLLM-MUSA community plugin; SGLang supported for MTT S5000 | Separate plugin and upstream support; validate exact MUSA / vLLM / SGLang versions. |
+| Hygon DCU / HCU | DTK | SGLang integration in progress | Do not label as generally supported; verify vendor plugin and release evidence before use. |
+| Cambricon MLU | Neuware, CNToolkit, torch_mlu | SGLang integration in progress | Track model / device-specific vendor integration; do not infer upstream production support. |
+| MetaX GPU | MACA / MXMACA | vLLM-MetaX community plugin; SGLang integration in progress | Separate plugin exists; SGLang README still marks its integration in progress. |
+| Iluvatar CoreX | IXUCA SDK, CoreX runtime, ixRT, IGIE | DeepSparkInference examples; vLLM-Iluvatar out-of-tree plugin; SGLang integration in progress | The public vLLM plugin specifies vLLM 0.27.1 only; compatibility with vLLM 0.33.0rc3 is not established. |
+| Enflame GCU | TopsRider 3.7.1, torch-gcu 2.10.0 | No current upstream vLLM / SGLang support verified | Public torch-gcu README lists PyTorch 2.10.0 and S60; do not extrapolate to other GCU models. |
+| Biren GPU | BIRENSUPA, br_pytorch, AIModelMaster | Vendor model-adaptation examples; no upstream plugin verified | Official BR166 DeepSeek-V4 and SenseNova U1 examples are vendor-reported; record exact software and SKU. |
 
 ## 10. How to maintain this page
 
