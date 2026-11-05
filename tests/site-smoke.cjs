@@ -88,16 +88,64 @@ const { chromium } = require("playwright");
   await page.goto(base + "/directory/", { waitUntil: "networkidle" });
   await page.waitForFunction(() => {
     const count = document.querySelector("[data-directory-count]");
-    return count && count.dataset.ready === "true";
+    const root = document.querySelector("[data-directory-explorer]");
+    return count && count.dataset.ready === "true" &&
+      root && root.dataset.profileRegistryLoaded === "true" &&
+      root.dataset.profileMatchedCount === "50";
   }, null, { timeout: 10000 });
   const companyCount = Number(await page.locator("[data-directory-count]").getAttribute("data-count"));
-  if (companyCount < 40) throw new Error("Directory company index is unexpectedly incomplete: " + companyCount);
+  if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
+  const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
+  if (!registrySummary.includes("50 profiles") ||
+      !registrySummary.includes("126 source links") ||
+      !registrySummary.includes("3 audited evidence records") ||
+      !registrySummary.includes("17 structured claims") ||
+      !registrySummary.includes("47 profiles not yet reviewed")) {
+    throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
+  }
+  await page.locator("[data-directory-search]").fill("MI355X");
+  const mi355Matches = await page.locator(".directory-result-title").allTextContents();
+  if (mi355Matches.length !== 1 || !mi355Matches[0].includes("AMD")) {
+    throw new Error("Structured company search did not locate AMD MI355X");
+  }
+  const mi355Product = (await page.locator(".directory-result-products").first().textContent()).trim();
+  if (!mi355Product.includes("AMD Instinct MI355X")) {
+    throw new Error("Directory result did not display the structured MI355X product: " + mi355Product);
+  }
+  const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
+  if (!mi355Evidence.includes("Fresh evidence") ||
+      !mi355Evidence.includes("1 evidence record") ||
+      !mi355Evidence.includes("6 reviewed claims")) {
+    throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
+  }
+  await page.locator("[data-directory-search]").fill("");
+  await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
+  if (await page.locator(".directory-result-title").count() !== 3) {
+    throw new Error("Freshness filter should return the three audited example profiles");
+  }
+  await page.locator("[data-directory-search]").fill("FuriosaAI");
+  await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
   await page.locator("[data-directory-search]").fill("FuriosaAI");
   const companyMatches = await page.locator(".directory-result-title").allTextContents();
   if (!companyMatches.some(name => name.includes("FuriosaAI"))) {
     throw new Error("Directory search did not find FuriosaAI");
   }
-  await page.locator("[data-directory-search]").fill("");
+  const profileEvidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
+  if (!profileEvidence.includes("Not reviewed") ||
+      !profileEvidence.includes("2 source links") ||
+      !profileEvidence.includes("0 evidence records") ||
+      !profileEvidence.includes("0 reviewed claims")) {
+    throw new Error("Company card did not show profile evidence state: " + profileEvidence);
+  }
+  await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
+  if (await page.locator(".directory-result-title").count() !== 1) {
+    throw new Error("Not-reviewed evidence filter did not retain the FuriosaAI profile");
+  }
+  await page.locator("[data-directory-evidence-filter]").selectOption("stale");
+  if (!(await page.locator("[data-directory-empty]").isVisible())) {
+    throw new Error("Stale evidence filter should not match unreviewed profiles");
+  }
+  await page.locator("[data-directory-reset]").click();
   await page.locator("[data-directory-group]").selectOption({ label: "China AI Accelerator Vendors" });
   const chinaMatches = await page.locator(".directory-result-title").allTextContents();
   if (!chinaMatches.some(name => name.includes("Huawei Ascend"))) {
@@ -171,7 +219,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: six routes, landscape asset, homepage coverage stats, directory search and group filter, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: six routes, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);

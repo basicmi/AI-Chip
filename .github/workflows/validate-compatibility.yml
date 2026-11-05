@@ -43,6 +43,7 @@ jobs:
           python3 scripts/validate_compatibility.py
           python3 scripts/validate_workloads.py
           python3 scripts/validate_benchmarks.py
+          python3 scripts/validate_company_profiles.py
 
   build-and-smoke-test:
     runs-on: ubuntu-latest
@@ -62,6 +63,8 @@ jobs:
       - name: Verify static assets in generated site
         run: |
           test -s _site/assets/js/benchmark-explorer.js
+          test -s _site/assets/js/directory-explorer.js
+          test -s _site/data/company-profiles.json
           test -s _site/resource/AI_Chip_Landscape_v0p9p1.svg
           python3 - <<'PY'
           import xml.etree.ElementTree as ET

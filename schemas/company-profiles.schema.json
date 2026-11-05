@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/company-profiles.schema.json",
+  "title": "AI Chip Company Profile and Evidence Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "database_version",
+    "registry_reviewed_at",
+    "scope",
+    "freshness_policy",
+    "profile_status_definitions",
+    "companies"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "registry_reviewed_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "freshness_policy": {
+      "$ref": "#/$defs/freshness_policy"
+    },
+    "profile_status_definitions": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "companies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/company"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "nullable_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "freshness_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fresh_within_days",
+        "stale_after_days",
+        "missing_checked_at_means",
+        "notes"
+      ],
+      "properties": {
+        "fresh_within_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stale_after_days": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "missing_checked_at_means": {
+          "type": "string",
+          "const": "unreviewed"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "url",
+        "source_type",
+        "review_status",
+        "published_at",
+        "checked_at",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "company_primary",
+            "vendor_primary",
+            "official_project",
+            "research_paper",
+            "independent_media",
+            "repository",
+            "government_or_regulatory",
+            "other"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "unreviewed",
+            "reviewed",
+            "excluded"
+          ]
+        },
+        "published_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "checked_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "source_type",
+        "independence",
+        "published_at",
+        "checked_at",
+        "review_status",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "company_primary",
+            "vendor_primary",
+            "official_project",
+            "research_paper",
+            "independent_media",
+            "government_or_regulatory",
+            "repository",
+            "other"
+          ]
+        },
+        "independence": {
+          "type": "string",
+          "enum": [
+            "vendor",
+            "project",
+            "independent",
+            "official"
+          ]
+        },
+        "published_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "reviewed",
+            "disputed"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "product_type",
+        "availability",
+        "claim_ids"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product_type": {
+          "type": "string",
+          "enum": [
+            "gpu",
+            "npu",
+            "asic",
+            "dpu",
+            "ip",
+            "system",
+            "compute_in_memory",
+            "other"
+          ]
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "generation": {
+          "type": "string"
+        },
+        "process_node": {
+          "type": "string"
+        },
+        "market_segment": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string",
+          "enum": [
+            "announced",
+            "sampling",
+            "shipping",
+            "production",
+            "roadmap",
+            "discontinued",
+            "unknown"
+          ]
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject_type",
+        "subject_id",
+        "topic",
+        "statement",
+        "scope",
+        "claim_status",
+        "evidence_ids",
+        "last_reviewed"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "subject_type": {
+          "type": "string",
+          "enum": [
+            "company",
+            "product"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/id"
+        },
+        "topic": {
+          "type": "string",
+          "enum": [
+            "product_identity",
+            "architecture",
+            "process_node",
+            "compute",
+            "memory_capacity",
+            "memory_bandwidth",
+            "interconnect",
+            "power",
+            "software_support",
+            "availability",
+            "deployment",
+            "performance",
+            "other"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_status": {
+          "type": "string",
+          "enum": [
+            "vendor_reported",
+            "source_confirmed",
+            "independently_verified",
+            "disputed",
+            "superseded"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "last_reviewed": {
+          "type": "string",
+          "format": "date"
+        },
+        "valid_until": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "company": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "category",
+        "directory_anchor",
+        "logo_url",
+        "summary",
+        "profile_status",
+        "last_reviewed",
+        "products",
+        "claims",
+        "evidence",
+        "references"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "IC Vendors",
+            "Tech Giants & HPC Vendors",
+            "Traditional IP Vendors",
+            "Startups",
+            "China AI Accelerator Vendors"
+          ]
+        },
+        "directory_anchor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logo_url": {
+          "$ref": "#/$defs/url"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_status": {
+          "type": "string",
+          "enum": [
+            "not_reviewed",
+            "partially_reviewed",
+            "reviewed"
+          ]
+        },
+        "last_reviewed": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/product"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        }
+      }
+    }
+  }
+}
