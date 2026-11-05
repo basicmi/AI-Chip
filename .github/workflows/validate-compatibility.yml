@@ -71,7 +71,8 @@ jobs:
           assert root.attrib.get("viewBox") == "0 0 2000 1260", "Unexpected landscape canvas"
           images = root.findall("{http://www.w3.org/2000/svg}image")
           assert len(images) == 48, f"Expected 48 embedded company logos, found {len(images)}"
-          assert all(image.attrib.get('{http://www.w3.org/1999/xlink}href', '').startswith('data:image/') for image in images), 'All company logos must be embedded data URIs'\n          print(f"PASS: landscape SVG parsed; {len(images)} embedded company logos.")
+          assert all(image.attrib.get('{http://www.w3.org/1999/xlink}href', '').startswith('data:image/') for image in images), 'All company logos must be embedded data URIs'
+          print(f"PASS: landscape SVG parsed; {len(images)} embedded company logos.")
           PY
           echo "Benchmark explorer and landscape assets found in generated site."
       - name: Install browser test dependency
