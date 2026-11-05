@@ -328,11 +328,12 @@ def main():
                               f"{cwhere}: compute claim needs a precision label")
                         check(metric_context.get("sparsity") in SPARSITY_MODES,
                               f"{cwhere}: compute claim needs a sparsity label")
-                    expected_operation = {"memory_capacity": "memory", "memory_bandwidth": "memory",
-                                          "interconnect": "interconnect", "power": "power"}
-                    if claim.get("topic") in expected_operation:
-                        check(metric_context.get("operation") == expected_operation[claim.get("topic")],
-                              f"{cwhere}: metric_context.operation must be {expected_operation[claim.get('topic')]}")
+                    expected_operations = {"memory_capacity": {"memory"}, "memory_bandwidth": {"memory"},
+                                           "interconnect": {"interconnect", "communication"},
+                                           "power": {"power"}}
+                    if claim.get("topic") in expected_operations:
+                        check(metric_context.get("operation") in expected_operations[claim.get("topic")],
+                              f"{cwhere}: invalid metric_context.operation for {claim.get('topic')}")
                     if metric_context.get("workload_id") is not None:
                         check(metric_context["workload_id"] in workload_ids,
                               f"{cwhere}: unknown workload_id {metric_context['workload_id']}")
