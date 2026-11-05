@@ -59,3 +59,14 @@ Product records may reference `compatibility_platform_ids`. These IDs connect pr
 The current first-wave registry links 16 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
 
 The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
+
+
+## Weekly evidence maintenance
+
+The repository runs `.github/workflows/data-maintenance.yml` weekly and on manual dispatch. It:
+
+1. Re-validates compatibility, workload, benchmark and company-profile registries.
+2. Publishes a human-readable review queue to the GitHub Actions run summary.
+3. Checks source URLs and uploads an advisory link-audit report as a 30-day artifact.
+
+The link checker does not edit source data or promote references to evidence. HTTP 403/429 responses are classified as blocked rather than broken, since publishers may apply bot protection. A reachable URL does not prove that its content supports a technical claim. Review dates and claim status must be updated only after a human has opened the source and verified the relevant statement.

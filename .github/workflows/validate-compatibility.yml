@@ -44,6 +44,7 @@ jobs:
           python3 scripts/validate_workloads.py
           python3 scripts/validate_benchmarks.py
           python3 scripts/validate_company_profiles.py
+          python3 -m unittest discover -s tests -p "test_data_maintenance.py"
 
   build-and-smoke-test:
     runs-on: ubuntu-latest
