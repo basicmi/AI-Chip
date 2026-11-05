@@ -4,7 +4,7 @@
 <p class="editor-line">Editor <a href="https://www.linkedin.com/in/shan-tang-27342510/"><strong>S.T.</strong></a> (LinkedIn)</p>
 <p class="wechat-line"><strong>WeChat / 微信公众号</strong> · <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a> — AI chip articles</p>
 <div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
-<div class="landscape-map"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p8.png" loading="lazy" alt="AI Chip Landscape v0.8 (2026)" /></div>
+<div class="landscape-map"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p9.svg" loading="lazy" alt="AI Chip Landscape v0.9 (November 2026)" /></div>
 <p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro (plus lineage where relevant) and 1–2 latest updates. Prefer official / primary sources; performance claims are often vendor-reported.</p>
 <p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a></p>
 </header>
