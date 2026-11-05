@@ -74,7 +74,7 @@ const { chromium } = require("playwright");
     nodes.map(node => node.textContent.trim())
   );
   if (initialHomeDataRequests !== 3 || homeStatValues.length !== 4 ||
-      !homeStatValues.every(value => /^\\d+$/.test(value))) {
+      !homeStatValues.every(value => /^\d+$/.test(value))) {
     throw new Error("Homepage coverage metrics did not load all four datasets: " +
       JSON.stringify({ initialHomeDataRequests, homeStatValues }));
   }
