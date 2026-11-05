@@ -10,6 +10,7 @@
     model: $("[data-results-model]"),
     scenario: $("[data-results-scenario]"),
     availability: $("[data-results-availability]"),
+    inferred: $("[data-results-inferred]"),
     division: $("[data-results-division]"),
     system: $("[data-results-system]")
   };
@@ -235,6 +236,8 @@
       if (filters.model.value && record.model !== filters.model.value) return false;
       if (filters.scenario.value && record.scenario !== filters.scenario.value) return false;
       if (filters.availability.value && record.availability !== filters.availability.value) return false;
+      if (filters.inferred.value === "true" && !record.inferred) return false;
+      if (filters.inferred.value === "false" && record.inferred) return false;
       if (filters.division.value && record.division !== filters.division.value) return false;
       if (filters.system.value && record.system_type !== filters.system.value) return false;
       const searchable = [
@@ -300,6 +303,7 @@
       populate(filters.model, data.records.map(record => record.model));
       populate(filters.scenario, data.records.map(record => record.scenario));
       populate(filters.availability, data.records.map(record => record.availability));
+      populate(filters.inferred, ["false", "true"], value => value === "true" ? "Inferred submissions" : "Non-inferred submissions");
       populate(filters.division, data.records.map(record => record.division));
       populate(filters.system, data.records.map(record => record.system_type));
 
