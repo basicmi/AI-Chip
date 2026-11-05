@@ -84,6 +84,8 @@ The link checker does not edit source data or promote references to evidence. HT
 
 The initial snapshot contains **492 MLPerf Inference v6.1 records** from the official MLCommons `summary.json`: 480 Available, 8 Preview and 4 RDI; 476 Closed and 16 Open; 468 datacenter and 24 edge records. 125 rows are marked inferred by the source. The summary extract contains no measured power records. A design-power field must never be presented as measured power.
 
+MLPerf Power is listed separately as a methodology source with no imported result rows yet. The current Inference v6.1 summary's zero power rows must not be interpreted as a zero-watt result or as evidence that MLPerf Power has no published work.
+
 The submitter and accelerator vendor are separate fields: a system integrator or cloud submitter is not necessarily the accelerator manufacturer. Product/platform links are populated only when the accelerator model maps clearly to a reviewed product record. CPU-only submissions and unknown accelerators remain unlinked.
 
 ### Import and update
