@@ -215,7 +215,12 @@
       else if (source.api_url) addLink(links, source.api_url, "Public API ↗");
       card.append(links);
       if (!source.record_count) {
-        card.append(make("p", "benchmark-result-warning", "No rows are cached in this snapshot. The repository importer supports this public source; it is not silently treated as zero performance."));
+        const message = source.import_status === "api_adapter_ready_not_yet_imported"
+          ? "No rows are cached in this snapshot. The repository importer supports this public API; the empty cache is not a zero-performance result."
+          : source.import_status === "methodology_only_no_result_snapshot"
+            ? "The methodology is catalogued separately. No machine-readable result snapshot is imported here."
+            : "No result rows are imported in this snapshot.";
+        card.append(make("p", "benchmark-result-warning", message));
       }
       container.append(card);
     });
