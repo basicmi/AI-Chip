@@ -50,7 +50,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
+          bundler-cache: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -62,7 +62,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Serve generated site
         run: |
-          python3 -m http.server 4173 --directory _site > /tmp/ai-chip-site.log 2>&1 &
+          python3 tests/serve_site.py > /tmp/ai-chip-site.log 2>&1 &
           echo $! > /tmp/ai-chip-site.pid
           for i in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:4173/AI-Chip/ > /dev/null; then exit 0; fi
