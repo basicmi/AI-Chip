@@ -13,6 +13,7 @@ description: A curated directory of public AI accelerator benchmarks, result por
     <span>Catalogue <strong data-benchmark-version>Loading…</strong></span>
     <span>Last reviewed <strong data-benchmark-reviewed>—</strong></span>
     <a href="{{ '/data/benchmark-projects.json' | relative_url }}">Raw catalogue ↗</a>
+    <a href="{{ '/results/' | relative_url }}">Explore published results ↗</a>
   </div>
 </section>
 
