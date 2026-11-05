@@ -16,6 +16,11 @@
     return node;
   };
 
+  const setPageText = (selector, value) => {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = String(value);
+  };
+
   const safeUrl = (value) => {
     try {
       const url = new URL(value);
@@ -159,16 +164,16 @@
         category.append(option);
       });
 
-      $("[data-benchmark-version]").textContent = data.database_version || "—";
-      $("[data-benchmark-reviewed]").textContent = data.last_reviewed || "—";
-      $("[data-benchmark-stat='projects']").textContent = data.projects.length;
-      $("[data-benchmark-stat='categories']").textContent = data.categories.length;
-      $("[data-benchmark-stat='portals']").textContent = data.projects.filter(
+      setPageText("[data-benchmark-version]", data.database_version || "—");
+      setPageText("[data-benchmark-reviewed]", data.last_reviewed || "—");
+      setPageText("[data-benchmark-stat='projects']", data.projects.length);
+      setPageText("[data-benchmark-stat='categories']", data.categories.length);
+      setPageText("[data-benchmark-stat='portals']", data.projects.filter(
         (project) => ["public_benchmark", "ranking"].includes(project.kind)
-      ).length;
-      $("[data-benchmark-stat='tools']").textContent = data.projects.filter(
+      ).length);
+      setPageText("[data-benchmark-stat='tools']", data.projects.filter(
         (project) => !["public_benchmark", "ranking"].includes(project.kind)
-      ).length;
+      ).length);
 
       load.hidden = true;
       render();
