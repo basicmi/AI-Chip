@@ -58,15 +58,15 @@ def hardware_identity(name: str | None):
         (("gaudi 3", "gaudi3"), "Intel", "intel-gaudi", "gaudi3"),
         (("gaudi 2", "gaudi2"), "Intel", "intel-gaudi", "gaudi2"),
         (("tpu7x", "ironwood"), "Google", "google-tpu", "tpu7x-ironwood"),
-        (("tpu v6e", "trillium"), "Google", "google-tpu", "tpu-v6e-trillium"),
+        (("tpu v6e", "tpu_v6e", "tpu-v6e", "trillium"), "Google", "google-tpu", "tpu-v6e-trillium"),
         (("trainium3", "trn3"), "AWS", "aws-trainium", "trainium3"),
         (("trainium2", "trn2"), "AWS", "aws-trainium", "trainium2"),
-        (("maia 200",), "Microsoft", "microsoft-maia", "maia200"),
-        (("maia 100",), "Microsoft", "microsoft-maia", "maia100"),
-        (("mtia 300",), "Meta", "meta-mtia", "mtia-300"),
-        (("mtia v2", "mtia-v2"), "Meta", "meta-mtia", "mtia-v2"),
-        (("wse-3",), "Cerebras", "cerebras-wse", "wse3"),
-        (("wse-2",), "Cerebras", "cerebras-wse", "wse2"),
+        (("maia 200", "maia200", "maia-200"), "Microsoft", "microsoft-maia", "maia200"),
+        (("maia 100", "maia100", "maia-100"), "Microsoft", "microsoft-maia", "maia100"),
+        (("mtia 300", "mtia-300", "mtia300"), "Meta", "meta-mtia", "mtia-300"),
+        (("mtia v2", "mtia-v2", "mtia_v2"), "Meta", "meta-mtia", "mtia-v2"),
+        (("wse-3", "wse3"), "Cerebras", "cerebras-wse", "wse3"),
+        (("wse-2", "wse2"), "Cerebras", "cerebras-wse", "wse2"),
     ]
     for needles, vendor, platform_id, product_id in rules:
         if any(needle in text for needle in needles):
