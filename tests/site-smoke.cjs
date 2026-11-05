@@ -90,7 +90,8 @@ const { chromium } = require("playwright");
     const count = document.querySelector("[data-directory-count]");
     const root = document.querySelector("[data-directory-explorer]");
     return count && count.dataset.ready === "true" &&
-      root && root.dataset.profileRegistryLoaded === "true";
+      root && root.dataset.profileRegistryLoaded === "true" &&
+      root.dataset.profileMatchedCount === "50";
   }, null, { timeout: 10000 });
   const companyCount = Number(await page.locator("[data-directory-count]").getAttribute("data-count"));
   if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
