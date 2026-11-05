@@ -18,6 +18,32 @@ permalink: /directory/
 </section>
 
 
+<section class="directory-explorer" data-directory-explorer>
+  <div class="directory-explorer-heading">
+    <div>
+      <p class="eyebrow">SEARCH THE LANDSCAPE</p>
+      <h2>Find a company, chip or architecture</h2>
+      <p>Search company names, product families, architectures, applications and recent updates. Results link to the full company profile below.</p>
+    </div>
+    <span class="directory-explorer-count" data-directory-count data-count="0">Building company index…</span>
+  </div>
+  <div class="directory-filters">
+    <label>Search
+      <input type="search" data-directory-search placeholder="Company, product, architecture, application…" autocomplete="off">
+    </label>
+    <label>Company group
+      <select data-directory-group><option value="">All groups</option></select>
+    </label>
+    <button type="button" class="text-button" data-directory-reset>Reset filters</button>
+  </div>
+  <p class="directory-results-summary" data-directory-summary aria-live="polite">Building company index…</p>
+  <div class="directory-result-grid" data-directory-results hidden></div>
+  <div class="directory-empty-state" data-directory-empty hidden>
+    <strong>No matching companies</strong>
+    <p>Try a broader company, product or architecture name.</p>
+  </div>
+</section>
+<script src="{{ '/assets/js/directory-explorer.js' | relative_url }}" defer></script>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
 <p class="refresh-note" align="center"><em>One-line latest status per company — updated periodically. Last refreshed: November 2026. Detailed software and benchmark maps are maintained in dedicated pages.</em></p>

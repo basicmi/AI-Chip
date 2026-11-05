@@ -14,10 +14,11 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <a class="button button-primary" href="{{ '/directory/' | relative_url }}">Explore hardware <span aria-hidden="true">↗</span></a>
       <a class="button button-secondary" href="{{ '/compatibility/' | relative_url }}">Open compatibility explorer</a>
     </div>
-    <div class="home-metrics" aria-label="Current database coverage" data-home-stats data-compat-source="{{ '/data/compatibility.json' | relative_url }}" data-workload-source="{{ '/data/workloads.json' | relative_url }}">
-      <div><strong>11</strong><span>accelerator platforms</span></div>
-      <div><strong>18</strong><span>software integrations</span></div>
-      <div><strong>10</strong><span>workload definitions</span></div>
+    <div class="home-metrics" aria-label="Current database coverage" data-home-stats data-compat-source="{{ '/data/compatibility.json' | relative_url }}" data-workload-source="{{ '/data/workloads.json' | relative_url }}" data-benchmark-source="{{ '/data/benchmark-projects.json' | relative_url }}">
+      <div><strong data-home-stat="platforms">11</strong><span>accelerator platforms</span></div>
+      <div><strong data-home-stat="integrations">18</strong><span>software integrations</span></div>
+      <div><strong data-home-stat="workloads">10</strong><span>workload definitions</span></div>
+      <div><strong data-home-stat="benchmarks">26</strong><span>public benchmark resources</span></div>
     </div>
   </div>
   <div class="home-hero-visual">
