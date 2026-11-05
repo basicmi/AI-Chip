@@ -70,7 +70,7 @@ class ReviewQueueTests(unittest.TestCase):
         self.assertIn("Sample Vendor", report)
         self.assertIn("Carried-over references awaiting claim-level review", report)
         self.assertIn("integration_only", report)
-        self.assertIn("not a completed workload test", report.lower())
+        self.assertIn("not workload-tested", report.lower())
 
 
 if __name__ == "__main__":
