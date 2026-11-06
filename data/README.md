@@ -70,3 +70,57 @@ The repository runs `.github/workflows/data-maintenance.yml` weekly and on manua
 3. Checks source URLs and uploads an advisory link-audit report as a 30-day artifact.
 
 The link checker does not edit source data or promote references to evidence. HTTP 403/429 responses are classified as blocked rather than broken, since publishers may apply bot protection. A reachable URL does not prove that its content supports a technical claim. Review dates and claim status must be updated only after a human has opened the source and verified the relevant statement.
+
+
+## Benchmark results registry
+
+- `benchmark-results.json`: normalized, source-linked result submissions and observations.
+- `schemas/benchmark-results.schema.json`: JSON Schema for the registry.
+- `scripts/import_benchmark_results.py`: imports official MLPerf Inference v6.1 summary rows and, optionally, public SemiAnalysis InferenceX API rows.
+- `scripts/validate_benchmark_results.py`: checks source references, IDs, product/platform links, summary counts and strict power-validity semantics.
+- `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters.
+
+### Current snapshot
+
+The initial snapshot contains **492 MLPerf Inference v6.1 records** from the official MLCommons `summary.json`: 480 Available, 8 Preview and 4 RDI; 476 Closed and 16 Open; 468 datacenter and 24 edge records. 125 rows are marked inferred by the source. The summary extract contains no measured power records. A design-power field must never be presented as measured power.
+
+MLPerf Power is listed separately as a methodology source with no imported result rows yet. The current Inference v6.1 summary's zero power rows must not be interpreted as a zero-watt result or as evidence that MLPerf Power has no published work.
+
+The submitter and accelerator vendor are separate fields: a system integrator or cloud submitter is not necessarily the accelerator manufacturer. Product/platform links are populated only when the accelerator model maps clearly to a reviewed product record. CPU-only submissions and unknown accelerators remain unlinked.
+
+### Import and update
+
+From the repository root:
+
+```bash
+# Refresh the official MLPerf v6.1 snapshot
+python3 scripts/import_benchmark_results.py --source mlperf
+
+# Import all currently available InferenceX model rows from its public API
+python3 scripts/import_benchmark_results.py --source inferencex
+
+# Or import selected InferenceX display models
+python3 scripts/import_benchmark_results.py --source inferencex --model DeepSeek-R1-0528 --model DeepSeek-V4-Pro
+
+# Preview changes without writing the JSON file
+python3 scripts/import_benchmark_results.py --source all --dry-run
+
+# Validate the result registry and its links to products/platforms
+python3 scripts/validate_benchmark_results.py
+python3 -m unittest discover -s tests -p "test_benchmark_results.py"
+```
+
+The InferenceX importer uses its documented unauthenticated read API. It preserves the raw scalar metric keys, workload shape, precision, parallelism, image, recipe fingerprint, date and producer run URL. InferenceX time metrics are in seconds; throughput metrics are tokens/s per GPU unless the metric name states otherwise. Strict energy comparisons require both `power_valid=1` and `power_metric_schema_version=2`. The importer does not calculate a universal score.
+
+A manual GitHub Actions workflow, `.github/workflows/refresh-benchmark-results.yml`, can refresh MLPerf, InferenceX or both and open a pull request containing the updated snapshot. It validates the result registry before proposing the data update; the workflow does not push benchmark data directly to the default branch.
+
+### Comparability rules
+
+1. Keep benchmark suite and version fixed.
+2. Keep model/task, scenario, division, system type and accuracy/quality target fixed.
+3. Keep metric units and measurement boundaries fixed. Do not compare system throughput with per-accelerator throughput.
+4. Keep Available, Preview, RDI and inferred submissions visibly distinct.
+5. Separate submitter from accelerator vendor.
+6. Do not interpret design power as measured power or missing power as zero.
+7. Preserve the source row and producer run link. A published submission is not automatically an independent replication.
+8. Do not rank different suites or workload families on one composite score.

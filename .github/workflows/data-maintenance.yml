@@ -23,7 +23,9 @@ jobs:
           python3 scripts/validate_workloads.py
           python3 scripts/validate_benchmarks.py
           python3 scripts/validate_company_profiles.py
+          python3 scripts/validate_benchmark_results.py
           python3 -m unittest discover -s tests -p "test_data_maintenance.py"
+          python3 -m unittest discover -s tests -p "test_benchmark_results.py"
       - name: Generate weekly review queue
         run: python3 scripts/report_profile_review_queue.py >> "$GITHUB_STEP_SUMMARY"
       - name: Audit public source links (advisory)

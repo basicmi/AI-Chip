@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -270,6 +270,52 @@ const { chromium } = require("playwright");
   }
   await page.locator("[data-benchmark-reset]").click();
 
+  await page.goto(base + "/results/", { waitUntil: "networkidle" });
+  await page.waitForFunction(() => {
+    const root = document.querySelector("[data-benchmark-results]");
+    const load = document.querySelector("[data-results-load]");
+    return (root && root.dataset.loaded === "true") || (load && load.classList.contains("is-error"));
+  }, null, { timeout: 15000 });
+  const resultsLoadError = await page.locator("[data-results-load]").textContent();
+  if (await page.locator("[data-results-load]").isVisible()) {
+    throw new Error("Benchmark Results Explorer failed to initialize: " + resultsLoadError);
+  }
+  const resultTotal = (await page.locator('[data-results-stat="total"]').textContent()).trim();
+  if (resultTotal !== "492") {
+    throw new Error("Benchmark Results Explorer reported " + resultTotal + " records instead of 492");
+  }
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 492) {
+    throw new Error("Benchmark Results Explorer should initially show all 492 MLPerf v6.1 rows");
+  }
+  if ((await page.locator("[data-results-source-cards]").textContent()).indexOf("InferenceX") < 0) {
+    throw new Error("Benchmark Results Explorer did not show the InferenceX source status");
+  }
+  await page.locator("[data-results-search]").fill("MI355X");
+  if (Number(await page.locator("[data-results-count]").textContent()) < 1) {
+    throw new Error("Benchmark result search did not locate MI355X submissions");
+  }
+  await page.locator("[data-results-reset]").click();
+  await page.locator("[data-results-vendor]").selectOption("AMD");
+  await page.locator("[data-results-model]").selectOption("deepseek-r1");
+  await page.locator("[data-results-scenario]").selectOption("Server");
+  await page.locator("[data-results-availability]").selectOption("available");
+  await page.locator("[data-results-division]").selectOption("closed");
+  await page.locator("[data-results-system]").selectOption("datacenter");
+  if (Number(await page.locator("[data-results-count]").textContent()) < 1) {
+    throw new Error("Like-for-like MLPerf filters did not return AMD DeepSeek R1 Server results");
+  }
+  await page.locator("[data-results-reset]").click();
+  await page.locator("[data-results-inferred]").selectOption("true");
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 125) {
+    throw new Error("Inferred-submission filter should isolate the 125 source-marked inferred rows");
+  }
+  await page.locator("[data-results-reset]").click();
+  const resultDetails = page.locator("[data-results-rows] .benchmark-result-details").first();
+  await resultDetails.locator("summary").click();
+  if (!(await resultDetails.locator(".benchmark-result-detail-links a").count())) {
+    throw new Error("Benchmark result details did not retain the publisher source link");
+  }
+
   await page.goto(base + "/workloads/", { waitUntil: "networkidle" });
   await waitForDataset({
     name: "Workload",
@@ -293,7 +339,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: seven routes, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: eight routes, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
