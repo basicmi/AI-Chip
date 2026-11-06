@@ -98,9 +98,9 @@ const { chromium } = require("playwright");
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
       !registrySummary.includes("153 source links") ||
-      !registrySummary.includes("49 audited evidence records") ||
-      !registrySummary.includes("153 structured claims") ||
-      !registrySummary.includes("34 profiles not yet reviewed")) {
+      !registrySummary.includes("50 audited evidence records") ||
+      !registrySummary.includes("160 structured claims") ||
+      !registrySummary.includes("33 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
   const profileRegistry = await page.evaluate(async () => {
@@ -129,14 +129,15 @@ const { chromium } = require("playwright");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.2" || productCount !== 39 ||
-      claimCount !== 153 || evidenceCount !== 49 || metricContextCount < 40 ||
+  if (profileRegistry.schema_version !== "1.2" || productCount !== 40 ||
+      claimCount !== 160 || evidenceCount !== 50 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
       lifecycleProducts.length < 10 || invalidLifecycleEvents.length ||
       !tenstorrentProfile.products.some(product => product.id === "tenstorrent-blackhole-p150b") ||
       !rebellionsProfile.products.some(product => product.id === "rebellions-rebel-quad") ||
+      !profileRegistry.companies.find(company => company.id === "cambricon").products.some(product => product.id === "mlu370-s4-s8") ||
       gb200.product_type !== "system" ||
       gb200Bandwidth.metric_context.measurement_scope !== "rack" ||
       trainium2Dense.metric_context.sparsity !== "dense" ||
@@ -200,7 +201,7 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "27";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "51,39,153,49,27,28") {
+  if (productStats.join(",") !== "51,40,160,50,27,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
   await page.locator("[data-product-search]").fill("RNGD");
