@@ -97,10 +97,10 @@ const { chromium } = require("playwright");
   if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
-      !registrySummary.includes("136 source links") ||
-      !registrySummary.includes("29 audited evidence records") ||
-      !registrySummary.includes("108 structured claims") ||
-      !registrySummary.includes("42 profiles not yet reviewed")) {
+      !registrySummary.includes("154 source links") ||
+      !registrySummary.includes("49 audited evidence records") ||
+      !registrySummary.includes("153 structured claims") ||
+      !registrySummary.includes("34 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
   const profileRegistry = await page.evaluate(async () => {
@@ -114,17 +114,29 @@ const { chromium } = require("playwright");
   const evidenceCount = profileRegistry.companies.reduce((sum, company) => sum + company.evidence.length, 0);
   const metricContextCount = profileRegistry.companies.reduce((sum, company) =>
     sum + company.claims.filter(claim => claim.metric_context).length, 0);
+  const lifecycleProducts = profileRegistry.companies.flatMap(company =>
+    company.products.map(product => ({ company, product }))).filter(item =>
+      Array.isArray(item.product.availability_history) && item.product.availability_history.length);
+  const invalidLifecycleEvents = lifecycleProducts.flatMap(({ company, product }) =>
+    product.availability_history.filter((event, index, events) =>
+      !company.evidence.some(record => record.id === event.evidence_id) ||
+      (index === events.length - 1 && event.status !== product.availability)));
+  const tenstorrentProfile = profileRegistry.companies.find(company => company.id === "tenstorrent");
+  const rebellionsProfile = profileRegistry.companies.find(company => company.id === "rebellions");
   const nvidiaProfile = profileRegistry.companies.find(company => company.id === "nvidia");
   const gb200 = nvidiaProfile.products.find(product => product.id === "gb200-nvl72");
   const gb200Bandwidth = nvidiaProfile.claims.find(claim => claim.id === "gb200-hbm-bandwidth");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.2" || productCount !== 27 ||
-      claimCount !== 108 || evidenceCount !== 29 || metricContextCount < 40 ||
+  if (profileRegistry.schema_version !== "1.2" || productCount !== 39 ||
+      claimCount !== 153 || evidenceCount !== 49 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
+      lifecycleProducts.length < 10 || invalidLifecycleEvents.length ||
+      !tenstorrentProfile.products.some(product => product.id === "tenstorrent-blackhole-p150b") ||
+      !rebellionsProfile.products.some(product => product.id === "rebellions-rebel-quad") ||
       gb200.product_type !== "system" ||
       gb200Bandwidth.metric_context.measurement_scope !== "rack" ||
       trainium2Dense.metric_context.sparsity !== "dense" ||
@@ -188,9 +200,22 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "27";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "50,27,108,29,27,28") {
+  if (productStats.join(",") !== "51,39,153,49,27,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
+  await page.locator("[data-product-search]").fill("RNGD");
+  const rngdCard = page.locator(".product-card").filter({ hasText: "FuriosaAI RNGD Tensor Contraction Processor" }).first();
+  if (!(await rngdCard.locator(".product-lifecycle-note").textContent()).includes("2026-01")) {
+    throw new Error("Product Explorer did not show source-precision lifecycle status on the RNGD card");
+  }
+  await rngdCard.locator("details.product-details summary").click();
+  const rngdLifecycle = rngdCard.locator(".product-lifecycle-item");
+  if (await rngdLifecycle.count() !== 1 ||
+      !(await rngdLifecycle.first().textContent()).includes("production") ||
+      !(await rngdLifecycle.first().textContent()).includes("furiosa.ai")) {
+    throw new Error("Product Explorer did not render the dated, source-linked RNGD lifecycle history");
+  }
+  await page.locator("[data-product-search]").fill("");
   await page.locator("[data-product-search]").fill("Trainium2");
   if (await page.locator(".product-card-title").count() !== 1 ||
       !(await page.locator(".product-card-title").first().textContent()).includes("Trainium2")) {
