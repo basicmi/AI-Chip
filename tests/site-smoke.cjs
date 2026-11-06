@@ -177,8 +177,8 @@ const { chromium } = require("playwright");
   }
   await page.locator("[data-directory-search]").fill("");
   await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
-  if (await page.locator(".directory-result-title").count() !== 18) {
-    throw new Error("Freshness filter should return all 18 recently reviewed company profiles");
+  if (await page.locator(".directory-result-title").count() !== 23) {
+    throw new Error("Freshness filter should return all 23 recently reviewed company profiles");
   }
   await page.locator("[data-directory-search]").fill("Qualcomm");
   await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
