@@ -516,6 +516,16 @@ permalink: /directory/
 <li><strong><a href="https://hailo.ai/company-overview/newsroom/news/hailo-announces-general-availability-of-hailo-10h-edge-ai-accelerator-with-generative-ai-capabilities/">Hailo-10H GA for edge GenAI</a></strong> — Jul 2025 — second-gen Hailo-10H for on-device LLM/VLM/GenAI (~40 TOPS INT4, ~2.5W typical); AEC-Q100 Grade 2 with 2026 SOP targeting.</li>
 </ul>
 
+<a name="Rebellions"></a>
+<div align="center" class="vendor-logo"><a href="https://rebellions.ai/"><img src="https://rebellions.ai/favicon.ico" height="48" loading="lazy" alt="Rebellions" /></a></div>
+<div align="center" class="vendor-title"><h3>Rebellions — AI inference NPUs</h3></div>
+<p class="vendor-blurb">Rebellions develops inference-focused NPUs. ATOM and ATOM-Max are first-generation products; REBEL-Quad is a chiplet-based UCIe-Advanced follow-on aimed at larger data-center inference systems.</p>
+<p class="latest-label"><strong>Latest</strong></p>
+<ul class="latest-list">
+<li><strong><a href="https://rebellions.ai/rebellions-product/rbln-ca22/">ATOM product specifications</a></strong> — 32 TFLOPS FP16, 128 TOPS INT8, 16GB GDDR6, 256GB/s and 85W (vendor specification).</li>
+<li><strong><a href="https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/">REBEL-Quad roadmap</a></strong> — Sep 2025 — chiplet-based UCIe-Advanced architecture with 144GB HBM3E; ATOM / ATOM-Max already in mass production per company statement.</li>
+</ul>
+
 <a name="Furiosa"></a>
 <div align="center" class="vendor-logo"><a href="https://www.furiosa.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png" height="60" loading="lazy" alt="FuriosaAI" /></a></div>
 <div align="center" class="vendor-title"><h3>FuriosaAI — RNGD / TCP</h3></div>
