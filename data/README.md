@@ -2,7 +2,7 @@
 
 This directory contains curated public information datasets used by the AI Chip landscape.
 
-- `compatibility.json`: version-scoped public evidence for software/platform integrations.
+- `compatibility.json`: version-scoped public evidence for software/platform integrations, with optional exact product links when sources name a specific SKU or generation.
 - `workloads.json`: descriptive workload taxonomy and public software-path references.
 - `benchmark-projects.json`: directory of public benchmark suites, result portals, measurement tools and microbenchmarks.
 
@@ -40,7 +40,7 @@ Products are separate records. Technical specifications and status statements be
 
 Freshness is computed from `checked_at`: fresh within 90 days, review due after 90 days, stale after 180 days. Missing dates mean unreviewed, never fresh. Staleness means a source needs rechecking; it does not by itself prove a claim is false.
 
-The registry carries over the 50 existing directory summaries and 126 inherited source links without upgrading them to verified facts. The structured product catalogue now covers eight audited company profiles and 27 products, with 108 claims linked to 29 reviewed source records and 136 total references. Recent additions include NVIDIA Rubin GPU, Vera Rubin NVL72, Groq 3 LPU and LPX; AMD MI455X and Helios; Microsoft Maia 300; Intel GPU D270 (Crescent Island); Meta MTIA 300; and Cerebras WSE-3 Turbo / CS-4. Google TPU7x (Ironwood) and AWS Trainium3 source records were refreshed against current official product documentation. Claims are explicitly classified as vendor-reported unless independent evidence is present; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
+The registry carries over the 50 existing directory summaries and 126 inherited source links without upgrading them to verified facts. The structured product catalogue is maintained in `company-profiles.json`; counts are computed from the current registry rather than hard-coded in this guide. Software integration records distinguish platform-level support from product-specific mappings. Recent additions include NVIDIA Rubin GPU, Vera Rubin NVL72, Groq 3 LPU and LPX; AMD MI455X and Helios; Microsoft Maia 300; Intel GPU D270 (Crescent Island); Meta MTIA 300; and Cerebras WSE-3 Turbo / CS-4. Google TPU7x (Ironwood) and AWS Trainium3 source records were refreshed against current official product documentation. Claims are explicitly classified as vendor-reported unless independent evidence is present; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
 
 ## Comparison metadata (schema v1.2)
 
@@ -136,3 +136,8 @@ The Product Explorer supports side-by-side comparison of up to **six products**.
 The 2026-11-06 v3 review wave adds structured profiles for Broadcom, Marvell, Tenstorrent, Etched, d-Matrix, SambaNova, FuriosaAI, Rebellions, Huawei Ascend and Cambricon. Platform-level custom-XPU records are used when a vendor has not disclosed a merchant SKU; missing chip-level specifications remain blank rather than inferred.
 
 Product records may include availability_history, a chronological list of dated status events (announced, sampling, shipping, production, roadmap, discontinued, or unknown). Each event links to a reviewed evidence record. Dates preserve source precision: use YYYY-MM when only a month is known and YYYY-MM-DD when the source gives a day. The latest event must match the product's current availability. This is a source-backed event log, not a claim that every transition is independently audited.
+
+
+## Product-specific software compatibility links
+
+Compatibility records may optionally include `product_ids`. Each ID must exist in `data/company-profiles.json`. Use this field only when the cited integration evidence explicitly names the product or generation. If the evidence names only a vendor platform or backend, omit `product_ids` and retain the platform-level record. The Product Explorer displays these two scopes separately; it must never copy a platform-level support statement onto every SKU as if each SKU were individually validated.
