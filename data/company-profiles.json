@@ -1,8 +1,8 @@
 {
   "schema_version": "1.2",
-  "database_version": "2026.11.05-3",
-  "registry_reviewed_at": "2026-11-05",
-  "scope": "Structured identity and source-link index for the company profiles published in directory.md. Summaries and reference links are inherited from the existing directory. They are not claim-level evidence and have not been independently audited.",
+  "database_version": "2026.11.06-1",
+  "registry_reviewed_at": "2026-11-06",
+  "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status.",
   "freshness_policy": {
     "fresh_within_days": 90,
     "stale_after_days": 180,
@@ -23,7 +23,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Nvidia_logo.png",
       "summary": "NVIDIA turned GPUs into the default AI training/inference substrate via CUDA (2007) and successive datacenter architectures. From Pascal/Volta Tensor Cores through Ampere and Hopper, the stack evolved into rack-scale Grace+Blackwell systems; Rubin extends that AI-factory model into 2026.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "b200-sxm",
@@ -65,6 +65,94 @@
           ],
           "compatibility_platform_ids": [
             "nvidia-gpu"
+          ]
+        },
+        {
+          "id": "rubin-gpu",
+          "name": "NVIDIA Rubin GPU",
+          "product_type": "gpu",
+          "architecture": "Rubin",
+          "generation": "Rubin",
+          "family": "NVIDIA Rubin",
+          "market_segment": "Data-center AI training and inference",
+          "availability": "production",
+          "form_factor": "SXM GPU",
+          "claim_ids": [
+            "rubin-hbm-capacity",
+            "rubin-hbm-bandwidth",
+            "rubin-nvlink-bandwidth",
+            "rubin-nvfp4-inference"
+          ],
+          "compatibility_platform_ids": [
+            "nvidia-gpu"
+          ]
+        },
+        {
+          "id": "vera-rubin-nvl72",
+          "name": "NVIDIA Vera Rubin NVL72",
+          "product_type": "system",
+          "architecture": "Vera Rubin platform",
+          "generation": "Rubin",
+          "family": "Vera Rubin",
+          "market_segment": "Rack-scale agentic AI training and inference",
+          "availability": "production",
+          "form_factor": "Liquid-cooled rack-scale system",
+          "system_configuration": "72 Rubin GPUs + 36 Vera CPUs; NVLink 6 rack-scale domain",
+          "notes": "Rack/system record; aggregate values must remain separate from per-GPU specifications.",
+          "claim_ids": [
+            "rubin-nvl72-gpu-count",
+            "rubin-nvl72-cpu-count"
+          ],
+          "compatibility_platform_ids": [
+            "nvidia-gpu"
+          ],
+          "related_product_ids": [
+            "rubin-gpu",
+            "groq3-lpx"
+          ]
+        },
+        {
+          "id": "groq3-lpu",
+          "name": "NVIDIA Groq 3 LPU",
+          "product_type": "asic",
+          "architecture": "Groq 3 deterministic tensor-streaming LPU",
+          "generation": "Groq 3",
+          "family": "NVIDIA Groq LPU",
+          "market_segment": "Low-latency decode and interactive inference",
+          "availability": "announced",
+          "form_factor": "LPU accelerator",
+          "claim_ids": [
+            "groq3-sram-capacity",
+            "groq3-sram-bandwidth",
+            "groq3-scaleup-bandwidth"
+          ],
+          "related_product_ids": [
+            "groq3-lpx"
+          ]
+        },
+        {
+          "id": "groq3-lpx",
+          "name": "NVIDIA Groq 3 LPX",
+          "product_type": "system",
+          "architecture": "256-LPU rack-scale inference accelerator",
+          "generation": "Groq 3",
+          "family": "NVIDIA Groq LPX",
+          "market_segment": "Rack-scale low-latency agentic inference",
+          "availability": "announced",
+          "form_factor": "Liquid-cooled rack",
+          "system_configuration": "256 Groq 3 LPUs per rack; co-designed to operate alongside Vera Rubin NVL72",
+          "notes": "LPX is a rack-scale LPU system, not a standalone single-chip product.",
+          "claim_ids": [
+            "lpx-lpu-count",
+            "lpx-sram-capacity",
+            "lpx-sram-bandwidth",
+            "lpx-scaleup-bandwidth",
+            "lpx-fp8-compute"
+          ],
+          "related_product_ids": [
+            "rubin-gpu",
+            "groq3-lpu",
+            "vera-rubin-nvl72"
           ]
         }
       ],
@@ -275,6 +363,294 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "Derived by applying NVIDIA's explicit footnote that dense performance is one-half of the sparse figure; not a separate measured result."
+        },
+        {
+          "id": "rubin-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "rubin-gpu",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists up to 288 GB of HBM4 per Rubin GPU.",
+          "value": 288,
+          "unit": "GB HBM4",
+          "scope": "Per Rubin GPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-rubin-gpu-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rubin-hbm-bandwidth",
+          "subject_type": "product",
+          "subject_id": "rubin-gpu",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists up to 22 TB/s HBM4 bandwidth per Rubin GPU.",
+          "value": 22,
+          "unit": "TB/s",
+          "scope": "Per Rubin GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-rubin-gpu-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rubin-nvlink-bandwidth",
+          "subject_type": "product",
+          "subject_id": "rubin-gpu",
+          "topic": "interconnect",
+          "statement": "NVIDIA lists 3.6 TB/s bidirectional NVLink 6 bandwidth per Rubin GPU.",
+          "value": 3.6,
+          "unit": "TB/s",
+          "scope": "Per GPU, NVLink 6 bidirectional bandwidth.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-rubin-gpu-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "bidirectional"
+          }
+        },
+        {
+          "id": "rubin-nvfp4-inference",
+          "subject_type": "product",
+          "subject_id": "rubin-gpu",
+          "topic": "compute",
+          "statement": "NVIDIA lists up to 50 PFLOPS NVFP4 inference performance per Rubin GPU.",
+          "value": 50,
+          "unit": "PFLOPS NVFP4",
+          "scope": "Per Rubin GPU; NVIDIA table labels this a sparse inference specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-rubin-gpu-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "NVFP4",
+            "sparsity": "unspecified"
+          },
+          "notes": "Vendor peak; sparse mode is not further normalized."
+        },
+        {
+          "id": "rubin-nvl72-gpu-count",
+          "subject_type": "product",
+          "subject_id": "vera-rubin-nvl72",
+          "topic": "system_scale",
+          "statement": "NVIDIA Vera Rubin NVL72 integrates 72 Rubin GPUs.",
+          "value": 72,
+          "unit": "GPUs",
+          "scope": "Per Vera Rubin NVL72 rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-vera-rubin-platform"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          }
+        },
+        {
+          "id": "rubin-nvl72-cpu-count",
+          "subject_type": "product",
+          "subject_id": "vera-rubin-nvl72",
+          "topic": "system_scale",
+          "statement": "NVIDIA Vera Rubin NVL72 integrates 36 Vera CPUs.",
+          "value": 36,
+          "unit": "CPUs",
+          "scope": "Per Vera Rubin NVL72 rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-vera-rubin-platform"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          }
+        },
+        {
+          "id": "groq3-sram-capacity",
+          "subject_type": "product",
+          "subject_id": "groq3-lpu",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists 500 MB SRAM per Groq 3 LPU.",
+          "value": 500,
+          "unit": "MB SRAM",
+          "scope": "Per Groq 3 LPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "groq3-sram-bandwidth",
+          "subject_type": "product",
+          "subject_id": "groq3-lpu",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists 150 TB/s SRAM bandwidth per Groq 3 LPU.",
+          "value": 150,
+          "unit": "TB/s",
+          "scope": "Per Groq 3 LPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "groq3-scaleup-bandwidth",
+          "subject_type": "product",
+          "subject_id": "groq3-lpu",
+          "topic": "interconnect",
+          "statement": "NVIDIA lists 2.5 TB/s scale-up bandwidth per Groq 3 LPU.",
+          "value": 2.5,
+          "unit": "TB/s",
+          "scope": "Per Groq 3 LPU; directionality not specified.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect",
+            "directionality": "unspecified"
+          }
+        },
+        {
+          "id": "lpx-lpu-count",
+          "subject_type": "product",
+          "subject_id": "groq3-lpx",
+          "topic": "system_scale",
+          "statement": "Each NVIDIA Groq 3 LPX rack integrates 256 interconnected LPU accelerators.",
+          "value": 256,
+          "unit": "LPUs",
+          "scope": "Per LPX rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          }
+        },
+        {
+          "id": "lpx-sram-capacity",
+          "subject_type": "product",
+          "subject_id": "groq3-lpx",
+          "topic": "memory_capacity",
+          "statement": "NVIDIA lists 128 GB total on-chip SRAM per LPX rack.",
+          "value": 128,
+          "unit": "GB SRAM",
+          "scope": "Aggregate across 256 LPUs in one LPX rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "lpx-sram-bandwidth",
+          "subject_type": "product",
+          "subject_id": "groq3-lpx",
+          "topic": "memory_bandwidth",
+          "statement": "NVIDIA lists 40 PB/s aggregate SRAM bandwidth per LPX rack.",
+          "value": 40,
+          "unit": "PB/s",
+          "scope": "Aggregate across one LPX rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "lpx-scaleup-bandwidth",
+          "subject_type": "product",
+          "subject_id": "groq3-lpx",
+          "topic": "interconnect",
+          "statement": "NVIDIA lists 640 TB/s scale-up bandwidth across the LPX rack.",
+          "value": 640,
+          "unit": "TB/s",
+          "scope": "Aggregate LPX rack scale-up fabric.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "interconnect",
+            "directionality": "unspecified"
+          }
+        },
+        {
+          "id": "lpx-fp8-compute",
+          "subject_type": "product",
+          "subject_id": "groq3-lpx",
+          "topic": "compute",
+          "statement": "NVIDIA lists 315 PFLOPS FP8 inference compute per LPX rack.",
+          "value": 315,
+          "unit": "PFLOPS FP8",
+          "scope": "Aggregate per LPX rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "nvidia-groq3-lpx-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "rack",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
         }
       ],
       "evidence": [
@@ -301,6 +677,42 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official NVIDIA product page. Rack-level values describe the complete 72-GPU GB200 NVL72 system; tensor performance figures are published with sparsity unless stated otherwise."
+        },
+        {
+          "id": "nvidia-rubin-gpu-specs",
+          "title": "Inside the NVIDIA Rubin Platform — Rubin GPU specifications",
+          "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-01-05",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official NVIDIA technical blog. Per-GPU HBM4, memory bandwidth and NVLink figures; compute figures are precision/mode-specific vendor peaks."
+        },
+        {
+          "id": "nvidia-groq3-lpx-specs",
+          "title": "NVIDIA Groq 3 LPX — product specifications",
+          "url": "https://www.nvidia.com/en-us/data-center/lpx/",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official NVIDIA product page for Groq 3 LPU and LPX rack. Per-LPU and rack-level quantities are kept distinct."
+        },
+        {
+          "id": "nvidia-vera-rubin-platform",
+          "title": "NVIDIA Vera Rubin Platform",
+          "url": "https://www.nvidia.com/en-us/data-center/technologies/rubin/",
+          "publisher": "NVIDIA",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official NVIDIA platform page. NVL72 configuration is a rack-level system claim."
         }
       ],
       "references": [
@@ -353,6 +765,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-nvidia-rubin-2026",
+          "label": "Rubin GPU and Vera Rubin platform",
+          "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-01-05",
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against NVIDIA's published GPU and system specifications."
+        },
+        {
+          "id": "ref-nvidia-groq3-lpx",
+          "label": "Groq 3 LPU / LPX product page",
+          "url": "https://www.nvidia.com/en-us/data-center/lpx/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against NVIDIA product page; per-LPU and per-rack boundaries retained."
         }
       ]
     },
@@ -362,9 +794,9 @@
       "category": "IC Vendors",
       "directory_anchor": "Habana",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png",
-      "summary": "Intel’s AI accelerator path consolidated around Habana Labs after the 2019 acquisition. Gaudi (training) and Goya (inference) established Ethernet-centric scale-out as an alternative to proprietary GPU fabrics; Gaudi 2 broadened LLM training, and Gaudi 3 (2024) targets enterprise generative AI with OEM and cloud availability. Intel also folds AI into Xeon AMX and Arc/Flex GPUs, but Gaudi remains the dedicated datacenter accelerator brand.",
+      "summary": "Intel's AI accelerator portfolio includes Habana Gaudi for training/inference and the Xe3P-based D-series for memory-rich, inference-optimized deployments. Product-specific software and availability claims should be evaluated separately across the Gaudi and D-series stacks.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "gaudi2",
@@ -405,6 +837,23 @@
           ],
           "compatibility_platform_ids": [
             "intel-gaudi"
+          ]
+        },
+        {
+          "id": "intel-gpu-d270",
+          "name": "Intel GPU D270 (Crescent Island)",
+          "product_type": "gpu",
+          "architecture": "Intel Xe3P",
+          "generation": "Intel GPU D-series",
+          "family": "Intel Data Center GPU D-series",
+          "market_segment": "Memory-rich data-center AI inference",
+          "availability": "announced",
+          "form_factor": "350 W air-cooled PCIe 5.0 accelerator card",
+          "claim_ids": [
+            "d270-memory-capacity",
+            "d270-memory-bandwidth",
+            "d270-power",
+            "d270-compute"
           ]
         }
       ],
@@ -553,6 +1002,88 @@
             "intel-gaudi3-whitepaper"
           ],
           "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "d270-memory-capacity",
+          "subject_type": "product",
+          "subject_id": "intel-gpu-d270",
+          "topic": "memory_capacity",
+          "statement": "Intel lists up to 480 GB LPDDR5X memory per D-series card design.",
+          "value": 480,
+          "unit": "GB LPDDR5X",
+          "scope": "Maximum capacity of D-series partner card designs; Intel-branded card configurations may differ.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-d270-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "d270-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "intel-gpu-d270",
+          "topic": "memory_bandwidth",
+          "statement": "Intel lists up to 1.5 TB/s memory bandwidth for Crescent Island.",
+          "value": 1.5,
+          "unit": "TB/s",
+          "scope": "Accelerator memory bandwidth; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-d270-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "d270-power",
+          "subject_type": "product",
+          "subject_id": "intel-gpu-d270",
+          "topic": "power",
+          "statement": "Intel lists a 350 W power envelope for GPU D270.",
+          "value": 350,
+          "unit": "W",
+          "scope": "Per D270 accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-d270-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "power"
+          }
+        },
+        {
+          "id": "d270-compute",
+          "subject_type": "product",
+          "subject_id": "intel-gpu-d270",
+          "topic": "compute",
+          "statement": "Intel lists up to 1.3 PFLOPS FP8 compute for Crescent Island.",
+          "value": 1.3,
+          "unit": "PFLOPS FP8",
+          "scope": "Peak vendor specification; confirm exact board SKU and precision configuration before comparison.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "intel-d270-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "module",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
         }
       ],
       "evidence": [
@@ -579,6 +1110,30 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official Intel white paper. Describes Gaudi 3's two compute dies, 128 GB HBM2e, 3.7 TB/s bandwidth and 1.8 PFLOPs FP8/BF16 peak compute."
+        },
+        {
+          "id": "intel-d270-2026",
+          "title": "Intel GPU D-series / Crescent Island product and architecture information",
+          "url": "https://www.intel.com/content/www/us/en/newsroom/news/artificial-intelligence/intel-accelerates-open-infrastructure-agentic-ai-era.html",
+          "publisher": "Intel",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Intel newsroom source. The 480 GB figure is a maximum across partner card designs; the Intel-branded card may carry less memory."
+        },
+        {
+          "id": "intel-d270-product-page",
+          "title": "Intel GPU D270 product page",
+          "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
+          "publisher": "Intel",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Intel product page identifies D270, 350 W air cooling, PCIe 5.0, and inference-focused workload positioning."
         }
       ],
       "references": [
@@ -601,6 +1156,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-intel-d270",
+          "label": "Intel GPU D270 / Crescent Island",
+          "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against official Intel product page; memory maximum and card variants require SKU-level qualification."
         }
       ]
     },
@@ -612,7 +1177,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/AMD_logo.png",
       "summary": "AMD’s datacenter AI story runs through the Instinct line on CDNA architecture (distinct from RDNA gaming GPUs), with ROCm as the software stack. MI100/MI200 established HBM-heavy training SKUs; MI300A/X (CDNA 3, 2023) brought chiplet APU/GPU designs into large LLM clusters. MI350 (CDNA 4, 2025) pushes HBM3E capacity and low-precision datatypes; MI400 / Helios rack systems headline the 2026 roadmap alongside deep hyperscaler partnerships.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "mi355x",
@@ -655,6 +1220,54 @@
           ],
           "compatibility_platform_ids": [
             "amd-gpu"
+          ]
+        },
+        {
+          "id": "mi455x",
+          "name": "AMD Instinct MI455X",
+          "product_type": "gpu",
+          "architecture": "5th Gen CDNA 5",
+          "generation": "Instinct MI400 Series",
+          "family": "AMD Instinct MI400",
+          "process_node": "TSMC 2nm | 3nm FinFET",
+          "market_segment": "Frontier AI training and inference",
+          "availability": "announced",
+          "form_factor": "Enhanced Accelerator Module (EAM)",
+          "claim_ids": [
+            "mi455x-hbm-capacity",
+            "mi455x-hbm-bandwidth",
+            "mi455x-mxfp4-compute",
+            "mi455x-ualoe-bandwidth"
+          ],
+          "compatibility_platform_ids": [
+            "amd-gpu"
+          ],
+          "related_product_ids": [
+            "helios-rack"
+          ]
+        },
+        {
+          "id": "helios-rack",
+          "name": "AMD Helios Rackscale Solution",
+          "product_type": "system",
+          "architecture": "AMD Helios open rack-scale AI platform",
+          "generation": "MI400 / Helios",
+          "family": "AMD Helios",
+          "market_segment": "Rack-scale frontier AI training and inference",
+          "availability": "announced",
+          "form_factor": "Open Rack Wide (ORW) liquid-cooled rack reference design",
+          "system_configuration": "72 MI455X GPUs with AMD EPYC Venice CPUs and Pensando networking",
+          "notes": "AMD describes Helios as a rack-scale reference design for OEM/ODM partners, not a standalone chip.",
+          "claim_ids": [
+            "helios-gpu-count",
+            "helios-hbm-capacity",
+            "helios-hbm-bandwidth"
+          ],
+          "compatibility_platform_ids": [
+            "amd-gpu"
+          ],
+          "related_product_ids": [
+            "mi455x"
           ]
         }
       ],
@@ -859,6 +1472,149 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "AMD presents MXFP8/OCP-FP8 together in this table; retain the combined source wording in the unit and statement."
+        },
+        {
+          "id": "mi455x-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "mi455x",
+          "topic": "memory_capacity",
+          "statement": "AMD lists 432 GB HBM4 per MI455X GPU.",
+          "value": 432,
+          "unit": "GB HBM4",
+          "scope": "Per MI455X GPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi455x-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "mi455x-hbm-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mi455x",
+          "topic": "memory_bandwidth",
+          "statement": "AMD lists up to 23.3 TB/s peak memory bandwidth per MI455X GPU.",
+          "value": 23.3,
+          "unit": "TB/s",
+          "scope": "Per MI455X GPU.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi455x-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "mi455x-mxfp4-compute",
+          "subject_type": "product",
+          "subject_id": "mi455x",
+          "topic": "compute",
+          "statement": "AMD lists 40.3 PFLOPS peak OCP MXFP4 performance per MI455X GPU.",
+          "value": 40.3,
+          "unit": "PFLOPS MXFP4",
+          "scope": "Per MI455X GPU; peak vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi455x-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "MXFP4",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mi455x-ualoe-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mi455x",
+          "topic": "interconnect",
+          "statement": "AMD lists 3.6 TB/s peak bidirectional UALoE scale-up bandwidth per MI455X board.",
+          "value": 3.6,
+          "unit": "TB/s",
+          "scope": "Per MI455X accelerator module; UALoE bidirectional scale-up.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-mi455x-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "module",
+            "operation": "interconnect",
+            "directionality": "bidirectional"
+          }
+        },
+        {
+          "id": "helios-gpu-count",
+          "subject_type": "product",
+          "subject_id": "helios-rack",
+          "topic": "system_scale",
+          "statement": "AMD Helios connects 72 MI455X GPUs in one rack-scale solution.",
+          "value": 72,
+          "unit": "GPUs",
+          "scope": "Per Helios rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-helios-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          }
+        },
+        {
+          "id": "helios-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "helios-rack",
+          "topic": "memory_capacity",
+          "statement": "AMD lists 31 TB total HBM4 capacity per Helios rack.",
+          "value": 31,
+          "unit": "TB HBM4",
+          "scope": "Aggregate across 72 GPUs in one Helios rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-helios-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "helios-hbm-bandwidth",
+          "subject_type": "product",
+          "subject_id": "helios-rack",
+          "topic": "memory_bandwidth",
+          "statement": "AMD lists up to 1.67 PB/s aggregate HBM bandwidth per Helios rack.",
+          "value": 1.67,
+          "unit": "PB/s",
+          "scope": "Aggregate theoretical memory bandwidth per Helios rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "amd-helios-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
         }
       ],
       "evidence": [
@@ -885,6 +1641,30 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official AMD product-family article. The table labels performance values as peak theoretical; dense matrix values are kept separate from sparse figures."
+        },
+        {
+          "id": "amd-mi455x-2026",
+          "title": "AMD Instinct MI455X GPU specifications",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi400/mi455x.html",
+          "publisher": "AMD",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official AMD product specification page. Memory, compute and board interconnect values are vendor specifications."
+        },
+        {
+          "id": "amd-helios-2026",
+          "title": "AMD launches Helios rackscale AI infrastructure",
+          "url": "https://www.amd.com/en/blogs/2026/amd-launches-helios-the-highest-performing-rackscale-ai-infrastructure-solution.html",
+          "publisher": "AMD",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-07-23",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official AMD announcement. Helios is a reference design; system totals must not be compared with per-GPU values."
         }
       ],
       "references": [
@@ -907,6 +1687,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-amd-mi455x-2026",
+          "label": "MI455X GPU specification",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi400/mi455x.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against official product specifications."
+        },
+        {
+          "id": "ref-amd-helios-2026",
+          "label": "Helios rack-scale reference design",
+          "url": "https://www.amd.com/en/blogs/2026/amd-launches-helios-the-highest-performing-rackscale-ai-infrastructure-solution.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-07-23",
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed; Helios is explicitly labeled as a partner reference design."
         }
       ]
     },
@@ -1083,7 +1883,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Google_logo.png",
       "summary": "Google invented the modern custom-AI-ASIC pattern with TPU v1 (2015) for production inference, then opened Cloud TPU for external training. Each generation scaled systolic MXUs, HBM, and pod interconnect; v4/v5 pods trained many Google foundation models, while Trillium (v6e) and Ironwood (v7) address GenAI train/serve economics. Edge TPU (Coral) and Pixel Tensor are related but separate product lines.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "tpu7x-ironwood",
@@ -1140,9 +1940,9 @@
           "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Cloud product documentation; preserve GiB units.",
           "metric_context": {
             "metric_type": "specification",
@@ -1161,9 +1961,9 @@
           "scope": "Per TPU7x chip, as published in Google Cloud's TPU version table.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Vendor-published specification.",
           "metric_context": {
             "metric_type": "specification",
@@ -1182,9 +1982,9 @@
           "scope": "Per TPU7x chip; ICI bandwidth, not data-center network bandwidth.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Vendor-published ICI figure; do not compare directly with Ethernet or InfiniBand bandwidth.",
           "metric_context": {
             "metric_type": "specification",
@@ -1204,9 +2004,9 @@
           "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Vendor theoretical peak; retain precision and chip-level scope.",
           "metric_context": {
             "metric_type": "theoretical_peak",
@@ -1227,9 +2027,9 @@
           "scope": "Per TPU7x chip; peak compute figure in Google Cloud's TPU version table.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Vendor theoretical peak; retain precision and chip-level scope.",
           "metric_context": {
             "metric_type": "theoretical_peak",
@@ -1250,9 +2050,9 @@
           "scope": "Maximum TPU7x pod scale in the Google Cloud TPU version table.",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "Pod-scale specification; actual available slice and deployment options are product/configuration dependent.",
           "metric_context": {
             "metric_type": "specification",
@@ -1271,9 +2071,9 @@
           "subject_id": "tpu7x-ironwood",
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "google-cloud-tpu7x-specs"
+            "google-tpu7x-ironwood-docs-2026"
           ],
-          "last_reviewed": "2026-11-05"
+          "last_reviewed": "2026-11-06"
         },
         {
           "id": "tpu-v6e-memory-capacity",
@@ -1403,6 +2203,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official Google Cloud TPU documentation. Values are per TPU v6e chip unless the scope explicitly says Pod."
+        },
+        {
+          "id": "google-tpu7x-ironwood-docs-2026",
+          "title": "Google Cloud TPU7x (Ironwood) architecture and specifications",
+          "url": "https://docs.cloud.google.com/tpu/docs/tpu7x",
+          "publisher": "Google Cloud",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Google Cloud TPU7x documentation; 192 GiB HBM, 7,380 GB/s HBM bandwidth, and 9,216 chips per pod. TPU7x is generally available as of 2026-03-31."
         }
       ],
       "references": [
@@ -1465,6 +2277,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-google-tpu7x-ironwood-2026",
+          "label": "TPU7x Ironwood architecture documentation",
+          "url": "https://docs.cloud.google.com/tpu/docs/tpu7x",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against current TPU7x product documentation."
         }
       ]
     },
@@ -1476,7 +2298,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Amazon_AWS.png",
       "summary": "AWS builds first-party AI silicon for EC2: Inferentia for inference and Trainium for training, compiled via the Neuron SDK. Inferentia1/2 lowered LLM serving cost on Inf1/Inf2; Trainium1 and Trainium2 (Trn1/Trn2) plus UltraServers with NeuronLink scale-up target foundation-model training and large inference inside AWS regions—often co-designed with partners such as Marvell/Annapurna.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "trainium2",
@@ -1646,9 +2468,9 @@
           },
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "aws-trainium3-architecture"
+            "aws-trainium3-ec2-product-2026"
           ],
-          "last_reviewed": "2026-11-05"
+          "last_reviewed": "2026-11-06"
         },
         {
           "id": "trainium3-memory-bandwidth",
@@ -1666,9 +2488,9 @@
           },
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "aws-trainium3-architecture"
+            "aws-trainium3-ec2-product-2026"
           ],
-          "last_reviewed": "2026-11-05"
+          "last_reviewed": "2026-11-06"
         },
         {
           "id": "trainium3-fp8-peak",
@@ -1688,9 +2510,9 @@
           },
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "aws-trainium3-architecture"
+            "aws-trainium3-ec2-product-2026"
           ],
-          "last_reviewed": "2026-11-05"
+          "last_reviewed": "2026-11-06"
         },
         {
           "id": "trainium3-bf16-peak",
@@ -1710,9 +2532,9 @@
           },
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "aws-trainium3-architecture"
+            "aws-trainium3-ec2-product-2026"
           ],
-          "last_reviewed": "2026-11-05",
+          "last_reviewed": "2026-11-06",
           "notes": "The source reports a combined BF16/FP16/TF32 figure; preserve the combined source wording rather than assigning it to a single precision."
         },
         {
@@ -1732,9 +2554,9 @@
           },
           "claim_status": "vendor_reported",
           "evidence_ids": [
-            "aws-trainium3-architecture"
+            "aws-trainium3-ec2-product-2026"
           ],
-          "last_reviewed": "2026-11-05"
+          "last_reviewed": "2026-11-06"
         }
       ],
       "evidence": [
@@ -1761,6 +2583,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official AWS Neuron architecture documentation. It distinguishes FP8, MXFP8/MXFP4, BF16 and sparse modes; only like-for-like modes should be compared."
+        },
+        {
+          "id": "aws-trainium3-ec2-product-2026",
+          "title": "Amazon EC2 Trn3 UltraServers",
+          "url": "https://aws.amazon.com/ec2/instance-types/trn3/",
+          "publisher": "Amazon Web Services",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official AWS product documentation. Trainium3 is listed with 144 GiB HBM3e and 4.9 TB/s bandwidth per chip; UltraServer aggregates 144 chips."
         }
       ],
       "references": [
@@ -1783,6 +2617,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-aws-trainium3-2026",
+          "label": "Trainium3 / Trn3 UltraServer product documentation",
+          "url": "https://aws.amazon.com/ec2/instance-types/trn3/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against AWS current product documentation."
         }
       ]
     },
@@ -1794,7 +2638,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Microsoft_logo.png",
       "summary": "Microsoft entered custom AI silicon with Azure Maia (accelerator) and Cobalt (Arm CPU) to optimize Azure OpenAI / Copilot economics. Maia 100 (5nm, advanced packaging) is co-designed for Azure AI cloud workloads with a PyTorch/ONNX Runtime software path; subsequent Maia generations are expected to deepen rack-level integration with Azure networking and cooling.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "maia100",
@@ -1834,6 +2678,29 @@
             "maia200-memory-bandwidth",
             "maia200-sram-capacity",
             "maia200-process"
+          ],
+          "compatibility_platform_ids": [
+            "microsoft-maia"
+          ]
+        },
+        {
+          "id": "maia300",
+          "name": "Microsoft Azure Maia 300",
+          "product_type": "asic",
+          "architecture": "Microsoft Maia 300 dataflow accelerator",
+          "generation": "Maia 300",
+          "family": "Azure Maia",
+          "market_segment": "Azure AI inference and long-context workloads",
+          "availability": "announced",
+          "form_factor": "950 W liquid-cooled accelerator; rack-scale 96-accelerator system",
+          "announced_at": "2026-10-12",
+          "system_configuration": "96 accelerators per rack; 167 kW rack power envelope",
+          "claim_ids": [
+            "maia300-hbm-bandwidth",
+            "maia300-tdp",
+            "maia300-rack-count",
+            "maia300-rack-hbm",
+            "maia300-rack-bandwidth"
           ],
           "compatibility_platform_ids": [
             "microsoft-maia"
@@ -1989,6 +2856,106 @@
             "microsoft-maia200-specs"
           ],
           "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "maia300-hbm-bandwidth",
+          "subject_type": "product",
+          "subject_id": "maia300",
+          "topic": "memory_bandwidth",
+          "statement": "Microsoft lists 18.0 TB/s peak HBM4 bandwidth for Maia 300.",
+          "value": 18,
+          "unit": "TB/s",
+          "scope": "Per Maia 300 accelerator.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "maia300-tdp",
+          "subject_type": "product",
+          "subject_id": "maia300",
+          "topic": "power",
+          "statement": "Microsoft lists a 950 W TDP for Maia 300.",
+          "value": 950,
+          "unit": "W TDP",
+          "scope": "Per Maia 300 accelerator; vendor-designated TDP.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "power"
+          }
+        },
+        {
+          "id": "maia300-rack-count",
+          "subject_type": "product",
+          "subject_id": "maia300",
+          "topic": "system_scale",
+          "statement": "Microsoft describes a Maia 300 rack with 96 accelerators.",
+          "value": 96,
+          "unit": "accelerators",
+          "scope": "Per Maia 300 rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "system_configuration"
+          }
+        },
+        {
+          "id": "maia300-rack-hbm",
+          "subject_type": "product",
+          "subject_id": "maia300",
+          "topic": "memory_capacity",
+          "statement": "Microsoft lists 27.6 TB aggregate HBM capacity in a 96-accelerator Maia 300 rack.",
+          "value": 27.6,
+          "unit": "TB HBM",
+          "scope": "Aggregate per 96-accelerator rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "maia300-rack-bandwidth",
+          "subject_type": "product",
+          "subject_id": "maia300",
+          "topic": "memory_bandwidth",
+          "statement": "Microsoft lists 1.7 PB/s aggregate HBM bandwidth in a Maia 300 rack.",
+          "value": 1.7,
+          "unit": "PB/s",
+          "scope": "Aggregate per 96-accelerator rack.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "microsoft-maia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "rack",
+            "operation": "memory"
+          }
         }
       ],
       "evidence": [
@@ -2015,6 +2982,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official Microsoft announcement. HBM capacity, bandwidth, SRAM and process node are vendor-reported specifications."
+        },
+        {
+          "id": "microsoft-maia300-2026",
+          "title": "Microsoft to expand Azure Maia system to multi-gigawatt deployments",
+          "url": "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/",
+          "publisher": "Microsoft",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-10-12",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Microsoft announcement. Maia 300 production deployments are stated to begin in 2027; rack-level totals are not per-chip specifications."
         }
       ],
       "references": [
@@ -2037,6 +3016,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-microsoft-maia300",
+          "label": "Maia 300 product and rack architecture",
+          "url": "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-10-12",
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against Microsoft official announcement; production deployment timing remains 2027."
         }
       ]
     },
@@ -2207,7 +3196,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/facebook_logo.png",
       "summary": "Meta’s MTIA (Meta Training and Inference Accelerator) is an in-house family for ranking, recommendation, and increasingly generative workloads at hyperscale. Built with Broadcom as implementation partner, MTIA has moved to a rapid multi-generation chiplet cadence (MTIA 300–500 class messaging) aimed at Meta’s production AI fleet rather than merchant sale.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "mtia-v2",
@@ -2242,6 +3231,26 @@
             "mtia300-pe-grid",
             "mtia300-reduction-throughput",
             "mtia300-nic-chiplets"
+          ],
+          "compatibility_platform_ids": [
+            "meta-mtia"
+          ]
+        },
+        {
+          "id": "mtia300",
+          "name": "Meta MTIA 300",
+          "product_type": "asic",
+          "architecture": "MTIA 300 with integrated network chiplets and communication-offload engines",
+          "generation": "MTIA 300",
+          "family": "Meta MTIA",
+          "market_segment": "Training and inference for ranking and recommendation models",
+          "availability": "production",
+          "form_factor": "Data-center accelerator package",
+          "claim_ids": [
+            "mtia300-hbm-capacity",
+            "mtia300-io-bandwidth",
+            "mtia300-nmc-reduction-throughput",
+            "mtia300-me-count"
           ],
           "compatibility_platform_ids": [
             "meta-mtia"
@@ -2339,6 +3348,82 @@
             "meta-mtia300-architecture"
           ],
           "last_reviewed": "2026-11-05"
+        },
+        {
+          "id": "mtia300-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "mtia300",
+          "topic": "memory_capacity",
+          "statement": "Meta specifies 216 GB HBM3E per MTIA 300 accelerator.",
+          "value": 216,
+          "unit": "GB HBM3E",
+          "scope": "Per MTIA 300 accelerator.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "package",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "mtia300-io-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mtia300",
+          "topic": "interconnect",
+          "statement": "Meta specifies 1.2 TB/s total I/O bandwidth from 12 integrated 800 Gbps RDMA NICs.",
+          "value": 1.2,
+          "unit": "TB/s",
+          "scope": "Per MTIA 300 package; aggregate I/O bandwidth from integrated NIC chiplets.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "package",
+            "operation": "interconnect",
+            "directionality": "aggregate"
+          }
+        },
+        {
+          "id": "mtia300-nmc-reduction-throughput",
+          "subject_type": "product",
+          "subject_id": "mtia300",
+          "topic": "performance",
+          "statement": "Meta reports more than 2.8 TB/s collective reduction throughput from its near-memory compute engines.",
+          "value": 2.8,
+          "unit": "TB/s",
+          "scope": "Aggregate reduction throughput per MTIA 300 package; vendor-reported architecture figure.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "vendor_measured",
+            "measurement_scope": "package",
+            "operation": "communication"
+          }
+        },
+        {
+          "id": "mtia300-me-count",
+          "subject_type": "product",
+          "subject_id": "mtia300",
+          "topic": "architecture",
+          "statement": "Meta specifies 16 dedicated message engines (MEs) for communication offload.",
+          "value": 16,
+          "unit": "message engines",
+          "scope": "Per MTIA 300 package.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "meta-mtia300-2026"
+          ],
+          "last_reviewed": "2026-11-06"
         }
       ],
       "evidence": [
@@ -2365,6 +3450,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Official Meta engineering article. It describes the 12x6 processing-element grid, 16 dedicated message engines and more than 2.8 TB/s reduction throughput."
+        },
+        {
+          "id": "meta-mtia300-2026",
+          "title": "MTIA 300: Meta's first training chip with built-in NICs and communication-offloading engines",
+          "url": "https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/",
+          "publisher": "Engineering at Meta",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-08-24",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Meta engineering article. It distinguishes per-chip package I/O and reduction throughput from rack-level scale-up/scale-out figures."
         }
       ],
       "references": [
@@ -2387,6 +3484,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-meta-mtia300",
+          "label": "MTIA 300 architecture and communication offload",
+          "url": "https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-08-24",
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against Meta's engineering article; claims are vendor-reported."
         }
       ]
     },
@@ -2583,7 +3690,7 @@
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cerebras_logo.png",
       "summary": "Cerebras builds wafer-scale AI processors (WSE) that place an enormous on-wafer SRAM/compute fabric into CS systems, avoiding many multi-GPU communication bottlenecks. WSE-1/2 established the approach; WSE-3 (2024, 5nm) powers CS-3 for foundation-model training and high-throughput inference with cloud and on-prem deployments.",
       "profile_status": "partially_reviewed",
-      "last_reviewed": "2026-11-05",
+      "last_reviewed": "2026-11-06",
       "products": [
         {
           "id": "wse2",
@@ -2622,6 +3729,46 @@
             "wse3-sram-capacity",
             "wse3-memory-bandwidth",
             "wse3-peak-ai-compute"
+          ],
+          "compatibility_platform_ids": [
+            "cerebras-wse"
+          ]
+        },
+        {
+          "id": "wse3-turbo",
+          "name": "Cerebras Wafer-Scale Engine 3 Turbo (WSE-3T)",
+          "product_type": "asic",
+          "architecture": "Wafer-scale processor with 900,000 AI-optimized cores",
+          "generation": "WSE-3 Turbo",
+          "family": "Cerebras WSE",
+          "market_segment": "Large-scale AI training and inference",
+          "availability": "announced",
+          "form_factor": "46,225 mm² wafer-scale processor",
+          "claim_ids": [
+            "wse3t-core-count",
+            "wse3t-transistor-count",
+            "wse3t-compute"
+          ],
+          "related_product_ids": [
+            "cs4-system"
+          ]
+        },
+        {
+          "id": "cs4-system",
+          "name": "Cerebras CS-4",
+          "product_type": "system",
+          "architecture": "Three WSE-3 Turbo processors with wafer links and Nexus platform",
+          "generation": "CS-4",
+          "family": "Cerebras CS",
+          "market_segment": "Rack-scale AI inference",
+          "availability": "announced",
+          "form_factor": "Rack-scale AI accelerator system",
+          "system_configuration": "Three WSE-3 Turbo processors per CS-4 system",
+          "claim_ids": [
+            "cs4-wse-count"
+          ],
+          "related_product_ids": [
+            "wse3-turbo"
           ],
           "compatibility_platform_ids": [
             "cerebras-wse"
@@ -2795,6 +3942,78 @@
           ],
           "last_reviewed": "2026-11-05",
           "notes": "Precision and operation mix are not specified in the announcement; do not compare directly with precision-specific GPU/ASIC FLOPs."
+        },
+        {
+          "id": "wse3t-core-count",
+          "subject_type": "product",
+          "subject_id": "wse3-turbo",
+          "topic": "architecture",
+          "statement": "Cerebras specifies 900,000 AI-optimized cores in WSE-3 Turbo.",
+          "value": 900000,
+          "unit": "AI-optimized cores",
+          "scope": "Entire WSE-3 Turbo wafer-scale processor.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3t-2026"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "wse3t-transistor-count",
+          "subject_type": "product",
+          "subject_id": "wse3-turbo",
+          "topic": "architecture",
+          "statement": "Cerebras specifies 4 trillion transistors in WSE-3 Turbo.",
+          "value": 4,
+          "unit": "trillion transistors",
+          "scope": "Entire WSE-3 Turbo wafer-scale processor.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3t-2026"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "wse3t-compute",
+          "subject_type": "product",
+          "subject_id": "wse3-turbo",
+          "topic": "compute",
+          "statement": "Cerebras advertises 250 PFLOPS AI compute for WSE-3 Turbo; the public product page does not specify a precision in this headline figure.",
+          "value": 250,
+          "unit": "PFLOPS AI compute",
+          "scope": "Entire WSE-3 Turbo wafer-scale processor; precision and sparsity are not specified in the headline figure.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3t-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "theoretical_peak",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "unspecified",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "cs4-wse-count",
+          "subject_type": "product",
+          "subject_id": "cs4-system",
+          "topic": "system_scale",
+          "statement": "Cerebras says CS-4 combines three WSE-3 Turbo processors.",
+          "value": 3,
+          "unit": "WSE-3T processors",
+          "scope": "Per CS-4 rack-scale system.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cerebras-wse3t-2026"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "system",
+            "operation": "system_configuration"
+          }
         }
       ],
       "evidence": [
@@ -2833,6 +4052,18 @@
           "checked_at": "2026-11-05",
           "review_status": "reviewed",
           "notes": "Cerebras issuer-filed SEC document. The 21 PB/s memory-bandwidth figure is issuer-reported in a regulatory filing, not an independent benchmark."
+        },
+        {
+          "id": "cerebras-wse3t-2026",
+          "title": "Cerebras WSE-3 Turbo and CS-4 product information",
+          "url": "https://www.cerebras.ai/chip",
+          "publisher": "Cerebras",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Cerebras product page. WSE-3T is the processor; CS-4 is a system with three WSE-3T processors. Headline compute figure lacks precision context."
         }
       ],
       "references": [
@@ -2855,6 +4086,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-cerebras-wse3t-cs4",
+          "label": "WSE-3 Turbo / CS-4 product information",
+          "url": "https://www.cerebras.ai/chip",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Reviewed against official Cerebras product page; compute figure retained without inferred precision."
         }
       ]
     },

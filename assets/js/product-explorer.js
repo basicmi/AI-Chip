@@ -178,7 +178,7 @@
     compareButton.type = "button";
     compareButton.dataset.compareProduct = product.id;
     compareButton.setAttribute("aria-pressed", selected.has(product.id) ? "true" : "false");
-    compareButton.disabled = !selected.has(product.id) && selected.size >= 4;
+    compareButton.disabled = !selected.has(product.id) && selected.size >= 6;
     actions.append(compareButton);
 
     const details = make("details", "product-details");
@@ -324,13 +324,13 @@
 
   const renderCompare = () => {
     const chosen = products.filter(product => selected.has(product.id));
-    compareCount.textContent = chosen.length + " / 4 selected";
+    compareCount.textContent = chosen.length + " / 6 selected";
     compareEmpty.hidden = chosen.length > 0;
     compareTable.hidden = chosen.length === 0;
     compareTable.replaceChildren();
 
     if (!chosen.length) {
-      compareNote.textContent = "Select two to four products from the catalogue. Metrics are aligned only when their topic, precision, sparsity, scope, measurement type and unit match; unmatched values remain separate.";
+      compareNote.textContent = "Select two to six products from the catalogue. Metrics are aligned only when their topic, precision, sparsity, scope, measurement type and unit match; unmatched values remain separate.";
       return;
     }
 
@@ -464,9 +464,9 @@
     if (!button) return;
     const id = button.dataset.compareProduct;
     if (selected.has(id)) selected.delete(id);
-    else if (selected.size < 4) selected.add(id);
+    else if (selected.size < 6) selected.add(id);
     else {
-      compareNote.textContent = "You can compare up to four products at a time. Remove one product before adding another.";
+      compareNote.textContent = "You can compare up to six products at a time. Remove one product before adding another.";
       return;
     }
     render();
