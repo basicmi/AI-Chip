@@ -217,6 +217,16 @@ const { chromium } = require("playwright");
     throw new Error("Product Explorer did not render the dated, source-linked RNGD lifecycle history");
   }
   await page.locator("[data-product-search]").fill("");
+  await page.locator("[data-product-search]").fill("MI355X");
+  const mi355Card = page.locator(".product-card").filter({ hasText: "AMD Instinct MI355X" }).first();
+  await mi355Card.locator("details.product-details summary").click();
+  if (!(await mi355Card.locator(".product-system-details").filter({ hasText: "Product-specific software integrations" }).textContent()).includes("SGLang")) {
+    throw new Error("Product Explorer did not link SGLang's exact MI355X support to the product record");
+  }
+  if ((await mi355Card.locator(".product-system-details").filter({ hasText: "Platform-level software integrations" }).textContent()).includes("SGLang")) {
+    throw new Error("Product Explorer incorrectly duplicated an exact product integration as platform-level support");
+  }
+  await page.locator("[data-product-search]").fill("");
   await page.locator("[data-product-search]").fill("Trainium2");
   if (await page.locator(".product-card-title").count() !== 1 ||
       !(await page.locator(".product-card-title").first().textContent()).includes("Trainium2")) {
