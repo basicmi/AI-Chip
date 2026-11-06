@@ -148,7 +148,7 @@
     if (Array.isArray(product.availability_history) && product.availability_history.length) {
       const latest = product.availability_history[product.availability_history.length - 1];
       card.append(make("p", "product-lifecycle-note",
-        "Status checked " + latest.effective_at + " · " + latest.notes));
+        "Status event " + latest.effective_at + " · " + latest.notes));
     }
 
     const tags = make("div", "product-tags");
