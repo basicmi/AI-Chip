@@ -273,9 +273,17 @@ const { chromium } = require("playwright");
   await page.goto(base + "/results/", { waitUntil: "networkidle" });
   await page.waitForFunction(() => {
     const root = document.querySelector("[data-benchmark-results]");
-    const total = document.querySelector('[data-results-stat="total"]');
-    return root && root.dataset.loaded === "true" && total && total.textContent.trim() === "492";
+    const load = document.querySelector("[data-results-load]");
+    return (root && root.dataset.loaded === "true") || (load && load.classList.contains("is-error"));
   }, null, { timeout: 15000 });
+  const resultsLoadError = await page.locator("[data-results-load]").textContent();
+  if (await page.locator("[data-results-load]").isVisible()) {
+    throw new Error("Benchmark Results Explorer failed to initialize: " + resultsLoadError);
+  }
+  const resultTotal = (await page.locator('[data-results-stat="total"]').textContent()).trim();
+  if (resultTotal !== "492") {
+    throw new Error("Benchmark Results Explorer reported " + resultTotal + " records instead of 492");
+  }
   if (Number(await page.locator("[data-results-count]").textContent()) !== 492) {
     throw new Error("Benchmark Results Explorer should initially show all 492 MLPerf v6.1 rows");
   }
