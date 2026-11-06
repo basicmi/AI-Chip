@@ -6,7 +6,7 @@
 <div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
 <div class="landscape-map"><a href="https://github.com/basicmi/AI-Chip/blob/master/resource/AI_Chip_Landscape_v0p9p1.svg"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p9p1.svg" loading="lazy" alt="AI Chip Landscape v0.9.1 (November 2026 · 48 company logos)" /></a></div>
 <p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro, product lineage and current corporate status. Acquired subsidiaries and discontinued vendors are separated from independent startups. Prefer official / primary sources; performance claims are often vendor-reported.</p>
-<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a></p>
+<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a> · <a href="/AI-Chip/model-support/">Model Support Explorer</a></p>
 </header>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
