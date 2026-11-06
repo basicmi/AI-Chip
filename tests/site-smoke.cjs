@@ -97,7 +97,7 @@ const { chromium } = require("playwright");
   if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
-      !registrySummary.includes("153 source links") ||
+      !registrySummary.includes("154 source links") ||
       !registrySummary.includes("50 audited evidence records") ||
       !registrySummary.includes("160 structured claims") ||
       !registrySummary.includes("33 profiles not yet reviewed")) {
