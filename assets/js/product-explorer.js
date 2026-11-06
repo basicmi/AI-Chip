@@ -173,7 +173,8 @@
     card.append(specs);
     const platformSummary = product.platforms.map(platform => platform.name).join(", ");
     card.append(make("p", "product-platform-summary",
-      product.integrations.length + " platform-level software integrations · " +
+      product.platformIntegrations.length + " platform-level paths · " +
+      product.productIntegrations.length + " product-specific integrations · " +
       product.workloadPaths.length + " workload paths" +
       (platformSummary ? " · " + platformSummary : "")));
 
@@ -226,28 +227,42 @@
       details.append(lifecycleSection);
     }
 
-    const softwareSection = make("section", "product-system-details");
-    softwareSection.append(make("h4", "", "Software integrations (" + product.integrations.length + ")"));
-    softwareSection.append(make("p", "product-system-caveat",
-      "These are platform-level records, not a guarantee for every SKU, model or feature."));
-    if (product.integrations.length) {
-      const integrationList = make("ul", "product-system-list");
-      product.integrations.forEach(integration => {
-        const item = make("li", "product-system-item");
-        const heading = make("div", "product-system-item-heading");
-        addLink(heading, integration.project_url, integration.project, "");
-        heading.append(make("span", "product-system-status",
-          integration.layer + " · " + integration.status.replaceAll("_", " ")));
-        item.append(heading);
-        item.append(make("p", "product-system-limitation", integration.limitations));
-        integrationList.append(item);
-      });
-      softwareSection.append(integrationList);
-    } else {
-      softwareSection.append(make("p", "product-system-empty",
-        "No public software integration record is linked to this platform in the current registry. This is not a claim that the hardware is unsupported."));
-    }
-    details.append(softwareSection);
+    const renderIntegrationSection = (heading, integrations, emptyText, exactScope) => {
+      const section = make("section", "product-system-details");
+      section.append(make("h4", "", heading + " (" + integrations.length + ")"));
+      section.append(make("p", "product-system-caveat", exactScope
+        ? "The source explicitly names this product or generation. This still does not guarantee every model, operator or feature."
+        : "Platform-level evidence only. Do not interpret this as validation for this exact SKU or every model / feature."));
+      if (integrations.length) {
+        const integrationList = make("ul", "product-system-list");
+        integrations.forEach(integration => {
+          const item = make("li", "product-system-item");
+          const headingRow = make("div", "product-system-item-heading");
+          addLink(headingRow, integration.project_url, integration.project, "");
+          headingRow.append(make("span", "product-system-status",
+            integration.layer + " · " + integration.status.replaceAll("_", " ")));
+          item.append(headingRow);
+          const versions = Object.entries(integration.versions || {})
+            .map(([key, value]) => key + ": " + value).join(" · ");
+          if (versions) item.append(make("p", "product-system-version", versions));
+          item.append(make("p", "product-system-limitation", integration.limitations));
+          (integration.evidence || []).forEach(evidence => {
+            const sourceLink = make("div", "product-evidence-links");
+            addLink(sourceLink, evidence.url, "Evidence · " + evidence.checked_at, "");
+            item.append(sourceLink);
+          });
+          integrationList.append(item);
+        });
+        section.append(integrationList);
+      } else {
+        section.append(make("p", "product-system-empty", emptyText));
+      }
+      details.append(section);
+    };
+    renderIntegrationSection("Product-specific software integrations", product.productIntegrations,
+      "No integration source currently names this exact product or generation. Platform-level records, if any, are shown separately.", true);
+    renderIntegrationSection("Platform-level software integrations", product.platformIntegrations,
+      "No platform-level software integration record is linked to this platform. This is not a claim that the hardware is unsupported.", false);
 
     const workloadSection = make("section", "product-system-details");
     workloadSection.append(make("h4", "", "Documented workload paths (" + product.workloadPaths.length + ")"));
@@ -429,7 +444,10 @@
           claims,
           evidence: company.evidence || [],
           platforms: platformIds.map(id => platformMap.get(id)).filter(Boolean),
-          integrations: (compatibility.integrations || []).filter(item => platformIds.includes(item.platform_id)),
+          platformIntegrations: (compatibility.integrations || []).filter(item =>
+            platformIds.includes(item.platform_id) && !(Array.isArray(item.product_ids) && item.product_ids.length)),
+          productIntegrations: (compatibility.integrations || []).filter(item =>
+            Array.isArray(item.product_ids) && item.product_ids.includes(product.id)),
           workloadPaths: (workloadData.paths || []).filter(path => platformIds.includes(path.platform_id))
         };
       }));

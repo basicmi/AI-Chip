@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "compatibility.json"
+COMPANY_PROFILES = ROOT / "data" / "company-profiles.json"
 ALLOWED_STATUS = {
     "upstream_supported", "vendor_plugin_supported", "vendor_framework",
     "experimental", "in_progress", "needs_review", "vendor_reported",
@@ -60,6 +61,20 @@ def main():
         print(f"FAIL: cannot parse {DATA}: {exc}", file=sys.stderr)
         return 2
 
+    try:
+        profiles = json.loads(COMPANY_PROFILES.read_text(encoding="utf-8"))
+        known_product_ids = set()
+        known_product_platforms = {}
+        for company in profiles.get("companies", []):
+            for product in company.get("products", []):
+                if isinstance(product, dict) and isinstance(product.get("id"), str):
+                    product_id = product["id"]
+                    known_product_ids.add(product_id)
+                    known_product_platforms[product_id] = set(product.get("compatibility_platform_ids", []))
+    except Exception as exc:
+        print(f"FAIL: cannot load product IDs from {COMPANY_PROFILES}: {exc}", file=sys.stderr)
+        return 2
+
     require(db, ["schema_version", "database_version", "last_reviewed",
                  "scope", "status_definitions", "platforms", "integrations"], "root")
     if not isinstance(db, dict):
@@ -102,6 +117,20 @@ def main():
         check(iid not in integration_ids, f"{where}: duplicate id {iid}")
         integration_ids.add(iid)
         check(entry.get("platform_id") in platform_ids, f"{where}: unknown platform_id {entry.get('platform_id')!r}")
+        linked_products = entry.get("product_ids", [])
+        check(isinstance(linked_products, list), f"{where}: product_ids must be an array when present")
+        if isinstance(linked_products, list):
+            valid_linked_products = [item for item in linked_products if isinstance(item, str)]
+            check(len(valid_linked_products) == len(linked_products),
+                  f"{where}: every product_id must be a string")
+            check(len(valid_linked_products) == len(set(valid_linked_products)),
+                  f"{where}: duplicate product_ids")
+            for product_id in valid_linked_products:
+                check(product_id in known_product_ids,
+                      f"{where}: unknown product_id {product_id!r} in company-profiles.json")
+                if product_id in known_product_platforms:
+                    check(entry.get("platform_id") in known_product_platforms[product_id],
+                          f"{where}: product {product_id!r} is not linked to platform {entry.get('platform_id')!r} in company-profiles.json")
         check(entry.get("status") in ALLOWED_STATUS, f"{where}: invalid status")
         check(entry.get("layer") in ALLOWED_LAYERS, f"{where}: invalid layer")
         check(entry.get("maintainer_type") in ALLOWED_MAINTAINERS, f"{where}: invalid maintainer_type")

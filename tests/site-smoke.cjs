@@ -201,7 +201,7 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "40";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "51,40,160,50,27,28") {
+  if (productStats.join(",") !== "51,40,160,50,28,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
   await page.locator("[data-product-search]").fill("RNGD");
@@ -215,6 +215,16 @@ const { chromium } = require("playwright");
       !(await rngdLifecycle.first().textContent()).includes("production") ||
       !(await rngdLifecycle.first().locator("a").getAttribute("href")).includes("furiosa.ai")) {
     throw new Error("Product Explorer did not render the dated, source-linked RNGD lifecycle history");
+  }
+  await page.locator("[data-product-search]").fill("");
+  await page.locator("[data-product-search]").fill("MI355X");
+  const mi355Card = page.locator(".product-card").filter({ hasText: "AMD Instinct MI355X" }).first();
+  await mi355Card.locator("details.product-details summary").click();
+  if (!(await mi355Card.locator(".product-system-details").filter({ hasText: "Product-specific software integrations" }).textContent()).includes("SGLang")) {
+    throw new Error("Product Explorer did not link SGLang's exact MI355X support to the product record");
+  }
+  if ((await mi355Card.locator(".product-system-details").filter({ hasText: "Platform-level software integrations" }).textContent()).includes("SGLang")) {
+    throw new Error("Product Explorer incorrectly duplicated an exact product integration as platform-level support");
   }
   await page.locator("[data-product-search]").fill("");
   await page.locator("[data-product-search]").fill("Trainium2");
@@ -286,6 +296,12 @@ const { chromium } = require("playwright");
   await page.locator("[data-filter-search]").fill("vLLM");
   if (Number(await page.locator("[data-result-count]").textContent()) < 1) {
     throw new Error("Compatibility search did not return vLLM records");
+  }
+  await page.locator("[data-filter-reset]").click();
+  await page.locator("[data-filter-search]").fill("SGLang AWS Trainium");
+  if (Number(await page.locator("[data-result-count]").textContent()) !== 1 ||
+      !(await page.locator("[data-result-cards]").textContent()).toLowerCase().includes("in progress")) {
+    throw new Error("Compatibility Explorer did not distinguish SGLang Trainium as an in-progress integration");
   }
   await page.locator("[data-filter-reset]").click();
 

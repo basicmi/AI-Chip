@@ -67,6 +67,9 @@ description: Search software compatibility and integration evidence across AI ac
 </section>
 
 <section class="compat-method-note">
+  <h2>Platform support vs. product-specific support</h2>
+  <p>Some integrations are documented only for a broad hardware platform (for example, an architecture family or vendor backend). These appear as <strong>platform-level</strong> records and must not be read as SKU validation. A record is marked <strong>product-specific</strong> only when its linked upstream or vendor evidence explicitly names the product or generation; that mapping is also linked back to the Product Explorer. Neither level guarantees support for every model, operator, quantization format or serving feature.</p>
+
   <div><p class="eyebrow">READ THE STATUS CORRECTLY</p><h2>Compatibility is not a binary property.</h2></div>
   <p>A platform being listed does not mean every model, operator, precision or serving feature is supported. Each record is scoped to its documented device family, software layer and version pins. Vendor-reported examples are kept distinct from upstream-supported paths; unresolved version conflicts are marked for review.</p>
 </section>

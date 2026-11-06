@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.05-2",
-  "last_reviewed": "2026-11-05",
-  "scope": "Publicly documented accelerator software compatibility and integration evidence. Entries are not certification or production-readiness claims.",
+  "database_version": "2026.11.06-1",
+  "last_reviewed": "2026-11-06",
+  "scope": "Publicly documented accelerator software compatibility and integration evidence. Entries are not certification or production-readiness claims. Product-specific links are only added when the cited source explicitly names that product or generation; otherwise the record remains platform-level.",
   "status_definitions": {
     "upstream_supported": "The upstream project documentation lists the hardware platform as supported.",
     "vendor_plugin_supported": "A vendor or project-maintained out-of-tree plugin documents a released integration and its scope.",
@@ -351,14 +351,18 @@
         "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
       },
       "limitations": "The upstream hardware table is broader than any single tested model / feature combination.",
-      "last_checked": "2026-11-05",
+      "last_checked": "2026-11-06",
       "evidence": [
         {
           "type": "upstream_docs",
           "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
-          "checked_at": "2026-11-05",
+          "checked_at": "2026-11-06",
           "claim": "NVIDIA is listed in SGLang Supported Hardware."
         }
+      ],
+      "product_ids": [
+        "b200-sxm",
+        "gb200-nvl72"
       ]
     },
     {
@@ -399,14 +403,18 @@
         "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
       },
       "limitations": "Validate exact ROCm release, GPU generation, attention backend and model support.",
-      "last_checked": "2026-11-05",
+      "last_checked": "2026-11-06",
       "evidence": [
         {
           "type": "upstream_docs",
           "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
-          "checked_at": "2026-11-05",
+          "checked_at": "2026-11-06",
           "claim": "SGLang Supported Hardware table lists MI300X / MI325X / MI350X / MI355X."
         }
+      ],
+      "product_ids": [
+        "mi350x",
+        "mi355x"
       ]
     },
     {
@@ -505,14 +513,18 @@
         "release": "v0.5.23 (latest release checked 2026-11-05); hardware list read from current main README"
       },
       "limitations": "SGLang's platform-level support does not imply feature parity across all Ascend generations.",
-      "last_checked": "2026-11-05",
+      "last_checked": "2026-11-06",
       "evidence": [
         {
           "type": "upstream_docs",
           "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
-          "checked_at": "2026-11-05",
+          "checked_at": "2026-11-06",
           "claim": "Huawei Ascend row lists A2, A3, 950PR / DT."
         }
+      ],
+      "product_ids": [
+        "ascend-950pr",
+        "ascend-950dt"
       ]
     },
     {
@@ -808,6 +820,10 @@
           "checked_at": "2026-11-05",
           "claim": "The current Gaudi PyTorch documentation describes Eager mode with torch.compile as recommended and Lazy mode as legacy."
         }
+      ],
+      "product_ids": [
+        "gaudi2",
+        "gaudi3"
       ]
     },
     {
@@ -834,6 +850,10 @@
           "checked_at": "2026-11-05",
           "claim": "Gaudi 1.24.2 release notes identify compatibility with vLLM Hardware Plugin 0.30.0 based on upstream vLLM 0.30.0."
         }
+      ],
+      "product_ids": [
+        "gaudi2",
+        "gaudi3"
       ]
     },
     {
@@ -865,6 +885,10 @@
           "checked_at": "2026-11-05",
           "claim": "Google Cloud documents generation-specific TPU runtime versions for PyTorch and JAX."
         }
+      ],
+      "product_ids": [
+        "tpu7x-ironwood",
+        "tpu-v6e-trillium"
       ]
     },
     {
@@ -890,6 +914,10 @@
           "checked_at": "2026-11-05",
           "claim": "Google Cloud documents vLLM inference on Cloud TPU through vLLM-TorchTPU for PyTorch models."
         }
+      ],
+      "product_ids": [
+        "tpu7x-ironwood",
+        "tpu-v6e-trillium"
       ]
     },
     {
@@ -915,6 +943,10 @@
           "checked_at": "2026-11-05",
           "claim": "Google Cloud documents SGLang-TorchTPU as a PyTorch backend for Cloud TPU inference."
         }
+      ],
+      "product_ids": [
+        "tpu7x-ironwood",
+        "tpu-v6e-trillium"
       ]
     },
     {
@@ -947,6 +979,10 @@
           "checked_at": "2026-11-05",
           "claim": "AWS Neuron 2.33.0 documentation describes the Neuron SDK and native PyTorch support for Trainium."
         }
+      ],
+      "product_ids": [
+        "trainium2",
+        "trainium3"
       ]
     },
     {
@@ -978,6 +1014,10 @@
           "checked_at": "2026-11-05",
           "claim": "AWS Neuron documents inference paths and model-specific serving support on Trainium."
         }
+      ],
+      "product_ids": [
+        "trainium2",
+        "trainium3"
       ]
     },
     {
@@ -1032,6 +1072,30 @@
           "url": "https://docs.cerebras.ai/",
           "checked_at": "2026-11-05",
           "claim": "Cerebras developer documentation describes the Inference SDK for building applications on Cerebras inference."
+        }
+      ]
+    },
+    {
+      "id": "aws-trainium-sglang",
+      "platform_id": "aws-trainium",
+      "layer": "serving",
+      "project": "SGLang AWS Trainium integration",
+      "project_url": "https://github.com/sgl-project/sglang",
+      "maintainer_type": "upstream_project",
+      "status": "in_progress",
+      "confidence": "high",
+      "hardware_scope": "AWS Trainium integration is listed by SGLang as in progress; no Trainium generation or production-ready model coverage is claimed.",
+      "versions": {
+        "release": "v0.5.23 (latest release checked 2026-11-06); platform status read from current upstream README"
+      },
+      "limitations": "SGLang lists AWS Trainium under integrations in progress, not under supported hardware. Do not treat this as a usable or production-supported path.",
+      "last_checked": "2026-11-06",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://github.com/sgl-project/sglang/blob/main/README.md",
+          "checked_at": "2026-11-06",
+          "claim": "SGLang lists AWS Trainium among integrations in progress."
         }
       ]
     }

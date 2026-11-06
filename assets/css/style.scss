@@ -1478,3 +1478,11 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-results-sort { width: 100%; margin-top: .75rem; justify-content: space-between; }
   .benchmark-results-sort select { flex: 1; }
 }
+
+.product-system-version {
+  margin: .25rem 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}

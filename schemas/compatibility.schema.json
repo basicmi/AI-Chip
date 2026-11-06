@@ -252,6 +252,15 @@
             "$ref": "#/$defs/evidence"
           },
           "minItems": 1
+        },
+        "product_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "description": "Optional exact product IDs from data/company-profiles.json. Omit when evidence only supports a platform-level statement."
         }
       }
     }
