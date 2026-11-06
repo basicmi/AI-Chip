@@ -212,7 +212,7 @@ const { chromium } = require("playwright");
   const rngdLifecycle = rngdCard.locator(".product-lifecycle-item");
   if (await rngdLifecycle.count() !== 1 ||
       !(await rngdLifecycle.first().textContent()).includes("production") ||
-      !(await rngdLifecycle.first().textContent()).includes("furiosa.ai")) {
+      !(await rngdLifecycle.first().locator("a").getAttribute("href")).includes("furiosa.ai")) {
     throw new Error("Product Explorer did not render the dated, source-linked RNGD lifecycle history");
   }
   await page.locator("[data-product-search]").fill("");
