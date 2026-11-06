@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -424,6 +424,28 @@ const { chromium } = require("playwright");
     throw new Error("Workload search did not isolate the Biren path");
   }
 
+  await page.goto(base + "/model-support/", { waitUntil: "networkidle" });
+  await waitForDataset({
+    name: "Model support",
+    loadSelector: "[data-model-load]",
+    statSelector: '[data-model-stat="paths"]',
+    countSelector: "[data-model-result-count]"
+  });
+  await page.locator("[data-model-search]").fill("Llama 3.3 70B");
+  if (Number(await page.locator("[data-model-result-count]").textContent()) !== 1) {
+    throw new Error("Model support search did not isolate Llama 3.3 70B");
+  }
+  const llamaPath = await page.locator(".model-support-card").first().textContent();
+  if (!llamaPath.includes("Trainium2") || !llamaPath.includes("Trainium3") ||
+      !llamaPath.includes("BF16") || !llamaPath.includes("FP8 static")) {
+    throw new Error("Llama 3.3 70B model support path is missing hardware or precision details");
+  }
+  await page.locator("[data-model-reset]").click();
+  await page.locator("[data-model-platform]").selectOption("aws-trainium");
+  if (Number(await page.locator("[data-model-result-count]").textContent()) !== 2) {
+    throw new Error("Model support platform filter did not return both AWS Trainium paths");
+  }
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("[data-nav-toggle]").click();
   if (await page.locator("[data-nav-toggle]").getAttribute("aria-expanded") !== "true") {
@@ -435,7 +457,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: eight routes, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: nine routes, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
