@@ -91,12 +91,12 @@ const { chromium } = require("playwright");
     const root = document.querySelector("[data-directory-explorer]");
     return count && count.dataset.ready === "true" &&
       root && root.dataset.profileRegistryLoaded === "true" &&
-      root.dataset.profileMatchedCount === "50";
+      root.dataset.profileMatchedCount === "51";
   }, null, { timeout: 10000 });
   const companyCount = Number(await page.locator("[data-directory-count]").getAttribute("data-count"));
-  if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
+  if (companyCount !== 51) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
-  if (!registrySummary.includes("50 profiles") ||
+  if (!registrySummary.includes("51 profiles") ||
       !registrySummary.includes("154 source links") ||
       !registrySummary.includes("50 audited evidence records") ||
       !registrySummary.includes("160 structured claims") ||
