@@ -5657,6 +5657,9 @@
               "evidence_id": "huawei-ascend-roadmap",
               "notes": "Huawei announced the 950PR roadmap and planned Q1 2026 introduction; no distinct 950PR shipment evidence is used here."
             }
+          ],
+          "compatibility_platform_ids": [
+            "huawei-ascend"
           ]
         },
         {
@@ -5688,6 +5691,9 @@
               "evidence_id": "huawei-ascend-2026",
               "notes": "Huawei stated Ascend 950 supernodes had entered commercial scale; family-level evidence, not independent verification of each card SKU."
             }
+          ],
+          "compatibility_platform_ids": [
+            "huawei-ascend"
           ]
         }
       ],
