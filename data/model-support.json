@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "database_version": "2026.11.06-1",
+  "last_reviewed": "2026-11-06",
+  "scope": "Model support records are configuration-specific evidence links, not blanket compatibility guarantees. A product-level mapping is included only when the source explicitly identifies the accelerator product or generation. A documented recipe, an upstream verification matrix, a vendor report and an independently reproduced run are distinct evidence levels. Performance numbers belong in benchmark-results.json, not here.",
+  "support_levels": {
+    "documented_recipe": "Vendor or upstream documentation provides a runnable or step-by-step model deployment recipe for the named hardware configuration.",
+    "upstream_verified": "An upstream project explicitly lists or verifies the model on the named accelerator, but the record is not an independently reproduced benchmark by this project.",
+    "vendor_reported": "The vendor reports model support or testing; no upstream implementation or independent reproduction is implied.",
+    "independently_tested": "A reproducible third-party or project test with configuration and correctness evidence.",
+    "integration_only": "A framework integration exists but no exact model-level evidence has been located."
+  },
+  "models": [
+    {
+      "id": "llama-3-1-405b-instruct",
+      "display_name": "Llama 3.1 405B Instruct",
+      "model_id": "meta-llama/Llama-3.1-405B-Instruct",
+      "publisher": "Meta",
+      "family": "Llama 3.1",
+      "parameter_count": "405B",
+      "modality": "text",
+      "architecture": "Dense decoder-only transformer",
+      "notes": "The checkpoint is gated by Meta's license terms; support paths below refer to the named instruct checkpoint or the documented Llama 3.1 405B model."
+    },
+    {
+      "id": "llama-3-3-70b-instruct",
+      "display_name": "Llama 3.3 70B Instruct",
+      "model_id": "meta-llama/Llama-3.3-70B-Instruct",
+      "publisher": "Meta",
+      "family": "Llama 3.3",
+      "parameter_count": "70B",
+      "modality": "text",
+      "architecture": "Dense decoder-only transformer",
+      "notes": "AWS Neuron recipe explicitly documents BF16 and static FP8 serving paths on Trainium2 and Trainium3."
+    },
+    {
+      "id": "qwen3-235b-a22b-thinking-2507",
+      "display_name": "Qwen3-235B-A22B-Thinking-2507",
+      "model_id": "Qwen/Qwen3-235B-A22B-Thinking-2507",
+      "publisher": "Qwen",
+      "family": "Qwen3",
+      "parameter_count": "235B total / 22B active",
+      "modality": "text",
+      "architecture": "Mixture-of-Experts",
+      "notes": "The vLLM FLY verification table names this FP8 model on AMD MI355X."
+    }
+  ],
+  "support_paths": [
+    {
+      "id": "aws-trn2-llama31-405b",
+      "model_id": "llama-3-1-405b-instruct",
+      "platform_id": "aws-trainium",
+      "product_ids": [
+        "trainium2"
+      ],
+      "integration_ids": [
+        "aws-trainium-vllm-neuron"
+      ],
+      "software_stack": "vLLM + Neuron SDK + neuronx-distributed-inference (NxD Inference)",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "BF16"
+      ],
+      "quantization": "BF16 checkpoint; no additional quantization asserted",
+      "execution_modes": [
+        "offline inference",
+        "tensor parallelism"
+      ],
+      "hardware_scope": "AWS Trainium2 instance; tutorial uses tensor_parallel_size=64. This is an AWS deployment recipe, not a single-chip result.",
+      "limitations": "The recipe requires a Trn2 instance and matching Neuron SDK environment. Exact throughput, latency and model quality are not reported by this record.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.33.0/inference-legacy/nxd-inference/tutorials/trn2-llama3.1-405b-tutorial.html",
+          "publisher": "AWS Neuron",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "claim": "AWS provides a step-by-step Llama 3.1 405B deployment tutorial on Trainium2 using vLLM and NxD Inference; the sample uses BF16 and tensor parallel size 64."
+        }
+      ]
+    },
+    {
+      "id": "aws-trn2-trn3-llama33-70b",
+      "model_id": "llama-3-3-70b-instruct",
+      "platform_id": "aws-trainium",
+      "product_ids": [
+        "trainium2",
+        "trainium3"
+      ],
+      "integration_ids": [
+        "aws-trainium-vllm-neuron"
+      ],
+      "software_stack": "vLLM Neuron plugin + Neuron SDK (Model Runner V1/V2)",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "BF16",
+        "FP8 static (ModelOpt)"
+      ],
+      "quantization": "BF16 or static per-tensor FP8 ModelOpt checkpoint",
+      "execution_modes": [
+        "tensor parallelism",
+        "data parallelism",
+        "continuous batching",
+        "prefix caching",
+        "disaggregated serving",
+        "speculative decoding"
+      ],
+      "hardware_scope": "AWS Trainium2 and Trainium3; the current AWS recipe explicitly lists both generations.",
+      "limitations": "Feature availability is model-runner and version dependent. AWS documents known data-parallel scaling limitations; this record does not imply all features are optimal or independently benchmarked.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.33.0/vllm-neuron/docs/model-recipes/llama-3.html",
+          "publisher": "AWS Neuron",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "claim": "AWS documents Llama 3.3 70B Instruct on Trainium2 and Trainium3 with vLLM Neuron, BF16 and static FP8 ModelOpt, plus a model-specific feature matrix."
+        }
+      ]
+    },
+    {
+      "id": "google-v6e-llama31-405b",
+      "model_id": "llama-3-1-405b-instruct",
+      "platform_id": "google-tpu",
+      "product_ids": [
+        "tpu-v6e-trillium"
+      ],
+      "integration_ids": [
+        "google-tpu-jetstream"
+      ],
+      "software_stack": "JetStream + MaxText + Pathways on Google Kubernetes Engine",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "BF16",
+        "INT8"
+      ],
+      "quantization": "The tutorial describes BF16 and an INT8 MaxText-compatible checkpoint conversion path.",
+      "execution_modes": [
+        "multi-host inference",
+        "tensor parallel topology",
+        "disaggregated prefill/decode"
+      ],
+      "hardware_scope": "Google Cloud TPU v6e multi-host slice on GKE; the documented example uses TPU v6e topology 4x4.",
+      "limitations": "This is a specific JetStream/MaxText/Pathways deployment recipe. It does not establish model support on TPU7x or other TPU generations, nor vLLM/SGLang compatibility.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-multihost-tpu-jetstream",
+          "publisher": "Google Cloud",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "claim": "Google's GKE tutorial serves Llama 3.1-405B on multi-host TPU v6e with JetStream, MaxText and Pathways; it documents BF16 and INT8 checkpoint paths."
+        }
+      ]
+    },
+    {
+      "id": "amd-mi355x-llama31-405b-fly",
+      "model_id": "llama-3-1-405b-instruct",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi355x"
+      ],
+      "integration_ids": [
+        "amd-vllm"
+      ],
+      "software_stack": "vLLM speculative decoding FLY verification path",
+      "support_level": "upstream_verified",
+      "precision_modes": [
+        "FP8 KV"
+      ],
+      "quantization": "Llama-3.1-405B-Instruct-FP8-KV target checkpoint",
+      "execution_modes": [
+        "speculative decoding"
+      ],
+      "hardware_scope": "AMD Instinct MI355X; the upstream vLLM FLY table lists this target model and a Llama-3.1-8B-Instruct draft model.",
+      "limitations": "This is a model/hardware verification entry in an upstream speculative-decoding document. It is not a full end-to-end deployment guide or an independent benchmark result.",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.vllm.ai/en/latest/features/speculative_decoding/fly/",
+          "publisher": "vLLM project",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "claim": "The vLLM FLY verification table lists AMD MI355X with Llama-3.1-405B-Instruct-FP8-KV and Llama-3.1-8B-Instruct as target/draft model pair."
+        }
+      ]
+    },
+    {
+      "id": "amd-mi355x-qwen3-235b-fly",
+      "model_id": "qwen3-235b-a22b-thinking-2507",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi355x"
+      ],
+      "integration_ids": [
+        "amd-vllm"
+      ],
+      "software_stack": "vLLM speculative decoding FLY verification path",
+      "support_level": "upstream_verified",
+      "precision_modes": [
+        "FP8"
+      ],
+      "quantization": "Qwen3-235B-A22B-Thinking-2507-FP8 checkpoint",
+      "execution_modes": [
+        "speculative decoding"
+      ],
+      "hardware_scope": "AMD Instinct MI355X; named model is listed in the upstream vLLM FLY verification matrix.",
+      "limitations": "The cited page establishes a documented verification configuration, not a full production support matrix, feature-parity statement or independently reproduced benchmark.",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.vllm.ai/en/latest/features/speculative_decoding/fly/",
+          "publisher": "vLLM project",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "claim": "The vLLM FLY verification table lists AMD MI355X with Qwen3-235B-A22B-Thinking-2507-FP8 and Qwen3-8B as target/draft model pair."
+        }
+      ]
+    }
+  ]
+}
