@@ -129,3 +129,10 @@ A manual GitHub Actions workflow, `.github/workflows/refresh-benchmark-results.y
 ## Product Explorer comparison workspace
 
 The Product Explorer supports side-by-side comparison of up to **six products**. Rows align only when topic, precision, sparsity, measurement scope, metric type and source unit match. Missing or non-comparable values remain separate; chip, module, rack and system specifications are never silently mixed. The six-product limit is a display/workflow limit, not a recommendation to compare unlike architectures or workloads.
+
+
+## Product registry v3 coverage and lifecycle tracking
+
+The 2026-11-06 v3 review wave adds structured profiles for Broadcom, Marvell, Tenstorrent, Etched, d-Matrix, SambaNova, FuriosaAI, Rebellions and Huawei Ascend. Platform-level custom-XPU records are used when a vendor has not disclosed a merchant SKU; missing chip-level specifications remain blank rather than inferred.
+
+Product records may include availability_history, a chronological list of dated status events (announced, sampling, shipping, production, roadmap, discontinued, or unknown). Each event links to a reviewed evidence record. Dates preserve source precision: use YYYY-MM when only a month is known and YYYY-MM-DD when the source gives a day. The latest event must match the product's current availability. This is a source-backed event log, not a claim that every transition is independently audited.
