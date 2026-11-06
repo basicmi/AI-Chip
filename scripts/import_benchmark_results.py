@@ -299,10 +299,13 @@ def import_inferencex(models: list[str] | None = None):
             if not isinstance(rows, list):
                 warnings.append(f"{model}: benchmark endpoint did not return an array")
                 continue
-            records.extend(
-                normalize_inferencex_record(row, endpoint)
-                for row in rows if isinstance(row, dict) and row.get("id") is not None
-            )
+            valid_rows = []
+            for index, row in enumerate(rows):
+                if not isinstance(row, dict) or row.get("id") is None:
+                    warnings.append(f"{model}: skipped malformed result row at index {index} (missing object/id)")
+                    continue
+                valid_rows.append(row)
+            records.extend(normalize_inferencex_record(row, endpoint) for row in valid_rows)
         except (HTTPError, URLError, TimeoutError, ValueError, RuntimeError) as error:
             warnings.append(f"{model}: {error}")
     source = {
@@ -362,6 +365,14 @@ def main():
         records.extend(imported)
         sources = [item for item in sources if item.get("id") != source["id"]]
         sources.append(source)
+
+    # Fail closed: a partial InferenceX API outage must never replace a previously
+    # imported complete snapshot with an incomplete subset (or an empty dataset).
+    if warnings:
+        for warning in warnings:
+            print("ERROR:", warning, file=sys.stderr)
+        print("Import aborted; existing registry was left unchanged.", file=sys.stderr)
+        return 2
 
     records.sort(key=lambda row: (row.get("source_id", ""), row.get("id", "")))
     database = {
