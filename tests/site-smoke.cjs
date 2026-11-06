@@ -298,6 +298,12 @@ const { chromium } = require("playwright");
     throw new Error("Compatibility search did not return vLLM records");
   }
   await page.locator("[data-filter-reset]").click();
+  await page.locator("[data-filter-search]").fill("AWS Trainium");
+  if (Number(await page.locator("[data-result-count]").textContent()) !== 1 ||
+      !(await page.locator("[data-result-cards]").textContent()).toLowerCase().includes("in progress")) {
+    throw new Error("Compatibility Explorer did not distinguish SGLang Trainium as an in-progress integration");
+  }
+  await page.locator("[data-filter-reset]").click();
 
   await page.locator("[data-theme-toggle]").click();
   if (await page.locator("html").getAttribute("data-theme") !== "dark") {
