@@ -178,7 +178,7 @@
     compareButton.type = "button";
     compareButton.dataset.compareProduct = product.id;
     compareButton.setAttribute("aria-pressed", selected.has(product.id) ? "true" : "false");
-    compareButton.disabled = !selected.has(product.id) && selected.size >= 4;
+    compareButton.disabled = !selected.has(product.id) && selected.size >= 6;
     actions.append(compareButton);
 
     const details = make("details", "product-details");
