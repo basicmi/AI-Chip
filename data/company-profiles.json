@@ -1,6 +1,6 @@
 {
   "schema_version": "1.3",
-  "database_version": "2026.11.06-6",
+  "database_version": "2026.11.06-7",
   "registry_reviewed_at": "2026-11-06",
   "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status. This revision adds reviewed, source-linked profiles for custom XPU suppliers and inference-focused accelerator companies; platform-level records are used where no public merchant SKU exists.",
   "freshness_policy": {
@@ -4374,7 +4374,21 @@
       "profile_status": "partially_reviewed",
       "last_reviewed": "2026-11-06",
       "products": [],
-      "claims": [],
+      "claims": [
+        {
+          "id": "graphcore-softbank-ownership",
+          "subject_type": "company",
+          "subject_id": "graphcore",
+          "topic": "availability",
+          "statement": "Graphcore became a wholly owned SoftBank subsidiary in July 2024 and continues operating under the Graphcore name.",
+          "scope": "Corporate ownership and operating status; reviewed 2026-11-06.",
+          "claim_status": "source_confirmed",
+          "evidence_ids": [
+            "graphcore-softbank-acquisition"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
       "evidence": [
         {
           "id": "graphcore-softbank-acquisition",
@@ -4814,7 +4828,22 @@
       "profile_status": "partially_reviewed",
       "last_reviewed": "2026-11-06",
       "products": [],
-      "claims": [],
+      "claims": [
+        {
+          "id": "groq-independent-after-nvidia-license",
+          "subject_type": "company",
+          "subject_id": "groq",
+          "topic": "availability",
+          "statement": "Groq states it remains independent after a non-exclusive technology licensing agreement with NVIDIA and selected team hires.",
+          "scope": "Corporate ownership and operating status; reviewed 2026-11-06.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "groq-nvidia-license-not-acquisition",
+            "groq-2026-growth-capital"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
       "evidence": [
         {
           "id": "groq-nvidia-license-not-acquisition",
@@ -5514,7 +5543,21 @@
       "profile_status": "partially_reviewed",
       "last_reviewed": "2026-11-06",
       "products": [],
-      "claims": [],
+      "claims": [
+        {
+          "id": "kinara-nxp-acquisition-completed-claim",
+          "subject_type": "company",
+          "subject_id": "kinara",
+          "topic": "availability",
+          "statement": "NXP completed the Kinara acquisition on 27 October 2025; Kinara is no longer an independent startup.",
+          "scope": "Corporate ownership and operating status; reviewed 2026-11-06.",
+          "claim_status": "source_confirmed",
+          "evidence_ids": [
+            "kinara-nxp-acquisition-completed"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
       "evidence": [
         {
           "id": "kinara-nxp-acquisition-completed",
@@ -7189,7 +7232,21 @@
       "profile_status": "partially_reviewed",
       "last_reviewed": "2026-11-06",
       "products": [],
-      "claims": [],
+      "claims": [
+        {
+          "id": "ampere-softbank-ownership",
+          "subject_type": "company",
+          "subject_id": "ampere",
+          "topic": "availability",
+          "statement": "SoftBank completed its acquisition of Ampere on 25 November 2025; Ampere continues operating as a wholly owned subsidiary.",
+          "scope": "Corporate ownership and operating status; reviewed 2026-11-06.",
+          "claim_status": "source_confirmed",
+          "evidence_ids": [
+            "ampere-softbank-acquisition-completed"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
       "evidence": [
         {
           "id": "ampere-softbank-acquisition-completed",
@@ -7261,7 +7318,21 @@
       "profile_status": "partially_reviewed",
       "last_reviewed": "2026-11-06",
       "products": [],
-      "claims": [],
+      "claims": [
+        {
+          "id": "untether-ai-ceased-operations",
+          "subject_type": "company",
+          "subject_id": "untether-ai",
+          "topic": "availability",
+          "statement": "Untether AI stopped supplying speedAI products and supporting imAIgine SDK after a 2025 AMD engineering-team acqui-hire; the sources do not establish an acquisition of the company or its IP.",
+          "scope": "Corporate ownership and operating status; reviewed 2026-11-06.",
+          "claim_status": "source_confirmed",
+          "evidence_ids": [
+            "untether-amd-team-acquihire"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
       "evidence": [
         {
           "id": "untether-amd-team-acquihire",
