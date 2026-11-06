@@ -161,15 +161,15 @@ const { chromium } = require("playwright");
   }
   await page.locator("[data-directory-search]").fill("");
   await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
-  if (await page.locator(".directory-result-title").count() !== 8) {
-    throw new Error("Freshness filter should return the eight audited first-wave company profiles");
+  if (await page.locator(".directory-result-title").count() !== 18) {
+    throw new Error("Freshness filter should return all 18 recently reviewed company profiles");
   }
-  await page.locator("[data-directory-search]").fill("FuriosaAI");
+  await page.locator("[data-directory-search]").fill("Qualcomm");
   await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
-  await page.locator("[data-directory-search]").fill("FuriosaAI");
+  await page.locator("[data-directory-search]").fill("Qualcomm");
   const companyMatches = await page.locator(".directory-result-title").allTextContents();
-  if (!companyMatches.some(name => name.includes("FuriosaAI"))) {
-    throw new Error("Directory search did not find FuriosaAI");
+  if (!companyMatches.some(name => name.includes("Qualcomm"))) {
+    throw new Error("Directory search did not find Qualcomm");
   }
   const profileEvidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!profileEvidence.includes("Not reviewed") ||
