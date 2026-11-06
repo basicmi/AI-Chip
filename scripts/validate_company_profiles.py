@@ -17,7 +17,7 @@ COMPATIBILITY = ROOT / "data" / "compatibility.json"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 CATEGORIES = {
     "IC Vendors", "Tech Giants & HPC Vendors", "Traditional IP Vendors",
-    "Startups", "China AI Accelerator Vendors",
+    "Startups", "Acquired / Legacy", "China AI Accelerator Vendors",
 }
 REFERENCE_TYPES = {
     "unknown", "company_primary", "vendor_primary", "official_project",
@@ -159,6 +159,38 @@ def main():
               f"{where}: invalid profile_status")
         last_reviewed = company.get("last_reviewed")
         check(valid_date(last_reviewed, nullable=True), f"{where}: invalid last_reviewed")
+
+        corporate = company.get("corporate_status")
+        if corporate is not None:
+            require(corporate, ["ownership_status", "operating_status", "effective_date",
+                                "transaction_type", "notes", "evidence_ids"],
+                    f"{where}.corporate_status")
+            if isinstance(corporate, dict):
+                check(corporate.get("ownership_status") in {
+                    "independent", "wholly_owned_subsidiary", "acquired_business_unit",
+                    "integrated_business_unit", "ceased_operations"
+                }, f"{where}: invalid corporate_status.ownership_status")
+                check(corporate.get("operating_status") in {"active", "ceased", "unknown"},
+                      f"{where}: invalid corporate_status.operating_status")
+                check(valid_date(corporate.get("effective_date"), nullable=True),
+                      f"{where}: invalid corporate_status.effective_date")
+                check(corporate.get("transaction_type") in {
+                    "acquisition", "acqui_hire", "integration", "license_and_talent_hire", "none"
+                }, f"{where}: invalid corporate_status.transaction_type")
+                check(isinstance(corporate.get("notes"), str) and bool(corporate["notes"].strip()),
+                      f"{where}: corporate_status.notes must be non-empty")
+                corporate_evidence_ids = corporate.get("evidence_ids", [])
+                check(isinstance(corporate_evidence_ids, list) and bool(corporate_evidence_ids),
+                      f"{where}: corporate_status.evidence_ids must be non-empty")
+                for evidence_id in corporate_evidence_ids if isinstance(corporate_evidence_ids, list) else []:
+                    check(any(item.get("id") == evidence_id for item in company.get("evidence", [])),
+                          f"{where}: corporate status references unknown evidence {evidence_id}")
+                if corporate.get("ownership_status") in {"wholly_owned_subsidiary", "acquired_business_unit", "integrated_business_unit"}:
+                    check(bool(corporate.get("parent_company")),
+                          f"{where}: acquired business must identify parent_company")
+                if corporate.get("ownership_status") == "ceased_operations":
+                    check(corporate.get("operating_status") == "ceased",
+                          f"{where}: ceased_operations must have operating_status=ceased")
 
         references = company.get("references", [])
         evidence = company.get("evidence", [])
