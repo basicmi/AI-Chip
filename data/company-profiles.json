@@ -1,8 +1,8 @@
 {
   "schema_version": "1.2",
-  "database_version": "2026.11.06-1",
+  "database_version": "2026.11.06-5",
   "registry_reviewed_at": "2026-11-06",
-  "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status.",
+  "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status. This revision adds reviewed, source-linked profiles for custom XPU suppliers and inference-focused accelerator companies; platform-level records are used where no public merchant SKU exists.",
   "freshness_policy": {
     "fresh_within_days": 90,
     "stale_after_days": 180,
@@ -1811,12 +1811,122 @@
       "category": "IC Vendors",
       "directory_anchor": "Marvell",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Marvell_logo.png",
-      "summary": "Marvell supplies DPUs (OCTEON / ARMADA) and, increasingly, co-designed custom AI accelerators for cloud providers. Alongside Broadcom’s XPU franchise, Marvell is widely reported as a design partner on AWS Trainium/Inferentia-class and Microsoft Maia-class silicon—making it a key “picks and shovels” vendor in the custom-ASIC wave.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Marvell's AI silicon opportunity is primarily customer-specific custom ASICs, custom HBM and scale-up connectivity. The registry intentionally records a platform rather than inventing merchant XPU SKUs.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "marvell-custom-xpu-platform",
+          "name": "Marvell Custom XPU / HBM Compute Architecture",
+          "product_type": "asic",
+          "architecture": "Custom compute die with tailored HBM base-die interfaces, die-to-die links and advanced packaging",
+          "generation": "Custom XPU platform",
+          "family": "Marvell Custom Silicon",
+          "market_segment": "Hyperscale AI accelerator ASICs",
+          "availability": "announced",
+          "form_factor": "Customer-specific multi-die package",
+          "claim_ids": [
+            "marvell-custom-hbm-area",
+            "marvell-custom-hbm-capacity",
+            "marvell-custom-hbm-power",
+            "marvell-nvlink-fusion"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2024-12-10",
+              "evidence_id": "marvell-custom-hbm",
+              "notes": "Custom HBM compute architecture announced."
+            },
+            {
+              "status": "announced",
+              "effective_at": "2026-03-31",
+              "evidence_id": "marvell-nvlink-fusion",
+              "notes": "Marvell announced NVLink Fusion collaboration for custom XPUs."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "marvell-custom-hbm-area",
+          "subject_type": "product",
+          "subject_id": "marvell-custom-xpu-platform",
+          "topic": "architecture",
+          "statement": "Marvell says its custom HBM architecture can free up to 25% more compute-die area for compute.",
+          "scope": "Vendor-stated design benefit versus conventional HBM interface; not a measured customer-product benchmark.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "marvell-custom-hbm"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "marvell-custom-hbm-capacity",
+          "subject_type": "product",
+          "subject_id": "marvell-custom-xpu-platform",
+          "topic": "memory_capacity",
+          "statement": "Marvell says the architecture can enable up to 33% greater memory capacity.",
+          "scope": "Vendor-stated architecture-level potential; not a universal shipped-product specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "marvell-custom-hbm"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "marvell-custom-hbm-power",
+          "subject_type": "product",
+          "subject_id": "marvell-custom-xpu-platform",
+          "topic": "power",
+          "statement": "Marvell says the custom memory interface can reduce memory-interface power by up to 70%.",
+          "scope": "Vendor-stated interface-level potential; not whole-chip or system power.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "marvell-custom-hbm"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "marvell-nvlink-fusion",
+          "subject_type": "product",
+          "subject_id": "marvell-custom-xpu-platform",
+          "topic": "interconnect",
+          "statement": "Marvell will provide custom XPUs and NVLink Fusion-compatible scale-up networking.",
+          "scope": "Partnership-level capability; no public named accelerator SKU or chip-level throughput disclosed.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "marvell-nvlink-fusion"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "marvell-custom-hbm",
+          "title": "Custom HBM Compute Architecture",
+          "url": "https://www.marvell.com/products/custom-asic/custom-hbm-compute-architecture.html",
+          "publisher": "Marvell",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official architecture page; percentages are vendor-stated design potential and must not be interpreted as measured product performance."
+        },
+        {
+          "id": "marvell-nvlink-fusion",
+          "title": "NVIDIA AI Ecosystem Expands as Marvell Joins Forces Through NVLink Fusion",
+          "url": "https://www.marvell.com/company/newsroom/nvidia-ai-ecosystem-expands-marvell-joins-forces-through-nvlink-fusion.html",
+          "publisher": "Marvell",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-03-31",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement dated 2026-03-31. Marvell provides custom XPUs and compatible scale-up networking; no XPU SKU specifications published."
+        }
+      ],
       "references": [
         {
           "id": "ref-marvell-1",
@@ -1837,6 +1947,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-marvell-custom-hbm",
+          "label": "Marvell Custom HBM Compute Architecture",
+          "url": "https://www.marvell.com/products/custom-asic/custom-hbm-compute-architecture.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Architecture-level benefits are vendor-stated; no public named XPU SKU."
+        },
+        {
+          "id": "ref-marvell-nvlink-fusion",
+          "label": "Marvell joins NVIDIA NVLink Fusion",
+          "url": "https://www.marvell.com/company/newsroom/nvidia-ai-ecosystem-expands-marvell-joins-forces-through-nvlink-fusion.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-03-31",
+          "checked_at": "2026-11-06",
+          "notes": "Partnership capability announcement, not a chip datasheet."
         }
       ]
     },
@@ -1846,12 +1976,94 @@
       "category": "IC Vendors",
       "directory_anchor": "Broadcom",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Broadcom_logo.png",
-      "summary": "Broadcom co-designs customer-specific AI accelerators (XPUs) and pairs them with Tomahawk/Jericho Ethernet switching. The model began with Google TPU generations and now spans Meta MTIA, OpenAI custom silicon, and other frontier/cloud programs—positioning Broadcom as the primary ASIC implementation partner opposite merchant GPUs.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Broadcom co-designs customer-specific AI XPUs, advanced packaging and high-speed networking. Public evidence supports a custom-silicon platform and multi-generation customer programs; individual customer chip SKUs and full specifications are generally undisclosed.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "broadcom-custom-xpu-platform",
+          "name": "Broadcom Custom XPU Platform",
+          "product_type": "asic",
+          "architecture": "Customer-specific custom AI accelerator; chiplet, HBM and advanced-package co-design",
+          "generation": "Multi-generation custom XPU platform",
+          "family": "Broadcom Custom Silicon",
+          "market_segment": "Hyperscale custom AI accelerators",
+          "availability": "production",
+          "form_factor": "Customer-specific ASIC / multi-die package",
+          "claim_ids": [
+            "broadcom-xpu-3d5d",
+            "broadcom-xpu-meta-2nm"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2024-12-05",
+              "evidence_id": "broadcom-xpu-platform",
+              "notes": "Broadcom introduced its 3.5D XDSiP custom-XPU platform."
+            },
+            {
+              "status": "production",
+              "effective_at": "2026-02-26",
+              "evidence_id": "broadcom-xpu-platform",
+              "notes": "Broadcom announced shipment of a 2nm custom compute SoC built on 3.5D XDSiP; platform-level evidence, not a named customer SKU."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "broadcom-xpu-3d5d",
+          "subject_type": "product",
+          "subject_id": "broadcom-custom-xpu-platform",
+          "topic": "packaging",
+          "statement": "Broadcom's 3.5D XDSiP platform supports multi-die custom XPU configurations integrating compute stacks, I/O chiplets and HBM.",
+          "scope": "Platform architecture; configurations vary by customer design.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "broadcom-xpu-platform"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "broadcom-xpu-meta-2nm",
+          "subject_type": "product",
+          "subject_id": "broadcom-custom-xpu-platform",
+          "topic": "process_node",
+          "statement": "Broadcom and Meta announced a multi-generation collaboration to deploy a 2nm AI compute accelerator.",
+          "scope": "Customer-specific Meta MTIA program; not a general Broadcom merchant product.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "broadcom-meta-xpu"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "broadcom-xpu-platform",
+          "title": "AI Accelerator | XPU | Custom Compute",
+          "url": "https://www.broadcom.com/info/ai/3point5d",
+          "publisher": "Broadcom",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official custom XPU platform page. Platform-level configurations are illustrative/customer-specific; not all are volume products."
+        },
+        {
+          "id": "broadcom-meta-xpu",
+          "title": "Broadcom and Meta extend partnership for multi-gigawatt custom silicon",
+          "url": "https://www.broadcom.com/company/news/product-releases/64236",
+          "publisher": "Broadcom",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-04-14",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement dated 2026-04-14. Describes multi-year collaboration and a 2nm MTIA accelerator; no public chip-level datasheet."
+        }
+      ],
       "references": [
         {
           "id": "ref-broadcom-1",
@@ -1872,6 +2084,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-broadcom-xpu-platform",
+          "label": "Broadcom 3.5D XDSiP custom XPU platform",
+          "url": "https://www.broadcom.com/info/ai/3point5d",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Customer-specific platform, not a universal merchant SKU."
+        },
+        {
+          "id": "ref-broadcom-meta-xpu",
+          "label": "Broadcom–Meta multi-generation XPU partnership",
+          "url": "https://www.broadcom.com/company/news/product-releases/64236",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-04-14",
+          "checked_at": "2026-11-06",
+          "notes": "2nm MTIA collaboration announcement; chip specifications remain undisclosed."
         }
       ]
     },
@@ -4140,12 +4372,220 @@
       "category": "Startups",
       "directory_anchor": "Tenstorrent",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png",
-      "summary": "Tenstorrent (Jim Keller–led) builds Tensix-based AI processors as scalable chiplet meshes with an open software stack (TT-Metalium). Wormhole-generation cards are shipping into developer and rack deployments; Blackhole is the next architecture step toward higher-density train/infer systems.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Tenstorrent's Blackhole p150b is documented with card- and chip-level boundaries. Galaxy Blackhole system availability is tracked separately from processor/card specification.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "tenstorrent-blackhole-p150b",
+          "name": "Tenstorrent Blackhole p150b",
+          "product_type": "asic",
+          "architecture": "Tensix manycore processor with integrated RISC-V control cores and GDDR6",
+          "generation": "Blackhole",
+          "family": "Tenstorrent Blackhole",
+          "process_node": "6nm",
+          "market_segment": "Developer cards and scalable AI inference systems",
+          "availability": "shipping",
+          "form_factor": "PCIe add-in card, passive-cooled",
+          "announced_at": "2025-04-03",
+          "claim_ids": [
+            "blackhole-tensix-cores",
+            "blackhole-riscv-cores",
+            "blackhole-sram",
+            "blackhole-memory",
+            "blackhole-memory-bandwidth",
+            "blackhole-fp8-compute",
+            "blackhole-board-power"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2025-04-03",
+              "evidence_id": "tenstorrent-blackhole-launch",
+              "notes": "Blackhole cards launched and became available to order."
+            },
+            {
+              "status": "shipping",
+              "effective_at": "2026-05-04",
+              "evidence_id": "tenstorrent-galaxy-production",
+              "notes": "Galaxy Blackhole entered production and volume shipping."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "blackhole-tensix-cores",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "architecture",
+          "statement": "The Blackhole processor contains 120 Tensix cores.",
+          "value": 120,
+          "unit": "cores",
+          "scope": "Per Blackhole processor.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "blackhole-riscv-cores",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "architecture",
+          "statement": "The Blackhole processor integrates 16 SiFive x280 RISC-V cores.",
+          "value": 16,
+          "unit": "RISC-V cores",
+          "scope": "Per Blackhole processor.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "blackhole-sram",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "memory_capacity",
+          "statement": "The Blackhole processor integrates 180 MB SRAM.",
+          "value": 180,
+          "unit": "MB SRAM",
+          "scope": "On-chip SRAM per processor.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "blackhole-memory",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "memory_capacity",
+          "statement": "The p150b card provides up to 32 GB GDDR6.",
+          "value": 32,
+          "unit": "GB GDDR6",
+          "scope": "Per p150b card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "blackhole-memory-bandwidth",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "memory_bandwidth",
+          "statement": "The p150b card provides 512 GB/s memory bandwidth.",
+          "value": 512,
+          "unit": "GB/s",
+          "scope": "Per p150b card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "blackhole-fp8-compute",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "compute",
+          "statement": "Tenstorrent lists 664 TFLOPS at BLOCKFP8 for the Blackhole card.",
+          "value": 664,
+          "unit": "TFLOPS BLOCKFP8",
+          "scope": "Per p150b card; BLOCKFP8 vendor-defined format, not assumed equivalent to IEEE FP8.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "mixed",
+            "sparsity": "unspecified"
+          },
+          "notes": "BLOCKFP8 is retained verbatim and is not normalized to standard FP8."
+        },
+        {
+          "id": "blackhole-board-power",
+          "subject_type": "product",
+          "subject_id": "tenstorrent-blackhole-p150b",
+          "topic": "power",
+          "statement": "The p150b card has a 300 W total board power specification.",
+          "value": 300,
+          "unit": "W TBP",
+          "scope": "Per p150b card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "tenstorrent-blackhole-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "tenstorrent-blackhole-specs",
+          "title": "Blackhole PCIe Cards — specifications",
+          "url": "https://docs.tenstorrent.com/aibs/blackhole/",
+          "publisher": "Tenstorrent",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official hardware documentation. BLOCKFP8 is retained as vendor-defined precision."
+        },
+        {
+          "id": "tenstorrent-blackhole-launch",
+          "title": "Tenstorrent launches Blackhole developer products",
+          "url": "https://tenstorrent.com/en/newsroom/tenstorrent-launches-blackhole-developer-products-at-tenstorrent-dev-day",
+          "publisher": "Tenstorrent",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-04-03",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official launch announcement dated 2025-04-03."
+        },
+        {
+          "id": "tenstorrent-galaxy-production",
+          "title": "TT-Deploy: Galaxy Blackhole in production and shipping",
+          "url": "https://tenstorrent.com/newsroom/tt-deploy",
+          "publisher": "Tenstorrent",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-05-04",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official May 2026 update: Galaxy Blackhole production and volume shipping; system-level evidence, not a separate chip specification."
+        }
+      ],
       "references": [
         {
           "id": "ref-tenstorrent-1",
@@ -4166,6 +4606,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-tenstorrent-blackhole-specs",
+          "label": "Blackhole PCIe Cards specification",
+          "url": "https://docs.tenstorrent.com/aibs/blackhole/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Board and processor specifications."
+        },
+        {
+          "id": "ref-tenstorrent-galaxy-production",
+          "label": "TT-Deploy production update",
+          "url": "https://tenstorrent.com/newsroom/tt-deploy",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-05-04",
+          "checked_at": "2026-11-06",
+          "notes": "Confirms Galaxy Blackhole production and volume shipping."
         }
       ]
     },
@@ -4175,12 +4635,95 @@
       "category": "Startups",
       "directory_anchor": "Etched",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Etched_logo.png",
-      "summary": "Etched builds ASICs purpose-built for Transformer inference (Sohu) rather than general-purpose GPU programmability—betting that specialization wins tokens/sec and energy efficiency for LLM serving. TSMC-manufactured silicon and “frontier inference cluster” messaging mark a fast rise from 2024 Series A through 2026 scale-up.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Etched's Sohu is a transformer-specialized inference ASIC delivered as a rack-scale system. Public sources support process-node and first-rack milestones, but not a full public chip datasheet; unsupported compute and memory figures are omitted.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "etched-sohu",
+          "name": "Etched Sohu Transformer Inference ASIC",
+          "product_type": "asic",
+          "architecture": "Transformer-specialized inference ASIC; rack-level co-design with proprietary low-voltage inference and shared memory fabric",
+          "generation": "Sohu",
+          "family": "Etched Sohu",
+          "process_node": "TSMC N4P",
+          "market_segment": "Transformer inference and frontier inference clusters",
+          "availability": "shipping",
+          "form_factor": "Rack-scale inference system",
+          "claim_ids": [
+            "etched-sohu-a0",
+            "etched-sohu-first-rack"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2026-06-30",
+              "evidence_id": "etched-sohu-cluster",
+              "notes": "Etched disclosed A0 silicon and rack-scale customer validation."
+            },
+            {
+              "status": "shipping",
+              "effective_at": "2026-08-18",
+              "evidence_id": "etched-sohu-first-rack",
+              "notes": "Etched announced first rack shipment to Jane Street."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "etched-sohu-a0",
+          "subject_type": "product",
+          "subject_id": "etched-sohu",
+          "topic": "process_node",
+          "statement": "Etched reports that its Sohu A0 silicon returned from TSMC N4P.",
+          "scope": "Company-reported first-silicon milestone; not a public production datasheet.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "etched-sohu-cluster"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "etched-sohu-first-rack",
+          "subject_type": "product",
+          "subject_id": "etched-sohu",
+          "topic": "deployment",
+          "statement": "Etched announced shipment of its first rack to Jane Street.",
+          "scope": "First customer rack shipment; does not disclose production volume or independent benchmark results.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "etched-sohu-first-rack"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "etched-sohu-cluster",
+          "title": "Frontier Inference Clusters",
+          "url": "https://www.etched.com/progress/frontier-inference-clusters",
+          "publisher": "Etched",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-06-30",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official company update dated 2026-06-30. Describes A0 silicon, TSMC N4P and customer rack validation; detailed chip specifications not publicly disclosed."
+        },
+        {
+          "id": "etched-sohu-first-rack",
+          "title": "From Zero to One",
+          "url": "https://www.etched.com/progress/from-zero-to-one",
+          "publisher": "Etched",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-08-18",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official company update dated 2026-08-18 announcing first rack shipment to Jane Street; not an independent performance validation."
+        }
+      ],
       "references": [
         {
           "id": "ref-etched-1",
@@ -4191,6 +4734,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-etched-sohu-cluster",
+          "label": "Etched Frontier Inference Clusters",
+          "url": "https://www.etched.com/progress/frontier-inference-clusters",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-06-30",
+          "checked_at": "2026-11-06",
+          "notes": "Architecture and A0 milestone; numerical product specifications not publicly disclosed."
+        },
+        {
+          "id": "ref-etched-sohu-first-rack",
+          "label": "Etched first Sohu rack shipment",
+          "url": "https://www.etched.com/progress/from-zero-to-one",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-08-18",
+          "checked_at": "2026-11-06",
+          "notes": "Company announcement of first rack shipment to Jane Street."
         }
       ]
     },
@@ -4225,12 +4788,209 @@
       "category": "Startups",
       "directory_anchor": "SambaNova",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/SambaNova_logo.png",
-      "summary": "SambaNova’s Reconfigurable Dataflow Unit (RDU) maps full model graphs onto a dataflow fabric for enterprise and agentic inference. SN40L established the GenAI-era platform; SN50 (5th gen) scales compute and network bandwidth for large agentic deployments with SambaNova’s full-stack software.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "SambaNova's SN50 is its fifth-generation RDU for memory-bound decode and agentic inference. Per-chip compute/memory specifications are separated from the system-level 256-RDU scale-up claim.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "sambanova-sn50-rdu",
+          "name": "SambaNova SN50 Reconfigurable Dataflow Unit",
+          "product_type": "asic",
+          "architecture": "Fifth-generation Reconfigurable Dataflow Unit with dataflow execution and three-tier memory",
+          "generation": "SN50 / fifth-generation RDU",
+          "family": "SambaNova RDU",
+          "process_node": "TSMC 5nm",
+          "market_segment": "Agentic AI inference and decode",
+          "availability": "announced",
+          "form_factor": "RDU accelerator chip",
+          "claim_ids": [
+            "sn50-bf16",
+            "sn50-fp8",
+            "sn50-sram",
+            "sn50-hbm",
+            "sn50-ddr",
+            "sn50-scaleup"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2026-09-02",
+              "evidence_id": "sambanova-sn50-product",
+              "notes": "SN50 architecture and scaling described at Hot Chips 2026."
+            },
+            {
+              "status": "announced",
+              "effective_at": "2026-11-03",
+              "evidence_id": "sambanova-sn50-supermicro",
+              "notes": "Supermicro announced plans for an initial 10,000 SN50 RDU chips; production availability is not inferred from the plan."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "sn50-bf16",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "compute",
+          "statement": "SambaNova lists 1,600 TFLOPS BF16 compute for SN50.",
+          "value": 1600,
+          "unit": "TFLOPS BF16",
+          "scope": "Per RDU chip; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "sn50-fp8",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "compute",
+          "statement": "SambaNova lists 3,200 TFLOPS FP8 compute for SN50.",
+          "value": 3200,
+          "unit": "TFLOPS FP8",
+          "scope": "Per RDU chip; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "sn50-sram",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "memory_capacity",
+          "statement": "SN50 integrates 432 MB on-chip SRAM.",
+          "value": 432,
+          "unit": "MB SRAM",
+          "scope": "Per RDU chip.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "sn50-hbm",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "memory_capacity",
+          "statement": "SN50 integrates 64 GB HBM2E.",
+          "value": 64,
+          "unit": "GB HBM2E",
+          "scope": "Per RDU chip.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "sn50-ddr",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "memory_capacity",
+          "statement": "SN50 supports up to 512 GB DDR5 in its three-tier memory architecture.",
+          "value": 512,
+          "unit": "GB DDR5 (up to)",
+          "scope": "Per RDU chip / associated memory tier; vendor states up to 512 GB.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "sn50-scaleup",
+          "subject_type": "product",
+          "subject_id": "sambanova-sn50-rdu",
+          "topic": "system_scale",
+          "statement": "SambaNova states SN50 systems can scale up to 256 RDUs.",
+          "value": 256,
+          "unit": "RDUs",
+          "scope": "System scale-up limit; not per-chip capability.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "sambanova-sn50-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "system",
+            "operation": "system_configuration"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "sambanova-sn50-specs",
+          "title": "Reconfigurable Dataflow Unit (RDU) Chip — SN50 specifications",
+          "url": "https://sambanova.ai/products/rdu-ai-chips",
+          "publisher": "SambaNova",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official product page lists SN50 1,600 TFLOPS BF16, 3,200 TFLOPS FP8, 432 MB SRAM, 64 GB HBM2E, up to 512 GB DDR5, and scale-up to 256 RDUs."
+        },
+        {
+          "id": "sambanova-sn50-product",
+          "title": "Hot Chips 2026: Dataflow at Scale",
+          "url": "https://sambanova.ai/blog/hot-chips-2026-dataflow-at-scale",
+          "publisher": "SambaNova",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-09-02",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Hot Chips 2026 architecture presentation; complements current SN50 product specifications."
+        },
+        {
+          "id": "sambanova-sn50-supermicro",
+          "title": "SambaNova SN50 Chips to Power Supermicro's New Inference Racks",
+          "url": "https://sambanova.ai/press/sambanova-and-supermicro-partnership",
+          "publisher": "SambaNova",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-11-03",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement dated 2026-11-03; Supermicro initially plans for 10,000 SN50 chips. A planned order is not independently verified shipment."
+        }
+      ],
       "references": [
         {
           "id": "ref-samba-nova-1",
@@ -4241,6 +5001,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-sambanova-sn50-specs",
+          "label": "SN50 RDU product specifications",
+          "url": "https://sambanova.ai/products/rdu-ai-chips",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Official chip specifications and memory tiers."
+        },
+        {
+          "id": "ref-sambanova-sn50-supermicro",
+          "label": "Supermicro SN50 rack collaboration",
+          "url": "https://sambanova.ai/press/sambanova-and-supermicro-partnership",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-11-03",
+          "checked_at": "2026-11-06",
+          "notes": "Announced initial plan for 10,000 chips; not a verified shipment record."
         }
       ]
     },
@@ -4310,12 +5090,264 @@
       "category": "Startups",
       "directory_anchor": "Furiosa",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Furiosa_logo.png",
-      "summary": "Korea-based FuriosaAI builds Tensor Contraction Processor (TCP) accelerators for datacenter inference. After earlier Warboy edge/vision chips, RNGD (TSMC 5nm) targets LLM and agentic serving in air-cooled multi-card servers, with a Broadcom collaboration to scale into multi-die Ethernet/PCIe platforms.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "FuriosaAI's RNGD is a production-stage inference accelerator. Per-card metrics and the eight-card NXT server are represented separately to avoid mixing chip and system specifications.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "furiosa-rngd",
+          "name": "FuriosaAI RNGD Tensor Contraction Processor",
+          "product_type": "npu",
+          "architecture": "Tensor Contraction Processor (TCP)",
+          "generation": "Second-generation RNGD",
+          "family": "FuriosaAI RNGD",
+          "process_node": "TSMC 5nm",
+          "market_segment": "Data-center LLM and multimodal inference",
+          "availability": "production",
+          "form_factor": "PCIe dual-slot accelerator card",
+          "claim_ids": [
+            "rngd-fp8",
+            "rngd-bf16",
+            "rngd-hbm",
+            "rngd-bandwidth",
+            "rngd-power"
+          ],
+          "availability_history": [
+            {
+              "status": "production",
+              "effective_at": "2026-01",
+              "evidence_id": "furiosa-rngd-production",
+              "notes": "Furiosa says RNGD reached mass production in January 2026; exact day not stated."
+            }
+          ]
+        },
+        {
+          "id": "furiosa-nxt-rngd-server",
+          "name": "FuriosaAI NXT RNGD Server",
+          "product_type": "system",
+          "architecture": "Eight RNGD TCP accelerators in a turnkey 4U server",
+          "generation": "NXT RNGD Server",
+          "family": "FuriosaAI RNGD",
+          "market_segment": "On-premises and cloud inference",
+          "availability": "unknown",
+          "form_factor": "4U rackmount server",
+          "system_configuration": "8 × RNGD cards; dual AMD EPYC 9354; 1 TB DDR5",
+          "claim_ids": [
+            "nxt-rngd-fp8",
+            "nxt-rngd-hbm",
+            "nxt-rngd-power"
+          ],
+          "related_product_ids": [
+            "furiosa-rngd"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "rngd-fp8",
+          "subject_type": "product",
+          "subject_id": "furiosa-rngd",
+          "topic": "compute",
+          "statement": "Furiosa specifies 512 TFLOPS FP8 for RNGD.",
+          "value": 512,
+          "unit": "TFLOPS FP8",
+          "scope": "Per RNGD accelerator chip/card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-rngd-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "rngd-bf16",
+          "subject_type": "product",
+          "subject_id": "furiosa-rngd",
+          "topic": "compute",
+          "statement": "Furiosa specifies 256 TFLOPS BF16 for RNGD.",
+          "value": 256,
+          "unit": "TFLOPS BF16",
+          "scope": "Per RNGD accelerator chip/card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-rngd-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "rngd-hbm",
+          "subject_type": "product",
+          "subject_id": "furiosa-rngd",
+          "topic": "memory_capacity",
+          "statement": "RNGD integrates 48 GB HBM3.",
+          "value": 48,
+          "unit": "GB HBM3",
+          "scope": "Per RNGD accelerator.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-rngd-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rngd-bandwidth",
+          "subject_type": "product",
+          "subject_id": "furiosa-rngd",
+          "topic": "memory_bandwidth",
+          "statement": "RNGD provides 1.5 TB/s HBM bandwidth.",
+          "value": 1.5,
+          "unit": "TB/s",
+          "scope": "Per RNGD accelerator.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-rngd-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rngd-power",
+          "subject_type": "product",
+          "subject_id": "furiosa-rngd",
+          "topic": "power",
+          "statement": "Furiosa's current developer documentation lists 180 W TDP for RNGD.",
+          "value": 180,
+          "unit": "W TDP",
+          "scope": "Per accelerator card; current 2026 developer documentation.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-rngd-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        },
+        {
+          "id": "nxt-rngd-fp8",
+          "subject_type": "product",
+          "subject_id": "furiosa-nxt-rngd-server",
+          "topic": "compute",
+          "statement": "NXT RNGD Server provides 4,096 TFLOPS FP8 across eight RNGD processors.",
+          "value": 4096,
+          "unit": "TFLOPS FP8",
+          "scope": "Per 8-card 4U server; aggregate system figure.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-nxt-server-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "server",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "nxt-rngd-hbm",
+          "subject_type": "product",
+          "subject_id": "furiosa-nxt-rngd-server",
+          "topic": "memory_capacity",
+          "statement": "NXT RNGD Server provides 384 GB HBM3 across eight cards.",
+          "value": 384,
+          "unit": "GB HBM3",
+          "scope": "Aggregate across eight accelerators in one server.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-nxt-server-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "server",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "nxt-rngd-power",
+          "subject_type": "product",
+          "subject_id": "furiosa-nxt-rngd-server",
+          "topic": "power",
+          "statement": "NXT RNGD Server system power usage is listed as 3,000 W.",
+          "value": 3000,
+          "unit": "W system power",
+          "scope": "Per 4U server; system power, not card TDP.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "furiosa-nxt-server-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "server",
+            "operation": "power"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "furiosa-rngd-specs",
+          "title": "RNGD hardware specifications — 2026 developer documentation",
+          "url": "https://developer.furiosa.ai/latest/en/overview/rngd.html",
+          "publisher": "FuriosaAI",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official developer documentation: 5nm, 512 TFLOPS FP8, 256 TFLOPS BF16, 48GB HBM3, 1.5TB/s, 180W TDP."
+        },
+        {
+          "id": "furiosa-rngd-production",
+          "title": "FuriosaAI closes $620 million Series D; RNGD in mass production",
+          "url": "https://furiosa.ai/blog/furiosaai-620-million-series-d",
+          "publisher": "FuriosaAI",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-10-28",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official update dated 2026-10-28. Company says RNGD reached mass production in January 2026; 20,000 cards planned for 2026. Volume figure is vendor plan, not independently audited shipment."
+        },
+        {
+          "id": "furiosa-nxt-server-specs",
+          "title": "NXT RNGD Server specifications",
+          "url": "https://furiosa.ai/rngd-server",
+          "publisher": "FuriosaAI",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official turnkey server page: 8 accelerators, 4,096 TFLOPS FP8, 384GB HBM3 and 3,000W system power."
+        }
+      ],
       "references": [
         {
           "id": "ref-furiosa-1",
@@ -4336,6 +5368,36 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-furiosa-rngd-specs",
+          "label": "RNGD developer hardware specification",
+          "url": "https://developer.furiosa.ai/latest/en/overview/rngd.html",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Per-accelerator chip/card specifications."
+        },
+        {
+          "id": "ref-furiosa-rngd-production",
+          "label": "RNGD mass-production update",
+          "url": "https://furiosa.ai/blog/furiosaai-620-million-series-d",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-10-28",
+          "checked_at": "2026-11-06",
+          "notes": "Company-reported mass-production status and 2026 production plan."
+        },
+        {
+          "id": "ref-furiosa-nxt-server",
+          "label": "NXT RNGD Server",
+          "url": "https://furiosa.ai/rngd-server",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "System-level configuration and aggregate specifications."
         }
       ]
     },
@@ -4395,12 +5457,76 @@
       "category": "Startups",
       "directory_anchor": "d-matrix",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/d-matrix_logo.png",
-      "summary": "d-Matrix builds digital compute-in-memory accelerators (Corsair) for low-latency, high-efficiency datacenter LLM inference—contrasting analog CIM approaches with a digital datapath while still attacking the memory-wall bottleneck that dominates decode.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "d-Matrix Corsair is represented as a platform/system record because public evidence establishes platform production and its decode role, not a complete independently validated chip specification.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "dmatrix-corsair-platform",
+          "name": "d-Matrix Corsair Inference Accelerator Platform",
+          "product_type": "system",
+          "architecture": "Digital in-memory compute accelerator platform for low-latency decode and heterogeneous disaggregated inference",
+          "generation": "Corsair",
+          "family": "d-Matrix Corsair",
+          "market_segment": "Data-center LLM inference, especially decode",
+          "availability": "production",
+          "form_factor": "Rack-scale accelerator platform",
+          "claim_ids": [
+            "corsair-full-production",
+            "corsair-disaggregated-inference"
+          ],
+          "availability_history": [
+            {
+              "status": "production",
+              "effective_at": "2026-06-09",
+              "evidence_id": "corsair-full-production",
+              "notes": "d-Matrix announced Corsair entered full production."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "corsair-full-production",
+          "subject_type": "product",
+          "subject_id": "dmatrix-corsair-platform",
+          "topic": "availability",
+          "statement": "d-Matrix announced that the Corsair inference accelerator platform entered full production.",
+          "scope": "Platform-level status as announced by vendor on 2026-06-09; volume shipments were to begin for priority customers.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "corsair-full-production"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "corsair-disaggregated-inference",
+          "subject_type": "product",
+          "subject_id": "dmatrix-corsair-platform",
+          "topic": "architecture",
+          "statement": "d-Matrix positions Corsair for decode in heterogeneous inference systems paired with GPUs for prefill.",
+          "scope": "Vendor-described deployment model; not a universal workload-performance guarantee.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "corsair-full-production"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "corsair-full-production",
+          "title": "Corsair AI Inference Platform Enters Full Production",
+          "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/",
+          "publisher": "d-Matrix",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-06-09",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement dated 2026-06-09. Describes full production and planned volume shipments; no detailed chip specification in this announcement."
+        }
+      ],
       "references": [
         {
           "id": "ref-d-matrix-1",
@@ -4505,12 +5631,222 @@
       "category": "China AI Accelerator Vendors",
       "directory_anchor": "HuaweiAscend",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/HiSilicon_logo.png",
-      "summary": "Huawei’s Ascend line (HiSilicon) is China’s most widely deployed domestic training/inference accelerator family. Ascend 910 established the high-end; 910B/910C scaled under export controls into Atlas servers and SuperPoD / CloudMatrix supernodes. Ascend 950-class (950DT training / 950PR inference messaging) and Atlas 950 SuperPoD push UnifiedBus optical scale-up to thousands of NPUs as a single logical node, with Cann/MindSpore as the software stack.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Huawei Ascend 950PR and 950DT are separately represented by their different memory configurations and target phases. The family-level 2026 commercial-deployment statement is qualified and is not treated as independent verification of each card SKU.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "ascend-950pr",
+          "name": "Huawei Ascend 950PR",
+          "product_type": "npu",
+          "architecture": "SIMD/SIMT; HiBL 1.0 memory variant; Prefill and recommendation oriented",
+          "generation": "Ascend 950",
+          "family": "Huawei Ascend 950",
+          "market_segment": "AI prefill and recommendation",
+          "availability": "announced",
+          "form_factor": "Accelerator card / supernode server",
+          "claim_ids": [
+            "ascend950pr-fp8",
+            "ascend950pr-interconnect",
+            "ascend950pr-positioning"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2025-09-18",
+              "evidence_id": "huawei-ascend-roadmap",
+              "notes": "Huawei announced the 950PR roadmap and planned Q1 2026 introduction; no distinct 950PR shipment evidence is used here."
+            }
+          ]
+        },
+        {
+          "id": "ascend-950dt",
+          "name": "Huawei Ascend 950DT",
+          "product_type": "npu",
+          "architecture": "SIMD/SIMT; HiZQ 2.0 HBM variant; Decode and training oriented",
+          "generation": "Ascend 950",
+          "family": "Huawei Ascend 950",
+          "market_segment": "AI decode and training",
+          "availability": "shipping",
+          "form_factor": "Accelerator card / Atlas 950 supernode",
+          "claim_ids": [
+            "ascend950dt-memory",
+            "ascend950dt-bandwidth",
+            "ascend950dt-interconnect",
+            "ascend950dt-positioning"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2025-09-18",
+              "evidence_id": "huawei-ascend-roadmap",
+              "notes": "Huawei announced Ascend 950DT roadmap and planned Q4 2026 introduction."
+            },
+            {
+              "status": "shipping",
+              "effective_at": "2026-09",
+              "evidence_id": "huawei-ascend-2026",
+              "notes": "Huawei stated Ascend 950 supernodes had entered commercial scale; family-level evidence, not independent verification of each card SKU."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "ascend950pr-fp8",
+          "subject_type": "product",
+          "subject_id": "ascend-950pr",
+          "topic": "compute",
+          "statement": "Huawei lists 1 PFLOPS FP8 compute for the Ascend 950 series, including 950PR.",
+          "value": 1,
+          "unit": "PFLOPS FP8",
+          "scope": "Per Ascend 950 die; vendor roadmap figure, not an independent benchmark.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "matrix",
+            "precision": "FP8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "ascend950pr-interconnect",
+          "subject_type": "product",
+          "subject_id": "ascend-950pr",
+          "topic": "interconnect",
+          "statement": "Huawei specifies 2 TB/s interconnect bandwidth for the Ascend 950 series.",
+          "value": 2,
+          "unit": "TB/s",
+          "scope": "Per accelerator; keynote summary does not fully detail directionality.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect"
+          }
+        },
+        {
+          "id": "ascend950pr-positioning",
+          "subject_type": "product",
+          "subject_id": "ascend-950pr",
+          "topic": "architecture",
+          "statement": "Huawei positions Ascend 950PR for inference Prefill and recommendation workloads, using HiBL 1.0.",
+          "scope": "Vendor architecture positioning; workload fit is not independently benchmarked.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06"
+        },
+        {
+          "id": "ascend950dt-memory",
+          "subject_type": "product",
+          "subject_id": "ascend-950dt",
+          "topic": "memory_capacity",
+          "statement": "Huawei specifies 144 GB HiZQ 2.0 memory for Ascend 950DT.",
+          "value": 144,
+          "unit": "GB HiZQ 2.0",
+          "scope": "Per accelerator chip; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "ascend950dt-bandwidth",
+          "subject_type": "product",
+          "subject_id": "ascend-950dt",
+          "topic": "memory_bandwidth",
+          "statement": "Huawei specifies 4 TB/s memory bandwidth for Ascend 950DT.",
+          "value": 4,
+          "unit": "TB/s",
+          "scope": "Per accelerator chip; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "ascend950dt-interconnect",
+          "subject_type": "product",
+          "subject_id": "ascend-950dt",
+          "topic": "interconnect",
+          "statement": "Huawei specifies 2 TB/s interconnect bandwidth for Ascend 950DT.",
+          "value": 2,
+          "unit": "TB/s",
+          "scope": "Per accelerator; vendor keynote summary figure.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "interconnect"
+          }
+        },
+        {
+          "id": "ascend950dt-positioning",
+          "subject_type": "product",
+          "subject_id": "ascend-950dt",
+          "topic": "architecture",
+          "statement": "Huawei positions Ascend 950DT for inference Decode and training workloads, using HiZQ 2.0.",
+          "scope": "Vendor architecture positioning; workload fit is not independently benchmarked.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "huawei-ascend-roadmap"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "huawei-ascend-roadmap",
+          "title": "Huawei Connect 2025 keynote: Ascend roadmap and Atlas 950",
+          "url": "https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech",
+          "publisher": "Huawei",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-09-18",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official keynote dated 2025-09-18. Lists 950PR/DT architecture, memory, bandwidth and roadmap; vendor-reported specifications."
+        },
+        {
+          "id": "huawei-ascend-2026",
+          "title": "Huawei Connect 2026: Ascend supernode deployment update",
+          "url": "https://www.huawei.com/cn/news/2026/9/hc-wang-keynote",
+          "publisher": "Huawei",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2026-09-01",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official 2026 update states Ascend 950 supernodes have reached commercial scale; it does not independently establish availability of every 950 card SKU."
+        }
+      ],
       "references": [
         {
           "id": "ref-huawei-ascend-1",
@@ -4531,6 +5867,26 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-huawei-ascend-roadmap",
+          "label": "Huawei Connect 2025 Ascend roadmap and architecture keynote",
+          "url": "https://www.huawei.com/cn/news/2025/9/hc-xu-keynote-speech",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2025-09-18",
+          "checked_at": "2026-11-06",
+          "notes": "Official source for 950PR/DT architecture and vendor specifications."
+        },
+        {
+          "id": "ref-huawei-ascend-2026",
+          "label": "Huawei Connect 2026 Ascend supernode deployment update",
+          "url": "https://www.huawei.com/cn/news/2026/9/hc-wang-keynote",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2026-09-01",
+          "checked_at": "2026-11-06",
+          "notes": "Commercial deployment statement applies to 950 supernodes; individual SKU availability is not separately audited."
         }
       ]
     },
@@ -4540,12 +5896,195 @@
       "category": "China AI Accelerator Vendors",
       "directory_anchor": "Cambricon",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png",
-      "summary": "Cambricon is China’s leading pure-play AI-chip vendor, spanning edge IP/SoCs and cloud MLU / Siyuan accelerators. After an early edge-IP era, the company refocused on cloud training/inference cards for Chinese internet and intelligent-computing customers, with aggressive 2026 volume plans.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Cambricon develops MLU accelerators and the NeuWare software stack. This structured record covers the publicly documented MLU370-S4/S8 card family; newer roadmap or market-reported products remain unstructured until authoritative product specifications are available.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "mlu370-s4-s8",
+          "name": "Cambricon MLU370-S4/S8 Accelerator Card",
+          "product_type": "npu",
+          "architecture": "Cambricon MLUarch03; chiplet-based architecture",
+          "generation": "Siyuan 370",
+          "family": "Cambricon MLU370",
+          "process_node": "7nm",
+          "market_segment": "Cloud AI inference and mixed AI workloads",
+          "availability": "shipping",
+          "form_factor": "PCIe Gen4 half-height, half-length single-slot accelerator card",
+          "claim_ids": [
+            "mlu370-int8",
+            "mlu370-fp16",
+            "mlu370-bf16",
+            "mlu370-fp32",
+            "mlu370-memory",
+            "mlu370-bandwidth",
+            "mlu370-power"
+          ],
+          "compatibility_platform_ids": [
+            "cambricon"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "mlu370-int8",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 192 TOPS INT8 peak performance for MLU370-S4/S8.",
+          "value": 192,
+          "unit": "TOPS INT8",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "INT8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-fp16",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 72 TFLOPS FP16 peak performance for MLU370-S4/S8.",
+          "value": 72,
+          "unit": "TFLOPS FP16",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-bf16",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 72 TFLOPS BF16 peak performance for MLU370-S4/S8.",
+          "value": 72,
+          "unit": "TFLOPS BF16",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-fp32",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 18 TFLOPS FP32 peak performance for MLU370-S4/S8.",
+          "value": 18,
+          "unit": "TFLOPS FP32",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP32",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-memory",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "memory_capacity",
+          "statement": "Cambricon lists 24 GB / 48 GB LPDDR5 memory options for MLU370-S4/S8.",
+          "value": "24 GB / 48 GB",
+          "unit": "LPDDR5",
+          "scope": "Per accelerator card; capacity varies by card variant, source does not map each capacity to S4 vs S8 in the same table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "notes": "Variant capacity is preserved as a string because the official page does not explicitly map the two capacities to each SKU in the cited specification table."
+        },
+        {
+          "id": "mlu370-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "memory_bandwidth",
+          "statement": "Cambricon lists 307.2 GB/s memory bandwidth for MLU370-S4/S8.",
+          "value": 307.2,
+          "unit": "GB/s",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "mlu370-power",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "power",
+          "statement": "Cambricon lists 75 W maximum thermal design power for MLU370-S4/S8.",
+          "value": 75,
+          "unit": "W TDP",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "cambricon-mlu370-specs",
+          "title": "MLU370-S4/S8 accelerator card specifications",
+          "url": "https://www.cambricon.com/index.php?a=lists&c=index&catid=367&m=content",
+          "publisher": "Cambricon",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Cambricon product specification page: MLUarch03, 7nm, 192 TOPS INT8, 72 TFLOPS FP16/BF16, 24GB/48GB LPDDR5, 307.2GB/s, PCIe Gen4 and 75W."
+        }
+      ],
       "references": [
         {
           "id": "ref-cambricon-1",
@@ -4566,6 +6105,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-cambricon-mlu370",
+          "label": "Cambricon MLU370-S4/S8 product specifications",
+          "url": "https://www.cambricon.com/index.php?a=lists&c=index&catid=367&m=content",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Official product specifications; 24GB/48GB capacity options retained without assigning each capacity to an individual card variant."
         }
       ]
     },
@@ -5246,6 +6795,254 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "rebellions",
+      "display_name": "Rebellions — AI inference NPUs",
+      "category": "Startups",
+      "directory_anchor": "Rebellions",
+      "logo_url": "https://rebellions.ai/favicon.ico",
+      "summary": "Rebellions develops inference-focused NPUs. ATOM and ATOM-Max represent its first-generation products; REBEL-Quad is a chiplet-based UCIe-Advanced follow-on aimed at larger data-center inference systems.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "rebellions-atom",
+          "name": "Rebellions ATOM",
+          "product_type": "npu",
+          "architecture": "Inference-optimized NPU",
+          "generation": "ATOM first generation",
+          "family": "Rebellions ATOM",
+          "market_segment": "Enterprise and small data-center inference",
+          "availability": "production",
+          "form_factor": "Single-slot PCIe Gen5 accelerator card",
+          "claim_ids": [
+            "atom-fp16",
+            "atom-int8",
+            "atom-memory",
+            "atom-bandwidth",
+            "atom-power"
+          ],
+          "availability_history": [
+            {
+              "status": "production",
+              "effective_at": "2025-09-30",
+              "evidence_id": "rebellions-roadmap",
+              "notes": "Rebellions states ATOM and ATOM-Max are in mass production."
+            }
+          ]
+        },
+        {
+          "id": "rebellions-rebel-quad",
+          "name": "Rebellions REBEL-Quad",
+          "product_type": "asic",
+          "architecture": "Chiplet-based UCIe-Advanced AI inference accelerator",
+          "generation": "Second generation",
+          "family": "Rebellions REBEL",
+          "market_segment": "Large-scale data-center inference",
+          "availability": "announced",
+          "form_factor": "Chiplet-based accelerator",
+          "claim_ids": [
+            "rebelquad-hbm",
+            "rebelquad-architecture"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2025-08",
+              "evidence_id": "rebellions-roadmap",
+              "notes": "REBEL-Quad introduced in August 2025; exact day not stated in linked announcement."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "atom-fp16",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "compute",
+          "statement": "Rebellions lists 32 TFLOPS FP16 for ATOM.",
+          "value": 32,
+          "unit": "TFLOPS FP16",
+          "scope": "Per ATOM accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "atom-int8",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "compute",
+          "statement": "Rebellions lists 128 TOPS INT8 for ATOM.",
+          "value": 128,
+          "unit": "TOPS INT8",
+          "scope": "Per ATOM accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "INT8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "atom-memory",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "memory_capacity",
+          "statement": "ATOM provides 16 GB GDDR6.",
+          "value": 16,
+          "unit": "GB GDDR6",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "atom-bandwidth",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "memory_bandwidth",
+          "statement": "ATOM provides 256 GB/s memory bandwidth.",
+          "value": 256,
+          "unit": "GB/s",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "atom-power",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "power",
+          "statement": "ATOM maximum power consumption is 85 W.",
+          "value": 85,
+          "unit": "W",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        },
+        {
+          "id": "rebelquad-hbm",
+          "subject_type": "product",
+          "subject_id": "rebellions-rebel-quad",
+          "topic": "memory_capacity",
+          "statement": "Rebellions describes REBEL-Quad with 144 GB HBM3E.",
+          "value": 144,
+          "unit": "GB HBM3E",
+          "scope": "Per REBEL-Quad accelerator; company announcement.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rebelquad-architecture",
+          "subject_type": "product",
+          "subject_id": "rebellions-rebel-quad",
+          "topic": "architecture",
+          "statement": "REBEL-Quad uses a chiplet-based UCIe-Advanced architecture.",
+          "scope": "Product architecture as described by Rebellions; no public full die/package specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-roadmap"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "rebellions-atom-specs",
+          "title": "ATOM product specifications",
+          "url": "https://rebellions.ai/rebellions-product/rbln-ca22/",
+          "publisher": "Rebellions",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official ATOM product page: 32 TFLOPS FP16, 128 TOPS INT8, 16GB GDDR6, 256GB/s and 85W."
+        },
+        {
+          "id": "rebellions-roadmap",
+          "title": "Rebellions raises $250M to advance next-generation AI infrastructure",
+          "url": "https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/",
+          "publisher": "Rebellions",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-09-30",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement: ATOM and ATOM-Max in mass production; REBEL-Quad introduced in August 2025, chiplet-based UCIe-Advanced with 144GB HBM3E."
+        }
+      ],
+      "references": [
+        {
+          "id": "ref-rebellions-atom-specs",
+          "label": "ATOM product specifications",
+          "url": "https://rebellions.ai/rebellions-product/rbln-ca22/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Per-card specifications."
+        },
+        {
+          "id": "ref-rebellions-roadmap",
+          "label": "REBEL-Quad product roadmap announcement",
+          "url": "https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2025-09-30",
+          "checked_at": "2026-11-06",
+          "notes": "Architecture and HBM capacity are vendor-reported; production timing is not inferred."
         }
       ]
     }

@@ -363,6 +363,13 @@
             "$ref": "#/$defs/id"
           },
           "uniqueItems": true
+        },
+        "availability_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/availability_history_item"
+          },
+          "description": "Dated, source-linked product lifecycle events in chronological order. The latest event status must equal availability."
         }
       }
     },
@@ -653,6 +660,41 @@
           "$ref": "#/$defs/id"
         },
         "benchmark_project_id": {
+          "$ref": "#/$defs/id"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "availability_history_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "effective_at",
+        "evidence_id",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "announced",
+            "sampling",
+            "shipping",
+            "production",
+            "roadmap",
+            "discontinued",
+            "unknown"
+          ]
+        },
+        "effective_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-(0[1-9]|1[0-2])(-([0-2][0-9]|3[01]))?$",
+          "description": "ISO date or month precision (YYYY-MM-DD or YYYY-MM) when source gives that precision."
+        },
+        "evidence_id": {
           "$ref": "#/$defs/id"
         },
         "notes": {

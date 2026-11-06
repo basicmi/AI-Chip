@@ -1021,6 +1021,19 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   line-height: 1.45;
 }
 .product-card-segment { color: var(--ink); }
+.product-lifecycle-note {
+  margin: .35rem 0 .55rem;
+  padding: .35rem .5rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border-left: 2px solid var(--teal);
+  font-size: 9px;
+  line-height: 1.45;
+}
+.product-lifecycle-list { margin: .55rem 0 0; padding-left: 1.1rem; }
+.product-lifecycle-item { margin: 0 0 .65rem; padding-left: .2rem; }
+.product-lifecycle-item strong { display: block; color: var(--ink); font-size: 10px; }
+.product-lifecycle-item p { margin: .2rem 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
 .product-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .55rem 0; }
 .product-tag {
   padding: .18rem .4rem;
