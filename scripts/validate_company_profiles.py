@@ -255,6 +255,31 @@ def main():
                 "announced", "sampling", "shipping", "production",
                 "roadmap", "discontinued", "unknown"
             }, f"{pwhere}: invalid availability")
+            history = product.get("availability_history", [])
+            check(isinstance(history, list), f"{pwhere}: availability_history must be an array")
+            previous_date = None
+            for hi, event in enumerate(history if isinstance(history, list) else []):
+                hwhere = f"{pwhere}.availability_history[{hi}]"
+                require(event, ["status", "effective_at", "evidence_id", "notes"], hwhere)
+                if not isinstance(event, dict):
+                    continue
+                check(event.get("status") in {
+                    "announced", "sampling", "shipping", "production",
+                    "roadmap", "discontinued", "unknown"
+                }, f"{hwhere}: invalid status")
+                check(valid_date(event.get("effective_at")), f"{hwhere}: invalid effective_at")
+                if valid_date(event.get("effective_at")):
+                    if previous_date is not None:
+                        check(event["effective_at"] >= previous_date,
+                              f"{hwhere}: events must be chronological")
+                    previous_date = event["effective_at"]
+                check(event.get("evidence_id") in {item.get("id") for item in evidence if isinstance(item, dict)},
+                      f"{hwhere}: unknown evidence_id {event.get('evidence_id')}")
+                check(isinstance(event.get("notes"), str) and bool(event["notes"].strip()),
+                      f"{hwhere}: notes must be non-empty")
+            if isinstance(history, list) and history:
+                check(history[-1].get("status") == product.get("availability"),
+                      f"{pwhere}: latest availability_history status must match availability")
             for field in ("family", "form_factor", "package", "system_configuration"):
                 if field in product:
                     check(isinstance(product[field], str) and bool(product[field].strip()),
