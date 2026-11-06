@@ -201,7 +201,7 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "40";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "51,40,160,50,27,28") {
+  if (productStats.join(",") !== "51,40,160,50,28,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
   await page.locator("[data-product-search]").fill("RNGD");
