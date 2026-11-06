@@ -522,7 +522,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .compat-project { color: var(--ink); font: 700 1.18rem/1.25 "Source Serif 4", Georgia, serif; text-decoration: none; }
 .compat-project:hover { color: var(--blue); }
 .status-pill { flex: 0 0 auto; display: inline-flex; align-items: center; padding: .25rem .5rem; border: 1px solid var(--line); border-radius: 99px; font-size: 9px; font-weight: 750; white-space: nowrap; }
-.status-upstream_supported, .status-vendor_plugin_supported, .status-vendor_framework { color: var(--green); background: color-mix(in srgb, var(--green) 9%, var(--surface)); border-color: color-mix(in srgb, var(--green) 24%, var(--line)); }
+.status-upstream_supported, .status-vendor_plugin_supported, .status-vendor_framework, .status-documented_recipe, .status-upstream_verified { color: var(--green); background: color-mix(in srgb, var(--green) 9%, var(--surface)); border-color: color-mix(in srgb, var(--green) 24%, var(--line)); }
 .status-experimental, .status-in_progress { color: var(--amber); background: color-mix(in srgb, var(--amber) 9%, var(--surface)); border-color: color-mix(in srgb, var(--amber) 24%, var(--line)); }
 .status-needs_review { color: var(--red); background: color-mix(in srgb, var(--red) 8%, var(--surface)); border-color: color-mix(in srgb, var(--red) 22%, var(--line)); }
 .status-vendor_reported { color: var(--blue); background: var(--blue-soft); border-color: color-mix(in srgb, var(--blue) 22%, var(--line)); }
