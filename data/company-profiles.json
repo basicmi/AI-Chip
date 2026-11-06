@@ -4367,7 +4367,7 @@
     {
       "id": "graphcore",
       "display_name": "Graphcore — IPU",
-      "category": "Startups",
+      "category": "Acquired / Legacy",
       "directory_anchor": "Graphcore",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png",
       "summary": "Graphcore pioneered Intelligence Processing Units (IPU) with fine-grained MIMD parallelism and large on-chip memory (Colossus Mk1/Mk2, Bow). SoftBank acquired the company in July 2024; Graphcore remains a wholly owned, operating subsidiary and continues to use the Graphcore brand. It is tracked as part of SoftBank's portfolio, not as an independent startup.",
@@ -5507,7 +5507,7 @@
     {
       "id": "kinara",
       "display_name": "Kinara (ex–Deep Vision)",
-      "category": "Startups",
+      "category": "Acquired / Legacy",
       "directory_anchor": "Kinara",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png",
       "summary": "Kinara developed Ara / Prisma edge NPUs for vision and on-device GenAI. NXP completed its acquisition on 27 October 2025; the technology and product lineage should now be tracked within NXP's edge-AI portfolio rather than as an independent startup.",
