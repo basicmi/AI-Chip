@@ -142,8 +142,8 @@ const { chromium } = require("playwright");
   }
   const mi355Evidence = (await page.locator(".directory-result-evidence").first().textContent()).trim();
   if (!mi355Evidence.includes("Fresh evidence") ||
-      !mi355Evidence.includes("2 evidence records") ||
-      !mi355Evidence.includes("10 reviewed claims")) {
+      !mi355Evidence.includes("4 evidence records") ||
+      !mi355Evidence.includes("17 reviewed claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
   }
   await page.locator("[data-directory-search]").fill("");
