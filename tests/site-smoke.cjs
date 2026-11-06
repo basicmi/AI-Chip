@@ -99,7 +99,7 @@ const { chromium } = require("playwright");
   if (!registrySummary.includes("53 profiles") ||
       !registrySummary.includes("159 source links") ||
       !registrySummary.includes("58 audited evidence records") ||
-      !registrySummary.includes("160 structured claims") ||
+      !registrySummary.includes("165 structured claims") ||
       !registrySummary.includes("30 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
@@ -131,7 +131,7 @@ const { chromium } = require("playwright");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
   if (profileRegistry.schema_version !== "1.3" || profileRegistry.companies.length !== 53 || productCount !== 40 ||
-      claimCount !== 160 || evidenceCount !== 50 || metricContextCount < 40 ||
+      claimCount !== 165 || evidenceCount !== 50 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
