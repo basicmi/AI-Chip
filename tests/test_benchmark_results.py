@@ -1,5 +1,8 @@
+import json
 import sys
+import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +13,7 @@ from import_benchmark_results import (
     normalize_mlperf_record,
     summarize,
     hardware_identity,
+    main as import_main,
 )
 from validate_benchmark_results import validate_database
 
@@ -81,6 +85,27 @@ class NormalizationTests(unittest.TestCase):
         base["metrics"].update({"power_valid": 1, "power_metric_schema_version": 2})
         validated = normalize_inferencex_record(base, endpoint)
         self.assertTrue(validated["power_metrics_available"])
+
+
+class ImportSafetyTests(unittest.TestCase):
+    def test_partial_inferencex_refresh_does_not_overwrite_existing_snapshot(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "benchmark-results.json"
+            original = {"sentinel": "keep-existing-snapshot"}
+            output.write_text(json.dumps(original), encoding="utf-8")
+            with mock.patch.object(sys, "argv", [
+                "import_benchmark_results.py", "--source", "inferencex",
+                "--output", str(output)
+            ]), mock.patch(
+                "import_benchmark_results.import_inferencex",
+                return_value=(
+                    {"id": "inferencex", "record_count": 0},
+                    [],
+                    ["model-a: HTTP 503"],
+                ),
+            ):
+                self.assertEqual(import_main(), 2)
+            self.assertEqual(json.loads(output.read_text(encoding="utf-8")), original)
 
 
 class RegistryValidationTests(unittest.TestCase):
