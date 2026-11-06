@@ -5129,7 +5129,7 @@
           "generation": "NXT RNGD Server",
           "family": "FuriosaAI RNGD",
           "market_segment": "On-premises and cloud inference",
-          "availability": "shipping",
+          "availability": "unknown",
           "form_factor": "4U rackmount server",
           "system_configuration": "8 × RNGD cards; dual AMD EPYC 9354; 1 TB DDR5",
           "claim_ids": [
@@ -5139,14 +5139,6 @@
           ],
           "related_product_ids": [
             "furiosa-rngd"
-          ],
-          "availability_history": [
-            {
-              "status": "shipping",
-              "effective_at": "2026-11-06",
-              "evidence_id": "furiosa-nxt-server-specs",
-              "notes": "Official server specification page lists the NXT RNGD Server; server availability is stated by vendor product page."
-            }
           ]
         }
       ],
@@ -5661,7 +5653,7 @@
           "generation": "Ascend 950",
           "family": "Huawei Ascend 950",
           "market_segment": "AI prefill and recommendation",
-          "availability": "shipping",
+          "availability": "announced",
           "form_factor": "Accelerator card / supernode server",
           "claim_ids": [
             "ascend950pr-fp8",
@@ -5673,13 +5665,7 @@
               "status": "announced",
               "effective_at": "2025-09-18",
               "evidence_id": "huawei-ascend-roadmap",
-              "notes": "Huawei announced Ascend 950PR roadmap and planned Q1 2026 introduction."
-            },
-            {
-              "status": "shipping",
-              "effective_at": "2026-09",
-              "evidence_id": "huawei-ascend-2026",
-              "notes": "Huawei stated Ascend 950 supernodes had entered commercial scale; family-level evidence, not independent verification of each card SKU."
+              "notes": "Huawei announced the 950PR roadmap and planned Q1 2026 introduction; no distinct 950PR shipment evidence is used here."
             }
           ]
         },
