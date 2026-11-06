@@ -1490,3 +1490,12 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .directory-result-corporate-status { display: inline-flex; width: fit-content; margin: .15rem 0 .35rem; padding: .2rem .45rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); background: var(--surface-soft); font-size: 9px; font-weight: 700; line-height: 1.35; }
 .corporate-status-note { max-width: 880px; margin: .65rem auto; padding: .55rem .8rem; border-left: 3px solid var(--amber); background: var(--surface-soft); color: var(--ink); font-size: 12px; line-height: 1.55; }
 .section-intro { max-width: 900px; margin: .5rem auto 1.25rem; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.6; }
+
+.model-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.model-support-card { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 3px 12px rgb(20 35 55 / 4%); }
+.model-support-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.model-support-card h3 { margin: .2rem 0; color: var(--ink); font: 700 1.08rem/1.25 "Source Serif 4", Georgia, serif; }
+.model-support-id, .model-support-hardware, .model-support-stack, .model-support-scope, .model-support-quantization { margin: .35rem 0; color: var(--muted); font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
+.model-support-hardware { color: var(--ink); font-weight: 700; }
+.model-support-stack { color: var(--ink); }
+@media (max-width: 760px) { .model-support-grid { grid-template-columns: 1fr; } .model-support-card-head { flex-direction: column; } }
