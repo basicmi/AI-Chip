@@ -145,6 +145,11 @@
     const metadata = [product.architecture, product.generation, product.process_node, product.form_factor].filter(Boolean);
     card.append(make("p", "product-card-meta", metadata.join(" · ") || "Architecture details not yet reviewed"));
     if (product.market_segment) card.append(make("p", "product-card-segment", product.market_segment));
+    if (Array.isArray(product.availability_history) && product.availability_history.length) {
+      const latest = product.availability_history[product.availability_history.length - 1];
+      card.append(make("p", "product-lifecycle-note",
+        "Status checked " + latest.effective_at + " · " + latest.notes));
+    }
 
     const tags = make("div", "product-tags");
     tags.append(make("span", "product-tag", product.product_type.toUpperCase()));
@@ -201,6 +206,25 @@
       list.append(item);
     });
     details.append(list);
+    if (Array.isArray(product.availability_history) && product.availability_history.length) {
+      const lifecycleSection = make("section", "product-system-details");
+      lifecycleSection.append(make("h4", "", "Availability history"));
+      const lifecycleList = make("ol", "product-lifecycle-list");
+      product.availability_history.forEach(event => {
+        const item = make("li", "product-lifecycle-item");
+        item.append(make("strong", "", (statusLabels[event.status] || event.status) + " · " + event.effective_at));
+        item.append(make("p", "", event.notes));
+        const source = product.evidence.find(record => record.id === event.evidence_id);
+        if (source) {
+          const links = make("div", "product-evidence-links");
+          addLink(links, source.url, source.publisher + ": " + source.title, "");
+          item.append(links);
+        }
+        lifecycleList.append(item);
+      });
+      lifecycleSection.append(lifecycleList);
+      details.append(lifecycleSection);
+    }
 
     const softwareSection = make("section", "product-system-details");
     softwareSection.append(make("h4", "", "Software integrations (" + product.integrations.length + ")"));
