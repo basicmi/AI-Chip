@@ -15,6 +15,7 @@
     system: $("[data-results-system]")
   };
   const rowsNode = $("[data-results-rows]");
+  const sortSelect = $("[data-results-sort]");
   const load = $("[data-results-load]");
   const pageSize = 50;
   let database = null;
@@ -250,6 +251,22 @@
       ].join(" ").toLowerCase();
       return !query || searchable.includes(query);
     });
+    const sortField = sortSelect.value;
+    if (sortField) {
+      const fieldValue = (record) => {
+        if (sortField === "vendor") return record.accelerator_vendor || "Not specified";
+        if (sortField === "model") return record.model || "";
+        if (sortField === "submitter") return record.submitter || "";
+        if (sortField === "system") return record.system_name || "";
+        return "";
+      };
+      filteredRecords.sort((a, b) =>
+        String(fieldValue(a)).localeCompare(String(fieldValue(b)), undefined, {
+          numeric: true,
+          sensitivity: "base"
+        }) || String(a.id).localeCompare(String(b.id))
+      );
+    }
     currentPage = 1;
     renderRows();
   };
@@ -274,10 +291,12 @@
   const reset = () => {
     search.value = "";
     Object.values(filters).forEach(select => { select.value = ""; });
+    sortSelect.value = "";
     applyFilters();
   };
 
   Object.values(filters).forEach(select => select.addEventListener("change", applyFilters));
+  sortSelect.addEventListener("change", applyFilters);
   search.addEventListener("input", applyFilters);
   $("[data-results-reset]").addEventListener("click", reset);
   $("[data-results-prev]").addEventListener("click", () => {
