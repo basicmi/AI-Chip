@@ -281,7 +281,7 @@ def main():
                 check(isinstance(event.get("notes"), str) and bool(event["notes"].strip()),
                       f"{hwhere}: notes must be non-empty")
             if isinstance(history, list) and history:
-                check(history[-1].get("status") == product.get("availability"),
+                check(isinstance(history[-1], dict) and history[-1].get("status") == product.get("availability"),
                       f"{pwhere}: latest availability_history status must match availability")
             for field in ("family", "form_factor", "package", "system_configuration"):
                 if field in product:
