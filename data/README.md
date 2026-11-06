@@ -56,7 +56,7 @@ The root `comparison_policy` requires precision, sparsity, measurement scope, an
 
 Product records may reference `compatibility_platform_ids`. These IDs connect product cards to the platform-level entries in `compatibility.json`; the explorer then displays the software integrations and workload paths associated with that platform. These are platform-level relationships, not a guarantee that every SKU, model, precision or feature is supported. Always read the integration's version and limitation notes.
 
-The current registry links 23 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
+The The current product registry contains 53 company profiles and 40 structured accelerator products. The compatibility catalogue contains 17 platforms and 29 software integration records; the workload catalogue contains 28 paths. The model-support catalogue currently includes 3 model families and 5 evidence-backed model-to-hardware paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
 
 The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
 
