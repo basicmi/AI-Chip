@@ -790,7 +790,7 @@
     },
     {
       "id": "habana",
-      "display_name": "Intel — Gaudi and Data Center GPU accelerators",
+      "display_name": "Intel / Habana Gaudi",
       "category": "IC Vendors",
       "directory_anchor": "Habana",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Intel_logo.png",
