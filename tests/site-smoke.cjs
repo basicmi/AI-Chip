@@ -236,7 +236,10 @@ const { chromium } = require("playwright");
       await page.locator("[data-product-compare-table] thead th").count() !== 7) {
     throw new Error("Product comparison should support six products plus the metric column");
   }
-  await page.locator('[data-compare-product="intel-gpu-d270"]').click();
+  const seventhCompareButton = page.locator('[data-compare-product="intel-gpu-d270"]');
+  if (!(await seventhCompareButton.isDisabled())) {
+    throw new Error("Product comparison should disable unselected products after six selections");
+  }
   if ((await page.locator("[data-product-compare-count]").textContent()).trim() !== "6 / 6 selected") {
     throw new Error("Product comparison should enforce a maximum of six selected products");
   }
