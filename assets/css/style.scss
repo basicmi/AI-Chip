@@ -1492,7 +1492,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .section-intro { max-width: 900px; margin: .5rem auto 1.25rem; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.6; }
 
 .model-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
-.model-support-card { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 3px 12px rgb(20 35 55 / 4%); }
+.model-support-card { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 3px 12px rgba(20, 35, 55, 0.04); }
 .model-support-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
 .model-support-card h3 { margin: .2rem 0; color: var(--ink); font: 700 1.08rem/1.25 "Source Serif 4", Georgia, serif; }
 .model-support-id, .model-support-hardware, .model-support-stack, .model-support-scope, .model-support-quantization { margin: .35rem 0; color: var(--muted); font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
