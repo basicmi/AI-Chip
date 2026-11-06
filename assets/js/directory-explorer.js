@@ -105,6 +105,7 @@
       if (!profile) return;
       matchedProfiles += 1;
       entry.profile = profile;
+      entry.corporateStatus = profile.corporate_status || null;
       entry.description = profile.summary || entry.description;
       entry.referenceCount = Array.isArray(profile.references) ? profile.references.length : 0;
       entry.evidenceCount = Array.isArray(profile.evidence) ? profile.evidence.length : 0;
@@ -190,6 +191,22 @@
       categoryLabel.textContent = entry.category;
       const title = document.createElement("h3");
       title.className = "directory-result-title";
+      const corporate = entry.corporateStatus;
+      const corporateLabel = document.createElement("span");
+      corporateLabel.className = "directory-result-corporate-status";
+      if (corporate) {
+        const ownershipLabels = {
+          independent: "Independent",
+          wholly_owned_subsidiary: "Wholly owned subsidiary",
+          acquired_business_unit: "Acquired business",
+          integrated_business_unit: "Integrated business unit",
+          ceased_operations: "Ceased operations"
+        };
+        corporateLabel.textContent = ownershipLabels[corporate.ownership_status] +
+          (corporate.parent_company ? " · " + corporate.parent_company : "") +
+          (corporate.team_acquired_by ? " · Team acquired by " + corporate.team_acquired_by : "");
+      }
+      corporateLabel.hidden = !corporate;
       title.textContent = entry.name;
       const description = document.createElement("p");
       description.className = "directory-result-description";
@@ -213,7 +230,9 @@
       evidence.textContent = freshnessLabels[entry.freshnessStatus] + " · " +
         entry.referenceCount + " source links · " + entry.evidenceCount + " " + evidenceLabel +
         " · " + entry.claimCount + " reviewed claims";
-      copy.append(categoryLabel, title, description, productLabel, evidence);
+      copy.append(categoryLabel);
+      if (corporate) copy.append(corporateLabel);
+      copy.append(title, description, productLabel, evidence);
       link.append(copy);
       card.append(link);
       results.append(card);
