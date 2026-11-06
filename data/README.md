@@ -146,3 +146,10 @@ Compatibility records may optionally include `product_ids`. Each ID must exist i
 ## Corporate ownership and operating status
 
 Company profiles may include an optional corporate_status object. It records whether the company remains independent, operates as a wholly owned subsidiary, has been integrated as a business unit, or has ceased operations. The object links to reviewed evidence records and distinguishes an equity acquisition from an acqui-hire or technology license. An acqui-hire must not be represented as an acquisition of the whole company or its IP unless the source says so. The Directory groups acquired and discontinued companies separately from independent startups; searchable company cards show the ownership status.
+
+
+## Model support registry
+
+model-support.json links exact model checkpoints to accelerator products, software integration records, precision/quantization modes, execution modes and source-backed deployment evidence. Support levels distinguish documented recipes, upstream verification, vendor-reported claims, independent tests and integration-only paths. The validator cross-checks model IDs, product IDs, platform IDs and software integration IDs against the existing registries. A documented recipe is not an AI-Chip independent benchmark; measured performance belongs in benchmark-results.json.
+
+The first reviewed wave includes Llama 3.1 405B on AWS Trainium2 and Google TPU v6e, Llama 3.3 70B on Trainium2/Trainium3, and upstream vLLM FLY model/hardware verification for selected Llama 3.1 and Qwen3 models on AMD MI355X. Coverage is intentionally narrow and source-driven rather than extrapolated from platform-level support.
