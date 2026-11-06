@@ -363,6 +363,13 @@
             "$ref": "#/$defs/id"
           },
           "uniqueItems": true
+        },
+        "availability_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/availability_history_item"
+          },
+          "description": "Dated, source-linked product lifecycle events in chronological order. The latest event status must equal availability."
         }
       }
     },
@@ -653,6 +660,39 @@
           "$ref": "#/$defs/id"
         },
         "benchmark_project_id": {
+          "$ref": "#/$defs/id"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "availability_history_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "effective_at",
+        "evidence_id",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "announced",
+            "sampling",
+            "shipping",
+            "production",
+            "roadmap",
+            "discontinued",
+            "unknown"
+          ]
+        },
+        "effective_at": {
+          "$ref": "#/$defs/nullable_date"
+        },
+        "evidence_id": {
           "$ref": "#/$defs/id"
         },
         "notes": {
