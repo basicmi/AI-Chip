@@ -522,7 +522,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .compat-project { color: var(--ink); font: 700 1.18rem/1.25 "Source Serif 4", Georgia, serif; text-decoration: none; }
 .compat-project:hover { color: var(--blue); }
 .status-pill { flex: 0 0 auto; display: inline-flex; align-items: center; padding: .25rem .5rem; border: 1px solid var(--line); border-radius: 99px; font-size: 9px; font-weight: 750; white-space: nowrap; }
-.status-upstream_supported, .status-vendor_plugin_supported, .status-vendor_framework { color: var(--green); background: color-mix(in srgb, var(--green) 9%, var(--surface)); border-color: color-mix(in srgb, var(--green) 24%, var(--line)); }
+.status-upstream_supported, .status-vendor_plugin_supported, .status-vendor_framework, .status-documented_recipe, .status-upstream_verified { color: var(--green); background: color-mix(in srgb, var(--green) 9%, var(--surface)); border-color: color-mix(in srgb, var(--green) 24%, var(--line)); }
 .status-experimental, .status-in_progress { color: var(--amber); background: color-mix(in srgb, var(--amber) 9%, var(--surface)); border-color: color-mix(in srgb, var(--amber) 24%, var(--line)); }
 .status-needs_review { color: var(--red); background: color-mix(in srgb, var(--red) 8%, var(--surface)); border-color: color-mix(in srgb, var(--red) 22%, var(--line)); }
 .status-vendor_reported { color: var(--blue); background: var(--blue-soft); border-color: color-mix(in srgb, var(--blue) 22%, var(--line)); }
@@ -1486,3 +1486,16 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
+
+.directory-result-corporate-status { display: inline-flex; width: fit-content; margin: .15rem 0 .35rem; padding: .2rem .45rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); background: var(--surface-soft); font-size: 9px; font-weight: 700; line-height: 1.35; }
+.corporate-status-note { max-width: 880px; margin: .65rem auto; padding: .55rem .8rem; border-left: 3px solid var(--amber); background: var(--surface-soft); color: var(--ink); font-size: 12px; line-height: 1.55; }
+.section-intro { max-width: 900px; margin: .5rem auto 1.25rem; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.6; }
+
+.model-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.model-support-card { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: 0 3px 12px rgba(20, 35, 55, 0.04); }
+.model-support-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.model-support-card h3 { margin: .2rem 0; color: var(--ink); font: 700 1.08rem/1.25 "Source Serif 4", Georgia, serif; }
+.model-support-id, .model-support-hardware, .model-support-stack, .model-support-scope, .model-support-quantization { margin: .35rem 0; color: var(--muted); font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
+.model-support-hardware { color: var(--ink); font-weight: 700; }
+.model-support-stack { color: var(--ink); }
+@media (max-width: 760px) { .model-support-grid { grid-template-columns: 1fr; } .model-support-card-head { flex-direction: column; } }

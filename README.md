@@ -5,8 +5,8 @@
 <p class="wechat-line"><strong>WeChat / 微信公众号</strong> · <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI3MDQ2MjA3OA==&amp;scene=1&amp;album_id=1374108991751782402&amp;count=3#wechat_redirect">StarryHeavensAbove</a> — AI chip articles</p>
 <div class="wechat-qr"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/qrcode_for_weichat_258.jpg" height="100" loading="lazy" alt="WeChat QR code" /></div>
 <div class="landscape-map"><a href="https://github.com/basicmi/AI-Chip/blob/master/resource/AI_Chip_Landscape_v0p9p1.svg"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/AI_Chip_Landscape_v0p9p1.svg" loading="lazy" alt="AI Chip Landscape v0.9.1 (November 2026 · 48 company logos)" /></a></div>
-<p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro (plus lineage where relevant) and 1–2 latest updates. Prefer official / primary sources; performance claims are often vendor-reported.</p>
-<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a></p>
+<p class="page-intro">A living directory of AI accelerators (ICs &amp; IPs) — each entry has a short field intro, product lineage and current corporate status. Acquired subsidiaries and discontinued vendors are separated from independent startups. Prefer official / primary sources; performance claims are often vendor-reported.</p>
+<p class="page-intro"><strong>Explore:</strong> <a href="/AI-Chip/software-ecosystem/">AI Accelerator Software Ecosystem</a> · <a href="/AI-Chip/benchmarks/">AI Accelerator Benchmarks</a> · <a href="/AI-Chip/compatibility/">Compatibility Explorer</a> · <a href="/AI-Chip/model-support/">Model Support Explorer</a></p>
 </header>
 
 <div align="center" class="section-title"><h2>At a glance</h2></div>
@@ -39,15 +39,15 @@
 <li><a href="#Cadence"><strong>Cadence</strong></a> — Tensilica AI Platform / NeuroWeave updates for on-device and automotive transformer SoCs (2025–2026).</li>
 <li><a href="#VeriSilicon"><strong>VeriSilicon</strong></a> — VIP/Acuity NPU IP and turnkey services for China/global edge GenAI SoCs (2025–2026).</li>
 <li><a href="#Cerebras"><strong>Cerebras</strong></a> — Nasdaq IPO (CBRS, May 2026); multi-year OpenAI inference capacity deal (&gt;$20B messaging).</li>
-<li><a href="#Graphcore"><strong>Graphcore</strong></a> — SoftBank injects ~$457M (2026); Izanagi next-gen IPU+CPU path aimed at Stargate-scale 2026 deployments.</li>
+<li><a href="#Acquired_Legacy"><strong>Acquired / Legacy</strong></a> — Graphcore and Ampere are SoftBank subsidiaries; Kinara is now part of NXP; Untether AI ceased operations after an AMD team acqui-hire.</li>
 <li><a href="#Tenstorrent"><strong>Tenstorrent</strong></a> — Galaxy Blackhole GA (Apr 2026): 32× Blackhole servers shipping for LLM inference and video gen.</li>
 <li><a href="#Etched"><strong>Etched</strong></a> — ~$5B valuation / ~$1B booked orders for transformer-specialized Sohu inference ASICs.</li>
-<li><a href="#Groq"><strong>Groq</strong></a> — LPU technology licensed into NVIDIA’s Vera Rubin AI-factory stack (GTC 2026).</li>
+<li><a href="#Groq"><strong>Groq</strong></a> — remains independent after non-exclusive NVIDIA technology licensing and selected team hires; GroqCloud continues to operate.</li>
 <li><a href="#SambaNova"><strong>SambaNova</strong></a> — SN50 RDU for agentic AI; $350M+ Series E; SoftBank early deploy; Intel collab; H2 2026 ship.</li>
 <li><a href="#Mythic"><strong>Mythic</strong></a> — $125M Series D + Videantis acquisition for hybrid analog/digital energy-efficient inference.</li>
 <li><a href="#Hailo"><strong>Hailo</strong></a> — Hailo-10H generally available for edge LLMs/VLMs (~40 TOPS INT4 class, ~2.5W).</li>
 <li><a href="#Furiosa"><strong>FuriosaAI</strong></a> — RNGD in mass production; Broadcom partnership for next-gen multi-die inference platform.</li>
-<li><a href="#Kinara"><strong>Kinara</strong></a> — NXP acquiring Kinara (ex–Deep Vision) for industrial/automotive edge NPU portfolio.</li>
+
 <li><a href="#SiMa"><strong>SiMa.ai</strong></a> — Modalix MLSoC in production for Physical AI (robots/industrial) under ~10W with LLiMa LLMs.</li>
 <li><a href="#d-matrix"><strong>d-Matrix</strong></a> — Corsair inference platform in full production (Jun 2026); $275M Series C / ~$2B valuation.</li>
 <li><a href="#Blaize"><strong>Blaize</strong></a> — Nasdaq-listed (BZAI); GSP architecture for industrial/smart-city edge vision and GenAI.</li>
@@ -82,7 +82,11 @@
   </tr>
   <tr>
     <th><a href="#Startups">Startups</a></th>
-    <td><a href="#Cerebras">Cerebras</a>, <a href="#Graphcore">Graphcore</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Etched">Etched</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova</a>, <a href="#Mythic">Mythic</a>, <a href="#Hailo">Hailo</a>, <a href="#Furiosa">FuriosaAI</a>, <a href="#Kinara">Kinara</a>, <a href="#SiMa">SiMa</a>, <a href="#d-matrix">d-Matrix</a>, <a href="#Blaize">Blaize</a>, …</td>
+    <td><a href="#Cerebras">Cerebras</a>, <a href="#Tenstorrent">Tenstorrent</a>, <a href="#Etched">Etched</a>, <a href="#Groq">Groq</a>, <a href="#SambaNova">SambaNova</a>, <a href="#Mythic">Mythic</a>, <a href="#Hailo">Hailo</a>, <a href="#Furiosa">FuriosaAI</a>, <a href="#SiMa">SiMa</a>, <a href="#d-matrix">d-Matrix</a>, <a href="#Blaize">Blaize</a>, …</td>
+  </tr>
+  <tr>
+    <th><a href="#Acquired_Legacy">Acquired / Legacy</a></th>
+    <td><a href="#Graphcore">Graphcore</a>, <a href="#Kinara">Kinara</a>, <a href="#Ampere">Ampere Computing</a>, <a href="#UntetherAI">Untether AI</a></td>
   </tr>
   <tr>
     <th><a href="#China_AI_Chips">China AI Accelerators</a></th>
@@ -403,16 +407,6 @@
 <li><strong><a href="https://www.cnbc.com/2026/04/17/cerebras-new-ipo-ai-chips.html">OpenAI multi-year capacity deal</a></strong> — 2025–2026 — OpenAI commits to large inference capacity (filings cite 750MW committed, option to 2GW) plus $1B infrastructure loan / warrants.</li>
 </ul>
 
-<a name="Graphcore"></a>
-<div align="center" class="vendor-logo"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70" loading="lazy" alt="Graphcore" /></a></div>
-<div align="center" class="vendor-title"><h3>Graphcore — IPU</h3></div>
-<p class="vendor-blurb">Graphcore pioneered Intelligence Processing Units (IPU) with fine-grained MIMD parallelism and large on-chip memory (Colossus Mk1/Mk2, Bow). After competing in the pre-LLM and early-LLM era, SoftBank acquired Graphcore (2024) as a wholly owned subsidiary to fund next-generation AI compute while keeping the Graphcore brand.</p>
-<p class="latest-label"><strong>Latest</strong></p>
-<ul class="latest-list">
-<li><strong><a href="https://www.cnbc.com/2026/05/12/softbank-graphcore-ai-chip-investment.html">SoftBank $457M funding into Graphcore</a></strong> — May 2026 — SoftBank funnels ~$457M into Graphcore (wholly owned since Jul 2024) to fund next-gen AI silicon and SoftBank AI infra plans.</li>
-<li><strong><a href="https://www.jonpeddie.com/news/graphcores-ipu-doing-well-at-softbank/">Izanagi / SoftBank AI stack</a></strong> — 2025–2026 — next-gen accelerator work (Izanagi messaging) pairs Graphcore IPU heritage with SoftBank/Ampere Arm CPU stack for hyperscale deployment targets.</li>
-</ul>
-
 <a name="Tenstorrent"></a>
 <div align="center" class="vendor-logo"><a href="http://tenstorrent.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Tenstorrent_logo.png" height="80" loading="lazy" alt="Tenstorrent" /></a></div>
 <div align="center" class="vendor-title"><h3>Tenstorrent — Wormhole / Blackhole</h3></div>
@@ -479,15 +473,6 @@
 <li><strong><a href="https://furiosa.ai/blog/furiosaai-partners-with-broadcom-to-build-next-generation-inference-platform-for-the-agentic-era">Broadcom inference partnership</a></strong> — May 2026 — evolve TCP into a scale-up multi-die inference platform with Broadcom Ethernet/PCIe switching.</li>
 </ul>
 
-<a name="Kinara"></a>
-<div align="center" class="vendor-logo"><a href="https://www.kinara.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png" height="40" loading="lazy" alt="Kinara" /></a></div>
-<div align="center" class="vendor-title"><h3>Kinara (ex–Deep Vision)</h3></div>
-<p class="vendor-blurb">Kinara (formerly Deep Vision) builds Ara/Prisma-class edge NPUs for vision and on-device GenAI inference. The company rebranded and scaled edge AI SKUs before NXP announced an acquisition (2025) to fold Kinara into NXP’s industrial and automotive edge AI portfolio.</p>
-<p class="latest-label"><strong>Latest</strong></p>
-<ul class="latest-list">
-<li><strong><a href="https://www.nxp.com/company/about-nxp/newsroom/NW-NXP-TO-ACQUIRE-KINARA">NXP to acquire Kinara</a></strong> — Feb 2025 — NXP acquisition of Kinara for edge AI NPUs used in vision and on-device GenAI; expands NXP industrial/automotive AI.</li>
-</ul>
-
 <a name="SiMa"></a>
 <div align="center" class="vendor-logo"><a href="https://sima.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/SiMa_logo.png" height="40" loading="lazy" alt="SiMa.ai" /></a></div>
 <div align="center" class="vendor-title"><h3>SiMa.ai — Modalix MLSoC</h3></div>
@@ -534,7 +519,42 @@
 <li><strong><a href="https://www.sagence.ai/">Sagence AI analog CIM</a></strong> — 2025–2026 — continues analog compute-in-memory accelerators (ex–Analog Inference) aimed at energy-efficient datacenter/edge LLM and vision inference.</li>
 </ul>
 
-<div align="center" class="section-title"><h2><a name="China_AI_Chips"></a>V. China AI Accelerator Vendors</h2></div>
+<div align="center" class="section-title"><h2>V. Acquired / Legacy</h2></div>
+<a name="Acquired_Legacy"></a>
+<hr class="section-rule" />
+<p class="section-intro">Companies and technology lineages that are no longer independent vendors. Acquisition does not necessarily mean the brand, engineering team or product line has ceased to operate; read each corporate-status note.</p>
+<a name="Graphcore"></a>
+<div align="center" class="vendor-logo"><a href="https://www.graphcore.ai/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Graphcore_logo.png" height="70" loading="lazy" alt="Graphcore" /></a></div>
+<div align="center" class="vendor-title"><h3>Graphcore — IPU</h3></div>
+<p class="corporate-status-note"><strong>Corporate status:</strong> Acquired by SoftBank on 11 July 2024; wholly owned subsidiary. Graphcore continues to operate under its own name. It is not an independent startup.</p>
+<p class="vendor-blurb">Graphcore pioneered Intelligence Processing Units (IPU) with fine-grained MIMD parallelism and large on-chip memory (Colossus Mk1/Mk2, Bow). Its IPU architecture and Poplar software remain important historical and technical references; current public product and deployment details should be treated separately from the legacy product lineage.</p>
+<p class="latest-label"><strong>Latest verified corporate update</strong></p>
+<ul class="latest-list"><li><strong><a href="https://www.graphcore.ai/posts/graphcore-joins-softbank-group-to-build-next-generation-of-ai-compute">Graphcore joins SoftBank Group</a></strong> — 11 Jul 2024 — official announcement confirms full acquisition, wholly owned subsidiary status and continuation of the Graphcore brand. No newer public product release was verified in this review.</li></ul>
+
+<a name="Kinara"></a>
+<div align="center" class="vendor-logo"><a href="https://www.nxp.com/"><img src="https://github.com/basicmi/AI-Chip/raw/master/resource/Deepvision_logo.png" height="40" loading="lazy" alt="Kinara technology lineage" /></a></div>
+<div align="center" class="vendor-title"><h3>Kinara (ex–Deep Vision)</h3></div>
+<p class="corporate-status-note"><strong>Corporate status:</strong> NXP completed the acquisition on 27 October 2025. Kinara is no longer an independent startup; its Ara / Prisma edge-NPU technology is tracked within NXP's portfolio.</p>
+<p class="vendor-blurb">Kinara (formerly Deep Vision) developed programmable Ara and Prisma neural processors for vision, industrial and on-device GenAI workloads. Retain the technology lineage for historical product comparisons, but attribute current corporate ownership to NXP Semiconductors.</p>
+<p class="latest-label"><strong>Latest verified corporate update</strong></p>
+<ul class="latest-list"><li><strong><a href="https://investors.nxp.com/news-releases/news-release-details/nxp-completes-acquisitions-aviva-links-and-kinara-advance">NXP completes Kinara acquisition</a></strong> — 27 Oct 2025 — NXP announced the closing of the $307M acquisition and identified edge AI for Industrial &amp; IoT and Automotive as the strategic rationale.</li></ul>
+
+<a name="Ampere"></a>
+<div align="center" class="vendor-logo"><a href="https://amperecomputing.com/"><img src="https://amperecomputing.com/favicon.ico" height="42" loading="lazy" alt="Ampere Computing" /></a></div>
+<div align="center" class="vendor-title"><h3>Ampere Computing — Arm server CPUs</h3></div>
+<p class="corporate-status-note"><strong>Corporate status:</strong> SoftBank completed its acquisition on 25 November 2025. Ampere remains an operating wholly owned subsidiary and continues to publish AmpereOne product and deployment updates.</p>
+<p class="vendor-blurb">Ampere designs Arm-based server CPUs for cloud and AI infrastructure. It is not a discrete AI accelerator vendor, but its host-CPU platform is relevant to AI server architecture, power efficiency and accelerator-system balance.</p>
+<p class="latest-label"><strong>Latest verified updates</strong></p>
+<ul class="latest-list"><li><strong><a href="https://group.softbank/en/news/press/20251126">SoftBank completes Ampere acquisition</a></strong> — 25 Nov 2025 — all equity interests acquired; Ampere became a wholly owned subsidiary.</li><li><strong><a href="https://amperecomputing.com/press/1">AmpereOne / AmpereOne M deployments</a></strong> — Mar 2026 — Ampere's official press index lists new cloud deployments and continued product activity.</li></ul>
+
+<a name="UntetherAI"></a>
+<div align="center" class="vendor-title"><h3>Untether AI — speedAI (discontinued)</h3></div>
+<p class="corporate-status-note"><strong>Corporate status:</strong> Ceased operations in June 2025. AMD acquired an engineering team through a strategic acqui-hire; Untether said it would no longer supply or support speedAI hardware or the imAIgine SDK. This was not a disclosed acquisition of the company or all of its IP.</p>
+<p class="vendor-blurb">Untether AI developed at-memory inference accelerators for edge and data-center workloads. Its speedAI240 and imAIgine software remain useful historical references, but should not appear as currently available products or as an AMD product family.</p>
+<p class="latest-label"><strong>Final corporate update</strong></p>
+<ul class="latest-list"><li><strong><a href="https://www.crn.com/news/components-peripherals/2025/exclusive-amd-acquires-team-behind-ai-chip-startup-untether-ai">AMD acqui-hires Untether AI engineering team</a></strong> — 5 Jun 2025 — AMD confirmed the team transaction; Untether stated its product supply and SDK support would end.</li></ul>
+
+<div align="center" class="section-title"><h2><a name="China_AI_Chips"></a>VI. China AI Accelerator Vendors</h2></div>
 <hr class="section-rule" />
 <p>Domestic training/inference accelerators have become central under export-control and procurement policies. Coverage below highlights widely reported product lines; treat performance claims as vendor-/press-reported unless independently benchmarked.</p>
 

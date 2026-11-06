@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.06-1",
+  "database_version": "2026.11.06-2",
   "last_reviewed": "2026-11-06",
   "scope": "Publicly documented accelerator software compatibility and integration evidence. Entries are not certification or production-readiness claims. Product-specific links are only added when the cited source explicitly names that product or generation; otherwise the record remains platform-level.",
   "status_definitions": {
@@ -386,7 +386,16 @@
           "url": "https://github.com/vllm-project/vllm/blob/main/docs/getting_started/installation/README.md",
           "checked_at": "2026-11-05",
           "claim": "Upstream installation documentation lists AMD ROCm as a supported hardware platform."
+        },
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.vllm.ai/en/latest/features/speculative_decoding/fly/",
+          "checked_at": "2026-11-06",
+          "claim": "The vLLM FLY verification matrix explicitly lists AMD MI355X with Llama 3.1 405B Instruct FP8-KV and Qwen3-235B-A22B-Thinking-2507-FP8."
         }
+      ],
+      "product_ids": [
+        "mi355x"
       ]
     },
     {
@@ -1097,6 +1106,34 @@
           "checked_at": "2026-11-06",
           "claim": "SGLang lists AWS Trainium among integrations in progress."
         }
+      ]
+    },
+    {
+      "id": "google-tpu-jetstream",
+      "platform_id": "google-tpu",
+      "layer": "serving",
+      "project": "JetStream + Pathways",
+      "project_url": "https://github.com/AI-Hypercomputer/JetStream",
+      "maintainer_type": "vendor",
+      "status": "vendor_framework",
+      "confidence": "high",
+      "hardware_scope": "Google Cloud TPU serving stack. The linked GKE tutorial explicitly demonstrates Llama 3.1-405B on multi-host TPU v6e; do not infer the same recipe on TPU7x without separate evidence.",
+      "versions": {
+        "serving_stack": "JetStream + MaxText + Pathways on GKE",
+        "tutorial_container": "JetStream-Pathways v0.2.0"
+      },
+      "limitations": "This is a documented Google Cloud recipe, not a universal JetStream model support matrix. The model checkpoint, TPU topology, GKE version and Pathways runtime are part of the configuration.",
+      "last_checked": "2026-11-06",
+      "evidence": [
+        {
+          "type": "upstream_docs",
+          "url": "https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-multihost-tpu-jetstream",
+          "checked_at": "2026-11-06",
+          "claim": "Google's GKE tutorial deploys Llama 3.1-405B on multi-host TPU v6e using JetStream, MaxText and Pathways."
+        }
+      ],
+      "product_ids": [
+        "tpu-v6e-trillium"
       ]
     }
   ]

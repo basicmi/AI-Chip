@@ -508,7 +508,8 @@
             "Tech Giants & HPC Vendors",
             "Traditional IP Vendors",
             "Startups",
-            "China AI Accelerator Vendors"
+            "China AI Accelerator Vendors",
+            "Acquired / Legacy"
           ]
         },
         "directory_anchor": {
@@ -555,6 +556,71 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/reference"
+          }
+        },
+        "corporate_status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ownership_status",
+            "operating_status",
+            "effective_date",
+            "transaction_type",
+            "notes",
+            "evidence_ids"
+          ],
+          "properties": {
+            "ownership_status": {
+              "type": "string",
+              "enum": [
+                "independent",
+                "wholly_owned_subsidiary",
+                "acquired_business_unit",
+                "integrated_business_unit",
+                "ceased_operations"
+              ]
+            },
+            "operating_status": {
+              "type": "string",
+              "enum": [
+                "active",
+                "ceased",
+                "unknown"
+              ]
+            },
+            "parent_company": {
+              "type": "string",
+              "minLength": 1
+            },
+            "team_acquired_by": {
+              "type": "string",
+              "minLength": 1
+            },
+            "effective_date": {
+              "$ref": "#/$defs/nullable_date"
+            },
+            "transaction_type": {
+              "type": "string",
+              "enum": [
+                "acquisition",
+                "acqui_hire",
+                "integration",
+                "license_and_talent_hire",
+                "none"
+              ]
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_ids": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/id"
+              }
+            }
           }
         }
       }

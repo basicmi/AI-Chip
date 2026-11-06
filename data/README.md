@@ -56,7 +56,7 @@ The root `comparison_policy` requires precision, sparsity, measurement scope, an
 
 Product records may reference `compatibility_platform_ids`. These IDs connect product cards to the platform-level entries in `compatibility.json`; the explorer then displays the software integrations and workload paths associated with that platform. These are platform-level relationships, not a guarantee that every SKU, model, precision or feature is supported. Always read the integration's version and limitation notes.
 
-The current registry links 23 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
+The The current product registry contains 53 company profiles and 40 structured accelerator products. The compatibility catalogue contains 17 platforms and 29 software integration records; the workload catalogue contains 28 paths. The model-support catalogue currently includes 3 model families and 5 evidence-backed model-to-hardware paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
 
 The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
 
@@ -141,3 +141,15 @@ Product records may include availability_history, a chronological list of dated 
 ## Product-specific software compatibility links
 
 Compatibility records may optionally include `product_ids`. Each ID must exist in `data/company-profiles.json`. Use this field only when the cited integration evidence explicitly names the product or generation. If the evidence names only a vendor platform or backend, omit `product_ids` and retain the platform-level record. The Product Explorer displays these two scopes separately; it must never copy a platform-level support statement onto every SKU as if each SKU were individually validated.
+
+
+## Corporate ownership and operating status
+
+Company profiles may include an optional corporate_status object. It records whether the company remains independent, operates as a wholly owned subsidiary, has been integrated as a business unit, or has ceased operations. The object links to reviewed evidence records and distinguishes an equity acquisition from an acqui-hire or technology license. An acqui-hire must not be represented as an acquisition of the whole company or its IP unless the source says so. The Directory groups acquired and discontinued companies separately from independent startups; searchable company cards show the ownership status.
+
+
+## Model support registry
+
+model-support.json links exact model checkpoints to accelerator products, software integration records, precision/quantization modes, execution modes and source-backed deployment evidence. Support levels distinguish documented recipes, upstream verification, vendor-reported claims, independent tests and integration-only paths. The validator cross-checks model IDs, product IDs, platform IDs and software integration IDs against the existing registries. A documented recipe is not an AI-Chip independent benchmark; measured performance belongs in benchmark-results.json.
+
+The first reviewed wave includes Llama 3.1 405B on AWS Trainium2 and Google TPU v6e, Llama 3.3 70B on Trainium2/Trainium3, and upstream vLLM FLY model/hardware verification for selected Llama 3.1 and Qwen3 models on AMD MI355X. Coverage is intentionally narrow and source-driven rather than extrapolated from platform-level support.

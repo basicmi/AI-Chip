@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -91,16 +91,16 @@ const { chromium } = require("playwright");
     const root = document.querySelector("[data-directory-explorer]");
     return count && count.dataset.ready === "true" &&
       root && root.dataset.profileRegistryLoaded === "true" &&
-      root.dataset.profileMatchedCount === "51";
+      root.dataset.profileMatchedCount === "53";
   }, null, { timeout: 10000 });
   const companyCount = Number(await page.locator("[data-directory-count]").getAttribute("data-count"));
-  if (companyCount !== 51) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
+  if (companyCount !== 53) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
-  if (!registrySummary.includes("51 profiles") ||
-      !registrySummary.includes("154 source links") ||
-      !registrySummary.includes("50 audited evidence records") ||
-      !registrySummary.includes("160 structured claims") ||
-      !registrySummary.includes("33 profiles not yet reviewed")) {
+  if (!registrySummary.includes("53 profiles") ||
+      !registrySummary.includes("159 source links") ||
+      !registrySummary.includes("58 audited evidence records") ||
+      !registrySummary.includes("165 structured claims") ||
+      !registrySummary.includes("30 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
   const profileRegistry = await page.evaluate(async () => {
@@ -122,6 +122,7 @@ const { chromium } = require("playwright");
       !company.evidence.some(record => record.id === event.evidence_id) ||
       (index === events.length - 1 && event.status !== product.availability)));
   const tenstorrentProfile = profileRegistry.companies.find(company => company.id === "tenstorrent");
+  const corporateProfiles = Object.fromEntries(profileRegistry.companies.filter(company => company.corporate_status).map(company => [company.id, company.corporate_status]));
   const rebellionsProfile = profileRegistry.companies.find(company => company.id === "rebellions");
   const nvidiaProfile = profileRegistry.companies.find(company => company.id === "nvidia");
   const gb200 = nvidiaProfile.products.find(product => product.id === "gb200-nvl72");
@@ -129,8 +130,8 @@ const { chromium } = require("playwright");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.2" || productCount !== 40 ||
-      claimCount !== 160 || evidenceCount !== 50 || metricContextCount < 40 ||
+  if (profileRegistry.schema_version !== "1.3" || profileRegistry.companies.length !== 53 || productCount !== 40 ||
+      claimCount !== 165 || evidenceCount !== 58 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
@@ -138,6 +139,11 @@ const { chromium } = require("playwright");
       !tenstorrentProfile.products.some(product => product.id === "tenstorrent-blackhole-p150b") ||
       !rebellionsProfile.products.some(product => product.id === "rebellions-rebel-quad") ||
       !profileRegistry.companies.find(company => company.id === "cambricon").products.some(product => product.id === "mlu370-s4-s8") ||
+      corporateProfiles.graphcore?.ownership_status !== "wholly_owned_subsidiary" ||
+      corporateProfiles.kinara?.parent_company !== "NXP Semiconductors" ||
+      corporateProfiles.ampere?.parent_company !== "SoftBank Group" ||
+      corporateProfiles["untether-ai"]?.operating_status !== "ceased" ||
+      corporateProfiles.groq?.ownership_status !== "independent" ||
       gb200.product_type !== "system" ||
       gb200Bandwidth.metric_context.measurement_scope !== "rack" ||
       trainium2Dense.metric_context.sparsity !== "dense" ||
@@ -159,10 +165,20 @@ const { chromium } = require("playwright");
       !mi355Evidence.includes("17 reviewed claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
   }
+  await page.locator("[data-directory-search]").fill("Graphcore");
+  const graphcoreCard = page.locator(".directory-result-card").first();
+  if (!(await graphcoreCard.textContent()).includes("Wholly owned subsidiary") ||
+      !(await graphcoreCard.textContent()).includes("SoftBank Group")) {
+    throw new Error("Graphcore ownership status missing from directory search");
+  }
+  await page.locator("[data-directory-search]").fill("Groq");
+  if (!(await page.locator(".directory-result-card").first().textContent()).includes("Independent")) {
+    throw new Error("Groq must remain classified as independent after its NVIDIA licensing agreement");
+  }
   await page.locator("[data-directory-search]").fill("");
   await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
-  if (await page.locator(".directory-result-title").count() !== 18) {
-    throw new Error("Freshness filter should return all 18 recently reviewed company profiles");
+  if (await page.locator(".directory-result-title").count() !== 23) {
+    throw new Error("Freshness filter should return all 23 recently reviewed company profiles");
   }
   await page.locator("[data-directory-search]").fill("Qualcomm");
   await page.locator("[data-directory-evidence-filter]").selectOption("not_reviewed");
@@ -408,6 +424,28 @@ const { chromium } = require("playwright");
     throw new Error("Workload search did not isolate the Biren path");
   }
 
+  await page.goto(base + "/model-support/", { waitUntil: "networkidle" });
+  await waitForDataset({
+    name: "Model support",
+    loadSelector: "[data-model-load]",
+    statSelector: '[data-model-stat="paths"]',
+    countSelector: "[data-model-result-count]"
+  });
+  await page.locator("[data-model-search]").fill("Llama 3.3 70B");
+  if (Number(await page.locator("[data-model-result-count]").textContent()) !== 1) {
+    throw new Error("Model support search did not isolate Llama 3.3 70B");
+  }
+  const llamaPath = await page.locator(".model-support-card").first().textContent();
+  if (!llamaPath.includes("Trainium2") || !llamaPath.includes("Trainium3") ||
+      !llamaPath.includes("BF16") || !llamaPath.includes("FP8 static")) {
+    throw new Error("Llama 3.3 70B model support path is missing hardware or precision details");
+  }
+  await page.locator("[data-model-reset]").click();
+  await page.locator("[data-model-platform]").selectOption("aws-trainium");
+  if (Number(await page.locator("[data-model-result-count]").textContent()) !== 2) {
+    throw new Error("Model support platform filter did not return both AWS Trainium paths");
+  }
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("[data-nav-toggle]").click();
   if (await page.locator("[data-nav-toggle]").getAttribute("aria-expanded") !== "true") {
@@ -419,7 +457,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: eight routes, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: nine routes, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
