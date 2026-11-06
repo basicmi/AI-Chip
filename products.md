@@ -65,11 +65,11 @@ description: Explore and compare AI accelerator products using source-linked spe
     <div class="product-compare-heading">
       <div><p class="eyebrow">SIDE-BY-SIDE ANALYSIS</p><h2 id="product-compare-title">Comparison workspace</h2></div>
       <div class="product-compare-actions">
-        <span data-product-compare-count>0 / 4 selected</span>
+        <span data-product-compare-count>0 / 6 selected</span>
         <button type="button" class="text-button" data-product-compare-clear>Clear selection</button>
       </div>
     </div>
-    <p class="product-compare-note" data-product-compare-note>Select two to four products from the catalogue. Metrics are aligned only when their topic, precision, sparsity, scope, measurement type and unit match; unmatched values remain separate.</p>
+    <p class="product-compare-note" data-product-compare-note>Select two to six products from the catalogue. Metrics are aligned only when their topic, precision, sparsity, scope, measurement type and unit match; unmatched values remain separate.</p>
     <div class="product-compare-empty" data-product-compare-empty>
       Choose products above to build a comparison. System-level aggregates and per-chip specifications are intentionally kept in separate rows.
     </div>
