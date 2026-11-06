@@ -198,7 +198,7 @@ const { chromium } = require("playwright");
   await page.waitForFunction(() => {
     const root = document.querySelector("[data-product-explorer]");
     const products = document.querySelector('[data-product-stat="products"]');
-    return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "27";
+    return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "40";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
   if (productStats.join(",") !== "51,40,160,50,27,28") {
