@@ -121,7 +121,7 @@ const { chromium } = require("playwright");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
   if (profileRegistry.schema_version !== "1.2" || productCount !== 27 ||
-      claimCount !== 108 || evidenceCount !== 17 || metricContextCount < 40 ||
+      claimCount !== 108 || evidenceCount !== 29 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
