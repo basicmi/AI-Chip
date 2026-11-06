@@ -97,10 +97,10 @@ const { chromium } = require("playwright");
   if (companyCount !== 53) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("53 profiles") ||
-      !registrySummary.includes("154 source links") ||
-      !registrySummary.includes("50 audited evidence records") ||
+      !registrySummary.includes("159 source links") ||
+      !registrySummary.includes("58 audited evidence records") ||
       !registrySummary.includes("160 structured claims") ||
-      !registrySummary.includes("33 profiles not yet reviewed")) {
+      !registrySummary.includes("30 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
   const profileRegistry = await page.evaluate(async () => {
