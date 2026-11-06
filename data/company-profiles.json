@@ -5547,16 +5547,6 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
-        },
-        {
-          "id": "ref-corsair-full-production",
-          "label": "Corsair full-production announcement",
-          "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/",
-          "source_type": "vendor_primary",
-          "review_status": "reviewed",
-          "published_at": "2026-06-09",
-          "checked_at": "2026-11-06",
-          "notes": "Confirms platform production status and intended prefill/decode disaggregation role."
         }
       ]
     },
