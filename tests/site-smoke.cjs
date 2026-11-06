@@ -130,7 +130,7 @@ const { chromium } = require("playwright");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.2" || productCount !== 40 ||
+  if (profileRegistry.schema_version !== "1.3" || profileRegistry.companies.length !== 53 || productCount !== 40 ||
       claimCount !== 160 || evidenceCount !== 50 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
