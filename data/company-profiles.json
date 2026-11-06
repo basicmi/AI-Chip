@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "database_version": "2026.11.06-2",
+  "database_version": "2026.11.06-4",
   "registry_reviewed_at": "2026-11-06",
   "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status. This revision adds reviewed, source-linked profiles for custom XPU suppliers and inference-focused accelerator companies; platform-level records are used where no public merchant SKU exists.",
   "freshness_policy": {
@@ -6626,6 +6626,254 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        }
+      ]
+    },
+    {
+      "id": "rebellions",
+      "display_name": "Rebellions — AI inference NPUs",
+      "category": "Startups",
+      "directory_anchor": "Rebellions",
+      "logo_url": "https://rebellions.ai/favicon.ico",
+      "summary": "Rebellions develops inference-focused NPUs. ATOM and ATOM-Max represent its first-generation products; REBEL-Quad is a chiplet-based UCIe-Advanced follow-on aimed at larger data-center inference systems.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "rebellions-atom",
+          "name": "Rebellions ATOM",
+          "product_type": "npu",
+          "architecture": "Inference-optimized NPU",
+          "generation": "ATOM first generation",
+          "family": "Rebellions ATOM",
+          "market_segment": "Enterprise and small data-center inference",
+          "availability": "production",
+          "form_factor": "Single-slot PCIe Gen5 accelerator card",
+          "claim_ids": [
+            "atom-fp16",
+            "atom-int8",
+            "atom-memory",
+            "atom-bandwidth",
+            "atom-power"
+          ],
+          "availability_history": [
+            {
+              "status": "production",
+              "effective_at": "2025-09-30",
+              "evidence_id": "rebellions-roadmap",
+              "notes": "Rebellions states ATOM and ATOM-Max are in mass production."
+            }
+          ]
+        },
+        {
+          "id": "rebellions-rebel-quad",
+          "name": "Rebellions REBEL-Quad",
+          "product_type": "asic",
+          "architecture": "Chiplet-based UCIe-Advanced AI inference accelerator",
+          "generation": "Second generation",
+          "family": "Rebellions REBEL",
+          "market_segment": "Large-scale data-center inference",
+          "availability": "announced",
+          "form_factor": "Chiplet-based accelerator",
+          "claim_ids": [
+            "rebelquad-hbm",
+            "rebelquad-architecture"
+          ],
+          "availability_history": [
+            {
+              "status": "announced",
+              "effective_at": "2025-08",
+              "evidence_id": "rebellions-roadmap",
+              "notes": "REBEL-Quad introduced in August 2025; exact day not stated in linked announcement."
+            }
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "atom-fp16",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "compute",
+          "statement": "Rebellions lists 32 TFLOPS FP16 for ATOM.",
+          "value": 32,
+          "unit": "TFLOPS FP16",
+          "scope": "Per ATOM accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "atom-int8",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "compute",
+          "statement": "Rebellions lists 128 TOPS INT8 for ATOM.",
+          "value": 128,
+          "unit": "TOPS INT8",
+          "scope": "Per ATOM accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "INT8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "atom-memory",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "memory_capacity",
+          "statement": "ATOM provides 16 GB GDDR6.",
+          "value": 16,
+          "unit": "GB GDDR6",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "atom-bandwidth",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "memory_bandwidth",
+          "statement": "ATOM provides 256 GB/s memory bandwidth.",
+          "value": 256,
+          "unit": "GB/s",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "atom-power",
+          "subject_type": "product",
+          "subject_id": "rebellions-atom",
+          "topic": "power",
+          "statement": "ATOM maximum power consumption is 85 W.",
+          "value": 85,
+          "unit": "W",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-atom-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        },
+        {
+          "id": "rebelquad-hbm",
+          "subject_type": "product",
+          "subject_id": "rebellions-rebel-quad",
+          "topic": "memory_capacity",
+          "statement": "Rebellions describes REBEL-Quad with 144 GB HBM3E.",
+          "value": 144,
+          "unit": "GB HBM3E",
+          "scope": "Per REBEL-Quad accelerator; company announcement.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-roadmap"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "chip",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "rebelquad-architecture",
+          "subject_type": "product",
+          "subject_id": "rebellions-rebel-quad",
+          "topic": "architecture",
+          "statement": "REBEL-Quad uses a chiplet-based UCIe-Advanced architecture.",
+          "scope": "Product architecture as described by Rebellions; no public full die/package specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "rebellions-roadmap"
+          ],
+          "last_reviewed": "2026-11-06"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "rebellions-atom-specs",
+          "title": "ATOM product specifications",
+          "url": "https://rebellions.ai/rebellions-product/rbln-ca22/",
+          "publisher": "Rebellions",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official ATOM product page: 32 TFLOPS FP16, 128 TOPS INT8, 16GB GDDR6, 256GB/s and 85W."
+        },
+        {
+          "id": "rebellions-roadmap",
+          "title": "Rebellions raises $250M to advance next-generation AI infrastructure",
+          "url": "https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/",
+          "publisher": "Rebellions",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": "2025-09-30",
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official announcement: ATOM and ATOM-Max in mass production; REBEL-Quad introduced in August 2025, chiplet-based UCIe-Advanced with 144GB HBM3E."
+        }
+      ],
+      "references": [
+        {
+          "id": "ref-rebellions-atom-specs",
+          "label": "ATOM product specifications",
+          "url": "https://rebellions.ai/rebellions-product/rbln-ca22/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Per-card specifications."
+        },
+        {
+          "id": "ref-rebellions-roadmap",
+          "label": "REBEL-Quad product roadmap announcement",
+          "url": "https://rebellions.ai/newsroom/rebellions-raises-250-million-to-advance-the-next-generation-ai-infrastructure-backed-by-arm-and-samsung/",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": "2025-09-30",
+          "checked_at": "2026-11-06",
+          "notes": "Architecture and HBM capacity are vendor-reported; production timing is not inferred."
         }
       ]
     }
