@@ -122,6 +122,7 @@ const { chromium } = require("playwright");
       !company.evidence.some(record => record.id === event.evidence_id) ||
       (index === events.length - 1 && event.status !== product.availability)));
   const tenstorrentProfile = profileRegistry.companies.find(company => company.id === "tenstorrent");
+  const corporateProfiles = Object.fromEntries(profileRegistry.companies.filter(company => company.corporate_status).map(company => [company.id, company.corporate_status]));
   const rebellionsProfile = profileRegistry.companies.find(company => company.id === "rebellions");
   const nvidiaProfile = profileRegistry.companies.find(company => company.id === "nvidia");
   const gb200 = nvidiaProfile.products.find(product => product.id === "gb200-nvl72");
@@ -138,6 +139,11 @@ const { chromium } = require("playwright");
       !tenstorrentProfile.products.some(product => product.id === "tenstorrent-blackhole-p150b") ||
       !rebellionsProfile.products.some(product => product.id === "rebellions-rebel-quad") ||
       !profileRegistry.companies.find(company => company.id === "cambricon").products.some(product => product.id === "mlu370-s4-s8") ||
+      corporateProfiles.graphcore?.ownership_status !== "wholly_owned_subsidiary" ||
+      corporateProfiles.kinara?.parent_company !== "NXP Semiconductors" ||
+      corporateProfiles.ampere?.parent_company !== "SoftBank Group" ||
+      corporateProfiles["untether-ai"]?.operating_status !== "ceased" ||
+      corporateProfiles.groq?.ownership_status !== "independent" ||
       gb200.product_type !== "system" ||
       gb200Bandwidth.metric_context.measurement_scope !== "rack" ||
       trainium2Dense.metric_context.sparsity !== "dense" ||
@@ -158,6 +164,16 @@ const { chromium } = require("playwright");
       !mi355Evidence.includes("4 evidence records") ||
       !mi355Evidence.includes("17 reviewed claims")) {
     throw new Error("AMD MI355X evidence card is inconsistent: " + mi355Evidence);
+  }
+  await page.locator("[data-directory-search]").fill("Graphcore");
+  const graphcoreCard = page.locator(".directory-result-card").first();
+  if (!(await graphcoreCard.textContent()).includes("Wholly owned subsidiary") ||
+      !(await graphcoreCard.textContent()).includes("SoftBank Group")) {
+    throw new Error("Graphcore ownership status missing from directory search");
+  }
+  await page.locator("[data-directory-search]").fill("Groq");
+  if (!(await page.locator(".directory-result-card").first().textContent()).includes("Independent")) {
+    throw new Error("Groq must remain classified as independent after its NVIDIA licensing agreement");
   }
   await page.locator("[data-directory-search]").fill("");
   await page.locator("[data-directory-evidence-filter]").selectOption("fresh");
