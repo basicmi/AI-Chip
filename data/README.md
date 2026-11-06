@@ -40,7 +40,7 @@ Products are separate records. Technical specifications and status statements be
 
 Freshness is computed from `checked_at`: fresh within 90 days, review due after 90 days, stale after 180 days. Missing dates mean unreviewed, never fresh. Staleness means a source needs rechecking; it does not by itself prove a claim is false.
 
-The registry carries over the 50 existing directory summaries and 126 source links without upgrading them to verified facts. The first audited wave covers eight companies and 16 products: NVIDIA B200 / GB200 NVL72; AMD MI350X / MI355X; Intel Gaudi 2 / Gaudi 3; Google TPU v6e / TPU7x; AWS Trainium2 / Trainium3; Microsoft Maia 100 / Maia 200; Meta MTIA v2 / MTIA 300; and Cerebras WSE-2 / WSE-3. The registry currently contains 70 structured claims linked to 17 reviewed source records. Claims are explicitly classified as vendor-reported or derived from a stated vendor specification; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
+The registry carries over the 50 existing directory summaries and 126 inherited source links without upgrading them to verified facts. The structured product catalogue now covers eight audited company profiles and 27 products, with 108 claims linked to 29 reviewed source records and 136 total references. Recent additions include NVIDIA Rubin GPU, Vera Rubin NVL72, Groq 3 LPU and LPX; AMD MI455X and Helios; Microsoft Maia 300; Intel GPU D270 (Crescent Island); Meta MTIA 300; and Cerebras WSE-3 Turbo / CS-4. Google TPU7x (Ironwood) and AWS Trainium3 source records were refreshed against current official product documentation. Claims are explicitly classified as vendor-reported unless independent evidence is present; they are not independent benchmark measurements. The other 42 company profiles remain unreviewed at claim level. Missing specifications are not inferred or fabricated.
 
 ## Comparison metadata (schema v1.2)
 
@@ -56,7 +56,7 @@ The root `comparison_policy` requires precision, sparsity, measurement scope, an
 
 Product records may reference `compatibility_platform_ids`. These IDs connect product cards to the platform-level entries in `compatibility.json`; the explorer then displays the software integrations and workload paths associated with that platform. These are platform-level relationships, not a guarantee that every SKU, model, precision or feature is supported. Always read the integration's version and limitation notes.
 
-The current first-wave registry links 16 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
+The current registry links 23 products to 8 platform records. The compatibility catalogue contains 17 platforms and 27 software integration records; the workload catalogue contains 28 paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
 
 The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
 
@@ -124,3 +124,8 @@ A manual GitHub Actions workflow, `.github/workflows/refresh-benchmark-results.y
 6. Do not interpret design power as measured power or missing power as zero.
 7. Preserve the source row and producer run link. A published submission is not automatically an independent replication.
 8. Do not rank different suites or workload families on one composite score.
+
+
+## Product Explorer comparison workspace
+
+The Product Explorer supports side-by-side comparison of up to **six products**. Rows align only when topic, precision, sparsity, measurement scope, metric type and source unit match. Missing or non-comparable values remain separate; chip, module, rack and system specifications are never silently mixed. The six-product limit is a display/workflow limit, not a recommendation to compare unlike architectures or workloads.
