@@ -5491,12 +5491,6 @@
           ],
           "availability_history": [
             {
-              "status": "announced",
-              "effective_at": "2025-01-01",
-              "evidence_id": "corsair-platform",
-              "notes": "Corsair platform publicly introduced; exact initial announcement date is not stated in the linked source."
-            },
-            {
               "status": "production",
               "effective_at": "2026-06-09",
               "evidence_id": "corsair-full-production",
