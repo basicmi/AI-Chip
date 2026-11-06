@@ -1460,7 +1460,8 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-results-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .benchmark-results-filters { grid-template-columns: 1fr; }
   [data-results-source-cards] { grid-template-columns: 1fr; }
+  .benchmark-results-heading { align-items: flex-start; flex-wrap: wrap; }
   .benchmark-results-pagination { justify-content: space-between; }
-  .benchmark-results-sort { margin-top: .75rem; justify-content: space-between; }
+  .benchmark-results-sort { width: 100%; margin-top: .75rem; justify-content: space-between; }
   .benchmark-results-sort select { flex: 1; }
 }
