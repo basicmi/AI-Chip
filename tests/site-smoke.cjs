@@ -97,9 +97,9 @@ const { chromium } = require("playwright");
   if (companyCount !== 50) throw new Error("Directory company index count changed unexpectedly: " + companyCount);
   const registrySummary = (await page.locator("[data-directory-review-summary]").textContent()).trim();
   if (!registrySummary.includes("50 profiles") ||
-      !registrySummary.includes("126 source links") ||
-      !registrySummary.includes("17 audited evidence records") ||
-      !registrySummary.includes("70 structured claims") ||
+      !registrySummary.includes("136 source links") ||
+      !registrySummary.includes("29 audited evidence records") ||
+      !registrySummary.includes("108 structured claims") ||
       !registrySummary.includes("42 profiles not yet reviewed")) {
     throw new Error("Company profile registry summary is inconsistent: " + registrySummary);
   }
@@ -120,8 +120,8 @@ const { chromium } = require("playwright");
   const awsProfile = profileRegistry.companies.find(company => company.id === "amazon-aws");
   const trainium2Dense = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-dense");
   const trainium2Sparse = awsProfile.claims.find(claim => claim.id === "trainium2-fp8-sparse");
-  if (profileRegistry.schema_version !== "1.2" || productCount !== 16 ||
-      claimCount !== 70 || evidenceCount !== 17 || metricContextCount < 40 ||
+  if (profileRegistry.schema_version !== "1.2" || productCount !== 27 ||
+      claimCount !== 108 || evidenceCount !== 17 || metricContextCount < 40 ||
       !profileRegistry.comparison_policy.precision_must_match ||
       !profileRegistry.comparison_policy.sparsity_must_match ||
       !profileRegistry.comparison_policy.measurement_scope_must_match ||
@@ -188,7 +188,7 @@ const { chromium } = require("playwright");
     return root && root.dataset.loaded === "true" && products && products.textContent.trim() === "16";
   }, null, { timeout: 15000 });
   const productStats = await page.locator(".product-stat strong").allTextContents();
-  if (productStats.join(",") !== "50,16,70,17,27,28") {
+  if (productStats.join(",") !== "50,27,108,29,27,28") {
     throw new Error("Product Explorer coverage stats are inconsistent: " + productStats.join(","));
   }
   await page.locator("[data-product-search]").fill("Trainium2");
@@ -222,10 +222,25 @@ const { chromium } = require("playwright");
       !comparisonText.includes("96 gib hbm") || !comparisonText.includes("144 gib hbm3e")) {
     throw new Error("Product comparison did not preserve dense/sparse precision and memory context");
   }
+
   await page.locator("[data-product-compare-clear]").click();
   if (await page.locator("[data-product-compare-table]").isVisible()) {
     throw new Error("Product comparison did not clear selected products");
   }
+  await page.locator("[data-product-search]").fill("");
+  const sixProductIds = ["rubin-gpu", "mi455x", "tpu7x-ironwood", "trainium3", "maia300", "mtia300"];
+  for (const id of sixProductIds) {
+    await page.locator('[data-compare-product="' + id + '"]').click();
+  }
+  if ((await page.locator("[data-product-compare-count]").textContent()).trim() !== "6 / 6 selected" ||
+      await page.locator("[data-product-compare-table] thead th").count() !== 7) {
+    throw new Error("Product comparison should support six products plus the metric column");
+  }
+  await page.locator('[data-compare-product="intel-gpu-d270"]').click();
+  if ((await page.locator("[data-product-compare-count]").textContent()).trim() !== "6 / 6 selected") {
+    throw new Error("Product comparison should enforce a maximum of six selected products");
+  }
+  await page.locator("[data-product-compare-clear]").click();
 
   await page.goto(base + "/compatibility/", { waitUntil: "networkidle" });
   await waitForDataset({
