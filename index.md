@@ -69,8 +69,15 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <p>Connect model families and workload phases to candidate hardware/software paths, with evidence maturity made explicit.</p>
       <span class="feature-link">Explore execution paths <span aria-hidden="true">→</span></span>
     </a>
+    <a class="feature-card feature-card-highlight" href="{{ '/model-support/' | relative_url }}">
+      <span class="feature-number">05 / MODEL SUPPORT</span>
+      <span class="feature-icon" aria-hidden="true">◈</span>
+      <h3>Model support explorer</h3>
+      <p>Trace exact model checkpoints to accelerator products, serving stacks, precision modes and source-backed deployment recipes.</p>
+      <span class="feature-link">Explore model support <span aria-hidden="true">→</span></span>
+    </a>
     <a class="feature-card" href="{{ '/benchmarks/' | relative_url }}">
-      <span class="feature-number">05 / BENCHMARKS</span>
+      <span class="feature-number">06 / BENCHMARKS</span>
       <span class="feature-icon" aria-hidden="true">▥</span>
       <h3>Benchmark landscape</h3>
       <p>Understand model, serving, kernel, memory, interconnect, power and cost benchmarks.</p>
