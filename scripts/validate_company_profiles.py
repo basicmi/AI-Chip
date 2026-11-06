@@ -83,7 +83,7 @@ def main():
                  "profile_status_definitions", "companies"], "root")
     if not isinstance(db, dict):
         return 2
-    check(db.get("schema_version") == "1.2", "root: schema_version must be 1.2")
+    check(db.get("schema_version") == "1.3", "root: schema_version must be 1.3")
     check(valid_date(db.get("registry_reviewed_at")), "root: invalid registry_reviewed_at")
     policy = db.get("freshness_policy", {})
     require(policy, ["fresh_within_days", "stale_after_days",
