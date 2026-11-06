@@ -646,6 +646,24 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .benchmark-results-heading h2{margin:0;font-size:1.55rem}
 .benchmark-results-heading h2 span{color:var(--teal)}
 .benchmark-results-heading>p{margin:0;color:var(--muted);font-size:11px}
+.benchmark-results-sort {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.benchmark-results-sort select {
+  min-width: 155px;
+  padding: .5rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+}
 .benchmark-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:stretch}
 .benchmark-card{min-width:0;padding:1.15rem;background:var(--surface);border:1px solid var(--line);border-radius:14px}
 .benchmark-card h3{margin:.35rem 0;font-size:1.2rem}
@@ -1442,5 +1460,8 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-results-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .benchmark-results-filters { grid-template-columns: 1fr; }
   [data-results-source-cards] { grid-template-columns: 1fr; }
+  .benchmark-results-heading { align-items: flex-start; flex-wrap: wrap; }
   .benchmark-results-pagination { justify-content: space-between; }
+  .benchmark-results-sort { width: 100%; margin-top: .75rem; justify-content: space-between; }
+  .benchmark-results-sort select { flex: 1; }
 }

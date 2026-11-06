@@ -287,6 +287,26 @@ const { chromium } = require("playwright");
   if (Number(await page.locator("[data-results-count]").textContent()) !== 492) {
     throw new Error("Benchmark Results Explorer should initially show all 492 MLPerf v6.1 rows");
   }
+  await page.locator("[data-results-sort]").selectOption("model");
+  const sortedModels = await page.locator("[data-results-rows] .benchmark-model").allTextContents();
+  const expectedModels = [...sortedModels].sort((a, b) =>
+    a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+  );
+  if (JSON.stringify(sortedModels) !== JSON.stringify(expectedModels)) {
+    throw new Error("Benchmark Results Explorer model sorting is not alphabetical");
+  }
+  await page.locator("[data-results-sort]").selectOption("vendor");
+  const sortedVendors = await page.locator("[data-results-rows] .benchmark-vendor-tag").allTextContents();
+  const expectedVendors = [...sortedVendors].sort((a, b) =>
+    a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+  );
+  if (JSON.stringify(sortedVendors) !== JSON.stringify(expectedVendors)) {
+    throw new Error("Benchmark Results Explorer vendor sorting is not alphabetical");
+  }
+  await page.locator("[data-results-reset]").click();
+  if (await page.locator("[data-results-sort]").inputValue() !== "") {
+    throw new Error("Benchmark Results Explorer reset did not restore source order");
+  }
   if ((await page.locator("[data-results-source-cards]").textContent()).indexOf("InferenceX") < 0) {
     throw new Error("Benchmark Results Explorer did not show the InferenceX source status");
   }

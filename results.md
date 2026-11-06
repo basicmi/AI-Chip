@@ -45,8 +45,17 @@ description: Source-linked public AI accelerator benchmark submissions and infer
   </div>
 
   <div class="benchmark-results-heading">
-    <div><p class="eyebrow">PUBLISHED RECORDS</p><h2><span data-results-count>—</span> results</h2></div>
-    <p data-results-summary aria-live="polite">Loading result registry…</p>
+    <div><p class="eyebrow">PUBLISHED RECORDS</p><h2><span data-results-count>—</span> results</h2>
+      <p data-results-summary aria-live="polite">Loading result registry…</p></div>
+    <label class="benchmark-results-sort">Display order
+      <select data-results-sort>
+        <option value="">Source order</option>
+        <option value="vendor">Accelerator vendor</option>
+        <option value="model">Model</option>
+        <option value="submitter">Submitter</option>
+        <option value="system">System name</option>
+      </select>
+    </label>
   </div>
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
