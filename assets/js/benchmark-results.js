@@ -198,7 +198,8 @@
   };
 
   const renderSourceCards = () => {
-    const container = $("[data-results-source-cards]");
+    // The source-status section intentionally sits outside the filter/table root.
+    const container = document.querySelector("[data-results-source-cards]");
     const map = sourceMap();
     container.replaceChildren();
     database.sources.forEach(source => {
