@@ -1486,3 +1486,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
+
+.directory-result-corporate-status { display: inline-flex; width: fit-content; margin: .15rem 0 .35rem; padding: .2rem .45rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); background: var(--surface-soft); font-size: 9px; font-weight: 700; line-height: 1.35; }
+.corporate-status-note { max-width: 880px; margin: .65rem auto; padding: .55rem .8rem; border-left: 3px solid var(--amber); background: var(--surface-soft); color: var(--ink); font-size: 12px; line-height: 1.55; }
+.section-intro { max-width: 900px; margin: .5rem auto 1.25rem; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.6; }
