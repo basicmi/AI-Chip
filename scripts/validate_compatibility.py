@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "compatibility.json"
+COMPANY_PROFILES = ROOT / "data" / "company-profiles.json"
 ALLOWED_STATUS = {
     "upstream_supported", "vendor_plugin_supported", "vendor_framework",
     "experimental", "in_progress", "needs_review", "vendor_reported",
