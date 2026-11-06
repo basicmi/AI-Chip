@@ -141,3 +141,8 @@ Product records may include availability_history, a chronological list of dated 
 ## Product-specific software compatibility links
 
 Compatibility records may optionally include `product_ids`. Each ID must exist in `data/company-profiles.json`. Use this field only when the cited integration evidence explicitly names the product or generation. If the evidence names only a vendor platform or backend, omit `product_ids` and retain the platform-level record. The Product Explorer displays these two scopes separately; it must never copy a platform-level support statement onto every SKU as if each SKU were individually validated.
+
+
+## Corporate ownership and operating status
+
+Company profiles may include an optional corporate_status object. It records whether the company remains independent, operates as a wholly owned subsidiary, has been integrated as a business unit, or has ceased operations. The object links to reviewed evidence records and distinguishes an equity acquisition from an acqui-hire or technology license. An acqui-hire must not be represented as an acquisition of the whole company or its IP unless the source says so. The Directory groups acquired and discontinued companies separately from independent startups; searchable company cards show the ownership status.
