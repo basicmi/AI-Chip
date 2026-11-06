@@ -5114,16 +5114,10 @@
           ],
           "availability_history": [
             {
-              "status": "announced",
-              "effective_at": "2024-08-27",
-              "evidence_id": "furiosa-rngd-specs",
-              "notes": "RNGD hardware specification published."
-            },
-            {
               "status": "production",
-              "effective_at": "2026-01-01",
+              "effective_at": "2026-01",
               "evidence_id": "furiosa-rngd-production",
-              "notes": "Furiosa says RNGD reached mass production in January 2026; exact day not specified, date is month-start with explanatory note."
+              "notes": "Furiosa says RNGD reached mass production in January 2026; exact day not stated."
             }
           ]
         },
@@ -5683,7 +5677,7 @@
             },
             {
               "status": "shipping",
-              "effective_at": "2026-09-01",
+              "effective_at": "2026-09",
               "evidence_id": "huawei-ascend-2026",
               "notes": "Huawei stated Ascend 950 supernodes had entered commercial scale; family-level evidence, not independent verification of each card SKU."
             }
@@ -5714,7 +5708,7 @@
             },
             {
               "status": "shipping",
-              "effective_at": "2026-09-01",
+              "effective_at": "2026-09",
               "evidence_id": "huawei-ascend-2026",
               "notes": "Huawei stated Ascend 950 supernodes had entered commercial scale; family-level evidence, not independent verification of each card SKU."
             }
