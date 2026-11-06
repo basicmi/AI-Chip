@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "database_version": "2026.11.06-4",
+  "database_version": "2026.11.06-5",
   "registry_reviewed_at": "2026-11-06",
   "scope": "Curated public AI accelerator company and product registry. New and updated product claims are source-linked and classified as vendor-reported unless independently measured evidence is explicitly cited. Availability labels distinguish announced, shipping and production status. This revision adds reviewed, source-linked profiles for custom XPU suppliers and inference-focused accelerator companies; platform-level records are used where no public merchant SKU exists.",
   "freshness_policy": {
@@ -5896,12 +5896,195 @@
       "category": "China AI Accelerator Vendors",
       "directory_anchor": "Cambricon",
       "logo_url": "https://github.com/basicmi/AI-Chip/raw/master/resource/Cambricon_logo.png",
-      "summary": "Cambricon is China’s leading pure-play AI-chip vendor, spanning edge IP/SoCs and cloud MLU / Siyuan accelerators. After an early edge-IP era, the company refocused on cloud training/inference cards for Chinese internet and intelligent-computing customers, with aggressive 2026 volume plans.",
-      "profile_status": "not_reviewed",
-      "last_reviewed": null,
-      "products": [],
-      "claims": [],
-      "evidence": [],
+      "summary": "Cambricon develops MLU accelerators and the NeuWare software stack. This structured record covers the publicly documented MLU370-S4/S8 card family; newer roadmap or market-reported products remain unstructured until authoritative product specifications are available.",
+      "profile_status": "partially_reviewed",
+      "last_reviewed": "2026-11-06",
+      "products": [
+        {
+          "id": "mlu370-s4-s8",
+          "name": "Cambricon MLU370-S4/S8 Accelerator Card",
+          "product_type": "npu",
+          "architecture": "Cambricon MLUarch03; chiplet-based architecture",
+          "generation": "Siyuan 370",
+          "family": "Cambricon MLU370",
+          "process_node": "7nm",
+          "market_segment": "Cloud AI inference and mixed AI workloads",
+          "availability": "shipping",
+          "form_factor": "PCIe Gen4 half-height, half-length single-slot accelerator card",
+          "claim_ids": [
+            "mlu370-int8",
+            "mlu370-fp16",
+            "mlu370-bf16",
+            "mlu370-fp32",
+            "mlu370-memory",
+            "mlu370-bandwidth",
+            "mlu370-power"
+          ],
+          "compatibility_platform_ids": [
+            "cambricon"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "id": "mlu370-int8",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 192 TOPS INT8 peak performance for MLU370-S4/S8.",
+          "value": 192,
+          "unit": "TOPS INT8",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "INT8",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-fp16",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 72 TFLOPS FP16 peak performance for MLU370-S4/S8.",
+          "value": 72,
+          "unit": "TFLOPS FP16",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-bf16",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 72 TFLOPS BF16 peak performance for MLU370-S4/S8.",
+          "value": 72,
+          "unit": "TFLOPS BF16",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "BF16",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-fp32",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "compute",
+          "statement": "Cambricon lists 18 TFLOPS FP32 peak performance for MLU370-S4/S8.",
+          "value": 18,
+          "unit": "TFLOPS FP32",
+          "scope": "Per accelerator card; vendor specification.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "matrix",
+            "precision": "FP32",
+            "sparsity": "unspecified"
+          }
+        },
+        {
+          "id": "mlu370-memory",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "memory_capacity",
+          "statement": "Cambricon lists 24 GB / 48 GB LPDDR5 memory options for MLU370-S4/S8.",
+          "value": "24 GB / 48 GB",
+          "unit": "LPDDR5",
+          "scope": "Per accelerator card; capacity varies by card variant, source does not map each capacity to S4 vs S8 in the same table.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "notes": "Variant capacity is preserved as a string because the official page does not explicitly map the two capacities to each SKU in the cited specification table."
+        },
+        {
+          "id": "mlu370-bandwidth",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "memory_bandwidth",
+          "statement": "Cambricon lists 307.2 GB/s memory bandwidth for MLU370-S4/S8.",
+          "value": 307.2,
+          "unit": "GB/s",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "memory"
+          }
+        },
+        {
+          "id": "mlu370-power",
+          "subject_type": "product",
+          "subject_id": "mlu370-s4-s8",
+          "topic": "power",
+          "statement": "Cambricon lists 75 W maximum thermal design power for MLU370-S4/S8.",
+          "value": 75,
+          "unit": "W TDP",
+          "scope": "Per accelerator card.",
+          "claim_status": "vendor_reported",
+          "evidence_ids": [
+            "cambricon-mlu370-specs"
+          ],
+          "last_reviewed": "2026-11-06",
+          "metric_context": {
+            "metric_type": "specification",
+            "measurement_scope": "board",
+            "operation": "power"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "cambricon-mlu370-specs",
+          "title": "MLU370-S4/S8 accelerator card specifications",
+          "url": "https://www.cambricon.com/index.php?a=lists&c=index&catid=367&m=content",
+          "publisher": "Cambricon",
+          "source_type": "vendor_primary",
+          "independence": "vendor",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "review_status": "reviewed",
+          "notes": "Official Cambricon product specification page: MLUarch03, 7nm, 192 TOPS INT8, 72 TFLOPS FP16/BF16, 24GB/48GB LPDDR5, 307.2GB/s, PCIe Gen4 and 75W."
+        }
+      ],
       "references": [
         {
           "id": "ref-cambricon-1",
@@ -5922,6 +6105,16 @@
           "published_at": null,
           "checked_at": null,
           "notes": "Carried over from directory.md. Source type, publication date and claim-level support have not yet been audited."
+        },
+        {
+          "id": "ref-cambricon-mlu370",
+          "label": "Cambricon MLU370-S4/S8 product specifications",
+          "url": "https://www.cambricon.com/index.php?a=lists&c=index&catid=367&m=content",
+          "source_type": "vendor_primary",
+          "review_status": "reviewed",
+          "published_at": null,
+          "checked_at": "2026-11-06",
+          "notes": "Official product specifications; 24GB/48GB capacity options retained without assigning each capacity to an individual card variant."
         }
       ]
     },
