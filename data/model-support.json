@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.09-1",
+  "database_version": "2026.11.09-2",
   "last_reviewed": "2026-11-09",
   "scope": "Model support records are configuration-specific evidence links, not blanket compatibility guarantees. A product-level mapping is included only when the source explicitly identifies the accelerator product or generation. A documented recipe, an upstream verification matrix, a vendor report and an independently reproduced run are distinct evidence levels. Performance numbers belong in benchmark-results.json, not here. Newly added records in this revision distinguish exact checkpoint variants and keep vendor profile availability separate from upstream verification and independent testing.",
   "support_levels": {
@@ -393,16 +393,17 @@
       "software_stack": "TensorRT-LLM 1.2.0",
       "support_level": "documented_recipe",
       "precision_modes": [
-        "BF16",
-        "FP8"
+        "FP8",
+        "NVFP4",
+        "Checkpoint default"
       ],
-      "quantization": "Model and checkpoint quantization are recipe-specific; configure MoE expert parallelism for Qwen3-235B-A22B.",
+      "quantization": "NVIDIA publishes BF16/base, FP8 and NVFP4 checkpoint variants; the recipe guide focuses on a working setup and recommended defaults.",
       "execution_modes": [
         "TensorRT-LLM serving",
         "Expert parallelism"
       ],
       "hardware_scope": "NVIDIA Hopper and Blackwell architectures as covered by the Qwen3 TensorRT-LLM deployment guide; exact SKU/recipe constraints must be checked in the selected configuration.",
-      "limitations": "The guide distinguishes Qwen3-30B-A3B and Qwen3-235B-A22B MoE settings. Do not merge this base model with the Thinking-2507 checkpoint or assume all quantization modes are interchangeable.",
+      "limitations": "The guide lists Qwen3-235B-A22B, its FP8 checkpoint and NVFP4 checkpoint. It describes the setup as a functional quick start; additional optimizations/support are planned. It distinguishes the base model from Qwen3 Thinking variants.",
       "evidence": [
         {
           "type": "vendor_docs",
@@ -411,6 +412,70 @@
           "published_at": null,
           "checked_at": "2026-11-09",
           "claim": "NVIDIA provides a Qwen3 TensorRT-LLM deployment guide and explicitly calls out MoE expert-parallel configuration for Qwen3-235B-A22B."
+        }
+      ]
+    },
+    {
+      "id": "amd-aim-qwen3-235b-a22b",
+      "model_id": "qwen3-235b-a22b",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi350x",
+        "mi355x"
+      ],
+      "integration_ids": [],
+      "software_stack": "AMD Enterprise AI · Accelerator Inference Microservices (AIM)",
+      "support_level": "vendor_reported",
+      "precision_modes": [
+        "AIM profile precision (profile-specific)"
+      ],
+      "quantization": "Not specified in the public accelerator support matrix; inspect the selected AIM profile before deployment.",
+      "execution_modes": [
+        "Packaged AIM inference service",
+        "ROCm"
+      ],
+      "hardware_scope": "AMD Instinct MI350X and MI355X are explicitly listed as optimized for Qwen3-235B-A22B in the current AIM accelerator matrix.",
+      "limitations": "The matrix describes model-specific profile support tiers, not independent testing or a generic ROCm framework guarantee. Do not conflate this base model with Qwen3-235B-A22B-Thinking-2507.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://enterprise-ai.docs.amd.com/en/latest/aims/accelerator_support.html",
+          "publisher": "AMD Enterprise AI",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "AMD's current AIM accelerator matrix lists Qwen/Qwen3-235B-A22B as optimized on Instinct MI350X and MI355X."
+        }
+      ]
+    },
+    {
+      "id": "amd-aim-gpt-oss-120b",
+      "model_id": "gpt-oss-120b",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi350x",
+        "mi355x"
+      ],
+      "integration_ids": [],
+      "software_stack": "AMD Enterprise AI · Accelerator Inference Microservices (AIM)",
+      "support_level": "vendor_reported",
+      "precision_modes": [
+        "AIM profile precision (profile-specific)"
+      ],
+      "quantization": "Not specified in the public accelerator support matrix; inspect the selected AIM profile before deployment.",
+      "execution_modes": [
+        "Packaged AIM inference service",
+        "ROCm"
+      ],
+      "hardware_scope": "AMD Instinct MI350X and MI355X are explicitly listed as optimized for openai/gpt-oss-120b in the current AIM accelerator matrix.",
+      "limitations": "The matrix describes model-specific profile support tiers, not independent testing or a generic ROCm framework guarantee. The support tier on MI250X and MI325X differs; this record is scoped only to MI350X/MI355X.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://enterprise-ai.docs.amd.com/en/latest/aims/accelerator_support.html",
+          "publisher": "AMD Enterprise AI",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "AMD's current AIM accelerator matrix lists openai/gpt-oss-120b as optimized on Instinct MI350X and MI355X."
         }
       ]
     }
