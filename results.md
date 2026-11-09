@@ -42,6 +42,19 @@ description: Source-linked public AI accelerator benchmark submissions and infer
       <label>Division<select data-results-division><option value="">All divisions</option></select></label>
       <label>System type<select data-results-system><option value="">All system types</option></select></label>
     </div>
+    <details class="benchmark-results-advanced">
+      <summary>Advanced workload filters · InferenceX</summary>
+      <div class="benchmark-results-filters">
+        <label>Framework<select data-results-framework><option value="">All frameworks</option></select></label>
+        <label>Precision<select data-results-precision><option value="">All precisions</option></select></label>
+        <label>Workload type<select data-results-benchmark-type><option value="">All workload types</option></select></label>
+        <label>Input length · ISL<select data-results-isl><option value="">All input lengths</option></select></label>
+        <label>Output length · OSL<select data-results-osl><option value="">All output lengths</option></select></label>
+        <label>Concurrency<select data-results-concurrency><option value="">All concurrency levels</option></select></label>
+        <label>Serving mode<select data-results-serving-mode><option value="">Aggregated / disaggregated</option></select></label>
+        <label>Deployment topology<select data-results-topology><option value="">Single-node / multi-node</option></select></label>
+      </div>
+    </details>
   </div>
 
   <div class="benchmark-results-heading">
@@ -90,7 +103,8 @@ description: Source-linked public AI accelerator benchmark submissions and infer
   <div><p class="eyebrow">COMPARABILITY POLICY</p><h2>Context before ranking.</h2></div>
   <div>
     <p>Do not compare results across different benchmark suites, models, scenarios, divisions, system types, units or accuracy targets. For MLPerf, preserve the suite version, Closed/Open division, Available/Preview/RDI status, scenario, inference mode, accuracy target and full system boundary. Inferred submissions are marked separately.</p>
-    <p>The MLPerf v6.1 summary snapshot contains no measured power records. Design power is not measured power. For InferenceX, TTFT/TPOT and throughput metrics retain the API's units; strict power comparisons require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>.</p>
+    <p>The MLPerf v6.1 summary snapshot contains no measured power records. Design power is not measured power. For InferenceX, <code>median_intvty</code> is median interactivity in tok/s/user (higher is better), not latency; <code>p99_itl</code> and <code>p99_tpot</code> are latency metrics in seconds. Throughput metrics are tokens/s per physical GPU unless the source key states otherwise.</p>
+    <p>Compare InferenceX rows only after matching model, workload type, ISL/OSL, concurrency, precision, framework/image, speculative mode, aggregated vs. disaggregated topology and prefill/decode parallelism. GPU power/energy values require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>. CPU/module telemetry has an independent <code>cpu_power_valid</code> verdict. An absent CPU verdict means there is no CPU-side measurement leg, not a failed GPU measurement. The importer preserves failed, incomplete and unreported states separately; do not combine component boundaries without checking their definitions.</p>
     <p>Every row links to its publisher's source record where available. A public submission or observation is attributed to its publisher; it is not automatically an independent replication.</p>
   </div>
 </section>

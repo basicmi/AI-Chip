@@ -12,7 +12,15 @@
     availability: $("[data-results-availability]"),
     inferred: $("[data-results-inferred]"),
     division: $("[data-results-division]"),
-    system: $("[data-results-system]")
+    system: $("[data-results-system]"),
+    framework: $("[data-results-framework]"),
+    precision: $("[data-results-precision]"),
+    benchmarkType: $("[data-results-benchmark-type]"),
+    isl: $("[data-results-isl]"),
+    osl: $("[data-results-osl]"),
+    concurrency: $("[data-results-concurrency]"),
+    servingMode: $("[data-results-serving-mode]"),
+    topology: $("[data-results-topology]")
   };
   const rowsNode = $("[data-results-rows]");
   const sortSelect = $("[data-results-sort]");
@@ -74,15 +82,29 @@
   };
 
   const metricSummary = (record) => {
-    const metrics = record.metrics || {};
-    const preferred = [
-      ["output_tput_per_gpu", "output tok/s/GPU"],
-      ["median_intvty", "median inter-token latency (s)"],
-      ["p99_ttft", "p99 TTFT (s)"],
-      ["p99_tpot", "p99 TPOT (s)"],
-      ["p99_itl", "p99 ITL (s)"]
+    const normalized = record.normalized_metrics || {};
+    const preferredNormalized = [
+      "output_throughput_per_gpu", "median_interactivity", "p99_ttft", "p99_tpot", "p99_itl"
     ];
-    const items = preferred
+    const normalizedItems = preferredNormalized
+      .filter(key => normalized[key] && typeof normalized[key].value === "number")
+      .slice(0, 3)
+      .map(key => {
+        const metric = normalized[key];
+        return metric.label + ": " + numberText(metric.value) + " " + metric.unit;
+      });
+    if (normalizedItems.length) return normalizedItems.join(" · ");
+
+    // Backward-compatible display for older snapshots without normalized_metrics.
+    const metrics = record.metrics || {};
+    const fallback = [
+      ["output_tput_per_gpu", "Output throughput (tok/s/GPU)"],
+      ["median_intvty", "Median interactivity (tok/s/user)"],
+      ["p99_ttft", "P99 TTFT (s)"],
+      ["p99_tpot", "P99 TPOT (s)"],
+      ["p99_itl", "P99 inter-token latency (s)"]
+    ];
+    const items = fallback
       .filter(([key]) => typeof metrics[key] === "number")
       .slice(0, 3)
       .map(([key, label]) => label + ": " + numberText(metrics[key]));
@@ -93,7 +115,8 @@
     if (typeof record.result_value === "number") {
       return numberText(record.result_value) + (record.result_unit ? " " + record.result_unit : "");
     }
-    if (record.metrics && Object.keys(record.metrics).length) return metricSummary(record);
+    if ((record.metrics && Object.keys(record.metrics).length) ||
+        (record.normalized_metrics && Object.keys(record.normalized_metrics).length)) return metricSummary(record);
     return "Metric not provided";
   };
 
@@ -115,12 +138,28 @@
     const configuration = record.configuration || {};
 
     addDetailLine(body, "Benchmark", record.benchmark_suite + " " + (record.benchmark_version || ""));
+    addDetailLine(body, "Model display name", record.model_display_name);
+    addDetailLine(body, "Raw model key", record.model_display_name ? record.model : "");
     addDetailLine(body, "Division / availability", record.division + " / " + record.availability);
     addDetailLine(body, "System", record.system_name);
     addDetailLine(body, "Accelerator", system.accelerator_model || system.hardware || "Not separately specified");
-    addDetailLine(body, "Accelerator count", system.total_accelerators || [
-      system.physical_prefill_gpus, system.physical_decode_gpus
-    ].filter(value => value !== null && value !== undefined).join(" prefill / ") || "");
+    addDetailLine(body, "Accelerator count", system.total_accelerators || "");
+    if (system.physical_prefill_gpus !== null && system.physical_prefill_gpus !== undefined ||
+        system.physical_decode_gpus !== null && system.physical_decode_gpus !== undefined) {
+      addDetailLine(body, "Physical prefill / decode GPUs", [
+        system.physical_prefill_gpus, system.physical_decode_gpus
+      ].map(value => value === null || value === undefined ? "—" : value).join(" / "));
+    }
+    addDetailLine(body, "Deployment topology", system.is_multinode === true ? "Multi-node" : system.is_multinode === false ? "Single-node" : "");
+    const workerPools = Array.isArray(system.workers) ? system.workers : [];
+    if (workerPools.length) addDetailLine(body, "Worker pools", workerPools.map(worker =>
+      [
+        worker.role,
+        worker.worker_idx !== undefined ? "worker " + worker.worker_idx : "",
+        worker.num_gpus !== undefined ? worker.num_gpus + " GPUs" : "",
+        Array.isArray(worker.hosts) ? worker.hosts.join(", ") : (worker.hosts || "")
+      ].filter(Boolean).join(" · ")
+    ).join(" | "));
     addDetailLine(body, "Host CPU", system.host_processor_model);
     addDetailLine(body, "Nodes", system.nodes);
     addDetailLine(body, "Framework", software.framework);
@@ -134,22 +173,62 @@
       workload.osl !== undefined && workload.osl !== null ? "OSL " + workload.osl : "",
       workload.concurrency !== undefined && workload.concurrency !== null ? "Concurrency " + workload.concurrency : "",
       workload.benchmark_type || "",
+      workload.precision ? "Precision " + workload.precision : "",
+      workload.disaggregated === true ? "Disaggregated" : workload.disaggregated === false ? "Aggregated" : "",
       workload.speculative_method ? "Speculative decoding " + workload.speculative_method : ""
     ].filter(Boolean).join(" · "));
     addDetailLine(body, "Parallelism", Object.entries(configuration)
-      .filter(([key]) => ["prefill_tp", "prefill_ep", "decode_tp", "decode_ep", "offload_mode"].includes(key))
+      .filter(([key]) => [
+        "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+        "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers", "offload_mode"
+      ].includes(key))
       .map(([key, value]) => key + "=" + value).join(" · "));
+    addDetailLine(body, "Workflow run ID", configuration.workflow_run_id);
+    addDetailLine(body, "Run started at", configuration.run_started_at);
+    if (record.normalized_metrics && Object.keys(record.normalized_metrics).length) {
+      const metrics = Object.values(record.normalized_metrics)
+        .map(metric => {
+          const direction = metric.direction === "higher" ? "higher is better"
+            : metric.direction === "lower" ? "lower is better" : "context only";
+          return metric.label + ": " + numberText(metric.value) + " " + metric.unit + " (" + direction + ")";
+        })
+        .join(" · ");
+      addDetailLine(body, "Normalized metrics", metrics);
+    }
     if (record.metrics && Object.keys(record.metrics).length) {
       const metrics = Object.entries(record.metrics)
         .map(([key, value]) => key + ": " + numberText(value))
         .join(" · ");
-      addDetailLine(body, "Metrics", metrics);
+      addDetailLine(body, "Raw publisher metrics", metrics);
     }
     addDetailLine(body, "Notes", record.notes);
     addDetailLine(body, "Source record key", record.source_record_key);
     if (record.inferred) body.append(make("p", "benchmark-result-warning", "This submission is marked as inferred by the source."));
-    if (record.power_metrics_available) {
-      body.append(make("p", "benchmark-result-power", "The source marks this record as containing power metrics. Check the source-specific validation semantics before comparison."));
+    if (record.source_id === "inferencex") {
+      const gpuPowerStatus = {
+        valid: "Valid · schema v2",
+        failed: "Failed validation",
+        schema_incomplete: "Schema v2 not confirmed",
+        unreported: "No validation verdict reported",
+        invalid_verdict: "Invalid source verdict"
+      }[record.power_measurement_status] || "Unknown";
+      const cpuPowerStatus = {
+        valid: "Valid · independent CPU-side leg",
+        failed: "Failed validation",
+        not_present: "No CPU-side measurement leg",
+        invalid_verdict: "Invalid source verdict"
+      }[record.cpu_power_measurement_status] || "Unknown";
+      addDetailLine(body, "GPU power validation", gpuPowerStatus);
+      addDetailLine(body, "CPU / module power validation", cpuPowerStatus);
+      if (record.power_metrics_available === true) {
+        body.append(make("p", "benchmark-result-power", "At least one GPU or CPU/module power/energy metric passed its source-specific validation. Compare component boundaries separately."));
+      } else if (record.power_measurement_valid === true || record.cpu_power_measurement_valid === true) {
+        body.append(make("p", "benchmark-result-warning", "A power measurement leg is valid, but this row exposes no measured power/energy value for that leg."));
+      } else {
+        body.append(make("p", "benchmark-result-warning", "No validated measured power/energy metric is available in this record. Design power, if present, is not measured power."));
+      }
+    } else if (record.power_metrics_available === true) {
+      body.append(make("p", "benchmark-result-power", "The source marks this record as containing measured power metrics; compare only within its stated measurement boundary."));
     } else {
       body.append(make("p", "benchmark-result-warning", "No measured power metric is available in this record. Design power, if present, is not measured power."));
     }
@@ -180,7 +259,7 @@
     row.append(accelerator);
 
     const workload = document.createElement("td");
-    workload.append(make("strong", "benchmark-model", record.model));
+    workload.append(make("strong", "benchmark-model", record.model_display_name || record.model));
     workload.append(make("small", "benchmark-scenario", record.scenario));
     row.append(workload);
 
@@ -235,18 +314,27 @@
     filteredRecords = database.records.filter(record => {
       if (filters.source.value && record.source_id !== filters.source.value) return false;
       if (filters.vendor.value && (record.accelerator_vendor || "Not specified") !== filters.vendor.value) return false;
-      if (filters.model.value && record.model !== filters.model.value) return false;
+      if (filters.model.value && (record.model_display_name || record.model) !== filters.model.value) return false;
       if (filters.scenario.value && record.scenario !== filters.scenario.value) return false;
       if (filters.availability.value && record.availability !== filters.availability.value) return false;
       if (filters.inferred.value === "true" && !record.inferred) return false;
       if (filters.inferred.value === "false" && record.inferred) return false;
       if (filters.division.value && record.division !== filters.division.value) return false;
       if (filters.system.value && record.system_type !== filters.system.value) return false;
+      if (filters.framework.value && (record.software?.framework || "") !== filters.framework.value) return false;
+      if (filters.precision.value && (record.workload?.precision || record.weight_data_types || "") !== filters.precision.value) return false;
+      if (filters.benchmarkType.value && (record.workload?.benchmark_type || "") !== filters.benchmarkType.value) return false;
+      if (filters.isl.value && String(record.workload?.isl ?? "") !== filters.isl.value) return false;
+      if (filters.osl.value && String(record.workload?.osl ?? "") !== filters.osl.value) return false;
+      if (filters.concurrency.value && String(record.workload?.concurrency ?? "") !== filters.concurrency.value) return false;
+      if (filters.servingMode.value && (record.workload?.disaggregated === true ? "disaggregated" : record.workload?.disaggregated === false ? "aggregated" : "") !== filters.servingMode.value) return false;
+      if (filters.topology.value && (record.system?.is_multinode === true ? "multi-node" : record.system?.is_multinode === false ? "single-node" : "") !== filters.topology.value) return false;
       const searchable = [
         record.submitter, record.accelerator_vendor, record.system_name,
         record.system?.accelerator_model, record.system?.hardware,
-        record.model, record.scenario, record.division, record.availability,
+        record.model_display_name, record.model, record.scenario, record.division, record.availability,
         record.software?.framework, record.software?.operating_system,
+        record.workload?.precision, record.workload?.benchmark_type,
         record.notes, record.accuracy_text, record.benchmark_suite
       ].join(" ").toLowerCase();
       return !query || searchable.includes(query);
@@ -255,7 +343,7 @@
     if (sortField) {
       const fieldValue = (record) => {
         if (sortField === "vendor") return record.accelerator_vendor || "Not specified";
-        if (sortField === "model") return record.model || "";
+        if (sortField === "model") return record.model_display_name || record.model || "";
         if (sortField === "submitter") return record.submitter || "";
         if (sortField === "system") return record.system_name || "";
         return "";
@@ -320,12 +408,24 @@
       populate(filters.source, data.sources.map(source => source.id),
         id => (sources.get(id)?.name || id));
       populate(filters.vendor, data.records.map(record => record.accelerator_vendor || "Not specified"));
-      populate(filters.model, data.records.map(record => record.model));
+      populate(filters.model, data.records.map(record => record.model_display_name || record.model));
       populate(filters.scenario, data.records.map(record => record.scenario));
       populate(filters.availability, data.records.map(record => record.availability));
       populate(filters.inferred, ["false", "true"], value => value === "true" ? "Inferred submissions" : "Non-inferred submissions");
       populate(filters.division, data.records.map(record => record.division));
       populate(filters.system, data.records.map(record => record.system_type));
+      populate(filters.framework, data.records.map(record => record.software?.framework));
+      populate(filters.precision, data.records.map(record => record.workload?.precision || record.weight_data_types));
+      populate(filters.benchmarkType, data.records.map(record => record.workload?.benchmark_type));
+      populate(filters.isl, data.records.map(record => record.workload?.isl));
+      populate(filters.osl, data.records.map(record => record.workload?.osl));
+      populate(filters.concurrency, data.records.map(record => record.workload?.concurrency));
+      populate(filters.servingMode, data.records.map(record =>
+        typeof record.workload?.disaggregated === "boolean" ? (record.workload.disaggregated ? "disaggregated" : "aggregated") : null
+      ));
+      populate(filters.topology, data.records.map(record =>
+        typeof record.system?.is_multinode === "boolean" ? (record.system.is_multinode ? "multi-node" : "single-node") : null
+      ));
 
       setText("[data-results-version]", data.database_version || "—");
       setText("[data-results-imported]", data.last_imported_at || "—");
