@@ -44,6 +44,7 @@ jobs:
           python3 scripts/validate_workloads.py
           python3 scripts/validate_benchmarks.py
           python3 scripts/validate_company_profiles.py
+          python3 scripts/validate_model_support.py
           python3 scripts/validate_benchmark_results.py
           python3 -m unittest discover -s tests -p "test_data_maintenance.py"
           python3 -m unittest discover -s tests -p "test_benchmark_results.py"
@@ -71,6 +72,10 @@ jobs:
           test -s _site/data/benchmark-results.json
           test -s _site/assets/js/directory-explorer.js
           test -s _site/assets/js/product-explorer.js
+          test -s _site/assets/js/model-support-explorer.js
+          test -s _site/model-support/index.html
+          test -s _site/data/model-support.json
+          test -s _site/schemas/model-support.schema.json
           test -s _site/products/index.html
           test -s _site/data/company-profiles.json
           test -s _site/resource/AI_Chip_Landscape_v0p9p1.svg

@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/model-support.schema.json",
+  "title": "AI Accelerator Model Support Database",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "database_version",
+    "last_reviewed",
+    "scope",
+    "support_levels",
+    "models",
+    "support_paths"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "database_version": {
+      "type": "string"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "support_levels": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/model"
+      }
+    },
+    "support_paths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/support_path"
+      }
+    }
+  },
+  "$defs": {
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "model_id",
+        "publisher",
+        "family",
+        "parameter_count",
+        "modality",
+        "architecture",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameter_count": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modality": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "url",
+        "publisher",
+        "checked_at",
+        "claim"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "vendor_docs",
+            "upstream_docs",
+            "research_paper",
+            "independent_media",
+            "independent_test"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "support_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "model_id",
+        "platform_id",
+        "product_ids",
+        "integration_ids",
+        "software_stack",
+        "support_level",
+        "precision_modes",
+        "quantization",
+        "execution_modes",
+        "hardware_scope",
+        "limitations",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "integration_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "software_stack": {
+          "type": "string",
+          "minLength": 1
+        },
+        "support_level": {
+          "type": "string",
+          "enum": [
+            "documented_recipe",
+            "upstream_verified",
+            "vendor_reported",
+            "independently_tested",
+            "integration_only"
+          ]
+        },
+        "precision_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "quantization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hardware_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    }
+  }
+}

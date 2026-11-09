@@ -13,7 +13,8 @@ description: Explore and compare AI accelerator products using source-linked spe
     <span>Registry <strong data-product-version>Loading…</strong></span>
     <span>Last reviewed <strong data-product-reviewed>—</strong></span>
     <a href="{{ '/data/company-profiles.json' | relative_url }}">Raw product registry ↗</a>
-    <a href="https://github.com/basicmi/AI-Chip/blob/master/schemas/company-profiles.schema.json" target="_blank" rel="noopener noreferrer">Schema v1.2 ↗</a>
+    <a href="{{ '/model-support/' | relative_url }}">Model support ↗</a>
+    <a href="https://github.com/basicmi/AI-Chip/blob/master/schemas/company-profiles.schema.json" target="_blank" rel="noopener noreferrer">Schema v1.3 ↗</a>
   </div>
 </section>
 
