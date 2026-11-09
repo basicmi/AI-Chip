@@ -106,12 +106,15 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(result["normalized_metrics"]["p99_itl"]["unit"], "s")
         self.assertNotIn("mean_gpu_power_per_gpu", result["normalized_metrics"])
         self.assertFalse(result["power_measurement_valid"])
+        self.assertEqual(result["power_measurement_status"], "unreported")
+        self.assertEqual(result["cpu_power_measurement_status"], "not_present")
         self.assertFalse(result["power_metrics_available"])
         self.assertEqual(len(result["system"]["workers"]), 1)
 
         base["metrics"].update({"power_valid": 1, "power_metric_schema_version": 2})
         validated = normalize_inferencex_record(base, endpoint, model_display_name="DeepSeek-R1-0528")
         self.assertTrue(validated["power_measurement_valid"])
+        self.assertEqual(validated["power_measurement_status"], "valid")
         self.assertTrue(validated["power_metrics_available"])
         self.assertEqual(validated["normalized_metrics"]["mean_gpu_power_per_gpu"]["unit"], "W/GPU")
 
@@ -125,6 +128,8 @@ class NormalizationTests(unittest.TestCase):
         cpu_result = normalize_inferencex_record(cpu_only, endpoint, model_display_name="DeepSeek-R1-0528")
         self.assertFalse(cpu_result["power_measurement_valid"])
         self.assertTrue(cpu_result["cpu_power_measurement_valid"])
+        self.assertEqual(cpu_result["power_measurement_status"], "unreported")
+        self.assertEqual(cpu_result["cpu_power_measurement_status"], "valid")
         self.assertFalse(cpu_result["gpu_power_metrics_available"])
         self.assertTrue(cpu_result["cpu_power_metrics_available"])
         self.assertTrue(cpu_result["power_metrics_available"])
@@ -211,7 +216,9 @@ class RegistryValidationTests(unittest.TestCase):
             "design_power_watts": None, "system": {"workers": []}, "software": {}, "workload": {},
             "configuration": {}, "metrics": {"power_valid": 0, "power_metric_schema_version": 2},
             "model_display_name": "DeepSeek-R1-0528", "power_measurement_valid": False,
-            "cpu_power_measurement_valid": False, "gpu_power_metrics_available": False,
+            "power_measurement_status": "failed",
+            "cpu_power_measurement_valid": False, "cpu_power_measurement_status": "not_present",
+            "gpu_power_metrics_available": False,
             "cpu_power_metrics_available": False, "normalized_metrics": {},
             "notes": "", "compliance": "publisher_published", "errors": 0,
             "weight_data_types": "fp8", "source_record_key": "1", "source_location": "",
