@@ -342,8 +342,8 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
         "notes": (
             "Raw scalar metrics are preserved. Normalized metrics use source-documented units; "
             "median_intvty is interactivity in tok/s/user, not a latency metric. "
-            "Power and energy metrics are normalized only when power_valid=1 and "
-            "power_metric_schema_version=2. Missing metrics remain unavailable."
+            "GPU power/energy metrics require power_valid=1 and power_metric_schema_version=2; "
+            "CPU/module power telemetry independently requires cpu_power_valid=1. Missing metrics remain unavailable."
             + ((" Source note: " + str(row.get("notes"))) if row.get("notes") else "")
         ),
         "compliance": "publisher_published",
@@ -475,7 +475,7 @@ def import_inferencex(models: list[str] | None = None):
             "model display name and key, workload shape, precision, physical prefill/decode GPU counts, "
             "parallelism, workers, image, recipe fingerprint and producer run URL. "
             "An empty or partial model refresh aborts without replacing the previous snapshot. "
-            "Strict power/energy normalization requires power_valid=1 and power_metric_schema_version=2."
+            "GPU power/energy requires power_valid=1 plus schema version 2; CPU/module telemetry independently requires cpu_power_valid=1."
         ),
     }
     return source, records, warnings
