@@ -35,7 +35,7 @@ jobs:
           python-version: "3.12"
       - name: Import public benchmark data
         env:
-          SOURCE: ${{ inputs.source || 'inferencex' }}
+          SOURCE: ${{ github.event_name == 'schedule' && 'inferencex' || inputs.source || 'all' }}
           MODELS: ${{ inputs.models }}
         run: |
           args=(--source "$SOURCE")
