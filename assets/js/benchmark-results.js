@@ -178,8 +178,13 @@
       workload.speculative_method ? "Speculative decoding " + workload.speculative_method : ""
     ].filter(Boolean).join(" · "));
     addDetailLine(body, "Parallelism", Object.entries(configuration)
-      .filter(([key]) => ["prefill_tp", "prefill_ep", "decode_tp", "decode_ep", "offload_mode"].includes(key))
+      .filter(([key]) => [
+        "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+        "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers", "offload_mode"
+      ].includes(key))
       .map(([key, value]) => key + "=" + value).join(" · "));
+    addDetailLine(body, "Workflow run ID", configuration.workflow_run_id);
+    addDetailLine(body, "Run started at", configuration.run_started_at);
     if (record.normalized_metrics && Object.keys(record.normalized_metrics).length) {
       const metrics = Object.values(record.normalized_metrics)
         .map(metric => metric.label + ": " + numberText(metric.value) + " " + metric.unit)
