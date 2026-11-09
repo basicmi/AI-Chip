@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "database_version": "2026.11.06-1",
-  "last_reviewed": "2026-11-06",
-  "scope": "Model support records are configuration-specific evidence links, not blanket compatibility guarantees. A product-level mapping is included only when the source explicitly identifies the accelerator product or generation. A documented recipe, an upstream verification matrix, a vendor report and an independently reproduced run are distinct evidence levels. Performance numbers belong in benchmark-results.json, not here.",
+  "database_version": "2026.11.09-2",
+  "last_reviewed": "2026-11-09",
+  "scope": "Model support records are configuration-specific evidence links, not blanket compatibility guarantees. A product-level mapping is included only when the source explicitly identifies the accelerator product or generation. A documented recipe, an upstream verification matrix, a vendor report and an independently reproduced run are distinct evidence levels. Performance numbers belong in benchmark-results.json, not here. Newly added records in this revision distinguish exact checkpoint variants and keep vendor profile availability separate from upstream verification and independent testing.",
   "support_levels": {
     "documented_recipe": "Vendor or upstream documentation provides a runnable or step-by-step model deployment recipe for the named hardware configuration.",
     "upstream_verified": "An upstream project explicitly lists or verifies the model on the named accelerator, but the record is not an independently reproduced benchmark by this project.",
@@ -43,6 +43,50 @@
       "modality": "text",
       "architecture": "Mixture-of-Experts",
       "notes": "The vLLM FLY verification table names this FP8 model on AMD MI355X."
+    },
+    {
+      "id": "deepseek-r1-0528",
+      "display_name": "DeepSeek-R1-0528",
+      "model_id": "deepseek-ai/DeepSeek-R1-0528",
+      "publisher": "DeepSeek",
+      "family": "DeepSeek-R1",
+      "parameter_count": "671B total / 37B active",
+      "modality": "text",
+      "architecture": "Mixture-of-Experts",
+      "notes": "A dated checkpoint variant. Keep separate from the original DeepSeek-R1 and other R1 revisions when recording runtime compatibility or performance."
+    },
+    {
+      "id": "llama-4-scout-17b-16e",
+      "display_name": "Llama 4 Scout 17B-16E Instruct",
+      "model_id": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "publisher": "Meta",
+      "family": "Llama 4",
+      "parameter_count": "17B active / 16 experts",
+      "modality": "text + vision",
+      "architecture": "Mixture-of-Experts",
+      "notes": "Meta gated checkpoint. NVIDIA's TensorRT-LLM guide documents FP8 on Blackwell and Hopper, with NVFP4 limited to Blackwell."
+    },
+    {
+      "id": "gpt-oss-120b",
+      "display_name": "gpt-oss-120b",
+      "model_id": "openai/gpt-oss-120b",
+      "publisher": "OpenAI",
+      "family": "gpt-oss",
+      "parameter_count": "117B total / 5.1B active",
+      "modality": "text",
+      "architecture": "Mixture-of-Experts",
+      "notes": "Open-weight reasoning model. NVIDIA TensorRT-LLM publishes B200 and H200 deployment configurations; hardware path below is scoped to B200 NVL."
+    },
+    {
+      "id": "qwen3-235b-a22b",
+      "display_name": "Qwen3-235B-A22B",
+      "model_id": "Qwen/Qwen3-235B-A22B",
+      "publisher": "Qwen",
+      "family": "Qwen3",
+      "parameter_count": "235B total / 22B active",
+      "modality": "text",
+      "architecture": "Mixture-of-Experts",
+      "notes": "Keep the base Qwen3-235B-A22B checkpoint distinct from the Thinking-2507 variant already tracked."
     }
   ],
   "support_paths": [
@@ -214,6 +258,224 @@
           "published_at": null,
           "checked_at": "2026-11-06",
           "claim": "The vLLM FLY verification table lists AMD MI355X with Qwen3-235B-A22B-Thinking-2507-FP8 and Qwen3-8B as target/draft model pair."
+        }
+      ]
+    },
+    {
+      "id": "nvidia-trtllm-deepseek-r1-0528",
+      "model_id": "deepseek-r1-0528",
+      "platform_id": "nvidia-gpu",
+      "product_ids": [],
+      "integration_ids": [],
+      "software_stack": "TensorRT-LLM 1.2.x · ModelOpt · FlashInfer",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "FP8",
+        "NVFP4"
+      ],
+      "quantization": "FP8 checkpoint; NVFP4 checkpoint for Blackwell; KV cache FP8 is configurable",
+      "execution_modes": [
+        "TensorRT-LLM serving",
+        "Tensor parallelism",
+        "Expert parallelism",
+        "MTP speculative decoding"
+      ],
+      "hardware_scope": "NVIDIA Hopper and Blackwell. Curated recipes explicitly name H100/H200 and B200/GB200; detailed deployment guide documents backend/precision constraints for H100/H200, B200/GB200 and GB200 NVL72.",
+      "limitations": "Not every MoE backend supports every precision/device combination. For B200/GB200, the documented MoE backend depends on precision and EP size; do not generalize one recipe to all GPU counts or traffic shapes.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://nvidia.github.io/TensorRT-LLM/1.2.0/deployment-guide/deployment-guide-for-deepseek-r1-on-trtllm.html",
+          "publisher": "NVIDIA TensorRT-LLM",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "TensorRT-LLM provides a DeepSeek-R1-0528 deployment guide with FP8 and NVFP4 checkpoints, curated H100/H200 and B200/GB200 configurations, and explicit MoE backend support constraints."
+        }
+      ]
+    },
+    {
+      "id": "amd-aim-deepseek-r1-mi350-mi355",
+      "model_id": "deepseek-r1-0528",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi350x",
+        "mi355x"
+      ],
+      "integration_ids": [],
+      "software_stack": "AMD Enterprise AI · Accelerator Inference Microservices (AIM)",
+      "support_level": "vendor_reported",
+      "precision_modes": [
+        "AIM profile precision (profile-specific)"
+      ],
+      "quantization": "Not specified in the public accelerator support matrix; inspect the selected AIM profile before deployment.",
+      "execution_modes": [
+        "Packaged AIM inference service",
+        "ROCm"
+      ],
+      "hardware_scope": "AMD Instinct MI350X and MI355X are explicitly listed as optimized for DeepSeek-R1-0528 in the current AIM accelerator matrix.",
+      "limitations": "The matrix describes profile availability/support tier, not a universal framework-level guarantee or independent performance result. MI300X is listed for DeepSeek-R1 original in the matrix; this record is scoped to R1-0528 and MI350X/MI355X.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://enterprise-ai.docs.amd.com/en/latest/aims/accelerator_support.html",
+          "publisher": "AMD Enterprise AI",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "AMD's current AIM accelerator matrix lists DeepSeek-R1-0528 as optimized on Instinct MI350X and MI355X; the support tier is based on available model-specific profiles."
+        }
+      ]
+    },
+    {
+      "id": "nvidia-trtllm-llama4-scout",
+      "model_id": "llama-4-scout-17b-16e",
+      "platform_id": "nvidia-gpu",
+      "product_ids": [],
+      "integration_ids": [],
+      "software_stack": "TensorRT-LLM 1.2.0 · ModelOpt · FlashInfer",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "FP8",
+        "NVFP4"
+      ],
+      "quantization": "NVIDIA FP8 and NVFP4 checkpoints; NVFP4 is only supported on Blackwell.",
+      "execution_modes": [
+        "TensorRT-LLM serving",
+        "CUDA Graphs"
+      ],
+      "hardware_scope": "NVIDIA Blackwell and Hopper architectures. Exact product SKU is not specified by the guide; NVFP4 is Blackwell-only.",
+      "limitations": "The source demonstrates a specific checkpoint and runtime version. Do not infer support for Llama 4 Maverick, other Scout variants, or every TensorRT-LLM release.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://nvidia.github.io/TensorRT-LLM/1.2.0/deployment-guide/deployment-guide-for-llama4-scout-on-trtllm.html",
+          "publisher": "NVIDIA TensorRT-LLM",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "NVIDIA documents Llama-4-Scout-17B-16E-Instruct FP8 serving on Hopper and Blackwell; NVFP4 is explicitly limited to Blackwell."
+        }
+      ]
+    },
+    {
+      "id": "nvidia-trtllm-gpt-oss-120b-b200",
+      "model_id": "gpt-oss-120b",
+      "platform_id": "nvidia-gpu",
+      "product_ids": [],
+      "integration_ids": [],
+      "software_stack": "TensorRT-LLM 1.2.0",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "BF16"
+      ],
+      "quantization": "Model checkpoint uses MXFP4 weights; the guide publishes B200 NVL configuration files.",
+      "execution_modes": [
+        "TensorRT-LLM serving",
+        "Tensor parallelism"
+      ],
+      "hardware_scope": "NVIDIA B200 NVL configurations (4-GPU and 8-GPU configurations are listed). H200 configurations are also documented but are not mapped to a product record here.",
+      "limitations": "Recipe matrix is configuration-specific (GPU count, ISL/OSL, concurrency and TP size). This record intentionally does not map B200 NVL to B200 SXM or GB200 NVL72.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://nvidia.github.io/TensorRT-LLM/1.2.0/deployment-guide/deployment-guide-for-gpt-oss-on-trtllm.html",
+          "publisher": "NVIDIA TensorRT-LLM",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "NVIDIA publishes GPT-OSS-120B TensorRT-LLM serving configurations for 4xB200_NVL and 8xB200_NVL across multiple ISL/OSL and concurrency profiles."
+        }
+      ]
+    },
+    {
+      "id": "nvidia-trtllm-qwen3-235b-a22b",
+      "model_id": "qwen3-235b-a22b",
+      "platform_id": "nvidia-gpu",
+      "product_ids": [],
+      "integration_ids": [],
+      "software_stack": "TensorRT-LLM 1.2.0",
+      "support_level": "documented_recipe",
+      "precision_modes": [
+        "FP8",
+        "NVFP4",
+        "Checkpoint default"
+      ],
+      "quantization": "NVIDIA publishes BF16/base, FP8 and NVFP4 checkpoint variants; the recipe guide focuses on a working setup and recommended defaults.",
+      "execution_modes": [
+        "TensorRT-LLM serving",
+        "Expert parallelism"
+      ],
+      "hardware_scope": "NVIDIA Hopper and Blackwell architectures as covered by the Qwen3 TensorRT-LLM deployment guide; exact SKU/recipe constraints must be checked in the selected configuration.",
+      "limitations": "The guide lists Qwen3-235B-A22B, its FP8 checkpoint and NVFP4 checkpoint. It describes the setup as a functional quick start; additional optimizations/support are planned. It distinguishes the base model from Qwen3 Thinking variants.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://nvidia.github.io/TensorRT-LLM/1.2.0/deployment-guide/deployment-guide-for-qwen3-on-trtllm.html",
+          "publisher": "NVIDIA TensorRT-LLM",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "NVIDIA provides a Qwen3 TensorRT-LLM deployment guide and explicitly calls out MoE expert-parallel configuration for Qwen3-235B-A22B."
+        }
+      ]
+    },
+    {
+      "id": "amd-aim-qwen3-235b-a22b",
+      "model_id": "qwen3-235b-a22b",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi350x",
+        "mi355x"
+      ],
+      "integration_ids": [],
+      "software_stack": "AMD Enterprise AI · Accelerator Inference Microservices (AIM)",
+      "support_level": "vendor_reported",
+      "precision_modes": [
+        "AIM profile precision (profile-specific)"
+      ],
+      "quantization": "Not specified in the public accelerator support matrix; inspect the selected AIM profile before deployment.",
+      "execution_modes": [
+        "Packaged AIM inference service",
+        "ROCm"
+      ],
+      "hardware_scope": "AMD Instinct MI350X and MI355X are explicitly listed as optimized for Qwen3-235B-A22B in the current AIM accelerator matrix.",
+      "limitations": "The matrix describes model-specific profile support tiers, not independent testing or a generic ROCm framework guarantee. Do not conflate this base model with Qwen3-235B-A22B-Thinking-2507.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://enterprise-ai.docs.amd.com/en/latest/aims/accelerator_support.html",
+          "publisher": "AMD Enterprise AI",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "AMD's current AIM accelerator matrix lists Qwen/Qwen3-235B-A22B as optimized on Instinct MI350X and MI355X."
+        }
+      ]
+    },
+    {
+      "id": "amd-aim-gpt-oss-120b",
+      "model_id": "gpt-oss-120b",
+      "platform_id": "amd-gpu",
+      "product_ids": [
+        "mi350x",
+        "mi355x"
+      ],
+      "integration_ids": [],
+      "software_stack": "AMD Enterprise AI · Accelerator Inference Microservices (AIM)",
+      "support_level": "vendor_reported",
+      "precision_modes": [
+        "AIM profile precision (profile-specific)"
+      ],
+      "quantization": "Not specified in the public accelerator support matrix; inspect the selected AIM profile before deployment.",
+      "execution_modes": [
+        "Packaged AIM inference service",
+        "ROCm"
+      ],
+      "hardware_scope": "AMD Instinct MI350X and MI355X are explicitly listed as optimized for openai/gpt-oss-120b in the current AIM accelerator matrix.",
+      "limitations": "The matrix describes model-specific profile support tiers, not independent testing or a generic ROCm framework guarantee. The support tier on MI250X and MI325X differs; this record is scoped only to MI350X/MI355X.",
+      "evidence": [
+        {
+          "type": "vendor_docs",
+          "url": "https://enterprise-ai.docs.amd.com/en/latest/aims/accelerator_support.html",
+          "publisher": "AMD Enterprise AI",
+          "published_at": null,
+          "checked_at": "2026-11-09",
+          "claim": "AMD's current AIM accelerator matrix lists openai/gpt-oss-120b as optimized on Instinct MI350X and MI355X."
         }
       ]
     }
