@@ -276,7 +276,7 @@
     filteredRecords = database.records.filter(record => {
       if (filters.source.value && record.source_id !== filters.source.value) return false;
       if (filters.vendor.value && (record.accelerator_vendor || "Not specified") !== filters.vendor.value) return false;
-      if (filters.model.value && record.model !== filters.model.value) return false;
+      if (filters.model.value && (record.model_display_name || record.model) !== filters.model.value) return false;
       if (filters.scenario.value && record.scenario !== filters.scenario.value) return false;
       if (filters.availability.value && record.availability !== filters.availability.value) return false;
       if (filters.inferred.value === "true" && !record.inferred) return false;
@@ -305,7 +305,7 @@
     if (sortField) {
       const fieldValue = (record) => {
         if (sortField === "vendor") return record.accelerator_vendor || "Not specified";
-        if (sortField === "model") return record.model || "";
+        if (sortField === "model") return record.model_display_name || record.model || "";
         if (sortField === "submitter") return record.submitter || "";
         if (sortField === "system") return record.system_name || "";
         return "";
@@ -370,7 +370,7 @@
       populate(filters.source, data.sources.map(source => source.id),
         id => (sources.get(id)?.name || id));
       populate(filters.vendor, data.records.map(record => record.accelerator_vendor || "Not specified"));
-      populate(filters.model, data.records.map(record => record.model));
+      populate(filters.model, data.records.map(record => record.model_display_name || record.model));
       populate(filters.scenario, data.records.map(record => record.scenario));
       populate(filters.availability, data.records.map(record => record.availability));
       populate(filters.inferred, ["false", "true"], value => value === "true" ? "Inferred submissions" : "Non-inferred submissions");
