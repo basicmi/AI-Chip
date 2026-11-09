@@ -133,6 +133,12 @@ def validate_database(db, platform_ids=None, product_ids=None):
                 errors.append(f"{where}: model_display_name must be a non-empty string")
             if not isinstance(row.get("power_measurement_valid"), bool):
                 errors.append(f"{where}: power_measurement_valid must be boolean")
+            if not isinstance(row.get("cpu_power_measurement_valid"), bool):
+                errors.append(f"{where}: cpu_power_measurement_valid must be boolean")
+            if not isinstance(row.get("gpu_power_metrics_available"), bool):
+                errors.append(f"{where}: gpu_power_metrics_available must be boolean")
+            if not isinstance(row.get("cpu_power_metrics_available"), bool):
+                errors.append(f"{where}: cpu_power_metrics_available must be boolean")
             normalized = row.get("normalized_metrics")
             if not isinstance(normalized, dict):
                 errors.append(f"{where}: normalized_metrics must be an object")
@@ -150,7 +156,7 @@ def validate_database(db, platform_ids=None, product_ids=None):
                     errors.append(f"{where}: normalized metric {metric_key} must have a unit")
                 if metric.get("direction") not in {"higher", "lower", "context"}:
                     errors.append(f"{where}: normalized metric {metric_key} has an invalid direction")
-                if metric.get("family") not in {"interactivity", "throughput", "latency", "energy", "power", "telemetry"}:
+                if metric.get("family") not in {"interactivity", "throughput", "latency", "energy", "power", "cpu_energy", "cpu_power", "telemetry"}:
                     errors.append(f"{where}: normalized metric {metric_key} has an invalid family")
                 source_metric = metric.get("source_metric")
                 if source_metric not in metrics:
@@ -158,26 +164,38 @@ def validate_database(db, platform_ids=None, product_ids=None):
                 elif isinstance(value, (int, float)) and not isinstance(value, bool) and metrics[source_metric] != value:
                     errors.append(f"{where}: normalized metric {metric_key} differs from its raw source metric")
                 if metric.get("family") in {"energy", "power"} and row.get("power_measurement_valid") is not True:
-                    errors.append(f"{where}: power/energy metric {metric_key} lacks strict schema-v2 validation")
-            has_raw_power = any(key in metrics for key in {
+                    errors.append(f"{where}: GPU power/energy metric {metric_key} lacks strict schema-v2 validation")
+                if metric.get("family") in {"cpu_energy", "cpu_power"} and row.get("cpu_power_measurement_valid") is not True:
+                    errors.append(f"{where}: CPU/module power metric {metric_key} lacks cpu_power_valid=1")
+            gpu_power_keys = {
                 "avg_power_w", "avg_total_gpu_power_w", "total_gpu_energy_j",
                 "p75_power_w", "p75_total_gpu_power_w", "p90_power_w", "p90_total_gpu_power_w",
                 "joules_per_successful_query", "joules_per_output_token", "joules_per_total_token",
                 "prefill_avg_power_w", "decode_avg_power_w", "joules_per_input_token",
                 "prefill_joules_per_input_token", "decode_joules_per_output_token",
+            }
+            cpu_power_keys = {
                 "avg_cpu_socket_power_w", "avg_total_cpu_power_w", "total_cpu_energy_j",
                 "avg_total_module_power_w", "total_module_energy_j",
                 "avg_total_cpu_rail_power_w", "total_cpu_rail_energy_j",
                 "avg_total_cpu_sysio_power_w", "total_cpu_sysio_energy_j",
-            })
+            }
+            has_gpu_power = row.get("power_measurement_valid") is True and any(key in metrics for key in gpu_power_keys)
+            has_cpu_power = row.get("cpu_power_measurement_valid") is True and any(key in metrics for key in cpu_power_keys)
             if row.get("power_measurement_valid") is True and (
                 metrics.get("power_valid") != 1 or metrics.get("power_metric_schema_version") != 2
             ):
                 errors.append(f"{where}: power_measurement_valid requires power_valid=1 and schema_version=2")
-            if row.get("power_metrics_available") is not has_raw_power:
-                errors.append(f"{where}: power_metrics_available must reflect present raw power/energy fields")
-            if row.get("power_metrics_available") is True and row.get("power_measurement_valid") is not True:
-                errors.append(f"{where}: strict power record must pass schema-v2 validation")
+            if row.get("cpu_power_measurement_valid") is True and metrics.get("cpu_power_valid") != 1:
+                errors.append(f"{where}: cpu_power_measurement_valid requires cpu_power_valid=1")
+            if row.get("gpu_power_metrics_available") is not has_gpu_power:
+                errors.append(f"{where}: gpu_power_metrics_available must reflect valid GPU power/energy fields")
+            if row.get("cpu_power_metrics_available") is not has_cpu_power:
+                errors.append(f"{where}: cpu_power_metrics_available must reflect valid CPU/module power/energy fields")
+            if row.get("power_metrics_available") is not (has_gpu_power or has_cpu_power):
+                errors.append(f"{where}: power_metrics_available must reflect validated GPU or CPU/module power data")
+            if row.get("power_metrics_available") is True and not (row.get("power_measurement_valid") or row.get("cpu_power_measurement_valid")):
+                errors.append(f"{where}: strict power record must pass the applicable GPU or CPU validation")
 
     for sid, source in source_map.items():
         if source.get("record_count") != counts.get(sid, 0):
