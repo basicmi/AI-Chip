@@ -60,17 +60,28 @@ INFERENCEX_METRIC_DEFINITIONS = {
     "decode_avg_power_w": ("decode_gpu_power_per_gpu", "Decode GPU power", "W/GPU", "context", "power"),
     "prefill_joules_per_input_token": ("prefill_energy_per_input_token", "Prefill energy per input token", "J/input token", "lower", "energy"),
     "decode_joules_per_output_token": ("decode_energy_per_output_token", "Decode energy per output token", "J/output token", "lower", "energy"),
+    "avg_cpu_socket_power_w": ("mean_cpu_socket_power", "Mean CPU socket power", "W/socket", "context", "cpu_power"),
+    "avg_total_cpu_power_w": ("mean_total_cpu_power", "Mean total CPU power", "W", "context", "cpu_power"),
+    "total_cpu_energy_j": ("total_cpu_energy", "Total CPU energy", "J", "context", "cpu_energy"),
+    "avg_total_module_power_w": ("mean_total_module_power", "Mean total compute-module power", "W", "context", "cpu_power"),
+    "total_module_energy_j": ("total_module_energy", "Total compute-module energy", "J", "context", "cpu_energy"),
+    "avg_total_cpu_rail_power_w": ("mean_cpu_rail_power", "Mean CPU core-rail power", "W", "context", "cpu_power"),
+    "total_cpu_rail_energy_j": ("total_cpu_rail_energy", "Total CPU core-rail energy", "J", "context", "cpu_energy"),
+    "avg_total_cpu_sysio_power_w": ("mean_cpu_sysio_power", "Mean CPU SysIO power", "W", "context", "cpu_power"),
+    "total_cpu_sysio_energy_j": ("total_cpu_sysio_energy", "Total CPU SysIO energy", "J", "context", "cpu_energy"),
     "avg_util_pct": ("mean_gpu_utilization", "Mean GPU utilization", "%", "context", "telemetry"),
     "avg_temp_c": ("mean_gpu_temperature", "Mean GPU temperature", "°C", "context", "telemetry"),
     "peak_temp_c": ("peak_gpu_temperature", "Peak GPU temperature", "°C", "context", "telemetry"),
     "avg_mem_used_mb": ("mean_gpu_memory_used", "Mean GPU memory used", "MB", "context", "telemetry"),
 }
-INFERENCEX_POWER_METRIC_KEYS = {
+INFERENCEX_GPU_POWER_METRIC_KEYS = {
     "avg_power_w", "avg_total_gpu_power_w", "total_gpu_energy_j",
     "p75_power_w", "p75_total_gpu_power_w", "p90_power_w", "p90_total_gpu_power_w",
     "joules_per_successful_query", "joules_per_output_token", "joules_per_total_token",
     "prefill_avg_power_w", "decode_avg_power_w", "joules_per_input_token",
     "prefill_joules_per_input_token", "decode_joules_per_output_token",
+}
+INFERENCEX_CPU_POWER_METRIC_KEYS = {
     "avg_cpu_socket_power_w", "avg_total_cpu_power_w", "total_cpu_energy_j",
     "avg_total_module_power_w", "total_module_energy_j",
     "avg_total_cpu_rail_power_w", "total_cpu_rail_energy_j",
@@ -78,7 +89,8 @@ INFERENCEX_POWER_METRIC_KEYS = {
 }
 
 
-def normalize_inferencex_metrics(metrics: dict, power_measurement_valid: bool = False):
+def normalize_inferencex_metrics(metrics: dict, power_measurement_valid: bool = False,
+                                 cpu_power_measurement_valid: bool = False):
     normalized = {}
     for source_key, definition in INFERENCEX_METRIC_DEFINITIONS.items():
         value = metrics.get(source_key)
@@ -86,6 +98,8 @@ def normalize_inferencex_metrics(metrics: dict, power_measurement_valid: bool = 
             continue
         metric_key, label, unit, direction, family = definition
         if family in {"power", "energy"} and not power_measurement_valid:
+            continue
+        if family in {"cpu_power", "cpu_energy"} and not cpu_power_measurement_valid:
             continue
         normalized[metric_key] = {
             "value": value,
@@ -248,9 +262,17 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
         and isinstance(metrics.get("power_metric_schema_version"), (int, float))
         and metrics.get("power_metric_schema_version") == 2
     )
-    power_metrics_available = power_measurement_valid and any(
-        key in metrics for key in INFERENCEX_POWER_METRIC_KEYS
+    cpu_power_measurement_valid = (
+        isinstance(metrics.get("cpu_power_valid"), (int, float))
+        and metrics.get("cpu_power_valid") == 1
     )
+    gpu_power_metrics_available = power_measurement_valid and any(
+        key in metrics for key in INFERENCEX_GPU_POWER_METRIC_KEYS
+    )
+    cpu_power_metrics_available = cpu_power_measurement_valid and any(
+        key in metrics for key in INFERENCEX_CPU_POWER_METRIC_KEYS
+    )
+    power_metrics_available = gpu_power_metrics_available or cpu_power_metrics_available
     display_model = str(model_display_name or row.get("model") or "unknown")
     raw_model = str(row.get("model") or "unknown")
     workers = row.get("workers")
@@ -279,6 +301,9 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
         "inferred": False,
         "power_metrics_available": power_metrics_available,
         "power_measurement_valid": power_measurement_valid,
+        "cpu_power_measurement_valid": cpu_power_measurement_valid,
+        "gpu_power_metrics_available": gpu_power_metrics_available,
+        "cpu_power_metrics_available": cpu_power_metrics_available,
         "design_power_watts": None,
         "system": {
             "hardware": hardware,
@@ -311,7 +336,9 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
             ) if key in row
         },
         "metrics": metrics,
-        "normalized_metrics": normalize_inferencex_metrics(metrics, power_measurement_valid),
+        "normalized_metrics": normalize_inferencex_metrics(
+            metrics, power_measurement_valid, cpu_power_measurement_valid
+        ),
         "notes": (
             "Raw scalar metrics are preserved. Normalized metrics use source-documented units; "
             "median_intvty is interactivity in tok/s/user, not a latency metric. "
