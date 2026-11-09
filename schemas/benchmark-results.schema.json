@@ -207,6 +207,13 @@
         },
         "is_multinode": {
           "type": "boolean"
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
         }
       }
     },
@@ -434,6 +441,65 @@
         },
         "release_url": {
           "$ref": "#/$defs/nullableUrl"
+        },
+        "model_display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "power_measurement_valid": {
+          "type": "boolean"
+        },
+        "normalized_metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/normalizedMetric"
+          }
+        }
+      }
+    },
+    "normalizedMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit",
+        "direction",
+        "label",
+        "source_metric",
+        "family"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "enum": [
+            "higher",
+            "lower",
+            "context"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family": {
+          "enum": [
+            "interactivity",
+            "throughput",
+            "latency",
+            "energy",
+            "power",
+            "telemetry"
+          ]
         }
       }
     }
