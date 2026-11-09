@@ -39,6 +39,9 @@ description: Evidence-backed model support paths across AI accelerator products,
       <label>Accelerator platform
         <select data-model-platform><option value="">All platforms</option></select>
       </label>
+      <label>Publisher
+        <select data-model-publisher><option value="">All publishers</option></select>
+      </label>
       <label>Evidence level
         <select data-model-level><option value="">All evidence levels</option></select>
       </label>
