@@ -133,8 +133,12 @@ def validate_database(db, platform_ids=None, product_ids=None):
                 errors.append(f"{where}: model_display_name must be a non-empty string")
             if not isinstance(row.get("power_measurement_valid"), bool):
                 errors.append(f"{where}: power_measurement_valid must be boolean")
+            if row.get("power_measurement_status") not in {"valid", "failed", "schema_incomplete", "unreported", "invalid_verdict"}:
+                errors.append(f"{where}: invalid power_measurement_status")
             if not isinstance(row.get("cpu_power_measurement_valid"), bool):
                 errors.append(f"{where}: cpu_power_measurement_valid must be boolean")
+            if row.get("cpu_power_measurement_status") not in {"valid", "failed", "not_present", "invalid_verdict"}:
+                errors.append(f"{where}: invalid cpu_power_measurement_status")
             if not isinstance(row.get("gpu_power_metrics_available"), bool):
                 errors.append(f"{where}: gpu_power_metrics_available must be boolean")
             if not isinstance(row.get("cpu_power_metrics_available"), bool):
@@ -182,12 +186,33 @@ def validate_database(db, platform_ids=None, product_ids=None):
             }
             has_gpu_power = row.get("power_measurement_valid") is True and any(key in metrics for key in gpu_power_keys)
             has_cpu_power = row.get("cpu_power_measurement_valid") is True and any(key in metrics for key in cpu_power_keys)
-            if row.get("power_measurement_valid") is True and (
-                metrics.get("power_valid") != 1 or metrics.get("power_metric_schema_version") != 2
-            ):
-                errors.append(f"{where}: power_measurement_valid requires power_valid=1 and schema_version=2")
-            if row.get("cpu_power_measurement_valid") is True and metrics.get("cpu_power_valid") != 1:
-                errors.append(f"{where}: cpu_power_measurement_valid requires cpu_power_valid=1")
+            power_flag = metrics.get("power_valid")
+            power_schema = metrics.get("power_metric_schema_version")
+            if isinstance(power_flag, (int, float)) and not isinstance(power_flag, bool):
+                if power_flag == 0:
+                    expected_power_status = "failed"
+                elif power_flag == 1 and power_schema == 2:
+                    expected_power_status = "valid"
+                elif power_flag == 1:
+                    expected_power_status = "schema_incomplete"
+                else:
+                    expected_power_status = "invalid_verdict"
+            else:
+                expected_power_status = "unreported"
+            if row.get("power_measurement_status") != expected_power_status:
+                errors.append(f"{where}: power_measurement_status does not match the source verdict")
+            if row.get("power_measurement_valid") is not (expected_power_status == "valid"):
+                errors.append(f"{where}: power_measurement_valid does not match the source verdict")
+
+            cpu_power_flag = metrics.get("cpu_power_valid")
+            if isinstance(cpu_power_flag, (int, float)) and not isinstance(cpu_power_flag, bool):
+                expected_cpu_status = "valid" if cpu_power_flag == 1 else "failed" if cpu_power_flag == 0 else "invalid_verdict"
+            else:
+                expected_cpu_status = "not_present"
+            if row.get("cpu_power_measurement_status") != expected_cpu_status:
+                errors.append(f"{where}: cpu_power_measurement_status does not match the source verdict")
+            if row.get("cpu_power_measurement_valid") is not (expected_cpu_status == "valid"):
+                errors.append(f"{where}: cpu_power_measurement_valid does not match the source verdict")
             if row.get("gpu_power_metrics_available") is not has_gpu_power:
                 errors.append(f"{where}: gpu_power_metrics_available must reflect valid GPU power/energy fields")
             if row.get("cpu_power_metrics_available") is not has_cpu_power:
