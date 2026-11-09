@@ -120,6 +120,16 @@ class NormalizationTests(unittest.TestCase):
         self.assertTrue(valid_without_power_value["power_measurement_valid"])
         self.assertFalse(valid_without_power_value["power_metrics_available"])
 
+        cpu_only = dict(base)
+        cpu_only["metrics"] = {"cpu_power_valid": 1, "avg_cpu_socket_power_w": 240.0, "total_cpu_energy_j": 9000.0}
+        cpu_result = normalize_inferencex_record(cpu_only, endpoint, model_display_name="DeepSeek-R1-0528")
+        self.assertFalse(cpu_result["power_measurement_valid"])
+        self.assertTrue(cpu_result["cpu_power_measurement_valid"])
+        self.assertFalse(cpu_result["gpu_power_metrics_available"])
+        self.assertTrue(cpu_result["cpu_power_metrics_available"])
+        self.assertTrue(cpu_result["power_metrics_available"])
+        self.assertEqual(cpu_result["normalized_metrics"]["mean_cpu_socket_power"]["unit"], "W/socket")
+
     def test_scoped_inferencex_refresh_preserves_other_models(self):
         existing = [
             {"id": "old-r1", "source_id": "inferencex", "model": "dsr1", "model_display_name": "DeepSeek-R1-0528"},
@@ -199,7 +209,8 @@ class RegistryValidationTests(unittest.TestCase):
             "design_power_watts": None, "system": {"workers": []}, "software": {}, "workload": {},
             "configuration": {}, "metrics": {"power_valid": 0, "power_metric_schema_version": 2},
             "model_display_name": "DeepSeek-R1-0528", "power_measurement_valid": False,
-            "normalized_metrics": {},
+            "cpu_power_measurement_valid": False, "gpu_power_metrics_available": False,
+            "cpu_power_metrics_available": False, "normalized_metrics": {},
             "notes": "", "compliance": "publisher_published", "errors": 0,
             "weight_data_types": "fp8", "source_record_key": "1", "source_location": "",
             "source_url": "https://example.com/api", "detail_url": None,
