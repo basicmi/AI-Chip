@@ -133,6 +133,8 @@ class NormalizationTests(unittest.TestCase):
     def test_scoped_inferencex_refresh_preserves_other_models(self):
         existing = [
             {"id": "old-r1", "source_id": "inferencex", "model": "dsr1", "model_display_name": "DeepSeek-R1-0528"},
+            {"id": "old-r1-legacy", "source_id": "inferencex", "model": "dsr1",
+             "source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"},
             {"id": "old-qwen", "source_id": "inferencex", "model": "qwen3", "model_display_name": "Qwen3"},
             {"id": "mlperf-1", "source_id": "mlperf-inference-v6.1", "model": "resnet"},
         ]
