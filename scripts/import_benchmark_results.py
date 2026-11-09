@@ -256,16 +256,32 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
         key: value for key, value in raw_metrics.items()
         if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
     }
-    power_measurement_valid = (
-        isinstance(metrics.get("power_valid"), (int, float))
-        and metrics.get("power_valid") == 1
-        and isinstance(metrics.get("power_metric_schema_version"), (int, float))
-        and metrics.get("power_metric_schema_version") == 2
-    )
-    cpu_power_measurement_valid = (
-        isinstance(metrics.get("cpu_power_valid"), (int, float))
-        and metrics.get("cpu_power_valid") == 1
-    )
+    power_flag = raw_metrics.get("power_valid")
+    power_schema = raw_metrics.get("power_metric_schema_version")
+    if isinstance(power_flag, (int, float)) and not isinstance(power_flag, bool):
+        if power_flag == 0:
+            power_measurement_status = "failed"
+        elif power_flag == 1 and power_schema == 2:
+            power_measurement_status = "valid"
+        elif power_flag == 1:
+            power_measurement_status = "schema_incomplete"
+        else:
+            power_measurement_status = "invalid_verdict"
+    else:
+        power_measurement_status = "unreported"
+    power_measurement_valid = power_measurement_status == "valid"
+
+    cpu_power_flag = raw_metrics.get("cpu_power_valid")
+    if isinstance(cpu_power_flag, (int, float)) and not isinstance(cpu_power_flag, bool):
+        if cpu_power_flag == 1:
+            cpu_power_measurement_status = "valid"
+        elif cpu_power_flag == 0:
+            cpu_power_measurement_status = "failed"
+        else:
+            cpu_power_measurement_status = "invalid_verdict"
+    else:
+        cpu_power_measurement_status = "not_present"
+    cpu_power_measurement_valid = cpu_power_measurement_status == "valid"
     gpu_power_metrics_available = power_measurement_valid and any(
         key in metrics for key in INFERENCEX_GPU_POWER_METRIC_KEYS
     )
@@ -301,7 +317,9 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
         "inferred": False,
         "power_metrics_available": power_metrics_available,
         "power_measurement_valid": power_measurement_valid,
+        "power_measurement_status": power_measurement_status,
         "cpu_power_measurement_valid": cpu_power_measurement_valid,
+        "cpu_power_measurement_status": cpu_power_measurement_status,
         "gpu_power_metrics_available": gpu_power_metrics_available,
         "cpu_power_metrics_available": cpu_power_metrics_available,
         "design_power_watts": None,
