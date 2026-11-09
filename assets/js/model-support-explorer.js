@@ -164,7 +164,7 @@
     })
   )).then(initialize).catch(error => {
     load.classList.add("is-error");
-    load.textContent = "Model support data unavailable: " + error.message;
+    load.textContent = "Model support explorer initialization failed: " + error.message;
     root.dataset.loadError = "true";
   });
 })();
