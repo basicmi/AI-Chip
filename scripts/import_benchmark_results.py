@@ -530,13 +530,8 @@ def main():
     if args.source in ("mlperf", "all"):
         source, imported = import_mlperf()
         replace_sources.add(source["id"])
-        records = merge_inferencex_records(
-            records, imported,
-            source.get("selected_models") if args.models else None
-        )
-        source["record_count"] = sum(1 for row in records if row.get("source_id") == source["id"])
-        if args.models:
-            source["import_status"] = "partial_model_refresh"
+        records = [row for row in records if row.get("source_id") != source["id"]]
+        records.extend(imported)
         sources = [item for item in sources if item.get("id") != source["id"]]
         sources.append(source)
 
@@ -549,8 +544,13 @@ def main():
             return 2
         warnings.extend(source_warnings)
         replace_sources.add(source["id"])
-        records = [row for row in records if row.get("source_id") != source["id"]]
-        records.extend(imported)
+        records = merge_inferencex_records(
+            records, imported,
+            source.get("selected_models") if args.models else None
+        )
+        source["record_count"] = sum(1 for row in records if row.get("source_id") == source["id"])
+        if args.models:
+            source["import_status"] = "partial_model_refresh"
         sources = [item for item in sources if item.get("id") != source["id"]]
         sources.append(source)
 
