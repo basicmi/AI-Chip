@@ -115,7 +115,8 @@
     if (typeof record.result_value === "number") {
       return numberText(record.result_value) + (record.result_unit ? " " + record.result_unit : "");
     }
-    if (record.metrics && Object.keys(record.metrics).length) return metricSummary(record);
+    if ((record.metrics && Object.keys(record.metrics).length) ||
+        (record.normalized_metrics && Object.keys(record.normalized_metrics).length)) return metricSummary(record);
     return "Metric not provided";
   };
 
@@ -143,14 +144,21 @@
     addDetailLine(body, "System", record.system_name);
     addDetailLine(body, "Accelerator", system.accelerator_model || system.hardware || "Not separately specified");
     addDetailLine(body, "Accelerator count", system.total_accelerators || "");
-    addDetailLine(body, "Physical prefill / decode GPUs", [
-      system.physical_prefill_gpus, system.physical_decode_gpus
-    ].map(value => value === null || value === undefined ? "—" : value).join(" / "));
+    if (system.physical_prefill_gpus !== null && system.physical_prefill_gpus !== undefined ||
+        system.physical_decode_gpus !== null && system.physical_decode_gpus !== undefined) {
+      addDetailLine(body, "Physical prefill / decode GPUs", [
+        system.physical_prefill_gpus, system.physical_decode_gpus
+      ].map(value => value === null || value === undefined ? "—" : value).join(" / "));
+    }
     addDetailLine(body, "Deployment topology", system.is_multinode === true ? "Multi-node" : system.is_multinode === false ? "Single-node" : "");
     const workerPools = Array.isArray(system.workers) ? system.workers : [];
     if (workerPools.length) addDetailLine(body, "Worker pools", workerPools.map(worker =>
-      [worker.role, "worker " + worker.worker_idx, worker.num_gpus + " GPUs", (worker.hosts || []).join(", ")]
-        .filter(Boolean).join(" · ")
+      [
+        worker.role,
+        worker.worker_idx !== undefined ? "worker " + worker.worker_idx : "",
+        worker.num_gpus !== undefined ? worker.num_gpus + " GPUs" : "",
+        Array.isArray(worker.hosts) ? worker.hosts.join(", ") : (worker.hosts || "")
+      ].filter(Boolean).join(" · ")
     ).join(" | "));
     addDetailLine(body, "Host CPU", system.host_processor_model);
     addDetailLine(body, "Nodes", system.nodes);
