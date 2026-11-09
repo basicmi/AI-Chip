@@ -489,7 +489,6 @@ def merge_inferencex_records(existing_records: list[dict], imported_records: lis
         return kept + imported_records
 
     selected = set(selected_models)
-    selected_raw_models = {row.get("model") for row in imported_records if row.get("model")}
     selected_endpoints = {
         INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
         for model in selected
@@ -500,8 +499,6 @@ def merge_inferencex_records(existing_records: list[dict], imported_records: lis
             kept.append(row)
             continue
         if row.get("model_display_name") in selected:
-            continue
-        if row.get("model") in selected_raw_models:
             continue
         if row.get("source_url") in selected_endpoints:
             continue
