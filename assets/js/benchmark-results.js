@@ -205,8 +205,21 @@
     addDetailLine(body, "Source record key", record.source_record_key);
     if (record.inferred) body.append(make("p", "benchmark-result-warning", "This submission is marked as inferred by the source."));
     if (record.source_id === "inferencex") {
-      addDetailLine(body, "GPU power validation", record.power_measurement_valid === true ? "Valid · schema v2" : "Not validated");
-      addDetailLine(body, "CPU / module power validation", record.cpu_power_measurement_valid === true ? "Valid · independent CPU-side leg" : "Not validated");
+      const gpuPowerStatus = {
+        valid: "Valid · schema v2",
+        failed: "Failed validation",
+        schema_incomplete: "Schema v2 not confirmed",
+        unreported: "No validation verdict reported",
+        invalid_verdict: "Invalid source verdict"
+      }[record.power_measurement_status] || "Unknown";
+      const cpuPowerStatus = {
+        valid: "Valid · independent CPU-side leg",
+        failed: "Failed validation",
+        not_present: "No CPU-side measurement leg",
+        invalid_verdict: "Invalid source verdict"
+      }[record.cpu_power_measurement_status] || "Unknown";
+      addDetailLine(body, "GPU power validation", gpuPowerStatus);
+      addDetailLine(body, "CPU / module power validation", cpuPowerStatus);
       if (record.power_metrics_available === true) {
         body.append(make("p", "benchmark-result-power", "At least one GPU or CPU/module power/energy metric passed its source-specific validation. Compare component boundaries separately."));
       } else if (record.power_measurement_valid === true || record.cpu_power_measurement_valid === true) {
