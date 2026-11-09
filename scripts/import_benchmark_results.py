@@ -454,6 +454,34 @@ def import_inferencex(models: list[str] | None = None):
     return source, records, warnings
 
 
+def merge_inferencex_records(existing_records: list[dict], imported_records: list[dict],
+                             selected_models: list[str] | None = None):
+    """Replace all InferenceX rows, or only the selected models for a scoped refresh."""
+    if selected_models is None:
+        kept = [row for row in existing_records if row.get("source_id") != "inferencex"]
+        return kept + imported_records
+
+    selected = set(selected_models)
+    selected_raw_models = {row.get("model") for row in imported_records if row.get("model")}
+    selected_endpoints = {
+        INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
+        for model in selected
+    }
+    kept = []
+    for row in existing_records:
+        if row.get("source_id") != "inferencex":
+            kept.append(row)
+            continue
+        if row.get("model_display_name") in selected:
+            continue
+        if row.get("model") in selected_raw_models:
+            continue
+        if row.get("source_url") in selected_endpoints:
+            continue
+        kept.append(row)
+    return kept + imported_records
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", choices=("mlperf", "inferencex", "all"), default="mlperf")
@@ -475,8 +503,13 @@ def main():
     if args.source in ("mlperf", "all"):
         source, imported = import_mlperf()
         replace_sources.add(source["id"])
-        records = [row for row in records if row.get("source_id") != source["id"]]
-        records.extend(imported)
+        records = merge_inferencex_records(
+            records, imported,
+            source.get("selected_models") if args.models else None
+        )
+        source["record_count"] = sum(1 for row in records if row.get("source_id") == source["id"])
+        if args.models:
+            source["import_status"] = "partial_model_refresh"
         sources = [item for item in sources if item.get("id") != source["id"]]
         sources.append(source)
 
