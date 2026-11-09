@@ -172,7 +172,8 @@ const { chromium } = require("playwright");
     throw new Error("Graphcore ownership status missing from directory search");
   }
   await page.locator("[data-directory-search]").fill("Groq");
-  if (!(await page.locator(".directory-result-card").first().textContent()).includes("Independent")) {
+  const groqCard = page.locator(".directory-result-card").filter({ hasText: "Groq — LPU" });
+  if (await groqCard.count() !== 1 || !(await groqCard.textContent()).includes("Independent")) {
     throw new Error("Groq must remain classified as independent after its NVIDIA licensing agreement");
   }
   await page.locator("[data-directory-search]").fill("");
