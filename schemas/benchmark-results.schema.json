@@ -454,6 +454,15 @@
           "additionalProperties": {
             "$ref": "#/$defs/normalizedMetric"
           }
+        },
+        "cpu_power_measurement_valid": {
+          "type": "boolean"
+        },
+        "gpu_power_metrics_available": {
+          "type": "boolean"
+        },
+        "cpu_power_metrics_available": {
+          "type": "boolean"
         }
       }
     },
@@ -498,6 +507,8 @@
             "latency",
             "energy",
             "power",
+            "cpu_energy",
+            "cpu_power",
             "telemetry"
           ]
         }
