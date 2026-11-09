@@ -187,10 +187,12 @@
     addDetailLine(body, "Notes", record.notes);
     addDetailLine(body, "Source record key", record.source_record_key);
     if (record.inferred) body.append(make("p", "benchmark-result-warning", "This submission is marked as inferred by the source."));
-    if (record.power_measurement_valid === true && record.power_metrics_available === true) {
-      body.append(make("p", "benchmark-result-power", "The publisher marks the schema-v2 power measurement window as valid and this row contains measured power/energy fields."));
-    } else if (record.power_measurement_valid === true) {
-      body.append(make("p", "benchmark-result-warning", "The publisher marks the schema-v2 power window as valid, but this row does not expose a measured power/energy field."));
+    addDetailLine(body, "GPU power validation", record.power_measurement_valid === true ? "Valid · schema v2" : "Not validated");
+    addDetailLine(body, "CPU / module power validation", record.cpu_power_measurement_valid === true ? "Valid · independent CPU-side leg" : "Not validated");
+    if (record.power_metrics_available === true) {
+      body.append(make("p", "benchmark-result-power", "At least one GPU or CPU/module power/energy metric passed its source-specific validation. Compare component boundaries separately."));
+    } else if (record.power_measurement_valid === true || record.cpu_power_measurement_valid === true) {
+      body.append(make("p", "benchmark-result-warning", "A power measurement leg is valid, but this row exposes no measured power/energy value for that leg."));
     } else {
       body.append(make("p", "benchmark-result-warning", "No validated measured power/energy metric is available in this record. Design power, if present, is not measured power."));
     }
