@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from import_benchmark_results import (
     import_inferencex,
+    merge_inferencex_records,
     normalize_inferencex_record,
     normalize_mlperf_record,
     summarize,
@@ -118,6 +119,21 @@ class NormalizationTests(unittest.TestCase):
         valid_without_power_value = normalize_inferencex_record(base, endpoint, model_display_name="DeepSeek-R1-0528")
         self.assertTrue(valid_without_power_value["power_measurement_valid"])
         self.assertFalse(valid_without_power_value["power_metrics_available"])
+
+    def test_scoped_inferencex_refresh_preserves_other_models(self):
+        existing = [
+            {"id": "old-r1", "source_id": "inferencex", "model": "dsr1", "model_display_name": "DeepSeek-R1-0528"},
+            {"id": "old-qwen", "source_id": "inferencex", "model": "qwen3", "model_display_name": "Qwen3"},
+            {"id": "mlperf-1", "source_id": "mlperf-inference-v6.1", "model": "resnet"},
+        ]
+        imported = [
+            {"id": "new-r1", "source_id": "inferencex", "model": "dsr1", "model_display_name": "DeepSeek-R1-0528"},
+        ]
+        merged = merge_inferencex_records(existing, imported, ["DeepSeek-R1-0528"])
+        self.assertEqual({row["id"] for row in merged}, {"new-r1", "old-qwen", "mlperf-1"})
+
+        full_refresh = merge_inferencex_records(existing, imported)
+        self.assertEqual({row["id"] for row in full_refresh}, {"new-r1", "mlperf-1"})
 
     def test_inferencex_empty_availability_is_not_a_valid_empty_snapshot(self):
         with mock.patch("import_benchmark_results.fetch_json", return_value=[]):
