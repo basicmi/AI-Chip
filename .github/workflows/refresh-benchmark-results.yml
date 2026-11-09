@@ -1,6 +1,8 @@
 name: Refresh public benchmark results
 
 on:
+  schedule:
+    - cron: "17 3 * * 1"
   workflow_dispatch:
     inputs:
       source:
@@ -33,7 +35,7 @@ jobs:
           python-version: "3.12"
       - name: Import public benchmark data
         env:
-          SOURCE: ${{ inputs.source }}
+          SOURCE: ${{ inputs.source || 'inferencex' }}
           MODELS: ${{ inputs.models }}
         run: |
           args=(--source "$SOURCE")
@@ -61,6 +63,7 @@ jobs:
           body: |
             Automated refresh of the source-linked benchmark results registry.
 
+            - Scheduled runs refresh InferenceX weekly; manual runs use the selected source.
             - Re-imports the selected public benchmark source(s).
             - Preserves source, workload, system and software provenance.
             - Runs the benchmark registry validator and normalization tests.
