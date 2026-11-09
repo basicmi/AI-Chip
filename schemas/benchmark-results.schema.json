@@ -463,6 +463,23 @@
         },
         "cpu_power_metrics_available": {
           "type": "boolean"
+        },
+        "power_measurement_status": {
+          "enum": [
+            "valid",
+            "failed",
+            "schema_incomplete",
+            "unreported",
+            "invalid_verdict"
+          ]
+        },
+        "cpu_power_measurement_status": {
+          "enum": [
+            "valid",
+            "failed",
+            "not_present",
+            "invalid_verdict"
+          ]
         }
       }
     },
