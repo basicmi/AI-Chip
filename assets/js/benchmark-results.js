@@ -187,7 +187,11 @@
     addDetailLine(body, "Run started at", configuration.run_started_at);
     if (record.normalized_metrics && Object.keys(record.normalized_metrics).length) {
       const metrics = Object.values(record.normalized_metrics)
-        .map(metric => metric.label + ": " + numberText(metric.value) + " " + metric.unit)
+        .map(metric => {
+          const direction = metric.direction === "higher" ? "higher is better"
+            : metric.direction === "lower" ? "lower is better" : "context only";
+          return metric.label + ": " + numberText(metric.value) + " " + metric.unit + " (" + direction + ")";
+        })
         .join(" · ");
       addDetailLine(body, "Normalized metrics", metrics);
     }
