@@ -432,6 +432,10 @@ const { chromium } = require("playwright");
     statSelector: '[data-model-stat="paths"]',
     countSelector: "[data-model-result-count]"
   });
+  if (await page.locator("[data-model-support-version]").textContent() === "Loading…" ||
+      !(await page.locator("[data-model-support-reviewed]").textContent()).trim()) {
+    throw new Error("Model Support page-level registry metadata did not initialize");
+  }
   await page.locator("[data-model-search]").fill("Llama 3.3 70B");
   if (Number(await page.locator("[data-model-result-count]").textContent()) !== 1) {
     throw new Error("Model support search did not isolate Llama 3.3 70B");
