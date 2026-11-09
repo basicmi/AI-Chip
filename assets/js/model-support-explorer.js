@@ -133,8 +133,14 @@
       option.value = id;
       platformFilter.append(option);
     });
-    $("[data-model-support-version]").textContent = database.database_version;
-    $("[data-model-support-reviewed]").textContent = database.last_reviewed;
+    // Registry metadata lives in the page heading, outside the explorer root.
+    const versionNode = document.querySelector("[data-model-support-version]");
+    const reviewedNode = document.querySelector("[data-model-support-reviewed]");
+    if (!versionNode || !reviewedNode) {
+      throw new Error("Model support page metadata elements are missing from the document");
+    }
+    versionNode.textContent = database.database_version;
+    reviewedNode.textContent = database.last_reviewed;
     $("[data-model-stat=\"models\"]").textContent = String(database.models.length);
     $("[data-model-stat=\"paths\"]").textContent = String(database.support_paths.length);
     $("[data-model-stat=\"recipes\"]").textContent = String(database.support_paths.filter(path => path.support_level === "documented_recipe").length);
