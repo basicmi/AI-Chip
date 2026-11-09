@@ -5,6 +5,7 @@
   const search = $("[data-model-search]");
   const platformFilter = $("[data-model-platform]");
   const levelFilter = $("[data-model-level]");
+  const publisherFilter = $("[data-model-publisher]");
   const cards = $("[data-model-cards]");
   const load = $("[data-model-load]");
   const labels = {
@@ -96,10 +97,12 @@
     const query = search.value.trim().toLowerCase();
     const selectedPlatform = platformFilter.value;
     const selectedLevel = levelFilter.value;
+    const selectedPublisher = publisherFilter.value;
     const matches = database.support_paths.filter(path => {
       if (selectedPlatform && path.platform_id !== selectedPlatform) return false;
       if (selectedLevel && path.support_level !== selectedLevel) return false;
       const model = database.models.find(item => item.id === path.model_id);
+      if (selectedPublisher && model.publisher !== selectedPublisher) return false;
       const platform = platforms.get(path.platform_id);
       const hardware = path.product_ids.map(id => products.get(id)?.name || id);
       const sourceText = path.evidence.map(item => item.publisher + " " + item.claim).join(" ");
@@ -122,6 +125,11 @@
     compatibility.platforms.forEach(platform => platforms.set(platform.id, platform));
     compatibility.integrations.forEach(integration => integrations.set(integration.id, integration));
     const levels = Object.keys(database.support_levels);
+    [...new Set(database.models.map(model => model.publisher))].sort().forEach(publisher => {
+      const option = el("option", "", publisher);
+      option.value = publisher;
+      publisherFilter.append(option);
+    });
     levels.forEach(level => {
       const option = el("option", "", labels[level] || level);
       option.value = level;
@@ -148,10 +156,12 @@
     search.addEventListener("input", render);
     platformFilter.addEventListener("change", render);
     levelFilter.addEventListener("change", render);
+    publisherFilter.addEventListener("change", render);
     $("[data-model-reset]").addEventListener("click", () => {
       search.value = "";
       platformFilter.value = "";
       levelFilter.value = "";
+      publisherFilter.value = "";
       render();
     });
     render();
