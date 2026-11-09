@@ -10,6 +10,7 @@ import argparse
 from collections import Counter
 from datetime import date, datetime, timezone
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -25,6 +26,77 @@ INFERENCEX_BASE = "https://inferencex.semianalysis.com"
 INFERENCEX_AVAILABILITY = INFERENCEX_BASE + "/api/v1/availability"
 INFERENCEX_BENCHMARKS = INFERENCEX_BASE + "/api/v1/benchmarks"
 USER_AGENT = "AI-Chip-Landscape-Benchmark-Importer/1.0 (+https://github.com/basicmi/AI-Chip)"
+
+# Stable, source-documented metric semantics. Unknown raw metrics remain preserved
+# in the source map but are not promoted into normalized comparison fields.
+INFERENCEX_METRIC_DEFINITIONS = {
+    "median_intvty": ("median_interactivity", "Median interactivity", "tok/s/user", "higher", "interactivity"),
+    "p90_intvty": ("p90_interactivity", "P90 interactivity", "tok/s/user", "higher", "interactivity"),
+    "output_tput_per_gpu": ("output_throughput_per_gpu", "Output throughput", "tok/s/GPU", "higher", "throughput"),
+    "tput_per_gpu": ("total_throughput_per_gpu", "Total throughput", "tok/s/GPU", "higher", "throughput"),
+    "input_tput_per_gpu": ("input_throughput_per_gpu", "Input throughput", "tok/s/GPU", "higher", "throughput"),
+    "output_tput_per_total_gpu": ("output_throughput_per_total_gpu", "Output throughput per total GPU", "tok/s/GPU", "higher", "throughput"),
+    "input_tput_per_total_gpu": ("input_throughput_per_total_gpu", "Input throughput per total GPU", "tok/s/GPU", "higher", "throughput"),
+    "median_ttft": ("median_ttft", "Median TTFT", "s", "lower", "latency"),
+    "mean_ttft": ("mean_ttft", "Mean TTFT", "s", "lower", "latency"),
+    "p99_ttft": ("p99_ttft", "P99 TTFT", "s", "lower", "latency"),
+    "median_tpot": ("median_tpot", "Median TPOT", "s", "lower", "latency"),
+    "mean_tpot": ("mean_tpot", "Mean TPOT", "s", "lower", "latency"),
+    "p99_tpot": ("p99_tpot", "P99 TPOT", "s", "lower", "latency"),
+    "p99_itl": ("p99_itl", "P99 inter-token latency", "s", "lower", "latency"),
+    "mean_e2el": ("mean_e2el", "Mean end-to-end latency", "s", "lower", "latency"),
+    "avg_power_w": ("mean_gpu_power_per_gpu", "Mean GPU power", "W/GPU", "context", "power"),
+    "avg_total_gpu_power_w": ("mean_total_gpu_power", "Mean total GPU power", "W", "context", "power"),
+    "p75_power_w": ("p75_gpu_power_per_gpu", "P75 GPU power", "W/GPU", "context", "power"),
+    "p75_total_gpu_power_w": ("p75_total_gpu_power", "P75 total GPU power", "W", "context", "power"),
+    "p90_power_w": ("p90_gpu_power_per_gpu", "P90 GPU power", "W/GPU", "context", "power"),
+    "p90_total_gpu_power_w": ("p90_total_gpu_power", "P90 total GPU power", "W", "context", "power"),
+    "total_gpu_energy_j": ("total_gpu_energy", "Total GPU energy", "J", "context", "energy"),
+    "joules_per_output_token": ("energy_per_output_token", "Energy per output token", "J/output token", "lower", "energy"),
+    "joules_per_total_token": ("energy_per_total_token", "Energy per total token", "J/total token", "lower", "energy"),
+    "joules_per_input_token": ("energy_per_input_token", "Energy per input token", "J/input token", "lower", "energy"),
+    "joules_per_successful_query": ("energy_per_successful_query", "Energy per successful query", "J/query", "lower", "energy"),
+    "prefill_avg_power_w": ("prefill_gpu_power_per_gpu", "Prefill GPU power", "W/GPU", "context", "power"),
+    "decode_avg_power_w": ("decode_gpu_power_per_gpu", "Decode GPU power", "W/GPU", "context", "power"),
+    "prefill_joules_per_input_token": ("prefill_energy_per_input_token", "Prefill energy per input token", "J/input token", "lower", "energy"),
+    "decode_joules_per_output_token": ("decode_energy_per_output_token", "Decode energy per output token", "J/output token", "lower", "energy"),
+    "avg_util_pct": ("mean_gpu_utilization", "Mean GPU utilization", "%", "context", "telemetry"),
+    "avg_temp_c": ("mean_gpu_temperature", "Mean GPU temperature", "°C", "context", "telemetry"),
+    "peak_temp_c": ("peak_gpu_temperature", "Peak GPU temperature", "°C", "context", "telemetry"),
+    "avg_mem_used_mb": ("mean_gpu_memory_used", "Mean GPU memory used", "MB", "context", "telemetry"),
+}
+INFERENCEX_POWER_METRIC_KEYS = {
+    "avg_power_w", "avg_total_gpu_power_w", "total_gpu_energy_j",
+    "p75_power_w", "p75_total_gpu_power_w", "p90_power_w", "p90_total_gpu_power_w",
+    "joules_per_successful_query", "joules_per_output_token", "joules_per_total_token",
+    "prefill_avg_power_w", "decode_avg_power_w", "joules_per_input_token",
+    "prefill_joules_per_input_token", "decode_joules_per_output_token",
+    "avg_cpu_socket_power_w", "avg_total_cpu_power_w", "total_cpu_energy_j",
+    "avg_total_module_power_w", "total_module_energy_j",
+    "avg_total_cpu_rail_power_w", "total_cpu_rail_energy_j",
+    "avg_total_cpu_sysio_power_w", "total_cpu_sysio_energy_j",
+}
+
+
+def normalize_inferencex_metrics(metrics: dict, power_measurement_valid: bool = False):
+    normalized = {}
+    for source_key, definition in INFERENCEX_METRIC_DEFINITIONS.items():
+        value = metrics.get(source_key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            continue
+        metric_key, label, unit, direction, family = definition
+        if family in {"power", "energy"} and not power_measurement_valid:
+            continue
+        normalized[metric_key] = {
+            "value": value,
+            "unit": unit,
+            "direction": direction,
+            "label": label,
+            "source_metric": source_key,
+            "family": family,
+        }
+    return normalized
+
 
 
 def fetch_json(url: str, timeout: float = 30.0):
@@ -47,13 +119,19 @@ def as_number(value):
 
 def hardware_identity(name: str | None):
     text = (name or "").lower()
+    # Product links are conservative: only map a product when the source key
+    # names that exact product/generation. Vendor/platform fallback is broader.
     rules = [
         (("mi350x",), "AMD", "amd-gpu", "mi350x"),
         (("mi355x",), "AMD", "amd-gpu", "mi355x"),
+        (("mi455x",), "AMD", "amd-gpu", "mi455x"),
         (("mi300x", "mi325x"), "AMD", "amd-gpu", None),
-        (("gb200",), "NVIDIA", "nvidia-gpu", "gb200-nvl72"),
-        (("gb300", "rubin"), "NVIDIA", "nvidia-gpu", None),
-        (("b200",), "NVIDIA", "nvidia-gpu", "b200-sxm"),
+        (("vera_rubin_nvl72", "vera-rubin-nvl72", "vera rubin nvl72"), "NVIDIA", "nvidia-gpu", "vera-rubin-nvl72"),
+        (("rubin_gpu", "rubin-gpu", "rubin gpu"), "NVIDIA", "nvidia-gpu", "rubin-gpu"),
+        (("gb200_nvl72", "gb200-nvl72", "gb200 nvl72"), "NVIDIA", "nvidia-gpu", "gb200-nvl72"),
+        (("gb300_nvl72", "gb300-nvl72", "gb300 nvl72"), "NVIDIA", "nvidia-gpu", None),
+        (("b200_sxm", "b200-sxm", "b200 sxm"), "NVIDIA", "nvidia-gpu", "b200-sxm"),
+        (("b300",), "NVIDIA", "nvidia-gpu", None),
         (("h100", "h200", "b100", "a100"), "NVIDIA", "nvidia-gpu", None),
         (("gaudi 3", "gaudi3"), "Intel", "intel-gaudi", "gaudi3"),
         (("gaudi 2", "gaudi2"), "Intel", "intel-gaudi", "gaudi2"),
@@ -61,6 +139,7 @@ def hardware_identity(name: str | None):
         (("tpu v6e", "tpu_v6e", "tpu-v6e", "trillium"), "Google", "google-tpu", "tpu-v6e-trillium"),
         (("trainium3", "trn3"), "AWS", "aws-trainium", "trainium3"),
         (("trainium2", "trn2"), "AWS", "aws-trainium", "trainium2"),
+        (("maia 300", "maia300", "maia-300"), "Microsoft", "microsoft-maia", "maia300"),
         (("maia 200", "maia200", "maia-200"), "Microsoft", "microsoft-maia", "maia200"),
         (("maia 100", "maia100", "maia-100"), "Microsoft", "microsoft-maia", "maia100"),
         (("mtia 300", "mtia-300", "mtia300"), "Meta", "meta-mtia", "mtia-300"),
@@ -71,9 +150,12 @@ def hardware_identity(name: str | None):
     for needles, vendor, platform_id, product_id in rules:
         if any(needle in text for needle in needles):
             return vendor, platform_id, product_id
-    if "nvidia" in text:
+    if "nvidia" in text or any(token in text for token in (
+        "h100", "h200", "a100", "b100", "b200", "b300", "gb200", "gb300",
+        "rubin", "rtxpro", "rtx pro"
+    )):
         return "NVIDIA", "nvidia-gpu", None
-    if "amd" in text:
+    if "amd" in text or any(token in text for token in ("mi300", "mi325", "mi350", "mi355", "mi455")):
         return "AMD", "amd-gpu", None
     if "intel" in text or "arc" in text:
         return "Intel", "intel-xpu", None
@@ -87,10 +169,6 @@ def hardware_identity(name: str | None):
         return "Meta", "meta-mtia", None
     if "maia" in text:
         return "Microsoft", "microsoft-maia", None
-    if "nvidia" in text or any(code in text for code in ("h100", "h200", "b100", "b200", "gb200", "gb300")):
-        return "NVIDIA", "nvidia-gpu", None
-    if "amd" in text:
-        return "AMD", "amd-gpu", None
     if "cerebras" in text:
         return "Cerebras", "cerebras-wse", None
     return None, None, None
@@ -154,19 +232,35 @@ def normalize_mlperf_record(key: str, row: dict):
     }
 
 
-def normalize_inferencex_record(row: dict, endpoint_url: str):
+def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name: str | None = None):
     hardware = str(row.get("hardware") or "")
     vendor, platform_id, product_id = hardware_identity(hardware)
-    metrics = row.get("metrics") or {}
-    if not isinstance(metrics, dict):
-        metrics = {}
+    raw_metrics = row.get("metrics") or {}
+    if not isinstance(raw_metrics, dict):
+        raw_metrics = {}
+    metrics = {
+        key: value for key, value in raw_metrics.items()
+        if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+    }
+    power_measurement_valid = (
+        isinstance(metrics.get("power_valid"), (int, float))
+        and metrics.get("power_valid") == 1
+        and isinstance(metrics.get("power_metric_schema_version"), (int, float))
+        and metrics.get("power_metric_schema_version") == 2
+    )
+    power_metrics_available = power_measurement_valid and any(
+        key in metrics for key in INFERENCEX_POWER_METRIC_KEYS
+    )
+    display_model = str(model_display_name or row.get("model") or "unknown")
+    raw_model = str(row.get("model") or "unknown")
+    workers = row.get("workers")
     return {
         "id": f"inferencex-{row.get('id')}",
         "source_id": "inferencex",
         "source_class": "third_party_public_benchmark",
         "evidence_level": "publisher_published_observation",
         "benchmark_suite": "SemiAnalysis InferenceX",
-        "benchmark_version": "public-api-v1",
+        "benchmark_version": None,
         "publication_date": row.get("date"),
         "submitter": "SemiAnalysis",
         "accelerator_vendor": vendor,
@@ -176,22 +270,22 @@ def normalize_inferencex_record(row: dict, endpoint_url: str):
         "system_name": hardware or "Hardware not specified",
         "division": "third_party",
         "availability": "published",
-        "model": str(row.get("model") or "unknown"),
+        "model": raw_model,
+        "model_display_name": display_model,
         "scenario": str(row.get("benchmark_type") or "unknown"),
         "result_value": None,
         "result_unit": "",
         "accuracy_text": "",
         "inferred": False,
-        "power_metrics_available": (
-            metrics.get("power_valid") == 1
-            and metrics.get("power_metric_schema_version") == 2
-        ),
+        "power_metrics_available": power_metrics_available,
+        "power_measurement_valid": power_measurement_valid,
         "design_power_watts": None,
         "system": {
             "hardware": hardware,
             "physical_prefill_gpus": as_number(row.get("num_prefill_gpu")),
             "physical_decode_gpus": as_number(row.get("num_decode_gpu")),
-            "is_multinode": bool(row.get("is_multinode", False)),
+            "is_multinode": row.get("is_multinode") is True,
+            "workers": workers if isinstance(workers, list) else [],
         },
         "software": {
             "framework": str(row.get("framework") or ""),
@@ -200,14 +294,14 @@ def normalize_inferencex_record(row: dict, endpoint_url: str):
             "recipe_fingerprint": row.get("recipe_fingerprint"),
         },
         "workload": {
-            "model": row.get("model"),
+            "model": raw_model,
             "benchmark_type": row.get("benchmark_type"),
             "isl": row.get("isl"),
             "osl": row.get("osl"),
             "concurrency": row.get("conc"),
             "precision": row.get("precision"),
             "speculative_method": row.get("spec_method"),
-            "disaggregated": row.get("disagg"),
+            "disaggregated": row.get("disagg") is True,
         },
         "configuration": {
             key: row.get(key) for key in (
@@ -216,15 +310,14 @@ def normalize_inferencex_record(row: dict, endpoint_url: str):
                 "offload_mode", "workflow_run_id", "run_started_at"
             ) if key in row
         },
-        "metrics": {
-            key: value for key, value in metrics.items()
-            if isinstance(value, (int, float)) and not isinstance(value, bool)
-        },
+        "metrics": metrics,
+        "normalized_metrics": normalize_inferencex_metrics(metrics, power_measurement_valid),
         "notes": (
-            "Public InferenceX result row. Metric units follow the InferenceX API contract: "
-            "time metrics such as p99_itl and p99_tpot are seconds; throughput metrics are "
-            "tokens/s per GPU unless the metric name states otherwise. For strict power "
-            "comparisons require power_valid=1 and power_metric_schema_version=2."
+            "Raw scalar metrics are preserved. Normalized metrics use source-documented units; "
+            "median_intvty is interactivity in tok/s/user, not a latency metric. "
+            "Power and energy metrics are normalized only when power_valid=1 and "
+            "power_metric_schema_version=2. Missing metrics remain unavailable."
+            + ((" Source note: " + str(row.get("notes"))) if row.get("notes") else "")
         ),
         "compliance": "publisher_published",
         "errors": 0,
@@ -289,9 +382,19 @@ def import_inferencex(models: list[str] | None = None):
         str(item.get("model")) for item in availability
         if isinstance(item, dict) and item.get("model")
     })
-    selected_models = sorted(set(models)) if models else available_models
-    records = []
     warnings = []
+    if not available_models:
+        warnings.append("availability endpoint returned no models; refusing to replace the existing InferenceX snapshot")
+    requested_models = sorted(set(models)) if models else available_models
+    available_set = set(available_models)
+    unknown_models = sorted(set(requested_models) - available_set)
+    if unknown_models:
+        warnings.append("requested model(s) are not present in availability: " + ", ".join(unknown_models))
+    selected_models = [model for model in requested_models if model in available_set]
+
+    records = []
+    rows_by_model = {}
+    seen_ids = set()
     for model in selected_models:
         endpoint = INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
         try:
@@ -299,15 +402,31 @@ def import_inferencex(models: list[str] | None = None):
             if not isinstance(rows, list):
                 warnings.append(f"{model}: benchmark endpoint did not return an array")
                 continue
-            valid_rows = []
+            if not rows:
+                warnings.append(f"{model}: availability lists this model but benchmarks returned no rows")
+                rows_by_model[model] = 0
+                continue
+            imported_for_model = 0
             for index, row in enumerate(rows):
                 if not isinstance(row, dict) or row.get("id") is None:
-                    warnings.append(f"{model}: skipped malformed result row at index {index} (missing object/id)")
+                    warnings.append(f"{model}: malformed result row at index {index} (missing object/id)")
                     continue
-                valid_rows.append(row)
-            records.extend(normalize_inferencex_record(row, endpoint) for row in valid_rows)
+                record_key = str(row.get("id"))
+                if record_key in seen_ids:
+                    warnings.append(f"{model}: duplicate benchmark result id {record_key}")
+                    continue
+                seen_ids.add(record_key)
+                records.append(normalize_inferencex_record(row, endpoint, model_display_name=model))
+                imported_for_model += 1
+            rows_by_model[model] = imported_for_model
+            if imported_for_model == 0:
+                warnings.append(f"{model}: no valid benchmark rows were imported")
         except (HTTPError, URLError, TimeoutError, ValueError, RuntimeError) as error:
             warnings.append(f"{model}: {error}")
+
+    if not records and not warnings:
+        warnings.append("no InferenceX benchmark rows were returned; refusing to replace the existing snapshot")
+
     source = {
         "id": "inferencex",
         "name": "SemiAnalysis InferenceX",
@@ -319,13 +438,17 @@ def import_inferencex(models: list[str] | None = None):
         "api_url": INFERENCEX_BASE + "/api",
         "availability_endpoint": INFERENCEX_AVAILABILITY,
         "benchmark_endpoint": INFERENCEX_BENCHMARKS,
+        "availability_model_count": len(available_models),
+        "selected_models": selected_models,
+        "rows_by_model": rows_by_model,
         "record_count": len(records),
         "import_status": "imported" if records else "no_rows_returned",
         "notes": (
-            "Public API benchmark rows retain model, hardware, framework, precision, ISL/OSL, "
-            "concurrency, parallelism, image, recipe fingerprint, metric map and run URL. "
-            "Do not treat missing power validity as valid power; strict power comparisons "
-            "require power_valid=1 and power_metric_schema_version=2."
+            "Public API benchmark rows preserve the raw metric map, normalized metric semantics, "
+            "model display name and key, workload shape, precision, physical prefill/decode GPU counts, "
+            "parallelism, workers, image, recipe fingerprint and producer run URL. "
+            "An empty or partial model refresh aborts without replacing the previous snapshot. "
+            "Strict power/energy normalization requires power_valid=1 and power_metric_schema_version=2."
         ),
     }
     return source, records, warnings
@@ -358,7 +481,12 @@ def main():
         sources.append(source)
 
     if args.source in ("inferencex", "all"):
-        source, imported, source_warnings = import_inferencex(args.models)
+        try:
+            source, imported, source_warnings = import_inferencex(args.models)
+        except (HTTPError, URLError, TimeoutError, ValueError, RuntimeError) as error:
+            print(f"ERROR: InferenceX import failed: {error}", file=sys.stderr)
+            print("Import aborted; existing registry was left unchanged.", file=sys.stderr)
+            return 2
         warnings.extend(source_warnings)
         replace_sources.add(source["id"])
         records = [row for row in records if row.get("source_id") != source["id"]]
