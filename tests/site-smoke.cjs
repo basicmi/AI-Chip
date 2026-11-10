@@ -447,6 +447,7 @@ const { chromium } = require("playwright");
   }));
   await page.goto(base + "/results/", { waitUntil: "networkidle" });
   await page.waitForFunction(() => document.querySelector("[data-benchmark-results]")?.dataset.loaded === "true");
+  await page.locator(".benchmark-results-advanced summary").click();
   const metricSelect = page.locator("[data-results-metric]");
   if (await metricSelect.locator("option").count() < 3) {
     throw new Error("Metric selector did not load normalized metric definitions");
