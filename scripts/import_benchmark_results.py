@@ -594,13 +594,15 @@ def import_inferencex(models: list[str] | None = None):
 
 
 def merge_inferencex_records(existing_records: list[dict], imported_records: list[dict],
-                             selected_models: list[str] | None = None):
+                             selected_models: list[str] | None = None,
+                             selected_raw_model_keys: list[str] | None = None):
     """Replace all InferenceX rows, or only the selected models for a scoped refresh."""
     if selected_models is None:
         kept = [row for row in existing_records if row.get("source_id") != "inferencex"]
         return kept + imported_records
 
     selected = set(selected_models)
+    selected_raw_keys = set(selected_raw_model_keys or [])
     selected_endpoints = {
         INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
         for model in selected
@@ -611,6 +613,8 @@ def merge_inferencex_records(existing_records: list[dict], imported_records: lis
             kept.append(row)
             continue
         if row.get("model_display_name") in selected:
+            continue
+        if row.get("model") in selected_raw_keys:
             continue
         if row.get("source_url") in selected_endpoints:
             continue
@@ -653,9 +657,17 @@ def main():
             return 2
         warnings.extend(source_warnings)
         replace_sources.add(source["id"])
+        selected_models = source.get("selected_models") if args.models else None
+        selected_raw_model_keys = (
+            sorted({
+                key
+                for model in (selected_models or [])
+                for key in source.get("model_db_keys", {}).get(model, [])
+            })
+            if args.models else None
+        )
         records = merge_inferencex_records(
-            records, imported,
-            source.get("selected_models") if args.models else None
+            records, imported, selected_models, selected_raw_model_keys
         )
         source["record_count"] = sum(1 for row in records if row.get("source_id") == source["id"])
         if args.models:
