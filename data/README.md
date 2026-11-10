@@ -56,7 +56,7 @@ The root `comparison_policy` requires precision, sparsity, measurement scope, an
 
 Product records may reference `compatibility_platform_ids`. These IDs connect product cards to the platform-level entries in `compatibility.json`; the explorer then displays the software integrations and workload paths associated with that platform. These are platform-level relationships, not a guarantee that every SKU, model, precision or feature is supported. Always read the integration's version and limitation notes.
 
-The The current product registry contains 53 company profiles and 40 structured accelerator products. The compatibility catalogue contains 17 platforms and 29 software integration records; the workload catalogue contains 28 paths. The model-support catalogue currently includes 3 model families and 5 evidence-backed model-to-hardware paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
+The The current product registry contains 53 company profiles and 40 structured accelerator products. The compatibility catalogue contains 17 platforms and 29 software integration records; the workload catalogue contains 28 paths. The model-support catalogue currently includes 7 model families and 12 evidence-backed model-to-hardware paths. Paths marked `integration_only` document a public software entry point only. They do not imply a completed workload test or benchmark.
 
 The benchmark catalogue remains a directory of benchmark projects and tools. No product-specific benchmark result is inferred from a platform integration; a product result must be added only with a concrete model/configuration, system boundary, measurement and source.
 
@@ -109,6 +109,8 @@ python3 scripts/import_benchmark_results.py --source all --dry-run
 python3 scripts/validate_benchmark_results.py
 python3 -m unittest discover -s tests -p "test_benchmark_results.py"
 ```
+
+The InferenceX importer discovers model availability from /api/v1/availability, then maps its raw database model keys (for example, dsr1) to the display names required by /api/v1/benchmarks (for example, DeepSeek-R1-0528) through /api/v1/views/options and models[].dbKeys. It verifies that every available raw model key is mapped and that every returned result row belongs to the queried model's mapped key set. Identical rows returned through display-name aliases are stored once; conflicting duplicate IDs, unmapped keys, empty model responses and partial API failures abort the refresh. Each successful source snapshot records the API endpoints, retrieval timestamp, raw model-key coverage, display-name mapping and per-model row counts.
 
 The InferenceX importer uses the documented unauthenticated read API. It preserves the raw scalar metric map and separately emits a small normalized metric view with explicit units and optimization direction. Unknown metric keys remain in the raw map and are not silently interpreted. In particular, `median_intvty` is interactivity in `tok/s/user` (higher is better), not inter-token latency; `p99_itl` and `p99_tpot` are latency metrics in seconds. Throughput fields are tokens/s per physical GPU unless the source key states otherwise. For disaggregated rows, the API defines distinct denominators for total, prefill and decode pools; do not mix them.
 

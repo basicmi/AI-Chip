@@ -24,6 +24,7 @@ MLPERF_SUMMARY = "https://raw.githubusercontent.com/mlcommons/inference_results_
 MLPERF_RELEASE = "https://mlcommons.org/2026/09/mlperf-inference-v6-1-results/"
 INFERENCEX_BASE = "https://inferencex.semianalysis.com"
 INFERENCEX_AVAILABILITY = INFERENCEX_BASE + "/api/v1/availability"
+INFERENCEX_OPTIONS = INFERENCEX_BASE + "/api/v1/views/options"
 INFERENCEX_BENCHMARKS = INFERENCEX_BASE + "/api/v1/benchmarks"
 USER_AGENT = "AI-Chip-Landscape-Benchmark-Importer/1.0 (+https://github.com/basicmi/AI-Chip)"
 
@@ -419,59 +420,143 @@ def import_mlperf():
     return source, records
 
 
+def map_inferencex_display_models(availability: list[dict], options: dict):
+    """Map availability raw database model keys to the API's required display names.
+
+    /availability returns keys such as dsr1. /benchmarks?model= expects
+    display names such as DeepSeek-R1-0528. The public options registry is
+    the authoritative bridge via models[].dbKeys.
+    """
+    if not isinstance(options, dict) or not isinstance(options.get("models"), list):
+        raise RuntimeError("InferenceX views/options did not contain a models array")
+
+    available_keys = {
+        str(item.get("model")).strip()
+        for item in availability
+        if isinstance(item, dict) and isinstance(item.get("model"), str) and item.get("model").strip()
+    }
+    display_to_keys = {}
+    for item in options["models"]:
+        if not isinstance(item, dict):
+            continue
+        display_name = item.get("name")
+        db_keys = item.get("dbKeys")
+        if not isinstance(display_name, str) or not display_name.strip() or not isinstance(db_keys, list):
+            continue
+        matching_keys = {
+            key.strip() for key in db_keys
+            if isinstance(key, str) and key.strip() and key.strip() in available_keys
+        }
+        if matching_keys:
+            display_to_keys.setdefault(display_name.strip(), set()).update(matching_keys)
+
+    display_to_keys = {
+        name: sorted(keys) for name, keys in display_to_keys.items()
+    }
+    mapped_keys = {
+        key for keys in display_to_keys.values() for key in keys
+    }
+    unmapped_keys = sorted(available_keys - mapped_keys)
+    return display_to_keys, unmapped_keys
+
+
 def import_inferencex(models: list[str] | None = None):
     availability = fetch_json(INFERENCEX_AVAILABILITY)
     if not isinstance(availability, list):
         raise RuntimeError("InferenceX availability endpoint did not return an array")
-    available_models = sorted({
-        str(item.get("model")) for item in availability
-        if isinstance(item, dict) and item.get("model")
-    })
+
     warnings = []
-    if not available_models:
-        warnings.append("availability endpoint returned no models; refusing to replace the existing InferenceX snapshot")
-    requested_models = sorted(set(models)) if models else available_models
-    available_set = set(available_models)
+    malformed_availability = [
+        index for index, item in enumerate(availability)
+        if not isinstance(item, dict) or not isinstance(item.get("model"), str) or not item.get("model", "").strip()
+    ]
+    if malformed_availability:
+        warnings.append(
+            "availability contains malformed rows at index(es): "
+            + ", ".join(str(index) for index in malformed_availability[:20])
+        )
+
+    availability_model_keys = sorted({
+        item["model"].strip() for item in availability
+        if isinstance(item, dict) and isinstance(item.get("model"), str) and item["model"].strip()
+    })
+    model_db_keys = {}
+    unmapped_model_keys = []
+    if not availability_model_keys:
+        warnings.append("availability endpoint returned no models/model keys; refusing to replace the existing InferenceX snapshot")
+    else:
+        options = fetch_json(INFERENCEX_OPTIONS)
+        model_db_keys, unmapped_model_keys = map_inferencex_display_models(availability, options)
+        if unmapped_model_keys:
+            warnings.append(
+                "availability model key(s) are not mapped by views/options models[].dbKeys: "
+                + ", ".join(unmapped_model_keys)
+            )
+        if not model_db_keys:
+            warnings.append("views/options did not map any available database model keys to display names")
+
+    available_display_models = list(model_db_keys)
+    requested_models = list(dict.fromkeys(models)) if models else available_display_models
+    available_set = set(available_display_models)
     unknown_models = sorted(set(requested_models) - available_set)
     if unknown_models:
-        warnings.append("requested model(s) are not present in availability: " + ", ".join(unknown_models))
+        warnings.append(
+            "requested display model(s) are not present in availability/options: "
+            + ", ".join(unknown_models)
+        )
     selected_models = [model for model in requested_models if model in available_set]
 
     records = []
     rows_by_model = {}
-    seen_ids = set()
-    for model in selected_models:
-        endpoint = INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
+    seen_rows = {}
+    for display_model in selected_models:
+        endpoint = INFERENCEX_BENCHMARKS + "?" + urlencode({"model": display_model})
         try:
             rows = fetch_json(endpoint)
             if not isinstance(rows, list):
-                warnings.append(f"{model}: benchmark endpoint did not return an array")
+                warnings.append(f"{display_model}: benchmark endpoint did not return an array")
                 continue
             if not rows:
-                warnings.append(f"{model}: availability lists this model but benchmarks returned no rows")
-                rows_by_model[model] = 0
+                warnings.append(f"{display_model}: availability lists its database key(s) but benchmarks returned no rows")
+                rows_by_model[display_model] = 0
                 continue
             imported_for_model = 0
+            expected_keys = set(model_db_keys[display_model])
             for index, row in enumerate(rows):
                 if not isinstance(row, dict) or row.get("id") is None:
-                    warnings.append(f"{model}: malformed result row at index {index} (missing object/id)")
+                    warnings.append(f"{display_model}: malformed result row at index {index} (missing object/id)")
+                    continue
+                raw_model_key = row.get("model")
+                if raw_model_key not in expected_keys:
+                    warnings.append(
+                        f"{display_model}: result id {row.get('id')} returned unexpected raw model key "
+                        f"{raw_model_key!r}; expected one of {sorted(expected_keys)}"
+                    )
                     continue
                 record_key = str(row.get("id"))
-                if record_key in seen_ids:
-                    warnings.append(f"{model}: duplicate benchmark result id {record_key}")
+                if record_key in seen_rows:
+                    if row != seen_rows[record_key]:
+                        warnings.append(f"{display_model}: conflicting duplicate benchmark result id {record_key}")
+                    else:
+                        # The same row can be exposed by more than one display-name alias.
+                        # Count the alias query as covered but keep one canonical copy.
+                        imported_for_model += 1
                     continue
-                seen_ids.add(record_key)
-                records.append(normalize_inferencex_record(row, endpoint, model_display_name=model))
+                seen_rows[record_key] = row
+                records.append(
+                    normalize_inferencex_record(row, endpoint, model_display_name=display_model)
+                )
                 imported_for_model += 1
-            rows_by_model[model] = imported_for_model
+            rows_by_model[display_model] = imported_for_model
             if imported_for_model == 0:
-                warnings.append(f"{model}: no valid benchmark rows were imported")
+                warnings.append(f"{display_model}: no valid benchmark rows were imported")
         except (HTTPError, URLError, TimeoutError, ValueError, RuntimeError) as error:
-            warnings.append(f"{model}: {error}")
+            warnings.append(f"{display_model}: {error}")
 
     if not records and not warnings:
         warnings.append("no InferenceX benchmark rows were returned; refusing to replace the existing snapshot")
 
+    retrieved_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     source = {
         "id": "inferencex",
         "name": "SemiAnalysis InferenceX",
@@ -481,32 +566,43 @@ def import_inferencex(models: list[str] | None = None):
         "publication_date": None,
         "results_url": INFERENCEX_BASE + "/",
         "api_url": INFERENCEX_BASE + "/api",
+        "api_contract_url": INFERENCEX_BASE + "/api",
         "availability_endpoint": INFERENCEX_AVAILABILITY,
+        "options_endpoint": INFERENCEX_OPTIONS,
         "benchmark_endpoint": INFERENCEX_BENCHMARKS,
-        "availability_model_count": len(available_models),
+        "retrieved_at": retrieved_at,
+        "availability_row_count": len(availability),
+        "availability_model_keys": availability_model_keys,
+        "availability_model_key_count": len(availability_model_keys),
+        "unmapped_availability_model_keys": unmapped_model_keys,
+        "model_db_keys": model_db_keys,
         "selected_models": selected_models,
         "rows_by_model": rows_by_model,
         "record_count": len(records),
         "import_status": "imported" if records else "no_rows_returned",
         "notes": (
-            "Public API benchmark rows preserve the raw metric map, normalized metric semantics, "
-            "model display name and key, workload shape, precision, physical prefill/decode GPU counts, "
-            "parallelism, workers, image, recipe fingerprint and producer run URL. "
-            "An empty or partial model refresh aborts without replacing the previous snapshot. "
-            "GPU power/energy requires power_valid=1 plus schema version 2; CPU/module telemetry independently requires cpu_power_valid=1."
+            "Public API model discovery maps /availability raw database keys to /benchmarks display-name "
+            "parameters using /api/v1/views/options models[].dbKeys. Benchmark rows preserve the raw model key, "
+            "display name, metric map, normalized metric semantics, workload shape, precision, physical "
+            "prefill/decode GPU counts, parallelism, workers, image, recipe fingerprint and producer run URL. "
+            "An empty, unmapped or partial model refresh aborts without replacing the previous snapshot. "
+            "GPU power/energy requires power_valid=1 plus schema version 2; CPU/module telemetry independently "
+            "requires cpu_power_valid=1."
         ),
     }
     return source, records, warnings
 
 
 def merge_inferencex_records(existing_records: list[dict], imported_records: list[dict],
-                             selected_models: list[str] | None = None):
+                             selected_models: list[str] | None = None,
+                             selected_raw_model_keys: list[str] | None = None):
     """Replace all InferenceX rows, or only the selected models for a scoped refresh."""
     if selected_models is None:
         kept = [row for row in existing_records if row.get("source_id") != "inferencex"]
         return kept + imported_records
 
     selected = set(selected_models)
+    selected_raw_keys = set(selected_raw_model_keys or [])
     selected_endpoints = {
         INFERENCEX_BENCHMARKS + "?" + urlencode({"model": model})
         for model in selected
@@ -517,6 +613,8 @@ def merge_inferencex_records(existing_records: list[dict], imported_records: lis
             kept.append(row)
             continue
         if row.get("model_display_name") in selected:
+            continue
+        if row.get("model") in selected_raw_keys:
             continue
         if row.get("source_url") in selected_endpoints:
             continue
@@ -559,9 +657,17 @@ def main():
             return 2
         warnings.extend(source_warnings)
         replace_sources.add(source["id"])
+        selected_models = source.get("selected_models") if args.models else None
+        selected_raw_model_keys = (
+            sorted({
+                key
+                for model in (selected_models or [])
+                for key in source.get("model_db_keys", {}).get(model, [])
+            })
+            if args.models else None
+        )
         records = merge_inferencex_records(
-            records, imported,
-            source.get("selected_models") if args.models else None
+            records, imported, selected_models, selected_raw_model_keys
         )
         source["record_count"] = sum(1 for row in records if row.get("source_id") == source["id"])
         if args.models:

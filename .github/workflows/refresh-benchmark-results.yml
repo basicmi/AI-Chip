@@ -1,6 +1,11 @@
 name: Refresh public benchmark results
 
 on:
+  push:
+    branches: [master]
+    paths:
+      - scripts/import_benchmark_results.py
+      - .github/workflows/refresh-benchmark-results.yml
   schedule:
     - cron: "17 3 * * 1"
   workflow_dispatch:
@@ -35,7 +40,7 @@ jobs:
           python-version: "3.12"
       - name: Import public benchmark data
         env:
-          SOURCE: ${{ github.event_name == 'schedule' && 'inferencex' || inputs.source || 'all' }}
+          SOURCE: ${{ (github.event_name == 'schedule' || github.event_name == 'push') && 'inferencex' || inputs.source || 'all' }}
           MODELS: ${{ inputs.models }}
         run: |
           args=(--source "$SOURCE")
