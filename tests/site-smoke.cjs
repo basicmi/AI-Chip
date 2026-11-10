@@ -358,11 +358,18 @@ const { chromium } = require("playwright");
     throw new Error("Benchmark Results Explorer failed to initialize: " + resultsLoadError);
   }
   const resultTotal = (await page.locator('[data-results-stat="total"]').textContent()).trim();
-  if (resultTotal !== "492") {
-    throw new Error("Benchmark Results Explorer reported " + resultTotal + " records instead of 492");
+  const registryTotal = await page.evaluate(async () => {
+    const root = document.querySelector("[data-benchmark-results]");
+    const response = await fetch(root.dataset.source);
+    if (!response.ok) throw new Error("Benchmark registry request failed");
+    const data = await response.json();
+    return data.records.length;
+  });
+  if (resultTotal !== String(registryTotal)) {
+    throw new Error("Benchmark Results Explorer summary does not match registry length");
   }
-  if (Number(await page.locator("[data-results-count]").textContent()) !== 492) {
-    throw new Error("Benchmark Results Explorer should initially show all 492 MLPerf v6.1 rows");
+  if (Number(await page.locator("[data-results-count]").textContent()) !== registryTotal) {
+    throw new Error("Benchmark Results Explorer should initially show all registry rows");
   }
   await page.locator("[data-results-sort]").selectOption("model");
   const sortedModels = await page.locator("[data-results-rows] .benchmark-model").allTextContents();
@@ -412,6 +419,60 @@ const { chromium } = require("playwright");
   if (!(await resultDetails.locator(".benchmark-result-detail-links a").count())) {
     throw new Error("Benchmark result details did not retain the publisher source link");
   }
+
+  const metricFixture = {
+    database_version: "fixture",
+    last_imported_at: "2026-11-10",
+    summary: { total_records: 3, by_availability: { published: 3 }, inferred_records: 0, power_records: 0, submitters: 1 },
+    sources: [{ id: "inferencex", name: "SemiAnalysis InferenceX", publisher: "SemiAnalysis", source_class: "third_party_public_benchmark", record_count: 3, results_url: "https://inferencex.semianalysis.com/" }],
+    records: [100, 250, 150].map((value, index) => ({
+      id: "fixture-" + index, source_id: "inferencex", source_class: "third_party_public_benchmark",
+      submitter: "SemiAnalysis", accelerator_vendor: "NVIDIA", system_name: "H200 SXM",
+      system: { hardware: "H200 SXM", is_multinode: false }, model: "dsr1",
+      model_display_name: "DeepSeek-R1-0528", scenario: "single_turn", availability: "published",
+      division: "third_party", system_type: "datacenter", benchmark_suite: "SemiAnalysis InferenceX",
+      benchmark_version: null, publication_date: "2026-11-10", inferred: false,
+      result_value: null, result_unit: "", accuracy_text: "", source_url: "https://inferencex.semianalysis.com/",
+      normalized_metrics: {
+        output_throughput_per_gpu: { value, unit: "tok/s/GPU", label: "Output throughput", direction: "higher", family: "throughput" },
+        median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" }
+      },
+      metrics: { output_tput_per_gpu: value },
+      workload: { precision: "FP8", benchmark_type: "single_turn", isl: 1024, osl: 1024, concurrency: 32, disaggregated: false },
+      software: { framework: "vLLM 0.11" }, configuration: {}, weight_data_types: "FP8"
+    }))
+  };
+  await page.route("**/data/benchmark-results.json", route => route.fulfill({
+    status: 200, contentType: "application/json", body: JSON.stringify(metricFixture)
+  }));
+  await page.goto(base + "/results/", { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelector("[data-benchmark-results]")?.dataset.loaded === "true");
+  await page.locator(".benchmark-results-advanced summary").click();
+  const metricSelect = page.locator("[data-results-metric]");
+  if (await metricSelect.locator("option").count() < 3) {
+    throw new Error("Metric selector did not load normalized metric definitions");
+  }
+  await metricSelect.selectOption("output_throughput_per_gpu");
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 3) {
+    throw new Error("Metric filter should retain only rows reporting the selected metric");
+  }
+  await page.locator("[data-results-sort]").selectOption("metric-best");
+  const bestFirst = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
+  if (!bestFirst[0].includes("250") || !bestFirst[1].includes("150") || !bestFirst[2].includes("100")) {
+    throw new Error("Higher-is-better metric sorting did not rank the largest throughput first: " + bestFirst.join(", "));
+  }
+  await page.locator("[data-results-sort]").selectOption("metric-worst");
+  const worstFirst = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
+  if (!worstFirst[0].includes("100") || !worstFirst[2].includes("250")) {
+    throw new Error("Metric worst-first sorting did not reverse the throughput order");
+  }
+  await metricSelect.selectOption("median_ttft");
+  await page.locator("[data-results-sort]").selectOption("metric-best");
+  const latencyBest = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
+  if (!latencyBest[0].includes("0.8")) {
+    throw new Error("Lower-is-better latency sorting did not put the smallest TTFT first");
+  }
+  await page.unroute("**/data/benchmark-results.json");
 
   await page.goto(base + "/workloads/", { waitUntil: "networkidle" });
   await waitForDataset({
