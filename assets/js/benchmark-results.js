@@ -20,7 +20,8 @@
     osl: $("[data-results-osl]"),
     concurrency: $("[data-results-concurrency]"),
     servingMode: $("[data-results-serving-mode]"),
-    topology: $("[data-results-topology]")
+    topology: $("[data-results-topology]"),
+    metric: $("[data-results-metric]")
   };
   const rowsNode = $("[data-results-rows]");
   const sortSelect = $("[data-results-sort]");
@@ -29,6 +30,7 @@
   let database = null;
   let currentPage = 1;
   let filteredRecords = [];
+  let metricCatalog = new Map();
 
   const make = (tag, className, content) => {
     const node = document.createElement(tag);
@@ -111,7 +113,13 @@
     return items.length ? items.join(" · ") : Object.keys(metrics).length + " scalar metrics";
   };
 
-  const resultText = (record) => {
+  const resultText = (record, selectedMetricKey = "") => {
+    if (selectedMetricKey) {
+      const metric = record.normalized_metrics?.[selectedMetricKey];
+      if (metric && typeof metric.value === "number") {
+        return numberText(metric.value) + (metric.unit ? " " + metric.unit : "");
+      }
+    }
     if (typeof record.result_value === "number") {
       return numberText(record.result_value) + (record.result_unit ? " " + record.result_unit : "");
     }
@@ -264,7 +272,7 @@
     row.append(workload);
 
     const result = document.createElement("td");
-    result.append(make("strong", "benchmark-result-value", resultText(record)));
+    result.append(make("strong", "benchmark-result-value", resultText(record, filters.metric.value)));
     if (record.inferred) result.append(make("span", "benchmark-inferred-tag", "Inferred"));
     row.append(result);
 
@@ -329,18 +337,34 @@
       if (filters.concurrency.value && String(record.workload?.concurrency ?? "") !== filters.concurrency.value) return false;
       if (filters.servingMode.value && (record.workload?.disaggregated === true ? "disaggregated" : record.workload?.disaggregated === false ? "aggregated" : "") !== filters.servingMode.value) return false;
       if (filters.topology.value && (record.system?.is_multinode === true ? "multi-node" : record.system?.is_multinode === false ? "single-node" : "") !== filters.topology.value) return false;
+      if (filters.metric.value && typeof record.normalized_metrics?.[filters.metric.value]?.value !== "number") return false;
       const searchable = [
         record.submitter, record.accelerator_vendor, record.system_name,
         record.system?.accelerator_model, record.system?.hardware,
         record.model_display_name, record.model, record.scenario, record.division, record.availability,
         record.software?.framework, record.software?.operating_system,
         record.workload?.precision, record.workload?.benchmark_type,
+        ...Object.entries(record.normalized_metrics || {}).flatMap(([key, metric]) =>
+          [key, metric.label, metric.unit, metric.value]),
         record.notes, record.accuracy_text, record.benchmark_suite
       ].join(" ").toLowerCase();
       return !query || searchable.includes(query);
     });
     const sortField = sortSelect.value;
-    if (sortField) {
+    if (sortField === "metric-best" || sortField === "metric-worst") {
+      const definition = metricCatalog.get(filters.metric.value);
+      if (definition && definition.direction !== "context") {
+        const bestAscending = definition.direction === "lower";
+        const ascending = sortField === "metric-best" ? bestAscending : !bestAscending;
+        filteredRecords.sort((a, b) => {
+          const av = a.normalized_metrics?.[filters.metric.value]?.value;
+          const bv = b.normalized_metrics?.[filters.metric.value]?.value;
+          if (typeof av !== "number") return typeof bv === "number" ? 1 : String(a.id).localeCompare(String(b.id));
+          if (typeof bv !== "number") return -1;
+          return (ascending ? av - bv : bv - av) || String(a.id).localeCompare(String(b.id));
+        });
+      }
+    } else if (sortField) {
       const fieldValue = (record) => {
         if (sortField === "vendor") return record.accelerator_vendor || "Not specified";
         if (sortField === "model") return record.model_display_name || record.model || "";
@@ -426,6 +450,35 @@
       populate(filters.topology, data.records.map(record =>
         typeof record.system?.is_multinode === "boolean" ? (record.system.is_multinode ? "multi-node" : "single-node") : null
       ));
+      metricCatalog = new Map();
+      const metricConflicts = new Set();
+      data.records.forEach(record => {
+        Object.entries(record.normalized_metrics || {}).forEach(([key, metric]) => {
+          if (typeof metric.value !== "number" || metricConflicts.has(key)) return;
+          const definition = { label: metric.label || key, unit: metric.unit || "", direction: metric.direction || "context" };
+          const existing = metricCatalog.get(key);
+          if (!existing) metricCatalog.set(key, definition);
+          else if (existing.unit !== definition.unit || existing.direction !== definition.direction) {
+            metricCatalog.delete(key);
+            metricConflicts.add(key);
+          }
+        });
+      });
+      populate(filters.metric, [...metricCatalog.keys()], key => {
+        const metric = metricCatalog.get(key);
+        return metric.label + (metric.unit ? " (" + metric.unit + ")" : "");
+      });
+      const bestSort = sortSelect.querySelector('option[value="metric-best"]');
+      const worstSort = sortSelect.querySelector('option[value="metric-worst"]');
+      if (bestSort) bestSort.disabled = true;
+      if (worstSort) worstSort.disabled = true;
+      filters.metric.addEventListener("change", () => {
+        const selected = metricCatalog.get(filters.metric.value);
+        const canSort = Boolean(selected && selected.direction !== "context");
+        if (bestSort) bestSort.disabled = !canSort;
+        if (worstSort) worstSort.disabled = !canSort;
+        if (!canSort && ["metric-best", "metric-worst"].includes(sortSelect.value)) sortSelect.value = "";
+      });
 
       setText("[data-results-version]", data.database_version || "—");
       setText("[data-results-imported]", data.last_imported_at || "—");
