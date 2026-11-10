@@ -483,7 +483,7 @@ def import_inferencex(models: list[str] | None = None):
     model_db_keys = {}
     unmapped_model_keys = []
     if not availability_model_keys:
-        warnings.append("availability endpoint returned no model keys; refusing to replace the existing InferenceX snapshot")
+        warnings.append("availability endpoint returned no models/model keys; refusing to replace the existing InferenceX snapshot")
     else:
         options = fetch_json(INFERENCEX_OPTIONS)
         model_db_keys, unmapped_model_keys = map_inferencex_display_models(availability, options)
