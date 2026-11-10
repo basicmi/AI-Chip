@@ -537,8 +537,10 @@ def import_inferencex(models: list[str] | None = None):
                 if record_key in seen_rows:
                     if row != seen_rows[record_key]:
                         warnings.append(f"{display_model}: conflicting duplicate benchmark result id {record_key}")
-                    # The same row can be exposed by more than one display-name alias.
-                    # Keep one copy; never inflate the record count.
+                    else:
+                        # The same row can be exposed by more than one display-name alias.
+                        # Count the alias query as covered but keep one canonical copy.
+                        imported_for_model += 1
                     continue
                 seen_rows[record_key] = row
                 records.append(
