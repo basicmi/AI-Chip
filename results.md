@@ -45,6 +45,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <details class="benchmark-results-advanced">
       <summary>Advanced workload filters · InferenceX</summary>
       <div class="benchmark-results-filters">
+        <label>Metric<select data-results-metric><option value="">All normalized metrics</option></select></label>
         <label>Framework<select data-results-framework><option value="">All frameworks</option></select></label>
         <label>Precision<select data-results-precision><option value="">All precisions</option></select></label>
         <label>Workload type<select data-results-benchmark-type><option value="">All workload types</option></select></label>
@@ -67,6 +68,8 @@ description: Source-linked public AI accelerator benchmark submissions and infer
         <option value="model">Model</option>
         <option value="submitter">Submitter</option>
         <option value="system">System name</option>
+        <option value="metric-best" disabled>Selected metric · best first</option>
+        <option value="metric-worst" disabled>Selected metric · worst first</option>
       </select>
     </label>
   </div>
@@ -78,7 +81,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
           <th>Submitter</th>
           <th>Accelerator / system</th>
           <th>Model / scenario</th>
-          <th>Result</th>
+          <th>Result / selected metric</th>
           <th>Status / evidence</th>
         </tr>
       </thead>
@@ -104,7 +107,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
   <div>
     <p>Do not compare results across different benchmark suites, models, scenarios, divisions, system types, units or accuracy targets. For MLPerf, preserve the suite version, Closed/Open division, Available/Preview/RDI status, scenario, inference mode, accuracy target and full system boundary. Inferred submissions are marked separately.</p>
     <p>The MLPerf v6.1 summary snapshot contains no measured power records. Design power is not measured power. For InferenceX, <code>median_intvty</code> is median interactivity in tok/s/user (higher is better), not latency; <code>p99_itl</code> and <code>p99_tpot</code> are latency metrics in seconds. Throughput metrics are tokens/s per physical GPU unless the source key states otherwise.</p>
-    <p>Compare InferenceX rows only after matching model, workload type, ISL/OSL, concurrency, precision, framework/image, speculative mode, aggregated vs. disaggregated topology and prefill/decode parallelism. GPU power/energy values require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>. CPU/module telemetry has an independent <code>cpu_power_valid</code> verdict. An absent CPU verdict means there is no CPU-side measurement leg, not a failed GPU measurement. The importer preserves failed, incomplete and unreported states separately; do not combine component boundaries without checking their definitions.</p>
+    <p>When a normalized metric is selected, the table filters to records that report that metric and displays its common unit. Metric sorting respects the source-defined optimization direction (higher or lower is better); context-only metrics are not ranked. This is not a cross-suite score. Compare InferenceX rows only after matching model, workload type, ISL/OSL, concurrency, precision, framework/image, speculative mode, aggregated vs. disaggregated topology and prefill/decode parallelism. GPU power/energy values require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>. CPU/module telemetry has an independent <code>cpu_power_valid</code> verdict. An absent CPU verdict means there is no CPU-side measurement leg, not a failed GPU measurement. The importer preserves failed, incomplete and unreported states separately; do not combine component boundaries without checking their definitions.</p>
     <p>Every row links to its publisher's source record where available. A public submission or observation is attributed to its publisher; it is not automatically an independent replication.</p>
   </div>
 </section>
