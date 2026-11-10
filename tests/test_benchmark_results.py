@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from import_benchmark_results import (
     import_inferencex,
+    map_inferencex_display_models,
     merge_inferencex_records,
     normalize_inferencex_record,
     normalize_mlperf_record,
@@ -151,6 +152,98 @@ class NormalizationTests(unittest.TestCase):
 
         full_refresh = merge_inferencex_records(existing, imported)
         self.assertEqual({row["id"] for row in full_refresh}, {"new-r1", "mlperf-1"})
+
+    def test_availability_raw_keys_map_to_benchmarks_display_names(self):
+        availability = [
+            {"model": "dsr1", "isl": 1024, "osl": 1024},
+            {"model": "dsv4", "isl": 8192, "osl": 1024},
+        ]
+        options = {
+            "models": [
+                {"name": "DeepSeek-R1-0528", "dbKeys": ["dsr1"]},
+                {"name": "DeepSeek-V4-Pro", "dbKeys": ["dsv4"]},
+                {"name": "Not yet available", "dbKeys": ["future-model"]},
+            ]
+        }
+        mapped, unmapped = map_inferencex_display_models(availability, options)
+        self.assertEqual(mapped, {
+            "DeepSeek-R1-0528": ["dsr1"],
+            "DeepSeek-V4-Pro": ["dsv4"],
+        })
+        self.assertEqual(unmapped, [])
+
+        row_r1 = {
+            "id": 901, "model": "dsr1", "hardware": "h200_sxm", "framework": "vllm",
+            "precision": "fp8", "benchmark_type": "single_turn", "isl": 1024,
+            "osl": 1024, "conc": 32, "metrics": {"output_tput_per_gpu": 100.0},
+            "date": "2026-11-09", "run_url": "https://github.com/example/run/901",
+        }
+        row_v4 = {
+            "id": 902, "model": "dsv4", "hardware": "gb200_nvl72", "framework": "sglang",
+            "precision": "fp8", "benchmark_type": "single_turn", "isl": 8192,
+            "osl": 1024, "conc": 16, "metrics": {"output_tput_per_gpu": 200.0},
+            "date": "2026-11-09", "run_url": "https://github.com/example/run/902",
+        }
+        responses = {
+            "https://inferencex.semianalysis.com/api/v1/availability": availability,
+            "https://inferencex.semianalysis.com/api/v1/views/options": options,
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528": [row_r1],
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-V4-Pro": [row_v4],
+        }
+
+        def fake_fetch(url):
+            if url not in responses:
+                raise AssertionError("Unexpected InferenceX API request: " + url)
+            return responses[url]
+
+        with mock.patch("import_benchmark_results.fetch_json", side_effect=fake_fetch) as fetch:
+            source, records, warnings = import_inferencex()
+
+        self.assertEqual(warnings, [])
+        self.assertEqual(source["availability_model_keys"], ["dsr1", "dsv4"])
+        self.assertEqual(source["selected_models"], ["DeepSeek-R1-0528", "DeepSeek-V4-Pro"])
+        self.assertEqual(source["model_db_keys"], {
+            "DeepSeek-R1-0528": ["dsr1"],
+            "DeepSeek-V4-Pro": ["dsv4"],
+        })
+        self.assertEqual(source["record_count"], 2)
+        self.assertTrue(source["retrieved_at"].endswith("+00:00"))
+        self.assertEqual(
+            {record["model_display_name"] for record in records},
+            {"DeepSeek-R1-0528", "DeepSeek-V4-Pro"},
+        )
+        self.assertEqual(
+            {record["model"] for record in records},
+            {"dsr1", "dsv4"},
+        )
+        requested_urls = [call.args[0] for call in fetch.call_args_list]
+        self.assertIn(
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528",
+            requested_urls,
+        )
+        self.assertIn(
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-V4-Pro",
+            requested_urls,
+        )
+        self.assertNotIn(
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=dsr1",
+            requested_urls,
+        )
+
+    def test_unmapped_availability_key_fails_closed(self):
+        availability = [{"model": "dsr1"}, {"model": "unmapped-key"}]
+        options = {"models": [{"name": "DeepSeek-R1-0528", "dbKeys": ["dsr1"]}]}
+        with mock.patch(
+            "import_benchmark_results.fetch_json",
+            side_effect=[availability, options, [{
+                "id": 903, "model": "dsr1", "hardware": "h200_sxm",
+                "metrics": {}, "date": "2026-11-09",
+            }]],
+        ):
+            source, records, warnings = import_inferencex()
+        self.assertEqual(len(records), 1)
+        self.assertEqual(source["unmapped_availability_model_keys"], ["unmapped-key"])
+        self.assertTrue(any("unmapped-key" in warning for warning in warnings))
 
     def test_inferencex_empty_availability_is_not_a_valid_empty_snapshot(self):
         with mock.patch("import_benchmark_results.fetch_json", return_value=[]):
