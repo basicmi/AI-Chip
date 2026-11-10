@@ -245,6 +245,48 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(source["unmapped_availability_model_keys"], ["unmapped-key"])
         self.assertTrue(any("unmapped-key" in warning for warning in warnings))
 
+    def test_duplicate_display_aliases_are_deduplicated_and_scoped_refresh_removes_raw_key(self):
+        availability = [{"model": "dsr1"}]
+        options = {
+            "models": [
+                {"name": "DeepSeek-R1-0528", "dbKeys": ["dsr1"]},
+                {"name": "DeepSeek-R1", "dbKeys": ["dsr1"]},
+            ]
+        }
+        row = {
+            "id": 904, "model": "dsr1", "hardware": "h200_sxm",
+            "metrics": {"output_tput_per_gpu": 100.0}, "date": "2026-11-09",
+        }
+        responses = {
+            "https://inferencex.semianalysis.com/api/v1/availability": availability,
+            "https://inferencex.semianalysis.com/api/v1/views/options": options,
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528": [row],
+            "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1": [row],
+        }
+        with mock.patch(
+            "import_benchmark_results.fetch_json",
+            side_effect=lambda url: responses[url],
+        ):
+            source, imported, warnings = import_inferencex()
+        self.assertEqual(warnings, [])
+        self.assertEqual(len(imported), 1)
+        self.assertEqual(source["rows_by_model"], {
+            "DeepSeek-R1-0528": 1,
+            "DeepSeek-R1": 1,
+        })
+
+        existing = [{
+            "id": "old-alias-row", "source_id": "inferencex", "model": "dsr1",
+            "model_display_name": "DeepSeek-R1-0528",
+            "source_url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528",
+        }]
+        refreshed = merge_inferencex_records(
+            existing, imported, ["DeepSeek-R1"],
+            selected_raw_model_keys=["dsr1"],
+        )
+        self.assertEqual(len(refreshed), 1)
+        self.assertEqual(refreshed[0]["id"], "inferencex-904")
+
     def test_inferencex_empty_availability_is_not_a_valid_empty_snapshot(self):
         with mock.patch("import_benchmark_results.fetch_json", return_value=[]):
             source, records, warnings = import_inferencex()
