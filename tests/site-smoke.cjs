@@ -517,15 +517,15 @@ const { chromium } = require("playwright");
   }
   await compareRow("fixture-1").locator(".benchmark-result-details summary").click();
   await compareRow("fixture-1").locator(".benchmark-compare-action").click();
-  let comparisonText = await page.locator("[data-comparison-content]").textContent();
-  if (!comparisonText.includes("Like-for-like cohort") || !comparisonText.includes("+150.0%") ||
-      !comparisonText.includes("higher is better")) {
-    throw new Error("Like-for-like InferenceX comparison did not calculate the source-directed delta: " + comparisonText);
+  let comparisonWorkspaceText = await page.locator("[data-comparison-content]").textContent();
+  if (!comparisonWorkspaceText.includes("Like-for-like cohort") || !comparisonWorkspaceText.includes("+150.0%") ||
+      !comparisonWorkspaceText.includes("higher is better")) {
+    throw new Error("Like-for-like InferenceX comparison did not calculate the source-directed delta: " + comparisonWorkspaceText);
   }
   await compareRow("fixture-3").locator(".benchmark-result-details summary").click();
   await compareRow("fixture-3").locator(".benchmark-compare-action").click();
-  comparisonText = await page.locator("[data-comparison-content]").textContent();
-  if (!comparisonText.includes("Not directly comparable") ||
+  comparisonWorkspaceText = await page.locator("[data-comparison-content]").textContent();
+  if (!comparisonWorkspaceText.includes("Not directly comparable") ||
       await page.locator(".benchmark-comparison-table").count() !== 0) {
     throw new Error("Comparison workspace must block metric comparison across different workload shapes");
   }
