@@ -363,7 +363,7 @@ const { chromium } = require("playwright");
       !qualityText.includes("Software stack") || !qualityText.includes("Measurement validation")) {
     throw new Error("Benchmark quality dashboard is missing evidence coverage dimensions or measurement validation");
   }
-  if (!/^\\d+%/.test((await qualityPanel.locator(".benchmark-quality-score strong").textContent()).trim())) {
+  if (!(/^\d+%/.test((await qualityPanel.locator(".benchmark-quality-score strong").textContent()).trim()))) {
     throw new Error("Benchmark quality dashboard did not calculate a core provenance coverage percentage");
   }
   const resultTotal = (await page.locator('[data-results-stat="total"]').textContent()).trim();
