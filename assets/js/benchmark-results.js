@@ -418,11 +418,21 @@
     if (currentPage * pageSize < filteredRecords.length) { currentPage += 1; renderRows(); }
   });
 
-  fetch(root.dataset.source, { cache: "no-cache" })
-    .then(response => {
-      if (!response.ok) throw new Error("Benchmark results request failed: HTTP " + response.status);
-      return response.json();
-    })
+  const fetchRegistry = async () => {
+    const response = await fetch(root.dataset.source, { cache: "no-cache" });
+    if (!response.ok) throw new Error("Benchmark results request failed: HTTP " + response.status);
+    const bytes = await response.arrayBuffer();
+    const isGzip = bytes.byteLength >= 2 && new Uint8Array(bytes, 0, 2)[0] === 0x1f &&
+      new Uint8Array(bytes, 0, 2)[1] === 0x8b;
+    if (!isGzip) return JSON.parse(new TextDecoder().decode(bytes));
+    if (typeof DecompressionStream !== "function") {
+      throw new Error("This browser cannot decompress the benchmark data. Open the raw JSON results instead.");
+    }
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return new Response(stream).json();
+  };
+
+  fetchRegistry()
     .then(data => {
       if (!Array.isArray(data.records) || !Array.isArray(data.sources) || !data.summary) {
         throw new Error("Benchmark results registry has an invalid structure.");

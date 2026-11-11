@@ -362,7 +362,9 @@ const { chromium } = require("playwright");
     const root = document.querySelector("[data-benchmark-results]");
     const response = await fetch(root.dataset.source);
     if (!response.ok) throw new Error("Benchmark registry request failed");
-    const data = await response.json();
+    const bytes = await response.arrayBuffer();
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
+    const data = await new Response(stream).json();
     return data.records.length;
   });
   if (resultTotal !== String(registryTotal)) {
@@ -442,7 +444,7 @@ const { chromium } = require("playwright");
       software: { framework: "vLLM 0.11" }, configuration: {}, weight_data_types: "FP8"
     }))
   };
-  await page.route("**/data/benchmark-results.json", route => route.fulfill({
+  await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
     status: 200, contentType: "application/json", body: JSON.stringify(metricFixture)
   }));
   await page.goto(base + "/results/", { waitUntil: "networkidle" });
@@ -472,7 +474,7 @@ const { chromium } = require("playwright");
   if (!latencyBest[0].includes("0.8")) {
     throw new Error("Lower-is-better latency sorting did not put the smallest TTFT first");
   }
-  await page.unroute("**/data/benchmark-results.json");
+  await page.unroute("**/data/benchmark-results.json.gz");
 
   await page.goto(base + "/workloads/", { waitUntil: "networkidle" });
   await waitForDataset({

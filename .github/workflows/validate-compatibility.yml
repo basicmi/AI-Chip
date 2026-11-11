@@ -62,6 +62,18 @@ jobs:
           node-version: "22"
       - name: Install GitHub Pages dependencies
         run: bundle install
+      - name: Prepare compressed benchmark registry
+        run: |
+          python3 - <<'PY'
+          import gzip
+          from pathlib import Path
+          source = Path("data/benchmark-results.json")
+          target = Path("data/benchmark-results.json.gz")
+          with source.open("rb") as input_file, target.open("wb") as output_file:
+              with gzip.GzipFile(fileobj=output_file, mode="wb", compresslevel=9, mtime=0) as compressed:
+                  compressed.write(input_file.read())
+          print(f"Prepared {target}: {target.stat().st_size:,} bytes")
+          PY
       - name: Build GitHub Pages site
         run: bundle exec jekyll build
       - name: Verify static assets in generated site
@@ -70,6 +82,7 @@ jobs:
           test -s _site/assets/js/benchmark-results.js
           test -s _site/results/index.html
           test -s _site/data/benchmark-results.json
+          test -s _site/data/benchmark-results.json.gz
           test -s _site/assets/js/directory-explorer.js
           test -s _site/assets/js/product-explorer.js
           test -s _site/assets/js/model-support-explorer.js

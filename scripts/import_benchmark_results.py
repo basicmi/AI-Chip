@@ -7,6 +7,7 @@ context. It never derives cross-suite scores or fills missing measurements.
 from __future__ import annotations
 
 import argparse
+import gzip
 from collections import Counter
 from datetime import date, datetime, timezone
 import json
@@ -20,6 +21,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "benchmark-results.json"
+COMPRESSED_OUTPUT = ROOT / "data" / "benchmark-results.json.gz"
 MLPERF_SUMMARY = "https://raw.githubusercontent.com/mlcommons/inference_results_v6.1/main/summary.json"
 MLPERF_RELEASE = "https://mlcommons.org/2026/09/mlperf-inference-v6-1-results/"
 INFERENCEX_BASE = "https://inferencex.semianalysis.com"
@@ -706,8 +708,16 @@ def main():
         print("Dry run: no file written.")
         return 0
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(database, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {args.output}")
+    serialized = json.dumps(database, indent=2, ensure_ascii=False) + "\n"
+    args.output.write_text(serialized, encoding="utf-8")
+    compressed_path = COMPRESSED_OUTPUT if args.output == OUTPUT else args.output.with_suffix(args.output.suffix + ".gz")
+    with compressed_path.open("wb") as raw_file:
+        with gzip.GzipFile(fileobj=raw_file, mode="wb", compresslevel=9, mtime=0) as compressed:
+            compressed.write(serialized.encode("utf-8"))
+    raw_size = args.output.stat().st_size
+    compressed_size = compressed_path.stat().st_size
+    print(f"Wrote {args.output} ({raw_size:,} bytes)")
+    print(f"Wrote {compressed_path} ({compressed_size:,} bytes; {compressed_size / raw_size:.1%} of JSON size)")
     return 0
 
 
