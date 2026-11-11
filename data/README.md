@@ -129,6 +129,8 @@ The GitHub Actions workflow `.github/workflows/refresh-benchmark-results.yml` su
 7. Preserve the source row and producer run link. A published submission is not automatically an independent replication.
 8. Do not rank different suites or workload families on one composite score.
 
+The Results Explorer's “Show strict cohort” action uses source-specific matching keys. InferenceX cohorts require the same API/source version, model checkpoint, workload type, ISL, OSL, concurrency, precision, speculative mode, serving mode and normalized metric/unit. MLPerf Inference cohorts require the same suite/version, model, scenario, division, availability, system type, accuracy target, precision, inferred status and result unit. Missing critical metadata blocks strict cohort creation rather than treating unknown values as equal. Hardware, system size, framework, image and parallelism remain visible comparison variables, not implicit equality requirements.
+
 
 ## Product Explorer comparison workspace
 

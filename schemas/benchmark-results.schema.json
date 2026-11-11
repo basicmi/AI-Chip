@@ -206,7 +206,10 @@
           "minimum": 0
         },
         "is_multinode": {
-          "type": "boolean"
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "workers": {
           "type": "array",
