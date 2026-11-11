@@ -507,6 +507,37 @@ const { chromium } = require("playwright");
   if (Number(await page.locator("[data-results-count]").textContent()) !== 4) {
     throw new Error("Clearing the strict cohort did not restore all four InferenceX records");
   }
+
+  const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
+  await compareRow("fixture-0").locator(".benchmark-result-details summary").click();
+  await compareRow("fixture-0").locator(".benchmark-compare-action").click();
+  if (!(await page.locator("[data-comparison-count]").textContent()).includes("1 / 4") ||
+      !(await page.locator("[data-comparison-content]").textContent()).includes("Add one more record")) {
+    throw new Error("Comparison workspace did not retain the first selected InferenceX record");
+  }
+  await compareRow("fixture-1").locator(".benchmark-result-details summary").click();
+  await compareRow("fixture-1").locator(".benchmark-compare-action").click();
+  let comparisonText = await page.locator("[data-comparison-content]").textContent();
+  if (!comparisonText.includes("Like-for-like cohort") || !comparisonText.includes("+150.0%") ||
+      !comparisonText.includes("higher is better")) {
+    throw new Error("Like-for-like InferenceX comparison did not calculate the source-directed delta: " + comparisonText);
+  }
+  await compareRow("fixture-3").locator(".benchmark-result-details summary").click();
+  await compareRow("fixture-3").locator(".benchmark-compare-action").click();
+  comparisonText = await page.locator("[data-comparison-content]").textContent();
+  if (!comparisonText.includes("Not directly comparable") ||
+      await page.locator(".benchmark-comparison-table").count() !== 0) {
+    throw new Error("Comparison workspace must block metric comparison across different workload shapes");
+  }
+  await page.locator('.benchmark-comparison-remove[data-record-id="fixture-3"]').click();
+  if (!(await page.locator("[data-comparison-content]").textContent()).includes("Like-for-like cohort")) {
+    throw new Error("Removing a mismatched workload did not restore the valid comparison");
+  }
+  await page.locator("[data-comparison-clear]").click();
+  if (!(await page.locator("[data-comparison-count]").textContent()).includes("0 / 4") ||
+      await page.locator(".benchmark-comparison-table").count() !== 0) {
+    throw new Error("Clear comparison did not reset the workspace");
+  }
   await page.unroute("**/data/benchmark-results.json.gz");
 
   const mlperfFixture = {
@@ -539,6 +570,17 @@ const { chromium } = require("playwright");
   if (Number(await page.locator("[data-results-count]").textContent()) !== 3) {
     throw new Error("Clearing the strict MLPerf cohort did not restore all fixture rows");
   }
+  await page.locator('[data-results-rows] tr[data-result-id="mlperf-0"] .benchmark-result-details summary').click();
+  await page.locator('[data-results-rows] tr[data-result-id="mlperf-0"] .benchmark-compare-action').click();
+  await page.locator('[data-results-rows] tr[data-result-id="mlperf-1"] .benchmark-result-details summary').click();
+  await page.locator('[data-results-rows] tr[data-result-id="mlperf-1"] .benchmark-compare-action').click();
+  const mlperfComparison = await page.locator("[data-comparison-content]").textContent();
+  if (!mlperfComparison.includes("Like-for-like cohort") ||
+      !mlperfComparison.includes("direction not ranked") ||
+      !mlperfComparison.includes("no winner is declared")) {
+    throw new Error("MLPerf comparison must show deltas without inventing an optimization direction");
+  }
+  await page.locator("[data-comparison-clear]").click();
   await page.unroute("**/data/benchmark-results.json.gz");
 
   await page.goto(base + "/workloads/", { waitUntil: "networkidle" });

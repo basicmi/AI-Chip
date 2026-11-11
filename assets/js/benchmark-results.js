@@ -29,12 +29,17 @@
   const cohortPanel = $("[data-results-cohort]");
   const cohortSummary = $("[data-results-cohort-summary]");
   const cohortClear = $("[data-results-cohort-clear]");
+  const comparisonCount = $("[data-comparison-count]");
+  const comparisonContent = $("[data-comparison-content]");
+  const comparisonClear = $("[data-comparison-clear]");
+  const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
   let currentPage = 1;
   let filteredRecords = [];
   let metricCatalog = new Map();
   let activeCohort = null;
+  const comparisonSelection = new Map();
 
   const make = (tag, className, content) => {
     const node = document.createElement(tag);
@@ -268,6 +273,212 @@
     return wrapper;
   };
 
+
+  const comparisonMetricFor = (item) => {
+    const record = item.record;
+    if (record.source_id === "inferencex") {
+      const metric = record.normalized_metrics?.[item.descriptor.metricKey];
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value)) return null;
+      return { label: metric.label || item.descriptor.metricKey, value: metric.value,
+        unit: metric.unit || "", direction: metric.direction || "context" };
+    }
+    if (typeof record.result_value !== "number" || !Number.isFinite(record.result_value)) return null;
+    return { label: record.benchmark_suite + " result", value: record.result_value,
+      unit: record.result_unit || "", direction: "context" };
+  };
+
+  const comparisonValue = value =>
+    value === null || value === undefined || value === "" ? "Not reported" : String(value);
+
+  const comparisonParallelism = configuration => {
+    const keys = [
+      "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+      "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers", "offload_mode"
+    ];
+    return keys.filter(key => configuration?.[key] !== null && configuration?.[key] !== undefined &&
+      configuration[key] !== "").map(key => key + "=" + configuration[key]).join(" · ") || "Not reported";
+  };
+
+  const comparisonConfigurationRows = [
+    ["Submitter", r => comparisonValue(r.submitter)],
+    ["Accelerator", r => comparisonValue(r.system?.accelerator_model || r.system?.hardware)],
+    ["Accelerator count", r => comparisonValue(r.system?.total_accelerators)],
+    ["System", r => comparisonValue(r.system_name)],
+    ["Nodes", r => comparisonValue(r.system?.nodes)],
+    ["Framework", r => comparisonValue(r.software?.framework)],
+    ["Container image", r => comparisonValue(r.software?.image)],
+    ["Precision", r => comparisonValue(r.workload?.precision || r.weight_data_types)],
+    ["Input / output tokens", r => {
+      const isl = r.workload?.isl, osl = r.workload?.osl;
+      return isl === undefined && osl === undefined ? "Not reported" :
+        "ISL " + comparisonValue(isl) + " · OSL " + comparisonValue(osl);
+    }],
+    ["Concurrency", r => comparisonValue(r.workload?.concurrency)],
+    ["Serving mode", r => typeof r.workload?.disaggregated === "boolean"
+      ? (r.workload.disaggregated ? "Disaggregated" : "Aggregated") : "Not reported"],
+    ["Topology", r => typeof r.system?.is_multinode === "boolean"
+      ? (r.system.is_multinode ? "Multi-node" : "Single-node") : "Not reported"],
+    ["Parallelism", r => comparisonParallelism(r.configuration)]
+  ];
+
+  const renderComparisonWorkspace = () => {
+    if (!comparisonContent) return;
+    const items = [...comparisonSelection.values()];
+    if (comparisonCount) comparisonCount.textContent = items.length + " / " + maxComparisonRecords;
+    if (comparisonClear) comparisonClear.disabled = items.length === 0;
+    comparisonContent.replaceChildren();
+
+    if (!items.length) {
+      comparisonContent.append(make("p", "benchmark-comparison-empty",
+        "Open a result’s “Configuration & source” details and choose “Add to comparison”."));
+      return;
+    }
+
+    const selected = make("div", "benchmark-comparison-selected");
+    items.forEach((item, index) => {
+      const record = item.record;
+      const chip = make("div", "benchmark-comparison-selected-item");
+      const identity = make("div", "benchmark-comparison-selected-identity");
+      identity.append(make("strong", "", (index + 1) + ". " +
+        (record.accelerator_vendor || "Unknown vendor") + " · " +
+        (record.system_name || record.system?.accelerator_model || "System not specified")));
+      identity.append(make("small", "", (record.submitter || "Unknown submitter") +
+        " · " + (record.model_display_name || record.model || "Model not specified")));
+      chip.append(identity);
+      const remove = make("button", "benchmark-comparison-remove", "Remove");
+      remove.type = "button";
+      remove.dataset.recordId = record.id;
+      remove.addEventListener("click", () => {
+        comparisonSelection.delete(record.id);
+        renderRows();
+      });
+      chip.append(remove);
+      selected.append(chip);
+    });
+    comparisonContent.append(selected);
+
+    if (items.length < 2) {
+      comparisonContent.append(make("p", "benchmark-comparison-note",
+        "Add one more record to build a side-by-side comparison. The first selected record becomes the baseline."));
+      return;
+    }
+
+    const descriptors = items.map(item => item.descriptor);
+    const invalid = descriptors.find(descriptor => !descriptor || descriptor.error);
+    if (invalid) {
+      comparisonContent.append(make("p", "benchmark-comparison-warning",
+        "Comparison unavailable: " + (invalid?.error || "one or more records lack a comparable metric definition.")));
+      return;
+    }
+    const cohortKeys = new Set(descriptors.map(descriptor => descriptor.key));
+    if (cohortKeys.size !== 1) {
+      comparisonContent.append(make("p", "benchmark-comparison-warning",
+        "Not directly comparable: the selected records do not share the same strict benchmark/workload definition. Remove mismatched records or select a matching cohort."));
+      const definitions = make("ul", "benchmark-comparison-definitions");
+      items.forEach((item, index) => {
+        definitions.append(make("li", "", (index + 1) + ". " + item.descriptor.summary));
+      });
+      comparisonContent.append(definitions);
+      return;
+    }
+
+    const metrics = items.map(comparisonMetricFor);
+    if (metrics.some(metric => !metric)) {
+      comparisonContent.append(make("p", "benchmark-comparison-warning",
+        "Comparison unavailable: at least one selected record no longer contains the metric captured when it was added."));
+      return;
+    }
+
+    const descriptor = descriptors[0];
+    const direction = metrics[0].direction;
+    const baseline = metrics[0];
+    const banner = make("div", "benchmark-comparison-compatible");
+    banner.append(make("strong", "", "Like-for-like cohort · " + descriptor.title));
+    banner.append(make("p", "", descriptor.summary));
+    banner.append(make("small", "", "The first selected record is the baseline. Hardware, system scale, software and parallelism remain visible variables; no composite score is calculated."));
+    comparisonContent.append(banner);
+
+    const wrap = make("div", "benchmark-comparison-table-wrap");
+    const table = make("table", "benchmark-comparison-table");
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    header.append(make("th", "", "Comparison dimension"));
+    items.forEach((item, index) => {
+      const th = document.createElement("th");
+      th.append(make("strong", "", (index === 0 ? "Baseline · " : "") +
+        (item.record.accelerator_vendor || "Unknown vendor")));
+      th.append(make("small", "", item.record.system_name ||
+        item.record.system?.accelerator_model || "System not specified"));
+      header.append(th);
+    });
+    thead.append(header);
+    table.append(thead);
+
+    const tbody = document.createElement("tbody");
+    const metricRow = make("tr", "benchmark-comparison-metric-row");
+    metricRow.append(make("th", "", metrics[0].label + (metrics[0].unit ? " · " + metrics[0].unit : "")));
+    metrics.forEach((metric, index) => {
+      const cell = document.createElement("td");
+      cell.append(make("strong", "benchmark-comparison-value",
+        numberText(metric.value) + (metric.unit ? " " + metric.unit : "")));
+      if (index === 0) {
+        cell.append(make("small", "benchmark-comparison-delta", "Baseline"));
+      } else if (baseline.value === 0) {
+        cell.append(make("small", "benchmark-comparison-delta", "Relative delta unavailable · baseline is zero"));
+      } else {
+        const delta = (metric.value - baseline.value) / Math.abs(baseline.value) * 100;
+        const signed = (delta > 0 ? "+" : "") + delta.toFixed(1) + "%";
+        let interpretation = "direction not ranked";
+        if (direction === "higher") interpretation = delta > 0 ? "higher is better" : delta < 0 ? "lower is better" : "equal";
+        if (direction === "lower") interpretation = delta < 0 ? "lower is better" : delta > 0 ? "higher is better" : "equal";
+        cell.append(make("small", "benchmark-comparison-delta", "Δ " + signed + " vs baseline · " + interpretation));
+      }
+      metricRow.append(cell);
+    });
+    tbody.append(metricRow);
+
+    comparisonConfigurationRows.forEach(([label, valueFor]) => {
+      const values = items.map(item => valueFor(item.record));
+      const distinct = new Set(values.map(value => value.trim().toLowerCase()));
+      const row = make("tr", "benchmark-comparison-context-row" +
+        (distinct.size > 1 ? " is-different" : ""));
+      row.append(make("th", "", label));
+      values.forEach(value => row.append(make("td", "", value)));
+      tbody.append(row);
+    });
+    table.append(tbody);
+    wrap.append(table);
+    comparisonContent.append(wrap);
+
+    const note = direction === "higher" || direction === "lower"
+      ? "Relative deltas use the source-defined metric direction (“" + direction + " is better”). They are not a cross-suite score."
+      : "The source does not define a higher/lower optimization direction for this result. Values and deltas are shown for context; no winner is declared.";
+    comparisonContent.append(make("p", "benchmark-comparison-note", note));
+  };
+
+  const buildComparisonAction = (record) => {
+    const wrapper = make("div", "benchmark-compare-actions");
+    const selected = comparisonSelection.has(record.id);
+    const descriptor = selected ? comparisonSelection.get(record.id).descriptor : buildCohortDescriptor(record);
+    const atLimit = !selected && comparisonSelection.size >= maxComparisonRecords;
+    const button = make("button", "benchmark-compare-action",
+      selected ? "Remove from comparison" : atLimit ? "Comparison full" : "Add to comparison");
+    button.type = "button";
+    button.disabled = !selected && (atLimit || Boolean(descriptor?.error));
+    if (!selected && descriptor?.error) button.title = descriptor.error;
+    if (atLimit) button.title = "Remove one selected record before adding another.";
+    button.addEventListener("click", () => {
+      if (selected) comparisonSelection.delete(record.id);
+      else comparisonSelection.set(record.id, { record, descriptor });
+      renderRows();
+    });
+    wrapper.append(button);
+    if (!selected && descriptor?.error) {
+      wrapper.append(make("small", "benchmark-compare-note", descriptor.error));
+    }
+    return wrapper;
+  };
+
   const buildDetails = (record) => {
     const details = make("details", "benchmark-result-details");
     details.append(make("summary", "", "Configuration & source"));
@@ -380,6 +591,7 @@
     if (record.release_url) addLink(links, record.release_url, "Benchmark release ↗");
     body.append(links);
     body.append(buildCohortAction(record));
+    body.append(buildComparisonAction(record));
     details.append(body);
     return details;
   };
@@ -597,6 +809,7 @@
     const start = (currentPage - 1) * pageSize;
     const pageRecords = filteredRecords.slice(start, start + pageSize);
     rowsNode.replaceChildren(...pageRecords.map(buildRow));
+    renderComparisonWorkspace();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
@@ -629,6 +842,10 @@
     activeCohort = null;
     renderCohortPanel();
     applyFilters();
+  });
+  if (comparisonClear) comparisonClear.addEventListener("click", () => {
+    comparisonSelection.clear();
+    renderRows();
   });
   sortSelect.addEventListener("change", applyFilters);
   search.addEventListener("input", applyFilters);
