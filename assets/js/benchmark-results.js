@@ -429,8 +429,8 @@
         const delta = (metric.value - baseline.value) / Math.abs(baseline.value) * 100;
         const signed = (delta > 0 ? "+" : "") + delta.toFixed(1) + "%";
         let interpretation = "direction not ranked";
-        if (direction === "higher") interpretation = delta > 0 ? "higher is better" : delta < 0 ? "lower is better" : "equal";
-        if (direction === "lower") interpretation = delta < 0 ? "lower is better" : delta > 0 ? "higher is better" : "equal";
+        if (direction === "higher") interpretation = delta > 0 ? "better (higher is better)" : delta < 0 ? "worse (higher is better)" : "equal";
+        if (direction === "lower") interpretation = delta < 0 ? "better (lower is better)" : delta > 0 ? "worse (lower is better)" : "equal";
         cell.append(make("small", "benchmark-comparison-delta", "Δ " + signed + " vs baseline · " + interpretation));
       }
       metricRow.append(cell);

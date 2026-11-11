@@ -509,6 +509,7 @@ const { chromium } = require("playwright");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
+  await metricSelect.selectOption("output_throughput_per_gpu");
   await compareRow("fixture-0").locator(".benchmark-result-details summary").click();
   await compareRow("fixture-0").locator(".benchmark-compare-action").click();
   if (!(await page.locator("[data-comparison-count]").textContent()).includes("1 / 4") ||
@@ -519,8 +520,8 @@ const { chromium } = require("playwright");
   await compareRow("fixture-1").locator(".benchmark-compare-action").click();
   let comparisonWorkspaceText = await page.locator("[data-comparison-content]").textContent();
   if (!comparisonWorkspaceText.includes("Like-for-like cohort") || !comparisonWorkspaceText.includes("+150.0%") ||
-      !comparisonWorkspaceText.includes("higher is better")) {
-    throw new Error("Like-for-like InferenceX comparison did not calculate the source-directed delta: " + comparisonWorkspaceText);
+      !comparisonWorkspaceText.includes("better (higher is better)")) {
+    throw new Error("Higher-is-better InferenceX comparison did not calculate the source-directed delta: " + comparisonWorkspaceText);
   }
   await compareRow("fixture-3").locator(".benchmark-result-details summary").click();
   await compareRow("fixture-3").locator(".benchmark-compare-action").click();
@@ -538,7 +539,18 @@ const { chromium } = require("playwright");
       await page.locator(".benchmark-comparison-table").count() !== 0) {
     throw new Error("Clear comparison did not reset the workspace");
   }
-  await page.unroute("**/data/benchmark-results.json.gz");
+
+  await metricSelect.selectOption("median_ttft");
+  await compareRow("fixture-0").locator(".benchmark-result-details summary").click();
+  await compareRow("fixture-0").locator(".benchmark-compare-action").click();
+  await compareRow("fixture-1").locator(".benchmark-result-details summary").click();
+  await compareRow("fixture-1").locator(".benchmark-compare-action").click();
+  const latencyComparisonText = await page.locator("[data-comparison-content]").textContent();
+  if (!latencyComparisonText.includes("+12.5%") ||
+      !latencyComparisonText.includes("worse (lower is better)")) {
+    throw new Error("Lower-is-better latency comparison incorrectly interpreted a positive delta: " + latencyComparisonText);
+  }
+  await page.locator("[data-comparison-clear]").click();  await page.unroute("**/data/benchmark-results.json.gz");
 
   const mlperfFixture = {
     database_version: "fixture",
