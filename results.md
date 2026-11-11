@@ -17,7 +17,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
   </div>
 </section>
 
-<section class="benchmark-results-explorer" data-benchmark-results data-source="{{ '/data/benchmark-results.json' | relative_url }}">
+<section class="benchmark-results-explorer" data-benchmark-results data-source="{{ '/data/benchmark-results.json.gz' | relative_url }}">
   <div class="benchmark-results-summary">
     <div class="compat-stat"><span>Result records</span><strong data-results-stat="total">—</strong></div>
     <div class="compat-stat"><span>Available</span><strong data-results-stat="available">—</strong></div>
