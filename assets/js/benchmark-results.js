@@ -26,11 +26,15 @@
   const rowsNode = $("[data-results-rows]");
   const sortSelect = $("[data-results-sort]");
   const load = $("[data-results-load]");
+  const cohortPanel = $("[data-results-cohort]");
+  const cohortSummary = $("[data-results-cohort-summary]");
+  const cohortClear = $("[data-results-cohort-clear]");
   const pageSize = 50;
   let database = null;
   let currentPage = 1;
   let filteredRecords = [];
   let metricCatalog = new Map();
+  let activeCohort = null;
 
   const make = (tag, className, content) => {
     const node = document.createElement(tag);
@@ -136,6 +140,134 @@
     parent.append(line);
   };
 
+
+  const missingCohortValue = value =>
+    value === null || value === undefined ||
+    (typeof value === "string" && (!value.trim() || value.trim().toLowerCase() === "unknown"));
+
+  const buildCohortDescriptor = (record) => {
+    if (record.source_id === "inferencex") {
+      const metricKey = filters.metric.value;
+      if (!metricKey) return { error: "Select a normalized metric in Advanced workload filters before creating a strict cohort." };
+      const metric = record.normalized_metrics?.[metricKey];
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value)) {
+        return { error: "This record does not report the selected normalized metric." };
+      }
+      if (missingCohortValue(metric.unit)) {
+        return { error: "The selected metric has no unit; a unit-safe cohort cannot be formed." };
+      }
+
+      const workload = record.workload || {};
+      const source = sourceMap().get(record.source_id);
+      const version = record.benchmark_version || source?.version;
+      const model = record.model_display_name || record.model;
+      const precision = workload.precision || record.weight_data_types;
+      const workloadType = workload.benchmark_type || record.scenario;
+      const required = [
+        ["source version", version], ["model checkpoint", model],
+        ["workload type", workloadType], ["scenario", record.scenario],
+        ["input length (ISL)", workload.isl], ["output length (OSL)", workload.osl],
+        ["concurrency", workload.concurrency], ["precision", precision],
+        ["speculative decoding mode", workload.speculative_method],
+        ["serving mode", typeof workload.disaggregated === "boolean" ? workload.disaggregated : null],
+        ["division", record.division], ["system type", record.system_type]
+      ];
+      const missing = required.filter(([, value]) => missingCohortValue(value)).map(([name]) => name);
+      if (missing.length) return { error: "Strict cohort unavailable: missing " + missing.join(", ") + "." };
+
+      const speculativeMethod = workload.speculative_method;
+      const values = [
+        record.source_id, record.benchmark_suite, version, model, record.model,
+        workloadType, record.scenario, record.division, record.availability, record.system_type,
+        workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod,
+        workload.disaggregated, metricKey, metric.unit, metric.direction || "context", metric.family || "unknown"
+      ];
+      return {
+        key: JSON.stringify(values),
+        metricKey,
+        title: "InferenceX · " + model,
+        summary: [
+          "Model " + model, "workload " + workloadType, "ISL " + workload.isl,
+          "OSL " + workload.osl, "concurrency " + workload.concurrency,
+          "precision " + precision, "speculative mode " + speculativeMethod,
+          workload.disaggregated ? "disaggregated" : "aggregated",
+          metric.label + " (" + metric.unit + ")"
+        ].join(" · "),
+        explanation: "Same InferenceX source/version, model, workload shape, precision, speculative mode, serving mode and metric/unit. Hardware, GPU count, software stack and parallelism remain variables; inspect each run's configuration before drawing conclusions."
+      };
+    }
+
+    if (record.source_id === "mlperf-inference-v6.1") {
+      if (typeof record.result_value !== "number" || !Number.isFinite(record.result_value)) {
+        return { error: "This MLPerf record has no numeric published result." };
+      }
+      const required = [
+        ["suite version", record.benchmark_version], ["model", record.model],
+        ["scenario", record.scenario], ["division", record.division],
+        ["availability status", record.availability], ["system type", record.system_type],
+        ["accuracy target", record.accuracy_text], ["precision", record.weight_data_types],
+        ["result unit", record.result_unit]
+      ];
+      const missing = required.filter(([, value]) => missingCohortValue(value)).map(([name]) => name);
+      if (missing.length) return { error: "Strict cohort unavailable: missing " + missing.join(", ") + "." };
+      const values = [
+        record.source_id, record.benchmark_suite, record.benchmark_version, record.model,
+        record.scenario, record.division, record.availability, record.system_type,
+        record.accuracy_text, record.weight_data_types, record.inferred, record.result_unit
+      ];
+      return {
+        key: JSON.stringify(values),
+        metricKey: "result_value",
+        title: "MLPerf Inference " + record.benchmark_version + " · " + record.model,
+        summary: [
+          "Model " + record.model, record.scenario, record.division, record.system_type,
+          "accuracy " + record.accuracy_text, "precision " + record.weight_data_types,
+          record.inferred ? "inferred submission" : "non-inferred submission",
+          "metric " + record.result_unit
+        ].join(" · "),
+        explanation: "Same MLPerf suite/version, model, scenario, division, availability, system type, accuracy target, precision, inferred status and result unit. Hardware and system scale remain variables; inspect the full system boundary in each record."
+      };
+    }
+    return { error: "Strict cohort matching is currently supported for MLPerf Inference v6.1 and SemiAnalysis InferenceX." };
+  };
+
+  const renderCohortPanel = () => {
+    if (!cohortPanel || !cohortSummary) return;
+    if (!activeCohort || !database) {
+      cohortPanel.hidden = true;
+      return;
+    }
+    const cohortSize = database.records.reduce((count, record) => {
+      const descriptor = buildCohortDescriptor(record);
+      return count + (descriptor && !descriptor.error && descriptor.key === activeCohort.key ? 1 : 0);
+    }, 0);
+    cohortSummary.textContent = activeCohort.title + " · " + cohortSize +
+      " records share this strict workload/metric definition. " + activeCohort.summary +
+      ". " + activeCohort.explanation;
+    cohortPanel.hidden = false;
+  };
+
+  const buildCohortAction = (record) => {
+    const descriptor = buildCohortDescriptor(record);
+    const wrapper = make("div", "benchmark-cohort-actions");
+    const button = make("button", "benchmark-cohort-action",
+      descriptor.error ? "Strict cohort unavailable" : "Show strict cohort");
+    button.type = "button";
+    button.disabled = Boolean(descriptor.error);
+    if (descriptor.error) {
+      button.title = descriptor.error;
+      wrapper.append(button, make("small", "benchmark-cohort-note", descriptor.error));
+    } else {
+      button.addEventListener("click", () => {
+        activeCohort = descriptor;
+        renderCohortPanel();
+        applyFilters();
+      });
+      wrapper.append(button);
+    }
+    return wrapper;
+  };
+
   const buildDetails = (record) => {
     const details = make("details", "benchmark-result-details");
     details.append(make("summary", "", "Configuration & source"));
@@ -182,7 +314,7 @@
       workload.concurrency !== undefined && workload.concurrency !== null ? "Concurrency " + workload.concurrency : "",
       workload.benchmark_type || "",
       workload.precision ? "Precision " + workload.precision : "",
-      workload.disaggregated === true ? "Disaggregated" : workload.disaggregated === false ? "Aggregated" : "",
+      workload.disaggregated === true ? "Disaggregated" : workload.disaggregated === false ? "Aggregated" : "Serving mode not reported",
       workload.speculative_method ? "Speculative decoding " + workload.speculative_method : ""
     ].filter(Boolean).join(" · "));
     addDetailLine(body, "Parallelism", Object.entries(configuration)
@@ -247,6 +379,7 @@
     }
     if (record.release_url) addLink(links, record.release_url, "Benchmark release ↗");
     body.append(links);
+    body.append(buildCohortAction(record));
     details.append(body);
     return details;
   };
@@ -338,6 +471,10 @@
       if (filters.servingMode.value && (record.workload?.disaggregated === true ? "disaggregated" : record.workload?.disaggregated === false ? "aggregated" : "") !== filters.servingMode.value) return false;
       if (filters.topology.value && (record.system?.is_multinode === true ? "multi-node" : record.system?.is_multinode === false ? "single-node" : "") !== filters.topology.value) return false;
       if (filters.metric.value && typeof record.normalized_metrics?.[filters.metric.value]?.value !== "number") return false;
+      if (activeCohort) {
+        const descriptor = buildCohortDescriptor(record);
+        if (!descriptor || descriptor.error || descriptor.key !== activeCohort.key) return false;
+      }
       const searchable = [
         record.submitter, record.accelerator_vendor, record.system_name,
         record.system?.accelerator_model, record.system?.hardware,
@@ -392,7 +529,8 @@
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
-        " of " + filteredRecords.length + " filtered records · no cross-suite ranking"
+        " of " + filteredRecords.length + " filtered records" +
+        (activeCohort ? " · strict workload cohort" : " · no cross-suite ranking")
       : "No records match the current filters.";
     $("[data-results-empty]").hidden = filteredRecords.length > 0;
     $("[data-results-page]").textContent = "Page " + currentPage + " of " + totalPages;
@@ -404,10 +542,23 @@
     search.value = "";
     Object.values(filters).forEach(select => { select.value = ""; });
     sortSelect.value = "";
+    activeCohort = null;
+    renderCohortPanel();
     applyFilters();
   };
 
-  Object.values(filters).forEach(select => select.addEventListener("change", applyFilters));
+  Object.entries(filters).forEach(([key, select]) => select.addEventListener("change", () => {
+    if (key === "metric" && activeCohort) {
+      activeCohort = null;
+      renderCohortPanel();
+    }
+    applyFilters();
+  }));
+  if (cohortClear) cohortClear.addEventListener("click", () => {
+    activeCohort = null;
+    renderCohortPanel();
+    applyFilters();
+  });
   sortSelect.addEventListener("change", applyFilters);
   search.addEventListener("input", applyFilters);
   $("[data-results-reset]").addEventListener("click", reset);

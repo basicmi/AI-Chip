@@ -330,7 +330,7 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
             "hardware": hardware,
             "physical_prefill_gpus": as_number(row.get("num_prefill_gpu")),
             "physical_decode_gpus": as_number(row.get("num_decode_gpu")),
-            "is_multinode": row.get("is_multinode") is True,
+            "is_multinode": row.get("is_multinode") if isinstance(row.get("is_multinode"), bool) else None,
             "workers": workers if isinstance(workers, list) else [],
         },
         "software": {
@@ -347,7 +347,7 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
             "concurrency": row.get("conc"),
             "precision": row.get("precision"),
             "speculative_method": row.get("spec_method"),
-            "disaggregated": row.get("disagg") is True,
+            "disaggregated": row.get("disagg") if isinstance(row.get("disagg"), bool) else None,
         },
         "configuration": {
             key: row.get(key) for key in (

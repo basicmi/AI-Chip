@@ -425,12 +425,12 @@ const { chromium } = require("playwright");
   const metricFixture = {
     database_version: "fixture",
     last_imported_at: "2026-11-10",
-    summary: { total_records: 3, by_availability: { published: 3 }, inferred_records: 0, power_records: 0, submitters: 1 },
-    sources: [{ id: "inferencex", name: "SemiAnalysis InferenceX", publisher: "SemiAnalysis", source_class: "third_party_public_benchmark", record_count: 3, results_url: "https://inferencex.semianalysis.com/" }],
-    records: [100, 250, 150].map((value, index) => ({
+    summary: { total_records: 4, by_availability: { published: 4 }, inferred_records: 0, power_records: 0, submitters: 1 },
+    sources: [{ id: "inferencex", name: "SemiAnalysis InferenceX", version: "Public API v1", publisher: "SemiAnalysis", source_class: "third_party_public_benchmark", record_count: 4, results_url: "https://inferencex.semianalysis.com/" }],
+    records: [100, 250, 150, 400].map((value, index) => ({
       id: "fixture-" + index, source_id: "inferencex", source_class: "third_party_public_benchmark",
-      submitter: "SemiAnalysis", accelerator_vendor: "NVIDIA", system_name: "H200 SXM",
-      system: { hardware: "H200 SXM", is_multinode: false }, model: "dsr1",
+      submitter: "SemiAnalysis", accelerator_vendor: index === 1 ? "AMD" : "NVIDIA", system_name: index === 1 ? "MI300X" : "H200 SXM",
+      system: { hardware: index === 1 ? "MI300X" : "H200 SXM", is_multinode: false }, model: "dsr1",
       model_display_name: "DeepSeek-R1-0528", scenario: "single_turn", availability: "published",
       division: "third_party", system_type: "datacenter", benchmark_suite: "SemiAnalysis InferenceX",
       benchmark_version: null, publication_date: "2026-11-10", inferred: false,
@@ -440,8 +440,8 @@ const { chromium } = require("playwright");
         median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" }
       },
       metrics: { output_tput_per_gpu: value },
-      workload: { precision: "FP8", benchmark_type: "single_turn", isl: 1024, osl: 1024, concurrency: 32, disaggregated: false },
-      software: { framework: "vLLM 0.11" }, configuration: {}, weight_data_types: "FP8"
+      workload: { precision: "FP8", benchmark_type: "single_turn", isl: index === 3 ? 2048 : 1024, osl: 1024, concurrency: 32, speculative_method: "none", disaggregated: false },
+      software: { framework: index === 2 ? "SGLang 0.5" : "vLLM 0.11" }, configuration: {}, weight_data_types: "FP8"
     }))
   };
   await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
@@ -454,18 +454,24 @@ const { chromium } = require("playwright");
   if (await metricSelect.locator("option").count() < 3) {
     throw new Error("Metric selector did not load normalized metric definitions");
   }
+  const unselectedCohortAction = page.locator('[data-results-rows] tr[data-result-id="fixture-0"] .benchmark-result-details summary');
+  await unselectedCohortAction.click();
+  if (!(await page.locator('[data-results-rows] tr[data-result-id="fixture-0"] .benchmark-cohort-action').isDisabled())) {
+    throw new Error("InferenceX strict cohort action must require an explicit normalized metric");
+  }
   await metricSelect.selectOption("output_throughput_per_gpu");
-  if (Number(await page.locator("[data-results-count]").textContent()) !== 3) {
-    throw new Error("Metric filter should retain only rows reporting the selected metric");
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 4) {
+    throw new Error("Metric filter should retain all four rows reporting the selected metric");
   }
   await page.locator("[data-results-sort]").selectOption("metric-best");
   const bestFirst = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
-  if (!bestFirst[0].includes("250") || !bestFirst[1].includes("150") || !bestFirst[2].includes("100")) {
+  if (!bestFirst[0].includes("400") || !bestFirst[1].includes("250") ||
+      !bestFirst[2].includes("150") || !bestFirst[3].includes("100")) {
     throw new Error("Higher-is-better metric sorting did not rank the largest throughput first: " + bestFirst.join(", "));
   }
   await page.locator("[data-results-sort]").selectOption("metric-worst");
   const worstFirst = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
-  if (!worstFirst[0].includes("100") || !worstFirst[2].includes("250")) {
+  if (!worstFirst[0].includes("100") || !worstFirst[3].includes("400")) {
     throw new Error("Metric worst-first sorting did not reverse the throughput order");
   }
   await metricSelect.selectOption("median_ttft");
@@ -473,6 +479,56 @@ const { chromium } = require("playwright");
   const latencyBest = await page.locator("[data-results-rows] .benchmark-result-value").allTextContents();
   if (!latencyBest[0].includes("0.8")) {
     throw new Error("Lower-is-better latency sorting did not put the smallest TTFT first");
+  }
+  const cohortRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
+  await cohortRow.locator(".benchmark-result-details summary").click();
+  await cohortRow.locator(".benchmark-cohort-action").click();
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 3) {
+    throw new Error("Strict InferenceX cohort should exclude the row with a different ISL");
+  }
+  const cohortIds = await page.locator("[data-results-rows] tr").evaluateAll(rows => rows.map(row => row.dataset.resultId));
+  if (!cohortIds.includes("fixture-1") || !cohortIds.includes("fixture-2") || cohortIds.includes("fixture-3")) {
+    throw new Error("Strict InferenceX cohort should retain hardware/software variants but exclude workload mismatches: " + cohortIds.join(", "));
+  }
+  const cohortText = await page.locator("[data-results-cohort-summary]").textContent();
+  if (!cohortText.includes("3 records") || !cohortText.includes("software stack")) {
+    throw new Error("Strict InferenceX cohort explanation did not render its count and variable dimensions");
+  }
+  await page.locator("[data-results-cohort-clear]").click();
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 4) {
+    throw new Error("Clearing the strict cohort did not restore all four InferenceX records");
+  }
+  await page.unroute("**/data/benchmark-results.json.gz");
+
+  const mlperfFixture = {
+    database_version: "fixture",
+    last_imported_at: "2026-11-10",
+    summary: { total_records: 3, by_availability: { available: 3 }, inferred_records: 0, power_records: 0, submitters: 3 },
+    sources: [{ id: "mlperf-inference-v6.1", name: "MLPerf Inference v6.1", version: "v6.1", publisher: "MLCommons", source_class: "standardized_public_submission", record_count: 3, results_url: "https://mlcommons.org/benchmarks/inference-datacenter/" }],
+    records: [
+      { id: "mlperf-0", source_id: "mlperf-inference-v6.1", source_class: "standardized_public_submission", submitter: "Vendor A", accelerator_vendor: "NVIDIA", system_name: "8xH100", system: { accelerator_model: "H100", total_accelerators: 8 }, software: { framework: "TensorRT" }, model: "deepseek-r1", scenario: "Server", availability: "available", division: "closed", system_type: "datacenter", benchmark_suite: "MLPerf Inference", benchmark_version: "v6.1", accuracy_text: "99% of reference", weight_data_types: "FP8", inferred: false, result_value: 1000, result_unit: "tokens/s", power_metrics_available: false },
+      { id: "mlperf-1", source_id: "mlperf-inference-v6.1", source_class: "standardized_public_submission", submitter: "Vendor B", accelerator_vendor: "AMD", system_name: "8xMI355X", system: { accelerator_model: "MI355X", total_accelerators: 8 }, software: { framework: "ROCm" }, model: "deepseek-r1", scenario: "Server", availability: "available", division: "closed", system_type: "datacenter", benchmark_suite: "MLPerf Inference", benchmark_version: "v6.1", accuracy_text: "99% of reference", weight_data_types: "FP8", inferred: false, result_value: 1500, result_unit: "tokens/s", power_metrics_available: false },
+      { id: "mlperf-2", source_id: "mlperf-inference-v6.1", source_class: "standardized_public_submission", submitter: "Vendor C", accelerator_vendor: "NVIDIA", system_name: "8xB200", system: { accelerator_model: "B200", total_accelerators: 8 }, software: { framework: "TensorRT" }, model: "deepseek-r1", scenario: "Server", availability: "available", division: "closed", system_type: "datacenter", benchmark_suite: "MLPerf Inference", benchmark_version: "v6.1", accuracy_text: "99.9% of reference", weight_data_types: "FP8", inferred: false, result_value: 1700, result_unit: "tokens/s", power_metrics_available: false }
+    ]
+  };
+  await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
+    status: 200, contentType: "application/json", body: JSON.stringify(mlperfFixture)
+  }));
+  await page.goto(base + "/results/", { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelector("[data-benchmark-results]")?.dataset.loaded === "true");
+  const mlperfRow = page.locator('[data-results-rows] tr[data-result-id="mlperf-0"]');
+  await mlperfRow.locator(".benchmark-result-details summary").click();
+  await mlperfRow.locator(".benchmark-cohort-action").click();
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 2) {
+    throw new Error("Strict MLPerf cohort should match accuracy target and exclude a different accuracy row");
+  }
+  const mlperfCohortIds = await page.locator("[data-results-rows] tr").evaluateAll(rows => rows.map(row => row.dataset.resultId));
+  if (!mlperfCohortIds.includes("mlperf-1") || mlperfCohortIds.includes("mlperf-2")) {
+    throw new Error("Strict MLPerf cohort should retain other systems with the same benchmark conditions");
+  }
+  await page.locator("[data-results-cohort-clear]").click();
+  if (Number(await page.locator("[data-results-count]").textContent()) !== 3) {
+    throw new Error("Clearing the strict MLPerf cohort did not restore all fixture rows");
   }
   await page.unroute("**/data/benchmark-results.json.gz");
 

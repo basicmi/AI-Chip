@@ -1423,6 +1423,56 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   opacity: .4;
   cursor: not-allowed;
 }
+.benchmark-cohort-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .9rem;
+  margin: .8rem 0;
+  padding: .8rem .9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ai-link);
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+.benchmark-cohort-banner[hidden] { display: none; }
+.benchmark-cohort-banner strong { color: var(--ink); font-size: 11px; }
+.benchmark-cohort-banner p {
+  margin: .25rem 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+.benchmark-cohort-banner button { flex-shrink: 0; }
+.benchmark-cohort-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .55rem;
+}
+.benchmark-cohort-action {
+  padding: .35rem .55rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--ai-link);
+  background: var(--surface-soft);
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.benchmark-cohort-action:disabled {
+  color: var(--muted);
+  opacity: .6;
+  cursor: not-allowed;
+}
+.benchmark-cohort-note {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
 .benchmark-source-status { margin: 2rem 0; }
 .benchmark-source-status h2 { margin: .2rem 0 .8rem; }
 [data-results-source-cards] {
@@ -1475,6 +1525,8 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   [data-results-source-cards] { grid-template-columns: 1fr; }
   .benchmark-results-heading { align-items: flex-start; flex-wrap: wrap; }
   .benchmark-results-pagination { justify-content: space-between; }
+  .benchmark-cohort-banner { align-items: flex-start; flex-direction: column; }
+  .benchmark-cohort-banner button { align-self: flex-start; }
   .benchmark-results-sort { width: 100%; margin-top: .75rem; justify-content: space-between; }
   .benchmark-results-sort select { flex: 1; }
 }

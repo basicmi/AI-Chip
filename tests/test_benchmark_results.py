@@ -136,6 +136,31 @@ class NormalizationTests(unittest.TestCase):
         self.assertTrue(cpu_result["power_metrics_available"])
         self.assertEqual(cpu_result["normalized_metrics"]["mean_cpu_socket_power"]["unit"], "W/socket")
 
+    def test_inferencex_preserves_unknown_serving_and_topology_flags(self):
+        endpoint = "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"
+        base = {
+            "id": 777, "model": "dsr1", "hardware": "h200_sxm",
+            "framework": "vllm", "precision": "fp8", "benchmark_type": "single_turn",
+            "isl": 1024, "osl": 1024, "conc": 32, "metrics": {},
+        }
+        unknown = normalize_inferencex_record(base, endpoint, model_display_name="DeepSeek-R1-0528")
+        self.assertIsNone(unknown["system"]["is_multinode"])
+        self.assertIsNone(unknown["workload"]["disaggregated"])
+
+        explicit_single = normalize_inferencex_record(
+            {**base, "is_multinode": False, "disagg": False},
+            endpoint, model_display_name="DeepSeek-R1-0528",
+        )
+        self.assertIs(explicit_single["system"]["is_multinode"], False)
+        self.assertIs(explicit_single["workload"]["disaggregated"], False)
+
+        explicit_multi = normalize_inferencex_record(
+            {**base, "is_multinode": True, "disagg": True},
+            endpoint, model_display_name="DeepSeek-R1-0528",
+        )
+        self.assertIs(explicit_multi["system"]["is_multinode"], True)
+        self.assertIs(explicit_multi["workload"]["disaggregated"], True)
+
     def test_scoped_inferencex_refresh_preserves_other_models(self):
         existing = [
             {"id": "old-r1", "source_id": "inferencex", "model": "dsr1", "model_display_name": "DeepSeek-R1-0528"},
