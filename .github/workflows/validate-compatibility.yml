@@ -70,6 +70,7 @@ jobs:
           test -s _site/assets/js/benchmark-results.js
           test -s _site/results/index.html
           test -s _site/data/benchmark-results.json
+          test -s _site/data/benchmark-results.json.gz
           test -s _site/assets/js/directory-explorer.js
           test -s _site/assets/js/product-explorer.js
           test -s _site/assets/js/model-support-explorer.js
