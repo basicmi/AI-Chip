@@ -1551,3 +1551,33 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .model-support-hardware { color: var(--ink); font-weight: 700; }
 .model-support-stack { color: var(--ink); }
 @media (max-width: 760px) { .model-support-grid { grid-template-columns: 1fr; } .model-support-card-head { flex-direction: column; } }
+
+/* Benchmark evidence quality dashboard */
+.benchmark-quality-panel { margin: .8rem 0 1.2rem; padding: .8rem .9rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.benchmark-quality-panel > summary { display: flex; align-items: center; justify-content: space-between; gap: .8rem; cursor: pointer; list-style: none; }
+.benchmark-quality-panel > summary::-webkit-details-marker { display: none; }
+.benchmark-quality-panel > summary strong { display: block; margin-top: .15rem; color: var(--ink); font: 700 1.08rem/1.2 "Source Serif 4", Georgia, serif; }
+.benchmark-quality-panel .eyebrow { margin: 0; color: var(--teal); font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+.benchmark-quality-toggle { color: var(--ai-link); font-size: 9px; font-weight: 700; }
+.benchmark-quality-overview { display: grid; grid-template-columns: auto minmax(0,1fr); gap: .7rem 1rem; align-items: center; margin: .8rem 0; }
+.benchmark-quality-score strong { color: var(--ink); font-size: 1.8rem; font-variant-numeric: tabular-nums; }
+.benchmark-quality-score span, .benchmark-quality-note { color: var(--muted); font-size: 9px; line-height: 1.5; }
+.benchmark-quality-note { margin: 0; }
+.benchmark-quality-table { border-top: 1px solid var(--line); }
+.benchmark-quality-row { display: grid; grid-template-columns: minmax(125px,1fr) minmax(120px,1.2fr) 55px 55px; gap: .7rem; align-items: center; padding: .42rem 0; border-bottom: 1px solid var(--line); }
+.benchmark-quality-row > strong { color: var(--ink); font-size: 9px; }
+.benchmark-quality-header { color: var(--muted); font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.benchmark-quality-meter { display: flex; align-items: center; gap: .45rem; }
+.benchmark-quality-track { display: block; flex: 1; height: 6px; overflow: hidden; border-radius: 10px; background: var(--surface-soft); }
+.benchmark-quality-fill { display: block; height: 100%; border-radius: inherit; background: var(--ai-link); }
+.benchmark-quality-meter small, .benchmark-quality-number { color: var(--muted); font-size: 9px; font-variant-numeric: tabular-nums; }
+.benchmark-quality-power { margin-top: .7rem; padding-top: .55rem; border-top: 1px solid var(--line); }
+.benchmark-quality-power h3 { margin: 0 0 .35rem; color: var(--ink); font-size: 10px; }
+.benchmark-quality-status { margin: .2rem 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
+.benchmark-quality-status strong { color: var(--ink); }
+.benchmark-quality-empty { margin: .7rem 0 0; color: var(--muted); font-size: 10px; }
+@media (max-width: 560px) {
+  .benchmark-quality-overview { grid-template-columns: 1fr; gap: .2rem; }
+  .benchmark-quality-row { grid-template-columns: minmax(105px,1fr) minmax(95px,1.2fr) 38px 42px; gap: .35rem; }
+  .benchmark-quality-row > strong { font-size: 8px; }
+}
