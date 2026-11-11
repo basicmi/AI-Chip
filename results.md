@@ -18,6 +18,14 @@ description: Source-linked public AI accelerator benchmark submissions and infer
 </section>
 
 <section class="benchmark-results-explorer" data-benchmark-results data-source="{{ '/data/benchmark-results.json.gz' | relative_url }}">
+  <details class="benchmark-quality-panel" data-results-quality open>
+    <summary>
+      <span><span class="eyebrow">DATA QUALITY</span><strong>How complete is the evidence?</strong></span>
+      <span class="benchmark-quality-toggle">Show / hide</span>
+    </summary>
+    <div data-results-quality-content><p class="benchmark-quality-empty">Calculating registry coverage…</p></div>
+  </details>
+
   <div class="benchmark-results-summary">
     <div class="compat-stat"><span>Result records</span><strong data-results-stat="total">—</strong></div>
     <div class="compat-stat"><span>Available</span><strong data-results-stat="available">—</strong></div>

@@ -418,6 +418,77 @@
     return row;
   };
 
+
+  const hasQualityValue = value => {
+    if (value === null || value === undefined) return false;
+    if (typeof value === "string") return value.trim() !== "" && value.trim().toLowerCase() !== "unknown";
+    if (typeof value === "number") return Number.isFinite(value);
+    if (typeof value === "boolean") return true;
+    return false;
+  };
+
+  const renderQualityDashboard = (records) => {
+    const host = $("[data-results-quality-content]");
+    if (!host) return;
+    host.replaceChildren();
+    if (!records.length) {
+      host.append(make("p", "benchmark-quality-empty", "No records are available for quality analysis."));
+      return;
+    }
+    const dimensions = [
+      { label: "Source attribution", fields: ["submitter", "source URL", "source record key"], applicable: () => true, value: r => [r.submitter, r.source_url, r.source_record_key].every(hasQualityValue) },
+      { label: "Model & scenario", fields: ["model", "scenario", "version"], applicable: () => true, value: r => [r.model, r.scenario, r.benchmark_version].every(hasQualityValue) },
+      { label: "Hardware identity", fields: ["accelerator model", "accelerator count"], applicable: () => true, value: r => hasQualityValue(r.system?.accelerator_model) && hasQualityValue(r.system?.total_accelerators) },
+      { label: "Software stack", fields: ["framework"], applicable: () => true, value: r => hasQualityValue(r.software?.framework) },
+      { label: "Workload shape", fields: ["ISL", "OSL", "concurrency", "workload type"], applicable: r => r.source_id === "inferencex", value: r => [r.workload?.isl, r.workload?.osl, r.workload?.concurrency, r.workload?.benchmark_type].every(hasQualityValue) },
+      { label: "Precision & serving", fields: ["precision", "speculative mode", "serving mode"], applicable: r => r.source_id === "inferencex", value: r => [r.workload?.precision || r.weight_data_types, r.workload?.speculative_method, r.workload?.disaggregated].every(hasQualityValue) },
+      { label: "Topology", fields: ["node topology"], applicable: r => r.source_id === "inferencex", value: r => hasQualityValue(r.system?.is_multinode) },
+      { label: "Comparable metric", fields: ["normalized metric and unit"], applicable: r => r.source_id === "inferencex", value: r => Object.values(r.normalized_metrics || {}).some(m => typeof m?.value === "number" && hasQualityValue(m.unit)) }
+    ];
+    const heading = make("div", "benchmark-quality-overview");
+    const complete = records.filter(r => [r.submitter, r.model, r.scenario, r.system_type, r.source_url].every(hasQualityValue)).length;
+    const summary = make("div", "benchmark-quality-score");
+    summary.append(make("strong", "", Math.round(100 * complete / records.length) + "%"));
+    summary.append(make("span", "", " records have core provenance"));
+    heading.append(summary);
+    heading.append(make("p", "benchmark-quality-note", "Coverage is calculated only over applicable records. Missing metadata is not a failed measurement; InferenceX-specific fields do not penalize MLPerf."));
+    host.append(heading);
+    const table = make("div", "benchmark-quality-table");
+    const header = make("div", "benchmark-quality-row benchmark-quality-header");
+    ["Dimension", "Coverage", "Records", "Missing"].forEach(label => header.append(make("span", "", label)));
+    table.append(header);
+    dimensions.forEach(d => {
+      const applicable = records.filter(d.applicable);
+      if (!applicable.length) return;
+      const covered = applicable.filter(d.value).length, missing = applicable.length - covered;
+      const row = make("div", "benchmark-quality-row");
+      row.append(make("strong", "", d.label));
+      const meter = make("div", "benchmark-quality-meter"), track = make("span", "benchmark-quality-track");
+      const fill = make("span", "benchmark-quality-fill");
+      fill.style.width = Math.round(100 * covered / applicable.length) + "%";
+      track.append(fill);
+      meter.append(track, make("small", "", Math.round(100 * covered / applicable.length) + "%"));
+      row.append(meter, make("span", "benchmark-quality-number", covered), make("span", "benchmark-quality-number", missing));
+      row.title = "Required fields: " + d.fields.join(", ");
+      table.append(row);
+    });
+    host.append(table);
+    const inferencex = records.filter(r => r.source_id === "inferencex");
+    if (inferencex.length) {
+      const power = make("div", "benchmark-quality-power");
+      power.append(make("h3", "", "Measurement validation · InferenceX"));
+      [["GPU power", "power_measurement_status"], ["CPU / module power", "cpu_power_measurement_status"]].forEach(([label, key]) => {
+        const counts = new Map();
+        inferencex.forEach(r => { const status = r[key] || "unreported"; counts.set(status, (counts.get(status) || 0) + 1); });
+        const line = make("p", "benchmark-quality-status");
+        line.append(make("strong", "", label + ": "));
+        line.append(document.createTextNode([...counts.entries()].sort((a,b) => a[0].localeCompare(b[0])).map(([k,v]) => k + " " + v).join(" · ")));
+        power.append(line);
+      });
+      host.append(power);
+    }
+  };
+
   const renderSourceCards = () => {
     // The source-status section intentionally sits outside the filter/table root.
     const container = document.querySelector("[data-results-source-cards]");
@@ -649,6 +720,7 @@
       setText('[data-results-stat="power"]', data.summary.power_records || 0);
       setText('[data-results-stat="submitters"]', data.summary.submitters || 0);
       renderSourceCards();
+      renderQualityDashboard(data.records);
       load.hidden = true;
       root.dataset.loaded = "true";
       applyFilters();

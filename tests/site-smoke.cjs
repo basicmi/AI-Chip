@@ -357,6 +357,15 @@ const { chromium } = require("playwright");
   if (await page.locator("[data-results-load]").isVisible()) {
     throw new Error("Benchmark Results Explorer failed to initialize: " + resultsLoadError);
   }
+  const qualityPanel = page.locator("[data-results-quality]");
+  const qualityText = await qualityPanel.locator("[data-results-quality-content]").textContent();
+  if (!qualityText.includes("Source attribution") || !qualityText.includes("Hardware identity") ||
+      !qualityText.includes("Software stack") || !qualityText.includes("Measurement validation")) {
+    throw new Error("Benchmark quality dashboard is missing evidence coverage dimensions or measurement validation");
+  }
+  if (!/^\\d+%/.test((await qualityPanel.locator(".benchmark-quality-score strong").textContent()).trim())) {
+    throw new Error("Benchmark quality dashboard did not calculate a core provenance coverage percentage");
+  }
   const resultTotal = (await page.locator('[data-results-stat="total"]').textContent()).trim();
   const registryTotal = await page.evaluate(async () => {
     const root = document.querySelector("[data-benchmark-results]");
