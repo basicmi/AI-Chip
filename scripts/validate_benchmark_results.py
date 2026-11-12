@@ -178,6 +178,13 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: value must be a non-negative finite number")
         if metric_id.endswith("_pct") and isinstance(value, (int, float)) and not isinstance(value, bool) and not 0 <= value <= 100:
             errors.append(f"{item_where}: percentage value must be between 0 and 100")
+        if metric_id in {"achieved_flops", "theoretical_peak_flops"}:
+            precision = metric.get("precision")
+            sparsity = metric.get("sparsity")
+            if not isinstance(precision, str) or not precision.strip():
+                errors.append(f"{item_where}: compute FLOP metrics require precision")
+            if sparsity not in {"dense", "structured_sparse", "unstructured_sparse", "unknown"}:
+                errors.append(f"{item_where}: compute FLOP metrics require an explicit sparsity mode")
         kind = metric.get("measurement_kind")
         aggregation = metric.get("aggregation")
         scope = metric.get("scope")
