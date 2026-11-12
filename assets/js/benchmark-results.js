@@ -951,10 +951,10 @@
         required: (ids, evidence) => {
           const metrics = evidence.metrics || [];
           const linkUtil = metrics.find(metric => metric.metric_id === "link_utilization_pct" &&
-            metric.scope === "per_link" && metric.link_type && metric.entity_id);
+            metric.scope === "per_link" && metric.link_type && metric.entity_id && metric.directionality);
           if (linkUtil) return true;
           const peak = metrics.find(metric => metric.metric_id === "link_peak_bandwidth_bytes_per_s" &&
-            metric.scope === "per_link" && metric.link_type && metric.entity_id);
+            metric.scope === "per_link" && metric.link_type && metric.entity_id && metric.directionality);
           if (!peak) return false;
           return [
             { type: "nvlink", tx: "nvlink_tx_bytes", rx: "nvlink_rx_bytes" },
@@ -968,7 +968,8 @@
             const rx = metrics.find(metric => metric.metric_id === fabric.rx && metric.scope === "per_link");
             return !!tx && !!rx && tx.link_type === fabric.type &&
               rx.link_type === fabric.type && peak.link_type === fabric.type &&
-              tx.entity_id && tx.entity_id === rx.entity_id && tx.entity_id === peak.entity_id;
+              tx.entity_id && tx.entity_id === rx.entity_id && tx.entity_id === peak.entity_id &&
+              tx.directionality === peak.directionality && rx.directionality === peak.directionality;
           });
         },
         relevant: ids => ["nvlink_tx_bytes", "nvlink_rx_bytes", "pcie_tx_bytes", "pcie_rx_bytes",
@@ -1095,6 +1096,7 @@
           (metric.mapping_quality ? " · mapping: " + metric.mapping_quality : "") +
           (metric.mapping_note ? " · mapping note: " + metric.mapping_note : "") +
           (metric.entity_id ? " · entity: " + metric.entity_id : "") +
+          (metric.directionality ? " · directionality: " + metric.directionality : "") +
           (metric.formula ? " · formula: " + metric.formula : "") +
           (Array.isArray(metric.input_metric_ids) ? " · inputs: " + metric.input_metric_ids.join(", ") : "");
         list.append(item);
