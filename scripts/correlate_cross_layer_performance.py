@@ -376,16 +376,26 @@ def correlate_records(database: dict | list, max_comparisons: int = MAX_COMPARIS
             by_execution.setdefault(fingerprint, []).append(profile)
         execution_groups = [
             _aggregate_execution_group(group, fingerprint)
-            for fingerprint, group in sorted(by_execution.items())
+            for fingerprint, group in sorted(
+                by_execution.items(),
+                key=lambda item: (
+                    str(item[1][0]["execution_identity"].get("system_name") or
+                        item[1][0]["execution_identity"].get("system_hardware") or
+                        item[1][0]["execution_identity"].get("product_id") or ""),
+                    str(item[1][0]["execution_identity"].get("framework") or ""),
+                    item[0],
+                ),
+            )
         ]
         all_comparable_groups = [group for group in execution_groups if group["execution_identity_complete"]]
         comparable_groups = all_comparable_groups[:12]
+        all_pair_count = len(all_comparable_groups) * (len(all_comparable_groups) - 1) // 2
+        displayed_pair_count = len(comparable_groups) * (len(comparable_groups) - 1) // 2
+        total_pairs_omitted += all_pair_count - displayed_pair_count
         comparisons = []
         for left, right in combinations(comparable_groups, 2):
             if len(comparisons) >= max_comparisons:
-                total_pairs_omitted += (
-                    len(comparable_groups) * (len(comparable_groups) - 1) // 2 - len(comparisons)
-                )
+                total_pairs_omitted += displayed_pair_count - len(comparisons)
                 break
             comparisons.append(_compare_groups(left, right))
         output_cohorts.append({
