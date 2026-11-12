@@ -82,6 +82,7 @@ The link checker does not edit source data or promote references to evidence. HT
 - `hardware-counter-mappings.json` + `schemas/hardware-counter-mappings.schema.json`: source-aware mappings for NVIDIA DCGM, Nsight Compute and AMD ROCm Compute Profiler.
 - `scripts/normalize_hardware_counters.py`: normalizes a structured raw-counter JSON export while retaining unmapped fields and refusing cumulative counters without an explicit delta.
 - `scripts/derive_hardware_metrics.py`: derives FLOP/s, DRAM bandwidth, peak-utilization ratios, KV-cache occupancy and link utilization from compatible evidence inputs.
+- `scripts/diagnose_hardware_performance.py`: generates evidence-constrained roofline, per-link communication, serving-runtime and candidate-attribution reports; it never emits an automatic bottleneck verdict.
 - `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters, plus strict-cohort hardware evidence coverage.
 
 ### Current snapshot
