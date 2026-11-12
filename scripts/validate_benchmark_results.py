@@ -44,7 +44,7 @@ def summarize(records):
 
 HARDWARE_EVIDENCE_UNITS = {
     "sm_active_pct": "%", "tensor_active_pct": "%",
-    "achieved_flops": "FLOP/s", "theoretical_peak_flops": "FLOP/s",
+    "compute_flop_count": "FLOP", "achieved_flops": "FLOP/s", "theoretical_peak_flops": "FLOP/s",
     "dram_read_bytes": "byte", "dram_write_bytes": "byte",
     "dram_bandwidth_bytes_per_s": "byte/s", "dram_peak_bandwidth_bytes_per_s": "byte/s",
     "hbm_used_bytes": "byte", "hbm_capacity_bytes": "byte",
