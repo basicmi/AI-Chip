@@ -1997,3 +1997,120 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .benchmark-decomposition-missing { color: var(--muted); }
 .benchmark-decomposition-source { margin-top: .3rem; }
 @media (max-width: 560px) { .benchmark-decomposition-panel { padding: .75rem; } }
+
+
+/* Low-level hardware bottleneck evidence coverage. */
+.benchmark-hardware-evidence-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-hardware-evidence-panel[hidden] { display: none !important; }
+.benchmark-hardware-evidence-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-hardware-evidence-heading p,
+.benchmark-hardware-evidence-summary,
+.benchmark-hardware-evidence-note {
+  margin: .55rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-hardware-evidence-summary { color: var(--ink); font-weight: 650; }
+.benchmark-hardware-evidence-coverage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: .6rem;
+  margin: .8rem 0;
+}
+.benchmark-hardware-evidence-domain {
+  padding: .65rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.benchmark-hardware-evidence-domain h3 {
+  margin: 0 0 .3rem;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+}
+.benchmark-hardware-evidence-domain p {
+  min-height: 2.5em;
+  margin: .25rem 0 .5rem;
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.45;
+}
+.benchmark-hardware-evidence-domain strong {
+  color: var(--ink);
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.benchmark-hardware-evidence-table-wrap { overflow-x: auto; margin-top: .8rem; }
+.benchmark-hardware-evidence-table {
+  min-width: 980px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.benchmark-hardware-evidence-table th,
+.benchmark-hardware-evidence-table td {
+  padding: .55rem .6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.benchmark-hardware-evidence-table thead th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+}
+.benchmark-hardware-evidence-table td { color: var(--ink); }
+.benchmark-hardware-evidence-table td:first-child strong,
+.benchmark-hardware-evidence-table td:first-child small { display: block; }
+.benchmark-hardware-evidence-table td:first-child small {
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: 8px;
+}
+.benchmark-hardware-evidence-state {
+  display: inline-block;
+  padding: .18rem .35rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 8px;
+  white-space: nowrap;
+}
+.benchmark-hardware-evidence-state.is-core { color: var(--teal); border-color: var(--teal); }
+.benchmark-hardware-evidence-state.is-partial { color: var(--ink); border-style: dashed; }
+.benchmark-hardware-evidence-state.is-missing { color: var(--muted); }
+.benchmark-hardware-evidence-source { margin-top: .25rem; }
+.benchmark-hardware-evidence-details {
+  margin-top: .55rem;
+  padding: .55rem .65rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 8px;
+}
+.benchmark-hardware-evidence-details summary {
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 650;
+}
+.benchmark-hardware-evidence-metric-list {
+  margin: .5rem 0 .2rem;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.benchmark-hardware-evidence-missing { color: var(--muted); }
+@media (max-width: 560px) {
+  .benchmark-hardware-evidence-panel { padding: .75rem; }
+}
