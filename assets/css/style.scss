@@ -1685,3 +1685,6 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 560px) {
   .benchmark-scaling-panel { padding: .75rem; }
 }
+
+/* Keep the opt-in analysis panel hidden even when component styles are active. */
+.benchmark-scaling-panel[hidden] { display: none !important; }
