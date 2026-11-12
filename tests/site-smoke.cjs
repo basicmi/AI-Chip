@@ -505,9 +505,9 @@ const { chromium } = require("playwright");
           sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z", sample_interval_ms: 1000, sample_count: 60 },
           provenance: { source_type: "profiler_export", source_url: "https://example.com/hardware-evidence/fixture-0", collected_at: "2026-11-12T10:02:00Z" },
           metrics: [
-            { metric_id: "sm_active_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed" },
+            { metric_id: "sm_throughput_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_kernel", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed", mapping_quality: "direct", mapping_note: "Profiler throughput relative to peak sustained rate over elapsed cycles." },
             { metric_id: "theoretical_peak_flops", value: 1.9e15, unit: "FLOP/s", measurement_kind: "telemetry", aggregation: "max", scope: "per_gpu", source_name: "device_fp8_peak_flops", precision: "FP8", sparsity: "dense" },
-            { metric_id: "compute_flop_count", value: 7.2e16, unit: "FLOP", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "flop_count_sp" },
+            { metric_id: "compute_flop_count", value: 7.2e16, unit: "FLOP", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "flop_count_sp", precision: "FP8", sparsity: "dense" },
             { metric_id: "achieved_flops", value: 1.2e15, unit: "FLOP/s", measurement_kind: "derived", aggregation: "mean", scope: "per_gpu", source_name: "derived_achieved_flops", formula: "compute_flop_count / measured_window_seconds", input_metric_ids: ["compute_flop_count"], precision: "FP8", sparsity: "dense" },
             { metric_id: "dram_read_bytes", value: 2e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "dram__bytes_read.sum" },
             { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes", link_type: "nvlink" },
@@ -650,9 +650,10 @@ const { chromium } = require("playwright");
   const evidenceRecord = page.locator('[data-hardware-evidence-record-id="fixture-0"]');
   await page.locator(".benchmark-hardware-evidence-details summary").click();
   const evidenceDetails = await page.locator(".benchmark-hardware-evidence-details").textContent();
-  if (!evidenceDetails.includes("sm_active_pct") ||
+  if (!evidenceDetails.includes("sm_throughput_pct") ||
       !evidenceDetails.includes("dram_read_bytes") ||
-      !evidenceDetails.includes("sm__throughput.avg.pct_of_peak_sustained_elapsed")) {
+      !evidenceDetails.includes("sm__throughput.avg.pct_of_peak_sustained_elapsed") ||
+      !evidenceDetails.includes("mapping: direct")) {
     throw new Error("Hardware evidence details did not preserve canonical and raw counter names: " + evidenceDetails);
   }
   const noEvidenceRecord = await page.locator('[data-hardware-evidence-record-id="fixture-1"]').textContent();
