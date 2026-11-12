@@ -717,6 +717,9 @@
       return [{
         record, energy: energy.value,
         totalTokenEnergy: readMetric(record, "energy_per_total_token", "J/total token", "lower"),
+        inputTokenEnergy: readMetric(record, "energy_per_input_token", "J/input token", "lower"),
+        prefillEnergy: readMetric(record, "prefill_energy_per_input_token", "J/input token", "lower"),
+        decodeEnergy: readMetric(record, "decode_energy_per_output_token", "J/output token", "lower"),
         queryEnergy: readMetric(record, "energy_per_successful_query", "J/query", "lower"),
         throughput: readMetric(record, "output_throughput_per_gpu", "tok/s/GPU", "higher"),
         gpuPower: readMetric(record, "mean_gpu_power_per_gpu", "W/GPU", "context"),
@@ -785,7 +788,8 @@
         "text-anchor":"middle",class:"benchmark-energy-axis-label"},"Output throughput / GPU (tok/s) · higher is better"));
       plotCandidates.forEach(candidate=>{
         const power=candidate.gpuPower?.value;
-        const normalized=power===undefined||power===null||pmin===pmax?.5:(power-pmin)/(pmax-pmin);
+        const normalized = power === undefined || power === null || pmin === pmax
+          ? 0.5 : (power - pmin) / (pmax - pmin);
         const radius=power===undefined||power===null?5:5+Math.sqrt(normalized)*7;
         const circle=svgNode("circle",{
           cx:sx(candidate.energy),cy:sy(candidate.throughput.value),r:radius,
@@ -811,7 +815,8 @@
 
     const wrap=make("div","benchmark-energy-table-wrap"),table=make("table","benchmark-energy-table");
     const thead=document.createElement("thead"),header=document.createElement("tr");
-    ["Configuration","GPU energy / output token","GPU energy / total token","Energy / successful query",
+    ["Configuration","GPU energy / output token","GPU energy / total token","GPU energy / input token",
+     "Prefill energy / input token","Decode energy / output token","Energy / successful query",
      "Output throughput / GPU","Mean GPU power / GPU","Mean total GPU power","CPU power (separate)",
      "GPU count","Source / evidence"].forEach(label=>header.append(make("th","",label)));
     thead.append(header);table.append(thead);
@@ -826,6 +831,9 @@
       row.append(identity);
       row.append(make("td","",numberText(item.energy)+" J/output token"));
       row.append(make("td","",item.totalTokenEnergy?numberText(item.totalTokenEnergy.value)+" J/total token":"Not reported"));
+      row.append(make("td","",item.inputTokenEnergy?numberText(item.inputTokenEnergy.value)+" J/input token":"Not reported"));
+      row.append(make("td","",item.prefillEnergy?numberText(item.prefillEnergy.value)+" J/input token":"Not reported"));
+      row.append(make("td","",item.decodeEnergy?numberText(item.decodeEnergy.value)+" J/output token":"Not reported"));
       row.append(make("td","",item.queryEnergy?numberText(item.queryEnergy.value)+" J/query":"Not reported"));
       row.append(make("td","",item.throughput?numberText(item.throughput.value)+" tok/s/GPU":"Not reported"));
       row.append(make("td","",item.gpuPower?numberText(item.gpuPower.value)+" W/GPU":"Not reported"));
