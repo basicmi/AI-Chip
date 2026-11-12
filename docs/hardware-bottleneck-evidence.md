@@ -30,14 +30,17 @@ A metric's source_name is the exact counter/telemetry field name emitted by the 
 
 | Domain | Metric IDs | Unit |
 |---|---|---|
-| Compute | sm_active_pct, tensor_active_pct | % |
+| Compute activity | sm_active_pct, tensor_active_pct, sm_throughput_pct, valu_active_pct, mfma_active_pct | % |
 | Compute | compute_flop_count | FLOP |
 | Compute | achieved_flops, theoretical_peak_flops | FLOP/s |
+| Compute | compute_peak_utilization_pct | % |
+| HBM activity | dram_active_pct, vmem_active_pct | % |
 | HBM traffic | dram_read_bytes, dram_write_bytes, hbm_used_bytes, hbm_capacity_bytes | byte |
 | HBM bandwidth | dram_bandwidth_bytes_per_s, dram_peak_bandwidth_bytes_per_s | byte/s |
+| HBM bandwidth | dram_bandwidth_utilization_pct | % |
 | KV cache | kv_cache_used_bytes, kv_cache_capacity_bytes | byte |
 | KV cache | kv_cache_tokens, kv_cache_token_capacity | token |
-| KV cache | kv_cache_hit_rate_pct | % |
+| KV cache | kv_cache_hit_rate_pct, kv_cache_occupancy_pct | % |
 | Fabric traffic | nvlink_tx_bytes, nvlink_rx_bytes, pcie_tx_bytes, pcie_rx_bytes, network_tx_bytes, network_rx_bytes | byte |
 | Fabric bandwidth | link_bandwidth_bytes_per_s, link_peak_bandwidth_bytes_per_s | byte/s |
 | Fabric utilization | link_utilization_pct | % |
@@ -46,7 +49,7 @@ A metric's source_name is the exact counter/telemetry field name emitted by the 
 | Power / thermal | temperature_c | °C |
 | Power / thermal | throttle_active_pct | % |
 
-link_type is required for all NVLink, PCIe, generic link_*, and network_* metrics (nvlink, pcie, infiniband, roce, ethernet, or other). A per-link counter must not be compared with a per-GPU or per-system rate without an explicit aggregation procedure.
+link_type is required for all NVLink, PCIe, generic link_*, and network_* metrics (nvlink, pcie, infiniband, roce, ethernet, or other). `link_bandwidth_bytes_per_s`, `link_peak_bandwidth_bytes_per_s`, and `link_utilization_pct` also require `directionality` (tx, rx, bidirectional, or aggregate). Per-link metrics should carry an `entity_id` such as `nvlink:L0`; distinct links remain distinct even when they share a canonical metric ID. A per-link counter must not be compared with a per-GPU or per-system rate without an explicit aggregation procedure.
 
 ## Measurement and normalization rules
 
