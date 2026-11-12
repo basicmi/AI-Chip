@@ -77,13 +77,13 @@ def validate_catalog(catalog, metric_units=None):
         conversion = mapping.get("conversion")
         source_unit = mapping.get("source_unit")
         canonical_unit = mapping.get("canonical_unit")
-        if status not in {"direct", "unit_converted", "proxy", "reference_only"}:
+        if not isinstance(status, str) or status not in {"direct", "unit_converted", "proxy", "reference_only"}:
             errors.append(f"{where}: invalid mapping_status")
         if status == "reference_only":
             if canonical is not None or canonical_unit is not None or conversion != "none":
                 errors.append(f"{where}: reference_only mappings cannot claim a canonical metric or conversion")
         else:
-            if canonical not in metric_units:
+            if not isinstance(canonical, str) or canonical not in metric_units:
                 errors.append(f"{where}: unknown canonical_metric_id {canonical}")
             elif canonical_unit != metric_units[canonical]:
                 errors.append(f"{where}: canonical_unit for {canonical} must be {metric_units[canonical]}")
@@ -103,18 +103,18 @@ def validate_catalog(catalog, metric_units=None):
             errors.append(f"{where}: proxy status must retain proxy mapping_quality")
         if not isinstance(mapping.get("mapping_quality"), str) or mapping.get("mapping_quality") not in {"direct", "proxy"}:
             errors.append(f"{where}: mapping_quality must be direct or proxy")
-        if mapping.get("default_scope") not in HARDWARE_EVIDENCE_SCOPES:
+        if not isinstance(mapping.get("default_scope"), str) or mapping.get("default_scope") not in HARDWARE_EVIDENCE_SCOPES:
             errors.append(f"{where}: invalid default_scope")
         if mapping.get("default_scope") == "per_link":
             if mapping.get("link_type") not in {"nvlink", "pcie", "infiniband", "roce", "ethernet", "other"}:
                 errors.append(f"{where}: per-link mapping requires link_type")
             if not isinstance(mapping.get("entity_id"), str) or not mapping["entity_id"]:
                 errors.append(f"{where}: per-link mapping requires entity_id")
-        if mapping.get("default_aggregation") not in {"instantaneous", "mean", "max", "min", "p50", "p95", "p99", "sum", "rate"}:
+        if not isinstance(mapping.get("default_aggregation"), str) or mapping.get("default_aggregation") not in {"instantaneous", "mean", "max", "min", "p50", "p95", "p99", "sum", "rate"}:
             errors.append(f"{where}: invalid default_aggregation")
-        if mapping.get("measurement_kind") not in {"hardware_counter", "telemetry", "derived"}:
+        if not isinstance(mapping.get("measurement_kind"), str) or mapping.get("measurement_kind") not in {"hardware_counter", "telemetry", "derived"}:
             errors.append(f"{where}: invalid measurement_kind")
-        if mapping.get("value_semantics") not in {
+        if not isinstance(mapping.get("value_semantics"), str) or mapping.get("value_semantics") not in {
             "gauge", "ratio", "monotonic_counter", "profile_window_bytes",
             "profiler_metric", "bitmask", "reference_only"
         }:
@@ -125,9 +125,9 @@ def validate_catalog(catalog, metric_units=None):
         ):
             errors.append(f"{where}: source_field_id must be a non-negative integer or null")
         link_type = mapping.get("link_type")
-        if link_type is not None and link_type not in {
+        if link_type is not None and (not isinstance(link_type, str) or link_type not in {
             "nvlink", "pcie", "infiniband", "roce", "ethernet", "other"
-        }:
+        }):
             errors.append(f"{where}: invalid link_type")
         if not isinstance(mapping.get("notes"), str) or not mapping["notes"].strip():
             errors.append(f"{where}: notes are required")
