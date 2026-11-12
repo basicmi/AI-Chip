@@ -32,6 +32,13 @@ class HardwareCounterMappingTests(unittest.TestCase):
         self.assertEqual(metric["mapping_quality"], "direct")
         self.assertIn("tensor pipe active", metric["mapping_note"])
 
+    def test_ratio_above_one_is_rejected_instead_of_clamped(self):
+        with self.assertRaises(ValueError):
+            normalize_counter(
+                "nvidia-dcgm", "DCGM_FI_PROF_TENSOR_UTIL_RATIO", 1.2,
+                catalog=self.catalog,
+            )
+
     def test_dcgm_clock_is_converted_from_mhz_to_hz(self):
         result = normalize_counter(
             "nvidia-dcgm", "DCGM_FI_DEV_SM_CLOCK", 1410,
@@ -104,12 +111,18 @@ class HardwareCounterMappingTests(unittest.TestCase):
             "counters": [
                 {"source_metric": "DCGM_FI_PROF_SM_UTIL_RATIO", "value": 0.8},
                 {"source_metric": "DCGM_FI_PROF_NVLINK_L0_TX_BYTES", "value": 1000},
+                {"source_metric": "DCGM_FI_PROF_NVLINK_L1_TX_BYTES", "value": 2000},
                 {"source_metric": "DCGM_FI_DEV_SM_CLOCK", "value": 1410},
                 {"source_metric": "DCGM_FI_DEV_CLOCKS_EVENT_REASONS", "value": 4},
             ],
         }
         result = normalize_payload(payload, self.catalog)
-        self.assertEqual(len(result["hardware_evidence"]["metrics"]), 3)
+        self.assertEqual(len(result["hardware_evidence"]["metrics"]), 4)
+        link_entities = {
+            metric["entity_id"] for metric in result["hardware_evidence"]["metrics"]
+            if metric["metric_id"] == "nvlink_tx_bytes"
+        }
+        self.assertEqual(link_entities, {"nvlink:L0", "nvlink:L1"})
         self.assertEqual(len(result["unmapped_counters"]), 1)
         self.assertEqual(validate_hardware_evidence(
             {"hardware_evidence": result["hardware_evidence"]}, "test"
