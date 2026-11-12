@@ -93,6 +93,32 @@ class HardwareMetricDerivationTests(unittest.TestCase):
         _, added, _ = derive_metrics(evidence)
         self.assertFalse(any(item["metric_id"] == "dram_bandwidth_bytes_per_s" for item in added))
 
+    def test_derives_link_bandwidth_from_directional_per_link_byte_totals(self):
+        evidence = base_evidence()
+        evidence["metrics"] = [
+            metric for metric in evidence["metrics"]
+            if metric["metric_id"] != "link_bandwidth_bytes_per_s"
+        ]
+        evidence["metrics"].extend([
+            {"metric_id": "nvlink_tx_bytes", "value": 400e9, "unit": "byte",
+             "measurement_kind": "hardware_counter", "aggregation": "sum",
+             "scope": "per_link", "source_name": "DCGM_FI_PROF_NVLINK_L0_TX_BYTES",
+             "link_type": "nvlink", "entity_id": "nvlink:L0"},
+            {"metric_id": "nvlink_rx_bytes", "value": 400e9, "unit": "byte",
+             "measurement_kind": "hardware_counter", "aggregation": "sum",
+             "scope": "per_link", "source_name": "DCGM_FI_PROF_NVLINK_L0_RX_BYTES",
+             "link_type": "nvlink", "entity_id": "nvlink:L0"},
+        ])
+        result, added, warnings = derive_metrics(evidence)
+        link_bandwidth = next(item for item in added if item["metric_id"] == "link_bandwidth_bytes_per_s")
+        link_utilization = next(item for item in added if item["metric_id"] == "link_utilization_pct")
+        self.assertAlmostEqual(link_bandwidth["value"], 80e9)
+        self.assertAlmostEqual(link_utilization["value"], 80)
+        self.assertEqual(link_bandwidth["entity_id"], "nvlink:L0")
+        self.assertEqual(validate_hardware_evidence(
+            {"hardware_evidence": result}, "derived-link"
+        ), [])
+
     def test_does_not_compare_different_link_entities(self):
         evidence = base_evidence()
         evidence["metrics"][-1]["entity_id"] = "nvlink:L1"
