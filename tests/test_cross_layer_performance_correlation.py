@@ -274,6 +274,56 @@ class CrossLayerCorrelationTests(unittest.TestCase):
         self.assertEqual(cohort["displayed_execution_group_count"], 4)
         self.assertEqual(len(cohort["pairwise_comparisons"]), 6)
 
+    def test_execution_identity_requires_configuration_or_worker_context(self):
+        left = record("unknown-config-a")
+        right = record("unknown-config-b", throughput=150)
+        for row in (left, right):
+            row["configuration"] = {}
+            row["system"]["workers"] = []
+            row["system"]["physical_prefill_gpus"] = None
+            row["system"]["physical_decode_gpus"] = None
+        result = correlate_records({
+            "sources": [{"id": "inferencex", "version": "Public API v1"}],
+            "records": [left, right],
+        })
+        cohort = result["cohorts"][0]
+        self.assertEqual(cohort["comparable_execution_group_count"], 0)
+        self.assertEqual(cohort["pairwise_comparisons"], [])
+
+    def test_execution_group_display_limit_is_reported(self):
+        names = [
+            ("H200", "h200", "NVIDIA", "vLLM"),
+            ("MI300X", "mi300x", "AMD", "ROCm"),
+            ("GB200", "gb200", "NVIDIA", "vLLM"),
+            ("Gaudi 3", "gaudi3", "Intel", "TGI"),
+            ("B200", "b200", "NVIDIA", "vLLM"),
+            ("MI355X", "mi355x", "AMD", "ROCm"),
+            ("Trainium2", "trainium2", "AWS", "Neuron"),
+            ("WSE-3", "wse3", "Cerebras", "Cerebras"),
+            ("LPU", "lpu", "Groq", "Groq"),
+            ("TPU v7", "tpu-v7", "Google", "Pathways"),
+            ("Maia 100", "maia100", "Microsoft", "Maia"),
+            ("Inferentia2", "inferentia2", "AWS", "Neuron"),
+            ("XPU", "xpu", "Intel", "oneAPI"),
+        ]
+        rows = [
+            record("identity-" + product, system_name=name, product_id=product,
+                   framework=framework, recipe=framework + "-" + product)
+            for name, product, vendor, framework in names
+        ]
+        for row, (_, _, vendor, _) in zip(rows, names):
+            row["accelerator_vendor"] = vendor
+        result = correlate_records({
+            "sources": [{"id": "inferencex", "version": "Public API v1"}],
+            "records": rows,
+        })
+        cohort = result["cohorts"][0]
+        self.assertEqual(cohort["comparable_execution_group_count"], 13)
+        self.assertEqual(cohort["displayed_execution_group_count"], 12)
+        self.assertEqual(len(cohort["pairwise_comparisons"]), 66)
+        self.assertTrue(cohort["pairwise_comparisons_truncated"])
+        self.assertEqual(result["total_pairwise_comparisons_omitted"], 12)
+
     def test_pairwise_comparison_limit_is_deterministic_and_reported(self):
         rows = [
             record("h200", throughput=100),
