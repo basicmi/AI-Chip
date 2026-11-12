@@ -907,16 +907,32 @@
       {
         key: "hbm", label: "HBM bandwidth",
         description: "Measured DRAM bandwidth (or both directional byte counters) and matching peak bandwidth",
-        required: ids => ids.has("dram_peak_bandwidth_bytes_per_s") &&
-          (ids.has("dram_bandwidth_bytes_per_s") || (ids.has("dram_read_bytes") && ids.has("dram_write_bytes"))),
+        required: (ids, evidence) => {
+          const metrics = evidence.metrics || [];
+          const find = id => metrics.find(metric => metric.metric_id === id);
+          const peak = find("dram_peak_bandwidth_bytes_per_s");
+          const direct = find("dram_bandwidth_bytes_per_s");
+          const read = find("dram_read_bytes");
+          const write = find("dram_write_bytes");
+          return !!peak && (
+            (!!direct && direct.scope === peak.scope) ||
+            (!!read && !!write && read.scope === write.scope && read.scope === peak.scope)
+          );
+        },
         relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_bandwidth_bytes_per_s",
           "dram_peak_bandwidth_bytes_per_s", "hbm_used_bytes", "hbm_capacity_bytes"].some(id => ids.has(id))
       },
       {
         key: "kv", label: "KV cache",
         description: "KV-cache occupancy with a matching byte or token capacity",
-        required: ids => (ids.has("kv_cache_used_bytes") && ids.has("kv_cache_capacity_bytes")) ||
-          (ids.has("kv_cache_tokens") && ids.has("kv_cache_token_capacity")),
+        required: (ids, evidence) => {
+          const metrics = evidence.metrics || [];
+          const find = id => metrics.find(metric => metric.metric_id === id);
+          const usedBytes = find("kv_cache_used_bytes"), capacityBytes = find("kv_cache_capacity_bytes");
+          const usedTokens = find("kv_cache_tokens"), capacityTokens = find("kv_cache_token_capacity");
+          return (!!usedBytes && !!capacityBytes && usedBytes.scope === capacityBytes.scope) ||
+            (!!usedTokens && !!capacityTokens && usedTokens.scope === capacityTokens.scope);
+        },
         relevant: ids => ["kv_cache_used_bytes", "kv_cache_capacity_bytes", "kv_cache_tokens",
           "kv_cache_token_capacity", "kv_cache_hit_rate_pct"].some(id => ids.has(id))
       },
@@ -925,12 +941,25 @@
         description: "Link utilization or directional traffic with link capacity and fabric identity",
         required: (ids, evidence) => {
           const metrics = evidence.metrics || [];
-          const hasLinkType = metrics.some(metric => metric.link_type);
-          const directional = (ids.has("nvlink_tx_bytes") && ids.has("nvlink_rx_bytes")) ||
-            (ids.has("pcie_tx_bytes") && ids.has("pcie_rx_bytes")) ||
-            (ids.has("network_tx_bytes") && ids.has("network_rx_bytes"));
-          return hasLinkType && (ids.has("link_utilization_pct") ||
-            (directional && ids.has("link_peak_bandwidth_bytes_per_s")));
+          const linkUtil = metrics.find(metric => metric.metric_id === "link_utilization_pct" &&
+            metric.scope === "per_link" && metric.link_type);
+          if (linkUtil) return true;
+          const peak = metrics.find(metric => metric.metric_id === "link_peak_bandwidth_bytes_per_s" &&
+            metric.scope === "per_link" && metric.link_type);
+          if (!peak) return false;
+          return [
+            { type: "nvlink", tx: "nvlink_tx_bytes", rx: "nvlink_rx_bytes" },
+            { type: "pcie", tx: "pcie_tx_bytes", rx: "pcie_rx_bytes" },
+            { type: "infiniband", tx: "network_tx_bytes", rx: "network_rx_bytes" },
+            { type: "roce", tx: "network_tx_bytes", rx: "network_rx_bytes" },
+            { type: "ethernet", tx: "network_tx_bytes", rx: "network_rx_bytes" },
+            { type: "other", tx: "network_tx_bytes", rx: "network_rx_bytes" }
+          ].some(fabric => {
+            const tx = metrics.find(metric => metric.metric_id === fabric.tx && metric.scope === "per_link");
+            const rx = metrics.find(metric => metric.metric_id === fabric.rx && metric.scope === "per_link");
+            return !!tx && !!rx && tx.link_type === fabric.type &&
+              rx.link_type === fabric.type && peak.link_type === fabric.type;
+          });
         },
         relevant: ids => ["nvlink_tx_bytes", "nvlink_rx_bytes", "pcie_tx_bytes", "pcie_rx_bytes",
           "network_tx_bytes", "network_rx_bytes", "link_bandwidth_bytes_per_s",
@@ -939,8 +968,12 @@
       {
         key: "thermal", label: "Power / thermal",
         description: "Power, GPU clock, temperature and throttle activity over the same sampling window",
-        required: ids => ids.has("gpu_power_w") && ids.has("gpu_clock_hz") &&
-          ids.has("temperature_c") && ids.has("throttle_active_pct"),
+        required: (ids, evidence) => {
+          const metrics = evidence.metrics || [];
+          const required = ["gpu_power_w", "gpu_clock_hz", "temperature_c", "throttle_active_pct"]
+            .map(id => metrics.find(metric => metric.metric_id === id));
+          return required.every(Boolean) && required.every(metric => metric.scope === required[0].scope);
+        },
         relevant: ids => ["gpu_power_w", "gpu_clock_hz", "memory_clock_hz",
           "temperature_c", "throttle_active_pct"].some(id => ids.has(id))
       }
@@ -1045,7 +1078,11 @@
         const scope = metric.scope || "scope unknown";
         item.textContent = metric.metric_id + ": " + numberText(metric.value) + " " +
           metric.unit + " · " + kind + " · " + aggregation + " · " + scope +
-          " · source: " + (metric.source_name || "not reported");
+          " · source: " + (metric.source_name || "not reported") +
+          (metric.precision ? " · precision: " + metric.precision : "") +
+          (metric.sparsity ? " · sparsity: " + metric.sparsity : "") +
+          (metric.formula ? " · formula: " + metric.formula : "") +
+          (Array.isArray(metric.input_metric_ids) ? " · inputs: " + metric.input_metric_ids.join(", ") : "");
         list.append(item);
       });
       details.append(list);
