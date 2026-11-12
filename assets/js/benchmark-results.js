@@ -951,7 +951,8 @@
         spec[0], median(group.map(record => metricValue(record, spec)).filter(value => value !== null))
       ]))
     }));
-    const comparableGroups = groups.filter(group => group.complete).slice(0, 12);
+    const allComparableGroups = groups.filter(group => group.complete);
+    const comparableGroups = allComparableGroups.slice(0, 12);
     const contrasts = [];
     for (let leftIndex = 0; leftIndex < comparableGroups.length; leftIndex += 1) {
       for (let rightIndex = leftIndex + 1; rightIndex < comparableGroups.length; rightIndex += 1) {
@@ -962,7 +963,9 @@
     const matrixSummary = make("p", "benchmark-cross-layer-summary",
       records.length + " strict-cohort records · " + groups.length +
       " execution identities · " + contrasts.length + " descriptive contrasts" +
-      (groups.length > comparableGroups.length ? " · incomplete identities excluded" : "") +
+      (groups.length > allComparableGroups.length ? " · incomplete identities excluded" : "") +
+      (allComparableGroups.length > comparableGroups.length
+        ? " · showing first " + comparableGroups.length + " complete identities" : "") +
       (contrasts.length > maxContrasts ? " · display capped at " + maxContrasts : ""));
     crossLayerContent.append(matrixSummary);
     if (!contrasts.length) {
