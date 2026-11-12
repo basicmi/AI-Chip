@@ -516,7 +516,7 @@ class RegistryValidationTests(unittest.TestCase):
         self.assertTrue(any("compute FLOP metrics require precision" in error for error in errors))
         self.assertTrue(any("derived input missing_counter is absent" in error for error in errors))
         self.assertTrue(any("sampling window must be positive" in error for error in errors))
-        self.assertTrue(any("link_type is invalid" in error for error in errors))
+        self.assertTrue(any("requires a valid link_type" in error for error in errors))
 
     def test_hardware_evidence_validator_handles_malformed_nested_types(self):
         evidence = self.valid_hardware_evidence()
