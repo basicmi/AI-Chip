@@ -657,6 +657,13 @@ const { chromium } = require("playwright");
       !evidenceDetails.includes("mapping: direct")) {
     throw new Error("Hardware evidence details did not preserve canonical and raw counter names: " + evidenceDetails);
   }
+  if (!evidenceDetails.includes("Roofline: insufficient evidence") ||
+      !evidenceDetails.includes("Communication: no comparable per-link utilization") ||
+      !evidenceDetails.includes("P99 TTFT") ||
+      !evidenceDetails.includes("no automatic bottleneck verdict") ||
+      !evidenceDetails.includes("kernel-gap traces")) {
+    throw new Error("Hardware diagnostics inferred a bottleneck or omitted runtime/evidence limitations: " + evidenceDetails);
+  }
   const noEvidenceRecord = await page.locator('[data-hardware-evidence-record-id="fixture-1"]').textContent();
   if (!noEvidenceRecord.includes("Not reported")) {
     throw new Error("Aggregate GPU metrics were incorrectly promoted to low-level hardware evidence");
