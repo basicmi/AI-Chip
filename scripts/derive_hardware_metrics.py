@@ -213,6 +213,30 @@ def derive_metrics(evidence):
             if derived_for_pair:
                 break
 
+    # Directional byte totals can be combined only for the same link entity/fabric.
+    link_pairs = [
+        ("nvlink_tx_bytes", "nvlink_rx_bytes", "nvlink"),
+        ("pcie_tx_bytes", "pcie_rx_bytes", "pcie"),
+        ("network_tx_bytes", "network_rx_bytes", None),
+    ]
+    for group in groups:
+        for tx_id, rx_id, fixed_link_type in link_pairs:
+            for tx in _find(metrics, tx_id, group):
+                for rx in _find(metrics, rx_id, group):
+                    if tx.get("aggregation") != "sum" or rx.get("aggregation") != "sum":
+                        warnings.append("link_bandwidth_bytes_per_s skipped: directional byte inputs must use sum aggregation")
+                        continue
+                    link_type = fixed_link_type or tx.get("link_type")
+                    if not link_type or link_type != rx.get("link_type"):
+                        continue
+                    value = (tx["value"] + rx["value"]) / seconds
+                    append(_derived(
+                        "link_bandwidth_bytes_per_s", value, "byte/s", "rate", group[0],
+                        [tx_id, rx_id],
+                        f"({tx_id} + {rx_id}) / sampling_window_seconds",
+                        entity_id=group[1], link_type=link_type,
+                    ))
+
     # Link bandwidth and peak must refer to the same link entity and fabric.
     for group in groups:
         bandwidths = _find(metrics, "link_bandwidth_bytes_per_s", group)
