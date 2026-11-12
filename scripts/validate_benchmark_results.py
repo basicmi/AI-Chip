@@ -270,7 +270,10 @@ def validate_hardware_evidence(row, where):
                     or item.get("link_type") == metric.get("link_type")
                 )
                 and (
-                    metric.get("directionality") is None
+                    metric.get("metric_id") != "link_utilization_pct"
+                    or item.get("metric_id") not in {
+                        "link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"
+                    }
                     or item.get("directionality") == metric.get("directionality")
                 )
                 for item in metrics
