@@ -908,7 +908,7 @@
           return !!comparableCompute;
         },
         relevant: ids => ["sm_active_pct", "tensor_active_pct", "sm_throughput_pct", "valu_active_pct",
-          "mfma_active_pct", "vmem_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
+          "mfma_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
       },
       {
         key: "hbm", label: "HBM bandwidth",
@@ -926,7 +926,7 @@
             (sameBoundary(read) && sameBoundary(write) && read.scope === write.scope));
         },
         relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_active_pct", "dram_bandwidth_bytes_per_s",
-          "dram_peak_bandwidth_bytes_per_s", "dram_bandwidth_utilization_pct",
+          "dram_peak_bandwidth_bytes_per_s", "dram_bandwidth_utilization_pct", "vmem_active_pct",
           "hbm_used_bytes", "hbm_capacity_bytes"].some(id => ids.has(id))
       },
       {
