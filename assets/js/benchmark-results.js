@@ -38,6 +38,8 @@
   const frontierContent = $("[data-results-frontier-content]");
   const energyPanel = $("[data-results-energy]");
   const energyContent = $("[data-results-energy-content]");
+  const attributionPanel = $("[data-results-attribution]");
+  const attributionContent = $("[data-results-attribution-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -199,6 +201,9 @@
         performanceKey: JSON.stringify(performanceValues),
         sourceId: record.source_id,
         metricKey,
+        metricUnit: metric.unit,
+        metricDirection: metric.direction || "context",
+        metricLabel: metric.label || metricKey,
         title: "InferenceX · " + model,
         summary: [
           "Model " + model, "workload " + workloadType, "ISL " + workload.isl,
@@ -863,6 +868,265 @@
       "Measurement boundary: energy per token and GPU power are publisher-normalized GPU telemetry. CPU/socket/module telemetry is shown separately and is never added to GPU energy. No energy value is inferred from power, runtime or throughput; records without a valid GPU power verdict and schema version are excluded."));
   };
 
+
+  const renderConfigurationAttribution = () => {
+    if (!attributionPanel || !attributionContent) return;
+    const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
+      activeCohort.performanceKey && database;
+    if (!supported) {
+      attributionPanel.hidden = true;
+      return;
+    }
+
+    attributionPanel.hidden = false;
+    attributionContent.replaceChildren();
+    const cohortRecords = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
+    const dimensions = [
+      { key: "hardware", label: "Accelerator" },
+      { key: "gpuCount", label: "GPU count" },
+      { key: "software", label: "Software stack" },
+      { key: "parallelism", label: "Prefill / decode parallelism" },
+      { key: "topology", label: "Node topology" }
+    ];
+    const parallelismKeys = [
+      "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+      "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers", "offload_mode"
+    ];
+    const dimensionValues = record => {
+      const system = record.system || {};
+      const hardware = String(system.hardware || system.accelerator_model || "").trim();
+      const gpuCount = reportedAcceleratorCount(record);
+      const software = scalingSoftwareIdentity(record);
+      const configuration = record.configuration || {};
+      const parallelismEntries = parallelismKeys
+        .filter(key => Object.prototype.hasOwnProperty.call(configuration, key) &&
+          configuration[key] !== null && configuration[key] !== undefined && configuration[key] !== "")
+        .map(key => [key, configuration[key]]);
+      const topology = typeof system.is_multinode === "boolean" ? system.is_multinode : null;
+      return {
+        hardware: hardware ? { key: hardware.toLowerCase(), label: hardware } : null,
+        gpuCount: gpuCount ? {
+          key: String(gpuCount.count),
+          label: gpuCount.count + " GPUs",
+          evidence: gpuCount.source
+        } : null,
+        software: software ? { key: software.key, label: software.label } : null,
+        parallelism: parallelismEntries.length ? {
+          key: JSON.stringify(parallelismEntries),
+          label: parallelismEntries.map(([key, value]) => key + "=" + value).join(" · ")
+        } : null,
+        topology: topology === null ? null : {
+          key: String(topology),
+          label: topology ? "Multi-node" : "Single-node"
+        }
+      };
+    };
+    const metricFor = record => {
+      const metric = record.normalized_metrics?.[activeCohort.metricKey];
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value) ||
+          metric.unit !== activeCohort.metricUnit ||
+          (metric.direction || "context") !== activeCohort.metricDirection) return null;
+      return metric;
+    };
+
+    const groups = new Map();
+    let metricExcluded = 0;
+    cohortRecords.forEach(record => {
+      const metric = metricFor(record);
+      if (!metric) {
+        metricExcluded += 1;
+        return;
+      }
+      const values = dimensionValues(record);
+      const signature = JSON.stringify(dimensions.map(dimension => values[dimension.key]?.key ?? null));
+      if (!groups.has(signature)) {
+        groups.set(signature, {
+          signature,
+          values,
+          samples: [],
+          recordIds: []
+        });
+      }
+      const group = groups.get(signature);
+      group.samples.push(metric.value);
+      group.recordIds.push(record.id);
+    });
+    const configurations = [...groups.values()].map(group => ({
+      ...group,
+      median: medianValue(group.samples),
+      sampleCount: group.samples.length
+    }));
+    const validRecordCount = configurations.reduce((sum, group) => sum + group.sampleCount, 0);
+
+    const coverage = dimensions.map(dimension => {
+      const known = cohortRecords.map(dimensionValues)
+        .map(values => values[dimension.key]).filter(Boolean);
+      return {
+        ...dimension,
+        records: known.length,
+        distinct: new Set(known.map(value => value.key)).size
+      };
+    });
+
+    const contrastsByDimension = new Map();
+    dimensions.forEach(dimension => {
+      const aggregates = new Map();
+      for (let leftIndex = 0; leftIndex < configurations.length; leftIndex += 1) {
+        for (let rightIndex = leftIndex + 1; rightIndex < configurations.length; rightIndex += 1) {
+          const first = configurations[leftIndex];
+          const second = configurations[rightIndex];
+          const firstValue = first.values[dimension.key];
+          const secondValue = second.values[dimension.key];
+          if (!firstValue || !secondValue || firstValue.key === secondValue.key) continue;
+
+          const controlsMatch = dimensions.every(other =>
+            other.key === dimension.key ||
+            (first.values[other.key]?.key ?? null) === (second.values[other.key]?.key ?? null)
+          );
+          if (!controlsMatch) continue;
+
+          const firstIsA = firstValue.key.localeCompare(secondValue.key, undefined, { numeric: true }) <= 0;
+          const a = firstIsA ? first : second;
+          const b = firstIsA ? second : first;
+          const aValue = a.values[dimension.key];
+          const bValue = b.values[dimension.key];
+          const pairKey = JSON.stringify([aValue.key, bValue.key]);
+          if (!aggregates.has(pairKey)) {
+            aggregates.set(pairKey, {
+              aLabel: aValue.label,
+              bLabel: bValue.label,
+              aValues: [],
+              bValues: [],
+              deltas: [],
+              percentChanges: [],
+              samplesA: 0,
+              samplesB: 0,
+              matchedContexts: 0,
+              unreportedControls: new Set(),
+              recordIds: []
+            });
+          }
+          const aggregate = aggregates.get(pairKey);
+          const delta = b.median - a.median;
+          aggregate.aValues.push(a.median);
+          aggregate.bValues.push(b.median);
+          aggregate.deltas.push(delta);
+          if (a.median !== 0) aggregate.percentChanges.push(delta / Math.abs(a.median) * 100);
+          aggregate.samplesA += a.sampleCount;
+          aggregate.samplesB += b.sampleCount;
+          aggregate.matchedContexts += 1;
+          dimensions.filter(other => other.key !== dimension.key &&
+            !first.values[other.key]).forEach(other => aggregate.unreportedControls.add(other.label));
+          aggregate.recordIds.push(...a.recordIds, ...b.recordIds);
+        }
+      }
+      const rows = [...aggregates.values()].map(aggregate => ({
+        ...aggregate,
+        medianA: medianValue(aggregate.aValues),
+        medianB: medianValue(aggregate.bValues),
+        medianDelta: medianValue(aggregate.deltas),
+        medianPercent: medianValue(aggregate.percentChanges)
+      })).sort((a, b) =>
+        b.matchedContexts - a.matchedContexts ||
+        Math.abs(b.medianPercent ?? b.medianDelta) - Math.abs(a.medianPercent ?? a.medianDelta) ||
+        a.aLabel.localeCompare(b.aLabel)
+      );
+      contrastsByDimension.set(dimension.key, rows);
+    });
+
+    const totalContrasts = [...contrastsByDimension.values()]
+      .reduce((sum, rows) => sum + rows.length, 0);
+    const directionLabel = activeCohort.metricDirection === "higher" ? "higher is better" :
+      activeCohort.metricDirection === "lower" ? "lower is better" : "context metric; no optimization direction";
+    attributionContent.append(make("p", "benchmark-attribution-summary",
+      cohortRecords.length + " records in the selected strict workload cohort · " +
+      validRecordCount + " report the selected metric (" + activeCohort.metricLabel + ", " +
+      activeCohort.metricUnit + "; " + directionLabel + ") · " + configurations.length +
+      " distinct reported configuration signatures · " + totalContrasts +
+      " matched one-dimension contrast groups · " + metricExcluded +
+      " excluded for missing or mismatched selected-metric evidence."));
+
+    const coverageWrap = make("div", "benchmark-attribution-coverage-wrap");
+    const coverageTable = make("table", "benchmark-attribution-coverage");
+    const coverageHead = document.createElement("thead");
+    const coverageHeader = document.createElement("tr");
+    ["Configuration dimension", "Records reporting it", "Distinct values", "Matched contrasts"].forEach(label =>
+      coverageHeader.append(make("th", "", label)));
+    coverageHead.append(coverageHeader);
+    coverageTable.append(coverageHead);
+    const coverageBody = document.createElement("tbody");
+    coverage.forEach(dimension => {
+      const row = document.createElement("tr");
+      row.dataset.attributionCoverageDimension = dimension.key;
+      row.append(make("td", "", dimension.label));
+      row.append(make("td", "", dimension.records + " / " + cohortRecords.length));
+      row.append(make("td", "", dimension.distinct));
+      row.append(make("td", "", (contrastsByDimension.get(dimension.key) || []).length));
+      coverageBody.append(row);
+    });
+    coverageTable.append(coverageBody);
+    coverageWrap.append(coverageTable);
+    attributionContent.append(coverageWrap);
+
+    dimensions.forEach(dimension => {
+      const contrasts = contrastsByDimension.get(dimension.key) || [];
+      if (!contrasts.length) return;
+      const card = make("section", "benchmark-attribution-dimension");
+      card.dataset.attributionDimension = dimension.key;
+      const heading = make("div", "benchmark-attribution-dimension-heading");
+      heading.append(make("h3", "", dimension.label));
+      heading.append(make("span", "", contrasts.length + " matched contrast" + (contrasts.length === 1 ? "" : "s")));
+      card.append(heading);
+      const tableWrap = make("div", "benchmark-attribution-table-wrap");
+      const table = make("table", "benchmark-attribution-table");
+      const thead = document.createElement("thead");
+      const header = document.createElement("tr");
+      ["Observed configuration contrast", "Median A", "Median B", "Δ B − A", "Δ %", "Matched contexts", "Samples A / B"].forEach(label =>
+        header.append(make("th", "", label)));
+      thead.append(header);
+      table.append(thead);
+      const tbody = document.createElement("tbody");
+      contrasts.slice(0, 8).forEach(contrast => {
+        const row = document.createElement("tr");
+        row.dataset.attributionContrast = dimension.key;
+        row.dataset.attributionRecords = contrast.recordIds.join(",");
+        row.append(make("td", "", contrast.aLabel + " → " + contrast.bLabel));
+        row.append(make("td", "", numberText(contrast.medianA) + " " + activeCohort.metricUnit));
+        row.append(make("td", "", numberText(contrast.medianB) + " " + activeCohort.metricUnit));
+        const delta = contrast.medianDelta;
+        row.append(make("td", "", (delta > 0 ? "+" : "") + numberText(delta) + " " + activeCohort.metricUnit));
+        row.append(make("td", "", contrast.medianPercent === null ? "—" :
+          (contrast.medianPercent > 0 ? "+" : "") + numberText(contrast.medianPercent) + "%"));
+        row.append(make("td", "", contrast.matchedContexts));
+        row.append(make("td", "", contrast.samplesA + " / " + contrast.samplesB));
+        tbody.append(row);
+      });
+      table.append(tbody);
+      tableWrap.append(table);
+      card.append(tableWrap);
+      if (contrasts.length > 8) {
+        card.append(make("p", "benchmark-attribution-note",
+          "Showing 8 of " + contrasts.length + " matched contrast groups, ordered by matched-context count and observed difference."));
+      }
+      const unreported = [...new Set(contrasts.flatMap(contrast => [...contrast.unreportedControls]))];
+      if (unreported.length) {
+        card.append(make("p", "benchmark-attribution-note",
+          "Some matched contrasts have unreported control dimensions: " + unreported.join(", ") +
+          ". Missing fields are unknown, not defaults."));
+      }
+      attributionContent.append(card);
+    });
+
+    if (!totalContrasts) {
+      attributionContent.append(make("p", "benchmark-attribution-empty",
+        "No one-dimension contrasts can be formed from the reported configuration fields in this strict workload cohort. A contrast requires two configurations that differ in one reported dimension while all other reported dimensions match."));
+    }
+    attributionContent.append(make("p", "benchmark-attribution-note",
+      "Interpretation: each contrast compares medians of exact configuration groups within the same strict workload cohort. A/B ordering is deterministic and Δ is B minus A; read the sign using the selected metric's optimization direction. Only the named reported dimension changes; other reported dimensions must match. Unreported fields remain unknown and may confound the result. These are observational associations, not causal estimates or a universal hardware/software ranking."));
+  };
+
   const comparisonMetricFor = (item) => {
     const record = item.record;
     if (record.source_id === "inferencex") {
@@ -1402,6 +1666,7 @@
     renderScalingAnalysis(filteredRecords);
     renderParetoFrontier();
     renderEnergyEfficiency();
+    renderConfigurationAttribution();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +

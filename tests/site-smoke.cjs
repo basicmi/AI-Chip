@@ -668,7 +668,126 @@ const { chromium } = require("playwright");
       !latencyComparisonText.includes("worse (lower is better)")) {
     throw new Error("Lower-is-better latency comparison incorrectly interpreted a positive delta: " + latencyComparisonText);
   }
-  await page.locator("[data-comparison-clear]").click();  await page.unroute("**/data/benchmark-results.json.gz");
+  await page.locator("[data-comparison-clear]").click();
+  await page.unroute("**/data/benchmark-results.json.gz");
+
+  const attributionRows = [
+    { id: "attr-base-a", hardware: "H200 SXM", gpuCount: 8, framework: "vLLM 0.11", image: "ghcr.io/vllm-project/vllm-openai:v0.11.0", recipe: "vllm-0.11-fp8", prefillTp: 1, value: 100 },
+    { id: "attr-base-b", hardware: "H200 SXM", gpuCount: 8, framework: "vLLM 0.11", image: "ghcr.io/vllm-project/vllm-openai:v0.11.0", recipe: "vllm-0.11-fp8", prefillTp: 1, value: 102 },
+    { id: "attr-software", hardware: "H200 SXM", gpuCount: 8, framework: "SGLang 0.5", image: "lmsysorg/sglang:v0.5.0", recipe: "sglang-0.5-fp8", prefillTp: 1, value: 120 },
+    { id: "attr-parallelism", hardware: "H200 SXM", gpuCount: 8, framework: "vLLM 0.11", image: "ghcr.io/vllm-project/vllm-openai:v0.11.0", recipe: "vllm-0.11-fp8", prefillTp: 2, value: 90 },
+    { id: "attr-gpu-count", hardware: "H200 SXM", gpuCount: 4, framework: "vLLM 0.11", image: "ghcr.io/vllm-project/vllm-openai:v0.11.0", recipe: "vllm-0.11-fp8", prefillTp: 1, value: 130 },
+    { id: "attr-hardware", hardware: "MI300X", gpuCount: 8, framework: "vLLM 0.11", image: "ghcr.io/vllm-project/vllm-openai:v0.11.0", recipe: "vllm-0.11-fp8", prefillTp: 1, value: 110 }
+  ];
+  const attributionFixture = {
+    database_version: "attribution-fixture",
+    last_imported_at: "2026-11-12",
+    summary: { total_records: attributionRows.length, by_availability: { published: attributionRows.length }, inferred_records: 0, power_records: 0, submitters: 1 },
+    sources: [{ id: "inferencex", name: "SemiAnalysis InferenceX", version: "Public API v1", publisher: "SemiAnalysis", source_class: "third_party_public_benchmark", record_count: attributionRows.length, results_url: "https://inferencex.semianalysis.com/" }],
+    records: attributionRows.map(row => ({
+      id: row.id, source_id: "inferencex", source_class: "third_party_public_benchmark",
+      submitter: "SemiAnalysis", accelerator_vendor: row.hardware === "MI300X" ? "AMD" : "NVIDIA",
+      system_name: row.gpuCount + "x" + row.hardware,
+      system: {
+        hardware: row.hardware, accelerator_model: row.hardware,
+        total_accelerators: row.gpuCount, physical_prefill_gpus: 0,
+        physical_decode_gpus: row.gpuCount, is_multinode: false,
+        workers: [{ role: "decode", worker_idx: 0, num_gpus: row.gpuCount }]
+      },
+      model: "dsr1", model_display_name: "DeepSeek-R1-0528",
+      scenario: "single_turn", availability: "published", division: "third_party",
+      system_type: "datacenter", benchmark_suite: "SemiAnalysis InferenceX",
+      benchmark_version: null, publication_date: "2026-11-12", inferred: false,
+      result_value: null, result_unit: "", accuracy_text: "",
+      source_url: "https://inferencex.semianalysis.com/",
+      detail_url: "https://inferencex.semianalysis.com/",
+      normalized_metrics: {
+        output_throughput_per_gpu: {
+          value: row.value, unit: "tok/s/GPU", label: "Output throughput",
+          direction: "higher", family: "throughput"
+        }
+      },
+      workload: {
+        precision: "FP8", benchmark_type: "single_turn", isl: 1024, osl: 1024,
+        concurrency: 32, speculative_method: "none", disaggregated: false
+      },
+      software: { framework: row.framework, image: row.image, recipe_fingerprint: row.recipe },
+      configuration: {
+        prefill_tp: row.prefillTp, prefill_ep: 1, prefill_dp_attention: 1,
+        prefill_num_workers: 1, decode_tp: 1, decode_ep: 1,
+        decode_dp_attention: 1, decode_num_workers: 1, offload_mode: "none"
+      },
+      weight_data_types: "FP8"
+    }))
+  };
+  await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
+    status: 200, contentType: "application/json", body: JSON.stringify(attributionFixture)
+  }));
+  await page.goto(base + "/results/", { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelector("[data-benchmark-results]")?.dataset.loaded === "true");
+  if (!(await page.locator("[data-results-attribution]").isHidden())) {
+    throw new Error("Configuration attribution must remain hidden until a strict InferenceX cohort is selected");
+  }
+  await page.locator(".benchmark-results-advanced summary").click();
+  await page.locator("[data-results-metric]").selectOption("output_throughput_per_gpu");
+  const attributionBaseRow = page.locator('[data-results-rows] tr[data-result-id="attr-base-a"]');
+  await attributionBaseRow.locator(".benchmark-result-details summary").click();
+  await attributionBaseRow.locator(".benchmark-cohort-action").click();
+  if (await page.locator("[data-results-attribution]").isHidden()) {
+    throw new Error("Selecting a strict InferenceX cohort did not reveal configuration attribution");
+  }
+  const attributionSummary = await page.locator("[data-results-attribution-content]").textContent();
+  if (!attributionSummary.includes("6 records in the selected strict workload cohort") ||
+      !attributionSummary.includes("6 report the selected metric") ||
+      !attributionSummary.includes("5 distinct reported configuration signatures") ||
+      !attributionSummary.includes("4 matched one-dimension contrast groups")) {
+    throw new Error("Configuration attribution did not summarize the strict cohort and matched contrasts: " + attributionSummary);
+  }
+  const attributionContrasts = page.locator("[data-results-attribution-content] [data-attribution-contrast]");
+  if (await attributionContrasts.count() !== 4) {
+    throw new Error("Configuration attribution should produce exactly four isolated hardware/software/parallelism/GPU-count contrasts");
+  }
+  const contrastDimensions = await attributionContrasts.evaluateAll(rows => rows.map(row => row.dataset.attributionContrast).sort());
+  if (JSON.stringify(contrastDimensions) !== JSON.stringify(["gpuCount", "hardware", "parallelism", "software"])) {
+    throw new Error("Configuration attribution did not isolate the four expected dimensions: " + contrastDimensions.join(", "));
+  }
+  const contrastRows = await attributionContrasts.evaluateAll(rows =>
+    rows.map(row => ({ dimension: row.dataset.attributionContrast, text: row.textContent, ids: row.dataset.attributionRecords }))
+  );
+  const hardwareContrast = contrastRows.find(row => row.dimension === "hardware");
+  const gpuContrast = contrastRows.find(row => row.dimension === "gpuCount");
+  const softwareContrast = contrastRows.find(row => row.dimension === "software");
+  const parallelismContrast = contrastRows.find(row => row.dimension === "parallelism");
+  if (!hardwareContrast.text.includes("H200 SXM → MI300X") ||
+      !hardwareContrast.ids.includes("attr-hardware") ||
+      !hardwareContrast.text.includes("+9 tok/s/GPU")) {
+    throw new Error("Hardware contrast failed to aggregate duplicate baseline runs or calculate the median delta: " + JSON.stringify(hardwareContrast));
+  }
+  if (!gpuContrast.text.includes("4 GPUs → 8 GPUs") ||
+      !gpuContrast.ids.includes("attr-gpu-count") ||
+      !gpuContrast.text.includes("-29 tok/s/GPU")) {
+    throw new Error("GPU-count contrast did not hold hardware/software/parallelism constant: " + JSON.stringify(gpuContrast));
+  }
+  if (!softwareContrast.text.includes("SGLang 0.5") ||
+      !softwareContrast.text.includes("vLLM 0.11") ||
+      !softwareContrast.ids.includes("attr-software")) {
+    throw new Error("Software-stack contrast did not isolate the framework/image/recipe change: " + JSON.stringify(softwareContrast));
+  }
+  if (!parallelismContrast.text.includes("prefill_tp=1") ||
+      !parallelismContrast.text.includes("prefill_tp=2") ||
+      !parallelismContrast.ids.includes("attr-parallelism")) {
+    throw new Error("Parallelism contrast did not isolate the prefill TP change: " + JSON.stringify(parallelismContrast));
+  }
+  const attributionCoverage = await page.locator("[data-attribution-coverage-dimension]")
+    .evaluateAll(rows => rows.map(row => row.dataset.attributionCoverageDimension));
+  if (attributionCoverage.length !== 5) {
+    throw new Error("Configuration attribution coverage table is missing one or more dimensions");
+  }
+  await page.locator("[data-results-cohort-clear]").click();
+  if (!(await page.locator("[data-results-attribution]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide configuration attribution");
+  }
+  await page.unroute("**/data/benchmark-results.json.gz");
 
   const mlperfFixture = {
     database_version: "fixture",

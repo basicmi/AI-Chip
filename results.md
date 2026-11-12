@@ -142,6 +142,19 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     </div>
   </section>
 
+  <section class="benchmark-attribution-panel" data-results-attribution hidden aria-labelledby="benchmark-attribution-title">
+    <div class="benchmark-attribution-heading">
+      <div>
+        <p class="eyebrow">CONFIGURATION INTELLIGENCE · INFERENCEX</p>
+        <h2 id="benchmark-attribution-title">Configuration attribution</h2>
+        <p>Find observed one-dimension contrasts inside the active strict workload cohort. Hardware, GPU count, software stack, prefill/decode parallelism and node topology are compared only when the other reported configuration dimensions match.</p>
+      </div>
+    </div>
+    <div data-results-attribution-content aria-live="polite">
+      <p class="benchmark-attribution-empty">Select an InferenceX strict workload cohort to inspect matched configuration contrasts.</p>
+    </div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">
@@ -178,6 +191,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <p>The MLPerf v6.1 summary snapshot contains no measured power records. Design power is not measured power. For InferenceX, <code>median_intvty</code> is median interactivity in tok/s/user (higher is better), not latency; <code>p99_itl</code> and <code>p99_tpot</code> are latency metrics in seconds. Throughput metrics are tokens/s per physical GPU unless the source key states otherwise.</p>
     <p>When a normalized metric is selected, the table filters to records that report that metric and displays its common unit. Metric sorting respects the source-defined optimization direction (higher or lower is better); context-only metrics are not ranked. This is not a cross-suite score. Compare InferenceX rows only after matching model, workload type, ISL/OSL, concurrency, precision, framework/image, speculative mode, aggregated vs. disaggregated topology and prefill/decode parallelism. GPU power/energy values require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>. CPU/module telemetry has an independent <code>cpu_power_valid</code> verdict. An absent CPU verdict means there is no CPU-side measurement leg, not a failed GPU measurement. The importer preserves failed, incomplete and unreported states separately; do not combine component boundaries without checking their definitions.</p>
     <p>The “Show strict cohort” action groups only records that match source/version, model and workload conditions, precision, speculative mode, serving mode, and the selected metric with its unit. MLPerf cohorts additionally match scenario, division, availability, system type, accuracy target and inferred status. Missing critical fields disable strict cohort creation instead of treating unknown values as equal. Hardware, system scale, framework, container image and parallelism are deliberately left as visible comparison variables; matching a cohort is not a claim that the complete systems are identical or that results are independently replicated.</p>
+    <p>Configuration attribution compares median metric values across exact configuration groups inside one strict InferenceX workload cohort. A pair is included only when one reported dimension changes and all other reported dimensions match. Missing fields remain unknown; they are not filled with assumed defaults. The result is an observational contrast, not a causal estimate. More complete run configuration and repeated measurements improve the strength of the analysis.</p>
     <p>Every row links to its publisher's source record where available. A public submission or observation is attributed to its publisher; it is not automatically an independent replication.</p>
   </div>
 </section>
