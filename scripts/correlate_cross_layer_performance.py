@@ -242,12 +242,12 @@ def _median(values: list[float]) -> float | None:
 
 
 def _aggregate_execution_group(profiles: list[dict], fingerprint: str) -> dict:
-    metric_keys = sorted(set.intersection(*[
+    metric_keys = sorted(set.union(*[
         set(profile["normalized_metrics"]) for profile in profiles
     ])) if profiles else []
     metrics = {}
     for key in metric_keys:
-        items = [profile["normalized_metrics"][key] for profile in profiles]
+        items = [profile["normalized_metrics"][key] for profile in profiles if key in profile["normalized_metrics"]]
         if len({(item["unit"], item["direction"], item["family"]) for item in items}) != 1:
             continue
         metrics[key] = {
@@ -255,8 +255,9 @@ def _aggregate_execution_group(profiles: list[dict], fingerprint: str) -> dict:
             "unit": items[0]["unit"],
             "direction": items[0]["direction"],
             "family": items[0]["family"],
-            "aggregation": "median_across_records",
+            "aggregation": "median_across_available_records",
             "record_count": len(items),
+            "group_record_count": len(profiles),
         }
     evidence_profiles = [profile for profile in profiles if profile["hardware_evidence"]["status"] == "available"]
     return {
@@ -294,26 +295,26 @@ def _compare_groups(left: dict, right: dict) -> dict:
         improvement = -delta if a["direction"] == "lower" else delta if a["direction"] == "higher" else None
         deltas.append({
             "metric": key,
-            "baseline_value": baseline,
-            "candidate_value": candidate,
+            "left_value": baseline,
+            "right_value": candidate,
             "unit": a["unit"],
             "direction": a["direction"],
-            "relative_change_pct": delta,
-            "candidate_improvement_pct": improvement,
+            "right_vs_left_change_pct": delta,
+            "right_vs_left_improvement_pct": improvement,
         })
     left_id, right_id = left["execution_identity"], right["execution_identity"]
     changed_dimensions = [
         key for key in IDENTITY_FIELDS if left_id.get(key) != right_id.get(key)
     ]
     return {
-        "baseline_execution_fingerprint": left["execution_fingerprint"],
-        "candidate_execution_fingerprint": right["execution_fingerprint"],
-        "baseline_record_ids": left["record_ids"],
-        "candidate_record_ids": right["record_ids"],
+        "left_execution_fingerprint": left["execution_fingerprint"],
+        "right_execution_fingerprint": right["execution_fingerprint"],
+        "left_record_ids": left["record_ids"],
+        "right_record_ids": right["record_ids"],
         "changed_dimensions": changed_dimensions,
         "metric_deltas": deltas,
-        "baseline_hardware_evidence_records": left["hardware_evidence_coverage"]["records_with_evidence"],
-        "candidate_hardware_evidence_records": right["hardware_evidence_coverage"]["records_with_evidence"],
+        "left_hardware_evidence_records": left["hardware_evidence_coverage"]["records_with_evidence"],
+        "right_hardware_evidence_records": right["hardware_evidence_coverage"]["records_with_evidence"],
         "temporal_alignment": "not_established",
         "causal_attribution": "not_claimed",
     }
@@ -424,7 +425,7 @@ def correlate_records(database: dict | list, max_comparisons: int = MAX_COMPARIS
             "Median aggregation across repeated records is descriptive and does not imply statistical significance or equivalent run variance.",
             "Hardware evidence is summarized per record; unlike counter values are not averaged across devices, scopes, collectors or sampling windows.",
             "No Pearson/Spearman correlation, causal effect, bottleneck ranking, confidence score or automatic verdict is produced.",
-            "Only positive baseline/candidate values are used for relative percentage deltas; zero or missing baselines remain unavailable.",
+            "Only positive left/right values are used for relative percentage deltas; zero or missing values remain unavailable.",
         ],
     }
 
