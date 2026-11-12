@@ -183,7 +183,7 @@ def validate_hardware_evidence(row, where):
             sparsity = metric.get("sparsity")
             if not isinstance(precision, str) or not precision.strip():
                 errors.append(f"{item_where}: compute FLOP metrics require precision")
-            if sparsity not in {"dense", "structured_sparse", "unstructured_sparse", "unknown"}:
+            if not isinstance(sparsity, str) or sparsity not in {"dense", "structured_sparse", "unstructured_sparse", "unknown"}:
                 errors.append(f"{item_where}: compute FLOP metrics require an explicit sparsity mode")
         kind = metric.get("measurement_kind")
         aggregation = metric.get("aggregation")
