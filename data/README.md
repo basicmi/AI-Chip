@@ -79,6 +79,9 @@ The link checker does not edit source data or promote references to evidence. HT
 - `scripts/import_benchmark_results.py`: imports official MLPerf Inference v6.1 summary rows and, optionally, public SemiAnalysis InferenceX API rows.
 - `scripts/validate_benchmark_results.py`: checks source references, IDs, product/platform links, summary counts, strict power-validity semantics, and optional low-level hardware evidence.
 - `docs/hardware-bottleneck-evidence.md`: versioned counter vocabulary, measurement boundaries, provenance and bottleneck-evidence requirements.
+- `hardware-counter-mappings.json` + `schemas/hardware-counter-mappings.schema.json`: source-aware mappings for NVIDIA DCGM, Nsight Compute and AMD ROCm Compute Profiler.
+- `scripts/normalize_hardware_counters.py`: normalizes a structured raw-counter JSON export while retaining unmapped fields and refusing cumulative counters without an explicit delta.
+- `scripts/derive_hardware_metrics.py`: derives FLOP/s, DRAM bandwidth, peak-utilization ratios, KV-cache occupancy and link utilization from compatible evidence inputs.
 - `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters, plus strict-cohort hardware evidence coverage.
 
 ### Current snapshot

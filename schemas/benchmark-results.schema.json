@@ -588,7 +588,15 @@
             "gpu_clock_hz",
             "memory_clock_hz",
             "temperature_c",
-            "throttle_active_pct"
+            "throttle_active_pct",
+            "dram_active_pct",
+            "sm_throughput_pct",
+            "valu_active_pct",
+            "mfma_active_pct",
+            "vmem_active_pct",
+            "compute_peak_utilization_pct",
+            "dram_bandwidth_utilization_pct",
+            "kv_cache_occupancy_pct"
           ]
         },
         "value": {
@@ -636,7 +644,8 @@
             "per_link",
             "per_node",
             "per_system",
-            "per_process"
+            "per_process",
+            "per_kernel"
           ]
         },
         "source_name": {
@@ -693,7 +702,15 @@
               "gpu_clock_hz",
               "memory_clock_hz",
               "temperature_c",
-              "throttle_active_pct"
+              "throttle_active_pct",
+              "dram_active_pct",
+              "sm_throughput_pct",
+              "valu_active_pct",
+              "mfma_active_pct",
+              "vmem_active_pct",
+              "compute_peak_utilization_pct",
+              "dram_bandwidth_utilization_pct",
+              "kv_cache_occupancy_pct"
             ]
           }
         },
@@ -707,6 +724,28 @@
             "structured_sparse",
             "unstructured_sparse",
             "unknown"
+          ]
+        },
+        "mapping_quality": {
+          "enum": [
+            "direct",
+            "proxy"
+          ]
+        },
+        "mapping_note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entity_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "directionality": {
+          "enum": [
+            "tx",
+            "rx",
+            "bidirectional",
+            "aggregate"
           ]
         }
       },
@@ -876,6 +915,78 @@
             },
             "required": [
               "link_type"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "compute_flop_count",
+                  "achieved_flops",
+                  "theoretical_peak_flops",
+                  "compute_peak_utilization_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "precision",
+              "sparsity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "dram_active_pct",
+                  "sm_throughput_pct",
+                  "valu_active_pct",
+                  "mfma_active_pct",
+                  "vmem_active_pct",
+                  "compute_peak_utilization_pct",
+                  "dram_bandwidth_utilization_pct",
+                  "kv_cache_occupancy_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maximum": 100
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "link_bandwidth_bytes_per_s",
+                  "link_peak_bandwidth_bytes_per_s",
+                  "link_utilization_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "directionality"
             ]
           }
         }

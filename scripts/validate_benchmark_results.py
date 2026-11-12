@@ -43,7 +43,9 @@ def summarize(records):
 
 
 HARDWARE_EVIDENCE_UNITS = {
-    "sm_active_pct": "%", "tensor_active_pct": "%",
+    "sm_active_pct": "%", "tensor_active_pct": "%", "dram_active_pct": "%",
+    "sm_throughput_pct": "%", "valu_active_pct": "%", "mfma_active_pct": "%", "vmem_active_pct": "%",
+    "compute_peak_utilization_pct": "%", "dram_bandwidth_utilization_pct": "%", "kv_cache_occupancy_pct": "%",
     "compute_flop_count": "FLOP", "achieved_flops": "FLOP/s", "theoretical_peak_flops": "FLOP/s",
     "dram_read_bytes": "byte", "dram_write_bytes": "byte",
     "dram_bandwidth_bytes_per_s": "byte/s", "dram_peak_bandwidth_bytes_per_s": "byte/s",
@@ -59,7 +61,8 @@ HARDWARE_EVIDENCE_UNITS = {
     "gpu_power_w": "W", "gpu_clock_hz": "Hz", "memory_clock_hz": "Hz",
     "temperature_c": "°C", "throttle_active_pct": "%",
 }
-HARDWARE_EVIDENCE_SCOPES = {"per_gpu", "per_link", "per_node", "per_system", "per_process"}
+HARDWARE_EVIDENCE_SCOPES = {"per_gpu", "per_link", "per_node", "per_system", "per_process", "per_kernel"}
+HARDWARE_EVIDENCE_SYSTEM_SCOPES = {"per_gpu", "per_link", "per_node", "per_system", "per_process"}
 HARDWARE_EVIDENCE_AGGREGATIONS = {
     "instantaneous", "mean", "max", "min", "p50", "p95", "p99", "sum", "rate"
 }
@@ -112,7 +115,7 @@ def validate_hardware_evidence(row, where):
     if not isinstance(system_scope, dict):
         errors.append(f"{where}: hardware_evidence.system_scope must be an object")
     else:
-        if not isinstance(system_scope.get("scope_type"), str) or system_scope.get("scope_type") not in HARDWARE_EVIDENCE_SCOPES:
+        if not isinstance(system_scope.get("scope_type"), str) or system_scope.get("scope_type") not in HARDWARE_EVIDENCE_SYSTEM_SCOPES:
             errors.append(f"{where}: hardware_evidence.system_scope.scope_type is invalid")
         count = system_scope.get("device_count")
         if isinstance(count, bool) or not isinstance(count, int) or count < 1:
@@ -178,7 +181,7 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: value must be a non-negative finite number")
         if metric_id.endswith("_pct") and isinstance(value, (int, float)) and not isinstance(value, bool) and not 0 <= value <= 100:
             errors.append(f"{item_where}: percentage value must be between 0 and 100")
-        if metric_id in {"achieved_flops", "theoretical_peak_flops"}:
+        if metric_id in {"compute_flop_count", "achieved_flops", "theoretical_peak_flops", "compute_peak_utilization_pct"}:
             precision = metric.get("precision")
             sparsity = metric.get("sparsity")
             if not isinstance(precision, str) or not precision.strip():
@@ -196,11 +199,32 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: scope is invalid")
         if not isinstance(metric.get("source_name"), str) or not metric["source_name"].strip():
             errors.append(f"{item_where}: source_name must be non-empty")
+        entity_id = metric.get("entity_id")
+        if entity_id is not None and (not isinstance(entity_id, str) or not entity_id.strip()):
+            errors.append(f"{item_where}: entity_id must be a non-empty string when provided")
+        mapping_quality = metric.get("mapping_quality")
+        if mapping_quality is not None and (
+            not isinstance(mapping_quality, str) or mapping_quality not in {"direct", "proxy"}
+        ):
+            errors.append(f"{item_where}: mapping_quality must be direct or proxy")
+        if metric.get("mapping_note") is not None and (
+            not isinstance(metric.get("mapping_note"), str) or not metric["mapping_note"].strip()
+        ):
+            errors.append(f"{item_where}: mapping_note must be a non-empty string")
         key = (metric_id, scope if isinstance(scope, str) else repr(scope),
-               aggregation if isinstance(aggregation, str) else repr(aggregation))
+               aggregation if isinstance(aggregation, str) else repr(aggregation), entity_id)
         if key in seen:
             errors.append(f"{item_where}: duplicate metric_id/scope/aggregation tuple {key}")
         seen.add(key)
+
+        directionality = metric.get("directionality")
+        if metric_id in {"link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s", "link_utilization_pct"}:
+            if not isinstance(directionality, str) or directionality not in {"tx", "rx", "bidirectional", "aggregate"}:
+                errors.append(f"{item_where}: {metric_id} requires explicit directionality")
+        elif directionality is not None and (
+            not isinstance(directionality, str) or directionality not in {"tx", "rx", "bidirectional", "aggregate"}
+        ):
+            errors.append(f"{item_where}: directionality is invalid")
 
         link_type = metric.get("link_type")
         expected_link_type = "nvlink" if metric_id.startswith("nvlink_") else "pcie" if metric_id.startswith("pcie_") else None
@@ -240,11 +264,36 @@ def validate_hardware_evidence(row, where):
                 continue
             input_scope_matches = any(
                 item.get("scope") == metric.get("scope")
+                and item.get("entity_id") == metric.get("entity_id")
+                and (
+                    metric.get("link_type") is None
+                    or item.get("link_type") == metric.get("link_type")
+                )
+                and (
+                    metric.get("metric_id") != "link_utilization_pct"
+                    or item.get("metric_id") not in {
+                        "link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"
+                    }
+                    or item.get("directionality") == metric.get("directionality")
+                )
                 for item in metrics
                 if isinstance(item, dict) and item.get("metric_id") == input_id
             )
             if not input_scope_matches:
-                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching measurement scope")
+                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching scope/entity/fabric")
+            if metric.get("metric_id") in {"achieved_flops", "compute_peak_utilization_pct"}:
+                matching_compute = [
+                    item for item in metrics
+                    if isinstance(item, dict) and item.get("metric_id") == input_id
+                    and item.get("scope") == metric.get("scope")
+                    and item.get("entity_id") == metric.get("entity_id")
+                ]
+                if matching_compute and any(
+                    (item.get("precision"), item.get("sparsity")) !=
+                    (metric.get("precision"), metric.get("sparsity"))
+                    for item in matching_compute
+                ):
+                    errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived compute input {input_id} has mismatched precision/sparsity")
 
     return errors
 
