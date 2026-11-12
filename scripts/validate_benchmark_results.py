@@ -238,11 +238,12 @@ def validate_hardware_evidence(row, where):
             if input_id not in metric_ids:
                 errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} is absent from this evidence block")
                 continue
-            input_scopes = {
-                item.get("scope") for item in metrics
+            input_scope_matches = any(
+                item.get("scope") == metric.get("scope")
+                for item in metrics
                 if isinstance(item, dict) and item.get("metric_id") == input_id
-            }
-            if metric.get("scope") not in input_scopes:
+            )
+            if not input_scope_matches:
                 errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching measurement scope")
 
     return errors
