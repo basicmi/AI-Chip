@@ -969,7 +969,7 @@
             return !!tx && !!rx && tx.link_type === fabric.type &&
               rx.link_type === fabric.type && peak.link_type === fabric.type &&
               tx.entity_id && tx.entity_id === rx.entity_id && tx.entity_id === peak.entity_id &&
-              tx.directionality === peak.directionality && rx.directionality === peak.directionality;
+              peak.directionality === "bidirectional";
           });
         },
         relevant: ids => ["nvlink_tx_bytes", "nvlink_rx_bytes", "pcie_tx_bytes", "pcie_rx_bytes",
