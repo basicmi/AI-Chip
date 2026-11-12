@@ -896,14 +896,15 @@
         required: (ids, evidence) => {
           const achieved = evidence.metrics.find(metric => metric.metric_id === "achieved_flops");
           const peak = evidence.metrics.find(metric => metric.metric_id === "theoretical_peak_flops");
-          const activity = evidence.metrics.find(metric =>
+          const activities = evidence.metrics.filter(metric =>
             ["sm_active_pct", "tensor_active_pct", "sm_throughput_pct", "valu_active_pct", "mfma_active_pct"]
               .includes(metric.metric_id));
-          const comparableCompute = achieved && peak && activity &&
+          const comparableCompute = achieved && peak &&
             achieved.precision && achieved.precision === peak.precision &&
             achieved.sparsity && achieved.sparsity === peak.sparsity &&
-            achieved.scope === peak.scope && activity.scope === achieved.scope &&
-            achieved.entity_id === peak.entity_id && activity.entity_id === achieved.entity_id;
+            achieved.scope === peak.scope && achieved.entity_id === peak.entity_id &&
+            activities.some(activity => activity.scope === achieved.scope &&
+              activity.entity_id === achieved.entity_id);
           return !!comparableCompute;
         },
         relevant: ids => ["sm_active_pct", "tensor_active_pct", "sm_throughput_pct", "valu_active_pct",
@@ -919,10 +920,10 @@
           const direct = find("dram_bandwidth_bytes_per_s");
           const read = find("dram_read_bytes");
           const write = find("dram_write_bytes");
-          return !!peak && (
-            (!!direct && direct.scope === peak.scope) ||
-            (!!read && !!write && read.scope === write.scope && read.scope === peak.scope)
-          );
+          const sameBoundary = metric => metric && metric.scope === peak?.scope &&
+            metric.entity_id === peak?.entity_id;
+          return !!peak && (sameBoundary(direct) ||
+            (sameBoundary(read) && sameBoundary(write) && read.scope === write.scope));
         },
         relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_active_pct", "dram_bandwidth_bytes_per_s",
           "dram_peak_bandwidth_bytes_per_s", "dram_bandwidth_utilization_pct",
@@ -936,8 +937,10 @@
           const find = id => metrics.find(metric => metric.metric_id === id);
           const usedBytes = find("kv_cache_used_bytes"), capacityBytes = find("kv_cache_capacity_bytes");
           const usedTokens = find("kv_cache_tokens"), capacityTokens = find("kv_cache_token_capacity");
-          return (!!usedBytes && !!capacityBytes && usedBytes.scope === capacityBytes.scope) ||
-            (!!usedTokens && !!capacityTokens && usedTokens.scope === capacityTokens.scope);
+          return (!!usedBytes && !!capacityBytes && usedBytes.scope === capacityBytes.scope &&
+            usedBytes.entity_id === capacityBytes.entity_id) ||
+            (!!usedTokens && !!capacityTokens && usedTokens.scope === capacityTokens.scope &&
+              usedTokens.entity_id === capacityTokens.entity_id);
         },
         relevant: ids => ["kv_cache_used_bytes", "kv_cache_capacity_bytes", "kv_cache_tokens",
           "kv_cache_token_capacity", "kv_cache_hit_rate_pct"].some(id => ids.has(id))
@@ -948,10 +951,10 @@
         required: (ids, evidence) => {
           const metrics = evidence.metrics || [];
           const linkUtil = metrics.find(metric => metric.metric_id === "link_utilization_pct" &&
-            metric.scope === "per_link" && metric.link_type);
+            metric.scope === "per_link" && metric.link_type && metric.entity_id);
           if (linkUtil) return true;
           const peak = metrics.find(metric => metric.metric_id === "link_peak_bandwidth_bytes_per_s" &&
-            metric.scope === "per_link" && metric.link_type);
+            metric.scope === "per_link" && metric.link_type && metric.entity_id);
           if (!peak) return false;
           return [
             { type: "nvlink", tx: "nvlink_tx_bytes", rx: "nvlink_rx_bytes" },
@@ -964,7 +967,8 @@
             const tx = metrics.find(metric => metric.metric_id === fabric.tx && metric.scope === "per_link");
             const rx = metrics.find(metric => metric.metric_id === fabric.rx && metric.scope === "per_link");
             return !!tx && !!rx && tx.link_type === fabric.type &&
-              rx.link_type === fabric.type && peak.link_type === fabric.type;
+              rx.link_type === fabric.type && peak.link_type === fabric.type &&
+              tx.entity_id && tx.entity_id === rx.entity_id && tx.entity_id === peak.entity_id;
           });
         },
         relevant: ids => ["nvlink_tx_bytes", "nvlink_rx_bytes", "pcie_tx_bytes", "pcie_rx_bytes",
@@ -978,7 +982,8 @@
           const metrics = evidence.metrics || [];
           const required = ["gpu_power_w", "gpu_clock_hz", "temperature_c", "throttle_active_pct"]
             .map(id => metrics.find(metric => metric.metric_id === id));
-          return required.every(Boolean) && required.every(metric => metric.scope === required[0].scope);
+          return required.every(Boolean) && required.every(metric =>
+            metric.scope === required[0].scope && metric.entity_id === required[0].entity_id);
         },
         relevant: ids => ["gpu_power_w", "gpu_clock_hz", "memory_clock_hz",
           "temperature_c", "throttle_active_pct"].some(id => ids.has(id))
