@@ -1038,10 +1038,12 @@
 
     const totalContrasts = [...contrastsByDimension.values()]
       .reduce((sum, rows) => sum + rows.length, 0);
+    const directionLabel = activeCohort.metricDirection === "higher" ? "higher is better" :
+      activeCohort.metricDirection === "lower" ? "lower is better" : "context metric; no optimization direction";
     attributionContent.append(make("p", "benchmark-attribution-summary",
       cohortRecords.length + " records in the selected strict workload cohort · " +
       validRecordCount + " report the selected metric (" + activeCohort.metricLabel + ", " +
-      activeCohort.metricUnit + ") · " + configurations.length +
+      activeCohort.metricUnit + "; " + directionLabel + ") · " + configurations.length +
       " distinct reported configuration signatures · " + totalContrasts +
       " matched one-dimension contrast groups · " + metricExcluded +
       " excluded for missing or mismatched selected-metric evidence."));
