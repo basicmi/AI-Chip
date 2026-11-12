@@ -1923,3 +1923,77 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-attribution-panel { padding: .75rem; }
   .benchmark-attribution-dimension { padding: .55rem; }
 }
+
+
+/* Inference phase-signal evidence map (not inferred kernel profiling). */
+.benchmark-decomposition-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-decomposition-panel[hidden] { display: none !important; }
+.benchmark-decomposition-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-decomposition-heading p,
+.benchmark-decomposition-summary,
+.benchmark-decomposition-note,
+.benchmark-decomposition-empty {
+  margin: .55rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-decomposition-summary { color: var(--ink); font-weight: 650; }
+.benchmark-decomposition-coverage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .65rem;
+  margin: .8rem 0;
+}
+.benchmark-decomposition-group {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: .65rem;
+}
+.benchmark-decomposition-group h3 {
+  margin: 0 0 .5rem;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+}
+.benchmark-decomposition-coverage-row {
+  display: grid;
+  grid-template-columns: minmax(85px, 1fr) minmax(35px, 1fr) auto;
+  gap: .35rem;
+  align-items: center;
+  margin: .4rem 0;
+  color: var(--muted);
+  font-size: 8px;
+}
+.benchmark-decomposition-coverage-row strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+.benchmark-decomposition-meter { height: 5px; background: var(--line); border-radius: 10px; overflow: hidden; }
+.benchmark-decomposition-meter-fill { height: 100%; background: var(--teal); }
+.benchmark-decomposition-table-wrap { overflow-x: auto; margin-top: .8rem; }
+.benchmark-decomposition-table { min-width: 1120px; width: 100%; border-collapse: collapse; font-size: 9px; }
+.benchmark-decomposition-table th,
+.benchmark-decomposition-table td {
+  border-bottom: 1px solid var(--line);
+  padding: .55rem .6rem;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.benchmark-decomposition-table thead th { color: var(--muted); background: var(--surface-soft); font-size: 8px; }
+.benchmark-decomposition-table td { color: var(--ink); font-variant-numeric: tabular-nums; }
+.benchmark-decomposition-table td:first-child strong,
+.benchmark-decomposition-table td:first-child small { display: block; }
+.benchmark-decomposition-table td:first-child small { color: var(--muted); font-size: 8px; margin-top: .15rem; }
+.benchmark-decomposition-reading { margin-bottom: .2rem; }
+.benchmark-decomposition-missing { color: var(--muted); }
+.benchmark-decomposition-source { margin-top: .3rem; }
+@media (max-width: 560px) { .benchmark-decomposition-panel { padding: .75rem; } }
