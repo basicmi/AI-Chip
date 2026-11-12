@@ -34,6 +34,20 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div class="compat-stat"><span>Submitters</span><strong data-results-stat="submitters">—</strong></div>
   </div>
 
+  <section class="benchmark-comparison-panel" data-comparison-workspace aria-labelledby="benchmark-comparison-title">
+    <div class="benchmark-comparison-heading">
+      <div>
+        <p class="eyebrow">SYSTEM COMPARISON</p>
+        <h2 id="benchmark-comparison-title">Comparison workspace <span data-comparison-count>0 / 4</span></h2>
+        <p>Select up to four result rows. Only records with the same strict benchmark/workload definition receive a side-by-side metric comparison.</p>
+      </div>
+      <button class="text-button" type="button" data-comparison-clear disabled>Clear comparison</button>
+    </div>
+    <div data-comparison-content aria-live="polite">
+      <p class="benchmark-comparison-empty">Open a result’s “Configuration & source” details and choose “Add to comparison”.</p>
+    </div>
+  </section>
+
   <div class="compat-filter-panel">
     <div class="compat-filter-heading">
       <div><p class="eyebrow">FILTER THE EVIDENCE</p><h2>Find comparable submissions</h2></div>
