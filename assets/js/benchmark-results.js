@@ -42,6 +42,8 @@
   const attributionContent = $("[data-results-attribution-content]");
   const decompositionPanel = $("[data-results-decomposition]");
   const decompositionContent = $("[data-results-decomposition-content]");
+  const hardwareEvidencePanel = $("[data-results-hardware-evidence]");
+  const hardwareEvidenceContent = $("[data-results-hardware-evidence-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -874,6 +876,178 @@
 
   // Publisher-reported signals only. Latency, throughput, power, and utilization
   // describe different measurement boundaries; none is a measured time breakdown.
+
+  const renderHardwareBottleneckEvidence = () => {
+    if (!hardwareEvidencePanel || !hardwareEvidenceContent) return;
+    if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
+        !activeCohort.performanceKey || !database) {
+      hardwareEvidencePanel.hidden = true;
+      return;
+    }
+    hardwareEvidencePanel.hidden = false;
+    hardwareEvidenceContent.replaceChildren();
+    const records = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
+    const categories = [
+      {
+        key: "compute", label: "Compute",
+        description: "Achieved and comparable peak FLOP/s, plus SM or Tensor activity",
+        required: ids => ids.has("achieved_flops") && ids.has("theoretical_peak_flops") &&
+          (ids.has("sm_active_pct") || ids.has("tensor_active_pct")),
+        relevant: ids => ["sm_active_pct", "tensor_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
+      },
+      {
+        key: "hbm", label: "HBM bandwidth",
+        description: "Measured DRAM bandwidth (or both directional byte counters) and matching peak bandwidth",
+        required: ids => ids.has("dram_peak_bandwidth_bytes_per_s") &&
+          (ids.has("dram_bandwidth_bytes_per_s") || (ids.has("dram_read_bytes") && ids.has("dram_write_bytes"))),
+        relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_bandwidth_bytes_per_s",
+          "dram_peak_bandwidth_bytes_per_s", "hbm_used_bytes", "hbm_capacity_bytes"].some(id => ids.has(id))
+      },
+      {
+        key: "kv", label: "KV cache",
+        description: "KV-cache occupancy with a matching byte or token capacity",
+        required: ids => (ids.has("kv_cache_used_bytes") && ids.has("kv_cache_capacity_bytes")) ||
+          (ids.has("kv_cache_tokens") && ids.has("kv_cache_token_capacity")),
+        relevant: ids => ["kv_cache_used_bytes", "kv_cache_capacity_bytes", "kv_cache_tokens",
+          "kv_cache_token_capacity", "kv_cache_hit_rate_pct"].some(id => ids.has(id))
+      },
+      {
+        key: "communication", label: "Communication",
+        description: "Link utilization or directional traffic with link capacity and fabric identity",
+        required: (ids, evidence) => {
+          const metrics = evidence.metrics || [];
+          const hasLinkType = metrics.some(metric => metric.link_type);
+          const directional = (ids.has("nvlink_tx_bytes") && ids.has("nvlink_rx_bytes")) ||
+            (ids.has("pcie_tx_bytes") && ids.has("pcie_rx_bytes")) ||
+            (ids.has("network_tx_bytes") && ids.has("network_rx_bytes"));
+          return hasLinkType && (ids.has("link_utilization_pct") ||
+            (directional && ids.has("link_peak_bandwidth_bytes_per_s")));
+        },
+        relevant: ids => ["nvlink_tx_bytes", "nvlink_rx_bytes", "pcie_tx_bytes", "pcie_rx_bytes",
+          "network_tx_bytes", "network_rx_bytes", "link_bandwidth_bytes_per_s",
+          "link_peak_bandwidth_bytes_per_s", "link_utilization_pct"].some(id => ids.has(id))
+      },
+      {
+        key: "thermal", label: "Power / thermal",
+        description: "Power, GPU clock, temperature and throttle activity over the same sampling window",
+        required: ids => ids.has("gpu_power_w") && ids.has("gpu_clock_hz") &&
+          ids.has("temperature_c") && ids.has("throttle_active_pct"),
+        relevant: ids => ["gpu_power_w", "gpu_clock_hz", "memory_clock_hz",
+          "temperature_c", "throttle_active_pct"].some(id => ids.has(id))
+      }
+    ];
+    const evidenceFor = record => {
+      const evidence = record.hardware_evidence;
+      if (!evidence || typeof evidence !== "object" || !Array.isArray(evidence.metrics)) return null;
+      return evidence;
+    };
+    const stateFor = (record, category) => {
+      const evidence = evidenceFor(record);
+      if (!evidence) return "missing";
+      const ids = new Set(evidence.metrics.map(metric => metric.metric_id));
+      if (category.required(ids, evidence)) return "core";
+      return category.relevant(ids) ? "partial" : "missing";
+    };
+    const withEvidence = records.filter(record => evidenceFor(record));
+    const allMetrics = withEvidence.reduce((sum, record) =>
+      sum + evidenceFor(record).metrics.length, 0);
+    const coreCount = categories.reduce((sum, category) =>
+      sum + records.filter(record => stateFor(record, category) === "core").length, 0);
+    hardwareEvidenceContent.append(make("p", "benchmark-hardware-evidence-summary",
+      withEvidence.length + "/" + records.length + " records include a provenance-backed hardware evidence bundle · " +
+      allMetrics + " reported low-level metric observations · " + coreCount +
+      " category-level core evidence matches across five domains. This is evidence coverage, not a bottleneck verdict."));
+
+    const coverage = make("div", "benchmark-hardware-evidence-coverage");
+    categories.forEach(category => {
+      const core = records.filter(record => stateFor(record, category) === "core").length;
+      const partial = records.filter(record => stateFor(record, category) === "partial").length;
+      const card = make("section", "benchmark-hardware-evidence-domain");
+      card.dataset.hardwareEvidenceDomain = category.key;
+      card.append(make("h3", "", category.label));
+      card.append(make("p", "", category.description));
+      card.append(make("strong", "", core + " core · " + partial + " partial · " +
+        (records.length - core - partial) + " missing"));
+      coverage.append(card);
+    });
+    hardwareEvidenceContent.append(coverage);
+
+    const wrap = make("div", "benchmark-hardware-evidence-table-wrap");
+    const table = make("table", "benchmark-hardware-evidence-table");
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    ["System / collector", "Compute", "HBM", "KV cache", "Communication", "Power / thermal", "Sampling / provenance"].forEach(label =>
+      header.append(make("th", "", label)));
+    thead.append(header);
+    table.append(thead);
+    const tbody = document.createElement("tbody");
+    records.forEach(record => {
+      const evidence = evidenceFor(record);
+      const row = document.createElement("tr");
+      row.dataset.hardwareEvidenceRecordId = record.id;
+      const identity = make("td", "");
+      identity.append(make("strong", "", record.system_name || record.system?.hardware || "Unspecified system"));
+      if (evidence) {
+        identity.append(make("small", "", evidence.collector?.name || "Collector not reported"));
+        identity.append(make("small", "", evidence.system_scope?.scope_type || "Scope unknown"));
+      } else {
+        identity.append(make("small", "", "No low-level evidence attached"));
+      }
+      row.append(identity);
+      categories.forEach(category => {
+        const state = stateFor(record, category);
+        const cell = make("td", "");
+        const label = state === "core" ? "Core signals present" :
+          state === "partial" ? "Partial signals" : "Not reported";
+        cell.append(make("span", "benchmark-hardware-evidence-state is-" + state, label));
+        row.append(cell);
+      });
+      const provenance = make("td", "");
+      if (evidence) {
+        const sampling = evidence.sampling || {};
+        provenance.append(make("div", "", (sampling.started_at || "Start unknown") + " → " +
+          (sampling.ended_at || "End unknown")));
+        provenance.append(make("small", "", (sampling.sample_count ?? "N/A") + " samples · " +
+          (sampling.sample_interval_ms ?? "N/A") + " ms"));
+        const source = make("div", "benchmark-hardware-evidence-source");
+        addLink(source, evidence.provenance?.source_url, "Evidence artifact ↗");
+        provenance.append(source);
+      } else {
+        provenance.append(make("span", "benchmark-hardware-evidence-missing", "No evidence artifact"));
+      }
+      row.append(provenance);
+      tbody.append(row);
+    });
+    table.append(tbody);
+    wrap.append(table);
+    hardwareEvidenceContent.append(wrap);
+
+    withEvidence.forEach(record => {
+      const evidence = evidenceFor(record);
+      const details = make("details", "benchmark-hardware-evidence-details");
+      const summary = make("summary", "", (record.system_name || record.id) + " · " +
+        evidence.metrics.length + " low-level metrics");
+      details.append(summary);
+      const list = make("ul", "benchmark-hardware-evidence-metric-list");
+      evidence.metrics.forEach(metric => {
+        const item = document.createElement("li");
+        const kind = metric.measurement_kind || "kind unknown";
+        const aggregation = metric.aggregation || "aggregation unknown";
+        const scope = metric.scope || "scope unknown";
+        item.textContent = metric.metric_id + ": " + numberText(metric.value) + " " +
+          metric.unit + " · " + kind + " · " + aggregation + " · " + scope +
+          " · source: " + (metric.source_name || "not reported");
+        list.append(item);
+      });
+      details.append(list);
+      hardwareEvidenceContent.append(details);
+    });
+    hardwareEvidenceContent.append(make("p", "benchmark-hardware-evidence-note",
+      "Interpretation: “core signals present” means only that the minimum evidence fields for investigation are attached. It does not mean the workload is bottlenecked by that resource. Counter scopes, sampling windows, precision, topology and device-specific peak definitions must still be checked. Existing aggregate GPU utilization and memory-used values are not substituted for low-level counters. Missing evidence is unknown, never zero."));
+  };
+
   const renderPerformanceDecomposition = () => {
     if (!decompositionPanel || !decompositionContent) return;
     if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
@@ -1840,6 +2014,7 @@
     renderEnergyEfficiency();
     renderConfigurationAttribution();
     renderPerformanceDecomposition();
+    renderHardwareBottleneckEvidence();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
