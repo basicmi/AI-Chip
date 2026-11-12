@@ -497,7 +497,7 @@ class RegistryValidationTests(unittest.TestCase):
         evidence["metrics"][0]["unit"] = "FLOP/s"
         evidence["metrics"][1]["value"] = -1
         evidence["metrics"][2]["input_metric_ids"] = ["missing_counter"]
-        evidence["metrics"][3]["value"] = 101
+        evidence["metrics"][0]["value"] = 101
         evidence["metrics"][9]["link_type"] = "unknown-fabric"
         evidence["sampling"]["ended_at"] = "2026-11-12T09:59:00Z"
         db = self.valid_inferencex_database({"hardware_evidence": evidence})
