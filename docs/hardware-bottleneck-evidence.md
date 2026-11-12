@@ -31,6 +31,7 @@ A metric's source_name is the exact counter/telemetry field name emitted by the 
 | Domain | Metric IDs | Unit |
 |---|---|---|
 | Compute | sm_active_pct, tensor_active_pct | % |
+| Compute | compute_flop_count | FLOP |
 | Compute | achieved_flops, theoretical_peak_flops | FLOP/s |
 | HBM traffic | dram_read_bytes, dram_write_bytes, hbm_used_bytes, hbm_capacity_bytes | byte |
 | HBM bandwidth | dram_bandwidth_bytes_per_s, dram_peak_bandwidth_bytes_per_s | byte/s |
