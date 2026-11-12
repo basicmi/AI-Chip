@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/hardware-counter-mappings.schema.json",
+  "title": "AI Chip Hardware Counter Mapping Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "sources",
+    "mappings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "catalog_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/mapping"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "vendor",
+        "collector",
+        "documentation_url",
+        "status",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "collector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentation_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "status": {
+          "enum": [
+            "current",
+            "preview",
+            "archived"
+          ]
+        },
+        "version_note": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source_id",
+        "source_metric",
+        "canonical_metric_id",
+        "source_unit",
+        "canonical_unit",
+        "conversion",
+        "measurement_kind",
+        "value_semantics",
+        "default_aggregation",
+        "default_scope",
+        "mapping_status",
+        "mapping_quality",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "source_metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_field_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "canonical_metric_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "sm_active_pct",
+            "tensor_active_pct",
+            "compute_flop_count",
+            "achieved_flops",
+            "theoretical_peak_flops",
+            "dram_read_bytes",
+            "dram_write_bytes",
+            "dram_bandwidth_bytes_per_s",
+            "dram_peak_bandwidth_bytes_per_s",
+            "hbm_used_bytes",
+            "hbm_capacity_bytes",
+            "kv_cache_used_bytes",
+            "kv_cache_capacity_bytes",
+            "kv_cache_tokens",
+            "kv_cache_token_capacity",
+            "kv_cache_hit_rate_pct",
+            "nvlink_tx_bytes",
+            "nvlink_rx_bytes",
+            "pcie_tx_bytes",
+            "pcie_rx_bytes",
+            "network_tx_bytes",
+            "network_rx_bytes",
+            "link_bandwidth_bytes_per_s",
+            "link_peak_bandwidth_bytes_per_s",
+            "link_utilization_pct",
+            "gpu_power_w",
+            "gpu_clock_hz",
+            "memory_clock_hz",
+            "temperature_c",
+            "throttle_active_pct",
+            "dram_active_pct",
+            "sm_throughput_pct",
+            "valu_active_pct",
+            "mfma_active_pct",
+            "vmem_active_pct",
+            "compute_peak_utilization_pct",
+            "dram_bandwidth_utilization_pct",
+            "kv_cache_occupancy_pct",
+            null
+          ]
+        },
+        "source_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conversion": {
+          "enum": [
+            "identity",
+            "ratio_to_percent",
+            "mhz_to_hz",
+            "none"
+          ]
+        },
+        "measurement_kind": {
+          "enum": [
+            "hardware_counter",
+            "telemetry",
+            "derived"
+          ]
+        },
+        "value_semantics": {
+          "enum": [
+            "gauge",
+            "ratio",
+            "monotonic_counter",
+            "profile_window_bytes",
+            "profiler_metric",
+            "bitmask",
+            "reference_only"
+          ]
+        },
+        "default_aggregation": {
+          "enum": [
+            "instantaneous",
+            "mean",
+            "max",
+            "min",
+            "p50",
+            "p95",
+            "p99",
+            "sum",
+            "rate"
+          ]
+        },
+        "default_scope": {
+          "enum": [
+            "per_gpu",
+            "per_link",
+            "per_node",
+            "per_system",
+            "per_process",
+            "per_kernel"
+          ]
+        },
+        "mapping_status": {
+          "enum": [
+            "direct",
+            "unit_converted",
+            "proxy",
+            "reference_only"
+          ]
+        },
+        "mapping_quality": {
+          "enum": [
+            "direct",
+            "proxy"
+          ]
+        },
+        "link_type": {
+          "enum": [
+            "nvlink",
+            "pcie",
+            "infiniband",
+            "roce",
+            "ethernet",
+            "other"
+          ]
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mapping_status": {
+                "const": "reference_only"
+              }
+            },
+            "required": [
+              "mapping_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "canonical_metric_id": {
+                "type": "null"
+              },
+              "canonical_unit": {
+                "type": "null"
+              },
+              "conversion": {
+                "const": "none"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mapping_status": {
+                "const": "direct"
+              }
+            },
+            "required": [
+              "mapping_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conversion": {
+                "const": "identity"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mapping_status": {
+                "const": "unit_converted"
+              }
+            },
+            "required": [
+              "mapping_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conversion": {
+                "enum": [
+                  "ratio_to_percent",
+                  "mhz_to_hz"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mapping_status": {
+                "const": "proxy"
+              }
+            },
+            "required": [
+              "mapping_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mapping_quality": {
+                "const": "proxy"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
