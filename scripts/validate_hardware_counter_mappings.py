@@ -64,7 +64,7 @@ def validate_catalog(catalog, metric_units=None):
         else:
             mapping_ids.add(mid)
         sid = mapping.get("source_id")
-        if sid not in source_ids:
+        if not isinstance(sid, str) or sid not in source_ids:
             errors.append(f"{where}: unknown source_id {sid}")
         source_metric = mapping.get("source_metric")
         if not isinstance(source_metric, str) or not source_metric.strip():
@@ -77,6 +77,8 @@ def validate_catalog(catalog, metric_units=None):
         conversion = mapping.get("conversion")
         source_unit = mapping.get("source_unit")
         canonical_unit = mapping.get("canonical_unit")
+        if status not in {"direct", "unit_converted", "proxy", "reference_only"}:
+            errors.append(f"{where}: invalid mapping_status")
         if status == "reference_only":
             if canonical is not None or canonical_unit is not None or conversion != "none":
                 errors.append(f"{where}: reference_only mappings cannot claim a canonical metric or conversion")
@@ -99,7 +101,7 @@ def validate_catalog(catalog, metric_units=None):
             errors.append(f"{where}: unit_converted mapping must declare a supported conversion")
         if status == "proxy" and mapping.get("mapping_quality") != "proxy":
             errors.append(f"{where}: proxy status must retain proxy mapping_quality")
-        if mapping.get("mapping_quality") not in {"direct", "proxy"}:
+        if not isinstance(mapping.get("mapping_quality"), str) or mapping.get("mapping_quality") not in {"direct", "proxy"}:
             errors.append(f"{where}: mapping_quality must be direct or proxy")
         if mapping.get("default_scope") not in HARDWARE_EVIDENCE_SCOPES:
             errors.append(f"{where}: invalid default_scope")
@@ -112,6 +114,21 @@ def validate_catalog(catalog, metric_units=None):
             errors.append(f"{where}: invalid default_aggregation")
         if mapping.get("measurement_kind") not in {"hardware_counter", "telemetry", "derived"}:
             errors.append(f"{where}: invalid measurement_kind")
+        if mapping.get("value_semantics") not in {
+            "gauge", "ratio", "monotonic_counter", "profile_window_bytes",
+            "profiler_metric", "bitmask", "reference_only"
+        }:
+            errors.append(f"{where}: invalid value_semantics")
+        field_id = mapping.get("source_field_id")
+        if field_id is not None and (
+            isinstance(field_id, bool) or not isinstance(field_id, int) or field_id < 0
+        ):
+            errors.append(f"{where}: source_field_id must be a non-negative integer or null")
+        link_type = mapping.get("link_type")
+        if link_type is not None and link_type not in {
+            "nvlink", "pcie", "infiniband", "roce", "ethernet", "other"
+        }:
+            errors.append(f"{where}: invalid link_type")
         if not isinstance(mapping.get("notes"), str) or not mapping["notes"].strip():
             errors.append(f"{where}: notes are required")
         if mapping.get("value_semantics") == "monotonic_counter" and mapping.get("default_aggregation") != "sum":
