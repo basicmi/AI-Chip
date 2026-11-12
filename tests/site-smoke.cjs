@@ -453,6 +453,13 @@ const { chromium } = require("playwright");
       normalized_metrics: {
         output_throughput_per_gpu: { value, unit: "tok/s/GPU", label: "Output throughput", direction: "higher", family: "throughput" },
         median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" },
+        ...(index === 1 ? {} : {
+          median_tpot: { value: 0.08 + index * 0.01, unit: "s", label: "Median TPOT", direction: "lower", family: "latency" }
+        }),
+        mean_gpu_utilization: { value: [76, 65, 80, 91][index], unit: "%", label: "Mean GPU utilization", direction: "context", family: "telemetry" },
+        ...(index === 2 ? {} : {
+          mean_gpu_memory_used: { value: 19000 + index * 3000, unit: "MB", label: "Mean GPU memory used", direction: "context", family: "telemetry" }
+        }),
         p99_ttft: { value: [1.2, 0.8, 1.0, 1.5][index], unit: "s", label: "P99 TTFT", direction: "lower", family: "latency" },
         p99_tpot: { value: [0.15, 0.16, 0.12, 0.2][index], unit: "s", label: "P99 TPOT", direction: "lower", family: "latency" },
         ...(index === 2 ? {} : {
@@ -466,10 +473,16 @@ const { chromium } = require("playwright");
           energy_per_successful_query: { value: 8.4, unit: "J/query", label: "Energy per successful query", direction: "lower", family: "energy" },
           prefill_energy_per_input_token: { value: 0.04, unit: "J/input token", label: "Prefill energy per input token", direction: "lower", family: "energy" },
           decode_energy_per_output_token: { value: 0.28, unit: "J/output token", label: "Decode energy per output token", direction: "lower", family: "energy" },
+          prefill_gpu_power_per_gpu: { value: 280, unit: "W/GPU", label: "Prefill GPU power", direction: "context", family: "power" },
+          decode_gpu_power_per_gpu: { value: 245, unit: "W/GPU", label: "Decode GPU power", direction: "context", family: "power" },
           mean_total_cpu_power: { value: 75, unit: "W", label: "Mean total CPU power", direction: "context", family: "cpu_power" }
         } : {}),
         mean_gpu_power_per_gpu: { value: [260, 280, 180, 240][index], unit: "W/GPU", label: "Mean GPU power", direction: "context", family: "power" },
-        mean_total_gpu_power: { value: [2080, 2240, 720, 3840][index], unit: "W", label: "Mean total GPU power", direction: "context", family: "power" }
+        mean_total_gpu_power: { value: [2080, 2240, 720, 3840][index], unit: "W", label: "Mean total GPU power", direction: "context", family: "power" },
+        ...(index === 2 ? {
+          prefill_gpu_power_per_gpu: { value: 999, unit: "W/GPU", label: "Prefill GPU power", direction: "context", family: "power" },
+          decode_gpu_power_per_gpu: { value: 999, unit: "W/GPU", label: "Decode GPU power", direction: "context", family: "power" }
+        } : {})
       },
       power_measurement_valid: index !== 2,
       power_measurement_status: index === 2 ? "failed" : "valid",
@@ -561,6 +574,9 @@ const { chromium } = require("playwright");
   if (!(await page.locator("[data-results-energy]").isHidden())) {
     throw new Error("Energy analysis must remain hidden until a strict workload cohort is selected");
   }
+  if (!(await page.locator("[data-results-decomposition]").isHidden())) {
+    throw new Error("Performance decomposition must remain hidden before a strict workload cohort");
+  }
   const scalingRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
   await scalingRow.locator(".benchmark-result-details summary").click();
   await scalingRow.locator(".benchmark-cohort-action").click();
@@ -578,6 +594,9 @@ const { chromium } = require("playwright");
   }
   if (await page.locator("[data-results-energy]").isHidden()) {
     throw new Error("Selecting a strict InferenceX cohort did not reveal GPU energy analysis");
+  }
+  if (await page.locator("[data-results-decomposition]").isHidden()) {
+    throw new Error("Selecting a strict InferenceX cohort did not reveal performance decomposition");
   }
   const frontierText = await page.locator("[data-results-frontier-content]").textContent();
   if (!frontierText.includes("3 report all three required metrics") ||
@@ -615,6 +634,33 @@ const { chromium } = require("playwright");
       await energyPlot.locator(".benchmark-energy-point.is-pareto").count() !== 2) {
     throw new Error("Energy Pareto plot did not distinguish the two non-dominated energy/throughput configurations");
   }
+  const decompositionText = await page.locator("[data-results-decomposition-content]").textContent();
+  if (!decompositionText.includes("3 records in selected strict workload cohort") ||
+      !decompositionText.includes("Median TTFT") ||
+      !decompositionText.includes("Median TPOT") ||
+      !decompositionText.includes("P99 ITL") ||
+      !decompositionText.includes("Prefill GPU energy") ||
+      !decompositionText.includes("not a measured decode-kernel breakdown") ||
+      !decompositionText.includes("classifications remain undetermined")) {
+    throw new Error("Performance decomposition did not explain phase signals and diagnostic boundaries: " + decompositionText);
+  }
+  const decompositionRows = page.locator("[data-results-decomposition-content] [data-decomposition-record-id]");
+  if (await decompositionRows.count() !== 3) {
+    throw new Error("Performance decomposition did not respect the strict workload cohort");
+  }
+  const validPhase = await page.locator('[data-decomposition-record-id="fixture-0"]').textContent();
+  const invalidPhase = await page.locator('[data-decomposition-record-id="fixture-2"]').textContent();
+  if (!validPhase.includes("280 W/GPU") || !validPhase.includes("245 W/GPU") ||
+      !validPhase.includes("0.04 J/input token") || !validPhase.includes("19,000 MB") ||
+      !invalidPhase.includes("Validated phase-energy telemetry unavailable") ||
+      invalidPhase.includes("999 W/GPU")) {
+    throw new Error("Performance decomposition failed to gate phase power and preserve publisher telemetry: " +
+      JSON.stringify({validPhase, invalidPhase}));
+  }
+  const decompositionCoverage = await page.locator("[data-decomposition-signal]").count();
+  if (decompositionCoverage !== 12) {
+    throw new Error("Performance decomposition must report all twelve signal coverage dimensions");
+  }
   await page.locator("[data-results-cohort-clear]").click();
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide scaling analysis");
@@ -624,6 +670,9 @@ const { chromium } = require("playwright");
   }
   if (!(await page.locator("[data-results-energy]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide energy analysis");
+  }
+  if (!(await page.locator("[data-results-decomposition]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide performance decomposition");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');

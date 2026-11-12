@@ -155,6 +155,15 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     </div>
   </section>
 
+  <section class="benchmark-decomposition-panel" data-results-decomposition hidden aria-labelledby="benchmark-decomposition-title">
+    <div class="benchmark-decomposition-heading">
+      <p class="eyebrow">PERFORMANCE SIGNALS · INFERENCEX</p>
+      <h2 id="benchmark-decomposition-title">Inference performance decomposition</h2>
+      <p>Inspect publisher-reported first-token latency, decode token cadence, throughput, GPU telemetry, and validated phase-energy signals within a strict workload cohort. This evidence map does not claim a measured kernel-time breakdown.</p>
+    </div>
+    <div data-results-decomposition-content aria-live="polite"></div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">
@@ -192,6 +201,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <p>When a normalized metric is selected, the table filters to records that report that metric and displays its common unit. Metric sorting respects the source-defined optimization direction (higher or lower is better); context-only metrics are not ranked. This is not a cross-suite score. Compare InferenceX rows only after matching model, workload type, ISL/OSL, concurrency, precision, framework/image, speculative mode, aggregated vs. disaggregated topology and prefill/decode parallelism. GPU power/energy values require <code>power_valid=1</code> and <code>power_metric_schema_version=2</code>. CPU/module telemetry has an independent <code>cpu_power_valid</code> verdict. An absent CPU verdict means there is no CPU-side measurement leg, not a failed GPU measurement. The importer preserves failed, incomplete and unreported states separately; do not combine component boundaries without checking their definitions.</p>
     <p>The “Show strict cohort” action groups only records that match source/version, model and workload conditions, precision, speculative mode, serving mode, and the selected metric with its unit. MLPerf cohorts additionally match scenario, division, availability, system type, accuracy target and inferred status. Missing critical fields disable strict cohort creation instead of treating unknown values as equal. Hardware, system scale, framework, container image and parallelism are deliberately left as visible comparison variables; matching a cohort is not a claim that the complete systems are identical or that results are independently replicated.</p>
     <p>Configuration attribution compares median metric values across exact configuration groups inside one strict InferenceX workload cohort. A pair is included only when one reported dimension changes and all other reported dimensions match. Missing fields remain unknown; they are not filled with assumed defaults. The result is an observational contrast, not a causal estimate. More complete run configuration and repeated measurements improve the strength of the analysis.</p>
+    <p>Performance decomposition is an evidence map, not a hardware bottleneck detector. TTFT is request-level time to first token (not isolated prefill execution), while TPOT/ITL reflect token cadence (not decode-kernel service time). GPU utilization and allocated memory do not reveal achieved FLOPs, HBM bytes/s, KV-cache residency, or network traffic. Phase power and token-energy metrics require the existing publisher validity flags, and measurements with different denominators must not be summed.</p>
     <p>Every row links to its publisher's source record where available. A public submission or observation is attributed to its publisher; it is not automatically an independent replication.</p>
   </div>
 </section>

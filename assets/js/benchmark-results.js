@@ -40,6 +40,8 @@
   const energyContent = $("[data-results-energy-content]");
   const attributionPanel = $("[data-results-attribution]");
   const attributionContent = $("[data-results-attribution-content]");
+  const decompositionPanel = $("[data-results-decomposition]");
+  const decompositionContent = $("[data-results-decomposition-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -869,6 +871,176 @@
   };
 
 
+
+  // Publisher-reported signals only. Latency, throughput, power, and utilization
+  // describe different measurement boundaries; none is a measured time breakdown.
+  const renderPerformanceDecomposition = () => {
+    if (!decompositionPanel || !decompositionContent) return;
+    if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
+        !activeCohort.performanceKey || !database) {
+      decompositionPanel.hidden = true;
+      return;
+    }
+    decompositionPanel.hidden = false;
+    decompositionContent.replaceChildren();
+    const records = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
+    const metrics = [
+      { key: "median_ttft", label: "Median TTFT", unit: "s", direction: "lower", type: "latency" },
+      { key: "p99_ttft", label: "P99 TTFT", unit: "s", direction: "lower", type: "latency" },
+      { key: "median_tpot", label: "Median TPOT", unit: "s", direction: "lower", type: "latency" },
+      { key: "p99_tpot", label: "P99 TPOT", unit: "s", direction: "lower", type: "latency" },
+      { key: "p99_itl", label: "P99 ITL", unit: "s", direction: "lower", type: "latency" },
+      { key: "output_throughput_per_gpu", label: "Output throughput", unit: "tok/s/GPU", direction: "higher", type: "throughput" },
+      { key: "mean_gpu_utilization", label: "Mean GPU utilization", unit: "%", direction: "context", type: "telemetry" },
+      { key: "mean_gpu_memory_used", label: "Mean GPU memory used", unit: "MB", direction: "context", type: "telemetry" },
+      { key: "prefill_gpu_power_per_gpu", label: "Prefill GPU power", unit: "W/GPU", direction: "context", type: "power" },
+      { key: "decode_gpu_power_per_gpu", label: "Decode GPU power", unit: "W/GPU", direction: "context", type: "power" },
+      { key: "prefill_energy_per_input_token", label: "Prefill GPU energy", unit: "J/input token", direction: "lower", type: "power" },
+      { key: "decode_energy_per_output_token", label: "Decode GPU energy", unit: "J/output token", direction: "lower", type: "power" }
+    ];
+    const read = (record, spec) => {
+      if (spec.type === "power" &&
+          !(record.power_measurement_valid === true && record.gpu_power_metrics_available === true)) return null;
+      const entry = record.normalized_metrics?.[spec.key];
+      if (!entry || typeof entry.value !== "number" || !Number.isFinite(entry.value) ||
+          entry.unit !== spec.unit || entry.direction !== spec.direction) return null;
+      if (entry.value < 0 || (entry.value === 0 && spec.type !== "telemetry")) return null;
+      return entry.value;
+    };
+    const sorted = [...records].sort((a, b) => String(a.id).localeCompare(String(b.id)));
+    const coverage = metrics.map(spec => ({
+      ...spec,
+      values: sorted.map(record => read(record, spec)),
+      count: sorted.filter(record => read(record, spec) !== null).length
+    }));
+    const coverageTotal = coverage.reduce((sum, item) => sum + item.count, 0);
+    decompositionContent.append(make("p", "benchmark-decomposition-summary",
+      sorted.length + " records in selected strict workload cohort · " +
+      coverageTotal + " of " + (sorted.length * metrics.length) +
+      " publisher-sourced signal slots populated · " +
+      coverage.filter(item => item.count > 0).length + " of " + metrics.length +
+      " signal types available."));
+
+    const groupDefs = [
+      { name: "Prefill / TTFT", keys: ["median_ttft", "p99_ttft"] },
+      { name: "Decode / token cadence", keys: ["median_tpot", "p99_tpot", "p99_itl"] },
+      { name: "Throughput", keys: ["output_throughput_per_gpu"] },
+      { name: "GPU state", keys: ["mean_gpu_utilization", "mean_gpu_memory_used"] },
+      { name: "GPU power / phase energy", keys: [
+        "prefill_gpu_power_per_gpu", "decode_gpu_power_per_gpu",
+        "prefill_energy_per_input_token", "decode_energy_per_output_token"
+      ] }
+    ];
+    const coverageWrap = make("div", "benchmark-decomposition-coverage");
+    groupDefs.forEach(group => {
+      const card = make("section", "benchmark-decomposition-group");
+      card.append(make("h3", "", group.name));
+      group.keys.forEach(key => {
+        const spec = coverage.find(item => item.key === key);
+        const row = make("div", "benchmark-decomposition-coverage-row");
+        row.dataset.decompositionSignal = key;
+        row.append(make("span", "", spec.label));
+        const meter = make("div", "benchmark-decomposition-meter");
+        const fill = make("div", "benchmark-decomposition-meter-fill");
+        fill.style.width = sorted.length ? (100 * spec.count / sorted.length).toFixed(1) + "%" : "0%";
+        meter.append(fill);
+        row.append(meter);
+        row.append(make("strong", "", spec.count + "/" + sorted.length));
+        card.append(row);
+      });
+      coverageWrap.append(card);
+    });
+    decompositionContent.append(coverageWrap);
+
+    if (!sorted.length) {
+      decompositionContent.append(make("p", "benchmark-decomposition-empty",
+        "No records share this strict workload identity."));
+      return;
+    }
+
+    const section = make("div", "benchmark-decomposition-table-wrap");
+    const table = make("table", "benchmark-decomposition-table");
+    const head = document.createElement("thead");
+    const hr = document.createElement("tr");
+    ["System / software", "Prefill signal (TTFT)", "Decode signal (TPOT / ITL)",
+      "Output throughput / GPU", "GPU utilization / memory",
+      "GPU phase power / energy", "GPU topology / run"].forEach(label =>
+      hr.append(make("th", "", label)));
+    head.append(hr);
+    table.append(head);
+    const body = document.createElement("tbody");
+    const detail = (record, key) => {
+      const spec = metrics.find(item => item.key === key);
+      const value = read(record, spec);
+      return value === null ? null : numberText(value) + " " + spec.unit;
+    };
+    const appendLines = (cell, rows, fallback) => {
+      let found = 0;
+      rows.forEach(([label, value]) => {
+        if (value === null) return;
+        cell.append(make("div", "benchmark-decomposition-reading", label + ": " + value));
+        found += 1;
+      });
+      if (!found) cell.append(make("span", "benchmark-decomposition-missing", fallback));
+    };
+    sorted.forEach(record => {
+      const tr = document.createElement("tr");
+      tr.dataset.decompositionRecordId = record.id;
+      const identity = make("td", "");
+      identity.append(make("strong", "", record.system_name || record.system?.hardware || "Unspecified system"));
+      identity.append(make("small", "", record.software?.framework || "Framework not reported"));
+      tr.append(identity);
+      const prefill = make("td", "");
+      appendLines(prefill, [["Median TTFT", detail(record, "median_ttft")],
+        ["P99 TTFT", detail(record, "p99_ttft")]], "TTFT not reported");
+      tr.append(prefill);
+      const decode = make("td", "");
+      appendLines(decode, [["Median TPOT", detail(record, "median_tpot")],
+        ["P99 TPOT", detail(record, "p99_tpot")],
+        ["P99 ITL", detail(record, "p99_itl")]], "Decode latency not reported");
+      tr.append(decode);
+      tr.append(make("td", "", detail(record, "output_throughput_per_gpu") || "Not reported"));
+      const state = make("td", "");
+      appendLines(state, [["Mean GPU utilization", detail(record, "mean_gpu_utilization")],
+        ["Mean GPU memory used", detail(record, "mean_gpu_memory_used")]],
+      "GPU utilization / memory not reported");
+      tr.append(state);
+      const energy = make("td", "");
+      appendLines(energy, [["Prefill GPU power", detail(record, "prefill_gpu_power_per_gpu")],
+        ["Decode GPU power", detail(record, "decode_gpu_power_per_gpu")],
+        ["Prefill energy / input token", detail(record, "prefill_energy_per_input_token")],
+        ["Decode energy / output token", detail(record, "decode_energy_per_output_token")]],
+        "Validated phase-energy telemetry unavailable");
+      tr.append(energy);
+      const topology = make("td", "");
+      const count = reportedAcceleratorCount(record);
+      if (count) topology.append(make("div", "", count.count + " GPUs · " + count.source));
+      const serving = record.workload?.disaggregated;
+      topology.append(make("div", "", serving === true ? "Disaggregated serving" :
+        serving === false ? "Aggregated serving" : "Serving mode unknown"));
+      const config = record.configuration || {};
+      const phaseKeys = ["prefill_tp", "prefill_ep", "decode_tp", "decode_ep"];
+      const reported = phaseKeys.filter(key => config[key] !== null &&
+        config[key] !== undefined && config[key] !== "");
+      if (reported.length) topology.append(make("small", "",
+        reported.map(key => key + "=" + config[key]).join(" · ")));
+      const source = make("div", "benchmark-decomposition-source");
+      addLink(source, record.detail_url || record.source_url, "Source record ↗");
+      topology.append(source);
+      tr.append(topology);
+      body.append(tr);
+    });
+    table.append(body);
+    section.append(table);
+    decompositionContent.append(section);
+
+    const notes = make("p", "benchmark-decomposition-note",
+      "Measurement semantics: TTFT is a request-level first-token latency proxy, not an isolated prefill kernel duration. TPOT and ITL are token-cadence metrics, not a measured decode-kernel breakdown. P99 figures are not added to median values. GPU utilization and memory-used are publisher telemetry, not FLOP efficiency or HBM bandwidth. Phase GPU power and token energy require validated power evidence, and their denominators differ. Absent PCIe/NVLink traffic, KV-cache occupancy, achieved FLOPs and DRAM counters, compute-, memory- and communication-bound classifications remain undetermined.");
+    decompositionContent.append(notes);
+  };
+
   const renderConfigurationAttribution = () => {
     if (!attributionPanel || !attributionContent) return;
     const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
@@ -1667,6 +1839,7 @@
     renderParetoFrontier();
     renderEnergyEfficiency();
     renderConfigurationAttribution();
+    renderPerformanceDecomposition();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
