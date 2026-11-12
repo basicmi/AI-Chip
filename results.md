@@ -102,6 +102,20 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     </div>
     <button class="text-button" type="button" data-results-cohort-clear>Clear cohort</button>
   </div>
+
+  <section class="benchmark-scaling-panel" data-results-scaling hidden aria-labelledby="benchmark-scaling-title">
+    <div class="benchmark-scaling-heading">
+      <div>
+        <p class="eyebrow">PERFORMANCE INTELLIGENCE · INFERENCEX</p>
+        <h2 id="benchmark-scaling-title">Observed throughput scaling</h2>
+        <p>Compare GPU-count scaling only inside the active strict workload cohort, with the same accelerator and software fingerprint.</p>
+      </div>
+    </div>
+    <div data-results-scaling-content aria-live="polite">
+      <p class="benchmark-scaling-empty">Choose an InferenceX output-throughput metric and open a strict cohort to inspect scaling evidence.</p>
+    </div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">

@@ -32,6 +32,8 @@
   const comparisonCount = $("[data-comparison-count]");
   const comparisonContent = $("[data-comparison-content]");
   const comparisonClear = $("[data-comparison-clear]");
+  const scalingPanel = $("[data-results-scaling]");
+  const scalingContent = $("[data-results-scaling-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -189,6 +191,7 @@
       ];
       return {
         key: JSON.stringify(values),
+        sourceId: record.source_id,
         metricKey,
         title: "InferenceX · " + model,
         summary: [
@@ -273,6 +276,184 @@
     return wrapper;
   };
 
+
+
+  const reportedAcceleratorCount = (record) => {
+    const system = record.system || {};
+    const total = Number(system.total_accelerators);
+    if (Number.isInteger(total) && total > 0) {
+      return { count: total, source: "reported total accelerator count" };
+    }
+    const prefill = system.physical_prefill_gpus;
+    const decode = system.physical_decode_gpus;
+    if (Number.isInteger(prefill) && prefill >= 0 &&
+        Number.isInteger(decode) && decode >= 0 && prefill + decode > 0) {
+      return { count: prefill + decode, source: "reported prefill / decode GPU counts" };
+    }
+    const workers = Array.isArray(system.workers) ? system.workers : [];
+    const workerCounts = workers.map(worker => Number(worker?.num_gpus));
+    if (workers.length && workerCounts.every(value => Number.isInteger(value) && value >= 0)) {
+      const count = workerCounts.reduce((sum, value) => sum + value, 0);
+      if (count > 0) return { count, source: "sum of reported worker-pool counts" };
+    }
+    return null;
+  };
+
+  const medianValue = values => {
+    const sorted = [...values].filter(Number.isFinite).sort((a, b) => a - b);
+    if (!sorted.length) return null;
+    const middle = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+  };
+
+  const scalingSoftwareIdentity = record => {
+    const software = record.software || {};
+    const framework = String(software.framework || "").trim();
+    const image = String(software.image || "").trim();
+    const recipe = String(software.recipe_fingerprint || "").trim();
+    if (!framework || (!image && !recipe)) return null;
+    return {
+      framework,
+      image,
+      recipe,
+      key: JSON.stringify([framework.toLowerCase(), image.toLowerCase(), recipe.toLowerCase()]),
+      label: framework + " · " + (recipe ? "recipe " + recipe : "image " + image)
+    };
+  };
+
+  const renderScalingAnalysis = records => {
+    if (!scalingPanel || !scalingContent) return;
+    const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
+      activeCohort.metricKey === "output_throughput_per_gpu";
+    if (!supported) {
+      scalingPanel.hidden = true;
+      return;
+    }
+    scalingPanel.hidden = false;
+    scalingContent.replaceChildren();
+
+    const groups = new Map();
+    const excluded = { servingMode: 0, hardware: 0, software: 0, gpuCount: 0, metric: 0 };
+    records.forEach(record => {
+      if (record.workload?.disaggregated !== false) {
+        excluded.servingMode += 1;
+        return;
+      }
+      const hardware = String(record.system?.hardware || record.system?.accelerator_model || "").trim();
+      if (!hardware) {
+        excluded.hardware += 1;
+        return;
+      }
+      const software = scalingSoftwareIdentity(record);
+      if (!software) {
+        excluded.software += 1;
+        return;
+      }
+      const gpuCount = reportedAcceleratorCount(record);
+      if (!gpuCount) {
+        excluded.gpuCount += 1;
+        return;
+      }
+      const metric = record.normalized_metrics?.output_throughput_per_gpu;
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value) ||
+          metric.value <= 0 || metric.unit !== "tok/s/GPU") {
+        excluded.metric += 1;
+        return;
+      }
+      const key = JSON.stringify([hardware.toLowerCase(), software.key]);
+      if (!groups.has(key)) groups.set(key, { hardware, software, counts: new Map() });
+      const group = groups.get(key);
+      if (!group.counts.has(gpuCount.count)) {
+        group.counts.set(gpuCount.count, { values: [], countSources: new Set() });
+      }
+      const bucket = group.counts.get(gpuCount.count);
+      bucket.values.push(metric.value);
+      bucket.countSources.add(gpuCount.source);
+    });
+
+    const series = [...groups.values()].map(group => ({
+      ...group,
+      points: [...group.counts.entries()].map(([count, bucket]) => ({
+        count,
+        samples: bucket.values.length,
+        medianPerGpu: medianValue(bucket.values),
+        countSources: [...bucket.countSources]
+      })).sort((a, b) => a.count - b.count)
+    })).filter(group => group.points.length >= 2)
+      .sort((a, b) => a.hardware.localeCompare(b.hardware) ||
+        a.software.framework.localeCompare(b.software.framework));
+
+    const eligibleCount = [...groups.values()].reduce((sum, group) =>
+      sum + [...group.counts.values()].reduce((count, bucket) => count + bucket.values.length, 0), 0);
+    scalingContent.append(make("p", "benchmark-scaling-summary",
+      records.length + " records in the active strict cohort · " + eligibleCount +
+      " records have a known GPU count and matching hardware/software identity · " +
+      series.length + " scaling series with multiple GPU counts."));
+
+    if (!series.length) {
+      scalingContent.append(make("p", "benchmark-scaling-empty",
+        "No defensible scaling curve is available in this filtered cohort. A curve requires at least two GPU counts for the same accelerator, framework and image/recipe, with aggregated serving and a reported GPU count."));
+    } else {
+      series.forEach(group => {
+        const card = make("article", "benchmark-scaling-card");
+        const heading = make("div", "benchmark-scaling-card-heading");
+        heading.append(make("strong", "", group.hardware));
+        heading.append(make("span", "", group.software.label));
+        card.append(heading);
+        const baseline = group.points[0];
+        const baselinePerGpu = baseline.medianPerGpu;
+        const baselineCount = baseline.count;
+        const tableWrap = make("div", "benchmark-scaling-table-wrap");
+        const table = make("table", "benchmark-scaling-table");
+        const thead = document.createElement("thead");
+        const header = document.createElement("tr");
+        ["GPU count", "Samples", "Median output throughput / GPU", "Estimated aggregate output throughput", "Linear reference", "Scaling efficiency"].forEach(label =>
+          header.append(make("th", "", label)));
+        thead.append(header);
+        table.append(thead);
+        const tbody = document.createElement("tbody");
+        group.points.forEach(point => {
+          const estimatedTotal = point.medianPerGpu * point.count;
+          const linearReference = baselinePerGpu * point.count;
+          const efficiency = baselinePerGpu > 0 ? point.medianPerGpu / baselinePerGpu * 100 : null;
+          const row = document.createElement("tr");
+          const countCell = document.createElement("td");
+          countCell.append(make("strong", "", point.count + " GPUs"));
+          countCell.append(make("small", "", point.countSources.join(" · ")));
+          row.append(countCell);
+          row.append(make("td", "", point.samples));
+          row.append(make("td", "", numberText(point.medianPerGpu) + " tok/s/GPU"));
+          row.append(make("td", "", numberText(estimatedTotal) + " tok/s"));
+          row.append(make("td", "", numberText(linearReference) + " tok/s"));
+          const efficiencyCell = make("td", "benchmark-scaling-efficiency");
+          efficiencyCell.append(make("strong", "", efficiency === null ? "—" : efficiency.toFixed(1) + "%"));
+          efficiencyCell.append(make("small", "", point.count === baselineCount
+            ? "Baseline · " + baselineCount + " GPUs"
+            : (point.count / baselineCount).toFixed(2).replace(/\.00$/, "") + "× GPU scale vs baseline"));
+          row.append(efficiencyCell);
+          tbody.append(row);
+        });
+        table.append(tbody);
+        tableWrap.append(table);
+        card.append(tableWrap);
+        scalingContent.append(card);
+      });
+    }
+
+    const exclusions = [
+      ["non-aggregated or unknown serving mode", excluded.servingMode],
+      ["missing accelerator identity", excluded.hardware],
+      ["missing framework and image/recipe fingerprint", excluded.software],
+      ["missing reliable GPU count", excluded.gpuCount],
+      ["missing or invalid output-throughput metric", excluded.metric]
+    ].filter(([, count]) => count > 0);
+    if (exclusions.length) {
+      scalingContent.append(make("p", "benchmark-scaling-exclusions",
+        "Excluded from scaling analysis: " + exclusions.map(([label, count]) => label + " (" + count + ")").join(" · ") + "."));
+    }
+    scalingContent.append(make("p", "benchmark-scaling-note",
+      "Interpretation: the smallest GPU-count point is the baseline within each identical hardware/software group. Scaling efficiency = median output throughput per GPU at N GPUs ÷ baseline median output throughput per GPU × 100%. Aggregate throughput and linear references are derived estimates, not publisher-reported totals. Parallelism and run configuration remain potential confounders; this is observed system-level scaling, not a causal hardware-only measurement."));
+  };
 
   const comparisonMetricFor = (item) => {
     const record = item.record;
@@ -810,6 +991,7 @@
     const pageRecords = filteredRecords.slice(start, start + pageSize);
     rowsNode.replaceChildren(...pageRecords.map(buildRow));
     renderComparisonWorkspace();
+    renderScalingAnalysis(filteredRecords);
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
