@@ -907,6 +907,15 @@
       ["median_interactivity", "Median interactivity", "tok/s/user", "higher", "interactivity"],
       ["energy_per_output_token", "Energy / output token", "J/output token", "lower", "energy"]
     ];
+    const stableSerialize = value => {
+      if (Array.isArray(value)) return "[" + value.map(stableSerialize).join(",") + "]";
+      if (value && typeof value === "object") {
+        return "{" + Object.keys(value).sort().map(key =>
+          JSON.stringify(key) + ":" + stableSerialize(value[key])
+        ).join(",") + "}";
+      }
+      return JSON.stringify(value);
+    };
     const executionIdentity = record => {
       const system = record.system || {};
       const software = record.software || {};
@@ -924,7 +933,7 @@
         software.recipe_fingerprint, record.configuration || {}, system.workers || []
       ];
       return {
-        key: JSON.stringify(fields),
+        key: stableSerialize(fields),
         complete: hardwareIdentified && runtimeIdentified && executionDetailsIdentified
       };
     };
@@ -995,10 +1004,10 @@
         const rightSystem = rightRecord.system_name || rightRecord.product_id || rightRecord.system?.hardware || "System not identified";
         const leftFramework = leftRecord.software?.framework || "Runtime not identified";
         const rightFramework = rightRecord.software?.framework || "Runtime not identified";
-        const leftConfig = JSON.stringify(leftRecord.configuration || {});
-        const rightConfig = JSON.stringify(rightRecord.configuration || {});
-        const leftWorkers = JSON.stringify(leftRecord.system?.workers || []);
-        const rightWorkers = JSON.stringify(rightRecord.system?.workers || []);
+        const leftConfig = stableSerialize(leftRecord.configuration || {});
+        const rightConfig = stableSerialize(rightRecord.configuration || {});
+        const leftWorkers = stableSerialize(leftRecord.system?.workers || []);
+        const rightWorkers = stableSerialize(rightRecord.system?.workers || []);
         const dimensions = [];
         if (leftRecord.accelerator_vendor !== rightRecord.accelerator_vendor ||
             leftRecord.product_id !== rightRecord.product_id ||
