@@ -500,6 +500,7 @@ class RegistryValidationTests(unittest.TestCase):
         evidence = self.valid_hardware_evidence()
         evidence["metrics"][0]["unit"] = "FLOP/s"
         evidence["metrics"][1]["value"] = -1
+        evidence["metrics"][1].pop("precision")
         next(metric for metric in evidence["metrics"] if metric["metric_id"] == "link_utilization_pct")["input_metric_ids"] = ["missing_counter"]
         evidence["metrics"][0]["value"] = 101
         evidence["metrics"][9]["link_type"] = "unknown-fabric"
@@ -508,6 +509,7 @@ class RegistryValidationTests(unittest.TestCase):
         errors = validate_database(db)
         self.assertTrue(any("sm_active_pct unit must be %" in error for error in errors))
         self.assertTrue(any("non-negative finite number" in error for error in errors))
+        self.assertTrue(any("compute FLOP metrics require precision" in error for error in errors))
         self.assertTrue(any("derived input missing_counter is absent" in error for error in errors))
         self.assertTrue(any("sampling window must be positive" in error for error in errors))
         self.assertTrue(any("link_type is invalid" in error for error in errors))
