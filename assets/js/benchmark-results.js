@@ -896,11 +896,13 @@
         required: (ids, evidence) => {
           const achieved = evidence.metrics.find(metric => metric.metric_id === "achieved_flops");
           const peak = evidence.metrics.find(metric => metric.metric_id === "theoretical_peak_flops");
-          const comparableCompute = achieved && peak &&
+          const activity = evidence.metrics.find(metric =>
+            metric.metric_id === "sm_active_pct" || metric.metric_id === "tensor_active_pct");
+          const comparableCompute = achieved && peak && activity &&
             achieved.precision && achieved.precision === peak.precision &&
             achieved.sparsity && achieved.sparsity === peak.sparsity &&
-            achieved.scope === peak.scope;
-          return comparableCompute && (ids.has("sm_active_pct") || ids.has("tensor_active_pct"));
+            achieved.scope === peak.scope && activity.scope === achieved.scope;
+          return !!comparableCompute;
         },
         relevant: ids => ["sm_active_pct", "tensor_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
       },
