@@ -284,29 +284,52 @@ def analyze_communication(evidence):
         rx = _first(_matching(evidence, rx_id, reference, aggregations={"sum"})) if rx_id else None
         measured = rates[0] if rates else None
         directionality = measured.get("directionality") if measured else None
-        if measured is None and seconds and tx and rx:
-            measured = {
-                "value": (tx["value"] + rx["value"]) / seconds,
-                "directionality": "bidirectional",
-                "aggregation": "rate",
-                "source": "derived_from_same_link_tx_rx_byte_sums",
-            }
-        elif measured is None and seconds and tx:
-            measured = {
-                "value": tx["value"] / seconds,
-                "directionality": "tx",
-                "aggregation": "rate",
-                "source": "derived_from_same_link_tx_byte_sum",
-            }
-            directionality = "tx"
-        elif measured is None and seconds and rx:
-            measured = {
-                "value": rx["value"] / seconds,
-                "directionality": "rx",
-                "aggregation": "rate",
-                "source": "derived_from_same_link_rx_byte_sum",
-            }
-            directionality = "rx"
+        target_directionality = peaks[0].get("directionality") if peaks else None
+        if measured is None and seconds:
+            requested_direction = target_directionality
+            if requested_direction == "bidirectional" and tx and rx:
+                measured = {
+                    "value": (tx["value"] + rx["value"]) / seconds,
+                    "directionality": "bidirectional",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_tx_rx_byte_sums",
+                }
+            elif requested_direction == "tx" and tx:
+                measured = {
+                    "value": tx["value"] / seconds,
+                    "directionality": "tx",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_tx_byte_sum",
+                }
+            elif requested_direction == "rx" and rx:
+                measured = {
+                    "value": rx["value"] / seconds,
+                    "directionality": "rx",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_rx_byte_sum",
+                }
+            elif requested_direction is None and tx and rx:
+                measured = {
+                    "value": (tx["value"] + rx["value"]) / seconds,
+                    "directionality": "bidirectional",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_tx_rx_byte_sums",
+                }
+            elif requested_direction is None and tx:
+                measured = {
+                    "value": tx["value"] / seconds,
+                    "directionality": "tx",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_tx_byte_sum",
+                }
+            elif requested_direction is None and rx:
+                measured = {
+                    "value": rx["value"] / seconds,
+                    "directionality": "rx",
+                    "aggregation": "rate",
+                    "source": "derived_from_same_link_rx_byte_sum",
+                }
+        directionality = measured.get("directionality") if measured else None
 
         peak = next((
             item for item in peaks
@@ -331,9 +354,9 @@ def analyze_communication(evidence):
         ), None)
         if direct is not None:
             if utilization is not None and not math.isclose(
-                utilization, direct["value"], rel_tol=0.05, abs_tol=0.5
+                utilization, direct["value"], rel_tol=1e-9, abs_tol=1e-9
             ):
-                warnings.append("reported and recomputed link utilization differ beyond the 5%/0.5-point consistency tolerance")
+                warnings.append("reported and recomputed link utilization differ; verify sampling window, counter definition and duplex semantics")
             utilization = direct["value"]
             utilization_source = "reported_link_utilization_pct"
 
