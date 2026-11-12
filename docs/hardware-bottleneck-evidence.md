@@ -51,7 +51,7 @@ link_type is required for all NVLink, PCIe, generic link_*, and network_* metric
 ## Measurement and normalization rules
 
 1. Units are canonical. The validator enforces the unit for each metric ID. Convert source units only in a documented transformation and preserve the exact source field name.
-2. Scope is mandatory. Per-GPU, per-link, per-node, per-system, and per-process are different measurement boundaries. Never silently multiply a per-GPU value into a system total.
+2. Scope is mandatory. Metrics may be per-kernel, per-GPU, per-link, per-node, per-system, or per-process; the evidence bundle's system_scope remains a hardware/system boundary. Never silently multiply a per-GPU value into a system total.
 3. Aggregation is mandatory. Instantaneous, mean, max, percentiles, sum, and rate are not interchangeable. Byte counters require a measurement window before a rate is derived.
 4. Sampling is mandatory. Record a timezone-aware measurement interval, sample cadence, and sample count. Do not compare measurements from materially different windows as if they were simultaneous.
 5. Raw vs derived is explicit. hardware_counter and telemetry entries carry the collector's source name. A derived entry must include a formula and references to inputs present in the same evidence bundle.
