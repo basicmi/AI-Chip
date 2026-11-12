@@ -217,6 +217,15 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: duplicate metric_id/scope/aggregation tuple {key}")
         seen.add(key)
 
+        directionality = metric.get("directionality")
+        if metric_id in {"link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s", "link_utilization_pct"}:
+            if not isinstance(directionality, str) or directionality not in {"tx", "rx", "bidirectional", "aggregate"}:
+                errors.append(f"{item_where}: {metric_id} requires explicit directionality")
+        elif directionality is not None and (
+            not isinstance(directionality, str) or directionality not in {"tx", "rx", "bidirectional", "aggregate"}
+        ):
+            errors.append(f"{item_where}: directionality is invalid")
+
         link_type = metric.get("link_type")
         expected_link_type = "nvlink" if metric_id.startswith("nvlink_") else "pcie" if metric_id.startswith("pcie_") else None
         if expected_link_type:
@@ -259,6 +268,10 @@ def validate_hardware_evidence(row, where):
                 and (
                     metric.get("link_type") is None
                     or item.get("link_type") == metric.get("link_type")
+                )
+                and (
+                    metric.get("directionality") is None
+                    or item.get("directionality") == metric.get("directionality")
                 )
                 for item in metrics
                 if isinstance(item, dict) and item.get("metric_id") == input_id
