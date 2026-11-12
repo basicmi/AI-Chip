@@ -52,11 +52,11 @@ def base_evidence():
             {"metric_id": "link_bandwidth_bytes_per_s", "value": 80e9, "unit": "byte/s",
              "measurement_kind": "telemetry", "aggregation": "mean",
              "scope": "per_link", "source_name": "nvlink_bw",
-             "link_type": "nvlink", "entity_id": "nvlink:L0"},
+             "link_type": "nvlink", "entity_id": "nvlink:L0", "directionality": "bidirectional"},
             {"metric_id": "link_peak_bandwidth_bytes_per_s", "value": 100e9, "unit": "byte/s",
              "measurement_kind": "telemetry", "aggregation": "max",
              "scope": "per_link", "source_name": "nvlink_peak",
-             "link_type": "nvlink", "entity_id": "nvlink:L0"},
+             "link_type": "nvlink", "entity_id": "nvlink:L0", "directionality": "bidirectional"},
         ],
     }
 
