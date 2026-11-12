@@ -46,7 +46,7 @@ A metric's source_name is the exact counter/telemetry field name emitted by the 
 | Power / thermal | temperature_c | °C |
 | Power / thermal | throttle_active_pct | % |
 
-link_type is required for generic link_* and network_* metrics (nvlink, pcie, infiniband, roce, ethernet, or other). A per-link counter must not be compared with a per-GPU or per-system rate without an explicit aggregation procedure.
+link_type is required for all NVLink, PCIe, generic link_*, and network_* metrics (nvlink, pcie, infiniband, roce, ethernet, or other). A per-link counter must not be compared with a per-GPU or per-system rate without an explicit aggregation procedure.
 
 ## Measurement and normalization rules
 
