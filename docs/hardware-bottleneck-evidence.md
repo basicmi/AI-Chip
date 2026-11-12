@@ -101,7 +101,7 @@ It derives only when the required inputs are present and compatible:
 | `link_bandwidth_bytes_per_s` | (same-link TX bytes + RX bytes) divided by the sampling window |
 | `link_utilization_pct` | measured link bandwidth divided by peak for the same link entity and fabric |
 
-Out-of-range ratios are skipped with an explicit note, never clamped. Missing inputs remain missing. The script does not make a bottleneck classification or apply arbitrary utilization thresholds. These metrics are descriptive evidence; diagnosis still needs workload phase, precision, device SKU, topology, worker mapping and counter collection context.
+For link bandwidth, TX and RX are combined only when they share the same link entity and fabric. The corresponding peak must use the same directionality convention (combined full-duplex versus per-direction); otherwise the utilization ratio is not comparable and must not be derived. Out-of-range ratios are skipped with an explicit note, never clamped. Missing inputs remain missing. The script does not make a bottleneck classification or apply arbitrary utilization thresholds. These metrics are descriptive evidence; diagnosis still needs workload phase, precision, device SKU, topology, worker mapping and counter collection context.
 
 Run the catalog validator and the two focused test suites:
 
