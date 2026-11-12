@@ -125,6 +125,13 @@ class HardwareMetricDerivationTests(unittest.TestCase):
         _, added, _ = derive_metrics(evidence)
         self.assertFalse(any(item["metric_id"] == "link_utilization_pct" for item in added))
 
+    def test_link_utilization_is_not_derived_from_mismatched_directionality(self):
+        evidence = base_evidence()
+        evidence["metrics"][-1]["directionality"] = "tx"
+        _, added, warnings = derive_metrics(evidence)
+        self.assertFalse(any(item["metric_id"] == "link_utilization_pct" for item in added))
+        self.assertTrue(any("directionality must match" in warning for warning in warnings))
+
     def test_out_of_range_ratios_are_skipped_not_clamped(self):
         evidence = base_evidence()
         evidence["metrics"][4]["value"] = 0.5e9
