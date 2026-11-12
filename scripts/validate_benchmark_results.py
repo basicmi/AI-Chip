@@ -203,7 +203,11 @@ def validate_hardware_evidence(row, where):
         seen.add(key)
 
         link_type = metric.get("link_type")
-        if metric_id.startswith("network_") or metric_id.startswith("link_"):
+        expected_link_type = "nvlink" if metric_id.startswith("nvlink_") else "pcie" if metric_id.startswith("pcie_") else None
+        if expected_link_type:
+            if link_type != expected_link_type:
+                errors.append(f"{item_where}: {metric_id} requires link_type={expected_link_type}")
+        elif metric_id.startswith("network_") or metric_id.startswith("link_"):
             if not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES:
                 errors.append(f"{item_where}: {metric_id} requires a valid link_type")
         elif link_type is not None and (not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES):
