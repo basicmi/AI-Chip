@@ -1102,6 +1102,107 @@
         list.append(item);
       });
       details.append(list);
+
+      const diagnostic = make("div", "benchmark-hardware-evidence-note");
+      diagnostic.append(make("strong", "", "Evidence analysis · no automatic bottleneck verdict"));
+      const metricFor = (metricId, predicate = () => true) =>
+        evidence.metrics.find(metric => metric.metric_id === metricId && predicate(metric));
+      const sameBoundary = (left, right) =>
+        left && right && left.scope === right.scope && left.entity_id === right.entity_id;
+      const count = metricFor("compute_flop_count", metric => metric.aggregation === "sum" &&
+        Number.isFinite(metric.value) && metric.value > 0);
+      const read = count && metricFor("dram_read_bytes", metric =>
+        metric.aggregation === "sum" && sameBoundary(metric, count));
+      const write = count && metricFor("dram_write_bytes", metric =>
+        metric.aggregation === "sum" && sameBoundary(metric, count));
+      const peakCompute = count && metricFor("theoretical_peak_flops", metric =>
+        sameBoundary(metric, count) && metric.precision === count.precision &&
+        metric.sparsity === count.sparsity && ["max", "mean", "instantaneous"].includes(metric.aggregation) &&
+        Number.isFinite(metric.value) && metric.value > 0);
+      const peakMemory = count && metricFor("dram_peak_bandwidth_bytes_per_s", metric =>
+        sameBoundary(metric, count) && ["max", "mean", "instantaneous"].includes(metric.aggregation) &&
+        Number.isFinite(metric.value) && metric.value > 0);
+      const start = Date.parse(evidence.sampling?.started_at || "");
+      const end = Date.parse(evidence.sampling?.ended_at || "");
+      const seconds = Number.isFinite(start) && Number.isFinite(end) && end > start
+        ? (end - start) / 1000 : null;
+      if (count && read && write && peakCompute && peakMemory && seconds) {
+        const bytes = read.value + write.value;
+        const intensity = bytes > 0 ? count.value / bytes : null;
+        const achieved = count.value / seconds;
+        const memoryCeiling = intensity === null ? null : intensity * peakMemory.value;
+        const roofline = memoryCeiling === null ? null : Math.min(peakCompute.value, memoryCeiling);
+        if (intensity !== null && roofline > 0) {
+          const lower = peakCompute.value < memoryCeiling ? "compute" :
+            memoryCeiling < peakCompute.value ? "memory" : "balanced";
+          const attainment = achieved / roofline * 100;
+          diagnostic.append(make("p", "",
+            "Roofline: AI " + numberText(intensity) + " FLOP/byte · achieved " +
+            numberText(achieved) + " FLOP/s · compute ceiling " + numberText(peakCompute.value) +
+            " FLOP/s · memory ceiling " + numberText(memoryCeiling) + " FLOP/s · lower theoretical ceiling: " +
+            lower + (attainment <= 100 ? " · attainment " + numberText(attainment) + "%" :
+              " · achieved rate exceeds the calculated ceiling; check evidence definitions.")));
+        } else {
+          diagnostic.append(make("p", "", "Roofline: insufficient evidence (zero or invalid DRAM traffic)."));
+        }
+      } else {
+        diagnostic.append(make("p", "",
+          "Roofline: insufficient evidence; requires interval FLOPs, same-boundary DRAM read + write bytes, " +
+          "precision/sparsity-matched compute peak, DRAM peak bandwidth and a valid sampling window."));
+      }
+
+      const directLinks = evidence.metrics.filter(metric =>
+        metric.metric_id === "link_utilization_pct" && metric.scope === "per_link" &&
+        metric.entity_id && metric.link_type && metric.directionality &&
+        Number.isFinite(metric.value) && metric.value >= 0 && metric.value <= 100);
+      const linkRatios = directLinks.map(metric => ({
+        entity: metric.entity_id, type: metric.link_type,
+        direction: metric.directionality, value: metric.value
+      }));
+      if (!linkRatios.length) {
+        evidence.metrics.filter(metric =>
+          metric.metric_id === "link_bandwidth_bytes_per_s" && metric.scope === "per_link" &&
+          metric.entity_id && metric.link_type && metric.directionality
+        ).forEach(rate => {
+          const peak = metricFor("link_peak_bandwidth_bytes_per_s", candidate =>
+            sameBoundary(candidate, rate) && candidate.link_type === rate.link_type &&
+            candidate.directionality === rate.directionality && candidate.value > 0);
+          if (peak && rate.value >= 0 && rate.value / peak.value <= 1) {
+            linkRatios.push({
+              entity: rate.entity_id, type: rate.link_type,
+              direction: rate.directionality, value: rate.value / peak.value * 100
+            });
+          }
+        });
+      }
+      diagnostic.append(make("p", "", linkRatios.length
+        ? "Communication: " + linkRatios.map(link =>
+          link.entity + " " + link.type + " " + link.direction + " " + numberText(link.value) + "%"
+        ).join(" · ") + " observed per-link utilization; critical-path contention is not established."
+        : "Communication: no comparable per-link utilization with entity, fabric and directionality is available."));
+
+      const runtimeSpecs = [
+        ["p99_ttft", "P99 TTFT", "s", "lower", "latency"],
+        ["p99_tpot", "P99 TPOT", "s", "lower", "latency"],
+        ["p99_itl", "P99 ITL", "s", "lower", "latency"],
+        ["output_throughput_per_gpu", "Output throughput / GPU", "tok/s/GPU", "higher", "throughput"],
+        ["mean_gpu_utilization", "Mean GPU utilization", "%", "context", "telemetry"],
+        ["mean_gpu_memory_used", "Mean GPU memory used", "MB", "context", "telemetry"]
+      ];
+      const runtimeReadings = runtimeSpecs.flatMap(([key, label, unit, direction, family]) => {
+        const item = record.normalized_metrics?.[key];
+        if (!item || !Number.isFinite(item.value) || item.unit !== unit ||
+            item.direction !== direction || item.family !== family) return [];
+        return [label + " " + numberText(item.value) + " " + unit];
+      });
+      diagnostic.append(make("p", "", runtimeReadings.length
+        ? "Serving runtime: " + runtimeReadings.join(" · ") +
+          ". These are end-to-end/context signals, not a hardware time breakdown."
+        : "Serving runtime: no validated TTFT/TPOT/throughput signals are available."));
+      diagnostic.append(make("p", "",
+        "Attribution boundary: scheduling/queueing requires request queue, batch formation, dispatch and kernel-gap traces. " +
+        "A lower roofline ceiling or active link is an observation, not a bottleneck verdict."));
+      details.append(diagnostic);
       hardwareEvidenceContent.append(details);
     });
     hardwareEvidenceContent.append(make("p", "benchmark-hardware-evidence-note",
