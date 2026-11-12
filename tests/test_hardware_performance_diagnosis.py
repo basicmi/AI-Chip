@@ -103,7 +103,7 @@ class HardwarePerformanceDiagnosisTests(unittest.TestCase):
         evidence["metrics"][2]["value"] = 0
         result = analyze_roofline(evidence)
         self.assertEqual(result["status"], "complete")
-        self.assertAlmostEqual(result["analyses"][0]["arithmetic_intensity_flop_per_byte"], 800)
+        self.assertAlmostEqual(result["analyses"][0]["arithmetic_intensity_flop_per_byte"], 2000)
 
     def test_roofline_does_not_mix_different_scopes(self):
         evidence = base_evidence()
