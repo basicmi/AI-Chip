@@ -514,6 +514,17 @@ class RegistryValidationTests(unittest.TestCase):
         self.assertTrue(any("sampling window must be positive" in error for error in errors))
         self.assertTrue(any("link_type is invalid" in error for error in errors))
 
+    def test_hardware_evidence_validator_handles_malformed_nested_types(self):
+        evidence = self.valid_hardware_evidence()
+        evidence["metrics"][0]["metric_id"] = {"unexpected": "object"}
+        evidence["metrics"][2]["scope"] = {"unexpected": "object"}
+        next(metric for metric in evidence["metrics"] if metric["metric_id"] == "link_utilization_pct")["input_metric_ids"] = [{"unexpected": "object"}]
+        db = self.valid_inferencex_database({"hardware_evidence": evidence})
+        errors = validate_database(db)
+        self.assertTrue(any("unknown metric_id" in error for error in errors))
+        self.assertTrue(any("scope is invalid" in error for error in errors))
+        self.assertTrue(any("valid input_metric_ids" in error for error in errors))
+
     def test_hardware_evidence_is_optional_and_never_synthesized_by_importer(self):
         endpoint = "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"
         raw = {"id": 999, "model": "dsr1", "hardware": "h200_sxm", "metrics": {}}
