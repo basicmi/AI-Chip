@@ -51,6 +51,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_benchmark_results.py"
           python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
           python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
+          python3 -m unittest discover -s tests -p "test_hardware_performance_diagnosis.py"
 
   build-and-smoke-test:
     runs-on: ubuntu-latest
