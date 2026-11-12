@@ -59,6 +59,55 @@ link_type is required for all NVLink, PCIe, generic link_*, and network_* metric
 7. Provenance is required. Every evidence bundle links to a source artifact or publisher record. An optional SHA-256 digest pins the exported artifact; it does not prove that the measurement is correct.
 8. No evidence is not zero. An absent counter means unavailable/unknown, not zero activity, zero traffic, or an idle device.
 
+## Counter mapping catalog and metric derivation
+
+The source-aware catalog lives in `data/hardware-counter-mappings.json`, validated by `schemas/hardware-counter-mappings.schema.json` and `scripts/validate_hardware_counter_mappings.py`. Each mapping records the exact source field or profiler label, collector family, source field ID where documented, canonical metric ID, units, conversion, default scope/aggregation, mapping quality, and caveats.
+
+The first catalog covers:
+
+- **NVIDIA DCGM:** SM/Tensor/DRAM activity ratios; PCIe and NVLink traffic; per-link NVLink L0-L17 fields; SM/memory clocks; GPU temperature and board power.
+- **NVIDIA Nsight Compute:** the documented SM throughput metric `sm__throughput.avg.pct_of_peak_sustained_elapsed`, retained as a kernel-scoped peak-throughput percentage rather than relabeled as SM active time.
+- **AMD ROCm Compute Profiler:** kernel-scoped VALU, MFMA and VMEM utilization labels. The cited 3.11.0 development page is marked as proposed future changes, so these entries are preview mappings, not a production compatibility guarantee.
+
+Ratios are multiplied by 100; MHz is multiplied by 1,000,000 to obtain Hz. Identity mappings preserve the source unit. Cumulative PCIe byte counters are not treated as interval traffic: the normalizer requires an explicit `counter_delta`. NVLink aggregate-per-GPU fields remain per-GPU; L0-L17 fields retain a per-link `entity_id`. The AMD `FLOPs (Total)` display is retained as reference-only because it is expressed per normalization unit and the documentation warns about execution-mask semantics; it is not silently converted into absolute FLOPs.
+
+The normalizer accepts a JSON wrapper with `source_id`, collector, system scope, sampling window, provenance and a `counters[]` list:
+
+```bash
+python3 scripts/normalize_hardware_counters.py --input raw-counters.json --output normalized-evidence.json
+```
+
+Unrecognized and reference-only fields are returned in `unmapped_counters`; they are not discarded or guessed. Per-link metrics keep their entity identity.
+
+### Derived metrics
+
+`scripts/derive_hardware_metrics.py` operates on a validated evidence object (or a record containing one) and writes a separate output file:
+
+```bash
+python3 scripts/derive_hardware_metrics.py --input normalized-evidence.json --output derived-evidence.json
+```
+
+It derives only when the required inputs are present and compatible:
+
+| Derived metric | Formula / required inputs |
+|---|---|
+| `achieved_flops` | `compute_flop_count / sampling_window_seconds`; precision and sparsity are retained |
+| `compute_peak_utilization_pct` | achieved FLOP/s divided by theoretical peak with matching precision, sparsity and scope |
+| `dram_bandwidth_bytes_per_s` | (DRAM read bytes + DRAM write bytes) divided by the sampling window |
+| `dram_bandwidth_utilization_pct` | measured DRAM bandwidth divided by matching peak bandwidth |
+| `kv_cache_occupancy_pct` | KV bytes used / capacity, or token count / token capacity |
+| `link_utilization_pct` | measured link bandwidth divided by peak for the same link entity and fabric |
+
+Out-of-range ratios are skipped with an explicit note, never clamped. Missing inputs remain missing. The script does not make a bottleneck classification or apply arbitrary utilization thresholds. These metrics are descriptive evidence; diagnosis still needs workload phase, precision, device SKU, topology, worker mapping and counter collection context.
+
+Run the catalog validator and the two focused test suites:
+
+```bash
+python3 scripts/validate_hardware_counter_mappings.py
+python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
+python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
+```
+
 ## What is needed before making a bottleneck claim
 
 | Candidate bottleneck | Minimum evidence to investigate | Important caveats |
