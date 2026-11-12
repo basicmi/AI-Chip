@@ -129,6 +129,19 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     </div>
   </section>
 
+  <section class="benchmark-energy-panel" data-results-energy hidden aria-labelledby="benchmark-energy-title">
+    <div class="benchmark-energy-heading">
+      <div>
+        <p class="eyebrow">ENERGY INTELLIGENCE · INFERENCEX</p>
+        <h2 id="benchmark-energy-title">GPU energy efficiency</h2>
+        <p>Compare validated GPU energy per output token with output throughput per GPU inside the active strict workload cohort. CPU telemetry remains a separate measurement boundary.</p>
+      </div>
+    </div>
+    <div data-results-energy-content aria-live="polite">
+      <p class="benchmark-energy-empty">Select an InferenceX strict workload cohort to inspect publisher-validated GPU energy measurements.</p>
+    </div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">
