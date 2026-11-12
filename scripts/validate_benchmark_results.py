@@ -129,8 +129,8 @@ def validate_hardware_evidence(row, where):
         end = _parse_iso_datetime(sampling.get("ended_at"))
         if start is None or end is None:
             errors.append(f"{where}: hardware_evidence sampling timestamps must be ISO date-times")
-        elif start.tzinfo != end.tzinfo or end <= start:
-            errors.append(f"{where}: hardware_evidence sampling window must be positive and timezone-consistent")
+        elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
+            errors.append(f"{where}: hardware_evidence sampling window must be positive and timezone-aware")
         interval = sampling.get("sample_interval_ms")
         if isinstance(interval, bool) or not isinstance(interval, (int, float)) or not math.isfinite(interval) or interval <= 0:
             errors.append(f"{where}: hardware_evidence.sample_interval_ms must be a positive finite number")
