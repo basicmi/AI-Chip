@@ -63,6 +63,18 @@ class HardwareCounterMappingTests(unittest.TestCase):
         self.assertEqual(mapped["metric"]["value"], 1250)
         self.assertEqual(mapped["metric"]["aggregation"], "sum")
 
+    def test_nsight_throughput_remains_kernel_scoped_and_distinct_from_sm_activity(self):
+        result = normalize_counter(
+            "nvidia-nsight-compute",
+            "sm__throughput.avg.pct_of_peak_sustained_elapsed",
+            72,
+            catalog=self.catalog,
+        )
+        metric = result["metric"]
+        self.assertEqual(metric["metric_id"], "sm_throughput_pct")
+        self.assertEqual(metric["scope"], "per_kernel")
+        self.assertNotEqual(metric["metric_id"], "sm_active_pct")
+
     def test_profiler_only_flop_metric_is_not_falsely_mapped_to_absolute_flops(self):
         result = normalize_counter(
             "amd-rocm-compute-profiler", "FLOPs (Total)", 100,
