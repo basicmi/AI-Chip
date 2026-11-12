@@ -739,6 +739,14 @@
         "entity_id": {
           "type": "string",
           "minLength": 1
+        },
+        "directionality": {
+          "enum": [
+            "tx",
+            "rx",
+            "bidirectional",
+            "aggregate"
+          ]
         }
       },
       "allOf": [
@@ -959,6 +967,27 @@
                 "maximum": 100
               }
             }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "link_bandwidth_bytes_per_s",
+                  "link_peak_bandwidth_bytes_per_s",
+                  "link_utilization_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "directionality"
+            ]
           }
         }
       ]
