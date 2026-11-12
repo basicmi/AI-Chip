@@ -507,7 +507,7 @@ const { chromium } = require("playwright");
           metrics: [
             { metric_id: "sm_active_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed" },
             { metric_id: "theoretical_peak_flops", value: 1.9e15, unit: "FLOP/s", measurement_kind: "telemetry", aggregation: "max", scope: "per_gpu", source_name: "device_fp8_peak_flops" },
-            { metric_id: "achieved_flops", value: 1.2e15, unit: "FLOP/s", measurement_kind: "derived", aggregation: "mean", scope: "per_gpu", source_name: "derived_achieved_flops", formula: "instruction_count * operation_width / elapsed_seconds", input_metric_ids: ["sm_active_pct", "theoretical_peak_flops"] },
+            { metric_id: "achieved_flops", value: 1.2e15, unit: "FLOP/s", measurement_kind: "hardware_counter", aggregation: "mean", scope: "per_gpu", source_name: "sm__sass_thread_inst_executed_op_ffma_pred_on.sum / elapsed_seconds" },
             { metric_id: "dram_read_bytes", value: 2e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "dram__bytes_read.sum" },
             { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes" },
             { metric_id: "gpu_power_w", value: 650, unit: "W", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "gpu_power_w" }
