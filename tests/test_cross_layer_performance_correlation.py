@@ -255,6 +255,25 @@ class CrossLayerCorrelationTests(unittest.TestCase):
             result["cohorts"][0]["records"][0]["normalized_metrics"],
         )
 
+    def test_execution_group_display_limit_is_reported(self):
+        rows = [
+            record("h200", throughput=100),
+            record("mi300", system_name="MI300X", product_id="mi300x",
+                   framework="ROCm", recipe="rocm"),
+            record("gb200", system_name="GB200", product_id="gb200",
+                   framework="vLLM", recipe="vllm-gb200"),
+            record("gaudi", system_name="Gaudi 3", product_id="gaudi3",
+                   framework="TGI", recipe="tgi"),
+        ]
+        result = correlate_records({
+            "sources": [{"id": "inferencex", "version": "Public API v1"}],
+            "records": rows,
+        })
+        cohort = result["cohorts"][0]
+        self.assertEqual(cohort["comparable_execution_group_count"], 4)
+        self.assertEqual(cohort["displayed_execution_group_count"], 4)
+        self.assertEqual(len(cohort["pairwise_comparisons"]), 6)
+
     def test_pairwise_comparison_limit_is_deterministic_and_reported(self):
         rows = [
             record("h200", throughput=100),
