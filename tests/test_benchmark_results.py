@@ -408,10 +408,8 @@ class RegistryValidationTests(unittest.TestCase):
                  "measurement_kind": "telemetry", "aggregation": "max",
                  "scope": "per_gpu", "source_name": "device_spec_fp8_peak"},
                 {"metric_id": "achieved_flops", "value": 1.2e15, "unit": "FLOP/s",
-                 "measurement_kind": "derived", "aggregation": "mean",
-                 "scope": "per_gpu", "source_name": "derived_achieved_flops",
-                 "formula": "sum(instruction_count * operation_width) / measured_seconds",
-                 "input_metric_ids": ["sm_active_pct", "theoretical_peak_flops"]},
+                 "measurement_kind": "hardware_counter", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "sm__sass_thread_inst_executed_op_ffma_pred_on.sum / measured_seconds"},
                 {"metric_id": "dram_bandwidth_bytes_per_s", "value": 2.2e12, "unit": "byte/s",
                  "measurement_kind": "hardware_counter", "aggregation": "mean",
                  "scope": "per_gpu", "source_name": "dram__bytes.sum / duration"},
@@ -436,6 +434,11 @@ class RegistryValidationTests(unittest.TestCase):
                 {"metric_id": "link_peak_bandwidth_bytes_per_s", "value": 9e11, "unit": "byte/s",
                  "measurement_kind": "telemetry", "aggregation": "max",
                  "scope": "per_link", "source_name": "nvlink_link_peak", "link_type": "nvlink"},
+                {"metric_id": "link_utilization_pct", "value": 80.0, "unit": "%",
+                 "measurement_kind": "derived", "aggregation": "mean",
+                 "scope": "per_link", "source_name": "derived_nvlink_utilization",
+                 "link_type": "nvlink", "formula": "link_bandwidth_bytes_per_s / link_peak_bandwidth_bytes_per_s * 100",
+                 "input_metric_ids": ["link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"]},
                 {"metric_id": "gpu_power_w", "value": 650, "unit": "W",
                  "measurement_kind": "telemetry", "aggregation": "mean",
                  "scope": "per_gpu", "source_name": "gpu_power_w"},
@@ -496,7 +499,7 @@ class RegistryValidationTests(unittest.TestCase):
         evidence = self.valid_hardware_evidence()
         evidence["metrics"][0]["unit"] = "FLOP/s"
         evidence["metrics"][1]["value"] = -1
-        evidence["metrics"][2]["input_metric_ids"] = ["missing_counter"]
+        next(metric for metric in evidence["metrics"] if metric["metric_id"] == "link_utilization_pct")["input_metric_ids"] = ["missing_counter"]
         evidence["metrics"][0]["value"] = 101
         evidence["metrics"][9]["link_type"] = "unknown-fabric"
         evidence["sampling"]["ended_at"] = "2026-11-12T09:59:00Z"
