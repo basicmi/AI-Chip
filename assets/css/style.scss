@@ -1833,3 +1833,93 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 560px) {
   .benchmark-energy-panel { padding: .75rem; }
 }
+
+
+/* Configuration attribution */
+.benchmark-attribution-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-attribution-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-attribution-heading p {
+  max-width: 900px;
+  margin: .35rem 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.benchmark-attribution-summary,
+.benchmark-attribution-empty,
+.benchmark-attribution-note {
+  margin: .65rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-attribution-summary { color: var(--ink); font-weight: 650; }
+.benchmark-attribution-coverage-wrap,
+.benchmark-attribution-table-wrap { overflow-x: auto; margin-top: .65rem; }
+.benchmark-attribution-coverage,
+.benchmark-attribution-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.benchmark-attribution-coverage { min-width: 560px; }
+.benchmark-attribution-table { min-width: 850px; }
+.benchmark-attribution-coverage th,
+.benchmark-attribution-coverage td,
+.benchmark-attribution-table th,
+.benchmark-attribution-table td {
+  padding: .5rem .6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.benchmark-attribution-coverage thead th,
+.benchmark-attribution-table thead th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+  font-weight: 700;
+}
+.benchmark-attribution-coverage tbody td,
+.benchmark-attribution-table tbody td {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.benchmark-attribution-dimension {
+  margin-top: .8rem;
+  padding: .7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.benchmark-attribution-dimension-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.benchmark-attribution-dimension-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+}
+.benchmark-attribution-dimension-heading span {
+  color: var(--muted);
+  font-size: 8px;
+}
+.benchmark-attribution-panel[hidden] { display: none !important; }
+@media (max-width: 560px) {
+  .benchmark-attribution-panel { padding: .75rem; }
+  .benchmark-attribution-dimension { padding: .55rem; }
+}
