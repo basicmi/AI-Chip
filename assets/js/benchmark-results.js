@@ -471,11 +471,34 @@
 
     frontierPanel.hidden = false;
     frontierContent.replaceChildren();
-    const cohortRecords = database.records.filter(record => {
-      const descriptor = buildCohortDescriptor(record);
-      return descriptor && !descriptor.error &&
-        descriptor.performanceKey === activeCohort.performanceKey;
-    });
+    // Match the workload identity without requiring the currently selected display
+    // metric. A record can be useful to the three-metric frontier even when it does
+    // not publish the metric selected in the main results table.
+    const performanceKeyFor = record => {
+      if (record.source_id !== "inferencex") return null;
+      const workload = record.workload || {};
+      const source = sourceMap().get(record.source_id);
+      const version = record.benchmark_version || source?.version;
+      const model = record.model_display_name || record.model;
+      const precision = workload.precision || record.weight_data_types;
+      const workloadType = workload.benchmark_type || record.scenario;
+      const speculativeMethod = workload.speculative_method;
+      const servingMode = typeof workload.disaggregated === "boolean" ? workload.disaggregated : null;
+      const required = [
+        version, model, workloadType, record.scenario, record.division, record.availability,
+        record.system_type, workload.isl, workload.osl, workload.concurrency, precision,
+        speculativeMethod, servingMode
+      ];
+      if (required.some(missingCohortValue)) return null;
+      return JSON.stringify([
+        record.source_id, record.benchmark_suite, version, model, record.model,
+        workloadType, record.scenario, record.division, record.availability, record.system_type,
+        workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod, servingMode
+      ]);
+    };
+    const cohortRecords = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
 
     const readMetric = (record, key, unit, direction) => {
       const metric = record.normalized_metrics?.[key];
