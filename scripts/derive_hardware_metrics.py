@@ -60,7 +60,7 @@ def _exists(metrics, metric_id, group, aggregation):
 
 
 def _derived(metric_id, value, unit, aggregation, scope, inputs, formula, *,
-             entity_id=None, precision=None, sparsity=None, link_type=None):
+             entity_id=None, precision=None, sparsity=None, link_type=None, directionality=None):
     metric = {
         "metric_id": metric_id,
         "value": value,
@@ -80,6 +80,8 @@ def _derived(metric_id, value, unit, aggregation, scope, inputs, formula, *,
         metric["sparsity"] = sparsity
     if link_type:
         metric["link_type"] = link_type
+    if directionality:
+        metric["directionality"] = directionality
     return metric
 
 
@@ -234,7 +236,7 @@ def derive_metrics(evidence):
                         "link_bandwidth_bytes_per_s", value, "byte/s", "rate", group[0],
                         [tx_id, rx_id],
                         f"({tx_id} + {rx_id}) / sampling_window_seconds",
-                        entity_id=group[1], link_type=link_type,
+                        entity_id=group[1], link_type=link_type, directionality="bidirectional",
                     ))
 
     # Link bandwidth and peak must refer to the same link entity and fabric.
@@ -244,7 +246,10 @@ def derive_metrics(evidence):
         for bandwidth in bandwidths:
             for peak in peaks:
                 link_type = bandwidth.get("link_type")
-                if not link_type or link_type != peak.get("link_type"):
+                directionality = bandwidth.get("directionality")
+                if (not link_type or link_type != peak.get("link_type") or
+                    not directionality or directionality != peak.get("directionality")):
+                    warnings.append("link_utilization_pct skipped: link type and directionality must match")
                     continue
                 if peak.get("value", 0) <= 0:
                     warnings.append("link_utilization_pct skipped: peak link bandwidth must be positive")
@@ -257,7 +262,7 @@ def derive_metrics(evidence):
                     "link_utilization_pct", value, "%", "mean", group[0],
                     ["link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"],
                     "link_bandwidth_bytes_per_s / link_peak_bandwidth_bytes_per_s * 100",
-                    entity_id=group[1], link_type=link_type,
+                    entity_id=group[1], link_type=link_type, directionality=directionality,
                 ))
 
     return result, added, warnings
