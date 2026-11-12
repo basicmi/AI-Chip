@@ -28,7 +28,7 @@ RUNTIME_METRICS = {
     "p99_tpot": ("s", "lower", "latency"),
     "p99_itl": ("s", "lower", "latency"),
     "output_throughput_per_gpu": ("tok/s/GPU", "higher", "throughput"),
-    "median_interactivity": ("tok/s/user", "higher", "throughput"),
+    "median_interactivity": ("tok/s/user", "higher", "interactivity"),
     "mean_gpu_utilization": ("%", "context", "telemetry"),
     "mean_gpu_memory_used": ("MB", "context", "telemetry"),
     "prefill_gpu_power_per_gpu": ("W/GPU", "context", "power"),
@@ -130,8 +130,8 @@ def analyze_roofline(evidence):
             global_missing.append("compute_flop_count must be a positive interval sum")
             continue
         missing = []
-        read = _first(_matching(evidence, "dram_read_bytes", count, aggregations={"sum"}), positive=True)
-        write = _first(_matching(evidence, "dram_write_bytes", count, aggregations={"sum"}), positive=True)
+        read = _first(_matching(evidence, "dram_read_bytes", count, aggregations={"sum"}))
+        write = _first(_matching(evidence, "dram_write_bytes", count, aggregations={"sum"}))
         peak_compute = _first(_matching(
             evidence, "theoretical_peak_flops", count,
             aggregations=PEAK_AGGREGATIONS, precision=True,
@@ -280,8 +280,8 @@ def analyze_communication(evidence):
             and _valid_number(item.get("value"))
         ]
         tx_id, rx_id = _link_counter_ids(link_type)
-        tx = _first(_matching(evidence, tx_id, reference, aggregations={"sum"}), positive=True) if tx_id else None
-        rx = _first(_matching(evidence, rx_id, reference, aggregations={"sum"}), positive=True) if rx_id else None
+        tx = _first(_matching(evidence, tx_id, reference, aggregations={"sum"})) if tx_id else None
+        rx = _first(_matching(evidence, rx_id, reference, aggregations={"sum"})) if rx_id else None
         measured = rates[0] if rates else None
         directionality = measured.get("directionality") if measured else None
         if measured is None and seconds and tx and rx:
@@ -373,7 +373,10 @@ def analyze_communication(evidence):
 
 
 def _read_runtime_metric(record, key):
-    entry = (record.get("normalized_metrics") or {}).get(key)
+    normalized = record.get("normalized_metrics")
+    if not isinstance(normalized, dict):
+        return None
+    entry = normalized.get(key)
     if not isinstance(entry, dict):
         return None
     expected = RUNTIME_METRICS.get(key)
@@ -383,6 +386,10 @@ def _read_runtime_metric(record, key):
     value = entry.get("value")
     if (
         not _valid_number(value)
+        or (family in {"power", "energy"} and not (
+            record.get("power_measurement_valid") is True
+            and record.get("gpu_power_metrics_available") is True
+        ))
         or entry.get("unit") != unit
         or entry.get("direction") != direction
         or entry.get("family") != family
