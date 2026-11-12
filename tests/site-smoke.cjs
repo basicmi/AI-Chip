@@ -510,7 +510,7 @@ const { chromium } = require("playwright");
             { metric_id: "compute_flop_count", value: 7.2e16, unit: "FLOP", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "flop_count_sp" },
             { metric_id: "achieved_flops", value: 1.2e15, unit: "FLOP/s", measurement_kind: "derived", aggregation: "mean", scope: "per_gpu", source_name: "derived_achieved_flops", formula: "compute_flop_count / measured_window_seconds", input_metric_ids: ["compute_flop_count"], precision: "FP8", sparsity: "dense" },
             { metric_id: "dram_read_bytes", value: 2e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "dram__bytes_read.sum" },
-            { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes" },
+            { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes", link_type: "nvlink" },
             { metric_id: "gpu_power_w", value: 650, unit: "W", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "gpu_power_w" }
           ]
         }
