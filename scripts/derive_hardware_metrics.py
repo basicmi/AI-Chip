@@ -135,7 +135,7 @@ def derive_metrics(evidence):
                     warnings.append("compute_peak_utilization_pct skipped: ratio is outside [0, 100]; check peak definition and precision")
                     continue
                 append(_derived(
-                    "compute_peak_utilization_pct", value, "%", "rate", group[0],
+                    "compute_peak_utilization_pct", value, "%", "mean", group[0],
                     ["achieved_flops", "theoretical_peak_flops"],
                     "achieved_flops / theoretical_peak_flops * 100",
                     entity_id=group[1], precision=actual.get("precision"),
@@ -172,7 +172,7 @@ def derive_metrics(evidence):
                     warnings.append("dram_bandwidth_utilization_pct skipped: ratio is outside [0, 100]; check peak and aggregation semantics")
                     continue
                 append(_derived(
-                    "dram_bandwidth_utilization_pct", value, "%", "rate", group[0],
+                    "dram_bandwidth_utilization_pct", value, "%", "mean", group[0],
                     ["dram_bandwidth_bytes_per_s", "dram_peak_bandwidth_bytes_per_s"],
                     "dram_bandwidth_bytes_per_s / dram_peak_bandwidth_bytes_per_s * 100",
                     entity_id=group[1],
@@ -185,7 +185,11 @@ def derive_metrics(evidence):
             ("kv_cache_tokens", "kv_cache_token_capacity", "token"),
         ]
         for used_id, capacity_id, unit in pairs:
+            if any(metric.get("metric_id") == "kv_cache_occupancy_pct" and _group(metric) == group
+                   for metric in metrics):
+                break
             used_values, capacities = _find(metrics, used_id, group), _find(metrics, capacity_id, group)
+            derived_for_pair = False
             for used in used_values:
                 for capacity in capacities:
                     if used.get("aggregation") != capacity.get("aggregation"):
@@ -202,10 +206,11 @@ def derive_metrics(evidence):
                         [used_id, capacity_id], f"{used_id} / {capacity_id} * 100",
                         entity_id=group[1],
                     ))
+                    derived_for_pair = True
                     break
-            if _exists(metrics, "kv_cache_occupancy_pct", group, "mean") or _exists(
-                metrics, "kv_cache_occupancy_pct", group, "instantaneous"
-            ):
+                if derived_for_pair:
+                    break
+            if derived_for_pair:
                 break
 
     # Link bandwidth and peak must refer to the same link entity and fabric.
@@ -225,7 +230,7 @@ def derive_metrics(evidence):
                     warnings.append("link_utilization_pct skipped: ratio is outside [0, 100]; check direction and link capacity")
                     continue
                 append(_derived(
-                    "link_utilization_pct", value, "%", "rate", group[0],
+                    "link_utilization_pct", value, "%", "mean", group[0],
                     ["link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"],
                     "link_bandwidth_bytes_per_s / link_peak_bandwidth_bytes_per_s * 100",
                     entity_id=group[1], link_type=link_type,
