@@ -378,7 +378,8 @@ def correlate_records(database: dict | list, max_comparisons: int = MAX_COMPARIS
             _aggregate_execution_group(group, fingerprint)
             for fingerprint, group in sorted(by_execution.items())
         ]
-        comparable_groups = [group for group in execution_groups if group["execution_identity_complete"]]
+        all_comparable_groups = [group for group in execution_groups if group["execution_identity_complete"]]
+        comparable_groups = all_comparable_groups[:12]
         comparisons = []
         for left, right in combinations(comparable_groups, 2):
             if len(comparisons) >= max_comparisons:
@@ -392,12 +393,14 @@ def correlate_records(database: dict | list, max_comparisons: int = MAX_COMPARIS
             "workload_fingerprint": hashlib.sha256(signature_json.encode("utf-8")).hexdigest()[:16],
             "record_count": len(cohort_records),
             "execution_group_count": len(execution_groups),
-            "comparable_execution_group_count": len(comparable_groups),
+            "comparable_execution_group_count": len(all_comparable_groups),
+            "displayed_execution_group_count": len(comparable_groups),
             "records": profiles,
             "execution_groups": execution_groups,
             "pairwise_comparisons": comparisons,
             "pairwise_comparisons_truncated": (
-                len(comparable_groups) * (len(comparable_groups) - 1) // 2 > len(comparisons)
+                len(all_comparable_groups) > len(comparable_groups)
+                or len(comparable_groups) * (len(comparable_groups) - 1) // 2 > len(comparisons)
             ),
             "interpretation": (
                 "Records share the strict workload signature. Execution groups differ in one or more hardware, "
