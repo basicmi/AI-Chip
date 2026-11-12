@@ -523,6 +523,19 @@ const { chromium } = require("playwright");
     throw new Error("Clearing the strict cohort did not restore all four InferenceX records");
   }
 
+  // Build the cohort from a metric published by only two records. The frontier
+  // must still consider fixture-2 because it reports the three frontier metrics.
+  await metricSelect.selectOption("p99_itl");
+  const partialMetricRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
+  await partialMetricRow.locator(".benchmark-result-details summary").click();
+  await partialMetricRow.locator(".benchmark-cohort-action").click();
+  const partialMetricFrontierIds = await page.locator("[data-results-frontier-content] tbody tr")
+    .evaluateAll(rows => rows.map(row => row.dataset.recordId));
+  if (!partialMetricFrontierIds.includes("fixture-2")) {
+    throw new Error("Pareto frontier incorrectly required the selected display metric on every cohort record");
+  }
+  await page.locator("[data-results-cohort-clear]").click();
+
   await metricSelect.selectOption("output_throughput_per_gpu");
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Scaling analysis must remain hidden until a strict workload cohort is selected");
@@ -559,13 +572,6 @@ const { chromium } = require("playwright");
       await paretoPlot.locator(".benchmark-frontier-point.is-pareto").count() !== 2) {
     throw new Error("Pareto scatter plot did not distinguish all candidates from non-dominated points");
   }
-  await metricSelect.selectOption("p99_itl");
-  const metricIndependentFrontierIds = await page.locator("[data-results-frontier-content] tbody tr")
-    .evaluateAll(rows => rows.map(row => row.dataset.recordId));
-  if (!metricIndependentFrontierIds.includes("fixture-2")) {
-    throw new Error("Pareto workload cohort incorrectly excluded a record missing only the currently selected display metric");
-  }
-  await metricSelect.selectOption("output_throughput_per_gpu");
   await page.locator("[data-results-cohort-clear]").click();
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide scaling analysis");
