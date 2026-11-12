@@ -136,6 +136,44 @@ class NormalizationTests(unittest.TestCase):
         self.assertTrue(cpu_result["power_metrics_available"])
         self.assertEqual(cpu_result["normalized_metrics"]["mean_cpu_socket_power"]["unit"], "W/socket")
 
+    def test_inferencex_energy_metrics_require_valid_gpu_power_schema(self):
+        endpoint = "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"
+        base = {
+            "id": 422, "hardware": "h200_sxm", "framework": "vllm",
+            "model": "dsr1", "precision": "fp8", "benchmark_type": "single_turn",
+            "isl": 1024, "osl": 1024, "conc": 32, "num_prefill_gpu": 0,
+            "num_decode_gpu": 8,
+            "metrics": {
+                "joules_per_output_token": 0.34, "joules_per_total_token": 0.12,
+                "joules_per_successful_query": 15.0, "prefill_joules_per_input_token": 0.04,
+                "decode_joules_per_output_token": 0.28, "avg_power_w": 680.0,
+                "avg_total_gpu_power_w": 5440.0,
+            },
+        }
+        unvalidated = normalize_inferencex_record(base, endpoint)
+        self.assertFalse(unvalidated["power_measurement_valid"])
+        self.assertNotIn("energy_per_output_token", unvalidated["normalized_metrics"])
+        self.assertNotIn("energy_per_total_token", unvalidated["normalized_metrics"])
+
+        base["metrics"].update({"power_valid": 1, "power_metric_schema_version": 2})
+        validated = normalize_inferencex_record(base, endpoint)
+        self.assertTrue(validated["power_measurement_valid"])
+        self.assertTrue(validated["gpu_power_metrics_available"])
+        self.assertEqual(validated["normalized_metrics"]["energy_per_output_token"]["value"], 0.34)
+        self.assertEqual(validated["normalized_metrics"]["energy_per_output_token"]["unit"], "J/output token")
+        self.assertEqual(validated["normalized_metrics"]["energy_per_output_token"]["direction"], "lower")
+        self.assertEqual(validated["normalized_metrics"]["energy_per_total_token"]["unit"], "J/total token")
+        self.assertEqual(validated["normalized_metrics"]["energy_per_successful_query"]["unit"], "J/query")
+        self.assertEqual(validated["normalized_metrics"]["prefill_energy_per_input_token"]["unit"], "J/input token")
+        self.assertEqual(validated["normalized_metrics"]["decode_energy_per_output_token"]["unit"], "J/output token")
+        self.assertEqual(validated["normalized_metrics"]["mean_total_gpu_power"]["unit"], "W")
+
+        base["metrics"]["power_valid"] = 0
+        failed = normalize_inferencex_record(base, endpoint)
+        self.assertFalse(failed["power_measurement_valid"])
+        self.assertFalse(failed["gpu_power_metrics_available"])
+        self.assertNotIn("energy_per_output_token", failed["normalized_metrics"])
+
     def test_inferencex_preserves_unknown_serving_and_topology_flags(self):
         endpoint = "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"
         base = {

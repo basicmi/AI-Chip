@@ -1764,3 +1764,72 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-frontier-panel { padding: .75rem; }
   .benchmark-frontier-plot { min-width: 560px; }
 }
+
+
+/* GPU energy efficiency analysis */
+.benchmark-energy-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-energy-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-energy-heading p {
+  max-width: 800px;
+  margin: .35rem 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.benchmark-energy-summary,
+.benchmark-energy-empty,
+.benchmark-energy-legend,
+.benchmark-energy-note {
+  margin: .65rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-energy-summary { color: var(--ink); font-weight: 650; }
+.benchmark-energy-grid { stroke: var(--line); stroke-dasharray: 3 4; stroke-width: 1; }
+.benchmark-energy-axis { stroke: var(--muted); stroke-width: 1.2; }
+.benchmark-energy-tick { fill: var(--muted); font-size: 10px; }
+.benchmark-energy-axis-label { fill: var(--ink); font-size: 11px; font-weight: 600; }
+.benchmark-energy-point { fill: var(--teal); fill-opacity: .3; stroke: var(--teal); stroke-width: 1.2; }
+.benchmark-energy-point.is-pareto { fill-opacity: .88; stroke: var(--ink); stroke-width: 2; }
+.benchmark-energy-table-wrap { overflow-x: auto; margin-top: .7rem; }
+.benchmark-energy-table { width: 100%; min-width: 1120px; border-collapse: collapse; font-size: 9px; }
+.benchmark-energy-table th,
+.benchmark-energy-table td {
+  padding: .55rem .6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.benchmark-energy-table thead th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+  font-weight: 700;
+}
+.benchmark-energy-table tbody tr:last-child td { border-bottom: 0; }
+.benchmark-energy-table tbody td { color: var(--ink); font-variant-numeric: tabular-nums; }
+.benchmark-energy-table td:first-child strong,
+.benchmark-energy-table td:first-child small { display: block; }
+.benchmark-energy-table td:first-child small {
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: 7px;
+  font-variant-numeric: normal;
+}
+.benchmark-energy-source { margin-top: .25rem; font-size: 8px; }
+.benchmark-energy-panel[hidden] { display: none !important; }
+@media (max-width: 560px) {
+  .benchmark-energy-panel { padding: .75rem; }
+}

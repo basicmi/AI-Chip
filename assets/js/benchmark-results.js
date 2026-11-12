@@ -36,6 +36,8 @@
   const scalingContent = $("[data-results-scaling-content]");
   const frontierPanel = $("[data-results-frontier]");
   const frontierContent = $("[data-results-frontier-content]");
+  const energyPanel = $("[data-results-energy]");
+  const energyContent = $("[data-results-energy-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -460,6 +462,31 @@
   };
 
 
+  // Shared by latency and energy analyses. The selected display metric is
+  // intentionally excluded; only the strict workload identity is compared.
+  const performanceKeyFor = record => {
+    if (record.source_id !== "inferencex") return null;
+    const workload = record.workload || {};
+    const source = sourceMap().get(record.source_id);
+    const version = record.benchmark_version || source?.version;
+    const model = record.model_display_name || record.model;
+    const precision = workload.precision || record.weight_data_types;
+    const workloadType = workload.benchmark_type || record.scenario;
+    const speculativeMethod = workload.speculative_method;
+    const servingMode = typeof workload.disaggregated === "boolean" ? workload.disaggregated : null;
+    const required = [
+      version, model, workloadType, record.scenario, record.division, record.availability,
+      record.system_type, workload.isl, workload.osl, workload.concurrency, precision,
+      speculativeMethod, servingMode
+    ];
+    if (required.some(missingCohortValue)) return null;
+    return JSON.stringify([
+      record.source_id, record.benchmark_suite, version, model, record.model,
+      workloadType, record.scenario, record.division, record.availability, record.system_type,
+      workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod, servingMode
+    ]);
+  };
+
   const renderParetoFrontier = () => {
     if (!frontierPanel || !frontierContent) return;
     const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
@@ -471,31 +498,6 @@
 
     frontierPanel.hidden = false;
     frontierContent.replaceChildren();
-    // Match the workload identity without requiring the currently selected display
-    // metric. A record can be useful to the three-metric frontier even when it does
-    // not publish the metric selected in the main results table.
-    const performanceKeyFor = record => {
-      if (record.source_id !== "inferencex") return null;
-      const workload = record.workload || {};
-      const source = sourceMap().get(record.source_id);
-      const version = record.benchmark_version || source?.version;
-      const model = record.model_display_name || record.model;
-      const precision = workload.precision || record.weight_data_types;
-      const workloadType = workload.benchmark_type || record.scenario;
-      const speculativeMethod = workload.speculative_method;
-      const servingMode = typeof workload.disaggregated === "boolean" ? workload.disaggregated : null;
-      const required = [
-        version, model, workloadType, record.scenario, record.division, record.availability,
-        record.system_type, workload.isl, workload.osl, workload.concurrency, precision,
-        speculativeMethod, servingMode
-      ];
-      if (required.some(missingCohortValue)) return null;
-      return JSON.stringify([
-        record.source_id, record.benchmark_suite, version, model, record.model,
-        workloadType, record.scenario, record.division, record.availability, record.system_type,
-        workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod, servingMode
-      ]);
-    };
     const cohortRecords = database.records.filter(record =>
       performanceKeyFor(record) === activeCohort.performanceKey
     );
@@ -685,6 +687,180 @@
     table.append(tbody);
     tableWrap.append(table);
     frontierContent.append(tableWrap);
+  };
+
+
+  const renderEnergyEfficiency = () => {
+    if (!energyPanel || !energyContent) return;
+    const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
+      activeCohort.performanceKey && database;
+    if (!supported) {
+      energyPanel.hidden = true;
+      return;
+    }
+    energyPanel.hidden = false;
+    energyContent.replaceChildren();
+    const cohortRecords = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
+    const readMetric = (record, key, unit, direction) => {
+      const metric = record.normalized_metrics?.[key];
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value) ||
+          metric.value <= 0 || metric.unit !== unit || metric.direction !== direction) return null;
+      return metric;
+    };
+    // Keep the publisher's power_valid + schema-version evidence gate in the UI.
+    const energyRecords = cohortRecords.flatMap(record => {
+      if (record.power_measurement_valid !== true || record.gpu_power_metrics_available !== true) return [];
+      const energy = readMetric(record, "energy_per_output_token", "J/output token", "lower");
+      if (!energy) return [];
+      return [{
+        record, energy: energy.value,
+        totalTokenEnergy: readMetric(record, "energy_per_total_token", "J/total token", "lower"),
+        inputTokenEnergy: readMetric(record, "energy_per_input_token", "J/input token", "lower"),
+        prefillEnergy: readMetric(record, "prefill_energy_per_input_token", "J/input token", "lower"),
+        decodeEnergy: readMetric(record, "decode_energy_per_output_token", "J/output token", "lower"),
+        queryEnergy: readMetric(record, "energy_per_successful_query", "J/query", "lower"),
+        throughput: readMetric(record, "output_throughput_per_gpu", "tok/s/GPU", "higher"),
+        gpuPower: readMetric(record, "mean_gpu_power_per_gpu", "W/GPU", "context"),
+        totalGpuPower: readMetric(record, "mean_total_gpu_power", "W", "context")
+      }];
+    }).sort((a,b)=>a.energy-b.energy || String(a.record.id).localeCompare(String(b.record.id)));
+
+    const excludedCount = cohortRecords.length - energyRecords.length;
+    const plotCandidates = energyRecords.filter(item => item.throughput !== null);
+    const dominates = (a,b) => a.energy <= b.energy && a.throughput.value >= b.throughput.value &&
+      (a.energy < b.energy || a.throughput.value > b.throughput.value);
+    plotCandidates.forEach(candidate => {
+      candidate.isPareto = !plotCandidates.some(other => other !== candidate && dominates(other,candidate));
+    });
+    const frontier = plotCandidates.filter(candidate => candidate.isPareto);
+    energyContent.append(make("p","benchmark-energy-summary",
+      cohortRecords.length+" records in the selected strict workload cohort · "+
+      energyRecords.length+" have validated GPU energy per output token · "+
+      plotCandidates.length+" also report output throughput per GPU · "+
+      frontier.length+" Pareto-optimal energy/throughput configurations · "+
+      excludedCount+" excluded because validated GPU energy evidence is unavailable."));
+    if (!energyRecords.length) {
+      energyContent.append(make("p","benchmark-energy-empty",
+        "No validated GPU energy-per-output-token measurements are available in this strict workload cohort. Records without publisher-validated GPU power telemetry are not ranked or estimated."));
+      return;
+    }
+
+    if (plotCandidates.length) {
+      const ns="http://www.w3.org/2000/svg";
+      const svgNode=(tag,attrs,content)=>{
+        const node=document.createElementNS(ns,tag);
+        Object.entries(attrs||{}).forEach(([key,value])=>node.setAttribute(key,String(value)));
+        if(content!==undefined)node.textContent=String(content);
+        return node;
+      };
+      const svg=svgNode("svg",{
+        viewBox:"0 0 760 340",role:"img",
+        "aria-label":"GPU energy per output token versus output throughput per GPU; bubble size represents mean GPU power per GPU",
+        "data-energy-plot":""
+      });
+      const plot={left:82,top:24,width:626,height:250};
+      const xs=plotCandidates.map(x=>x.energy),ys=plotCandidates.map(x=>x.throughput.value);
+      const domain=values=>{
+        const min=Math.min(...values),max=Math.max(...values),span=max-min||Math.max(Math.abs(min)*.2,.01);
+        return {min:Math.max(0,min-span*.12),max:max+span*.12};
+      };
+      const xd=domain(xs),yd=domain(ys);
+      const sx=v=>plot.left+(v-xd.min)/(xd.max-xd.min)*plot.width;
+      const sy=v=>plot.top+plot.height-(v-yd.min)/(yd.max-yd.min)*plot.height;
+      const powers=plotCandidates.map(x=>x.gpuPower?.value).filter(Number.isFinite);
+      const pmin=powers.length?Math.min(...powers):null,pmax=powers.length?Math.max(...powers):null;
+      for(let tick=0;tick<=4;tick+=1){
+        const x=plot.left+plot.width*tick/4,y=plot.top+plot.height*tick/4;
+        svg.append(svgNode("line",{x1:x,y1:plot.top,x2:x,y2:plot.top+plot.height,class:"benchmark-energy-grid"}));
+        svg.append(svgNode("line",{x1:plot.left,y1:y,x2:plot.left+plot.width,y2:y,class:"benchmark-energy-grid"}));
+        svg.append(svgNode("text",{x,y:plot.top+plot.height+18,"text-anchor":"middle",class:"benchmark-energy-tick"},
+          numberText(xd.min+(xd.max-xd.min)*tick/4)));
+        svg.append(svgNode("text",{x:plot.left-10,y:y+3,"text-anchor":"end",class:"benchmark-energy-tick"},
+          numberText(yd.max-(yd.max-yd.min)*tick/4)));
+      }
+      svg.append(svgNode("line",{x1:plot.left,y1:plot.top+plot.height,x2:plot.left+plot.width,y2:plot.top+plot.height,class:"benchmark-energy-axis"}));
+      svg.append(svgNode("line",{x1:plot.left,y1:plot.top,x2:plot.left,y2:plot.top+plot.height,class:"benchmark-energy-axis"}));
+      svg.append(svgNode("text",{x:plot.left+plot.width/2,y:326,"text-anchor":"middle",class:"benchmark-energy-axis-label"},
+        "GPU energy per output token (J) · lower is better"));
+      svg.append(svgNode("text",{x:17,y:plot.top+plot.height/2,transform:"rotate(-90 17 "+(plot.top+plot.height/2)+")",
+        "text-anchor":"middle",class:"benchmark-energy-axis-label"},"Output throughput / GPU (tok/s) · higher is better"));
+      plotCandidates.forEach(candidate=>{
+        const power=candidate.gpuPower?.value;
+        const normalized = power === undefined || power === null || pmin === pmax
+          ? 0.5 : (power - pmin) / (pmax - pmin);
+        const radius=power===undefined||power===null?5:5+Math.sqrt(normalized)*7;
+        const circle=svgNode("circle",{
+          cx:sx(candidate.energy),cy:sy(candidate.throughput.value),r:radius,
+          class:"benchmark-energy-point"+(candidate.isPareto?" is-pareto":""),
+          "data-record-id":candidate.record.id,"data-frontier":candidate.isPareto?"true":"false"
+        });
+        circle.append(svgNode("title",{},[
+          candidate.record.system_name||candidate.record.system?.hardware||"System not specified",
+          "GPU energy "+numberText(candidate.energy)+" J/output token",
+          "Output throughput "+numberText(candidate.throughput.value)+" tok/s/GPU",
+          power===undefined||power===null?"Mean GPU power not reported":"Mean GPU power "+numberText(power)+" W/GPU",
+          candidate.isPareto?"Pareto optimal":"Dominated by another configuration"
+        ].join(" · ")));
+        svg.append(circle);
+      });
+      energyContent.append(svg);
+      energyContent.append(make("p","benchmark-energy-legend",
+        "Each point is one publisher observation. Outlined points are non-dominated on energy per output token and output throughput per GPU. Bubble size represents mean GPU power per GPU when reported; it is context, not a third optimization objective."));
+    } else {
+      energyContent.append(make("p","benchmark-energy-empty",
+        "Validated GPU energy measurements are available, but none of these records also reports output throughput per GPU; the energy table is shown without a Pareto plot."));
+    }
+
+    const wrap=make("div","benchmark-energy-table-wrap"),table=make("table","benchmark-energy-table");
+    const thead=document.createElement("thead"),header=document.createElement("tr");
+    ["Configuration","GPU energy / output token","GPU energy / total token","GPU energy / input token",
+     "Prefill energy / input token","Decode energy / output token","Energy / successful query",
+     "Output throughput / GPU","Mean GPU power / GPU","Mean total GPU power","CPU power (separate)",
+     "GPU count","Source / evidence"].forEach(label=>header.append(make("th","",label)));
+    thead.append(header);table.append(thead);
+    const tbody=document.createElement("tbody");
+    energyRecords.forEach(item=>{
+      const record=item.record,row=document.createElement("tr");
+      row.dataset.recordId=record.id;
+      const identity=make("td","");
+      identity.append(make("strong","",record.system_name||record.system?.hardware||record.system?.accelerator_model||"System not specified"));
+      identity.append(make("small","",(record.accelerator_vendor||"Unknown vendor")+" · "+
+        (record.software?.framework||"Framework not reported")+" · "+(record.submitter||"Unknown submitter")));
+      row.append(identity);
+      row.append(make("td","",numberText(item.energy)+" J/output token"));
+      row.append(make("td","",item.totalTokenEnergy?numberText(item.totalTokenEnergy.value)+" J/total token":"Not reported"));
+      row.append(make("td","",item.inputTokenEnergy?numberText(item.inputTokenEnergy.value)+" J/input token":"Not reported"));
+      row.append(make("td","",item.prefillEnergy?numberText(item.prefillEnergy.value)+" J/input token":"Not reported"));
+      row.append(make("td","",item.decodeEnergy?numberText(item.decodeEnergy.value)+" J/output token":"Not reported"));
+      row.append(make("td","",item.queryEnergy?numberText(item.queryEnergy.value)+" J/query":"Not reported"));
+      row.append(make("td","",item.throughput?numberText(item.throughput.value)+" tok/s/GPU":"Not reported"));
+      row.append(make("td","",item.gpuPower?numberText(item.gpuPower.value)+" W/GPU":"Not reported"));
+      row.append(make("td","",item.totalGpuPower?numberText(item.totalGpuPower.value)+" W":"Not reported"));
+      const cpuCell=make("td","");
+      if(record.cpu_power_measurement_valid===true){
+        const cpuMetric=[
+          record.normalized_metrics?.mean_total_cpu_power,
+          record.normalized_metrics?.mean_cpu_socket_power,
+          record.normalized_metrics?.mean_total_module_power
+        ].find(m=>m&&typeof m.value==="number"&&Number.isFinite(m.value)&&m.value>0&&m.direction==="context");
+        cpuCell.textContent=cpuMetric?(cpuMetric.label||"CPU/module power")+": "+numberText(cpuMetric.value)+" "+cpuMetric.unit:"Validated; no CPU power value";
+      }else cpuCell.textContent="Not validated / not reported";
+      row.append(cpuCell);
+      const count=reportedAcceleratorCount(record),gpuCell=make("td","",count?count.count+" GPUs":"Not reported");
+      if(count)gpuCell.append(make("small","",count.source));
+      row.append(gpuCell);
+      const evidence=make("td","");
+      evidence.append(make("small","","GPU power telemetry: "+(record.power_measurement_status||"status unavailable")));
+      const link=make("div","benchmark-energy-source");
+      addLink(link,record.detail_url||record.source_url,"Source record ↗");
+      if(!link.childNodes.length)link.append(make("span","","Source link unavailable"));
+      evidence.append(link);row.append(evidence);tbody.append(row);
+    });
+    table.append(tbody);wrap.append(table);energyContent.append(wrap);
+    energyContent.append(make("p","benchmark-energy-note",
+      "Measurement boundary: energy per token and GPU power are publisher-normalized GPU telemetry. CPU/socket/module telemetry is shown separately and is never added to GPU energy. No energy value is inferred from power, runtime or throughput; records without a valid GPU power verdict and schema version are excluded."));
   };
 
   const comparisonMetricFor = (item) => {
@@ -1225,6 +1401,7 @@
     renderComparisonWorkspace();
     renderScalingAnalysis(filteredRecords);
     renderParetoFrontier();
+    renderEnergyEfficiency();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +
