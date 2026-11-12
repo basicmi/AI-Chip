@@ -383,6 +383,8 @@ def analyze_communication(evidence):
             "warnings": warnings,
         })
 
+    if not links:
+        missing.append("per-link entity, fabric, traffic and directionality-matched capacity/utilization")
     return {
         "status": "complete" if links and all(item["status"] == "complete" for item in links)
             else "partial" if links else "insufficient_evidence",
@@ -484,6 +486,17 @@ def _kv_observations(evidence):
                     "unit": unit, "used": used["value"], "capacity": capacity["value"],
                     "occupancy_pct": pct, "input_metric_ids": [used_id, capacity_id],
                 })
+    for metric in _metrics(evidence, "kv_cache_occupancy_pct"):
+        if not any(
+            item["scope"] == metric.get("scope") and item["entity_id"] == metric.get("entity_id")
+            for item in observations
+        ) and _valid_number(metric.get("value")) and 0 <= metric["value"] <= 100:
+            observations.append({
+                "scope": metric.get("scope"), "entity_id": metric.get("entity_id"),
+                "unit": "%", "used": None, "capacity": None,
+                "occupancy_pct": metric["value"],
+                "input_metric_ids": metric.get("input_metric_ids", ["kv_cache_occupancy_pct"]),
+            })
     return observations
 
 
@@ -649,7 +662,8 @@ def diagnose_record(record):
     attribution = attribute_candidates(evidence, roofline, communication, runtime)
     window = _window_seconds(evidence) if evidence else None
     has_any = bool(
-        roofline.get("analyses") or communication.get("links") or runtime.get("metrics")
+        (evidence and evidence.get("metrics")) or roofline.get("analyses")
+        or communication.get("links") or runtime.get("metrics")
         or _kv_observations(evidence) or _thermal_observations(evidence)
     )
     next_measurements = [
