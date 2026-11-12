@@ -777,6 +777,54 @@
               "sparsity"
             ]
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "sm_active_pct",
+                  "tensor_active_pct",
+                  "kv_cache_hit_rate_pct",
+                  "link_utilization_pct",
+                  "throttle_active_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maximum": 100
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "link_bandwidth_bytes_per_s",
+                  "link_peak_bandwidth_bytes_per_s",
+                  "link_utilization_pct",
+                  "network_tx_bytes",
+                  "network_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "link_type"
+            ]
+          }
         }
       ]
     },
