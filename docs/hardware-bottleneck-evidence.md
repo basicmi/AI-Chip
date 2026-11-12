@@ -24,7 +24,7 @@ A benchmark record may contain an optional hardware_evidence object. Its schema 
 | provenance | Source class, HTTP(S) evidence URL, collection timestamp, optional artifact SHA-256 |
 | metrics[] | Canonical metric ID, value/unit, raw-vs-derived kind, aggregation, scope, exact source name, and optional derivation formula |
 
-A metric's source_name is the exact counter/telemetry field name emitted by the collector. metric_id is the normalized semantic identity. Do not replace the source name with a guessed alias.
+A metric's source_name is the exact counter/telemetry field name emitted by the collector. metric_id is the normalized semantic identity. Compute FLOP metrics must also carry precision and sparsity metadata. Do not replace the source name with a guessed alias.
 
 ## Canonical metric vocabulary
 
@@ -62,7 +62,7 @@ link_type is required for generic link_* and network_* metrics (nvlink, pcie, in
 
 | Candidate bottleneck | Minimum evidence to investigate | Important caveats |
 |---|---|---|
-| Compute saturation | Achieved FLOP/s and comparable peak FLOP/s at the same precision/sparsity, plus SM/Tensor activity | Utilization alone is not achieved compute; peak specs must match SKU, clock, precision and sparsity |
+| Compute saturation | Achieved FLOP/s and comparable peak FLOP/s with matching precision, sparsity and scope, plus SM/Tensor activity | Utilization alone is not achieved compute; peak specs must match SKU, clock, precision and sparsity |
 | HBM bandwidth | DRAM read/write traffic or measured bandwidth, plus a matching device/system peak bandwidth | Memory-used bytes and GPU utilization do not measure HBM bandwidth |
 | KV-cache pressure | KV bytes or token occupancy and corresponding capacity, ideally with allocator/eviction/reuse evidence | Total GPU memory use is not KV-cache occupancy; cache hit rate requires a defined denominator |
 | Communication | Directional bytes/rates or link utilization, link type, topology and matching link capacity | PCIe/NVLink/NIC aggregate traffic cannot be conflated; link counters may double-count both endpoints |
