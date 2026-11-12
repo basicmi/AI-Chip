@@ -114,6 +114,29 @@ python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
 python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
 ```
 
+## Evidence-constrained diagnosis engine
+
+The executable analysis layer is \`scripts/diagnose_hardware_performance.py\`. It accepts one benchmark record (including its optional \`hardware_evidence\` and publisher-normalized \`normalized_metrics\`) and writes a separate report:
+
+\`\`\`bash
+python3 scripts/diagnose_hardware_performance.py \\
+  --input benchmark-record.json \\
+  --output hardware-diagnosis.json
+\`\`\`
+
+The report has four independent views:
+
+1. **Roofline geometry:** arithmetic intensity = interval FLOPs / (DRAM read bytes + DRAM write bytes); achieved FLOP/s = interval FLOPs / sampling duration; memory ceiling = arithmetic intensity × declared peak DRAM bandwidth; roofline ceiling = min(compute peak, memory ceiling). Compute peak must match precision, sparsity, scope and entity. DRAM counters and peaks must share scope/entity. Each GPU or other entity is analyzed independently.
+2. **Communication:** reports per-link bandwidth and utilization only when link entity, fabric and directionality match. TX/RX counters are combined only for the same link. A utilization ratio does not prove that a link is on the workload's critical path.
+3. **Serving runtime:** retains validated publisher-normalized TTFT, TPOT, ITL, throughput, GPU utilization/memory, and strictly validated power/energy metrics. P99/median ratios are descriptive distribution indicators, not causal attribution. Workload and prefill/decode parallelism fields are retained as context.
+4. **Candidate attribution:** records roofline ceiling geometry, observed link utilization, KV-cache occupancy and non-zero throttle activity. Scheduling/queueing remains explicitly unattributed until request queue, batch formation, dispatch and kernel-gap traces are supplied.
+
+The engine always sets \`overall_verdict=undetermined\` and \`automatic_bottleneck_classification=false\`. It uses no fixed utilization threshold and emits no uncalibrated numeric confidence score. A lower theoretical roofline ceiling is not a claim that the workload is bottlenecked by that resource. A throttle counter is evidence of throttle activity, not a complete explanation of its performance impact.
+
+The browser Results Explorer exposes the same conservative boundary: it shows roofline arithmetic only when the required same-boundary inputs are present, displays per-link utilization only with entity/fabric/directionality, and keeps TTFT/TPOT and aggregate GPU signals clearly labeled as runtime/context observations.
+
+The focused test suite covers scope and precision mismatches, multi-GPU separation, zero-valued directional counters, link identity/directionality, serving metric units, strict power gating, thermal observations and the no-automatic-verdict policy.
+
 ## What is needed before making a bottleneck claim
 
 | Candidate bottleneck | Minimum evidence to investigate | Important caveats |
