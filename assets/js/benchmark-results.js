@@ -893,8 +893,15 @@
       {
         key: "compute", label: "Compute",
         description: "Achieved and comparable peak FLOP/s, plus SM or Tensor activity",
-        required: ids => ids.has("achieved_flops") && ids.has("theoretical_peak_flops") &&
-          (ids.has("sm_active_pct") || ids.has("tensor_active_pct")),
+        required: (ids, evidence) => {
+          const achieved = evidence.metrics.find(metric => metric.metric_id === "achieved_flops");
+          const peak = evidence.metrics.find(metric => metric.metric_id === "theoretical_peak_flops");
+          const comparableCompute = achieved && peak &&
+            achieved.precision && achieved.precision === peak.precision &&
+            achieved.sparsity && achieved.sparsity === peak.sparsity &&
+            achieved.scope === peak.scope;
+          return comparableCompute && (ids.has("sm_active_pct") || ids.has("tensor_active_pct"));
+        },
         relevant: ids => ["sm_active_pct", "tensor_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
       },
       {
