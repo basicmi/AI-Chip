@@ -464,6 +464,8 @@ const { chromium } = require("playwright");
         }),
         ...(index === 0 ? {
           energy_per_successful_query: { value: 8.4, unit: "J/query", label: "Energy per successful query", direction: "lower", family: "energy" },
+          prefill_energy_per_input_token: { value: 0.04, unit: "J/input token", label: "Prefill energy per input token", direction: "lower", family: "energy" },
+          decode_energy_per_output_token: { value: 0.28, unit: "J/output token", label: "Decode energy per output token", direction: "lower", family: "energy" },
           mean_total_cpu_power: { value: 75, unit: "W", label: "Mean total CPU power", direction: "context", family: "cpu_power" }
         } : {}),
         mean_gpu_power_per_gpu: { value: [260, 280, 180, 240][index], unit: "W/GPU", label: "Mean GPU power", direction: "context", family: "power" },
@@ -598,7 +600,8 @@ const { chromium } = require("playwright");
   if (!energyText.includes("3 records in the selected strict workload cohort") ||
       !energyText.includes("2 have validated GPU energy per output token") ||
       !energyText.includes("2 Pareto-optimal energy/throughput configurations") ||
-      !energyText.includes("75 W") || !energyText.includes("CPU/socket/module telemetry")) {
+      !energyText.includes("75 W") || !energyText.includes("0.04 J/input token") ||
+      !energyText.includes("0.28 J/output token") || !energyText.includes("CPU/socket/module telemetry")) {
     throw new Error("Energy analysis did not summarize validated GPU energy and separate CPU telemetry: " + energyText);
   }
   const energyIds = await page.locator("[data-results-energy-content] tbody tr")
