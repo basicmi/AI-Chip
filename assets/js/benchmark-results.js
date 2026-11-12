@@ -897,14 +897,17 @@
           const achieved = evidence.metrics.find(metric => metric.metric_id === "achieved_flops");
           const peak = evidence.metrics.find(metric => metric.metric_id === "theoretical_peak_flops");
           const activity = evidence.metrics.find(metric =>
-            metric.metric_id === "sm_active_pct" || metric.metric_id === "tensor_active_pct");
+            ["sm_active_pct", "tensor_active_pct", "sm_throughput_pct", "valu_active_pct", "mfma_active_pct"]
+              .includes(metric.metric_id));
           const comparableCompute = achieved && peak && activity &&
             achieved.precision && achieved.precision === peak.precision &&
             achieved.sparsity && achieved.sparsity === peak.sparsity &&
-            achieved.scope === peak.scope && activity.scope === achieved.scope;
+            achieved.scope === peak.scope && activity.scope === achieved.scope &&
+            achieved.entity_id === peak.entity_id && activity.entity_id === achieved.entity_id;
           return !!comparableCompute;
         },
-        relevant: ids => ["sm_active_pct", "tensor_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
+        relevant: ids => ["sm_active_pct", "tensor_active_pct", "sm_throughput_pct", "valu_active_pct",
+          "mfma_active_pct", "vmem_active_pct", "achieved_flops", "theoretical_peak_flops"].some(id => ids.has(id))
       },
       {
         key: "hbm", label: "HBM bandwidth",
@@ -921,8 +924,9 @@
             (!!read && !!write && read.scope === write.scope && read.scope === peak.scope)
           );
         },
-        relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_bandwidth_bytes_per_s",
-          "dram_peak_bandwidth_bytes_per_s", "hbm_used_bytes", "hbm_capacity_bytes"].some(id => ids.has(id))
+        relevant: ids => ["dram_read_bytes", "dram_write_bytes", "dram_active_pct", "dram_bandwidth_bytes_per_s",
+          "dram_peak_bandwidth_bytes_per_s", "dram_bandwidth_utilization_pct",
+          "hbm_used_bytes", "hbm_capacity_bytes"].some(id => ids.has(id))
       },
       {
         key: "kv", label: "KV cache",
@@ -1083,6 +1087,9 @@
           " · source: " + (metric.source_name || "not reported") +
           (metric.precision ? " · precision: " + metric.precision : "") +
           (metric.sparsity ? " · sparsity: " + metric.sparsity : "") +
+          (metric.mapping_quality ? " · mapping: " + metric.mapping_quality : "") +
+          (metric.mapping_note ? " · mapping note: " + metric.mapping_note : "") +
+          (metric.entity_id ? " · entity: " + metric.entity_id : "") +
           (metric.formula ? " · formula: " + metric.formula : "") +
           (Array.isArray(metric.input_metric_ids) ? " · inputs: " + metric.input_metric_ids.join(", ") : "");
         list.append(item);
