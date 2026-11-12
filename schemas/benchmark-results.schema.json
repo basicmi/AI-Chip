@@ -756,6 +756,27 @@
               ]
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "achieved_flops",
+                  "theoretical_peak_flops"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "precision",
+              "sparsity"
+            ]
+          }
         }
       ]
     },
