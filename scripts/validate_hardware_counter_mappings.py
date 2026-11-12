@@ -46,7 +46,7 @@ def validate_catalog(catalog, metric_units=None):
         url = source.get("documentation_url")
         if not isinstance(url, str) or not url.startswith(("https://", "http://")):
             errors.append(f"{where}: documentation_url must be HTTP(S)")
-        if source.get("status") not in {"current", "preview", "archived"}:
+        if not isinstance(source.get("status"), str) or source.get("status") not in {"current", "preview", "archived"}:
             errors.append(f"{where}: invalid status")
         if not isinstance(source.get("notes"), str) or not source["notes"].strip():
             errors.append(f"{where}: notes are required")
@@ -69,9 +69,10 @@ def validate_catalog(catalog, metric_units=None):
         source_metric = mapping.get("source_metric")
         if not isinstance(source_metric, str) or not source_metric.strip():
             errors.append(f"{where}: source_metric is required")
-        elif (sid, source_metric) in source_keys:
+        elif isinstance(sid, str) and (sid, source_metric) in source_keys:
             errors.append(f"{where}: duplicate source metric mapping {sid}/{source_metric}")
-        source_keys.add((sid, source_metric))
+        if isinstance(sid, str) and isinstance(source_metric, str):
+            source_keys.add((sid, source_metric))
         canonical = mapping.get("canonical_metric_id")
         status = mapping.get("mapping_status")
         conversion = mapping.get("conversion")
@@ -93,7 +94,7 @@ def validate_catalog(catalog, metric_units=None):
                 errors.append(f"{where}: ratio_to_percent requires ratio -> %")
             elif conversion == "mhz_to_hz" and (source_unit != "MHz" or canonical_unit != "Hz"):
                 errors.append(f"{where}: mhz_to_hz requires MHz -> Hz")
-            elif conversion not in {"identity", "ratio_to_percent", "mhz_to_hz"}:
+            elif not isinstance(conversion, str) or conversion not in {"identity", "ratio_to_percent", "mhz_to_hz"}:
                 errors.append(f"{where}: invalid conversion for mapped metric")
         if status == "direct" and conversion != "identity":
             errors.append(f"{where}: direct mapping must use identity conversion")
@@ -106,7 +107,7 @@ def validate_catalog(catalog, metric_units=None):
         if not isinstance(mapping.get("default_scope"), str) or mapping.get("default_scope") not in HARDWARE_EVIDENCE_SCOPES:
             errors.append(f"{where}: invalid default_scope")
         if mapping.get("default_scope") == "per_link":
-            if mapping.get("link_type") not in {"nvlink", "pcie", "infiniband", "roce", "ethernet", "other"}:
+            if not isinstance(mapping.get("link_type"), str) or mapping.get("link_type") not in {"nvlink", "pcie", "infiniband", "roce", "ethernet", "other"}:
                 errors.append(f"{where}: per-link mapping requires link_type")
             if not isinstance(mapping.get("entity_id"), str) or not mapping["entity_id"]:
                 errors.append(f"{where}: per-link mapping requires entity_id")
