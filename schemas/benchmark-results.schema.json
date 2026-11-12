@@ -828,6 +828,56 @@
               "link_type"
             ]
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "nvlink_tx_bytes",
+                  "nvlink_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "link_type": {
+                "const": "nvlink"
+              }
+            },
+            "required": [
+              "link_type"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "pcie_tx_bytes",
+                  "pcie_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "link_type": {
+                "const": "pcie"
+              }
+            },
+            "required": [
+              "link_type"
+            ]
+          }
         }
       ]
     },
