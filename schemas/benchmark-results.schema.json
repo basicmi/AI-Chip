@@ -693,6 +693,18 @@
               "throttle_active_pct"
             ]
           }
+        },
+        "precision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sparsity": {
+          "enum": [
+            "dense",
+            "structured_sparse",
+            "unstructured_sparse",
+            "unknown"
+          ]
         }
       },
       "allOf": [
