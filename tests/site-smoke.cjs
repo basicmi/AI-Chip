@@ -452,7 +452,9 @@ const { chromium } = require("playwright");
       result_value: null, result_unit: "", accuracy_text: "", source_url: "https://inferencex.semianalysis.com/",
       normalized_metrics: {
         output_throughput_per_gpu: { value, unit: "tok/s/GPU", label: "Output throughput", direction: "higher", family: "throughput" },
-        median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" }
+        median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" },
+        p99_ttft: { value: [1.2, 0.8, 1.0, 1.5][index], unit: "s", label: "P99 TTFT", direction: "lower", family: "latency" },
+        p99_tpot: { value: [0.15, 0.16, 0.12, 0.2][index], unit: "s", label: "P99 TPOT", direction: "lower", family: "latency" }
       },
       metrics: { output_tput_per_gpu: value },
       workload: { precision: "FP8", benchmark_type: "single_turn", isl: index === 3 ? 2048 : 1024, osl: 1024, concurrency: 32, speculative_method: "none", disaggregated: false },
@@ -534,9 +536,32 @@ const { chromium } = require("playwright");
       !scalingText.includes("worker-pool counts") || !scalingText.includes("derived estimates")) {
     throw new Error("Scaling analysis did not derive a provenance-aware 4-to-8 GPU efficiency curve: " + scalingText);
   }
+  if (await page.locator("[data-results-frontier]").isHidden()) {
+    throw new Error("Selecting a strict InferenceX cohort did not reveal the latency-throughput frontier");
+  }
+  const frontierText = await page.locator("[data-results-frontier-content]").textContent();
+  if (!frontierText.includes("3 report all three required metrics") ||
+      !frontierText.includes("2 Pareto-optimal configurations") ||
+      !frontierText.includes("P99 TTFT") || !frontierText.includes("P99 TPOT")) {
+    throw new Error("Pareto frontier did not summarize the three-metric cohort correctly: " + frontierText);
+  }
+  const frontierIds = await page.locator("[data-results-frontier-content] tbody tr")
+    .evaluateAll(rows => rows.map(row => row.dataset.recordId));
+  if (frontierIds.length !== 2 || !frontierIds.includes("fixture-1") ||
+      !frontierIds.includes("fixture-2") || frontierIds.includes("fixture-0")) {
+    throw new Error("Pareto frontier should retain the two non-dominated configurations and exclude fixture-0: " + frontierIds.join(", "));
+  }
+  const paretoPlot = page.locator("[data-pareto-plot]");
+  if (await paretoPlot.locator(".benchmark-frontier-point").count() !== 3 ||
+      await paretoPlot.locator(".benchmark-frontier-point.is-pareto").count() !== 2) {
+    throw new Error("Pareto scatter plot did not distinguish all candidates from non-dominated points");
+  }
   await page.locator("[data-results-cohort-clear]").click();
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide scaling analysis");
+  }
+  if (!(await page.locator("[data-results-frontier]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide the Pareto frontier");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
