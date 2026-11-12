@@ -454,7 +454,10 @@ const { chromium } = require("playwright");
         output_throughput_per_gpu: { value, unit: "tok/s/GPU", label: "Output throughput", direction: "higher", family: "throughput" },
         median_ttft: { value: 0.8 + index * 0.1, unit: "s", label: "Median TTFT", direction: "lower", family: "latency" },
         p99_ttft: { value: [1.2, 0.8, 1.0, 1.5][index], unit: "s", label: "P99 TTFT", direction: "lower", family: "latency" },
-        p99_tpot: { value: [0.15, 0.16, 0.12, 0.2][index], unit: "s", label: "P99 TPOT", direction: "lower", family: "latency" }
+        p99_tpot: { value: [0.15, 0.16, 0.12, 0.2][index], unit: "s", label: "P99 TPOT", direction: "lower", family: "latency" },
+        ...(index === 2 ? {} : {
+          p99_itl: { value: 0.18 + index * 0.01, unit: "s", label: "P99 inter-token latency", direction: "lower", family: "latency" }
+        })
       },
       metrics: { output_tput_per_gpu: value },
       workload: { precision: "FP8", benchmark_type: "single_turn", isl: index === 3 ? 2048 : 1024, osl: 1024, concurrency: 32, speculative_method: "none", disaggregated: false },
@@ -556,6 +559,13 @@ const { chromium } = require("playwright");
       await paretoPlot.locator(".benchmark-frontier-point.is-pareto").count() !== 2) {
     throw new Error("Pareto scatter plot did not distinguish all candidates from non-dominated points");
   }
+  await metricSelect.selectOption("p99_itl");
+  const metricIndependentFrontierIds = await page.locator("[data-results-frontier-content] tbody tr")
+    .evaluateAll(rows => rows.map(row => row.dataset.recordId));
+  if (!metricIndependentFrontierIds.includes("fixture-2")) {
+    throw new Error("Pareto workload cohort incorrectly excluded a record missing only the currently selected display metric");
+  }
+  await metricSelect.selectOption("output_throughput_per_gpu");
   await page.locator("[data-results-cohort-clear]").click();
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide scaling analysis");
