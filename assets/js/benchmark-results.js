@@ -913,6 +913,9 @@
       const hardwareIdentified = Boolean(record.product_id || record.system_name ||
         system.hardware || record.platform_id);
       const runtimeIdentified = Boolean(software.framework || software.image || software.recipe_fingerprint);
+      const executionDetailsIdentified = Object.keys(record.configuration || {}).length > 0 ||
+        Boolean(system.workers?.length) || system.physical_prefill_gpus !== null && system.physical_prefill_gpus !== undefined ||
+        system.physical_decode_gpus !== null && system.physical_decode_gpus !== undefined;
       const fields = [
         record.accelerator_vendor, record.platform_id, record.product_id,
         record.system_name, system.hardware, system.nodes, system.total_accelerators,
@@ -920,7 +923,10 @@
         system.physical_decode_gpus, software.framework, software.image,
         software.recipe_fingerprint, record.configuration || {}, system.workers || []
       ];
-      return { key: JSON.stringify(fields), complete: hardwareIdentified && runtimeIdentified };
+      return {
+        key: JSON.stringify(fields),
+        complete: hardwareIdentified && runtimeIdentified && executionDetailsIdentified
+      };
     };
     const executionGroups = new Map();
     records.forEach(record => {
