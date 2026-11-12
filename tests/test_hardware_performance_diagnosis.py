@@ -169,6 +169,23 @@ class HardwarePerformanceDiagnosisTests(unittest.TestCase):
         self.assertIsNone(result["links"][0]["measured_bandwidth_bytes_per_second"])
         self.assertIsNone(result["links"][0]["utilization_pct"])
 
+    def test_communication_tx_only_uses_tx_peak_not_bidirectional_sum(self):
+        evidence = base_evidence()
+        evidence["metrics"].extend([
+            metric("nvlink_tx_bytes", 400e9, "byte", "hardware_counter", "sum",
+                   "per_link", "nvlink_l0_tx", link_type="nvlink", entity_id="nvlink:L0"),
+            metric("nvlink_rx_bytes", 400e9, "byte", "hardware_counter", "sum",
+                   "per_link", "nvlink_l0_rx", link_type="nvlink", entity_id="nvlink:L0"),
+            metric("link_peak_bandwidth_bytes_per_s", 50e9, "byte/s", "telemetry", "max",
+                   "per_link", "nvlink_l0_tx_peak", link_type="nvlink",
+                   entity_id="nvlink:L0", directionality="tx"),
+        ])
+        result = analyze_communication(evidence)
+        link = result["links"][0]
+        self.assertAlmostEqual(link["measured_bandwidth_bytes_per_second"], 40e9)
+        self.assertAlmostEqual(link["utilization_pct"], 80)
+        self.assertEqual(link["directionality"], "tx")
+
     def test_communication_requires_directionality_matched_peak(self):
         evidence = base_evidence()
         evidence["metrics"].extend([
