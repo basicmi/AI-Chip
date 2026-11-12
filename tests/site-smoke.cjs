@@ -648,6 +648,17 @@ const { chromium } = require("playwright");
   if (await evidenceRows.count() !== 3) {
     throw new Error("Hardware evidence table did not retain the selected strict cohort");
   }
+  const crossLayerText = await page.locator("[data-results-cross-layer-content]").textContent();
+  if (!crossLayerText.includes("3 strict-cohort records") ||
+      !crossLayerText.includes("3 execution identities") ||
+      !crossLayerText.includes("3 descriptive contrasts") ||
+      !crossLayerText.includes("P99 TTFT") ||
+      !crossLayerText.includes("Not established")) {
+    throw new Error("Cross-layer matrix did not compare the strict cohort with runtime and evidence limits: " + crossLayerText);
+  }
+  if (await page.locator("[data-cross-layer-comparison]").count() !== 3) {
+    throw new Error("Cross-layer matrix should render the three unique execution contrasts");
+  }
   const evidenceRecord = page.locator('[data-hardware-evidence-record-id="fixture-0"]');
   await page.locator(".benchmark-hardware-evidence-details summary").click();
   const evidenceDetails = await page.locator(".benchmark-hardware-evidence-details").textContent();
