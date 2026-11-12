@@ -434,7 +434,7 @@ const { chromium } = require("playwright");
   const metricFixture = {
     database_version: "fixture",
     last_imported_at: "2026-11-10",
-    summary: { total_records: 4, by_availability: { published: 4 }, inferred_records: 0, power_records: 0, submitters: 1 },
+    summary: { total_records: 4, by_availability: { published: 4 }, inferred_records: 0, power_records: 3, submitters: 1 },
     sources: [{ id: "inferencex", name: "SemiAnalysis InferenceX", version: "Public API v1", publisher: "SemiAnalysis", source_class: "third_party_public_benchmark", record_count: 4, results_url: "https://inferencex.semianalysis.com/" }],
     records: [100, 250, 150, 400].map((value, index) => ({
       id: "fixture-" + index, source_id: "inferencex", source_class: "third_party_public_benchmark",
@@ -457,8 +457,24 @@ const { chromium } = require("playwright");
         p99_tpot: { value: [0.15, 0.16, 0.12, 0.2][index], unit: "s", label: "P99 TPOT", direction: "lower", family: "latency" },
         ...(index === 2 ? {} : {
           p99_itl: { value: 0.18 + index * 0.01, unit: "s", label: "P99 inter-token latency", direction: "lower", family: "latency" }
-        })
+        }),
+        energy_per_output_token: { value: [0.30, 0.45, 0.18, 0.22][index], unit: "J/output token", label: "Energy per output token", direction: "lower", family: "energy" },
+        ...(index === 1 ? {} : {
+          energy_per_total_token: { value: [0.12, 0, 0.08, 0.09][index], unit: "J/total token", label: "Energy per total token", direction: "lower", family: "energy" }
+        }),
+        ...(index === 0 ? {
+          energy_per_successful_query: { value: 8.4, unit: "J/query", label: "Energy per successful query", direction: "lower", family: "energy" },
+          mean_total_cpu_power: { value: 75, unit: "W", label: "Mean total CPU power", direction: "context", family: "cpu_power" }
+        } : {}),
+        mean_gpu_power_per_gpu: { value: [260, 280, 180, 240][index], unit: "W/GPU", label: "Mean GPU power", direction: "context", family: "power" },
+        mean_total_gpu_power: { value: [2080, 2240, 720, 3840][index], unit: "W", label: "Mean total GPU power", direction: "context", family: "power" }
       },
+      power_measurement_valid: index !== 2,
+      power_measurement_status: index === 2 ? "failed" : "valid",
+      gpu_power_metrics_available: index !== 2,
+      cpu_power_measurement_valid: index === 0,
+      cpu_power_measurement_status: index === 0 ? "valid" : "not_present",
+      cpu_power_metrics_available: index === 0,
       metrics: { output_tput_per_gpu: value },
       workload: { precision: "FP8", benchmark_type: "single_turn", isl: index === 3 ? 2048 : 1024, osl: 1024, concurrency: 32, speculative_method: "none", disaggregated: false },
       software: {
@@ -540,6 +556,9 @@ const { chromium } = require("playwright");
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Scaling analysis must remain hidden until a strict workload cohort is selected");
   }
+  if (!(await page.locator("[data-results-energy]").isHidden())) {
+    throw new Error("Energy analysis must remain hidden until a strict workload cohort is selected");
+  }
   const scalingRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
   await scalingRow.locator(".benchmark-result-details summary").click();
   await scalingRow.locator(".benchmark-cohort-action").click();
@@ -554,6 +573,9 @@ const { chromium } = require("playwright");
   }
   if (await page.locator("[data-results-frontier]").isHidden()) {
     throw new Error("Selecting a strict InferenceX cohort did not reveal the latency-throughput frontier");
+  }
+  if (await page.locator("[data-results-energy]").isHidden()) {
+    throw new Error("Selecting a strict InferenceX cohort did not reveal GPU energy analysis");
   }
   const frontierText = await page.locator("[data-results-frontier-content]").textContent();
   if (!frontierText.includes("3 report all three required metrics") ||
@@ -572,12 +594,33 @@ const { chromium } = require("playwright");
       await paretoPlot.locator(".benchmark-frontier-point.is-pareto").count() !== 2) {
     throw new Error("Pareto scatter plot did not distinguish all candidates from non-dominated points");
   }
+  const energyText = await page.locator("[data-results-energy-content]").textContent();
+  if (!energyText.includes("3 records in the selected strict workload cohort") ||
+      !energyText.includes("2 have validated GPU energy per output token") ||
+      !energyText.includes("2 Pareto-optimal energy/throughput configurations") ||
+      !energyText.includes("75 W") || !energyText.includes("CPU/socket/module telemetry")) {
+    throw new Error("Energy analysis did not summarize validated GPU energy and separate CPU telemetry: " + energyText);
+  }
+  const energyIds = await page.locator("[data-results-energy-content] tbody tr")
+    .evaluateAll(rows => rows.map(row => row.dataset.recordId));
+  if (energyIds.length !== 2 || !energyIds.includes("fixture-0") ||
+      !energyIds.includes("fixture-1") || energyIds.includes("fixture-2")) {
+    throw new Error("Energy analysis included an unvalidated power record or omitted a valid record: " + energyIds.join(", "));
+  }
+  const energyPlot = page.locator("[data-energy-plot]");
+  if (await energyPlot.locator(".benchmark-energy-point").count() !== 2 ||
+      await energyPlot.locator(".benchmark-energy-point.is-pareto").count() !== 2) {
+    throw new Error("Energy Pareto plot did not distinguish the two non-dominated energy/throughput configurations");
+  }
   await page.locator("[data-results-cohort-clear]").click();
   if (!(await page.locator("[data-results-scaling]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide scaling analysis");
   }
   if (!(await page.locator("[data-results-frontier]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide the Pareto frontier");
+  }
+  if (!(await page.locator("[data-results-energy]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide energy analysis");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
