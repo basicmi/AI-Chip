@@ -203,7 +203,9 @@ def validate_hardware_evidence(row, where):
         if entity_id is not None and (not isinstance(entity_id, str) or not entity_id.strip()):
             errors.append(f"{item_where}: entity_id must be a non-empty string when provided")
         mapping_quality = metric.get("mapping_quality")
-        if mapping_quality is not None and mapping_quality not in {"direct", "proxy"}:
+        if mapping_quality is not None and (
+            not isinstance(mapping_quality, str) or mapping_quality not in {"direct", "proxy"}
+        ):
             errors.append(f"{item_where}: mapping_quality must be direct or proxy")
         if metric.get("mapping_note") is not None and (
             not isinstance(metric.get("mapping_note"), str) or not metric["mapping_note"].strip()
@@ -253,11 +255,29 @@ def validate_hardware_evidence(row, where):
                 continue
             input_scope_matches = any(
                 item.get("scope") == metric.get("scope")
+                and item.get("entity_id") == metric.get("entity_id")
+                and (
+                    metric.get("link_type") is None
+                    or item.get("link_type") == metric.get("link_type")
+                )
                 for item in metrics
                 if isinstance(item, dict) and item.get("metric_id") == input_id
             )
             if not input_scope_matches:
-                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching measurement scope")
+                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching scope/entity/fabric")
+            if metric.get("metric_id") in {"achieved_flops", "compute_peak_utilization_pct"}:
+                matching_compute = [
+                    item for item in metrics
+                    if isinstance(item, dict) and item.get("metric_id") == input_id
+                    and item.get("scope") == metric.get("scope")
+                    and item.get("entity_id") == metric.get("entity_id")
+                ]
+                if matching_compute and any(
+                    (item.get("precision"), item.get("sparsity")) !=
+                    (metric.get("precision"), metric.get("sparsity"))
+                    for item in matching_compute
+                ):
+                    errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived compute input {input_id} has mismatched precision/sparsity")
 
     return errors
 
