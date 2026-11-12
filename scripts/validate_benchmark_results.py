@@ -41,6 +41,214 @@ def summarize(records):
     }
 
 
+
+HARDWARE_EVIDENCE_UNITS = {
+    "sm_active_pct": "%", "tensor_active_pct": "%",
+    "compute_flop_count": "FLOP", "achieved_flops": "FLOP/s", "theoretical_peak_flops": "FLOP/s",
+    "dram_read_bytes": "byte", "dram_write_bytes": "byte",
+    "dram_bandwidth_bytes_per_s": "byte/s", "dram_peak_bandwidth_bytes_per_s": "byte/s",
+    "hbm_used_bytes": "byte", "hbm_capacity_bytes": "byte",
+    "kv_cache_used_bytes": "byte", "kv_cache_capacity_bytes": "byte",
+    "kv_cache_tokens": "token", "kv_cache_token_capacity": "token",
+    "kv_cache_hit_rate_pct": "%",
+    "nvlink_tx_bytes": "byte", "nvlink_rx_bytes": "byte",
+    "pcie_tx_bytes": "byte", "pcie_rx_bytes": "byte",
+    "network_tx_bytes": "byte", "network_rx_bytes": "byte",
+    "link_bandwidth_bytes_per_s": "byte/s", "link_peak_bandwidth_bytes_per_s": "byte/s",
+    "link_utilization_pct": "%",
+    "gpu_power_w": "W", "gpu_clock_hz": "Hz", "memory_clock_hz": "Hz",
+    "temperature_c": "°C", "throttle_active_pct": "%",
+}
+HARDWARE_EVIDENCE_SCOPES = {"per_gpu", "per_link", "per_node", "per_system", "per_process"}
+HARDWARE_EVIDENCE_AGGREGATIONS = {
+    "instantaneous", "mean", "max", "min", "p50", "p95", "p99", "sum", "rate"
+}
+HARDWARE_EVIDENCE_COLLECTOR_TYPES = {
+    "profiler", "device_telemetry", "runtime_telemetry",
+    "network_telemetry", "publisher_export", "other"
+}
+HARDWARE_EVIDENCE_SOURCE_TYPES = {
+    "publisher_api", "profiler_export", "telemetry_export",
+    "independent_measurement", "vendor_report", "other"
+}
+HARDWARE_EVIDENCE_LINK_TYPES = {"nvlink", "pcie", "infiniband", "roce", "ethernet", "other"}
+
+
+def _parse_iso_datetime(value):
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        from datetime import datetime
+        return datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def validate_hardware_evidence(row, where):
+    """Validate optional, provenance-backed low-level hardware measurements."""
+    errors = []
+    evidence = row.get("hardware_evidence")
+    if evidence is None:
+        return errors
+    if not isinstance(evidence, dict):
+        return [f"{where}: hardware_evidence must be an object or null"]
+
+    if evidence.get("schema_version") != "1.0":
+        errors.append(f"{where}: hardware_evidence.schema_version must be 1.0")
+
+    collector = evidence.get("collector")
+    if not isinstance(collector, dict):
+        errors.append(f"{where}: hardware_evidence.collector must be an object")
+    else:
+        if not isinstance(collector.get("name"), str) or not collector["name"].strip():
+            errors.append(f"{where}: hardware_evidence.collector.name must be non-empty")
+        if not isinstance(collector.get("type"), str) or collector.get("type") not in HARDWARE_EVIDENCE_COLLECTOR_TYPES:
+            errors.append(f"{where}: hardware_evidence.collector.type is invalid")
+        version = collector.get("version")
+        if version is not None and not isinstance(version, str):
+            errors.append(f"{where}: hardware_evidence.collector.version must be a string or null")
+
+    system_scope = evidence.get("system_scope")
+    if not isinstance(system_scope, dict):
+        errors.append(f"{where}: hardware_evidence.system_scope must be an object")
+    else:
+        if not isinstance(system_scope.get("scope_type"), str) or system_scope.get("scope_type") not in HARDWARE_EVIDENCE_SCOPES:
+            errors.append(f"{where}: hardware_evidence.system_scope.scope_type is invalid")
+        count = system_scope.get("device_count")
+        if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+            errors.append(f"{where}: hardware_evidence.system_scope.device_count must be a positive integer")
+        for field in ("device_model", "topology"):
+            if system_scope.get(field) is not None and not isinstance(system_scope[field], str):
+                errors.append(f"{where}: hardware_evidence.system_scope.{field} must be a string")
+
+    sampling = evidence.get("sampling")
+    if not isinstance(sampling, dict):
+        errors.append(f"{where}: hardware_evidence.sampling must be an object")
+    else:
+        start = _parse_iso_datetime(sampling.get("started_at"))
+        end = _parse_iso_datetime(sampling.get("ended_at"))
+        if start is None or end is None:
+            errors.append(f"{where}: hardware_evidence sampling timestamps must be ISO date-times")
+        elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
+            errors.append(f"{where}: hardware_evidence sampling window must be positive and timezone-aware")
+        interval = sampling.get("sample_interval_ms")
+        if isinstance(interval, bool) or not isinstance(interval, (int, float)) or not math.isfinite(interval) or interval <= 0:
+            errors.append(f"{where}: hardware_evidence.sample_interval_ms must be a positive finite number")
+        count = sampling.get("sample_count")
+        if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+            errors.append(f"{where}: hardware_evidence.sample_count must be a positive integer")
+
+    provenance = evidence.get("provenance")
+    if not isinstance(provenance, dict):
+        errors.append(f"{where}: hardware_evidence.provenance must be an object")
+    else:
+        if not isinstance(provenance.get("source_type"), str) or provenance.get("source_type") not in HARDWARE_EVIDENCE_SOURCE_TYPES:
+            errors.append(f"{where}: hardware_evidence.provenance.source_type is invalid")
+        if not is_http_url(provenance.get("source_url")) or not provenance.get("source_url"):
+            errors.append(f"{where}: hardware_evidence.provenance.source_url must be an HTTP(S) URL")
+        if _parse_iso_datetime(provenance.get("collected_at")) is None:
+            errors.append(f"{where}: hardware_evidence.provenance.collected_at must be an ISO date-time")
+        digest = provenance.get("artifact_sha256")
+        if digest is not None and (not isinstance(digest, str) or len(digest) != 64 or
+                                   any(char not in "0123456789abcdefABCDEF" for char in digest)):
+            errors.append(f"{where}: hardware_evidence.provenance.artifact_sha256 must be a SHA-256 hex digest")
+
+    metrics = evidence.get("metrics")
+    if not isinstance(metrics, list) or not metrics:
+        errors.append(f"{where}: hardware_evidence.metrics must be a non-empty array")
+        return errors
+
+    seen = set()
+    metric_ids = set()
+    for index, metric in enumerate(metrics):
+        item_where = f"{where}.hardware_evidence.metrics[{index}]"
+        if not isinstance(metric, dict):
+            errors.append(f"{item_where}: must be an object")
+            continue
+        metric_id = metric.get("metric_id")
+        if not isinstance(metric_id, str) or metric_id not in HARDWARE_EVIDENCE_UNITS:
+            errors.append(f"{item_where}: unknown metric_id {metric_id}")
+            continue
+        metric_ids.add(metric_id)
+        unit = metric.get("unit")
+        if unit != HARDWARE_EVIDENCE_UNITS[metric_id]:
+            errors.append(f"{item_where}: {metric_id} unit must be {HARDWARE_EVIDENCE_UNITS[metric_id]}")
+        value = metric.get("value")
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+            errors.append(f"{item_where}: value must be a non-negative finite number")
+        if metric_id.endswith("_pct") and isinstance(value, (int, float)) and not isinstance(value, bool) and not 0 <= value <= 100:
+            errors.append(f"{item_where}: percentage value must be between 0 and 100")
+        if metric_id in {"achieved_flops", "theoretical_peak_flops"}:
+            precision = metric.get("precision")
+            sparsity = metric.get("sparsity")
+            if not isinstance(precision, str) or not precision.strip():
+                errors.append(f"{item_where}: compute FLOP metrics require precision")
+            if not isinstance(sparsity, str) or sparsity not in {"dense", "structured_sparse", "unstructured_sparse", "unknown"}:
+                errors.append(f"{item_where}: compute FLOP metrics require an explicit sparsity mode")
+        kind = metric.get("measurement_kind")
+        aggregation = metric.get("aggregation")
+        scope = metric.get("scope")
+        if not isinstance(kind, str) or kind not in {"hardware_counter", "telemetry", "derived"}:
+            errors.append(f"{item_where}: measurement_kind is invalid")
+        if not isinstance(aggregation, str) or aggregation not in HARDWARE_EVIDENCE_AGGREGATIONS:
+            errors.append(f"{item_where}: aggregation is invalid")
+        if not isinstance(scope, str) or scope not in HARDWARE_EVIDENCE_SCOPES:
+            errors.append(f"{item_where}: scope is invalid")
+        if not isinstance(metric.get("source_name"), str) or not metric["source_name"].strip():
+            errors.append(f"{item_where}: source_name must be non-empty")
+        key = (metric_id, scope if isinstance(scope, str) else repr(scope),
+               aggregation if isinstance(aggregation, str) else repr(aggregation))
+        if key in seen:
+            errors.append(f"{item_where}: duplicate metric_id/scope/aggregation tuple {key}")
+        seen.add(key)
+
+        link_type = metric.get("link_type")
+        expected_link_type = "nvlink" if metric_id.startswith("nvlink_") else "pcie" if metric_id.startswith("pcie_") else None
+        if expected_link_type:
+            if link_type != expected_link_type:
+                errors.append(f"{item_where}: {metric_id} requires link_type={expected_link_type}")
+        elif metric_id.startswith("network_") or metric_id.startswith("link_"):
+            if not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES:
+                errors.append(f"{item_where}: {metric_id} requires a valid link_type")
+        elif link_type is not None and (not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES):
+            errors.append(f"{item_where}: link_type is invalid")
+
+        kind = metric.get("measurement_kind")
+        formula = metric.get("formula")
+        inputs = metric.get("input_metric_ids")
+        if kind == "derived":
+            if not isinstance(formula, str) or not formula.strip():
+                errors.append(f"{item_where}: derived metric requires a formula")
+            if not isinstance(inputs, list) or not inputs or any(
+                not isinstance(item, str) or item not in HARDWARE_EVIDENCE_UNITS for item in inputs
+            ):
+                errors.append(f"{item_where}: derived metric requires valid input_metric_ids")
+        elif formula is not None or inputs is not None:
+            errors.append(f"{item_where}: raw counter/telemetry metric cannot declare a derived formula")
+
+    for index, metric in enumerate(metrics):
+        if not isinstance(metric, dict) or metric.get("measurement_kind") != "derived":
+            continue
+        inputs = metric.get("input_metric_ids")
+        if not isinstance(inputs, list):
+            continue
+        for input_id in inputs:
+            if not isinstance(input_id, str):
+                continue
+            if input_id not in metric_ids:
+                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} is absent from this evidence block")
+                continue
+            input_scope_matches = any(
+                item.get("scope") == metric.get("scope")
+                for item in metrics
+                if isinstance(item, dict) and item.get("metric_id") == input_id
+            )
+            if not input_scope_matches:
+                errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} has no matching measurement scope")
+
+    return errors
+
+
 def validate_database(db, platform_ids=None, product_ids=None):
     errors = []
     if db.get("schema_version") != "1.0":
@@ -83,6 +291,8 @@ def validate_database(db, platform_ids=None, product_ids=None):
             errors.append(f"{where}: duplicate id {rid}")
         else:
             ids.add(rid)
+
+        errors.extend(validate_hardware_evidence(row, where))
 
         sid = row.get("source_id")
         counts[sid] += 1

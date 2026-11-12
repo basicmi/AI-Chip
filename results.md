@@ -164,6 +164,15 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div data-results-decomposition-content aria-live="polite"></div>
   </section>
 
+  <section class="benchmark-hardware-evidence-panel" data-results-hardware-evidence hidden aria-labelledby="benchmark-hardware-evidence-title">
+    <div class="benchmark-hardware-evidence-heading">
+      <p class="eyebrow">LOW-LEVEL COUNTERS · EVIDENCE READINESS</p>
+      <h2 id="benchmark-hardware-evidence-title">Hardware bottleneck evidence</h2>
+      <p>Check whether the selected strict workload cohort carries source-linked counters for compute, HBM, KV cache, communication, and power/thermal investigation. Coverage is not a bottleneck diagnosis.</p>
+    </div>
+    <div data-results-hardware-evidence-content aria-live="polite"></div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">

@@ -483,6 +483,16 @@
             "not_present",
             "invalid_verdict"
           ]
+        },
+        "hardware_evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/hardwareEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       }
     },
@@ -531,6 +541,489 @@
             "cpu_power",
             "telemetry"
           ]
+        }
+      }
+    },
+    "hardwareEvidenceMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric_id",
+        "value",
+        "unit",
+        "measurement_kind",
+        "aggregation",
+        "scope",
+        "source_name"
+      ],
+      "properties": {
+        "metric_id": {
+          "enum": [
+            "sm_active_pct",
+            "tensor_active_pct",
+            "compute_flop_count",
+            "achieved_flops",
+            "theoretical_peak_flops",
+            "dram_read_bytes",
+            "dram_write_bytes",
+            "dram_bandwidth_bytes_per_s",
+            "dram_peak_bandwidth_bytes_per_s",
+            "hbm_used_bytes",
+            "hbm_capacity_bytes",
+            "kv_cache_used_bytes",
+            "kv_cache_capacity_bytes",
+            "kv_cache_tokens",
+            "kv_cache_token_capacity",
+            "kv_cache_hit_rate_pct",
+            "nvlink_tx_bytes",
+            "nvlink_rx_bytes",
+            "pcie_tx_bytes",
+            "pcie_rx_bytes",
+            "network_tx_bytes",
+            "network_rx_bytes",
+            "link_bandwidth_bytes_per_s",
+            "link_peak_bandwidth_bytes_per_s",
+            "link_utilization_pct",
+            "gpu_power_w",
+            "gpu_clock_hz",
+            "memory_clock_hz",
+            "temperature_c",
+            "throttle_active_pct"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "%",
+            "FLOP/s",
+            "byte",
+            "byte/s",
+            "token",
+            "W",
+            "Hz",
+            "°C",
+            "FLOP"
+          ]
+        },
+        "measurement_kind": {
+          "enum": [
+            "hardware_counter",
+            "telemetry",
+            "derived"
+          ]
+        },
+        "aggregation": {
+          "enum": [
+            "instantaneous",
+            "mean",
+            "max",
+            "min",
+            "p50",
+            "p95",
+            "p99",
+            "sum",
+            "rate"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "per_gpu",
+            "per_link",
+            "per_node",
+            "per_system",
+            "per_process"
+          ]
+        },
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "link_type": {
+          "enum": [
+            "nvlink",
+            "pcie",
+            "infiniband",
+            "roce",
+            "ethernet",
+            "other"
+          ]
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_metric_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "sm_active_pct",
+              "tensor_active_pct",
+              "compute_flop_count",
+              "achieved_flops",
+              "theoretical_peak_flops",
+              "dram_read_bytes",
+              "dram_write_bytes",
+              "dram_bandwidth_bytes_per_s",
+              "dram_peak_bandwidth_bytes_per_s",
+              "hbm_used_bytes",
+              "hbm_capacity_bytes",
+              "kv_cache_used_bytes",
+              "kv_cache_capacity_bytes",
+              "kv_cache_tokens",
+              "kv_cache_token_capacity",
+              "kv_cache_hit_rate_pct",
+              "nvlink_tx_bytes",
+              "nvlink_rx_bytes",
+              "pcie_tx_bytes",
+              "pcie_rx_bytes",
+              "network_tx_bytes",
+              "network_rx_bytes",
+              "link_bandwidth_bytes_per_s",
+              "link_peak_bandwidth_bytes_per_s",
+              "link_utilization_pct",
+              "gpu_power_w",
+              "gpu_clock_hz",
+              "memory_clock_hz",
+              "temperature_c",
+              "throttle_active_pct"
+            ]
+          }
+        },
+        "precision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sparsity": {
+          "enum": [
+            "dense",
+            "structured_sparse",
+            "unstructured_sparse",
+            "unknown"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "measurement_kind": {
+                "const": "derived"
+              }
+            },
+            "required": [
+              "measurement_kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "formula",
+              "input_metric_ids"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "measurement_kind": {
+                "enum": [
+                  "hardware_counter",
+                  "telemetry"
+                ]
+              }
+            },
+            "required": [
+              "measurement_kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "formula"
+                  ]
+                },
+                {
+                  "required": [
+                    "input_metric_ids"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "achieved_flops",
+                  "theoretical_peak_flops"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "precision",
+              "sparsity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "sm_active_pct",
+                  "tensor_active_pct",
+                  "kv_cache_hit_rate_pct",
+                  "link_utilization_pct",
+                  "throttle_active_pct"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "maximum": 100
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "link_bandwidth_bytes_per_s",
+                  "link_peak_bandwidth_bytes_per_s",
+                  "link_utilization_pct",
+                  "network_tx_bytes",
+                  "network_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "required": [
+              "link_type"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "nvlink_tx_bytes",
+                  "nvlink_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "link_type": {
+                "const": "nvlink"
+              }
+            },
+            "required": [
+              "link_type"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "metric_id": {
+                "enum": [
+                  "pcie_tx_bytes",
+                  "pcie_rx_bytes"
+                ]
+              }
+            },
+            "required": [
+              "metric_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "link_type": {
+                "const": "pcie"
+              }
+            },
+            "required": [
+              "link_type"
+            ]
+          }
+        }
+      ]
+    },
+    "hardwareEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "collector",
+        "system_scope",
+        "sampling",
+        "provenance",
+        "metrics"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "collector": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "type"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "enum": [
+                "profiler",
+                "device_telemetry",
+                "runtime_telemetry",
+                "network_telemetry",
+                "publisher_export",
+                "other"
+              ]
+            }
+          }
+        },
+        "system_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope_type",
+            "device_count"
+          ],
+          "properties": {
+            "scope_type": {
+              "enum": [
+                "per_gpu",
+                "per_link",
+                "per_node",
+                "per_system",
+                "per_process"
+              ]
+            },
+            "device_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "device_model": {
+              "type": "string"
+            },
+            "topology": {
+              "type": "string"
+            }
+          }
+        },
+        "sampling": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "started_at",
+            "ended_at",
+            "sample_interval_ms",
+            "sample_count"
+          ],
+          "properties": {
+            "started_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ended_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "sample_interval_ms": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "sample_count": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_type",
+            "source_url",
+            "collected_at"
+          ],
+          "properties": {
+            "source_type": {
+              "enum": [
+                "publisher_api",
+                "profiler_export",
+                "telemetry_export",
+                "independent_measurement",
+                "vendor_report",
+                "other"
+              ]
+            },
+            "source_url": {
+              "$ref": "#/$defs/httpUrl"
+            },
+            "collected_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "artifact_sha256": {
+              "type": "string",
+              "pattern": "^[a-fA-F0-9]{64}$"
+            }
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/hardwareEvidenceMetric"
+          }
+        },
+        "notes": {
+          "type": "string"
         }
       }
     }

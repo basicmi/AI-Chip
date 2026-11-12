@@ -356,6 +356,9 @@ def normalize_inferencex_record(row: dict, endpoint_url: str, model_display_name
                 "offload_mode", "workflow_run_id", "run_started_at"
             ) if key in row
         },
+        # Optional low-level evidence is preserved only as a provenance-bearing
+        # object; the registry validator enforces its schema and units.
+        "hardware_evidence": row.get("hardware_evidence"),
         "metrics": metrics,
         "normalized_metrics": normalize_inferencex_metrics(
             metrics, power_measurement_valid, cpu_power_measurement_valid

@@ -380,6 +380,165 @@ class ImportSafetyTests(unittest.TestCase):
 
 
 class RegistryValidationTests(unittest.TestCase):
+    @staticmethod
+    def valid_hardware_evidence():
+        return {
+            "schema_version": "1.0",
+            "collector": {"name": "Nsight Systems", "version": "2026.3", "type": "profiler"},
+            "system_scope": {
+                "scope_type": "per_gpu", "device_count": 8,
+                "device_model": "NVIDIA H200 SXM", "topology": "8-GPU NVLink node",
+            },
+            "sampling": {
+                "started_at": "2026-11-12T10:00:00Z",
+                "ended_at": "2026-11-12T10:01:00Z",
+                "sample_interval_ms": 1000, "sample_count": 60,
+            },
+            "provenance": {
+                "source_type": "profiler_export",
+                "source_url": "https://example.com/run/hardware-counters",
+                "collected_at": "2026-11-12T10:02:00Z",
+                "artifact_sha256": "a" * 64,
+            },
+            "metrics": [
+                {"metric_id": "sm_active_pct", "value": 78.0, "unit": "%",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "sm__throughput.avg.pct_of_peak_sustained_elapsed"},
+                {"metric_id": "theoretical_peak_flops", "value": 1.98e15, "unit": "FLOP/s",
+                 "measurement_kind": "telemetry", "aggregation": "max",
+                 "scope": "per_gpu", "source_name": "device_spec_fp8_peak", "precision": "FP8", "sparsity": "dense"},
+                {"metric_id": "compute_flop_count", "value": 7.2e16, "unit": "FLOP",
+                 "measurement_kind": "hardware_counter", "aggregation": "sum",
+                 "scope": "per_gpu", "source_name": "flop_count_sp"},
+                {"metric_id": "achieved_flops", "value": 1.2e15, "unit": "FLOP/s",
+                 "measurement_kind": "derived", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "derived_achieved_flops",
+                 "formula": "compute_flop_count / measured_window_seconds",
+                 "input_metric_ids": ["compute_flop_count"], "precision": "FP8", "sparsity": "dense"},
+                {"metric_id": "dram_bandwidth_bytes_per_s", "value": 2.2e12, "unit": "byte/s",
+                 "measurement_kind": "hardware_counter", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "dram__bytes.sum / duration"},
+                {"metric_id": "dram_peak_bandwidth_bytes_per_s", "value": 3.35e12, "unit": "byte/s",
+                 "measurement_kind": "telemetry", "aggregation": "max",
+                 "scope": "per_gpu", "source_name": "device_spec_hbm_peak"},
+                {"metric_id": "kv_cache_used_bytes", "value": 40e9, "unit": "byte",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "runtime_kv_cache_used_bytes"},
+                {"metric_id": "kv_cache_capacity_bytes", "value": 70e9, "unit": "byte",
+                 "measurement_kind": "telemetry", "aggregation": "max",
+                 "scope": "per_gpu", "source_name": "runtime_kv_cache_capacity_bytes"},
+                {"metric_id": "nvlink_tx_bytes", "value": 9e12, "unit": "byte",
+                 "measurement_kind": "hardware_counter", "aggregation": "sum",
+                 "scope": "per_link", "source_name": "nvlink_tx_bytes", "link_type": "nvlink"},
+                {"metric_id": "nvlink_rx_bytes", "value": 8e12, "unit": "byte",
+                 "measurement_kind": "hardware_counter", "aggregation": "sum",
+                 "scope": "per_link", "source_name": "nvlink_rx_bytes", "link_type": "nvlink"},
+                {"metric_id": "link_bandwidth_bytes_per_s", "value": 7.2e11, "unit": "byte/s",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_link", "source_name": "nvlink_link_bandwidth", "link_type": "nvlink"},
+                {"metric_id": "link_peak_bandwidth_bytes_per_s", "value": 9e11, "unit": "byte/s",
+                 "measurement_kind": "telemetry", "aggregation": "max",
+                 "scope": "per_link", "source_name": "nvlink_link_peak", "link_type": "nvlink"},
+                {"metric_id": "link_utilization_pct", "value": 80.0, "unit": "%",
+                 "measurement_kind": "derived", "aggregation": "mean",
+                 "scope": "per_link", "source_name": "derived_nvlink_utilization",
+                 "link_type": "nvlink", "formula": "link_bandwidth_bytes_per_s / link_peak_bandwidth_bytes_per_s * 100",
+                 "input_metric_ids": ["link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"]},
+                {"metric_id": "gpu_power_w", "value": 650, "unit": "W",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "gpu_power_w"},
+                {"metric_id": "gpu_clock_hz", "value": 1.4e9, "unit": "Hz",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "gpu_clock_hz"},
+                {"metric_id": "temperature_c", "value": 72, "unit": "°C",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "gpu_temperature"},
+                {"metric_id": "throttle_active_pct", "value": 0, "unit": "%",
+                 "measurement_kind": "telemetry", "aggregation": "mean",
+                 "scope": "per_gpu", "source_name": "throttle_active_pct"},
+            ],
+        }
+
+    @staticmethod
+    def valid_inferencex_database(row):
+        source = {
+            "id": "inferencex", "source_class": "third_party_public_benchmark",
+            "record_count": 1, "results_url": "https://example.com",
+            "dataset_url": "https://example.com/api",
+        }
+        record = {
+            "id": "inferencex-1", "source_id": "inferencex",
+            "source_class": "third_party_public_benchmark",
+            "evidence_level": "publisher_published_observation",
+            "benchmark_suite": "InferenceX", "benchmark_version": "public-api-v1",
+            "publication_date": "2026-11-01", "submitter": "SemiAnalysis",
+            "accelerator_vendor": "NVIDIA", "platform_id": None, "product_id": None,
+            "system_type": "datacenter", "system_name": "h200_sxm",
+            "division": "third_party", "availability": "published", "model": "dsr1",
+            "scenario": "single_turn", "result_value": None, "result_unit": "",
+            "accuracy_text": "", "inferred": False, "power_metrics_available": False,
+            "design_power_watts": None, "system": {"workers": []}, "software": {},
+            "workload": {}, "configuration": {}, "metrics": {},
+            "model_display_name": "DeepSeek-R1-0528", "power_measurement_valid": False,
+            "power_measurement_status": "unreported",
+            "cpu_power_measurement_valid": False, "cpu_power_measurement_status": "not_present",
+            "gpu_power_metrics_available": False,
+            "cpu_power_metrics_available": False, "normalized_metrics": {},
+            "notes": "", "compliance": "publisher_published", "errors": 0,
+            "weight_data_types": "fp8", "source_record_key": "1", "source_location": "",
+            "source_url": "https://example.com/api", "detail_url": None,
+            "dataset_url": "https://example.com/api", "release_url": "https://example.com",
+            **row,
+        }
+        return {
+            "schema_version": "1.0", "sources": [source], "records": [record],
+            "summary": summarize([record]),
+        }
+
+    def test_hardware_evidence_contract_accepts_provenanced_multilayer_counters(self):
+        evidence = self.valid_hardware_evidence()
+        db = self.valid_inferencex_database({"hardware_evidence": evidence})
+        self.assertEqual(validate_database(db), [])
+
+    def test_hardware_evidence_rejects_unit_scope_time_and_derived_metric_errors(self):
+        evidence = self.valid_hardware_evidence()
+        evidence["metrics"][0]["unit"] = "FLOP/s"
+        evidence["metrics"][1]["value"] = -1
+        evidence["metrics"][1].pop("precision")
+        next(metric for metric in evidence["metrics"] if metric["metric_id"] == "link_utilization_pct")["input_metric_ids"] = ["missing_counter"]
+        evidence["metrics"][0]["value"] = 101
+        evidence["metrics"][9]["link_type"] = "unknown-fabric"
+        evidence["sampling"]["ended_at"] = "2026-11-12T09:59:00Z"
+        db = self.valid_inferencex_database({"hardware_evidence": evidence})
+        errors = validate_database(db)
+        self.assertTrue(any("sm_active_pct unit must be %" in error for error in errors))
+        self.assertTrue(any("non-negative finite number" in error for error in errors))
+        self.assertTrue(any("compute FLOP metrics require precision" in error for error in errors))
+        self.assertTrue(any("derived input missing_counter is absent" in error for error in errors))
+        self.assertTrue(any("sampling window must be positive" in error for error in errors))
+        self.assertTrue(any("requires link_type=nvlink" in error for error in errors))
+
+    def test_hardware_evidence_validator_handles_malformed_nested_types(self):
+        evidence = self.valid_hardware_evidence()
+        evidence["metrics"][0]["metric_id"] = {"unexpected": "object"}
+        evidence["metrics"][2]["scope"] = {"unexpected": "object"}
+        next(metric for metric in evidence["metrics"] if metric["metric_id"] == "link_utilization_pct")["input_metric_ids"] = [{"unexpected": "object"}]
+        db = self.valid_inferencex_database({"hardware_evidence": evidence})
+        errors = validate_database(db)
+        self.assertTrue(any("unknown metric_id" in error for error in errors))
+        self.assertTrue(any("scope is invalid" in error for error in errors))
+        self.assertTrue(any("valid input_metric_ids" in error for error in errors))
+
+    def test_hardware_evidence_is_optional_and_never_synthesized_by_importer(self):
+        endpoint = "https://inferencex.semianalysis.com/api/v1/benchmarks?model=DeepSeek-R1-0528"
+        raw = {"id": 999, "model": "dsr1", "hardware": "h200_sxm", "metrics": {}}
+        normalized = normalize_inferencex_record(raw, endpoint)
+        self.assertIsNone(normalized["hardware_evidence"])
+        evidence = self.valid_hardware_evidence()
+        raw["hardware_evidence"] = evidence
+        preserved = normalize_inferencex_record(raw, endpoint)
+        self.assertEqual(preserved["hardware_evidence"], evidence)
+
     def test_summary_counts_are_source_specific(self):
         records = [
             {"source_id": "a", "availability": "available", "division": "closed",

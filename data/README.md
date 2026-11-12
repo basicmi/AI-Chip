@@ -77,8 +77,9 @@ The link checker does not edit source data or promote references to evidence. HT
 - `benchmark-results.json`: normalized, source-linked result submissions and observations.
 - `schemas/benchmark-results.schema.json`: JSON Schema for the registry.
 - `scripts/import_benchmark_results.py`: imports official MLPerf Inference v6.1 summary rows and, optionally, public SemiAnalysis InferenceX API rows.
-- `scripts/validate_benchmark_results.py`: checks source references, IDs, product/platform links, summary counts and strict power-validity semantics.
-- `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters.
+- `scripts/validate_benchmark_results.py`: checks source references, IDs, product/platform links, summary counts, strict power-validity semantics, and optional low-level hardware evidence.
+- `docs/hardware-bottleneck-evidence.md`: versioned counter vocabulary, measurement boundaries, provenance and bottleneck-evidence requirements.
+- `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters, plus strict-cohort hardware evidence coverage.
 
 ### Current snapshot
 
