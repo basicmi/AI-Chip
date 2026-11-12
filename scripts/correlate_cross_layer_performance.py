@@ -117,7 +117,10 @@ def _execution_identity(record: dict) -> tuple[dict, bool]:
     runtime_identified = any(_present(identity[key]) for key in (
         "framework", "image", "recipe_fingerprint"
     ))
-    return identity, hardware_identified and runtime_identified
+    execution_details_identified = bool(identity["configuration"]) or bool(identity["workers"]) or any(
+        _present(identity[key]) for key in ("physical_prefill_gpus", "physical_decode_gpus")
+    )
+    return identity, hardware_identified and runtime_identified and execution_details_identified
 
 
 def _normalized_metrics(record: dict) -> dict:
