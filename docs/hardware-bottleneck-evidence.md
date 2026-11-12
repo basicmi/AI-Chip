@@ -63,6 +63,8 @@ link_type is required for all NVLink, PCIe, generic link_*, and network_* metric
 
 The source-aware catalog lives in `data/hardware-counter-mappings.json`, validated by `schemas/hardware-counter-mappings.schema.json` and `scripts/validate_hardware_counter_mappings.py`. Each mapping records the exact source field or profiler label, collector family, source field ID where documented, canonical metric ID, units, conversion, default scope/aggregation, mapping quality, and caveats.
 
+The primary references are the [NVIDIA DCGM field identifiers](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html), [Nsight Compute Profiling Guide](https://docs.nvidia.com/nsight-compute/ProfilingGuide/), and [AMD ROCm Compute Profiler pipeline metrics](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/develop/conceptual/cdna/pipeline-metrics.html).
+
 The first catalog covers:
 
 - **NVIDIA DCGM:** SM/Tensor/DRAM activity ratios; PCIe and NVLink traffic; per-link NVLink L0-L17 fields; SM/memory clocks; GPU temperature and board power.
@@ -96,6 +98,7 @@ It derives only when the required inputs are present and compatible:
 | `dram_bandwidth_bytes_per_s` | (DRAM read bytes + DRAM write bytes) divided by the sampling window |
 | `dram_bandwidth_utilization_pct` | measured DRAM bandwidth divided by matching peak bandwidth |
 | `kv_cache_occupancy_pct` | KV bytes used / capacity, or token count / token capacity |
+| `link_bandwidth_bytes_per_s` | (same-link TX bytes + RX bytes) divided by the sampling window |
 | `link_utilization_pct` | measured link bandwidth divided by peak for the same link entity and fabric |
 
 Out-of-range ratios are skipped with an explicit note, never clamped. Missing inputs remain missing. The script does not make a bottleneck classification or apply arbitrary utilization thresholds. These metrics are descriptive evidence; diagnosis still needs workload phase, precision, device SKU, topology, worker mapping and counter collection context.
