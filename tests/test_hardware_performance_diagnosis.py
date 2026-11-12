@@ -200,6 +200,11 @@ class HardwarePerformanceDiagnosisTests(unittest.TestCase):
         self.assertEqual(result["status"], "partial")
         self.assertIsNone(result["links"][0]["utilization_pct"])
 
+    def test_communication_explains_missing_per_link_measurements(self):
+        result = analyze_communication(base_evidence())
+        self.assertEqual(result["status"], "insufficient_evidence")
+        self.assertTrue(result["missing_inputs"])
+
     def test_reported_link_utilization_is_retained_without_inventing_peak(self):
         evidence = base_evidence()
         evidence["metrics"].append(
@@ -232,6 +237,24 @@ class HardwarePerformanceDiagnosisTests(unittest.TestCase):
         record["power_measurement_valid"] = True
         record["gpu_power_metrics_available"] = True
         self.assertIn("decode_energy_per_output_token", analyze_serving_runtime(record)["metrics"])
+
+    def test_direct_kv_occupancy_is_retained_without_requiring_raw_capacity_pair(self):
+        record = base_record()
+        record["hardware_evidence"]["metrics"] = [
+            item for item in record["hardware_evidence"]["metrics"]
+            if item["metric_id"] not in {"kv_cache_used_bytes", "kv_cache_capacity_bytes"}
+        ]
+        record["hardware_evidence"]["metrics"].append(
+            metric("kv_cache_occupancy_pct", 76, "%", "derived", "mean",
+                   "per_gpu", "derived_kv_occupancy",
+                   formula="kv_cache_used_bytes / kv_cache_capacity_bytes * 100",
+                   input_metric_ids=["kv_cache_used_bytes", "kv_cache_capacity_bytes"])
+        )
+        # The evidence validator correctly requires the derived inputs in the same bundle;
+        # exercise the candidate extraction helper directly for this isolated fallback.
+        from diagnose_hardware_performance import _kv_observations
+        observations = _kv_observations(record["hardware_evidence"])
+        self.assertEqual(observations[0]["occupancy_pct"], 76)
 
     def test_diagnosis_never_emits_automatic_bottleneck_verdict(self):
         report = diagnose_record(base_record())
