@@ -439,7 +439,13 @@ const { chromium } = require("playwright");
     records: [100, 250, 150, 400].map((value, index) => ({
       id: "fixture-" + index, source_id: "inferencex", source_class: "third_party_public_benchmark",
       submitter: "SemiAnalysis", accelerator_vendor: index === 1 ? "AMD" : "NVIDIA", system_name: index === 1 ? "MI300X" : "H200 SXM",
-      system: { hardware: index === 1 ? "MI300X" : "H200 SXM", is_multinode: false }, model: "dsr1",
+      system: {
+        hardware: index === 1 ? "MI300X" : "H200 SXM",
+        is_multinode: false,
+        physical_prefill_gpus: index === 2 ? null : 0,
+        physical_decode_gpus: index === 2 ? null : (index === 0 ? 8 : index === 1 ? 8 : 16),
+        workers: [{ role: "decode", worker_idx: 0, num_gpus: index === 0 ? 8 : index === 1 ? 8 : index === 2 ? 4 : 16 }]
+      }, model: "dsr1",
       model_display_name: "DeepSeek-R1-0528", scenario: "single_turn", availability: "published",
       division: "third_party", system_type: "datacenter", benchmark_suite: "SemiAnalysis InferenceX",
       benchmark_version: null, publication_date: "2026-11-10", inferred: false,
@@ -450,7 +456,11 @@ const { chromium } = require("playwright");
       },
       metrics: { output_tput_per_gpu: value },
       workload: { precision: "FP8", benchmark_type: "single_turn", isl: index === 3 ? 2048 : 1024, osl: 1024, concurrency: 32, speculative_method: "none", disaggregated: false },
-      software: { framework: index === 2 ? "SGLang 0.5" : "vLLM 0.11" }, configuration: {}, weight_data_types: "FP8"
+      software: {
+        framework: "vLLM 0.11",
+        image: "ghcr.io/vllm-project/vllm-openai:v0.11.0",
+        recipe_fingerprint: "vllm-0.11-fp8"
+      }, configuration: {}, weight_data_types: "FP8"
     }))
   };
   await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
@@ -506,6 +516,27 @@ const { chromium } = require("playwright");
   await page.locator("[data-results-cohort-clear]").click();
   if (Number(await page.locator("[data-results-count]").textContent()) !== 4) {
     throw new Error("Clearing the strict cohort did not restore all four InferenceX records");
+  }
+
+  await metricSelect.selectOption("output_throughput_per_gpu");
+  if (!(await page.locator("[data-results-scaling]").isHidden())) {
+    throw new Error("Scaling analysis must remain hidden until a strict workload cohort is selected");
+  }
+  const scalingRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
+  await scalingRow.locator(".benchmark-result-details summary").click();
+  await scalingRow.locator(".benchmark-cohort-action").click();
+  if (await page.locator("[data-results-scaling]").isHidden()) {
+    throw new Error("Selecting an InferenceX output-throughput cohort did not reveal scaling analysis");
+  }
+  const scalingText = await page.locator("[data-results-scaling-content]").textContent();
+  if (!scalingText.includes("H200 SXM") || !scalingText.includes("66.7%") ||
+      !scalingText.includes("4 GPUs") || !scalingText.includes("8 GPUs") ||
+      !scalingText.includes("worker-pool counts") || !scalingText.includes("derived estimates")) {
+    throw new Error("Scaling analysis did not derive a provenance-aware 4-to-8 GPU efficiency curve: " + scalingText);
+  }
+  await page.locator("[data-results-cohort-clear]").click();
+  if (!(await page.locator("[data-results-scaling]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide scaling analysis");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
