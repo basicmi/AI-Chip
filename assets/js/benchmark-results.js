@@ -1124,7 +1124,7 @@
         "No one-dimension contrasts can be formed from the reported configuration fields in this strict workload cohort. A contrast requires two configurations that differ in one reported dimension while all other reported dimensions match."));
     }
     attributionContent.append(make("p", "benchmark-attribution-note",
-      "Interpretation: each contrast compares medians of exact configuration groups within the same strict workload cohort. Only the named reported dimension changes; other reported dimensions must match. Unreported fields remain unknown and may confound the result. These are observational associations, not causal estimates or a universal hardware/software ranking."));
+      "Interpretation: each contrast compares medians of exact configuration groups within the same strict workload cohort. A/B ordering is deterministic and Δ is B minus A; read the sign using the selected metric's optimization direction. Only the named reported dimension changes; other reported dimensions must match. Unreported fields remain unknown and may confound the result. These are observational associations, not causal estimates or a universal hardware/software ranking."));
   };
 
   const comparisonMetricFor = (item) => {
