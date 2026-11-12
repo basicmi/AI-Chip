@@ -1688,3 +1688,79 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 
 /* Keep the opt-in analysis panel hidden even when component styles are active. */
 .benchmark-scaling-panel[hidden] { display: none !important; }
+
+
+/* Three-metric latency/throughput Pareto analysis */
+.benchmark-frontier-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-frontier-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-frontier-heading p {
+  max-width: 780px;
+  margin: .35rem 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.benchmark-frontier-summary,
+.benchmark-frontier-empty,
+.benchmark-frontier-legend {
+  margin: .65rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-frontier-summary { color: var(--ink); font-weight: 650; }
+.benchmark-frontier-plot {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: .7rem auto;
+}
+.benchmark-frontier-grid { stroke: var(--line); stroke-dasharray: 3 4; stroke-width: 1; }
+.benchmark-frontier-axis { stroke: var(--muted); stroke-width: 1.2; }
+.benchmark-frontier-tick { fill: var(--muted); font-size: 10px; }
+.benchmark-frontier-axis-label { fill: var(--ink); font-size: 11px; font-weight: 600; }
+.benchmark-frontier-point { fill: var(--teal); fill-opacity: .28; stroke: var(--teal); stroke-width: 1.2; }
+.benchmark-frontier-point.is-pareto { fill-opacity: .85; stroke: var(--ink); stroke-width: 2; }
+.benchmark-frontier-table-wrap { overflow-x: auto; margin-top: .7rem; }
+.benchmark-frontier-table { width: 100%; min-width: 850px; border-collapse: collapse; font-size: 9px; }
+.benchmark-frontier-table th,
+.benchmark-frontier-table td {
+  padding: .55rem .65rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+.benchmark-frontier-table thead th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+  font-weight: 700;
+}
+.benchmark-frontier-table tbody tr:last-child td { border-bottom: 0; }
+.benchmark-frontier-table tbody td { color: var(--ink); font-variant-numeric: tabular-nums; }
+.benchmark-frontier-table td:first-child strong,
+.benchmark-frontier-table td:first-child small { display: block; }
+.benchmark-frontier-table td:first-child small {
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: 7px;
+  font-variant-numeric: normal;
+}
+.benchmark-frontier-source { margin-top: .25rem; font-size: 8px; }
+.benchmark-frontier-panel[hidden] { display: none !important; }
+@media (max-width: 560px) {
+  .benchmark-frontier-panel { padding: .75rem; }
+  .benchmark-frontier-plot { min-width: 560px; }
+}

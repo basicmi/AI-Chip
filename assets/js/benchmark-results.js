@@ -34,6 +34,8 @@
   const comparisonClear = $("[data-comparison-clear]");
   const scalingPanel = $("[data-results-scaling]");
   const scalingContent = $("[data-results-scaling-content]");
+  const frontierPanel = $("[data-results-frontier]");
+  const frontierContent = $("[data-results-frontier-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -189,8 +191,10 @@
         workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod,
         workload.disaggregated, metricKey, metric.unit, metric.direction || "context", metric.family || "unknown"
       ];
+      const performanceValues = values.slice(0, 16);
       return {
         key: JSON.stringify(values),
+        performanceKey: JSON.stringify(performanceValues),
         sourceId: record.source_id,
         metricKey,
         title: "InferenceX · " + model,
@@ -453,6 +457,234 @@
     }
     scalingContent.append(make("p", "benchmark-scaling-note",
       "Interpretation: the smallest GPU-count point is the baseline within each identical hardware/software group. Scaling efficiency = median output throughput per GPU at N GPUs ÷ baseline median output throughput per GPU × 100%. Aggregate throughput and linear references are derived estimates, not publisher-reported totals. Parallelism and run configuration remain potential confounders; this is observed system-level scaling, not a causal hardware-only measurement."));
+  };
+
+
+  const renderParetoFrontier = () => {
+    if (!frontierPanel || !frontierContent) return;
+    const supported = activeCohort && activeCohort.sourceId === "inferencex" &&
+      activeCohort.performanceKey && database;
+    if (!supported) {
+      frontierPanel.hidden = true;
+      return;
+    }
+
+    frontierPanel.hidden = false;
+    frontierContent.replaceChildren();
+    // Match the workload identity without requiring the currently selected display
+    // metric. A record can be useful to the three-metric frontier even when it does
+    // not publish the metric selected in the main results table.
+    const performanceKeyFor = record => {
+      if (record.source_id !== "inferencex") return null;
+      const workload = record.workload || {};
+      const source = sourceMap().get(record.source_id);
+      const version = record.benchmark_version || source?.version;
+      const model = record.model_display_name || record.model;
+      const precision = workload.precision || record.weight_data_types;
+      const workloadType = workload.benchmark_type || record.scenario;
+      const speculativeMethod = workload.speculative_method;
+      const servingMode = typeof workload.disaggregated === "boolean" ? workload.disaggregated : null;
+      const required = [
+        version, model, workloadType, record.scenario, record.division, record.availability,
+        record.system_type, workload.isl, workload.osl, workload.concurrency, precision,
+        speculativeMethod, servingMode
+      ];
+      if (required.some(missingCohortValue)) return null;
+      return JSON.stringify([
+        record.source_id, record.benchmark_suite, version, model, record.model,
+        workloadType, record.scenario, record.division, record.availability, record.system_type,
+        workload.isl, workload.osl, workload.concurrency, precision, speculativeMethod, servingMode
+      ]);
+    };
+    const cohortRecords = database.records.filter(record =>
+      performanceKeyFor(record) === activeCohort.performanceKey
+    );
+
+    const readMetric = (record, key, unit, direction) => {
+      const metric = record.normalized_metrics?.[key];
+      if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value) ||
+          metric.value <= 0 || metric.unit !== unit || metric.direction !== direction) return null;
+      return metric.value;
+    };
+
+    const candidates = [];
+    cohortRecords.forEach(record => {
+      const ttft = readMetric(record, "p99_ttft", "s", "lower");
+      const tpot = readMetric(record, "p99_tpot", "s", "lower");
+      const throughput = readMetric(record, "output_throughput_per_gpu", "tok/s/GPU", "higher");
+      if (ttft === null || tpot === null || throughput === null) return;
+      candidates.push({ record, ttft, tpot, throughput, isPareto: false });
+    });
+
+    const dominates = (left, right) =>
+      left.ttft <= right.ttft && left.tpot <= right.tpot &&
+      left.throughput >= right.throughput &&
+      (left.ttft < right.ttft || left.tpot < right.tpot || left.throughput > right.throughput);
+    candidates.forEach(candidate => {
+      candidate.isPareto = !candidates.some(other => other !== candidate && dominates(other, candidate));
+    });
+    const frontier = candidates.filter(candidate => candidate.isPareto)
+      .sort((a, b) => a.ttft - b.ttft || a.tpot - b.tpot || b.throughput - a.throughput);
+
+    frontierContent.append(make("p", "benchmark-frontier-summary",
+      cohortRecords.length + " records in the selected strict workload cohort · " +
+      candidates.length + " report all three required metrics · " +
+      frontier.length + " Pareto-optimal configurations · " +
+      (cohortRecords.length - candidates.length) + " excluded for incomplete or invalid metrics."));
+
+    if (candidates.length < 2) {
+      frontierContent.append(make("p", "benchmark-frontier-empty",
+        "At least two records with valid P99 TTFT, P99 TPOT and output throughput per GPU are required to identify a performance trade-off. Missing metrics are not estimated."));
+      return;
+    }
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svgNode = (tag, attributes, content) => {
+      const node = document.createElementNS(svgNS, tag);
+      Object.entries(attributes || {}).forEach(([key, value]) => node.setAttribute(key, String(value)));
+      if (content !== undefined) node.textContent = String(content);
+      return node;
+    };
+    const svg = svgNode("svg", {
+      viewBox: "0 0 760 340",
+      role: "img",
+      "aria-label": "P99 TTFT versus P99 TPOT scatter plot; bubble size represents output throughput per GPU",
+      "data-pareto-plot": ""
+    });
+    const plot = { left: 78, top: 24, width: 630, height: 250 };
+    const xValues = candidates.map(item => item.ttft);
+    const yValues = candidates.map(item => item.tpot);
+    const minMax = values => {
+      const min = Math.min(...values), max = Math.max(...values);
+      const span = max - min || Math.max(Math.abs(min) * 0.2, 0.01);
+      return { min: Math.max(0, min - span * 0.12), max: max + span * 0.12 };
+    };
+    const xDomain = minMax(xValues);
+    const yDomain = minMax(yValues);
+    const xScale = value => plot.left + (value - xDomain.min) /
+      (xDomain.max - xDomain.min) * plot.width;
+    const yScale = value => plot.top + plot.height - (value - yDomain.min) /
+      (yDomain.max - yDomain.min) * plot.height;
+    const throughputValues = candidates.map(item => item.throughput);
+    const throughputMin = Math.min(...throughputValues);
+    const throughputMax = Math.max(...throughputValues);
+
+    for (let tick = 0; tick <= 4; tick += 1) {
+      const x = plot.left + plot.width * tick / 4;
+      const y = plot.top + plot.height * tick / 4;
+      const xValue = xDomain.min + (xDomain.max - xDomain.min) * tick / 4;
+      const yValue = yDomain.max - (yDomain.max - yDomain.min) * tick / 4;
+      svg.append(svgNode("line", {
+        x1: x, y1: plot.top, x2: x, y2: plot.top + plot.height,
+        class: "benchmark-frontier-grid"
+      }));
+      svg.append(svgNode("line", {
+        x1: plot.left, y1: y, x2: plot.left + plot.width, y2: y,
+        class: "benchmark-frontier-grid"
+      }));
+      svg.append(svgNode("text", {
+        x, y: plot.top + plot.height + 18, "text-anchor": "middle",
+        class: "benchmark-frontier-tick"
+      }, numberText(xValue)));
+      svg.append(svgNode("text", {
+        x: plot.left - 10, y: y + 3, "text-anchor": "end",
+        class: "benchmark-frontier-tick"
+      }, numberText(yValue)));
+    }
+    svg.append(svgNode("line", {
+      x1: plot.left, y1: plot.top + plot.height,
+      x2: plot.left + plot.width, y2: plot.top + plot.height,
+      class: "benchmark-frontier-axis"
+    }));
+    svg.append(svgNode("line", {
+      x1: plot.left, y1: plot.top, x2: plot.left, y2: plot.top + plot.height,
+      class: "benchmark-frontier-axis"
+    }));
+    svg.append(svgNode("text", {
+      x: plot.left + plot.width / 2, y: 326, "text-anchor": "middle",
+      class: "benchmark-frontier-axis-label"
+    }, "P99 TTFT (s) · lower is better"));
+    svg.append(svgNode("text", {
+      x: 17, y: plot.top + plot.height / 2,
+      transform: "rotate(-90 17 " + (plot.top + plot.height / 2) + ")",
+      "text-anchor": "middle", class: "benchmark-frontier-axis-label"
+    }, "P99 TPOT (s) · lower is better"));
+
+    candidates.forEach(candidate => {
+      const normalizedThroughput = throughputMax === throughputMin ? 0.5 :
+        (candidate.throughput - throughputMin) / (throughputMax - throughputMin);
+      const radius = 5 + Math.sqrt(normalizedThroughput) * 7;
+      const circle = svgNode("circle", {
+        cx: xScale(candidate.ttft),
+        cy: yScale(candidate.tpot),
+        r: radius,
+        class: "benchmark-frontier-point" + (candidate.isPareto ? " is-pareto" : ""),
+        "data-record-id": candidate.record.id,
+        "data-frontier": candidate.isPareto ? "true" : "false"
+      });
+      circle.append(svgNode("title", {}, [
+        candidate.record.system_name || candidate.record.system?.hardware || "System not specified",
+        "P99 TTFT " + numberText(candidate.ttft) + " s",
+        "P99 TPOT " + numberText(candidate.tpot) + " s",
+        "Output throughput " + numberText(candidate.throughput) + " tok/s/GPU",
+        candidate.isPareto ? "Pareto optimal" : "Dominated by another configuration"
+      ].join(" · ")));
+      svg.append(circle);
+    });
+    frontierContent.append(svg);
+    frontierContent.append(make("p", "benchmark-frontier-legend",
+      "Each point is one published configuration. Bubble size represents output throughput per GPU; outlined points are non-dominated. Lower TTFT and TPOT are better, while higher throughput is better."));
+
+    const tableWrap = make("div", "benchmark-frontier-table-wrap");
+    const table = make("table", "benchmark-frontier-table");
+    const thead = document.createElement("thead");
+    const header = document.createElement("tr");
+    ["Pareto configuration", "P99 TTFT", "P99 TPOT", "Output throughput / GPU", "GPU count", "Parallelism / source"].forEach(label =>
+      header.append(make("th", "", label)));
+    thead.append(header);
+    table.append(thead);
+    const tbody = document.createElement("tbody");
+
+    frontier.forEach(candidate => {
+      const record = candidate.record;
+      const row = document.createElement("tr");
+      row.dataset.recordId = record.id;
+      const identity = document.createElement("td");
+      identity.append(make("strong", "", record.system_name ||
+        record.system?.hardware || record.system?.accelerator_model || "System not specified"));
+      identity.append(make("small", "", (record.accelerator_vendor || "Unknown vendor") +
+        " · " + (record.submitter || "Unknown submitter") +
+        " · " + (record.software?.framework || "Framework not reported")));
+      row.append(identity);
+      row.append(make("td", "", numberText(candidate.ttft) + " s"));
+      row.append(make("td", "", numberText(candidate.tpot) + " s"));
+      row.append(make("td", "", numberText(candidate.throughput) + " tok/s/GPU"));
+
+      const gpuCount = reportedAcceleratorCount(record);
+      const gpuCell = make("td", "", gpuCount ? gpuCount.count + " GPUs" : "Not reported");
+      if (gpuCount) gpuCell.append(make("small", "", gpuCount.source));
+      row.append(gpuCell);
+
+      const configuration = record.configuration || {};
+      const parallelismKeys = [
+        "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+        "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers", "offload_mode"
+      ];
+      const parallelism = parallelismKeys
+        .filter(key => configuration[key] !== null && configuration[key] !== undefined && configuration[key] !== "")
+        .map(key => key + "=" + configuration[key]).join(" · ") || "Parallelism not reported";
+      const detail = make("td", "");
+      detail.append(make("span", "", parallelism));
+      const link = make("div", "benchmark-frontier-source");
+      addLink(link, record.detail_url || record.source_url, "Source record ↗");
+      if (!link.childNodes.length) link.append(make("span", "", "Source link unavailable"));
+      detail.append(link);
+      row.append(detail);
+      tbody.append(row);
+    });
+    table.append(tbody);
+    tableWrap.append(table);
+    frontierContent.append(tableWrap);
   };
 
   const comparisonMetricFor = (item) => {
@@ -992,6 +1224,7 @@
     rowsNode.replaceChildren(...pageRecords.map(buildRow));
     renderComparisonWorkspace();
     renderScalingAnalysis(filteredRecords);
+    renderParetoFrontier();
     $("[data-results-count]").textContent = String(filteredRecords.length);
     $("[data-results-summary]").textContent = filteredRecords.length
       ? "Showing " + (start + 1) + "–" + Math.min(start + pageSize, filteredRecords.length) +

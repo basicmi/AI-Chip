@@ -116,6 +116,19 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     </div>
   </section>
 
+  <section class="benchmark-frontier-panel" data-results-frontier hidden aria-labelledby="benchmark-frontier-title">
+    <div class="benchmark-frontier-heading">
+      <div>
+        <p class="eyebrow">PERFORMANCE INTELLIGENCE · INFERENCEX</p>
+        <h2 id="benchmark-frontier-title">Latency–throughput Pareto frontier</h2>
+        <p>Within the selected strict workload cohort, identify configurations that balance P99 TTFT, P99 TPOT and output throughput per GPU. No composite score or cross-source ranking is calculated.</p>
+      </div>
+    </div>
+    <div data-results-frontier-content aria-live="polite">
+      <p class="benchmark-frontier-empty">Select an InferenceX strict workload cohort to inspect the three-metric performance frontier.</p>
+    </div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">
