@@ -102,7 +102,7 @@ def validate_hardware_evidence(row, where):
     else:
         if not isinstance(collector.get("name"), str) or not collector["name"].strip():
             errors.append(f"{where}: hardware_evidence.collector.name must be non-empty")
-        if collector.get("type") not in HARDWARE_EVIDENCE_COLLECTOR_TYPES:
+        if not isinstance(collector.get("type"), str) or collector.get("type") not in HARDWARE_EVIDENCE_COLLECTOR_TYPES:
             errors.append(f"{where}: hardware_evidence.collector.type is invalid")
         version = collector.get("version")
         if version is not None and not isinstance(version, str):
@@ -112,7 +112,7 @@ def validate_hardware_evidence(row, where):
     if not isinstance(system_scope, dict):
         errors.append(f"{where}: hardware_evidence.system_scope must be an object")
     else:
-        if system_scope.get("scope_type") not in HARDWARE_EVIDENCE_SCOPES:
+        if not isinstance(system_scope.get("scope_type"), str) or system_scope.get("scope_type") not in HARDWARE_EVIDENCE_SCOPES:
             errors.append(f"{where}: hardware_evidence.system_scope.scope_type is invalid")
         count = system_scope.get("device_count")
         if isinstance(count, bool) or not isinstance(count, int) or count < 1:
@@ -142,7 +142,7 @@ def validate_hardware_evidence(row, where):
     if not isinstance(provenance, dict):
         errors.append(f"{where}: hardware_evidence.provenance must be an object")
     else:
-        if provenance.get("source_type") not in HARDWARE_EVIDENCE_SOURCE_TYPES:
+        if not isinstance(provenance.get("source_type"), str) or provenance.get("source_type") not in HARDWARE_EVIDENCE_SOURCE_TYPES:
             errors.append(f"{where}: hardware_evidence.provenance.source_type is invalid")
         if not is_http_url(provenance.get("source_url")) or not provenance.get("source_url"):
             errors.append(f"{where}: hardware_evidence.provenance.source_url must be an HTTP(S) URL")
@@ -166,7 +166,7 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: must be an object")
             continue
         metric_id = metric.get("metric_id")
-        if metric_id not in HARDWARE_EVIDENCE_UNITS:
+        if not isinstance(metric_id, str) or metric_id not in HARDWARE_EVIDENCE_UNITS:
             errors.append(f"{item_where}: unknown metric_id {metric_id}")
             continue
         metric_ids.add(metric_id)
@@ -178,24 +178,28 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: value must be a non-negative finite number")
         if metric_id.endswith("_pct") and isinstance(value, (int, float)) and not isinstance(value, bool) and not 0 <= value <= 100:
             errors.append(f"{item_where}: percentage value must be between 0 and 100")
-        if metric.get("measurement_kind") not in {"hardware_counter", "telemetry", "derived"}:
+        kind = metric.get("measurement_kind")
+        aggregation = metric.get("aggregation")
+        scope = metric.get("scope")
+        if not isinstance(kind, str) or kind not in {"hardware_counter", "telemetry", "derived"}:
             errors.append(f"{item_where}: measurement_kind is invalid")
-        if metric.get("aggregation") not in HARDWARE_EVIDENCE_AGGREGATIONS:
+        if not isinstance(aggregation, str) or aggregation not in HARDWARE_EVIDENCE_AGGREGATIONS:
             errors.append(f"{item_where}: aggregation is invalid")
-        if metric.get("scope") not in HARDWARE_EVIDENCE_SCOPES:
+        if not isinstance(scope, str) or scope not in HARDWARE_EVIDENCE_SCOPES:
             errors.append(f"{item_where}: scope is invalid")
         if not isinstance(metric.get("source_name"), str) or not metric["source_name"].strip():
             errors.append(f"{item_where}: source_name must be non-empty")
-        key = (metric_id, metric.get("scope"), metric.get("aggregation"))
+        key = (metric_id, scope if isinstance(scope, str) else repr(scope),
+               aggregation if isinstance(aggregation, str) else repr(aggregation))
         if key in seen:
             errors.append(f"{item_where}: duplicate metric_id/scope/aggregation tuple {key}")
         seen.add(key)
 
         link_type = metric.get("link_type")
         if metric_id.startswith("network_") or metric_id.startswith("link_"):
-            if link_type not in HARDWARE_EVIDENCE_LINK_TYPES:
+            if not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES:
                 errors.append(f"{item_where}: {metric_id} requires a valid link_type")
-        elif link_type is not None and link_type not in HARDWARE_EVIDENCE_LINK_TYPES:
+        elif link_type is not None and (not isinstance(link_type, str) or link_type not in HARDWARE_EVIDENCE_LINK_TYPES):
             errors.append(f"{item_where}: link_type is invalid")
 
         kind = metric.get("measurement_kind")
@@ -204,7 +208,9 @@ def validate_hardware_evidence(row, where):
         if kind == "derived":
             if not isinstance(formula, str) or not formula.strip():
                 errors.append(f"{item_where}: derived metric requires a formula")
-            if not isinstance(inputs, list) or not inputs or any(item not in HARDWARE_EVIDENCE_UNITS for item in inputs):
+            if not isinstance(inputs, list) or not inputs or any(
+                not isinstance(item, str) or item not in HARDWARE_EVIDENCE_UNITS for item in inputs
+            ):
                 errors.append(f"{item_where}: derived metric requires valid input_metric_ids")
         elif formula is not None or inputs is not None:
             errors.append(f"{item_where}: raw counter/telemetry metric cannot declare a derived formula")
@@ -212,8 +218,11 @@ def validate_hardware_evidence(row, where):
     for index, metric in enumerate(metrics):
         if not isinstance(metric, dict) or metric.get("measurement_kind") != "derived":
             continue
-        for input_id in metric.get("input_metric_ids", []):
-            if input_id not in metric_ids:
+        inputs = metric.get("input_metric_ids")
+        if not isinstance(inputs, list):
+            continue
+        for input_id in inputs:
+            if isinstance(input_id, str) and input_id not in metric_ids:
                 errors.append(f"{where}.hardware_evidence.metrics[{index}]: derived input {input_id} is absent from this evidence block")
 
     return errors
