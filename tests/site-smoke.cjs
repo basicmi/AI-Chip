@@ -496,7 +496,25 @@ const { chromium } = require("playwright");
         framework: "vLLM 0.11",
         image: "ghcr.io/vllm-project/vllm-openai:v0.11.0",
         recipe_fingerprint: "vllm-0.11-fp8"
-      }, configuration: {}, weight_data_types: "FP8"
+      }, configuration: {},
+      ...(index === 0 ? {
+        hardware_evidence: {
+          schema_version: "1.0",
+          collector: { name: "Nsight Compute", version: "2026.3", type: "profiler" },
+          system_scope: { scope_type: "per_gpu", device_count: 8, device_model: "H200 SXM", topology: "8-GPU NVLink node" },
+          sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z", sample_interval_ms: 1000, sample_count: 60 },
+          provenance: { source_type: "profiler_export", source_url: "https://example.com/hardware-evidence/fixture-0", collected_at: "2026-11-12T10:02:00Z" },
+          metrics: [
+            { metric_id: "sm_active_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed" },
+            { metric_id: "theoretical_peak_flops", value: 1.9e15, unit: "FLOP/s", measurement_kind: "telemetry", aggregation: "max", scope: "per_gpu", source_name: "device_fp8_peak_flops" },
+            { metric_id: "achieved_flops", value: 1.2e15, unit: "FLOP/s", measurement_kind: "derived", aggregation: "mean", scope: "per_gpu", source_name: "derived_achieved_flops", formula: "instruction_count * operation_width / elapsed_seconds", input_metric_ids: ["sm_active_pct", "theoretical_peak_flops"] },
+            { metric_id: "dram_read_bytes", value: 2e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "dram__bytes_read.sum" },
+            { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes" },
+            { metric_id: "gpu_power_w", value: 650, unit: "W", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "gpu_power_w" }
+          ]
+        }
+      } : {}),
+      weight_data_types: "FP8"
     }))
   };
   await page.route("**/data/benchmark-results.json.gz", route => route.fulfill({
@@ -577,6 +595,9 @@ const { chromium } = require("playwright");
   if (!(await page.locator("[data-results-decomposition]").isHidden())) {
     throw new Error("Performance decomposition must remain hidden before a strict workload cohort");
   }
+  if (!(await page.locator("[data-results-hardware-evidence]").isHidden())) {
+    throw new Error("Hardware evidence coverage must remain hidden before a strict workload cohort");
+  }
   const scalingRow = page.locator('[data-results-rows] tr[data-result-id="fixture-0"]');
   await scalingRow.locator(".benchmark-result-details summary").click();
   await scalingRow.locator(".benchmark-cohort-action").click();
@@ -597,6 +618,45 @@ const { chromium } = require("playwright");
   }
   if (await page.locator("[data-results-decomposition]").isHidden()) {
     throw new Error("Selecting a strict InferenceX cohort did not reveal performance decomposition");
+  }
+  if (await page.locator("[data-results-hardware-evidence]").isHidden()) {
+    throw new Error("Selecting a strict InferenceX cohort did not reveal hardware evidence coverage");
+  }
+  const hardwareEvidenceText = await page.locator("[data-results-hardware-evidence-content]").textContent();
+  if (!hardwareEvidenceText.includes("1/3 records include a provenance-backed hardware evidence bundle") ||
+      !hardwareEvidenceText.includes("Compute") || !hardwareEvidenceText.includes("HBM bandwidth") ||
+      !hardwareEvidenceText.includes("KV cache") || !hardwareEvidenceText.includes("Communication") ||
+      !hardwareEvidenceText.includes("Power / thermal") || !hardwareEvidenceText.includes("not a bottleneck verdict")) {
+    throw new Error("Hardware evidence coverage did not report the five evidence domains and limitations: " + hardwareEvidenceText);
+  }
+  const evidenceDomains = page.locator("[data-hardware-evidence-domain]");
+  if (await evidenceDomains.count() !== 5) {
+    throw new Error("Hardware evidence coverage should expose exactly five domains");
+  }
+  const computeEvidence = await page.locator('[data-hardware-evidence-domain="compute"]').textContent();
+  const hbmEvidence = await page.locator('[data-hardware-evidence-domain="hbm"]').textContent();
+  const communicationEvidence = await page.locator('[data-hardware-evidence-domain="communication"]').textContent();
+  if (!computeEvidence.includes("1 core · 0 partial · 2 missing") ||
+      !hbmEvidence.includes("0 core · 1 partial · 2 missing") ||
+      !communicationEvidence.includes("0 core · 1 partial · 2 missing")) {
+    throw new Error("Hardware evidence readiness incorrectly classified complete/partial/missing signals: " +
+      JSON.stringify({computeEvidence, hbmEvidence, communicationEvidence}));
+  }
+  const evidenceRows = page.locator("[data-hardware-evidence-record-id]");
+  if (await evidenceRows.count() !== 3) {
+    throw new Error("Hardware evidence table did not retain the selected strict cohort");
+  }
+  const evidenceRecord = page.locator('[data-hardware-evidence-record-id="fixture-0"]');
+  await page.locator(".benchmark-hardware-evidence-details summary").click();
+  const evidenceDetails = await page.locator(".benchmark-hardware-evidence-details").textContent();
+  if (!evidenceDetails.includes("sm_active_pct") ||
+      !evidenceDetails.includes("dram_read_bytes") ||
+      !evidenceDetails.includes("sm__throughput.avg.pct_of_peak_sustained_elapsed")) {
+    throw new Error("Hardware evidence details did not preserve canonical and raw counter names: " + evidenceDetails);
+  }
+  const noEvidenceRecord = await page.locator('[data-hardware-evidence-record-id="fixture-1"]').textContent();
+  if (!noEvidenceRecord.includes("Not reported")) {
+    throw new Error("Aggregate GPU metrics were incorrectly promoted to low-level hardware evidence");
   }
   const frontierText = await page.locator("[data-results-frontier-content]").textContent();
   if (!frontierText.includes("3 report all three required metrics") ||
@@ -673,6 +733,9 @@ const { chromium } = require("playwright");
   }
   if (!(await page.locator("[data-results-decomposition]").isHidden())) {
     throw new Error("Clearing the strict cohort did not hide performance decomposition");
+  }
+  if (!(await page.locator("[data-results-hardware-evidence]").isHidden())) {
+    throw new Error("Clearing the strict cohort did not hide hardware evidence coverage");
   }
 
   const compareRow = id => page.locator('[data-results-rows] tr[data-result-id="' + id + '"]');
