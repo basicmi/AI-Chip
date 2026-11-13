@@ -214,7 +214,7 @@
     }
     versionNode.textContent = database.database_version;
     reviewedNode.textContent = database.last_reviewed;
-    $("[data-model-stat=\"models\"]").textContent = String(database.models.length);
+    $("[data-model-stat=\"models\"]").textContent = String(catalogDb.models.length);
     $("[data-model-stat=\"paths\"]").textContent = String(database.support_paths.length);
     $("[data-model-stat=\"recipes\"]").textContent = String(database.support_paths.filter(path => path.support_level === "documented_recipe").length);
     $("[data-model-stat=\"upstream\"]").textContent = String(database.support_paths.filter(path => path.support_level === "upstream_verified").length);
