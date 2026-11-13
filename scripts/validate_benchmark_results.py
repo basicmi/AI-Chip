@@ -563,7 +563,7 @@ def validate_runtime_trace(trace, where):
             if value is not None and (not isinstance(value, str) or not value.strip()):
                 errors.append(f"{event_where}.{field} must be a non-empty string when provided")
         dependencies = event.get("depends_on_event_ids")
-        if dependencies is not None:
+        if "depends_on_event_ids" in event:
             if event.get("category") == "request":
                 errors.append(f"{event_where}: request root cannot declare completion dependencies")
             if not isinstance(dependencies, list) or not dependencies:
@@ -573,7 +573,7 @@ def validate_runtime_trace(trace, where):
             elif len(set(dependencies)) != len(dependencies):
                 errors.append(f"{event_where}.depends_on_event_ids must not contain duplicates")
         dependency_complete = event.get("dependency_graph_complete")
-        if dependency_complete is not None:
+        if "dependency_graph_complete" in event:
             if event.get("category") != "request":
                 errors.append(f"{event_where}.dependency_graph_complete is only valid on request roots")
             if not isinstance(dependency_complete, bool):

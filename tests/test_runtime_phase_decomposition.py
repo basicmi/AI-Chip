@@ -326,5 +326,15 @@ class RuntimePhaseDecompositionTests(unittest.TestCase):
         self.assertTrue(any("must resolve to the same request correlation_id" in e for e in validate_runtime_trace(trace_for(events),"test")))
 
 
+    def test_validator_rejects_null_dependency_contract_fields(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-root"]["dependency_graph_complete"] = None
+        by_id["request-1-queue"]["depends_on_event_ids"] = None
+        errors = validate_runtime_trace(trace_for(events), "test")
+        self.assertTrue(any("depends_on_event_ids must be a non-empty array" in error for error in errors))
+        self.assertTrue(any("dependency_graph_complete must be boolean" in error for error in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
