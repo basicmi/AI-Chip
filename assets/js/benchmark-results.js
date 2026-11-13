@@ -1220,7 +1220,7 @@
     // reverse-engineered from phase durations.
     const phaseRows = [];
     const phasePrimary = ["queue_wait", "batch_wait", "prefill", "decode", "host_runtime", "other"];
-    const phaseSub = ["kernel", "communication"];
+    const phaseSub = ["kernel", "communication", "cpu_scheduling", "communication_wait"];
     const unionMs = intervals => {
       const ordered = intervals.filter(item => item[1] > item[0]).sort((a, b) => a[0] - b[0]);
       if (!ordered.length) return 0;
@@ -1333,7 +1333,7 @@
       phaseTable.dataset.runtimePhaseDecomposition = "";
       const phaseHead = document.createElement("thead");
       const phaseHeader = document.createElement("tr");
-      ["Record", "Requests", "TTFT p50 / p95", "TPOT p50 / p95", "TTFT phases · Q / Batch / Prefill", "TPOT phases · Decode / Kernel / Comm"].forEach(label =>
+      ["Record", "Requests", "TTFT p50 / p95", "TPOT p50 / p95", "TTFT · Q / Batch / Prefill / CPU / Comm wait", "TPOT · Decode / Kernel / Comm / CPU / Comm wait"].forEach(label =>
         phaseHeader.append(make("th", "", label)));
       phaseHead.append(phaseHeader);
       phaseTable.append(phaseHead);
@@ -1349,9 +1349,9 @@
           ? numberText(samplePercentile(row.tpotValues, 0.5)) + " / " +
             numberText(samplePercentile(row.tpotValues, 0.95)) + " ms (n=" + row.tpotValues.length + ")"
           : "—";
-        const ttftPhases = ["queue_wait", "batch_wait", "prefill"].map(key =>
+        const ttftPhases = ["queue_wait", "batch_wait", "prefill", "cpu_scheduling", "communication_wait"].map(key =>
           meanPhase(row.ttftCoverage, key));
-        const tpotPhases = ["decode", "kernel", "communication"].map(key =>
+        const tpotPhases = ["decode", "kernel", "communication", "cpu_scheduling", "communication_wait"].map(key =>
           meanPhase(row.tpotCoverage, key));
         const phaseText = values => values.every(value => value === null)
           ? "—" : values.map(value => numberText(value) + " ms").join(" / ");
@@ -1363,7 +1363,7 @@
       phaseDecompositionContent.append(phaseTable);
     }
     phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-note",
-      "TTFT = request-root start to token 1. TPOT = mean interval between consecutive token emissions. Phase cells are mean per-request interval-union coverage; kernel/communication may overlap decode and are not additive. Trace sample percentiles are not substitutes for published benchmark p99s."));
+      "TTFT = request-root start to token 1. TPOT = mean interval between consecutive token emissions. CPU scheduling and communication wait are explicit subphase events; kernel/communication may overlap prefill/decode and are not additive. Kernel event time is not GPU-active time: synchronized SM-activity counters are required to quantify GPU busy/idle. Unclassified gaps are not presumed idle. Trace sample percentiles are not substitutes for published benchmark p99s."));
 
     const categories = [
       {
