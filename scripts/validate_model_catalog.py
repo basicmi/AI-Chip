@@ -73,7 +73,7 @@ def validate_catalog(catalog, support, *, today=None):
         if model.get("license") is not None and not isinstance(model.get("license"), str):
             errors.append(w + ".license must be a string or null")
         capabilities = model.get("capabilities")
-        if not isinstance(capabilities, list) or len(set(capabilities)) != len(capabilities) or not set(capabilities).issubset(CAPABILITIES):
+        if not isinstance(capabilities, list) or any(not isinstance(v, str) for v in capabilities) or len(set(capabilities)) != len(capabilities) or not set(capabilities).issubset(CAPABILITIES):
             errors.append(w + ".capabilities must be a unique array of known capabilities")
     support_models = support.get("models", [])
     support_ids = {m.get("id") for m in support_models}

@@ -31,7 +31,8 @@ Model releases and verified accelerator recipes are separate datasets.
 
 ## Scheduled read-only discovery
 
-The weekly workflow checks the known official model repositories via the
+The weekly workflow checks known model repositories and scans recent official
+publisher-organization model listings for potential new checkpoints via the
 Hugging Face model API and writes a downloadable discovery snapshot as a
 GitHub Actions artifact. It does **not** commit changes or auto-approve model
 facts/hardware support: human review of model versions, licences and hardware
@@ -40,7 +41,8 @@ published registry.
 
     python3 scripts/discover_model_catalog.py --output /tmp/model-discovery.json
 
-No API token is required for public model pages. Gated/private model pages may
+No API token is required for public model pages. Unreviewed publisher listing entries are explicitly labeled candidates (not
+new verified models). Gated/private model pages may
 not be available without credentials; that is reported as an error, not as an
 absence of the model or an unsupported accelerator.
 
