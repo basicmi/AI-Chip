@@ -1333,7 +1333,7 @@
       phaseTable.dataset.runtimePhaseDecomposition = "";
       const phaseHead = document.createElement("thead");
       const phaseHeader = document.createElement("tr");
-      ["Record", "Requests", "TTFT p50 / p95", "TPOT p50 / p95", "TTFT · Q / Batch / Prefill / CPU / Comm wait", "TPOT · Decode / Kernel / Comm / CPU / Comm wait"].forEach(label =>
+      ["Record", "Requests", "TTFT p50 / p95", "TPOT p50 / p95", "TTFT · Q / Batch / Prefill / CPU / Comm wait", "TPOT · Decode / Kernel / Comm / CPU / Comm wait", "TTFT gap / overlap", "TPOT gap / overlap"].forEach(label =>
         phaseHeader.append(make("th", "", label)));
       phaseHead.append(phaseHeader);
       phaseTable.append(phaseHead);
@@ -1355,7 +1355,13 @@
           meanPhase(row.tpotCoverage, key));
         const phaseText = values => values.every(value => value === null)
           ? "—" : values.map(value => numberText(value) + " ms").join(" / ");
-        [row.id, row.requestCount, ttftText, tpotText, phaseText(ttftPhases), phaseText(tpotPhases)]
+        const meanCoverageField = (samples, field) => samples.length
+          ? samples.reduce((sum, sample) => sum + sample[field], 0) / samples.length : null;
+        const gapOverlapText = samples => samples.length
+          ? numberText(meanCoverageField(samples, "gap")) + " / " +
+            numberText(meanCoverageField(samples, "overlap")) + " ms" : "—";
+        [row.id, row.requestCount, ttftText, tpotText, phaseText(ttftPhases), phaseText(tpotPhases),
+          gapOverlapText(row.ttftCoverage), gapOverlapText(row.tpotCoverage)]
           .forEach(value => tr.append(make("td", "", value)));
         phaseBody.append(tr);
       });
