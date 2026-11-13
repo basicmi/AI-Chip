@@ -230,7 +230,7 @@ class RuntimeHardwareAlignmentTests(unittest.TestCase):
         self.assertTrue(any("must be contained by hardware_evidence.sampling" in error for error in errors))
 
     def test_multiple_samples_of_same_counter_can_have_distinct_windows(self):
-        evidence = hardware_evidence()
+        evidence = hardware_evidence(metric_scope="per_kernel")
         second = dict(evidence["metrics"][0])
         second["value"] = 81
         second["sampling_window"] = {
