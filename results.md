@@ -164,6 +164,15 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div data-results-decomposition-content aria-live="polite"></div>
   </section>
 
+  <section class="benchmark-cross-layer-panel" data-results-cross-layer hidden aria-labelledby="benchmark-cross-layer-title">
+    <div class="benchmark-cross-layer-heading">
+      <p class="eyebrow">CROSS-LAYER PERFORMANCE · INFERENCEX</p>
+      <h2 id="benchmark-cross-layer-title">Runtime × hardware comparison</h2>
+      <p>Compare runtime outcomes across distinct hardware, software and serving configurations inside the same strict workload cohort. Differences are descriptive; profiler/runtime time alignment and causal effects are not assumed.</p>
+    </div>
+    <div data-results-cross-layer-content aria-live="polite"></div>
+  </section>
+
   <section class="benchmark-hardware-evidence-panel" data-results-hardware-evidence hidden aria-labelledby="benchmark-hardware-evidence-title">
     <div class="benchmark-hardware-evidence-heading">
       <p class="eyebrow">LOW-LEVEL COUNTERS · EVIDENCE READINESS</p>

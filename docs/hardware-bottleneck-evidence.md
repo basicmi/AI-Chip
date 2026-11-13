@@ -114,6 +114,24 @@ python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
 python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
 ```
 
+## Cross-layer performance correlation
+
+The cross-layer comparison layer is \`scripts/correlate_cross_layer_performance.py\`. It consumes the benchmark registry (or a record array) and writes a separate comparison report:
+
+\`\`\`bash
+python3 scripts/correlate_cross_layer_performance.py \\
+  --input data/benchmark-results.json \\
+  --output cross-layer-performance.json
+\`\`\`
+
+It follows the same strict InferenceX workload identity used by the Results Explorer: source/version, model, scenario, division, availability, system type, ISL, OSL, concurrency, precision, speculative method and aggregated/disaggregated mode. Missing identity fields are excluded rather than treated as wildcards.
+
+Within each exact workload cohort, records are grouped by hardware identity, node/GPU topology, software framework/image/recipe, worker layout and full serving configuration. Repeated records in an execution group are summarized with a per-metric median over the records that actually report that metric; the report retains the contributing record count. It does not average low-level counter values across different GPUs, collectors, scopes or sampling windows.
+
+Pairwise contrasts show only normalized runtime metrics with matching units, optimization directions and metric families. Positive/negative changes are labeled according to the metric's declared direction. Hardware evidence remains attached to each source record with roofline geometry, per-link observations, KV-cache occupancy and throttle signals. The browser Results Explorer exposes the same cohort-level execution contrasts and runtime deltas.
+
+The report explicitly records \`temporal_alignment=not_established\` and \`causal_attribution=not_claimed\`. Benchmark publication dates do not establish profiler capture alignment. A contrast may change hardware, topology, software and serving configuration simultaneously; it is not a hardware-only experiment. No statistical correlation coefficient, significance estimate, causal effect, confidence score or bottleneck verdict is produced. Cohorts are bounded to the first 12 complete execution identities and 100 pairwise comparisons by default to keep reports tractable.
+
 ## Evidence-constrained diagnosis engine
 
 The executable analysis layer is \`scripts/diagnose_hardware_performance.py\`. It accepts one benchmark record (including its optional \`hardware_evidence\` and publisher-normalized \`normalized_metrics\`) and writes a separate report:

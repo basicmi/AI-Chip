@@ -44,6 +44,8 @@
   const decompositionContent = $("[data-results-decomposition-content]");
   const hardwareEvidencePanel = $("[data-results-hardware-evidence]");
   const hardwareEvidenceContent = $("[data-results-hardware-evidence-content]");
+  const crossLayerPanel = $("[data-results-cross-layer]");
+  const crossLayerContent = $("[data-results-cross-layer-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -878,17 +880,186 @@
   // describe different measurement boundaries; none is a measured time breakdown.
 
   const renderHardwareBottleneckEvidence = () => {
-    if (!hardwareEvidencePanel || !hardwareEvidenceContent) return;
+    if (!hardwareEvidencePanel || !hardwareEvidenceContent ||
+        !crossLayerPanel || !crossLayerContent) return;
     if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
         !activeCohort.performanceKey || !database) {
       hardwareEvidencePanel.hidden = true;
+      crossLayerPanel.hidden = true;
       return;
     }
     hardwareEvidencePanel.hidden = false;
+    crossLayerPanel.hidden = false;
     hardwareEvidenceContent.replaceChildren();
+    crossLayerContent.replaceChildren();
     const records = database.records.filter(record =>
       performanceKeyFor(record) === activeCohort.performanceKey
     );
+
+    // Cross-layer comparison is descriptive: exact workload cohort first,
+    // then separate execution identities. It never assumes profiler/runtime
+    // sampling windows are aligned or that a metric delta is causal.
+    const metricSpecs = [
+      ["p99_ttft", "P99 TTFT", "s", "lower", "latency"],
+      ["p99_tpot", "P99 TPOT", "s", "lower", "latency"],
+      ["p99_itl", "P99 ITL", "s", "lower", "latency"],
+      ["output_throughput_per_gpu", "Output throughput / GPU", "tok/s/GPU", "higher", "throughput"],
+      ["median_interactivity", "Median interactivity", "tok/s/user", "higher", "interactivity"],
+      ["energy_per_output_token", "Energy / output token", "J/output token", "lower", "energy"]
+    ];
+    const stableSerialize = value => {
+      if (Array.isArray(value)) return "[" + value.map(stableSerialize).join(",") + "]";
+      if (value && typeof value === "object") {
+        return "{" + Object.keys(value).sort().map(key =>
+          JSON.stringify(key) + ":" + stableSerialize(value[key])
+        ).join(",") + "}";
+      }
+      return JSON.stringify(value);
+    };
+    const executionIdentity = record => {
+      const system = record.system || {};
+      const software = record.software || {};
+      const hardwareIdentified = Boolean(record.product_id || record.system_name ||
+        system.hardware || record.platform_id);
+      const runtimeIdentified = Boolean(software.framework || software.image || software.recipe_fingerprint);
+      const executionDetailsIdentified = Object.keys(record.configuration || {}).length > 0 ||
+        Boolean(system.workers?.length) || system.physical_prefill_gpus !== null && system.physical_prefill_gpus !== undefined ||
+        system.physical_decode_gpus !== null && system.physical_decode_gpus !== undefined;
+      const fields = [
+        record.accelerator_vendor, record.platform_id, record.product_id,
+        record.system_name, system.hardware, system.nodes, system.total_accelerators,
+        system.accelerators_per_node, system.is_multinode, system.physical_prefill_gpus,
+        system.physical_decode_gpus, software.framework, software.image,
+        software.recipe_fingerprint, record.configuration || {}, system.workers || []
+      ];
+      return {
+        key: stableSerialize(fields),
+        complete: hardwareIdentified && runtimeIdentified && executionDetailsIdentified
+      };
+    };
+    const executionGroups = new Map();
+    records.forEach(record => {
+      const identity = executionIdentity(record);
+      const key = identity.complete ? identity.key : identity.key + "|record:" + record.id;
+      if (!executionGroups.has(key)) executionGroups.set(key, []);
+      executionGroups.get(key).push(record);
+    });
+    const metricValue = (record, spec) => {
+      const [key, , unit, direction, family] = spec;
+      const item = record.normalized_metrics?.[key];
+      if (!item || !Number.isFinite(item.value) || item.value <= 0 ||
+          item.unit !== unit || item.direction !== direction || item.family !== family) return null;
+      if (family === "energy" &&
+          (record.power_measurement_valid !== true || record.gpu_power_metrics_available !== true)) return null;
+      return item.value;
+    };
+    const median = values => {
+      if (!values.length) return null;
+      const sorted = [...values].sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+    };
+    const groups = [...executionGroups.entries()].map(([key, group]) => ({
+      key, records: group, representative: group[0],
+      complete: executionIdentity(group[0]).complete,
+      metrics: Object.fromEntries(metricSpecs.map(spec => [
+        spec[0], median(group.map(record => metricValue(record, spec)).filter(value => value !== null))
+      ]))
+    }));
+    const allComparableGroups = groups.filter(group => group.complete);
+    const comparableGroups = allComparableGroups.slice(0, 12);
+    const contrasts = [];
+    for (let leftIndex = 0; leftIndex < comparableGroups.length; leftIndex += 1) {
+      for (let rightIndex = leftIndex + 1; rightIndex < comparableGroups.length; rightIndex += 1) {
+        contrasts.push([comparableGroups[leftIndex], comparableGroups[rightIndex]]);
+      }
+    }
+    const maxContrasts = 30;
+    const matrixSummary = make("p", "benchmark-cross-layer-summary",
+      records.length + " strict-cohort records · " + groups.length +
+      " execution identities · " + contrasts.length + " descriptive contrasts" +
+      (groups.length > allComparableGroups.length ? " · incomplete identities excluded" : "") +
+      (allComparableGroups.length > comparableGroups.length
+        ? " · showing first " + comparableGroups.length + " complete identities" : "") +
+      (contrasts.length > maxContrasts ? " · display capped at " + maxContrasts : ""));
+    crossLayerContent.append(matrixSummary);
+    if (!contrasts.length) {
+      crossLayerContent.append(make("p", "benchmark-cross-layer-empty",
+        "At least two records with identified hardware and software execution identities are required. " +
+        "Missing identity fields are not treated as matching wildcards."));
+    } else {
+      const tableWrap = make("div", "benchmark-cross-layer-table-wrap");
+      const table = make("table", "benchmark-cross-layer-table");
+      table.dataset.crossLayerMatrix = "";
+      const head = document.createElement("thead");
+      const header = document.createElement("tr");
+      ["Execution contrast", "Changed dimensions", "Runtime metric deltas", "Hardware evidence", "Capture alignment"].forEach(label =>
+        header.append(make("th", "", label)));
+      head.append(header);
+      table.append(head);
+      const body = document.createElement("tbody");
+      contrasts.slice(0, maxContrasts).forEach(([left, right]) => {
+        const leftRecord = left.representative, rightRecord = right.representative;
+        const leftSystem = leftRecord.system_name || leftRecord.product_id || leftRecord.system?.hardware || "System not identified";
+        const rightSystem = rightRecord.system_name || rightRecord.product_id || rightRecord.system?.hardware || "System not identified";
+        const leftFramework = leftRecord.software?.framework || "Runtime not identified";
+        const rightFramework = rightRecord.software?.framework || "Runtime not identified";
+        const leftConfig = stableSerialize(leftRecord.configuration || {});
+        const rightConfig = stableSerialize(rightRecord.configuration || {});
+        const leftWorkers = stableSerialize(leftRecord.system?.workers || []);
+        const rightWorkers = stableSerialize(rightRecord.system?.workers || []);
+        const dimensions = [];
+        if (leftRecord.accelerator_vendor !== rightRecord.accelerator_vendor ||
+            leftRecord.product_id !== rightRecord.product_id ||
+            leftRecord.system_name !== rightRecord.system_name ||
+            leftRecord.system?.hardware !== rightRecord.system?.hardware) dimensions.push("hardware");
+        if (leftRecord.system?.nodes !== rightRecord.system?.nodes ||
+            leftRecord.system?.total_accelerators !== rightRecord.system?.total_accelerators ||
+            leftRecord.system?.accelerators_per_node !== rightRecord.system?.accelerators_per_node ||
+            leftRecord.system?.is_multinode !== rightRecord.system?.is_multinode) dimensions.push("topology / GPU count");
+        if (leftFramework !== rightFramework ||
+            leftRecord.software?.image !== rightRecord.software?.image ||
+            leftRecord.software?.recipe_fingerprint !== rightRecord.software?.recipe_fingerprint) dimensions.push("software");
+        if (leftConfig !== rightConfig || leftWorkers !== rightWorkers ||
+            leftRecord.system?.physical_prefill_gpus !== rightRecord.system?.physical_prefill_gpus ||
+            leftRecord.system?.physical_decode_gpus !== rightRecord.system?.physical_decode_gpus) dimensions.push("parallelism / configuration");
+        const metricChanges = metricSpecs.flatMap(spec => {
+          const a = left.metrics[spec[0]], b = right.metrics[spec[0]];
+          if (a === null || b === null) return [];
+          const delta = (b - a) / a * 100;
+          const improvement = spec[3] === "lower" ? -delta : delta;
+          const state = improvement > 0.05 ? "improved" : improvement < -0.05 ? "worsened" : "similar";
+          return [spec[1] + ": " + (delta > 0 ? "+" : "") + delta.toFixed(1) +
+            "% (" + state + ")"];
+        });
+        const row = document.createElement("tr");
+        row.dataset.crossLayerComparison = "";
+        const identityCell = make("td", "");
+        identityCell.append(make("strong", "", leftSystem + " / " + leftFramework));
+        identityCell.append(make("small", "", left.records.length + " record(s)"));
+        identityCell.append(make("span", "", "→"));
+        identityCell.append(make("strong", "", rightSystem + " / " + rightFramework));
+        identityCell.append(make("small", "", right.records.length + " record(s)"));
+        row.append(identityCell);
+        row.append(make("td", "", dimensions.length ? dimensions.join(" · ") : "Execution details differ"));
+        row.append(make("td", "", metricChanges.length ? metricChanges.join(" · ") :
+          "No common positive normalized runtime metrics"));
+        const evidenceCount = group => group.records.filter(record =>
+          record.hardware_evidence && Array.isArray(record.hardware_evidence.metrics)).length;
+        row.append(make("td", "", evidenceCount(left) + "/" + left.records.length +
+          " left · " + evidenceCount(right) + "/" + right.records.length + " right"));
+        row.append(make("td", "", "Not established"));
+        body.append(row);
+      });
+      table.append(body);
+      tableWrap.append(table);
+      crossLayerContent.append(tableWrap);
+      crossLayerContent.append(make("p", "benchmark-cross-layer-note",
+        "Positive change means the right-hand group has a higher metric value; “improved / worsened” follows the metric's declared direction. " +
+        "Group values are medians across available records. Contrasts are limited to the first 12 complete execution identities in registry order. " +
+        "Runtime and profiler sampling windows are not assumed to align; differences do not establish causality."));
+    }
+
     const categories = [
       {
         key: "compute", label: "Compute",

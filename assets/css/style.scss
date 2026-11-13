@@ -1999,6 +1999,61 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 560px) { .benchmark-decomposition-panel { padding: .75rem; } }
 
 
+/* Cross-layer runtime and hardware comparisons inside a strict workload cohort. */
+.benchmark-cross-layer-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-cross-layer-panel[hidden] { display: none !important; }
+.benchmark-cross-layer-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-cross-layer-heading p,
+.benchmark-cross-layer-summary,
+.benchmark-cross-layer-note,
+.benchmark-cross-layer-empty {
+  margin: .55rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-cross-layer-summary { color: var(--ink); font-weight: 650; }
+.benchmark-cross-layer-table-wrap { overflow-x: auto; margin-top: .65rem; }
+.benchmark-cross-layer-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.benchmark-cross-layer-table th,
+.benchmark-cross-layer-table td {
+  padding: .55rem .6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.benchmark-cross-layer-table th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+}
+.benchmark-cross-layer-table td { color: var(--ink); }
+.benchmark-cross-layer-table td:first-child strong,
+.benchmark-cross-layer-table td:first-child small { display: block; }
+.benchmark-cross-layer-table td:first-child small {
+  color: var(--muted);
+  font-size: 8px;
+}
+@media (max-width: 560px) {
+  .benchmark-cross-layer-panel { padding: .75rem; }
+}
+
 /* Low-level hardware bottleneck evidence coverage. */
 .benchmark-hardware-evidence-panel {
   margin: 1rem 0 1.35rem;
