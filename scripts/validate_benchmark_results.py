@@ -134,6 +134,8 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{where}: hardware_evidence sampling timestamps must be ISO date-times")
         elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
             errors.append(f"{where}: hardware_evidence sampling window must be positive and timezone-aware")
+        sampling_start = start
+        sampling_end = end
         interval = sampling.get("sample_interval_ms")
         if isinstance(interval, bool) or not isinstance(interval, (int, float)) or not math.isfinite(interval) or interval <= 0:
             errors.append(f"{where}: hardware_evidence.sample_interval_ms must be a positive finite number")
@@ -199,6 +201,26 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{item_where}: scope is invalid")
         if not isinstance(metric.get("source_name"), str) or not metric["source_name"].strip():
             errors.append(f"{item_where}: source_name must be non-empty")
+
+        metric_window = metric.get("sampling_window")
+        if metric_window is not None:
+            if not isinstance(metric_window, dict):
+                errors.append(f"{item_where}: sampling_window must be an object when provided")
+            else:
+                metric_start = _parse_iso_datetime(metric_window.get("started_at"))
+                metric_end = _parse_iso_datetime(metric_window.get("ended_at"))
+                if metric_start is None or metric_end is None:
+                    errors.append(f"{item_where}: sampling_window timestamps must be ISO date-times")
+                elif (
+                    metric_start.utcoffset() is None or metric_end.utcoffset() is None
+                    or metric_end <= metric_start
+                ):
+                    errors.append(f"{item_where}: sampling_window must be positive and timezone-aware")
+                elif (
+                    sampling_start is not None and sampling_end is not None
+                    and (metric_start < sampling_start or metric_end > sampling_end)
+                ):
+                    errors.append(f"{item_where}: sampling_window must be contained by hardware_evidence.sampling")
         entity_id = metric.get("entity_id")
         if entity_id is not None and (not isinstance(entity_id, str) or not entity_id.strip()):
             errors.append(f"{item_where}: entity_id must be a non-empty string when provided")
@@ -298,6 +320,150 @@ def validate_hardware_evidence(row, where):
     return errors
 
 
+
+
+RUNTIME_TRACE_CATEGORIES = {
+    "queue_wait", "batch_wait", "prefill", "decode",
+    "kernel", "communication", "host_runtime", "other",
+}
+
+
+def validate_runtime_trace(trace, where):
+    """Validate an optional UTC wall-clock runtime trace and its event hierarchy."""
+    errors = []
+    if trace is None:
+        return errors
+    prefix = f"{where}.runtime_trace"
+    if not isinstance(trace, dict):
+        return [f"{prefix}: must be an object or null"]
+    if trace.get("schema_version") != "1.0":
+        errors.append(f"{prefix}.schema_version must be 1.0")
+
+    collector = trace.get("collector")
+    if not isinstance(collector, dict):
+        errors.append(f"{prefix}.collector must be an object")
+    else:
+        if not isinstance(collector.get("name"), str) or not collector["name"].strip():
+            errors.append(f"{prefix}.collector.name must be non-empty")
+        if collector.get("type") not in {"runtime_trace", "profiler_export", "other"}:
+            errors.append(f"{prefix}.collector.type is invalid")
+        version = collector.get("version")
+        if version is not None and not isinstance(version, str):
+            errors.append(f"{prefix}.collector.version must be a string or null")
+
+    if trace.get("clock_domain") != "utc_wall_clock":
+        errors.append(f"{prefix}.clock_domain must be utc_wall_clock; monotonic clocks need an explicit mapping first")
+
+    sampling = trace.get("sampling")
+    trace_start = trace_end = None
+    if not isinstance(sampling, dict):
+        errors.append(f"{prefix}.sampling must be an object")
+    else:
+        trace_start = _parse_iso_datetime(sampling.get("started_at"))
+        trace_end = _parse_iso_datetime(sampling.get("ended_at"))
+        if trace_start is None or trace_end is None:
+            errors.append(f"{prefix}.sampling timestamps must be ISO date-times")
+        elif (
+            trace_start.utcoffset() is None or trace_end.utcoffset() is None
+            or trace_end <= trace_start
+        ):
+            errors.append(f"{prefix}.sampling window must be positive and timezone-aware")
+
+    provenance = trace.get("provenance")
+    if not isinstance(provenance, dict):
+        errors.append(f"{prefix}.provenance must be an object")
+    else:
+        if provenance.get("source_type") not in {
+            "runtime_trace_export", "profiler_export", "independent_measurement", "other"
+        }:
+            errors.append(f"{prefix}.provenance.source_type is invalid")
+        if not is_http_url(provenance.get("source_url")) or not provenance.get("source_url"):
+            errors.append(f"{prefix}.provenance.source_url must be an HTTP(S) URL")
+        collected = _parse_iso_datetime(provenance.get("collected_at"))
+        if collected is None or collected.utcoffset() is None:
+            errors.append(f"{prefix}.provenance.collected_at must be a timezone-aware ISO date-time")
+        digest = provenance.get("artifact_sha256")
+        if digest is not None and (
+            not isinstance(digest, str) or len(digest) != 64
+            or any(char not in "0123456789abcdefABCDEF" for char in digest)
+        ):
+            errors.append(f"{prefix}.provenance.artifact_sha256 must be a SHA-256 hex digest")
+
+    events = trace.get("events")
+    if not isinstance(events, list) or not events:
+        errors.append(f"{prefix}.events must be a non-empty array")
+        return errors
+    if len(events) > 100000:
+        errors.append(f"{prefix}.events must not exceed 100000 events")
+        return errors
+
+    event_map = {}
+    parsed_events = {}
+    for index, event in enumerate(events):
+        event_where = f"{prefix}.events[{index}]"
+        if not isinstance(event, dict):
+            errors.append(f"{event_where}: must be an object")
+            continue
+        event_id = event.get("event_id")
+        if not isinstance(event_id, str) or not event_id.strip():
+            errors.append(f"{event_where}.event_id must be non-empty")
+        elif event_id in event_map:
+            errors.append(f"{event_where}: duplicate event_id {event_id}")
+        else:
+            event_map[event_id] = event
+        if not isinstance(event.get("name"), str) or not event["name"].strip():
+            errors.append(f"{event_where}.name must be non-empty")
+        if event.get("category") not in RUNTIME_TRACE_CATEGORIES:
+            errors.append(f"{event_where}.category is invalid")
+        start = _parse_iso_datetime(event.get("started_at"))
+        end = _parse_iso_datetime(event.get("ended_at"))
+        if start is None or end is None:
+            errors.append(f"{event_where}: event timestamps must be ISO date-times")
+        elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
+            errors.append(f"{event_where}: event interval must be positive and timezone-aware")
+        else:
+            parsed_events[event_id] = (start, end)
+            if trace_start is not None and trace_end is not None and (
+                start < trace_start or end > trace_end
+            ):
+                errors.append(f"{event_where}: event must be contained by runtime_trace.sampling")
+        for field in ("entity_id", "correlation_id", "parent_event_id", "stream_id"):
+            value = event.get(field)
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                errors.append(f"{event_where}.{field} must be a non-empty string when provided")
+
+    for index, event in enumerate(events):
+        if not isinstance(event, dict):
+            continue
+        event_id = event.get("event_id")
+        parent_id = event.get("parent_event_id")
+        if parent_id is None:
+            continue
+        if parent_id == event_id:
+            errors.append(f"{prefix}.events[{index}]: event cannot parent itself")
+            continue
+        parent = event_map.get(parent_id)
+        if parent is None:
+            errors.append(f"{prefix}.events[{index}]: unknown parent_event_id {parent_id}")
+            continue
+        if event_id in parsed_events and parent_id in parsed_events:
+            child_start, child_end = parsed_events[event_id]
+            parent_start, parent_end = parsed_events[parent_id]
+            if child_start < parent_start or child_end > parent_end:
+                errors.append(f"{prefix}.events[{index}]: child event must be contained by its parent interval")
+
+        visited = {event_id}
+        current = parent_id
+        while current in event_map:
+            if current in visited:
+                errors.append(f"{prefix}.events[{index}]: parent_event_id hierarchy contains a cycle")
+                break
+            visited.add(current)
+            current = event_map[current].get("parent_event_id")
+
+    return errors
+
+
 def validate_database(db, platform_ids=None, product_ids=None):
     errors = []
     if db.get("schema_version") != "1.0":
@@ -342,6 +508,7 @@ def validate_database(db, platform_ids=None, product_ids=None):
             ids.add(rid)
 
         errors.extend(validate_hardware_evidence(row, where))
+        errors.extend(validate_runtime_trace(row.get("runtime_trace"), where))
 
         sid = row.get("source_id")
         counts[sid] += 1
