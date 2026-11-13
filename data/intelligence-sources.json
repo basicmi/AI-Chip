@@ -119,8 +119,8 @@
       "name": "Google MaxText",
       "category": "framework",
       "kind": "github_releases",
-      "repo": "google/maxtext",
-      "source_url": "https://github.com/google/maxtext",
+      "repo": "AI-Hypercomputer/maxtext",
+      "source_url": "https://github.com/AI-Hypercomputer/maxtext",
       "description": "Large-scale JAX-based LLM training and inference.",
       "priority": "high",
       "active": true
