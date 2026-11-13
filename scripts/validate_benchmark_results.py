@@ -336,7 +336,7 @@ def validate_hardware_evidence(row, where):
 
 RUNTIME_TRACE_CATEGORIES = {
     "queue_wait", "batch_wait", "prefill", "decode",
-    "kernel", "communication", "host_runtime", "other",
+    "kernel", "communication", "host_runtime", "other", "request", "token_emit",
 }
 
 
@@ -535,8 +535,10 @@ def validate_runtime_trace(trace, where):
             errors.append(
                 f"{event_where}: event timestamps must match the clock domain and lie within clock anchors"
             )
-        elif end <= start:
-            errors.append(f"{event_where}: event interval must be positive")
+        elif end < start or (end == start and event.get("category") != "token_emit"):
+            errors.append(f"{event_where}: event interval must be positive; token_emit markers must be instantaneous")
+        elif event.get("category") == "token_emit" and end != start:
+            errors.append(f"{event_where}: token_emit markers must have identical started_at and ended_at")
         else:
             if isinstance(event_id, str) and event_id.strip():
                 parsed_events[event_id] = (start, end)
@@ -544,6 +546,17 @@ def validate_runtime_trace(trace, where):
                 start < trace_start or end > trace_end
             ):
                 errors.append(f"{event_where}: event must be contained by runtime_trace.sampling")
+        token_index = event.get("token_index")
+        if event.get("category") == "token_emit":
+            if isinstance(token_index, bool) or not isinstance(token_index, int) or token_index < 1:
+                errors.append(f"{event_where}.token_index must be a positive integer for token_emit markers")
+        elif token_index is not None:
+            errors.append(f"{event_where}.token_index is only valid for token_emit markers")
+        if event.get("category") == "request":
+            if event.get("parent_event_id") is not None:
+                errors.append(f"{event_where}: request event must be a root event")
+            if not isinstance(event.get("correlation_id"), str) or not event["correlation_id"].strip():
+                errors.append(f"{event_where}.correlation_id is required for request events")
         for field in ("entity_id", "correlation_id", "parent_event_id", "stream_id"):
             value = event.get(field)
             if value is not None and (not isinstance(value, str) or not value.strip()):
