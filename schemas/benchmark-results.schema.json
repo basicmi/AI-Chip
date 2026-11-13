@@ -1197,7 +1197,9 @@
             "kernel",
             "communication",
             "host_runtime",
-            "other"
+            "other",
+            "request",
+            "token_emit"
           ]
         },
         "started_at": {
@@ -1221,8 +1223,48 @@
         "stream_id": {
           "type": "string",
           "minLength": 1
+        },
+        "token_index": {
+          "type": "integer",
+          "minimum": 1
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "request"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "required": [
+              "correlation_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "token_emit"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "required": [
+              "token_index"
+            ]
+          }
+        }
+      ]
     },
     "runtimeTrace": {
       "type": "object",
