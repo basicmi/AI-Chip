@@ -238,6 +238,47 @@ The browser Results Explorer exposes the same conservative boundary: it shows ro
 
 The focused test suite covers scope and precision mismatches, multi-GPU separation, zero-valued directional counters, link identity/directionality, serving metric units, strict power gating, thermal observations and the no-automatic-verdict policy.
 
+## GPU execution efficiency and compute/communication overlap
+
+The diagnosis report now includes \`gpu_execution_efficiency\`, produced by \`scripts/analyze_gpu_execution_efficiency.py\` and integrated into \`scripts/diagnose_hardware_performance.py\`.
+
+### Hardware activity evidence
+
+The analyzer groups observations only when **scope, entity identity and effective sampling window are identical**. A metric-level \`sampling_window\` takes precedence; otherwise the enclosing hardware-evidence sampling window is used for descriptive grouping.
+
+It retains these distinct signals:
+
+- \`sm_active_pct\`: cycles with at least one warp assigned to an SM. The complement is named \`sm_inactive_cycle_complement_pct\`; it is **not** a whole-GPU idle-time estimate.
+- \`tensor_active_pct\`: cycles with a Tensor pipe active.
+- \`sm_throughput_pct\`: kernel-scoped throughput relative to peak sustained rate; it is not the SM active-cycle ratio.
+- \`dram_active_pct\`: DRAM interface activity, not achieved bandwidth or saturation.
+- \`dram_bandwidth_utilization_pct\`: measured bandwidth relative to a compatible peak. It is only contrasted with DRAM activity when scope, entity and sampling window match.
+- VALU/MFMA/VMEM activity, compute peak utilization, clocks, power, temperature and throttle activity remain separately identified.
+
+A difference between two counters is a descriptive contrast, not an occupancy, instruction-issue, thermal or bottleneck diagnosis.
+
+### Strict metric-to-trace joins
+
+A hardware metric is joined to a runtime event only when it has an explicit metric-level sampling window that is fully contained by exactly one leaf event, after applying the monotonic-clock mapping error guard. Scope-specific event category rules apply (\`per_kernel\` → \`kernel\`, \`per_link\` → \`communication\`) and entity identity must match exactly. There is no fuzzy matching by kernel name, GPU ordinal, time overlap alone or parent evidence window.
+
+### Request-correlated execution overlap
+
+For each request root, the analyzer computes interval unions for kernel, communication, communication-wait, prefill and decode events. It reports:
+
+- kernel/communication overlap as a share of communication wall time;
+- kernel interval coverage of prefill and decode phase windows;
+- communication-wait interval coverage of decode.
+
+Intervals are unioned before intersection so nested or concurrent events are not double-counted. These are **same-request temporal overlaps**, not proof of device-side concurrency, communication hiding, synchronization completion or critical-path impact.
+
+The report always keeps \`overall_verdict\` as \`undetermined\`. Missing counters and traces remain unknown, never zero. The offline diagnosis command remains:
+
+\`\`\`bash
+python3 scripts/diagnose_hardware_performance.py \\
+  --input benchmark-record.json \\
+  --output hardware-diagnosis.json
+\`\`\`
+
 ## What is needed before making a bottleneck claim
 
 | Candidate bottleneck | Minimum evidence to investigate | Important caveats |
