@@ -26,16 +26,16 @@ def fixture(path, *, include_kernel=True, include_runtime=True):
                        "(start INTEGER, end INTEGER, deviceId INTEGER, contextId INTEGER, "
                        "streamId INTEGER, correlationId INTEGER, globalPid INTEGER, shortName INTEGER)")
             db.executemany("INSERT INTO CUPTI_ACTIVITY_KIND_KERNEL VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
-                (100, 200, 0, 3, 7, 11, 123 << 24, 1),
-                (220, 270, 1, 4, 8, 12, 123 << 24, 2),
+                (100_000_000, 200_000_000, 0, 3, 7, 11, 123 << 24, 1),
+                (220_000_000, 270_000_000, 1, 4, 8, 12, 123 << 24, 2),
             ])
         if include_runtime:
             db.execute("CREATE TABLE CUPTI_ACTIVITY_KIND_RUNTIME "
                        "(start INTEGER, end INTEGER, correlationId INTEGER, globalTid INTEGER, nameId INTEGER)")
             db.executemany("INSERT INTO CUPTI_ACTIVITY_KIND_RUNTIME VALUES (?, ?, ?, ?, ?)", [
-                (10, 50, 11, (123 << 24) + 20, 3),
-                (55, 90, 12, (123 << 24) + 20, 4),
-                (5, 9, 11, (345 << 24) + 20, 3),
+                (10_000_000, 50_000_000, 11, (123 << 24) + 20, 3),
+                (55_000_000, 90_000_000, 12, (123 << 24) + 20, 4),
+                (5_000_000, 9_000_000, 11, (345 << 24) + 20, 3),
             ])
         db.commit()
     finally:
@@ -73,20 +73,20 @@ class NsightImportTests(unittest.TestCase):
     def test_explicit_utc_clock_anchors_yield_valid_existing_runtime_trace(self):
         anchors = {"method": "piecewise_linear", "anchors": [
             {"monotonic_ns": 0, "utc_at": "2026-11-13T00:00:00Z"},
-            {"monotonic_ns": 500, "utc_at": "2026-11-13T00:00:00.000000500Z"},
+            {"monotonic_ns": 500_000_000, "utc_at": "2026-11-13T00:00:00.500Z"},
         ], "max_error_ns": 0}
         report = import_nsys(self.path, source_url=SOURCE, anchors=anchors)
         self.assertEqual(report["clock_alignment_status"], "verified_anchors_supplied_by_caller")
         trace = report["records"][0]["runtime_trace"]
         self.assertEqual(validate_runtime_trace(trace, "test"), [])
         self.assertTrue(all("correlation_id" not in event for event in trace["events"]))
-        self.assertEqual(trace["sampling"]["started_at"], 5)
-        self.assertEqual(trace["sampling"]["ended_at"], 270)
+        self.assertEqual(trace["sampling"]["started_at"], 5_000_000)
+        self.assertEqual(trace["sampling"]["ended_at"], 270_000_000)
 
     def test_anchor_window_must_cover_trace_no_extrapolation(self):
         anchors = {"method": "piecewise_linear", "anchors": [
-            {"monotonic_ns": 10, "utc_at": "2026-11-13T00:00:00Z"},
-            {"monotonic_ns": 250, "utc_at": "2026-11-13T00:00:00.000000240Z"},
+            {"monotonic_ns": 10_000_000, "utc_at": "2026-11-13T00:00:00Z"},
+            {"monotonic_ns": 250_000_000, "utc_at": "2026-11-13T00:00:00.240Z"},
         ], "max_error_ns": 0}
         with self.assertRaisesRegex(ValueError, "contain every exported event"):
             import_nsys(self.path, source_url=SOURCE, anchors=anchors)
@@ -115,7 +115,7 @@ class NsightImportTests(unittest.TestCase):
     def test_no_invented_utc_mapping_from_timestamp_values(self):
         report = import_nsys(self.path, source_url=SOURCE)
         self.assertNotIn("runtime_trace", report)
-        self.assertEqual(report["time_window_ns"], {"started_at": 5, "ended_at": 270})
+        self.assertEqual(report["time_window_ns"], {"started_at": 5_000_000, "ended_at": 270_000_000})
 
 
 if __name__ == "__main__":
