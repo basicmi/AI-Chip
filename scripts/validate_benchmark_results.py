@@ -442,6 +442,8 @@ def validate_runtime_trace(trace, where):
             continue
         event_id = event.get("event_id")
         parent_id = event.get("parent_event_id")
+        if not isinstance(event_id, str) or not event_id.strip():
+            continue
         if parent_id is None or not isinstance(parent_id, str) or not parent_id.strip():
             continue
         if parent_id == event_id:
