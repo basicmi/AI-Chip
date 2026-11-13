@@ -273,14 +273,99 @@ class RuntimeHardwareAlignmentTests(unittest.TestCase):
         errors = validate_hardware_evidence({"hardware_evidence": evidence}, "test")
         self.assertTrue(any("derived input compute_flop_count has no matching scope/entity/fabric" in error for error in errors))
 
-    def test_naive_timestamps_and_monotonic_clock_are_rejected(self):
+    def test_naive_timestamps_and_unmapped_monotonic_clock_are_rejected(self):
         trace = runtime_trace(clock_domain="monotonic_ns")
         errors = validate_runtime_trace(trace, "test")
-        self.assertTrue(any("clock_domain must be utc_wall_clock" in error for error in errors))
+        self.assertTrue(any("clock_mapping is required for monotonic_ns" in error for error in errors))
         trace = runtime_trace()
         trace["events"][0]["started_at"] = "2026-11-13T10:00:01"
         errors = validate_runtime_trace(trace, "test")
         self.assertTrue(any("positive and timezone-aware" in error for error in errors))
+
+    def test_monotonic_trace_maps_to_utc_with_explicit_two_anchor_clock_model(self):
+        trace = runtime_trace(
+            clock_domain="monotonic_ns",
+            started_at=0,
+            ended_at=10_000_000_000,
+            events=[
+                {
+                    "event_id": "prefill-1", "name": "prefill", "category": "prefill",
+                    "started_at": 1_000_000_000, "ended_at": 8_000_000_000,
+                    "entity_id": "gpu0",
+                },
+                {
+                    "event_id": "kernel-1", "name": "attention kernel", "category": "kernel",
+                    "started_at": 1_999_000_000, "ended_at": 4_001_000_000,
+                    "entity_id": "gpu0", "parent_event_id": "prefill-1",
+                },
+            ],
+        )
+        trace["clock_mapping"] = {
+            "method": "piecewise_linear",
+            "anchors": [
+                {"monotonic_ns": 0, "utc_at": "2026-11-13T10:00:00Z"},
+                {"monotonic_ns": 10_000_000_000, "utc_at": "2026-11-13T10:00:10Z"},
+            ],
+            "max_error_ns": 100_000,
+        }
+        errors = validate_runtime_trace(trace, "test")
+        self.assertEqual(errors, [])
+        report = align_record(record(trace=trace))
+        metric = report["metric_alignments"][0]
+        self.assertTrue(metric["eligible_for_phase_join"])
+        self.assertEqual(metric["selected_event"]["event_id"], "kernel-1")
+        self.assertEqual(report["capture_alignment"]["clock_mapping_method"], "piecewise_linear")
+        self.assertEqual(report["capture_alignment"]["clock_mapping_max_error_ns"], 100_000)
+
+    def test_monotonic_clock_mapping_does_not_extrapolate_outside_anchor_range(self):
+        trace = runtime_trace(clock_domain="monotonic_ns", started_at=0, ended_at=11_000_000_000)
+        trace["clock_mapping"] = {
+            "method": "piecewise_linear",
+            "anchors": [
+                {"monotonic_ns": 1_000_000_000, "utc_at": "2026-11-13T10:00:01Z"},
+                {"monotonic_ns": 10_000_000_000, "utc_at": "2026-11-13T10:00:10Z"},
+            ],
+            "max_error_ns": 0,
+        }
+        errors = validate_runtime_trace(trace, "test")
+        self.assertTrue(any("lie within clock anchors" in error for error in errors))
+
+    def test_clock_mapping_uncertainty_is_a_containment_guard_band(self):
+        trace = runtime_trace(
+            clock_domain="monotonic_ns",
+            started_at=0,
+            ended_at=10_000_000_000,
+            events=[{
+                "event_id": "kernel-1", "name": "kernel", "category": "kernel",
+                "started_at": 2_000_000_000, "ended_at": 4_000_000_000,
+                "entity_id": "gpu0",
+            }],
+        )
+        trace["clock_mapping"] = {
+            "method": "piecewise_linear",
+            "anchors": [
+                {"monotonic_ns": 0, "utc_at": "2026-11-13T10:00:00Z"},
+                {"monotonic_ns": 10_000_000_000, "utc_at": "2026-11-13T10:00:10Z"},
+            ],
+            "max_error_ns": 1_000_000,
+        }
+        metric = align_record(record(trace=trace))["metric_alignments"][0]
+        self.assertEqual(metric["alignment_status"], "partial_or_multiple_event_overlap")
+        self.assertFalse(metric["eligible_for_phase_join"])
+        self.assertEqual(metric["clock_mapping_uncertainty_seconds"], 0.001)
+
+    def test_clock_anchors_must_be_strictly_monotonic(self):
+        trace = runtime_trace(clock_domain="monotonic_ns", started_at=0, ended_at=10_000_000_000)
+        trace["clock_mapping"] = {
+            "method": "piecewise_linear",
+            "anchors": [
+                {"monotonic_ns": 0, "utc_at": "2026-11-13T10:00:00Z"},
+                {"monotonic_ns": 0, "utc_at": "2026-11-13T10:00:10Z"},
+            ],
+            "max_error_ns": 0,
+        }
+        errors = validate_runtime_trace(trace, "test")
+        self.assertTrue(any("monotonic_ns anchors must be strictly increasing" in error for error in errors))
 
     def test_parent_references_must_exist_and_cycles_are_rejected(self):
         events = [
