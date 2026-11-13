@@ -1199,7 +1199,9 @@
             "host_runtime",
             "other",
             "request",
-            "token_emit"
+            "token_emit",
+            "cpu_scheduling",
+            "communication_wait"
           ]
         },
         "started_at": {
