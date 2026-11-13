@@ -30,8 +30,8 @@ def _datetime(value):
     return parsed
 
 
-def _window_seconds(evidence):
-    sampling = evidence.get("sampling", {})
+def _window_seconds(evidence, sampling_window=None):
+    sampling = sampling_window if sampling_window is not None else evidence.get("sampling", {})
     start = _datetime(sampling.get("started_at"))
     end = _datetime(sampling.get("ended_at"))
     seconds = (end - start).total_seconds()
@@ -41,7 +41,22 @@ def _window_seconds(evidence):
 
 
 def _group(metric):
-    return metric.get("scope"), metric.get("entity_id")
+    window = metric.get("sampling_window")
+    window_key = (
+        (window.get("started_at"), window.get("ended_at"))
+        if isinstance(window, dict) else None
+    )
+    return metric.get("scope"), metric.get("entity_id"), window_key
+
+
+def _group_sampling_window(group):
+    if group[2] is None:
+        return None
+    return {"started_at": group[2][0], "ended_at": group[2][1]}
+
+
+def _group_window_seconds(evidence, group):
+    return _window_seconds(evidence, _group_sampling_window(group))
 
 
 def _find(metrics, metric_id, group=None):
@@ -60,7 +75,8 @@ def _exists(metrics, metric_id, group, aggregation):
 
 
 def _derived(metric_id, value, unit, aggregation, scope, inputs, formula, *,
-             entity_id=None, precision=None, sparsity=None, link_type=None, directionality=None):
+             entity_id=None, precision=None, sparsity=None, link_type=None, directionality=None,
+             sampling_window=None):
     metric = {
         "metric_id": metric_id,
         "value": value,
@@ -74,6 +90,8 @@ def _derived(metric_id, value, unit, aggregation, scope, inputs, formula, *,
     }
     if entity_id:
         metric["entity_id"] = entity_id
+    if sampling_window is not None:
+        metric["sampling_window"] = dict(sampling_window)
     if precision:
         metric["precision"] = precision
     if sparsity:
@@ -91,7 +109,6 @@ def derive_metrics(evidence):
         raise ValueError("evidence must be an object containing a metrics array")
     result = copy.deepcopy(evidence)
     metrics = result["metrics"]
-    seconds = _window_seconds(result)
     added, warnings = [], []
 
     def append(metric):
@@ -112,11 +129,13 @@ def derive_metrics(evidence):
             if not precision or not sparsity:
                 warnings.append("compute_flop_count skipped: precision and sparsity are required")
                 continue
+            seconds = _group_window_seconds(result, group)
             rate = count["value"] / seconds
             append(_derived(
                 "achieved_flops", rate, "FLOP/s", "rate", group[0],
                 ["compute_flop_count"], "compute_flop_count / sampling_window_seconds",
                 entity_id=group[1], precision=precision, sparsity=sparsity,
+                sampling_window=_group_sampling_window(group),
             ))
 
     # Compute peak utilization is comparable only when precision, sparsity and scope match.
@@ -142,6 +161,7 @@ def derive_metrics(evidence):
                     "achieved_flops / theoretical_peak_flops * 100",
                     entity_id=group[1], precision=actual.get("precision"),
                     sparsity=actual.get("sparsity"),
+                    sampling_window=_group_sampling_window(group),
                 ))
 
     # DRAM byte counters must both be interval totals over the same scope.
@@ -152,12 +172,13 @@ def derive_metrics(evidence):
                 if read.get("aggregation") != "sum" or write.get("aggregation") != "sum":
                     warnings.append("dram_bandwidth_bytes_per_s skipped: read/write byte inputs must use sum aggregation")
                     continue
+                seconds = _group_window_seconds(result, group)
                 value = (read["value"] + write["value"]) / seconds
                 append(_derived(
                     "dram_bandwidth_bytes_per_s", value, "byte/s", "rate", group[0],
                     ["dram_read_bytes", "dram_write_bytes"],
                     "(dram_read_bytes + dram_write_bytes) / sampling_window_seconds",
-                    entity_id=group[1],
+                    entity_id=group[1], sampling_window=_group_sampling_window(group),
                 ))
 
     # A bandwidth ratio is valid only for the same measurement boundary.
@@ -177,7 +198,7 @@ def derive_metrics(evidence):
                     "dram_bandwidth_utilization_pct", value, "%", "mean", group[0],
                     ["dram_bandwidth_bytes_per_s", "dram_peak_bandwidth_bytes_per_s"],
                     "dram_bandwidth_bytes_per_s / dram_peak_bandwidth_bytes_per_s * 100",
-                    entity_id=group[1],
+                    entity_id=group[1], sampling_window=_group_sampling_window(group),
                 ))
 
     # Prefer byte occupancy; use token occupancy only when byte occupancy is unavailable.
@@ -206,7 +227,7 @@ def derive_metrics(evidence):
                     append(_derived(
                         "kv_cache_occupancy_pct", value, "%", used["aggregation"], group[0],
                         [used_id, capacity_id], f"{used_id} / {capacity_id} * 100",
-                        entity_id=group[1],
+                        entity_id=group[1], sampling_window=_group_sampling_window(group),
                     ))
                     derived_for_pair = True
                     break
@@ -231,12 +252,14 @@ def derive_metrics(evidence):
                     link_type = fixed_link_type or tx.get("link_type")
                     if not link_type or link_type != rx.get("link_type"):
                         continue
+                    seconds = _group_window_seconds(result, group)
                     value = (tx["value"] + rx["value"]) / seconds
                     append(_derived(
                         "link_bandwidth_bytes_per_s", value, "byte/s", "rate", group[0],
                         [tx_id, rx_id],
                         f"({tx_id} + {rx_id}) / sampling_window_seconds",
                         entity_id=group[1], link_type=link_type, directionality="bidirectional",
+                        sampling_window=_group_sampling_window(group),
                     ))
 
     # Link bandwidth and peak must refer to the same link entity and fabric.
@@ -263,6 +286,7 @@ def derive_metrics(evidence):
                     ["link_bandwidth_bytes_per_s", "link_peak_bandwidth_bytes_per_s"],
                     "link_bandwidth_bytes_per_s / link_peak_bandwidth_bytes_per_s * 100",
                     entity_id=group[1], link_type=link_type, directionality=directionality,
+                    sampling_window=_group_sampling_window(group),
                 ))
 
     return result, added, warnings
