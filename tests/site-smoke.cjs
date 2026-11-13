@@ -1058,11 +1058,29 @@ const { chromium } = require("playwright");
       !(await page.locator("[data-model-support-reviewed]").textContent()).trim()) {
     throw new Error("Model Support page-level registry metadata did not initialize");
   }
+  const catalogCount = Number(await page.locator('[data-model-stat="models"]').textContent());
+  if (catalogCount < 13 || Number(await page.locator("[data-catalog-result-count]").textContent()) !== catalogCount) {
+    throw new Error("Model catalog did not render all independently curated checkpoints");
+  }
+  await page.locator("[data-catalog-search]").fill("Kimi K2 Thinking");
+  if (Number(await page.locator("[data-catalog-result-count]").textContent()) !== 1) {
+    throw new Error("Catalog search failed for an independently curated checkpoint");
+  }
+  const catalogOnly = await page.locator("[data-catalog-cards] .model-support-card").first().textContent();
+  if (!catalogOnly.includes("No verified hardware path") || !catalogOnly.includes("official model card")) {
+    throw new Error("Catalog-only model did not distinguish metadata from accelerator support");
+  }
+  await page.locator("[data-catalog-reset]").click();
+  await page.locator("[data-catalog-coverage]").selectOption("catalog_only");
+  if (Number(await page.locator("[data-catalog-result-count]").textContent()) < 6) {
+    throw new Error("Catalog-only coverage filtering failed");
+  }
+  await page.locator("[data-catalog-reset]").click();
   await page.locator("[data-model-search]").fill("Llama 3.3 70B");
   if (Number(await page.locator("[data-model-result-count]").textContent()) !== 1) {
     throw new Error("Model support search did not isolate Llama 3.3 70B");
   }
-  const llamaPath = await page.locator(".model-support-card").first().textContent();
+  const llamaPath = await page.locator("[data-model-cards] .model-support-card").first().textContent();
   if (!llamaPath.includes("Trainium2") || !llamaPath.includes("Trainium3") ||
       !llamaPath.includes("BF16") || !llamaPath.includes("FP8 static")) {
     throw new Error("Llama 3.3 70B model support path is missing hardware or precision details");
