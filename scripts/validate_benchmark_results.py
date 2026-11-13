@@ -235,8 +235,15 @@ def validate_hardware_evidence(row, where):
             not isinstance(metric.get("mapping_note"), str) or not metric["mapping_note"].strip()
         ):
             errors.append(f"{item_where}: mapping_note must be a non-empty string")
+        metric_window_key = None
+        if isinstance(metric.get("sampling_window"), dict):
+            metric_window_key = (
+                metric["sampling_window"].get("started_at"),
+                metric["sampling_window"].get("ended_at"),
+            )
         key = (metric_id, scope if isinstance(scope, str) else repr(scope),
-               aggregation if isinstance(aggregation, str) else repr(aggregation), entity_id)
+               aggregation if isinstance(aggregation, str) else repr(aggregation),
+               entity_id, metric_window_key)
         if key in seen:
             errors.append(f"{item_where}: duplicate metric_id/scope/aggregation tuple {key}")
         seen.add(key)
@@ -289,6 +296,7 @@ def validate_hardware_evidence(row, where):
             input_scope_matches = any(
                 item.get("scope") == metric.get("scope")
                 and item.get("entity_id") == metric.get("entity_id")
+                and item.get("sampling_window") == metric.get("sampling_window")
                 and (
                     metric.get("link_type") is None
                     or item.get("link_type") == metric.get("link_type")
@@ -311,6 +319,7 @@ def validate_hardware_evidence(row, where):
                     if isinstance(item, dict) and item.get("metric_id") == input_id
                     and item.get("scope") == metric.get("scope")
                     and item.get("entity_id") == metric.get("entity_id")
+                    and item.get("sampling_window") == metric.get("sampling_window")
                 ]
                 if matching_compute and any(
                     (item.get("precision"), item.get("sparsity")) !=
