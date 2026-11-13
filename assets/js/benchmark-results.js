@@ -1366,7 +1366,9 @@
         phaseBody.append(tr);
       });
       phaseTable.append(phaseBody);
-      phaseDecompositionContent.append(phaseTable);
+      const phaseTableWrap = make("div", "benchmark-runtime-alignment-table-wrap");
+      phaseTableWrap.append(phaseTable);
+      phaseDecompositionContent.append(phaseTableWrap);
     }
     phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-note",
       "TTFT = request-root start to token 1. TPOT = mean interval between consecutive token emissions. CPU scheduling and communication wait are explicit subphase events; kernel/communication may overlap prefill/decode and are not additive. Kernel event time is not GPU-active time: synchronized SM-activity counters are required to quantify GPU busy/idle. Unclassified gaps are not presumed idle. Trace sample percentiles are not substitutes for published benchmark p99s."));
