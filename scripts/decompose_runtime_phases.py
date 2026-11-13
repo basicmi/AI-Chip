@@ -21,7 +21,7 @@ from validate_benchmark_results import _parse_runtime_trace_timestamp, validate_
 
 DERIVER = "scripts/decompose_runtime_phases.py"
 PRIMARY_PHASES = ("queue_wait", "batch_wait", "prefill", "decode", "host_runtime", "other")
-SUBPHASES = ("kernel", "communication")
+SUBPHASES = ("kernel", "communication", "cpu_scheduling", "communication_wait")
 ALL_PHASES = PRIMARY_PHASES + SUBPHASES
 
 
