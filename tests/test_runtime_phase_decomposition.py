@@ -15,8 +15,8 @@ def event(event_id, category, start_ms, end_ms, *, parent="request-event",
         "event_id": event_id,
         "name": event_id.replace("-", " "),
         "category": category,
-        "started_at": f"2026-11-13T10:00:{start_ms / 1000:06.3f}Z",
-        "ended_at": f"2026-11-13T10:00:{end_ms / 1000:06.3f}Z",
+        "started_at": iso_ms(start_ms),
+        "ended_at": iso_ms(end_ms),
     }
     if parent is not None:
         item["parent_event_id"] = parent
@@ -213,6 +213,13 @@ class RuntimePhaseDecompositionTests(unittest.TestCase):
             event("token-1", "token_emit", 50, 50, token_index=1),
             event("token-2", "token_emit", 100, 100, token_index=2),
         ]
+        for item in events:
+            for key in ("started_at", "ended_at"):
+                utc_value = item[key]
+                from datetime import datetime, timezone
+                parsed = datetime.fromisoformat(utc_value.replace("Z", "+00:00"))
+                origin = datetime.fromisoformat("2026-11-13T10:00:00+00:00")
+                item[key] = int((parsed - origin).total_seconds() * 1_000_000_000)
         result = decompose_record(record(events, clock_domain="monotonic_ns", end_ms=1000))
         self.assertEqual(result["requests"][0]["ttft_ms"], 50)
         self.assertEqual(result["requests"][0]["tpot_ms"], 50)
