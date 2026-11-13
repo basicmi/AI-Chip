@@ -1703,7 +1703,7 @@
       "sm_active_pct", "tensor_active_pct", "dram_active_pct", "sm_throughput_pct",
       "dram_bandwidth_utilization_pct", "compute_peak_utilization_pct",
       "valu_active_pct", "mfma_active_pct", "vmem_active_pct",
-      "gpu_clock_hz", "memory_clock_hz", "throttle_active_pct"
+      "gpu_clock_hz", "memory_clock_hz", "gpu_power_w", "temperature_c", "throttle_active_pct"
     ];
     const gpuGroups = [];
     records.forEach(record => {
@@ -1744,7 +1744,7 @@
       activityTable.dataset.gpuExecutionActivity = "";
       const activityHead = document.createElement("thead");
       const activityHeader = document.createElement("tr");
-      ["Record", "Scope / entity", "SM active", "SM inactive-cycle complement", "Tensor active", "SM throughput", "DRAM active", "DRAM bandwidth utilization", "Sampling window"].forEach(label =>
+      ["Record", "Scope / entity", "SM active", "SM inactive-cycle complement", "Tensor active", "SM throughput", "Compute / VALU / MFMA / VMEM", "DRAM active", "DRAM bandwidth utilization", "Clock / power / thermal", "Sampling window"].forEach(label =>
         activityHeader.append(make("th", "", label)));
       activityHead.append(activityHeader);
       activityTable.append(activityHead);
@@ -1768,8 +1768,19 @@
           inactive,
           metricCell(group, "tensor_active_pct"),
           metricCell(group, "sm_throughput_pct"),
+          [
+            ["compute peak", "compute_peak_utilization_pct"],
+            ["VALU", "valu_active_pct"], ["MFMA", "mfma_active_pct"], ["VMEM", "vmem_active_pct"]
+          ].map(([label, key]) => (group.values[key] || []).length
+            ? label + " " + metricCell(group, key) : null).filter(Boolean).join(" · ") || "—",
           metricCell(group, "dram_active_pct"),
           metricCell(group, "dram_bandwidth_utilization_pct"),
+          [
+            ["GPU", "gpu_clock_hz", " Hz"], ["Memory", "memory_clock_hz", " Hz"],
+            ["Power", "gpu_power_w", " W"], ["Temp", "temperature_c", " °C"],
+            ["Throttle", "throttle_active_pct", "%"]
+          ].map(([label, key, suffix]) => (group.values[key] || []).length
+            ? label + " " + metricCell(group, key, suffix) : null).filter(Boolean).join(" · ") || "—",
           group.window.started_at + " → " + group.window.ended_at
         ].forEach(value => row.append(make("td", "", value)));
         activityBody.append(row);
