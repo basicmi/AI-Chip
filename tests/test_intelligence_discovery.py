@@ -40,4 +40,5 @@ class IntelligenceDiscoveryTests(unittest.TestCase):
  def test_release_fingerprint_changes_when_release_notes_change(self):
   a={"tag_name":"v1","name":"v1","body":"A","published_at":"2026-11-12T00:00:00Z","html_url":"https://github.com/o/r","prerelease":False}
   self.assertNotEqual(release_fingerprint(a),release_fingerprint({**a,"body":"B"}))
+  self.assertNotEqual(release_fingerprint(a),release_fingerprint({**a,"updated_at":"2026-11-13T00:00:00Z"}))
 if __name__=="__main__": unittest.main()

@@ -22,7 +22,7 @@ def fetch_json(url, *, opener=urllib.request.urlopen, timeout=15):
         return json.loads(response.read().decode("utf-8"))
 
 def release_fingerprint(release):
-    payload = {key: release.get(key) for key in ("tag_name","name","body","published_at","html_url","prerelease")}
+    payload = {key: release.get(key) for key in ("tag_name","name","body","published_at","updated_at","html_url","prerelease")}
     encoded = json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
