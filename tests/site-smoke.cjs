@@ -505,7 +505,7 @@ const { chromium } = require("playwright");
           sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z", sample_interval_ms: 1000, sample_count: 60 },
           provenance: { source_type: "profiler_export", source_url: "https://example.com/hardware-evidence/fixture-0", collected_at: "2026-11-12T10:02:00Z" },
           metrics: [
-            { metric_id: "sm_throughput_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_kernel", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed", mapping_quality: "direct", mapping_note: "Profiler throughput relative to peak sustained rate over elapsed cycles." },
+            { metric_id: "sm_throughput_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_kernel", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed", mapping_quality: "direct", mapping_note: "Profiler throughput relative to peak sustained rate over elapsed cycles.", entity_id: "gpu0", sampling_window: { started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z" } },
             { metric_id: "sm_active_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "DCGM_FI_PROF_SM_UTIL_RATIO", mapping_quality: "direct", mapping_note: "Ratio of cycles with at least one warp assigned to an SM." },
             { metric_id: "theoretical_peak_flops", value: 1.9e15, unit: "FLOP/s", measurement_kind: "telemetry", aggregation: "max", scope: "per_gpu", source_name: "device_fp8_peak_flops", precision: "FP8", sparsity: "dense" },
             { metric_id: "compute_flop_count", value: 7.2e16, unit: "FLOP", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "flop_count_sp", precision: "FP8", sparsity: "dense" },
@@ -513,6 +513,19 @@ const { chromium } = require("playwright");
             { metric_id: "dram_read_bytes", value: 2e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "dram__bytes_read.sum" },
             { metric_id: "nvlink_tx_bytes", value: 8e12, unit: "byte", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_link", source_name: "nvlink_tx_bytes", link_type: "nvlink" },
             { metric_id: "gpu_power_w", value: 650, unit: "W", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "gpu_power_w" }
+          ]
+        }
+      } : {}),
+      ...(index === 0 ? {
+        runtime_trace: {
+          schema_version: "1.0",
+          collector: { name: "Serving Runtime Trace", version: "1.0", type: "runtime_trace" },
+          clock_domain: "utc_wall_clock",
+          sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z" },
+          provenance: { source_type: "runtime_trace_export", source_url: "https://example.com/runtime-trace/fixture-0", collected_at: "2026-11-12T10:02:01Z" },
+          events: [
+            { event_id: "prefill-1", name: "prefill batch 1", category: "prefill", started_at: "2026-11-12T10:00:01Z", ended_at: "2026-11-12T10:00:08Z", entity_id: "gpu0" },
+            { event_id: "kernel-1", name: "attention kernel", category: "kernel", started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z", entity_id: "gpu0", parent_event_id: "prefill-1", correlation_id: "request-17", stream_id: "stream-0" }
           ]
         }
       } : {}),
@@ -658,6 +671,19 @@ const { chromium } = require("playwright");
   }
   if (await page.locator("[data-cross-layer-comparison]").count() !== 3) {
     throw new Error("Cross-layer matrix should render the three unique execution contrasts");
+  }
+  const runtimeAlignmentText = await page.locator("[data-results-runtime-alignment-content]").textContent();
+  if (!runtimeAlignmentText.includes("3 strict-cohort records") ||
+      !runtimeAlignmentText.includes("1 runtime traces") ||
+      !runtimeAlignmentText.includes("1 hardware/trace pairs") ||
+      !runtimeAlignmentText.includes("1 metric-specific windows") ||
+      !runtimeAlignmentText.includes("1 eligible phase joins")) {
+    throw new Error("Runtime trace alignment panel did not report exact evidence coverage: " + runtimeAlignmentText);
+  }
+  if (await page.locator("[data-runtime-trace-record-id]").count() !== 1 ||
+      await page.locator("[data-runtime-phase-join]").count() !== 1 ||
+      !(await page.locator("[data-runtime-phase-join]").textContent()).includes("kernel")) {
+    throw new Error("Runtime phase alignment did not join the metric window to the exact nested kernel event");
   }
   const evidenceRecord = page.locator('[data-hardware-evidence-record-id="fixture-0"]');
   await page.locator(".benchmark-hardware-evidence-details summary").click();
