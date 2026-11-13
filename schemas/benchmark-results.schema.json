@@ -1229,6 +1229,18 @@
         "token_index": {
           "type": "integer",
           "minimum": 1
+        },
+        "depends_on_event_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "dependency_graph_complete": {
+          "type": "boolean"
         }
       },
       "allOf": [
@@ -1264,6 +1276,32 @@
             "required": [
               "token_index"
             ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "request"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "depends_on_event_ids"
+              ]
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "dependency_graph_complete"
+              ]
+            }
           }
         }
       ]

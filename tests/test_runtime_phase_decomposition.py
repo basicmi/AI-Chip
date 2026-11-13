@@ -266,5 +266,65 @@ class RuntimePhaseDecompositionTests(unittest.TestCase):
         self.assertEqual(result["records"][2]["status"], "no_request_events")
 
 
+    def test_complete_dependency_graph_reports_first_token_controlling_chain(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-root"]["dependency_graph_complete"] = True
+        by_id["request-1-queue"]["depends_on_event_ids"] = ["request-1-root"]
+        by_id["request-1-prefill"]["depends_on_event_ids"] = ["request-1-queue"]
+        by_id["request-1-token-1"]["depends_on_event_ids"] = ["request-1-prefill"]
+        trace = trace_for(events)
+        self.assertEqual(validate_runtime_trace(trace, "test"), [])
+        path = decompose_record({"id":"cp","runtime_trace":trace})["requests"][0]["critical_path"]
+        self.assertEqual(path["status"], "available")
+        self.assertEqual(path["dependency_path_event_ids"], ["request-1-queue","request-1-prefill","request-1-token-1"])
+        self.assertEqual(path["event_duration_ms"], 40)
+        self.assertEqual(path["unclassified_dependency_gap_ms"], 10)
+        self.assertEqual(path["reconstructed_elapsed_ms"], 50)
+
+    def test_dependency_path_is_withheld_without_completeness_attestation(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-queue"]["depends_on_event_ids"] = ["request-1-root"]
+        by_id["request-1-prefill"]["depends_on_event_ids"] = ["request-1-queue"]
+        by_id["request-1-token-1"]["depends_on_event_ids"] = ["request-1-prefill"]
+        path = decompose_record(record(events))["requests"][0]["critical_path"]
+        self.assertEqual(path["status"], "not_attested")
+        self.assertEqual(path["dependency_path"], [])
+
+    def test_attested_graph_without_rooted_first_token_path_is_withheld(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-root"]["dependency_graph_complete"] = True
+        by_id["request-1-token-1"]["depends_on_event_ids"] = ["request-1-prefill"]
+        path = decompose_record(record(events))["requests"][0]["critical_path"]
+        self.assertEqual(path["status"], "missing_dependency_path")
+
+    def test_validator_rejects_unknown_completion_dependency(self):
+        events = request_fixture()
+        next(item for item in events if item["event_id"] == "request-1-queue")["depends_on_event_ids"] = ["missing-event"]
+        self.assertTrue(any("unknown depends_on_event_id" in e for e in validate_runtime_trace(trace_for(events),"test")))
+
+    def test_validator_rejects_completion_dependency_cycles(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-queue"]["depends_on_event_ids"] = ["request-1-prefill"]
+        by_id["request-1-prefill"]["depends_on_event_ids"] = ["request-1-queue"]
+        self.assertTrue(any("completion dependency graph contains a cycle" in e for e in validate_runtime_trace(trace_for(events),"test")))
+
+    def test_validator_rejects_dependency_that_finishes_after_dependent_starts(self):
+        events = request_fixture()
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-queue"]["ended_at"] = iso_ms(35)
+        by_id["request-1-prefill"]["depends_on_event_ids"] = ["request-1-queue"]
+        self.assertTrue(any("must complete before the dependent event starts" in e for e in validate_runtime_trace(trace_for(events),"test")))
+
+    def test_validator_rejects_cross_request_completion_dependencies(self):
+        events = request_fixture("request-1") + request_fixture("request-2", offset_ms=300)
+        by_id = {item["event_id"]: item for item in events}
+        by_id["request-1-queue"]["depends_on_event_ids"] = ["request-2-root"]
+        self.assertTrue(any("must resolve to the same request correlation_id" in e for e in validate_runtime_trace(trace_for(events),"test")))
+
+
 if __name__ == "__main__":
     unittest.main()

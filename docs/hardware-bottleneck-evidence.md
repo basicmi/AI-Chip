@@ -305,3 +305,23 @@ python3 scripts/validate_benchmark_results.py
 python3 -m unittest discover -s tests -p "test_benchmark_results.py"
 
 The validator checks structure, exact units, finite non-negative values, percentage bounds, unique metric tuples, timezone-aware sampling windows, provenance URLs, derived-metric inputs, and link-type metadata. It does not certify the counter's correctness or the publisher's methodology.
+
+
+## Explicit request dependencies and first-token controlling path
+
+A collector may attach explicit completion dependencies to runtime trace events:
+
+- depends_on_event_ids: one or more event IDs whose completion is a prerequisite for the dependent event to start.
+- dependency_graph_complete: an optional boolean on a request root. true is a collector assertion that all completion dependencies relevant to that request's first-token response are represented; false explicitly marks the graph incomplete. Absence means completeness is not attested.
+
+The request root is a release-time boundary: when another event depends on the request root, the predecessor time is the root's started_at, not its ended_at. For every other dependency edge, the predecessor's ended_at must be no later than the dependent event's started_at. Dependencies must reference existing events, be acyclic, and resolve through the event hierarchy to the same request correlation ID. depends_on_event_ids is distinct from parent_event_id: the latter expresses interval containment only and is never promoted into a dependency edge.
+
+The request-level decomposition report adds critical_path to each request. It is withheld unless the request root explicitly sets dependency_graph_complete=true, exactly one token-index-1 marker exists, and every prerequisite branch recursively reaches the request root. At each event, the report follows the declared prerequisite with the latest observed completion; ties are resolved by accumulated event duration and then event ID. It reports the selected event chain, event duration, unclassified dependency gaps, and whether their sum reconciles to trace-derived TTFT.
+
+**Interpretation limits:**
+
+1. Completeness is a collector attestation, not something the analyzer can prove from timestamps.
+2. The chain is a trace-derived controlling dependency observation. It is not proof that a particular GPU kernel, communication operation, or hardware resource caused latency.
+3. Gaps along the selected chain are unclassified. They are not automatically queue wait, CPU scheduling, GPU idle, or communication stall.
+4. A parent/child relationship, stream ID, timestamp overlap, or matching request correlation ID is not sufficient to create a dependency edge.
+5. Cross-request dependencies are rejected in this version. Shared batch dependencies must not be marked complete until a future schema explicitly models their multi-request ownership.

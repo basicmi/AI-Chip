@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Decompose request-level runtime traces into TTFT/TPOT and phase coverage.
+"""Decompose request-level runtime traces into TTFT/TPOT, phase coverage and explicit dependency paths.
 
-This tool reports measured wall-clock intervals and trace coverage. It does not
-infer causal critical paths, serialize concurrent work, or turn overlapping
-phase durations into an additive latency equation.
+A controlling dependency chain is emitted only when the collector attests a complete
+graph and the first token has a fully rooted completion-dependency path. This tool
+does not infer causality, serialize concurrent work, or produce a bottleneck verdict.
 """
 from __future__ import annotations
 
@@ -150,7 +150,116 @@ def _phase_coverage(events: list[dict], window: tuple[datetime, datetime], trace
     }
 
 
-def _request_decomposition(request_event: dict, events: list[dict], trace: dict) -> dict:
+
+
+def _critical_path_analysis(
+    request_event: dict, events: list[dict], trace: dict,
+    event_map: dict, ttft_ms: float | None,
+) -> dict:
+    """Follow explicit completion dependencies to the first token; never infer edges."""
+    attestation = request_event.get("dependency_graph_complete")
+    if attestation is not True:
+        return {
+            "status": "incomplete_graph" if attestation is False else "not_attested",
+            "completeness_attested": attestation is True,
+            "dependency_path": [],
+            "reason": "Collector marked the dependency graph incomplete."
+                if attestation is False else
+                "The request root does not attest that first-token dependencies are complete.",
+        }
+    if ttft_ms is None:
+        return {"status":"ttft_unavailable","completeness_attested":True,
+                "dependency_path":[],"reason":"A valid trace-derived TTFT is required."}
+    first_tokens = [e for e in events if e.get("category") == "token_emit" and e.get("token_index") == 1]
+    if not first_tokens:
+        return {"status":"missing_first_token","completeness_attested":True,
+                "dependency_path":[],"reason":"No token_index 1 marker exists for this request."}
+    if len(first_tokens) != 1:
+        return {"status":"ambiguous_first_token","completeness_attested":True,
+                "dependency_path":[],"reason":"Multiple token_index 1 markers exist for this request."}
+
+    root_id = request_event["event_id"]
+    root_start = _trace_time(request_event["started_at"], trace)
+    memo, visiting = {}, set()
+
+    def visit(event_id: str):
+        if event_id == root_id:
+            return {"events":[],"event_duration_ms":0.0,
+                    "unclassified_dependency_gap_ms":0.0,"controlling_predecessor_ties":0}
+        if event_id in memo:
+            return memo[event_id]
+        if event_id in visiting or len(visiting) >= 900:
+            return None
+        event = event_map.get(event_id)
+        dependencies = event.get("depends_on_event_ids") if isinstance(event, dict) else None
+        if not isinstance(dependencies, list) or not dependencies:
+            return None
+        start, end = _trace_time(event["started_at"], trace), _trace_time(event["ended_at"], trace)
+        if start is None or end is None or end < start:
+            return None
+        visiting.add(event_id)
+        candidates = []
+        for dependency_id in dependencies:
+            predecessor = event_map.get(dependency_id)
+            previous = visit(dependency_id)
+            if predecessor is None or previous is None:
+                visiting.remove(event_id)
+                return None
+            predecessor_start = _trace_time(predecessor["started_at"], trace)
+            predecessor_end = predecessor_start if predecessor.get("category") == "request" else _trace_time(predecessor["ended_at"], trace)
+            if predecessor_end is None or predecessor_end > start:
+                visiting.remove(event_id)
+                return None
+            candidates.append((predecessor_end, previous, dependency_id))
+        latest = max(item[0] for item in candidates)
+        controlling = [item for item in candidates if item[0] == latest]
+        controlling.sort(key=lambda item: (
+            -item[1]["event_duration_ms"],
+            tuple(node["event_id"] for node in item[1]["events"]),
+            item[2],
+        ))
+        predecessor_end, previous, _ = controlling[0]
+        duration_ms, gap_ms = _seconds(start, end) * 1000, _seconds(predecessor_end, start) * 1000
+        result = {
+            "events": previous["events"] + [{
+                "event_id":event_id,"name":event["name"],"category":event["category"],
+                "duration_ms":round(duration_ms,6),"gap_before_ms":round(gap_ms,6)
+            }],
+            "event_duration_ms":previous["event_duration_ms"] + duration_ms,
+            "unclassified_dependency_gap_ms":previous["unclassified_dependency_gap_ms"] + gap_ms,
+            "controlling_predecessor_ties":previous["controlling_predecessor_ties"] + (1 if len(controlling)>1 else 0),
+        }
+        visiting.remove(event_id)
+        memo[event_id]=result
+        return result
+
+    path = visit(first_tokens[0]["event_id"])
+    if path is None:
+        return {
+            "status":"missing_dependency_path","completeness_attested":True,
+            "first_token_event_id":first_tokens[0]["event_id"],"dependency_path":[],
+            "reason":"The first token has no complete dependency chain rooted at request start.",
+        }
+    reconstructed = path["event_duration_ms"] + path["unclassified_dependency_gap_ms"]
+    matches = abs(reconstructed - ttft_ms) <= 0.001
+    return {
+        "status":"available" if matches else "path_time_mismatch",
+        "completeness_attested":True,
+        "first_token_event_id":first_tokens[0]["event_id"],
+        "ttft_ms":round(ttft_ms,6),
+        "dependency_path":path["events"],
+        "dependency_path_event_ids":[item["event_id"] for item in path["events"]],
+        "event_duration_ms":round(path["event_duration_ms"],6),
+        "unclassified_dependency_gap_ms":round(path["unclassified_dependency_gap_ms"],6),
+        "reconstructed_elapsed_ms":round(reconstructed,6),
+        "reconstruction_matches_ttft":matches,
+        "controlling_predecessor_ties":path["controlling_predecessor_ties"],
+        "selection_rule":"Follow the declared prerequisite with the latest observed completion; break ties by accumulated event duration, then event ID.",
+        "reason":None if matches else "The explicit dependency path does not reconcile to trace-derived TTFT.",
+    }
+
+
+def _request_decomposition(request_event: dict, events: list[dict], trace: dict, event_map: dict) -> dict:
     request_start = _trace_time(request_event["started_at"], trace)
     request_end = _trace_time(request_event["ended_at"], trace)
     request_window = (request_start, request_end)
@@ -213,6 +322,7 @@ def _request_decomposition(request_event: dict, events: list[dict], trace: dict)
         "request_phase_coverage": request_coverage,
         "ttft_phase_coverage": ttft_coverage,
         "tpot_phase_coverage": tpot_coverage,
+        "critical_path": _critical_path_analysis(request_event, events, trace, event_map, ttft_ms),
         "warnings": warnings,
     }
 
@@ -267,7 +377,7 @@ def decompose_record(record: dict) -> dict:
             if _trace_time(event["started_at"], trace) >= _trace_time(request_event["started_at"], trace)
             and _trace_time(event["ended_at"], trace) <= _trace_time(request_event["ended_at"], trace)
         ]
-        decompositions.append(_request_decomposition(request_event, request_events, trace))
+        decompositions.append(_request_decomposition(request_event, request_events, trace, event_map))
 
     ttft_values = [item["ttft_ms"] for item in decompositions if item["ttft_ms"] is not None]
     tpot_values = [item["tpot_ms"] for item in decompositions if item["tpot_ms"] is not None]
@@ -309,6 +419,7 @@ def decompose_record(record: dict) -> dict:
         "request_count": len(decompositions),
         "requests_with_ttft": len(ttft_values),
         "requests_with_tpot": len(tpot_values),
+        "requests_with_critical_path": sum(item["critical_path"]["status"] == "available" for item in decompositions),
         "ttft_ms": _distribution(ttft_values),
         "tpot_ms": _distribution(tpot_values),
         "phase_summary": phase_summary,
@@ -319,7 +430,8 @@ def decompose_record(record: dict) -> dict:
             "Phase coverage is wall-clock interval union. Nested and parallel events can overlap, so phase durations are not necessarily additive.",
             "Kernel and communication are reported as subphases and may overlap prefill/decode; they are not added to the primary phase total.",
             "Unclassified gap means no primary phase event covers that wall-clock interval; it is not automatically GPU idle time.",
-            "This report does not infer a critical path, attribute causality, or equate trace-derived sample percentiles with published benchmark percentiles.",
+            "A first-token controlling dependency chain is reported only when the request root attests a complete graph and every dependency path is explicit and rooted; dependency gaps remain unclassified.",
+            "The controlling chain is a trace-derived dependency observation, not proof of hardware causality or a bottleneck; trace sample percentiles are not substitutes for published benchmark percentiles.",
         ],
     }
 
@@ -345,11 +457,12 @@ def decompose_database(database: dict | list) -> dict:
         "request_count": sum(report["request_count"] for report in reports),
         "requests_with_ttft": sum(report["requests_with_ttft"] for report in decomposed),
         "requests_with_tpot": sum(report["requests_with_tpot"] for report in decomposed),
+        "requests_with_critical_path": sum(report.get("requests_with_critical_path",0) for report in decomposed),
         "records": reports,
         "global_limitations": [
             "Trace-derived TTFT/TPOT are request-sample statistics, not substitutes for the benchmark's published aggregate metrics.",
             "Phase wall-clock coverage is non-additive when events overlap or execute concurrently.",
-            "Unclassified time is not proof of GPU idle; a critical path requires explicit dependency evidence beyond timestamp overlap.",
+            "Unclassified time is not proof of GPU idle. A controlling dependency chain requires collector-attested completeness and explicit completion-dependency edges; timestamps and parent/child nesting alone are insufficient.",
         ],
     }
 
