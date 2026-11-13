@@ -337,6 +337,7 @@ def validate_hardware_evidence(row, where):
 RUNTIME_TRACE_CATEGORIES = {
     "queue_wait", "batch_wait", "prefill", "decode",
     "kernel", "communication", "host_runtime", "other", "request", "token_emit",
+    "cpu_scheduling", "communication_wait",
 }
 
 
