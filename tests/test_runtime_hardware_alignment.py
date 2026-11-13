@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from align_runtime_hardware_traces import align_database, align_record
-from validate_benchmark_results import validate_hardware_evidence, validate_runtime_trace
+from validate_benchmark_results import validate_database, validate_hardware_evidence, validate_runtime_trace
 
 
 def hardware_evidence(*, metric_window=True, metric_scope="per_gpu",
@@ -400,6 +400,25 @@ class RuntimeHardwareAlignmentTests(unittest.TestCase):
         self.assertEqual(report["records_with_runtime_trace"], 2)
         self.assertEqual(report["records_with_overlapping_capture_windows"], 1)
         self.assertEqual(report["eligible_metric_phase_join_count"], 1)
+
+    def test_benchmark_database_validator_invokes_runtime_trace_validation(self):
+        database = {
+            "schema_version": "1.0",
+            "sources": [{
+                "id": "fixture-source",
+                "source_class": "third_party_public_benchmark",
+                "record_count": 1,
+                "results_url": "https://example.com/results",
+            }],
+            "records": [{
+                "id": "trace-invalid",
+                "source_id": "fixture-source",
+                "source_class": "third_party_public_benchmark",
+                "runtime_trace": {"schema_version": "unsupported"},
+            }],
+        }
+        errors = validate_database(database)
+        self.assertTrue(any("runtime_trace.schema_version must be 1.0" in error for error in errors))
 
     def test_metric_window_with_naive_time_is_rejected_without_type_error(self):
         evidence = hardware_evidence()
