@@ -53,6 +53,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
           python3 -m unittest discover -s tests -p "test_hardware_performance_diagnosis.py"
           python3 -m unittest discover -s tests -p "test_runtime_hardware_alignment.py"
+          python3 -m unittest discover -s tests -p "test_runtime_phase_decomposition.py"
           python3 -m unittest discover -s tests -p "test_cross_layer_performance_correlation.py"
 
   build-and-smoke-test:
