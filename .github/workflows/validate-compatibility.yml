@@ -55,6 +55,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_gpu_execution_efficiency.py"
           python3 -m unittest discover -s tests -p "test_runtime_hardware_alignment.py"
           python3 -m unittest discover -s tests -p "test_runtime_phase_decomposition.py"
+          python3 -m unittest discover -s tests -p "test_otel_trace_import.py"
           python3 -m unittest discover -s tests -p "test_cross_layer_performance_correlation.py"
 
   build-and-smoke-test:
