@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "registry_version": "2026.11.13-1",
+  "last_reviewed": "2026-11-13",
+  "policy": "Curated official project repositories. Discovery candidates are leads for human review, not proof of product capability, model compatibility or benchmark results.",
+  "sources": [
+    {
+      "id": "nvidia-tensorrt-llm",
+      "name": "NVIDIA TensorRT-LLM",
+      "category": "runtime",
+      "kind": "github_releases",
+      "repo": "NVIDIA/TensorRT-LLM",
+      "source_url": "https://github.com/NVIDIA/TensorRT-LLM",
+      "description": "High-performance inference runtime and deployment recipes.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "category": "runtime",
+      "kind": "github_releases",
+      "repo": "vllm-project/vllm",
+      "source_url": "https://github.com/vllm-project/vllm",
+      "description": "Open-source LLM serving engine.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "sglang",
+      "name": "SGLang",
+      "category": "runtime",
+      "kind": "github_releases",
+      "repo": "sgl-project/sglang",
+      "source_url": "https://github.com/sgl-project/sglang",
+      "description": "LLM serving and structured generation runtime.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "triton",
+      "name": "Triton",
+      "category": "compiler",
+      "kind": "github_releases",
+      "repo": "triton-lang/triton",
+      "source_url": "https://github.com/triton-lang/triton",
+      "description": "GPU programming language and compiler.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "nvidia-cutlass",
+      "name": "NVIDIA CUTLASS",
+      "category": "kernel",
+      "kind": "github_releases",
+      "repo": "NVIDIA/cutlass",
+      "source_url": "https://github.com/NVIDIA/cutlass",
+      "description": "CUDA templates and kernels for linear algebra.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "nvidia-transformer-engine",
+      "name": "NVIDIA Transformer Engine",
+      "category": "kernel",
+      "kind": "github_releases",
+      "repo": "NVIDIA/TransformerEngine",
+      "source_url": "https://github.com/NVIDIA/TransformerEngine",
+      "description": "Transformer-optimized kernels and precision recipes.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "flashinfer",
+      "name": "FlashInfer",
+      "category": "kernel",
+      "kind": "github_releases",
+      "repo": "flashinfer-ai/flashinfer",
+      "source_url": "https://github.com/flashinfer-ai/flashinfer",
+      "description": "LLM serving kernels and attention primitives.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "pytorch",
+      "name": "PyTorch",
+      "category": "framework",
+      "kind": "github_releases",
+      "repo": "pytorch/pytorch",
+      "source_url": "https://github.com/pytorch/pytorch",
+      "description": "Core tensor and machine-learning framework.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "rocm-aiter",
+      "name": "AMD ROCm AITER",
+      "category": "kernel",
+      "kind": "github_releases",
+      "repo": "ROCm/aiter",
+      "source_url": "https://github.com/ROCm/aiter",
+      "description": "AMD GPU inference and transformer kernels.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "rocm-composable-kernel",
+      "name": "AMD Composable Kernel",
+      "category": "kernel",
+      "kind": "github_releases",
+      "repo": "ROCm/Composable_Kernel",
+      "source_url": "https://github.com/ROCm/Composable_Kernel",
+      "description": "Composable GPU kernel programming library.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "google-maxtext",
+      "name": "Google MaxText",
+      "category": "framework",
+      "kind": "github_releases",
+      "repo": "AI-Hypercomputer/maxtext",
+      "source_url": "https://github.com/AI-Hypercomputer/maxtext",
+      "description": "Large-scale JAX-based LLM training and inference.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "aws-neuron-sdk",
+      "name": "AWS Neuron SDK",
+      "category": "system",
+      "kind": "github_releases",
+      "repo": "aws-neuron/aws-neuron-sdk",
+      "source_url": "https://github.com/aws-neuron/aws-neuron-sdk",
+      "description": "Software stack for AWS Trainium and Inferentia.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "deepseek-deepep",
+      "name": "DeepSeek DeepEP",
+      "category": "communication",
+      "kind": "github_releases",
+      "repo": "deepseek-ai/DeepEP",
+      "source_url": "https://github.com/deepseek-ai/DeepEP",
+      "description": "Expert-parallel communication library.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "mooncake",
+      "name": "Mooncake",
+      "category": "serving-system",
+      "kind": "github_releases",
+      "repo": "kvcache-ai/Mooncake",
+      "source_url": "https://github.com/kvcache-ai/Mooncake",
+      "description": "Disaggregated LLM serving and KV-cache infrastructure.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "mlcommons-inference",
+      "name": "MLCommons Inference",
+      "category": "benchmark",
+      "kind": "github_releases",
+      "repo": "mlcommons/inference",
+      "source_url": "https://github.com/mlcommons/inference",
+      "description": "Open benchmark suite and reference implementations.",
+      "priority": "high",
+      "active": true
+    }
+  ]
+}
