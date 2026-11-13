@@ -2104,6 +2104,22 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-runtime-alignment-panel { padding: .75rem; }
 }
 
+.benchmark-runtime-decomposition {
+  margin-top: 1.1rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--line);
+}
+.benchmark-runtime-decomposition h3 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.05rem/1.25 "Source Serif 4", Georgia, serif;
+}
+.benchmark-runtime-decomposition > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
 /* Low-level hardware bottleneck evidence coverage. */
 .benchmark-hardware-evidence-panel {
   margin: 1rem 0 1.35rem;
