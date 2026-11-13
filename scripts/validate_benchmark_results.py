@@ -135,8 +135,9 @@ def validate_hardware_evidence(row, where):
             errors.append(f"{where}: hardware_evidence sampling timestamps must be ISO date-times")
         elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
             errors.append(f"{where}: hardware_evidence sampling window must be positive and timezone-aware")
-        sampling_start = start
-        sampling_end = end
+        else:
+            sampling_start = start
+            sampling_end = end
         interval = sampling.get("sample_interval_ms")
         if isinstance(interval, bool) or not isinstance(interval, (int, float)) or not math.isfinite(interval) or interval <= 0:
             errors.append(f"{where}: hardware_evidence.sample_interval_ms must be a positive finite number")
@@ -360,15 +361,17 @@ def validate_runtime_trace(trace, where):
     if not isinstance(sampling, dict):
         errors.append(f"{prefix}.sampling must be an object")
     else:
-        trace_start = _parse_iso_datetime(sampling.get("started_at"))
-        trace_end = _parse_iso_datetime(sampling.get("ended_at"))
-        if trace_start is None or trace_end is None:
+        parsed_start = _parse_iso_datetime(sampling.get("started_at"))
+        parsed_end = _parse_iso_datetime(sampling.get("ended_at"))
+        if parsed_start is None or parsed_end is None:
             errors.append(f"{prefix}.sampling timestamps must be ISO date-times")
         elif (
-            trace_start.utcoffset() is None or trace_end.utcoffset() is None
-            or trace_end <= trace_start
+            parsed_start.utcoffset() is None or parsed_end.utcoffset() is None
+            or parsed_end <= parsed_start
         ):
             errors.append(f"{prefix}.sampling window must be positive and timezone-aware")
+        else:
+            trace_start, trace_end = parsed_start, parsed_end
 
     provenance = trace.get("provenance")
     if not isinstance(provenance, dict):
