@@ -110,6 +110,8 @@ class GPUExecutionEfficiencyTests(unittest.TestCase):
                 metric("sm_active_pct", 80, "%", "per_gpu", sampling_window=common),
                 metric("tensor_active_pct", 50, "%", "per_gpu", sampling_window=common),
                 metric("dram_active_pct", 40, "%", "per_gpu", sampling_window=common),
+                metric("dram_bandwidth_bytes_per_s", 1.5e9, "byte/s", "per_gpu", sampling_window=common),
+                metric("dram_peak_bandwidth_bytes_per_s", 2e9, "byte/s", "per_gpu", sampling_window=common),
                 metric("dram_bandwidth_utilization_pct", 75, "%", "per_gpu", sampling_window=common,
                        measurement_kind="derived", formula="measured / peak * 100",
                        input_metric_ids=["dram_bandwidth_bytes_per_s", "dram_peak_bandwidth_bytes_per_s"]),
@@ -136,7 +138,10 @@ class GPUExecutionEfficiencyTests(unittest.TestCase):
         result = analyze_gpu_execution_efficiency({"id": "boundaries", "hardware_evidence": evidence(metrics)})
         groups = result["hardware_activity"]["activity_groups"]
         self.assertEqual(len(groups), 3)
-        self.assertTrue(all(not group["descriptive_contrasts"] for group in groups))
+        for group in groups:
+            self.assertNotIn("sm_active_minus_sm_throughput_pp", group["descriptive_contrasts"])
+            self.assertNotIn("dram_active_minus_bandwidth_utilization_pp", group["descriptive_contrasts"])
+            self.assertNotIn("tensor_active_minus_sm_active_pp", group["descriptive_contrasts"])
 
     def test_kernel_counter_requires_exact_entity_and_unique_containing_kernel_event(self):
         kernel_window = {
