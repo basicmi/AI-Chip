@@ -426,7 +426,8 @@ def validate_runtime_trace(trace, where):
         elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
             errors.append(f"{event_where}: event interval must be positive and timezone-aware")
         else:
-            parsed_events[event_id] = (start, end)
+            if isinstance(event_id, str) and event_id.strip():
+                parsed_events[event_id] = (start, end)
             if trace_start is not None and trace_end is not None and (
                 start < trace_start or end > trace_end
             ):
@@ -441,7 +442,7 @@ def validate_runtime_trace(trace, where):
             continue
         event_id = event.get("event_id")
         parent_id = event.get("parent_event_id")
-        if parent_id is None:
+        if parent_id is None or not isinstance(parent_id, str) or not parent_id.strip():
             continue
         if parent_id == event_id:
             errors.append(f"{prefix}.events[{index}]: event cannot parent itself")
@@ -463,7 +464,8 @@ def validate_runtime_trace(trace, where):
                 errors.append(f"{prefix}.events[{index}]: parent_event_id hierarchy contains a cycle")
                 break
             visited.add(current)
-            current = event_map[current].get("parent_event_id")
+            next_parent = event_map[current].get("parent_event_id")
+            current = next_parent if isinstance(next_parent, str) else ""
 
     return errors
 
