@@ -191,6 +191,7 @@ def collect_releases(source, *, since, fetcher=fetch_json):
             "updated_at": release.get("updated_at"), "url": link,
             "prerelease": bool(release.get("prerelease")),
             "excerpt": body[:1400],
+            "body_excerpt": body[:1400],
             "evidence_scope": "official_project_release_metadata",
         }
         candidate["fingerprint"] = candidate_fingerprint(candidate)
