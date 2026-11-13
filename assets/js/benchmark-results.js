@@ -1215,7 +1215,7 @@
     runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-note",
       "Eligible joins require a metric-specific capture window fully contained by one leaf event after any clock-mapping error guard. Entity identity must match for GPU, link, kernel and process scopes. Temporal overlap is descriptive only; it does not establish causality."));
 
-    <escape></escape>    // Request-level latency decomposition requires explicit request roots and
+    // Request-level latency decomposition requires explicit request roots and
     // instantaneous token_emit markers. Aggregate benchmark p99s are not
     // reverse-engineered from phase durations.
     const phaseRows = [];
