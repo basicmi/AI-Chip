@@ -76,8 +76,10 @@ def request_fixture(request_id="request-1", offset_ms=0):
         e("batch", "batch_wait", 20, 30),
         e("prefill", "prefill", 30, 50),
         e("kernel", "kernel", 35, 45, parent="prefill"),
+        e("cpu-scheduling", "cpu_scheduling", 10, 13, parent="queue"),
         e("decode", "decode", 50, 100),
         e("communication", "communication", 75, 80, parent="decode"),
+        e("communication-wait", "communication_wait", 82, 86, parent="decode"),
         e("host", "host_runtime", 80, 90),
         e("token-1", "token_emit", 50, 50, token_index=1),
         e("token-2", "token_emit", 75, 75, token_index=2),
@@ -108,12 +110,14 @@ class RuntimePhaseDecompositionTests(unittest.TestCase):
         self.assertEqual(ttft["primary_phase_union_ms"], 50)
         self.assertEqual(ttft["unclassified_gap_ms"], 0)
         self.assertEqual(ttft["subphase_coverage"]["kernel"], 10)
+        self.assertEqual(ttft["subphase_coverage"]["cpu_scheduling"], 3)
         tpot = request["tpot_phase_coverage"]
         self.assertEqual(tpot["primary_phase_coverage"]["decode"], 50)
         self.assertEqual(tpot["primary_phase_coverage"]["host_runtime"], 10)
         self.assertEqual(tpot["primary_phase_overlap_ms"], 10)
         self.assertEqual(tpot["primary_phase_union_ms"], 50)
         self.assertEqual(tpot["subphase_coverage"]["communication"], 5)
+        self.assertEqual(tpot["subphase_coverage"]["communication_wait"], 4)
 
     def test_overlapping_primary_phases_are_not_double_counted_in_union(self):
         events = [
