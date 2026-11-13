@@ -280,7 +280,7 @@ class RuntimeHardwareAlignmentTests(unittest.TestCase):
         trace = runtime_trace()
         trace["events"][0]["started_at"] = "2026-11-13T10:00:01"
         errors = validate_runtime_trace(trace, "test")
-        self.assertTrue(any("positive and timezone-aware" in error for error in errors))
+        self.assertTrue(any("event timestamps must match the clock domain" in error for error in errors))
 
     def test_monotonic_trace_maps_to_utc_with_explicit_two_anchor_clock_model(self):
         trace = runtime_trace(
