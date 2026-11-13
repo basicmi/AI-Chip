@@ -84,8 +84,16 @@ class CaptureHarnessTests(unittest.TestCase):
         self.assertTrue(any("clock anchors" in item for item in report["warnings"]))
 
     def test_alignment_pair_limit_fails_closed(self):
+        payload = json.loads(self.otel.read_text())
+        second_root = dict(payload["resourceSpans"][0]["scopeSpans"][0]["spans"][0])
+        second_root["spanId"] = "2222222222222222"
+        second_root["startTimeUnixNano"] = str(BASE_NS + 20_000_000_000)
+        second_root["endTimeUnixNano"] = str(BASE_NS + 30_000_000_000)
+        payload["resourceSpans"][0]["scopeSpans"][0]["spans"].append(second_root)
+        two_requests = self.root / "two-requests.json"
+        two_requests.write_text(json.dumps(payload))
         with self.assertRaisesRegex(ValueError, "alignment would create"):
-            build_capture_bundle(run_id="trial-limit", otel_json=self.otel,
+            build_capture_bundle(run_id="trial-limit", otel_json=two_requests,
                 otel_source_url="https://trace.example/trace/1", nsys_sqlite=self.nsys,
                 nsys_source_url="https://profiler.example/session.sqlite", clock_anchors=self.anchors,
                 dcgm_capture=self.dcgm, dcgm_source_url="https://artifacts.example/dcgm.json",
