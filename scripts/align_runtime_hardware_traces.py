@@ -18,7 +18,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from validate_benchmark_results import validate_hardware_evidence, validate_runtime_trace
+from validate_benchmark_results import (
+    _parse_runtime_trace_timestamp, validate_hardware_evidence, validate_runtime_trace
+)
 
 DERIVER = "scripts/align_runtime_hardware_traces.py"
 ENTITY_REQUIRED_SCOPES = {"per_gpu", "per_link", "per_kernel", "per_process"}
@@ -33,6 +35,22 @@ def _time(value: str) -> datetime:
     if parsed.utcoffset() is None:
         raise ValueError("timestamp must be timezone-aware")
     return parsed.astimezone(timezone.utc)
+
+
+def _trace_time(value: Any, trace: dict) -> datetime:
+    parsed = _parse_runtime_trace_timestamp(
+        value, trace.get("clock_domain"), trace.get("clock_mapping")
+    )
+    if parsed is None:
+        raise ValueError("runtime trace timestamp cannot be mapped into UTC")
+    return parsed
+
+
+def _clock_error_seconds(trace: dict) -> float:
+    mapping = trace.get("clock_mapping")
+    if trace.get("clock_domain") != "monotonic_ns" or not isinstance(mapping, dict):
+        return 0.0
+    return float(mapping.get("max_error_ns", 0)) / 1_000_000_000
 
 
 def _seconds(start: datetime, end: datetime) -> float:
@@ -84,13 +102,13 @@ def _scope_compatible(metric: dict, event: dict, entity_status: str) -> tuple[bo
 
 
 def _event_overlap_summary(metric_start: datetime, metric_end: datetime,
-                           events: list[dict]) -> tuple[list[dict], dict, float]:
+                           events: list[dict], trace: dict) -> tuple[list[dict], dict, float]:
     matches = []
     by_category: dict[str, list[tuple[datetime, datetime]]] = {}
     all_intervals = []
     duration = _seconds(metric_start, metric_end)
     for event in events:
-        start, end = _time(event["started_at"]), _time(event["ended_at"])
+        start, end = _trace_time(event["started_at"], trace), _trace_time(event["ended_at"], trace)
         overlap = _overlap(metric_start, metric_end, start, end)
         if overlap <= 0:
             continue
@@ -127,10 +145,12 @@ def _metric_alignment(metric: dict, evidence: dict, trace: dict) -> dict:
     start, end = _time(sampling["started_at"]), _time(sampling["ended_at"])
     duration = _seconds(start, end)
     events = trace["events"]
-    matches, category_coverage, total_coverage = _event_overlap_summary(start, end, events)
+    matches, category_coverage, total_coverage = _event_overlap_summary(start, end, events, trace)
+    clock_error = _clock_error_seconds(trace)
     full_events = [
         event for event in events
-        if _time(event["started_at"]) <= start and _time(event["ended_at"]) >= end
+        if _trace_time(event["started_at"], trace).timestamp() + clock_error <= start.timestamp()
+        and _trace_time(event["ended_at"], trace).timestamp() - clock_error >= end.timestamp()
     ]
     full_ids = {event["event_id"] for event in full_events}
     parent_ids = {
@@ -178,6 +198,7 @@ def _metric_alignment(metric: dict, evidence: dict, trace: dict) -> dict:
         "source_name": metric.get("source_name"),
         "metric_window_source": metric_window_source,
         "metric_window_seconds": round(duration, 9),
+        "clock_mapping_uncertainty_seconds": round(clock_error, 9),
         "runtime_event_coverage_pct": round(total_coverage / duration * 100, 6) if duration else 0,
         "category_overlap": category_coverage,
         "overlapping_events": matches,
@@ -226,7 +247,7 @@ def align_record(record: dict) -> dict:
         "metric_alignments": [],
         "eligible_metric_phase_join_count": 0,
         "limitations": [
-            "Only UTC wall-clock timestamps are supported; monotonic clocks require an explicit clock-domain mapping before alignment.",
+            "Only UTC wall-clock timestamps or monotonic timestamps with explicit in-range clock anchors are supported.",
             "Bundle-level hardware sampling windows are coarse and are never used to attribute an individual counter to a runtime phase.",
             "A phase join requires a metric-specific sampling window, one containing leaf event, and compatible entity/scope identity.",
             "Temporal overlap is descriptive and does not establish causality or prove that a counter caused a runtime delay.",
@@ -237,13 +258,16 @@ def align_record(record: dict) -> dict:
         return report
 
     hw_start, hw_end = _time(evidence["sampling"]["started_at"]), _time(evidence["sampling"]["ended_at"])
-    trace_start, trace_end = _time(trace["sampling"]["started_at"]), _time(trace["sampling"]["ended_at"])
+    trace_start = _trace_time(trace["sampling"]["started_at"], trace)
+    trace_end = _trace_time(trace["sampling"]["ended_at"], trace)
     hardware_duration = _seconds(hw_start, hw_end)
     trace_duration = _seconds(trace_start, trace_end)
     capture_overlap = _overlap(hw_start, hw_end, trace_start, trace_end)
     report["status"] = "overlapping_capture_windows" if capture_overlap > 0 else "no_temporal_overlap"
     report["capture_alignment"] = {
         "clock_domain": trace["clock_domain"],
+        "clock_mapping_method": trace.get("clock_mapping", {}).get("method") if isinstance(trace.get("clock_mapping"), dict) else None,
+        "clock_mapping_max_error_ns": trace.get("clock_mapping", {}).get("max_error_ns") if isinstance(trace.get("clock_mapping"), dict) else None,
         "hardware_window_seconds": round(hardware_duration, 9),
         "trace_window_seconds": round(trace_duration, 9),
         "overlap_seconds": round(capture_overlap, 9),
