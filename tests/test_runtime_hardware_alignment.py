@@ -229,6 +229,50 @@ class RuntimeHardwareAlignmentTests(unittest.TestCase):
         errors = validate_hardware_evidence({"hardware_evidence": evidence}, "test")
         self.assertTrue(any("must be contained by hardware_evidence.sampling" in error for error in errors))
 
+    def test_multiple_samples_of_same_counter_can_have_distinct_windows(self):
+        evidence = hardware_evidence()
+        second = dict(evidence["metrics"][0])
+        second["value"] = 81
+        second["sampling_window"] = {
+            "started_at": "2026-11-13T10:00:05Z",
+            "ended_at": "2026-11-13T10:00:07Z",
+        }
+        evidence["metrics"].append(second)
+        errors = validate_hardware_evidence({"hardware_evidence": evidence}, "test")
+        self.assertEqual(errors, [])
+        report = align_record(record(evidence=evidence))
+        self.assertEqual(len(report["metric_alignments"]), 2)
+        self.assertEqual(report["eligible_metric_phase_join_count"], 1)
+
+    def test_derived_counter_inputs_must_share_the_same_capture_window(self):
+        evidence = hardware_evidence()
+        evidence["metrics"].extend([
+            {
+                "metric_id": "compute_flop_count", "value": 1e12, "unit": "FLOP",
+                "measurement_kind": "hardware_counter", "aggregation": "sum",
+                "scope": "per_gpu", "source_name": "flop_count",
+                "entity_id": "gpu0", "precision": "FP8", "sparsity": "dense",
+                "sampling_window": {
+                    "started_at": "2026-11-13T10:00:02Z",
+                    "ended_at": "2026-11-13T10:00:04Z",
+                },
+            },
+            {
+                "metric_id": "achieved_flops", "value": 5e11, "unit": "FLOP/s",
+                "measurement_kind": "derived", "aggregation": "mean",
+                "scope": "per_gpu", "source_name": "derived_achieved_flops",
+                "entity_id": "gpu0", "precision": "FP8", "sparsity": "dense",
+                "formula": "compute_flop_count / measured_window_seconds",
+                "input_metric_ids": ["compute_flop_count"],
+                "sampling_window": {
+                    "started_at": "2026-11-13T10:00:03Z",
+                    "ended_at": "2026-11-13T10:00:05Z",
+                },
+            },
+        ])
+        errors = validate_hardware_evidence({"hardware_evidence": evidence}, "test")
+        self.assertTrue(any("derived input compute_flop_count has no matching scope/entity/fabric" in error for error in errors))
+
     def test_naive_timestamps_and_monotonic_clock_are_rejected(self):
         trace = runtime_trace(clock_domain="monotonic_ns")
         errors = validate_runtime_trace(trace, "test")
