@@ -26,6 +26,44 @@ A benchmark record may contain an optional hardware_evidence object. Its schema 
 
 A metric's source_name is the exact counter/telemetry field name emitted by the collector. metric_id is the normalized semantic identity. Compute FLOP metrics must also carry precision and sparsity metadata. Do not replace the source name with a guessed alias.
 
+## Runtime trace and metric-level time alignment
+
+A benchmark record may also carry an optional `runtime_trace` object. Its schema is defined in `schemas/benchmark-results.schema.json` under `$defs.runtimeTrace`. Version 1.0 supports two explicit clock domains:
+
+| Field | Meaning |
+|---|---|
+| collector | Runtime trace collector name, version and type |
+| clock_domain | `utc_wall_clock` or `monotonic_ns` |
+| sampling | Start/end of the trace capture, expressed in the declared clock domain |
+| clock_mapping | Required for `monotonic_ns`: piecewise-linear anchors from monotonic nanoseconds to timezone-aware UTC timestamps, plus a declared maximum error bound |
+| provenance | Source type, HTTP(S) artifact URL, collection time and optional SHA-256 |
+| events[] | Event ID/name/category, start/end in the declared clock domain, optional entity/correlation/parent/stream IDs |
+
+Event categories are `queue_wait`, `batch_wait`, `prefill`, `decode`, `kernel`, `communication`, `host_runtime` and `other`. Events must lie within the trace capture window. Optional parent references must exist, be acyclic, and contain the child event's interval. This allows a trace to represent request → phase → kernel nesting without flattening away its hierarchy.
+
+For `utc_wall_clock`, timestamps are timezone-aware ISO date-times. For `monotonic_ns`, timestamps are non-negative integer nanoseconds and `clock_mapping` must provide 2–64 anchors with strictly increasing monotonic and UTC values. Mapping is piecewise-linear only between supplied anchors; extrapolation is rejected. `max_error_ns` is carried into the report and used as a guard band: an event must still contain the complete metric window after shrinking both event boundaries by the declared mapping uncertainty. The mapping is explicit input evidence, not inferred by the tool.
+
+The hardware evidence bundle's existing `sampling` window remains the coarse capture interval. A hardware metric may now optionally carry its own `sampling_window.started_at/ended_at` in UTC. This is required for phase-level joins. If the metric-specific window is absent, the alignment tool may report coarse overlap against the bundle window, but it must never attribute that counter to an individual runtime phase.
+
+Run the offline alignment report from the repository root:
+
+```bash
+python3 scripts/align_runtime_hardware_traces.py \
+  --input data/benchmark-results.json \
+  --output runtime-hardware-alignment.json
+```
+
+A metric is eligible for a phase join only when all of the following hold:
+
+1. The metric has its own timezone-aware UTC sampling window, contained within the hardware evidence bundle window.
+2. The runtime trace is either UTC wall-clock or is mapped to UTC by valid in-range anchors, and one leaf event fully contains the metric window after applying the clock-error guard band.
+3. The metric and event entity IDs match exactly when the metric scope requires entity identity (`per_gpu`, `per_link`, `per_kernel`, or `per_process`). Kernel-scoped counters must join to a kernel event; link-scoped counters must join to a communication event.
+4. No missing timestamps, entity identities, or clock mappings are filled in by inference.
+
+The report includes capture-window overlap, per-category interval coverage, candidate event matches, the selected leaf event (when unambiguous), clock-mapping uncertainty, and explicit reasons for rejected joins. Interval unions are used for category coverage so overlapping events do not double-count elapsed time. A timestamp overlap is not proof that the counter caused a latency or throughput change. The tool does not interpolate counters, infer idle periods, calculate phase loss scores, or produce a bottleneck verdict.
+
+Cross-host clock skew correction, calibration of GPU-to-host clock drift beyond supplied anchors, and multi-device synchronization remain the responsibility of the trace collector. A single host clock mapping must not be reused across unrelated devices or hosts without evidence.
+
 ## Canonical metric vocabulary
 
 | Domain | Metric IDs | Unit |

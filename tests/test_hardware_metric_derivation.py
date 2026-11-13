@@ -78,6 +78,51 @@ class HardwareMetricDerivationTests(unittest.TestCase):
             {"hardware_evidence": result}, "derived"
         ), [])
 
+    def test_derives_metrics_using_metric_specific_capture_window(self):
+        evidence = base_evidence()
+        window = {"started_at": "2026-11-12T10:00:02Z", "ended_at": "2026-11-12T10:00:06Z"}
+        for metric in evidence["metrics"]:
+            metric["sampling_window"] = dict(window)
+        evidence["metrics"][4]["value"] = 3e9
+        result, added, warnings = derive_metrics(evidence)
+        values = {metric["metric_id"]: metric for metric in added}
+        self.assertAlmostEqual(values["achieved_flops"]["value"], 2e12)
+        self.assertAlmostEqual(values["compute_peak_utilization_pct"]["value"], 100)
+        self.assertAlmostEqual(values["dram_bandwidth_bytes_per_s"]["value"], 2.5e9)
+        self.assertAlmostEqual(values["dram_bandwidth_utilization_pct"]["value"], 2.5e9 / 3e9 * 100)
+        self.assertEqual(values["achieved_flops"]["sampling_window"], window)
+        self.assertEqual(values["dram_bandwidth_bytes_per_s"]["sampling_window"], window)
+        self.assertEqual(warnings, [])
+        self.assertEqual(validate_hardware_evidence({"hardware_evidence": result}, "windowed"), [])
+
+    def test_repeated_counter_windows_derive_independently_without_cross_window_mixing(self):
+        evidence = base_evidence()
+        first = {"started_at": "2026-11-12T10:00:00Z", "ended_at": "2026-11-12T10:00:02Z"}
+        second = {"started_at": "2026-11-12T10:00:02Z", "ended_at": "2026-11-12T10:00:06Z"}
+        flop = next(metric for metric in evidence["metrics"] if metric["metric_id"] == "compute_flop_count")
+        peak = next(metric for metric in evidence["metrics"] if metric["metric_id"] == "theoretical_peak_flops")
+        flop["value"] = 4e12
+        flop["sampling_window"] = first
+        peak["sampling_window"] = first
+        second_flop = dict(flop, value=4e12, sampling_window=second)
+        second_peak = dict(peak, sampling_window=second)
+        evidence["metrics"].extend([second_flop, second_peak])
+        result, added, warnings = derive_metrics(evidence)
+        achieved = [metric for metric in added if metric["metric_id"] == "achieved_flops"]
+        utilization = [metric for metric in added if metric["metric_id"] == "compute_peak_utilization_pct"]
+        self.assertEqual(len(achieved), 2)
+        self.assertEqual(len(utilization), 2)
+        self.assertEqual(
+            {metric["sampling_window"]["started_at"]: metric["value"] for metric in achieved},
+            {first["started_at"]: 2e12, second["started_at"]: 1e12},
+        )
+        self.assertEqual(
+            {metric["sampling_window"]["started_at"]: metric["value"] for metric in utilization},
+            {first["started_at"]: 100, second["started_at"]: 50},
+        )
+        self.assertEqual(warnings, [])
+        self.assertEqual(validate_hardware_evidence({"hardware_evidence": result}, "repeated"), [])
+
     def test_does_not_derive_compute_utilization_across_mismatched_precision(self):
         evidence = base_evidence()
         evidence["metrics"][1]["precision"] = "BF16"

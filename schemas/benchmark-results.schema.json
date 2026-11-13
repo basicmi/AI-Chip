@@ -493,6 +493,16 @@
               "type": "null"
             }
           ]
+        },
+        "runtime_trace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/runtimeTrace"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       }
     },
@@ -747,6 +757,9 @@
             "bidirectional",
             "aggregate"
           ]
+        },
+        "sampling_window": {
+          "$ref": "#/$defs/timeWindow"
         }
       },
       "allOf": [
@@ -1135,6 +1148,261 @@
         },
         "notes": {
           "type": "string"
+        }
+      }
+    },
+    "timeWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_at",
+        "ended_at"
+      ],
+      "properties": {
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "runtimeTraceEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "name",
+        "category",
+        "started_at",
+        "ended_at"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "enum": [
+            "queue_wait",
+            "batch_wait",
+            "prefill",
+            "decode",
+            "kernel",
+            "communication",
+            "host_runtime",
+            "other"
+          ]
+        },
+        "started_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
+        },
+        "ended_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
+        },
+        "entity_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correlation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stream_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "runtimeTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "collector",
+        "clock_domain",
+        "sampling",
+        "provenance",
+        "events"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "collector": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "type"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "type": {
+              "enum": [
+                "runtime_trace",
+                "profiler_export",
+                "other"
+              ]
+            }
+          }
+        },
+        "clock_domain": {
+          "enum": [
+            "utc_wall_clock",
+            "monotonic_ns"
+          ]
+        },
+        "sampling": {
+          "$ref": "#/$defs/runtimeTraceWindow"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_type",
+            "source_url",
+            "collected_at"
+          ],
+          "properties": {
+            "source_type": {
+              "enum": [
+                "runtime_trace_export",
+                "profiler_export",
+                "independent_measurement",
+                "other"
+              ]
+            },
+            "source_url": {
+              "$ref": "#/$defs/httpUrl"
+            },
+            "collected_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "artifact_sha256": {
+              "type": "string",
+              "pattern": "^[a-fA-F0-9]{64}$"
+            }
+          }
+        },
+        "events": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100000,
+          "items": {
+            "$ref": "#/$defs/runtimeTraceEvent"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "clock_mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "anchors",
+            "max_error_ns"
+          ],
+          "properties": {
+            "method": {
+              "const": "piecewise_linear"
+            },
+            "anchors": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "monotonic_ns",
+                  "utc_at"
+                ],
+                "properties": {
+                  "monotonic_ns": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "utc_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            },
+            "max_error_ns": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "clock_domain": {
+                "const": "monotonic_ns"
+              }
+            },
+            "required": [
+              "clock_domain"
+            ]
+          },
+          "then": {
+            "required": [
+              "clock_mapping"
+            ]
+          }
+        }
+      ]
+    },
+    "runtimeTraceTimestamp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ]
+    },
+    "runtimeTraceWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_at",
+        "ended_at"
+      ],
+      "properties": {
+        "started_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
+        },
+        "ended_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
         }
       }
     }

@@ -46,6 +46,8 @@
   const hardwareEvidenceContent = $("[data-results-hardware-evidence-content]");
   const crossLayerPanel = $("[data-results-cross-layer]");
   const crossLayerContent = $("[data-results-cross-layer-content]");
+  const runtimeAlignmentPanel = $("[data-results-runtime-alignment]");
+  const runtimeAlignmentContent = $("[data-results-runtime-alignment-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -881,17 +883,21 @@
 
   const renderHardwareBottleneckEvidence = () => {
     if (!hardwareEvidencePanel || !hardwareEvidenceContent ||
-        !crossLayerPanel || !crossLayerContent) return;
+        !crossLayerPanel || !crossLayerContent ||
+        !runtimeAlignmentPanel || !runtimeAlignmentContent) return;
     if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
         !activeCohort.performanceKey || !database) {
       hardwareEvidencePanel.hidden = true;
       crossLayerPanel.hidden = true;
+      runtimeAlignmentPanel.hidden = true;
       return;
     }
     hardwareEvidencePanel.hidden = false;
     crossLayerPanel.hidden = false;
+    runtimeAlignmentPanel.hidden = false;
     hardwareEvidenceContent.replaceChildren();
     crossLayerContent.replaceChildren();
+    runtimeAlignmentContent.replaceChildren();
     const records = database.records.filter(record =>
       performanceKeyFor(record) === activeCohort.performanceKey
     );
@@ -1059,6 +1065,152 @@
         "Group values are medians across available records. Contrasts are limited to the first 12 complete execution identities in registry order. " +
         "Runtime and profiler sampling windows are not assumed to align; differences do not establish causality."));
     }
+
+    // Time alignment is intentionally stricter than capture-window overlap.
+    // A phase join requires a metric-specific window and one containing leaf event.
+    const runtimeTraceRecords = records.filter(record => record.runtime_trace);
+    const metricWindowCount = records.reduce((count, record) =>
+      count + (record.hardware_evidence?.metrics || []).filter(metric => metric.sampling_window).length, 0);
+    const eligibleJoins = [];
+    const alignmentRows = [];
+    const toEpoch = (value, trace) => {
+      if (trace?.clock_domain === "utc_wall_clock") {
+        const parsed = Date.parse(value);
+        return Number.isFinite(parsed) ? parsed : null;
+      }
+      if (trace?.clock_domain !== "monotonic_ns" || !Number.isSafeInteger(value)) return null;
+      const anchors = trace.clock_mapping?.anchors;
+      if (!Array.isArray(anchors) || anchors.length < 2) return null;
+      for (let index = 0; index < anchors.length - 1; index += 1) {
+        const left = anchors[index], right = anchors[index + 1];
+        if (!Number.isSafeInteger(left.monotonic_ns) || !Number.isSafeInteger(right.monotonic_ns) ||
+            value < left.monotonic_ns || value > right.monotonic_ns) continue;
+        const leftUtc = Date.parse(left.utc_at), rightUtc = Date.parse(right.utc_at);
+        if (!Number.isFinite(leftUtc) || !Number.isFinite(rightUtc) ||
+            right.monotonic_ns <= left.monotonic_ns || rightUtc <= leftUtc) return null;
+        return leftUtc + (value - left.monotonic_ns) /
+          (right.monotonic_ns - left.monotonic_ns) * (rightUtc - leftUtc);
+      }
+      const last = anchors[anchors.length - 1];
+      return value === last.monotonic_ns ? Date.parse(last.utc_at) : null;
+    };
+    const entityRequiredScopes = new Set(["per_gpu", "per_link", "per_kernel", "per_process"]);
+    const expectedEventCategories = { per_kernel: "kernel", per_link: "communication" };
+    records.forEach(record => {
+      const trace = record.runtime_trace;
+      const evidence = record.hardware_evidence;
+      const events = Array.isArray(trace?.events) ? trace.events : [];
+      const metrics = Array.isArray(evidence?.metrics) ? evidence.metrics : [];
+      const rowJoins = [];
+      metrics.forEach(metric => {
+        if (!metric.sampling_window) return;
+        const start = toEpoch(metric.sampling_window.started_at, { clock_domain: "utc_wall_clock" });
+        const end = toEpoch(metric.sampling_window.ended_at, { clock_domain: "utc_wall_clock" });
+        if (start === null || end === null || end <= start) return;
+        const containing = events.filter(event => {
+          const eventStart = toEpoch(event.started_at, trace), eventEnd = toEpoch(event.ended_at, trace);
+          const errorMs = trace.clock_domain === "monotonic_ns"
+            ? Number(trace.clock_mapping?.max_error_ns || 0) / 1e6 : 0;
+          return eventStart !== null && eventEnd !== null &&
+            eventStart + errorMs <= start && eventEnd - errorMs >= end;
+        });
+        const containingIds = new Set(containing.map(event => event.event_id));
+        const parents = new Set(containing.map(event => event.parent_event_id).filter(id => containingIds.has(id)));
+        const leaves = containing.filter(event => !parents.has(event.event_id));
+        if (leaves.length !== 1) return;
+        const event = leaves[0];
+        const scope = metric.scope;
+        const metricEntity = metric.entity_id, eventEntity = event.entity_id;
+        const entityMatch = Boolean(metricEntity && eventEntity && metricEntity === eventEntity);
+        if (metricEntity && eventEntity && metricEntity !== eventEntity) return;
+        if (Boolean(metricEntity) !== Boolean(eventEntity)) return;
+        if (entityRequiredScopes.has(scope) && !entityMatch) return;
+        if (expectedEventCategories[scope] && event.category !== expectedEventCategories[scope]) return;
+        const join = {
+          record_id: record.id,
+          metric_id: metric.metric_id,
+          scope,
+          event_id: event.event_id,
+          event_name: event.name,
+          category: event.category,
+          entity_id: event.entity_id || metric.entity_id || "not specified"
+        };
+        rowJoins.push(join);
+        eligibleJoins.push(join);
+      });
+      alignmentRows.push({
+        record_id: record.id,
+        trace_available: Boolean(trace),
+        hardware_evidence_available: Boolean(evidence),
+        event_count: events.length,
+        metric_window_count: metrics.filter(metric => metric.sampling_window).length,
+        coarse_metric_count: metrics.filter(metric => !metric.sampling_window).length,
+        eligible_join_count: rowJoins.length,
+        clock_domain: trace?.clock_domain === "monotonic_ns"
+          ? "monotonic_ns · mapped ±" + (trace.clock_mapping?.max_error_ns ?? "unknown") + " ns"
+          : trace?.clock_domain || "not available"
+      });
+    });
+    const tracePairCount = records.filter(record => record.runtime_trace && record.hardware_evidence).length;
+    const traceSummary = make("p", "benchmark-runtime-alignment-summary",
+      records.length + " strict-cohort records · " + runtimeTraceRecords.length +
+      " runtime traces · " + tracePairCount + " hardware/trace pairs · " +
+      metricWindowCount + " metric-specific windows · " + eligibleJoins.length +
+      " eligible phase joins");
+    runtimeAlignmentContent.append(traceSummary);
+    if (!runtimeTraceRecords.length) {
+      runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-empty",
+        "No runtime trace is attached to this workload cohort. Hardware evidence and serving metrics remain separate; no phase alignment is inferred."));
+    } else {
+      const tableWrap = make("div", "benchmark-runtime-alignment-table-wrap");
+      const table = make("table", "benchmark-runtime-alignment-table");
+      table.dataset.runtimeAlignmentCoverage = "";
+      const head = document.createElement("thead");
+      const header = document.createElement("tr");
+      ["Record", "Trace events", "Metric windows", "Eligible phase joins", "Clock domain"].forEach(label =>
+        header.append(make("th", "", label)));
+      head.append(header);
+      table.append(head);
+      const body = document.createElement("tbody");
+      alignmentRows.filter(row => row.trace_available).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.dataset.runtimeTraceRecordId = row.record_id;
+        tr.append(make("td", "", row.record_id));
+        tr.append(make("td", "", row.event_count));
+        tr.append(make("td", "", row.metric_window_count + " specific · " + row.coarse_metric_count + " coarse"));
+        tr.append(make("td", "", row.eligible_join_count));
+        tr.append(make("td", "", row.clock_domain));
+        body.append(tr);
+      });
+      table.append(body);
+      tableWrap.append(table);
+      runtimeAlignmentContent.append(tableWrap);
+      if (eligibleJoins.length) {
+        const joinTable = make("table", "benchmark-runtime-alignment-table");
+        joinTable.dataset.runtimeAlignmentJoins = "";
+        const joinHead = document.createElement("thead");
+        const joinHeader = document.createElement("tr");
+        ["Record", "Hardware metric", "Runtime event", "Phase", "Entity"].forEach(label =>
+          joinHeader.append(make("th", "", label)));
+        joinHead.append(joinHeader);
+        joinTable.append(joinHead);
+        const joinBody = document.createElement("tbody");
+        eligibleJoins.forEach(join => {
+          const tr = document.createElement("tr");
+          tr.dataset.runtimePhaseJoin = "";
+          [join.record_id, join.metric_id, join.event_name, join.category, join.entity_id].forEach(value =>
+            tr.append(make("td", "", value)));
+          joinBody.append(tr);
+        });
+        joinTable.append(joinBody);
+        runtimeAlignmentContent.append(joinTable);
+      } else {
+        runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-empty",
+          "Runtime traces are present, but no metric currently satisfies the strict phase-join rules. Coarse bundle overlap is not phase attribution."));
+      }
+    }
+    runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-note",
+      "Eligible joins require a metric-specific capture window fully contained by one leaf event after any clock-mapping error guard. Entity identity must match for GPU, link, kernel and process scopes. Temporal overlap is descriptive only; it does not establish causality."));
 
     const categories = [
       {

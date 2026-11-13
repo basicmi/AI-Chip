@@ -2054,6 +2054,56 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .benchmark-cross-layer-panel { padding: .75rem; }
 }
 
+/* Runtime trace and hardware-counter temporal alignment. */
+.benchmark-runtime-alignment-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-runtime-alignment-panel[hidden] { display: none !important; }
+.benchmark-runtime-alignment-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-runtime-alignment-heading p,
+.benchmark-runtime-alignment-summary,
+.benchmark-runtime-alignment-note,
+.benchmark-runtime-alignment-empty {
+  margin: .55rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+.benchmark-runtime-alignment-summary { color: var(--ink); font-weight: 650; }
+.benchmark-runtime-alignment-table-wrap { overflow-x: auto; margin-top: .65rem; }
+.benchmark-runtime-alignment-table {
+  width: 100%;
+  min-width: 640px;
+  margin: .55rem 0;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.benchmark-runtime-alignment-table th,
+.benchmark-runtime-alignment-table td {
+  padding: .5rem .6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.benchmark-runtime-alignment-table th {
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 8px;
+}
+.benchmark-runtime-alignment-table td { color: var(--ink); }
+@media (max-width: 560px) {
+  .benchmark-runtime-alignment-panel { padding: .75rem; }
+}
+
 /* Low-level hardware bottleneck evidence coverage. */
 .benchmark-hardware-evidence-panel {
   margin: 1rem 0 1.35rem;
