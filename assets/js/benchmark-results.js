@@ -48,6 +48,7 @@
   const crossLayerContent = $("[data-results-cross-layer-content]");
   const runtimeAlignmentPanel = $("[data-results-runtime-alignment]");
   const runtimeAlignmentContent = $("[data-results-runtime-alignment-content]");
+  const phaseDecompositionContent = $("[data-results-phase-decomposition-content]");
   const maxComparisonRecords = 4;
   const pageSize = 50;
   let database = null;
@@ -884,7 +885,8 @@
   const renderHardwareBottleneckEvidence = () => {
     if (!hardwareEvidencePanel || !hardwareEvidenceContent ||
         !crossLayerPanel || !crossLayerContent ||
-        !runtimeAlignmentPanel || !runtimeAlignmentContent) return;
+        !runtimeAlignmentPanel || !runtimeAlignmentContent ||
+        !phaseDecompositionContent) return;
     if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
         !activeCohort.performanceKey || !database) {
       hardwareEvidencePanel.hidden = true;
@@ -898,6 +900,7 @@
     hardwareEvidenceContent.replaceChildren();
     crossLayerContent.replaceChildren();
     runtimeAlignmentContent.replaceChildren();
+    phaseDecompositionContent.replaceChildren();
     const records = database.records.filter(record =>
       performanceKeyFor(record) === activeCohort.performanceKey
     );
@@ -1211,6 +1214,156 @@
     }
     runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-note",
       "Eligible joins require a metric-specific capture window fully contained by one leaf event after any clock-mapping error guard. Entity identity must match for GPU, link, kernel and process scopes. Temporal overlap is descriptive only; it does not establish causality."));
+
+    <escape></escape>    // Request-level latency decomposition requires explicit request roots and
+    // instantaneous token_emit markers. Aggregate benchmark p99s are not
+    // reverse-engineered from phase durations.
+    const phaseRows = [];
+    const phasePrimary = ["queue_wait", "batch_wait", "prefill", "decode", "host_runtime", "other"];
+    const phaseSub = ["kernel", "communication"];
+    const unionMs = intervals => {
+      const ordered = intervals.filter(item => item[1] > item[0]).sort((a, b) => a[0] - b[0]);
+      if (!ordered.length) return 0;
+      let start = ordered[0][0], end = ordered[0][1], total = 0;
+      ordered.slice(1).forEach(item => {
+        if (item[0] <= end) end = Math.max(end, item[1]);
+        else { total += end - start; start = item[0]; end = item[1]; }
+      });
+      return total + end - start;
+    };
+    const samplePercentile = (values, p) => {
+      if (!values.length) return null;
+      const ordered = [...values].sort((a, b) => a - b);
+      const position = (ordered.length - 1) * p;
+      const low = Math.floor(position), high = Math.ceil(position);
+      return ordered[low] + (ordered[high] - ordered[low]) * (position - low);
+    };
+    const phaseWindowCoverage = (events, start, end, trace) => {
+      const categories = Object.fromEntries([...phasePrimary, ...phaseSub].map(key => [key, []]));
+      events.forEach(event => {
+        if (!Object.prototype.hasOwnProperty.call(categories, event.category)) return;
+        const eventStart = toEpoch(event.started_at, trace), eventEnd = toEpoch(event.ended_at, trace);
+        if (eventStart === null || eventEnd === null) return;
+        const clippedStart = Math.max(start, eventStart), clippedEnd = Math.min(end, eventEnd);
+        if (clippedEnd > clippedStart) categories[event.category].push([clippedStart, clippedEnd]);
+      });
+      const durations = Object.fromEntries(Object.entries(categories).map(([key, intervals]) =>
+        [key, unionMs(intervals)]));
+      const primarySum = phasePrimary.reduce((sum, key) => sum + durations[key], 0);
+      const primaryUnion = unionMs(phasePrimary.flatMap(key => categories[key]));
+      return {
+        durations,
+        primaryUnion,
+        overlap: Math.max(0, primarySum - primaryUnion),
+        gap: Math.max(0, end - start - primaryUnion)
+      };
+    };
+    const meanPhase = (samples, category) => samples.length
+      ? samples.reduce((sum, sample) => sum + sample.durations[category], 0) / samples.length : null;
+    records.forEach(record => {
+      const trace = record.runtime_trace;
+      if (!trace || !Array.isArray(trace.events)) return;
+      const events = trace.events;
+      const eventMap = new Map(events.map(event => [event.event_id, event]));
+      const correlationCache = new Map();
+      const resolveCorrelation = (event, seen = new Set()) => {
+        if (correlationCache.has(event.event_id)) return correlationCache.get(event.event_id);
+        if (event.correlation_id) {
+          correlationCache.set(event.event_id, event.correlation_id);
+          return event.correlation_id;
+        }
+        if (seen.has(event.event_id)) return null;
+        seen.add(event.event_id);
+        const parent = eventMap.get(event.parent_event_id);
+        const resolved = parent ? resolveCorrelation(parent, seen) : null;
+        correlationCache.set(event.event_id, resolved);
+        return resolved;
+      };
+      const roots = events.filter(event => event.category === "request" && event.correlation_id);
+      const ttftValues = [], tpotValues = [], ttftCoverage = [], tpotCoverage = [];
+      roots.forEach(root => {
+        const requestStart = toEpoch(root.started_at, trace);
+        const requestEnd = toEpoch(root.ended_at, trace);
+        if (requestStart === null || requestEnd === null || requestEnd <= requestStart) return;
+        const requestEvents = events.filter(event => {
+          if (event.event_id === root.event_id || resolveCorrelation(event) !== root.correlation_id) return false;
+          const eventStart = toEpoch(event.started_at, trace), eventEnd = toEpoch(event.ended_at, trace);
+          return eventStart !== null && eventEnd !== null &&
+            eventStart >= requestStart && eventEnd <= requestEnd;
+        });
+        const tokens = requestEvents.filter(event => event.category === "token_emit")
+          .sort((a, b) => a.token_index - b.token_index);
+        const indexes = tokens.map(event => event.token_index);
+        const tokenTimes = tokens.map(event => toEpoch(event.started_at, trace));
+        const first = tokenTimes[0], last = tokenTimes[tokenTimes.length - 1];
+        if (indexes[0] === 1 && first !== null && first >= requestStart && first <= requestEnd) {
+          ttftValues.push(first - requestStart);
+          ttftCoverage.push(phaseWindowCoverage(requestEvents, requestStart, first, trace));
+        }
+        const complete = indexes.length >= 2 &&
+          indexes.every((value, index) => value === index + 1) &&
+          tokenTimes.every((value, index) => value !== null &&
+            (index === 0 || value > tokenTimes[index - 1])) &&
+          first >= requestStart && last <= requestEnd;
+        if (complete) {
+          tpotValues.push((last - first) / (indexes.length - 1));
+          tpotCoverage.push(phaseWindowCoverage(requestEvents, first, last, trace));
+        }
+      });
+      phaseRows.push({
+        id: record.id,
+        requestCount: roots.length,
+        ttftValues,
+        tpotValues,
+        ttftCoverage,
+        tpotCoverage
+      });
+    });
+    const phaseRequestCount = phaseRows.reduce((sum, row) => sum + row.requestCount, 0);
+    const phaseTtftCount = phaseRows.reduce((sum, row) => sum + row.ttftValues.length, 0);
+    const phaseTpotCount = phaseRows.reduce((sum, row) => sum + row.tpotValues.length, 0);
+    phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-summary",
+      phaseRequestCount + " request roots · " + phaseTtftCount + " trace-derived TTFT samples · " +
+      phaseTpotCount + " trace-derived TPOT samples"));
+    if (!phaseRequestCount) {
+      phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-empty",
+        "No request roots with correlation IDs are present in this cohort. Add one request event and token_emit markers to each traced request before calculating TTFT or TPOT."));
+    } else {
+      const phaseTable = make("table", "benchmark-runtime-alignment-table");
+      phaseTable.dataset.runtimePhaseDecomposition = "";
+      const phaseHead = document.createElement("thead");
+      const phaseHeader = document.createElement("tr");
+      ["Record", "Requests", "TTFT p50 / p95", "TPOT p50 / p95", "TTFT phases · Q / Batch / Prefill", "TPOT phases · Decode / Kernel / Comm"].forEach(label =>
+        phaseHeader.append(make("th", "", label)));
+      phaseHead.append(phaseHeader);
+      phaseTable.append(phaseHead);
+      const phaseBody = document.createElement("tbody");
+      phaseRows.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.dataset.runtimePhaseRecordId = row.id;
+        const ttftText = row.ttftValues.length
+          ? numberText(samplePercentile(row.ttftValues, 0.5)) + " / " +
+            numberText(samplePercentile(row.ttftValues, 0.95)) + " ms (n=" + row.ttftValues.length + ")"
+          : "—";
+        const tpotText = row.tpotValues.length
+          ? numberText(samplePercentile(row.tpotValues, 0.5)) + " / " +
+            numberText(samplePercentile(row.tpotValues, 0.95)) + " ms (n=" + row.tpotValues.length + ")"
+          : "—";
+        const ttftPhases = ["queue_wait", "batch_wait", "prefill"].map(key =>
+          meanPhase(row.ttftCoverage, key));
+        const tpotPhases = ["decode", "kernel", "communication"].map(key =>
+          meanPhase(row.tpotCoverage, key));
+        const phaseText = values => values.every(value => value === null)
+          ? "—" : values.map(value => numberText(value) + " ms").join(" / ");
+        [row.id, row.requestCount, ttftText, tpotText, phaseText(ttftPhases), phaseText(tpotPhases)]
+          .forEach(value => tr.append(make("td", "", value)));
+        phaseBody.append(tr);
+      });
+      phaseTable.append(phaseBody);
+      phaseDecompositionContent.append(phaseTable);
+    }
+    phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-note",
+      "TTFT = request-root start to token 1. TPOT = mean interval between consecutive token emissions. Phase cells are mean per-request interval-union coverage; kernel/communication may overlap decode and are not additive. Trace sample percentiles are not substitutes for published benchmark p99s."));
 
     const categories = [
       {
