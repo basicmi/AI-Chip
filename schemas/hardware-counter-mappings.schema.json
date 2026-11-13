@@ -179,6 +179,7 @@
             "identity",
             "ratio_to_percent",
             "mhz_to_hz",
+            "mib_to_bytes",
             "none"
           ]
         },
@@ -316,7 +317,8 @@
               "conversion": {
                 "enum": [
                   "ratio_to_percent",
-                  "mhz_to_hz"
+                  "mhz_to_hz",
+                  "mib_to_bytes"
                 ]
               }
             }

@@ -990,6 +990,23 @@
       "mapping_status": "reference_only",
       "mapping_quality": "direct",
       "notes": "The profiler reports FLOPs per normalization unit and the documentation warns that execution masks are not accounted for. Do not map to absolute FLOP count until normalization semantics are explicit."
+    },
+    {
+      "id": "dcgm-fi-dev-fb-used",
+      "source_id": "nvidia-dcgm",
+      "source_metric": "DCGM_FI_DEV_FB_USED",
+      "source_field_id": 252,
+      "canonical_metric_id": "hbm_used_bytes",
+      "source_unit": "MiB",
+      "canonical_unit": "byte",
+      "conversion": "mib_to_bytes",
+      "measurement_kind": "telemetry",
+      "value_semantics": "gauge",
+      "default_aggregation": "mean",
+      "default_scope": "per_gpu",
+      "mapping_status": "unit_converted",
+      "mapping_quality": "direct",
+      "notes": "DCGM framebuffer memory used is reported in MiB; maps to device-memory usage bytes, not HBM bandwidth or KV-cache usage."
     }
   ]
 }

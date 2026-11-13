@@ -63,6 +63,8 @@ def normalize_counter(source_id: str, source_metric: str, value=None, *,
         if value > 1:
             raise ValueError(f"{source_metric}: ratio input must be in [0, 1]")
         normalized_value = value * 100
+    elif conversion == "mib_to_bytes":
+        normalized_value = value * 1048576
     elif conversion == "mhz_to_hz":
         normalized_value = value * 1_000_000
     elif conversion == "identity":
