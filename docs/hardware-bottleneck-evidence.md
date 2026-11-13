@@ -68,12 +68,12 @@ Cross-host clock skew correction, calibration of GPU-to-host clock drift beyond 
 
 Runtime traces can optionally include two marker categories in addition to the existing interval events:
 
-- \`request\`: one root interval per request, with a required \`correlation_id\`. Its start/end define the request envelope. Child events may inherit this correlation ID through their parent chain.
-- \`token_emit\`: an instantaneous marker whose \`started_at\` and \`ended_at\` are identical, with a positive, one-based \`token_index\`. Token markers are not duration events.
+- `request`: one root interval per request, with a required `correlation_id`. Its start/end define the request envelope. Child events may inherit this correlation ID through their parent chain.
+- `token_emit`: an instantaneous marker whose `started_at` and `ended_at` are identical, with a positive, one-based `token_index`. Token markers are not duration events.
 
 Example request event sequence (timestamps abbreviated):
 
-\`\`\`json
+```json
 {
   "event_id": "request-17",
   "name": "request 17",
@@ -82,9 +82,9 @@ Example request event sequence (timestamps abbreviated):
   "started_at": "2026-11-13T10:00:00Z",
   "ended_at": "2026-11-13T10:00:01Z"
 }
-\`\`\`
+```
 
-The request's child events should carry the same \`correlation_id\` or inherit it through \`parent_event_id\`. Emit one \`token_emit\` marker per output token, with consecutive indices starting at 1. This allows the tool to measure:
+The request's child events should carry the same `correlation_id` or inherit it through `parent_event_id`. Emit one `token_emit` marker per output token, with consecutive indices starting at 1. This allows the tool to measure:
 
 - **Trace-derived TTFT** = token 1 emission time − request root start time.
 - **Trace-derived TPOT** = (last token emission time − first token emission time) / (number of emitted tokens − 1).
@@ -93,11 +93,11 @@ A missing first token, a gap or duplicate in token indices, non-increasing token
 
 Run the offline report from the repository root:
 
-\`\`\`bash
-python3 scripts/decompose_runtime_phases.py \\
-  --input data/benchmark-results.json \\
+```bash
+python3 scripts/decompose_runtime_phases.py \
+  --input data/benchmark-results.json \
   --output runtime-phase-decomposition.json
-\`\`\`
+```
 
 For each request, the report computes interval-union coverage for queue wait, batch wait, prefill, decode, host runtime and other primary phases. Kernel and communication are reported separately as subphases. TTFT-window and TPOT-window phase coverage are calculated independently. It also reports primary-phase overlap and unclassified wall-clock gaps.
 
@@ -199,13 +199,13 @@ python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
 
 ## Cross-layer performance correlation
 
-The cross-layer comparison layer is \`scripts/correlate_cross_layer_performance.py\`. It consumes the benchmark registry (or a record array) and writes a separate comparison report:
+The cross-layer comparison layer is `scripts/correlate_cross_layer_performance.py`. It consumes the benchmark registry (or a record array) and writes a separate comparison report:
 
-\`\`\`bash
-python3 scripts/correlate_cross_layer_performance.py \\
-  --input data/benchmark-results.json \\
+```bash
+python3 scripts/correlate_cross_layer_performance.py \
+  --input data/benchmark-results.json \
   --output cross-layer-performance.json
-\`\`\`
+```
 
 It follows the same strict InferenceX workload identity used by the Results Explorer: source/version, model, scenario, division, availability, system type, ISL, OSL, concurrency, precision, speculative method and aggregated/disaggregated mode. Missing identity fields are excluded rather than treated as wildcards.
 
@@ -213,17 +213,17 @@ Within each exact workload cohort, records are grouped by hardware identity, nod
 
 Pairwise contrasts show only normalized runtime metrics with matching units, optimization directions and metric families. Positive/negative changes are labeled according to the metric's declared direction. Hardware evidence remains attached to each source record with roofline geometry, per-link observations, KV-cache occupancy and throttle signals. The browser Results Explorer exposes the same cohort-level execution contrasts and runtime deltas.
 
-The report explicitly records \`temporal_alignment=not_established\` and \`causal_attribution=not_claimed\`. Benchmark publication dates do not establish profiler capture alignment. A contrast may change hardware, topology, software and serving configuration simultaneously; it is not a hardware-only experiment. No statistical correlation coefficient, significance estimate, causal effect, confidence score or bottleneck verdict is produced. Cohorts are bounded to the first 12 complete execution identities and 100 pairwise comparisons by default to keep reports tractable.
+The report explicitly records `temporal_alignment=not_established` and `causal_attribution=not_claimed`. Benchmark publication dates do not establish profiler capture alignment. A contrast may change hardware, topology, software and serving configuration simultaneously; it is not a hardware-only experiment. No statistical correlation coefficient, significance estimate, causal effect, confidence score or bottleneck verdict is produced. Cohorts are bounded to the first 12 complete execution identities and 100 pairwise comparisons by default to keep reports tractable.
 
 ## Evidence-constrained diagnosis engine
 
-The executable analysis layer is \`scripts/diagnose_hardware_performance.py\`. It accepts one benchmark record (including its optional \`hardware_evidence\` and publisher-normalized \`normalized_metrics\`) and writes a separate report:
+The executable analysis layer is `scripts/diagnose_hardware_performance.py`. It accepts one benchmark record (including its optional `hardware_evidence` and publisher-normalized `normalized_metrics`) and writes a separate report:
 
-\`\`\`bash
-python3 scripts/diagnose_hardware_performance.py \\
-  --input benchmark-record.json \\
+```bash
+python3 scripts/diagnose_hardware_performance.py \
+  --input benchmark-record.json \
   --output hardware-diagnosis.json
-\`\`\`
+```
 
 The report has four independent views:
 
@@ -232,11 +232,52 @@ The report has four independent views:
 3. **Serving runtime:** retains validated publisher-normalized TTFT, TPOT, ITL, throughput, GPU utilization/memory, and strictly validated power/energy metrics. P99/median ratios are descriptive distribution indicators, not causal attribution. Workload and prefill/decode parallelism fields are retained as context.
 4. **Candidate attribution:** records roofline ceiling geometry, observed link utilization, KV-cache occupancy and non-zero throttle activity. Scheduling/queueing remains explicitly unattributed until request queue, batch formation, dispatch and kernel-gap traces are supplied.
 
-The engine always sets \`overall_verdict=undetermined\` and \`automatic_bottleneck_classification=false\`. It uses no fixed utilization threshold and emits no uncalibrated numeric confidence score. A lower theoretical roofline ceiling is not a claim that the workload is bottlenecked by that resource. A throttle counter is evidence of throttle activity, not a complete explanation of its performance impact.
+The engine always sets `overall_verdict=undetermined` and `automatic_bottleneck_classification=false`. It uses no fixed utilization threshold and emits no uncalibrated numeric confidence score. A lower theoretical roofline ceiling is not a claim that the workload is bottlenecked by that resource. A throttle counter is evidence of throttle activity, not a complete explanation of its performance impact.
 
 The browser Results Explorer exposes the same conservative boundary: it shows roofline arithmetic only when the required same-boundary inputs are present, displays per-link utilization only with entity/fabric/directionality, and keeps TTFT/TPOT and aggregate GPU signals clearly labeled as runtime/context observations.
 
 The focused test suite covers scope and precision mismatches, multi-GPU separation, zero-valued directional counters, link identity/directionality, serving metric units, strict power gating, thermal observations and the no-automatic-verdict policy.
+
+## GPU execution efficiency and compute/communication overlap
+
+The diagnosis report now includes `gpu_execution_efficiency`, produced by `scripts/analyze_gpu_execution_efficiency.py` and integrated into `scripts/diagnose_hardware_performance.py`.
+
+### Hardware activity evidence
+
+The analyzer groups observations only when **scope, entity identity and effective sampling window are identical**. A metric-level `sampling_window` takes precedence; otherwise the enclosing hardware-evidence sampling window is used for descriptive grouping.
+
+It retains these distinct signals:
+
+- `sm_active_pct`: cycles with at least one warp assigned to an SM. The complement is named `sm_inactive_cycle_complement_pct`; it is **not** a whole-GPU idle-time estimate.
+- `tensor_active_pct`: cycles with a Tensor pipe active.
+- `sm_throughput_pct`: kernel-scoped throughput relative to peak sustained rate; it is not the SM active-cycle ratio.
+- `dram_active_pct`: DRAM interface activity, not achieved bandwidth or saturation.
+- `dram_bandwidth_utilization_pct`: measured bandwidth relative to a compatible peak. It is only contrasted with DRAM activity when scope, entity and sampling window match.
+- VALU/MFMA/VMEM activity, compute peak utilization, clocks, power, temperature and throttle activity remain separately identified.
+
+A difference between two counters is a descriptive contrast, not an occupancy, instruction-issue, thermal or bottleneck diagnosis.
+
+### Strict metric-to-trace joins
+
+A hardware metric is joined to a runtime event only when it has an explicit metric-level sampling window that is fully contained by exactly one leaf event, after applying the monotonic-clock mapping error guard. Scope-specific event category rules apply (`per_kernel` → `kernel`, `per_link` → `communication`) and entity identity must match exactly. There is no fuzzy matching by kernel name, GPU ordinal, time overlap alone or parent evidence window.
+
+### Request-correlated execution overlap
+
+For each request root, the analyzer computes interval unions for kernel, communication, communication-wait, prefill and decode events. It reports:
+
+- kernel/communication overlap as a share of communication wall time;
+- kernel interval coverage of prefill and decode phase windows;
+- communication-wait interval coverage of decode.
+
+Intervals are unioned before intersection so nested or concurrent events are not double-counted. These are **same-request temporal overlaps**, not proof of device-side concurrency, communication hiding, synchronization completion or critical-path impact.
+
+The report always keeps `overall_verdict` as `undetermined`. Missing counters and traces remain unknown, never zero. The offline diagnosis command remains:
+
+```bash
+python3 scripts/diagnose_hardware_performance.py \
+  --input benchmark-record.json \
+  --output hardware-diagnosis.json
+```
 
 ## What is needed before making a bottleneck claim
 

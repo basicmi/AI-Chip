@@ -505,7 +505,7 @@ const { chromium } = require("playwright");
           sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z", sample_interval_ms: 1000, sample_count: 60 },
           provenance: { source_type: "profiler_export", source_url: "https://example.com/hardware-evidence/fixture-0", collected_at: "2026-11-12T10:02:00Z" },
           metrics: [
-            { metric_id: "sm_throughput_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_kernel", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed", mapping_quality: "direct", mapping_note: "Profiler throughput relative to peak sustained rate over elapsed cycles.", entity_id: "gpu0", sampling_window: { started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z" } },
+            { metric_id: "sm_throughput_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_kernel", source_name: "sm__throughput.avg.pct_of_peak_sustained_elapsed", mapping_quality: "direct", mapping_note: "Profiler throughput relative to peak sustained rate over elapsed cycles.", entity_id: "gpu0", sampling_window: { started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:02.500Z" } },
             { metric_id: "sm_active_pct", value: 72, unit: "%", measurement_kind: "telemetry", aggregation: "mean", scope: "per_gpu", source_name: "DCGM_FI_PROF_SM_UTIL_RATIO", mapping_quality: "direct", mapping_note: "Ratio of cycles with at least one warp assigned to an SM." },
             { metric_id: "theoretical_peak_flops", value: 1.9e15, unit: "FLOP/s", measurement_kind: "telemetry", aggregation: "max", scope: "per_gpu", source_name: "device_fp8_peak_flops", precision: "FP8", sparsity: "dense" },
             { metric_id: "compute_flop_count", value: 7.2e16, unit: "FLOP", measurement_kind: "hardware_counter", aggregation: "sum", scope: "per_gpu", source_name: "flop_count_sp", precision: "FP8", sparsity: "dense" },
@@ -528,7 +528,9 @@ const { chromium } = require("playwright");
             { event_id: "queue-17", name: "queue wait", category: "queue_wait", started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:00:01Z", parent_event_id: "request-root-17" },
             { event_id: "prefill-1", name: "prefill batch 1", category: "prefill", started_at: "2026-11-12T10:00:01Z", ended_at: "2026-11-12T10:00:08Z", entity_id: "gpu0", parent_event_id: "request-root-17" },
             { event_id: "kernel-1", name: "attention kernel", category: "kernel", started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z", entity_id: "gpu0", parent_event_id: "prefill-1", stream_id: "stream-0" },
+            { event_id: "communication-17", name: "collective communication", category: "communication", started_at: "2026-11-12T10:00:03Z", ended_at: "2026-11-12T10:00:05Z", entity_id: "gpu0", parent_event_id: "request-root-17" },
             { event_id: "decode-17", name: "decode phase", category: "decode", started_at: "2026-11-12T10:00:08Z", ended_at: "2026-11-12T10:00:12Z", parent_event_id: "request-root-17" },
+            { event_id: "communication-wait-17", name: "communication wait", category: "communication_wait", started_at: "2026-11-12T10:00:10Z", ended_at: "2026-11-12T10:00:11Z", parent_event_id: "decode-17" },
             { event_id: "token-17-1", name: "first token", category: "token_emit", started_at: "2026-11-12T10:00:08Z", ended_at: "2026-11-12T10:00:08Z", token_index: 1, parent_event_id: "request-root-17" },
             { event_id: "token-17-2", name: "second token", category: "token_emit", started_at: "2026-11-12T10:00:12Z", ended_at: "2026-11-12T10:00:12Z", token_index: 2, parent_event_id: "request-root-17" }
           ]
@@ -665,6 +667,21 @@ const { chromium } = require("playwright");
   const evidenceRows = page.locator("[data-hardware-evidence-record-id]");
   if (await evidenceRows.count() !== 3) {
     throw new Error("Hardware evidence table did not retain the selected strict cohort");
+  }
+  if (await page.locator("[data-results-gpu-execution]").isHidden()) {
+    throw new Error("Selecting a strict workload cohort did not reveal GPU execution efficiency analysis");
+  }
+  const gpuExecutionText = await page.locator("[data-results-gpu-execution-content]").textContent();
+  if (!gpuExecutionText.includes("scope/entity/window-matched hardware activity groups") ||
+      !gpuExecutionText.includes("SM inactive-cycle complement") ||
+      !gpuExecutionText.includes("SM throughput") ||
+      !gpuExecutionText.includes("50% (n=1)") ||
+      !gpuExecutionText.includes("25% (n=1)")) {
+    throw new Error("GPU execution analysis did not preserve counter semantics and request-level compute/communication overlap: " + gpuExecutionText);
+  }
+  if (await page.locator("[data-gpu-execution-activity] tbody tr").count() !== 2 ||
+      await page.locator("[data-gpu-execution-overlap] tbody tr").count() !== 1) {
+    throw new Error("GPU activity and request-overlap tables did not render the expected fixture rows");
   }
   const crossLayerText = await page.locator("[data-results-cross-layer-content]").textContent();
   if (!crossLayerText.includes("3 strict-cohort records") ||

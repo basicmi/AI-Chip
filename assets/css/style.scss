@@ -2120,6 +2120,27 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   line-height: 1.5;
 }
 
+/* GPU execution efficiency evidence and interval-overlap panel. */
+.benchmark-gpu-execution-panel {
+  margin: 1rem 0 1.35rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.benchmark-gpu-execution-panel[hidden] { display: none !important; }
+.benchmark-gpu-execution-heading h2 {
+  margin: .2rem 0;
+  color: var(--ink);
+  font: 700 1.25rem/1.2 "Source Serif 4", Georgia, serif;
+}
+.benchmark-gpu-execution-heading p {
+  margin: .55rem 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
 /* Low-level hardware bottleneck evidence coverage. */
 .benchmark-hardware-evidence-panel {
   margin: 1rem 0 1.35rem;

@@ -44,6 +44,8 @@
   const decompositionContent = $("[data-results-decomposition-content]");
   const hardwareEvidencePanel = $("[data-results-hardware-evidence]");
   const hardwareEvidenceContent = $("[data-results-hardware-evidence-content]");
+  const gpuExecutionPanel = $("[data-results-gpu-execution]");
+  const gpuExecutionContent = $("[data-results-gpu-execution-content]");
   const crossLayerPanel = $("[data-results-cross-layer]");
   const crossLayerContent = $("[data-results-cross-layer-content]");
   const runtimeAlignmentPanel = $("[data-results-runtime-alignment]");
@@ -886,15 +888,18 @@
     if (!hardwareEvidencePanel || !hardwareEvidenceContent ||
         !crossLayerPanel || !crossLayerContent ||
         !runtimeAlignmentPanel || !runtimeAlignmentContent ||
-        !phaseDecompositionContent) return;
+        !phaseDecompositionContent || !gpuExecutionPanel || !gpuExecutionContent) return;
     if (!activeCohort || activeCohort.sourceId !== "inferencex" ||
         !activeCohort.performanceKey || !database) {
       hardwareEvidencePanel.hidden = true;
+      gpuExecutionPanel.hidden = true;
       crossLayerPanel.hidden = true;
       runtimeAlignmentPanel.hidden = true;
       return;
     }
     hardwareEvidencePanel.hidden = false;
+    gpuExecutionPanel.hidden = false;
+    gpuExecutionContent.replaceChildren();
     crossLayerPanel.hidden = false;
     runtimeAlignmentPanel.hidden = false;
     hardwareEvidenceContent.replaceChildren();
@@ -1691,6 +1696,203 @@
     });
     hardwareEvidenceContent.append(make("p", "benchmark-hardware-evidence-note",
       "Interpretation: “core signals present” means only that the minimum evidence fields for investigation are attached. It does not mean the workload is bottlenecked by that resource. Counter scopes, sampling windows, precision, topology and device-specific peak definitions must still be checked. Existing aggregate GPU utilization and memory-used values are not substituted for low-level counters. Missing evidence is unknown, never zero."));
+
+
+    // GPU execution efficiency: retain exact metric scope/entity/window boundaries.
+    const gpuMetricIds = [
+      "sm_active_pct", "tensor_active_pct", "dram_active_pct", "sm_throughput_pct",
+      "dram_bandwidth_utilization_pct", "compute_peak_utilization_pct",
+      "valu_active_pct", "mfma_active_pct", "vmem_active_pct",
+      "gpu_clock_hz", "memory_clock_hz", "gpu_power_w", "temperature_c", "throttle_active_pct"
+    ];
+    const gpuGroups = [];
+    records.forEach(record => {
+      const evidence = record.hardware_evidence;
+      const metrics = Array.isArray(evidence?.metrics) ? evidence.metrics : [];
+      const groupsForRecord = new Map();
+      metrics.filter(metric => gpuMetricIds.includes(metric.metric_id)).forEach(metric => {
+        const window = metric.sampling_window || evidence.sampling;
+        if (!window?.started_at || !window?.ended_at ||
+            !Number.isFinite(Date.parse(window.started_at)) ||
+            !Number.isFinite(Date.parse(window.ended_at)) ||
+            Date.parse(window.ended_at) <= Date.parse(window.started_at)) return;
+        const key = JSON.stringify([
+          metric.scope || "scope not specified", metric.entity_id || "entity not specified",
+          window.started_at, window.ended_at
+        ]);
+        if (!groupsForRecord.has(key)) groupsForRecord.set(key, {
+          recordId: record.id, scope: metric.scope || "not specified",
+          entity: metric.entity_id || "not specified", window, values: {}
+        });
+        const group = groupsForRecord.get(key);
+        if (!group.values[metric.metric_id]) group.values[metric.metric_id] = [];
+        group.values[metric.metric_id].push(metric.value);
+      });
+      gpuGroups.push(...groupsForRecord.values());
+    });
+    const gpuActivitySummary = make("p", "benchmark-runtime-alignment-summary",
+      gpuGroups.length + " scope/entity/window-matched hardware activity groups across " +
+      records.filter(record => record.hardware_evidence?.metrics?.some(metric =>
+        gpuMetricIds.includes(metric.metric_id))).length + " records");
+    gpuExecutionContent.append(gpuActivitySummary);
+    if (!gpuGroups.length) {
+      gpuExecutionContent.append(make("p", "benchmark-runtime-alignment-empty",
+        "No SM/Tensor/DRAM activity or kernel-throughput counters are attached to this cohort. Aggregate GPU utilization is not substituted."));
+    } else {
+      const activityWrap = make("div", "benchmark-runtime-alignment-table-wrap");
+      const activityTable = make("table", "benchmark-runtime-alignment-table");
+      activityTable.dataset.gpuExecutionActivity = "";
+      const activityHead = document.createElement("thead");
+      const activityHeader = document.createElement("tr");
+      ["Record", "Scope / entity", "SM active", "SM inactive-cycle complement", "Tensor active", "SM throughput", "Compute / VALU / MFMA / VMEM", "DRAM active", "DRAM bandwidth utilization", "Clock / power / thermal", "Sampling window"].forEach(label =>
+        activityHeader.append(make("th", "", label)));
+      activityHead.append(activityHeader);
+      activityTable.append(activityHead);
+      const activityBody = document.createElement("tbody");
+      const metricCell = (group, key, suffix = "%") => {
+        const values = group.values[key] || [];
+        if (!values.length) return "—";
+        if (values.length > 1) return "multiple (" + values.length + ")";
+        return numberText(values[0]) + suffix;
+      };
+      gpuGroups.forEach(group => {
+        const row = document.createElement("tr");
+        row.dataset.gpuExecutionRecordId = group.recordId;
+        const smValues = group.values.sm_active_pct || [];
+        const inactive = smValues.length === 1 ? numberText(100 - smValues[0]) + "%" :
+          smValues.length > 1 ? "multiple" : "—";
+        [
+          group.recordId,
+          group.scope + " · " + group.entity,
+          metricCell(group, "sm_active_pct"),
+          inactive,
+          metricCell(group, "tensor_active_pct"),
+          metricCell(group, "sm_throughput_pct"),
+          [
+            ["compute peak", "compute_peak_utilization_pct"],
+            ["VALU", "valu_active_pct"], ["MFMA", "mfma_active_pct"], ["VMEM", "vmem_active_pct"]
+          ].map(([label, key]) => (group.values[key] || []).length
+            ? label + " " + metricCell(group, key) : null).filter(Boolean).join(" · ") || "—",
+          metricCell(group, "dram_active_pct"),
+          metricCell(group, "dram_bandwidth_utilization_pct"),
+          [
+            ["GPU", "gpu_clock_hz", " Hz"], ["Memory", "memory_clock_hz", " Hz"],
+            ["Power", "gpu_power_w", " W"], ["Temp", "temperature_c", " °C"],
+            ["Throttle", "throttle_active_pct", "%"]
+          ].map(([label, key, suffix]) => (group.values[key] || []).length
+            ? label + " " + metricCell(group, key, suffix) : null).filter(Boolean).join(" · ") || "—",
+          group.window.started_at + " → " + group.window.ended_at
+        ].forEach(value => row.append(make("td", "", value)));
+        activityBody.append(row);
+      });
+      activityTable.append(activityBody);
+      activityWrap.append(activityTable);
+      gpuExecutionContent.append(activityWrap);
+    }
+
+    const overlapRows = [];
+    const intervalUnion = intervals => {
+      const ordered = intervals.filter(item => item[1] > item[0]).sort((a, b) => a[0] - b[0]);
+      if (!ordered.length) return [];
+      const result = [];
+      let start = ordered[0][0], end = ordered[0][1];
+      ordered.slice(1).forEach(item => {
+        if (item[0] <= end) end = Math.max(end, item[1]);
+        else { result.push([start, end]); start = item[0]; end = item[1]; }
+      });
+      result.push([start, end]);
+      return result;
+    };
+    const intervalUnionMs = intervals => intervalUnion(intervals)
+      .reduce((sum, item) => sum + item[1] - item[0], 0);
+    const intervalIntersectionMs = (left, right) => {
+      const intersections = [];
+      intervalUnion(left).forEach(a => intervalUnion(right).forEach(b => {
+        const start = Math.max(a[0], b[0]), end = Math.min(a[1], b[1]);
+        if (end > start) intersections.push([start, end]);
+      }));
+      return intervalUnionMs(intersections);
+    };
+    records.forEach(record => {
+      const trace = record.runtime_trace;
+      if (!Array.isArray(trace?.events)) return;
+      const events = trace.events;
+      const eventMap = new Map(events.map(event => [event.event_id, event]));
+      const cache = new Map();
+      const resolveCorrelation = (event, seen = new Set()) => {
+        if (cache.has(event.event_id)) return cache.get(event.event_id);
+        if (event.correlation_id) {
+          cache.set(event.event_id, event.correlation_id);
+          return event.correlation_id;
+        }
+        if (seen.has(event.event_id)) return null;
+        seen.add(event.event_id);
+        const parent = eventMap.get(event.parent_event_id);
+        const resolved = parent ? resolveCorrelation(parent, seen) : null;
+        cache.set(event.event_id, resolved);
+        return resolved;
+      };
+      const roots = events.filter(event => event.category === "request" && event.correlation_id);
+      const rootCounts = new Map();
+      roots.forEach(root => rootCounts.set(root.correlation_id, (rootCounts.get(root.correlation_id) || 0) + 1));
+      const overlap = [], decodeCoverage = [], waitCoverage = [];
+      roots.filter(root => rootCounts.get(root.correlation_id) === 1).forEach(root => {
+        const requestStart = toEpoch(root.started_at, trace), requestEnd = toEpoch(root.ended_at, trace);
+        if (requestStart === null || requestEnd === null || requestEnd <= requestStart) return;
+        const scoped = events.filter(event => {
+          if (event.event_id === root.event_id || resolveCorrelation(event) !== root.correlation_id) return false;
+          const start = toEpoch(event.started_at, trace), end = toEpoch(event.ended_at, trace);
+          return start !== null && end !== null && start >= requestStart && end <= requestEnd && end > start;
+        });
+        const intervals = category => scoped.filter(event => event.category === category).map(event => [
+          toEpoch(event.started_at, trace), toEpoch(event.ended_at, trace)
+        ]);
+        const kernel = intervals("kernel"), communication = intervals("communication");
+        const decode = intervals("decode"), communicationWait = intervals("communication_wait");
+        const communicationMs = intervalUnionMs(communication);
+        const decodeMs = intervalUnionMs(decode);
+        if (communicationMs > 0) overlap.push(intervalIntersectionMs(kernel, communication) / communicationMs * 100);
+        if (decodeMs > 0) {
+          decodeCoverage.push(intervalIntersectionMs(kernel, decode) / decodeMs * 100);
+          waitCoverage.push(intervalIntersectionMs(communicationWait, decode) / decodeMs * 100);
+        }
+      });
+      if (roots.length) overlapRows.push({
+        id: record.id, requestCount: roots.filter(root => rootCounts.get(root.correlation_id) === 1).length,
+        overlap, decodeCoverage, waitCoverage
+      });
+    });
+    const average = values => values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+    gpuExecutionContent.append(make("p", "benchmark-runtime-alignment-summary",
+      "Request-correlated runtime interval overlap"));
+    if (!overlapRows.length) {
+      gpuExecutionContent.append(make("p", "benchmark-runtime-alignment-empty",
+        "No request-root runtime traces are available for compute/communication overlap analysis."));
+    } else {
+      const overlapWrap = make("div", "benchmark-runtime-alignment-table-wrap");
+      const overlapTable = make("table", "benchmark-runtime-alignment-table");
+      overlapTable.dataset.gpuExecutionOverlap = "";
+      const overlapHead = document.createElement("thead");
+      const overlapHeader = document.createElement("tr");
+      ["Record", "Requests", "Kernel / communication overlap", "Kernel coverage of decode", "Communication-wait coverage of decode"].forEach(label =>
+        overlapHeader.append(make("th", "", label)));
+      overlapHead.append(overlapHeader);
+      overlapTable.append(overlapHead);
+      const overlapBody = document.createElement("tbody");
+      overlapRows.forEach(item => {
+        const row = document.createElement("tr");
+        const format = values => average(values) === null ? "—" : numberText(average(values)) + "% (n=" + values.length + ")";
+        [item.id, item.requestCount, format(item.overlap), format(item.decodeCoverage), format(item.waitCoverage)]
+          .forEach(value => row.append(make("td", "", value)));
+        overlapBody.append(row);
+      });
+      overlapTable.append(overlapBody);
+      overlapWrap.append(overlapTable);
+      gpuExecutionContent.append(overlapWrap);
+    }
+    gpuExecutionContent.append(make("p", "benchmark-runtime-alignment-note",
+      "SM inactive-cycle complement is not whole-GPU idle time. SM active and SM throughput have different definitions; DRAM activity is not bandwidth saturation. Counter rows are grouped only by exact scope, entity and sampling window. Runtime overlap is a same-request timestamp observation, not proof of device-side concurrency, communication hiding or critical-path impact. No automatic bottleneck verdict is generated."));
   };
 
   const renderPerformanceDecomposition = () => {

@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_benchmark_results import validate_hardware_evidence
+from analyze_gpu_execution_efficiency import analyze_gpu_execution_efficiency
 
 DERIVER = "scripts/diagnose_hardware_performance.py"
 PEAK_AGGREGATIONS = {"max", "mean", "instantaneous"}
@@ -659,18 +660,22 @@ def diagnose_record(record):
         "interpretation": "No link utilization is inferred from device count or topology labels.",
     }
     runtime = analyze_serving_runtime(record)
+    gpu_execution = analyze_gpu_execution_efficiency(record)
     attribution = attribute_candidates(evidence, roofline, communication, runtime)
     window = _window_seconds(evidence) if evidence else None
     has_any = bool(
         (evidence and evidence.get("metrics")) or roofline.get("analyses")
         or communication.get("links") or runtime.get("metrics")
         or _kv_observations(evidence) or _thermal_observations(evidence)
+        or gpu_execution.get("status") == "evidence_available"
     )
     next_measurements = [
         "Compute: interval FLOP count plus a precision/sparsity-matched device peak and SM/Tensor activity.",
-        "Memory: same-boundary DRAM read/write byte totals and measured peak bandwidth.",
         "Communication: per-link directional byte totals, directionality-matched peak bandwidth, and physical/logical topology.",
         "KV cache: used bytes/tokens and allocator capacity at the same scope and time window.",
+        "GPU activity: SM active-cycle, Tensor activity, kernel-scoped throughput and synchronized sampling windows.",
+        "Memory: achieved DRAM bytes/s and same-boundary peak bandwidth; DRAM activity alone is not saturation.",
+        "Compute/communication overlap: request-correlated kernel and communication intervals on a mapped common clock.",
         "Scheduling: request queue, batch formation, dispatch and kernel-gap traces aligned to prefill/decode phases.",
     ]
     return {
@@ -682,6 +687,7 @@ def diagnose_record(record):
         "roofline": roofline,
         "communication": communication,
         "serving_runtime": runtime,
+        "gpu_execution_efficiency": gpu_execution,
         "attribution": attribution,
         "overall_status": "evidence_available" if has_any else "insufficient_evidence",
         "overall_verdict": "undetermined",
@@ -691,6 +697,8 @@ def diagnose_record(record):
             "The roofline model uses measured arithmetic intensity and declared peak definitions; it does not account for cache reuse, instruction mix, occupancy or kernel launch overhead unless separately measured.",
             "Per-link utilization is not a critical-path measurement; topology and collective algorithm details are still required.",
             "No numeric confidence score or fixed utilization threshold is used because the evidence contract does not calibrate either.",
+            "SM inactive-cycle complement is not a whole-GPU idle estimate; kernel time is not equivalent to SM-active time.",
+            "Temporal kernel/communication overlap does not prove device-side concurrency or communication hiding.",
             "Missing evidence is unknown, never zero.",
         ],
     }
