@@ -1073,9 +1073,26 @@
       count + (record.hardware_evidence?.metrics || []).filter(metric => metric.sampling_window).length, 0);
     const eligibleJoins = [];
     const alignmentRows = [];
-    const toEpoch = value => {
-      const parsed = Date.parse(value);
-      return Number.isFinite(parsed) ? parsed : null;
+    const toEpoch = (value, trace) => {
+      if (trace?.clock_domain === "utc_wall_clock") {
+        const parsed = Date.parse(value);
+        return Number.isFinite(parsed) ? parsed : null;
+      }
+      if (trace?.clock_domain !== "monotonic_ns" || !Number.isSafeInteger(value)) return null;
+      const anchors = trace.clock_mapping?.anchors;
+      if (!Array.isArray(anchors) || anchors.length < 2) return null;
+      for (let index = 0; index < anchors.length - 1; index += 1) {
+        const left = anchors[index], right = anchors[index + 1];
+        if (!Number.isSafeInteger(left.monotonic_ns) || !Number.isSafeInteger(right.monotonic_ns) ||
+            value < left.monotonic_ns || value > right.monotonic_ns) continue;
+        const leftUtc = Date.parse(left.utc_at), rightUtc = Date.parse(right.utc_at);
+        if (!Number.isFinite(leftUtc) || !Number.isFinite(rightUtc) ||
+            right.monotonic_ns <= left.monotonic_ns || rightUtc <= leftUtc) return null;
+        return leftUtc + (value - left.monotonic_ns) /
+          (right.monotonic_ns - left.monotonic_ns) * (rightUtc - leftUtc);
+      }
+      const last = anchors[anchors.length - 1];
+      return value === last.monotonic_ns ? Date.parse(last.utc_at) : null;
     };
     const entityRequiredScopes = new Set(["per_gpu", "per_link", "per_kernel", "per_process"]);
     const expectedEventCategories = { per_kernel: "kernel", per_link: "communication" };
@@ -1087,12 +1104,15 @@
       const rowJoins = [];
       metrics.forEach(metric => {
         if (!metric.sampling_window) return;
-        const start = toEpoch(metric.sampling_window.started_at);
-        const end = toEpoch(metric.sampling_window.ended_at);
+        const start = toEpoch(metric.sampling_window.started_at, { clock_domain: "utc_wall_clock" });
+        const end = toEpoch(metric.sampling_window.ended_at, { clock_domain: "utc_wall_clock" });
         if (start === null || end === null || end <= start) return;
         const containing = events.filter(event => {
-          const eventStart = toEpoch(event.started_at), eventEnd = toEpoch(event.ended_at);
-          return eventStart !== null && eventEnd !== null && eventStart <= start && eventEnd >= end;
+          const eventStart = toEpoch(event.started_at, trace), eventEnd = toEpoch(event.ended_at, trace);
+          const errorMs = trace.clock_domain === "monotonic_ns"
+            ? Number(trace.clock_mapping?.max_error_ns || 0) / 1e6 : 0;
+          return eventStart !== null && eventEnd !== null &&
+            eventStart + errorMs <= start && eventEnd - errorMs >= end;
         });
         const containingIds = new Set(containing.map(event => event.event_id));
         const parents = new Set(containing.map(event => event.parent_event_id).filter(id => containingIds.has(id)));
@@ -1126,7 +1146,9 @@
         metric_window_count: metrics.filter(metric => metric.sampling_window).length,
         coarse_metric_count: metrics.filter(metric => !metric.sampling_window).length,
         eligible_join_count: rowJoins.length,
-        clock_domain: trace?.clock_domain || "not available"
+        clock_domain: trace?.clock_domain === "monotonic_ns"
+          ? "monotonic_ns · mapped ±" + (trace.clock_mapping?.max_error_ns ?? "unknown") + " ns"
+          : trace?.clock_domain || "not available"
       });
     });
     const tracePairCount = records.filter(record => record.runtime_trace && record.hardware_evidence).length;
@@ -1188,7 +1210,7 @@
       }
     }
     runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-note",
-      "Eligible joins require a metric-specific capture window fully contained by one leaf event. Entity identity must match for GPU, link, kernel and process scopes. UTC wall-clock overlap is descriptive only; it does not establish causality."));
+      "Eligible joins require a metric-specific capture window fully contained by one leaf event after any clock-mapping error guard. Entity identity must match for GPU, link, kernel and process scopes. Temporal overlap is descriptive only; it does not establish causality."));
 
     const categories = [
       {
