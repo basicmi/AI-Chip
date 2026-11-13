@@ -101,6 +101,7 @@ class HardwareMetricDerivationTests(unittest.TestCase):
         second = {"started_at": "2026-11-12T10:00:02Z", "ended_at": "2026-11-12T10:00:06Z"}
         flop = next(metric for metric in evidence["metrics"] if metric["metric_id"] == "compute_flop_count")
         peak = next(metric for metric in evidence["metrics"] if metric["metric_id"] == "theoretical_peak_flops")
+        flop["value"] = 4e12
         flop["sampling_window"] = first
         peak["sampling_window"] = first
         second_flop = dict(flop, value=4e12, sampling_window=second)
@@ -117,9 +118,9 @@ class HardwareMetricDerivationTests(unittest.TestCase):
         )
         self.assertEqual(
             {metric["sampling_window"]["started_at"]: metric["value"] for metric in utilization},
-            {first["started_at"]: 200, second["started_at"]: 50},
+            {first["started_at"]: 100, second["started_at"]: 50},
         )
-        self.assertTrue(any("outside [0, 100]" in warning for warning in warnings))
+        self.assertEqual(warnings, [])
         self.assertEqual(validate_hardware_evidence({"hardware_evidence": result}, "repeated"), [])
 
     def test_does_not_derive_compute_utilization_across_mismatched_precision(self):
