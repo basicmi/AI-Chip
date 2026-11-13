@@ -1101,8 +1101,9 @@
         const event = leaves[0];
         const scope = metric.scope;
         const metricEntity = metric.entity_id, eventEntity = event.entity_id;
-        const entityMatch = metricEntity && eventEntity && metricEntity === eventEntity;
+        const entityMatch = Boolean(metricEntity && eventEntity && metricEntity === eventEntity);
         if (metricEntity && eventEntity && metricEntity !== eventEntity) return;
+        if (Boolean(metricEntity) !== Boolean(eventEntity)) return;
         if (entityRequiredScopes.has(scope) && !entityMatch) return;
         if (expectedEventCategories[scope] && event.category !== expectedEventCategories[scope]) return;
         const join = {
@@ -1180,7 +1181,6 @@
           joinBody.append(tr);
         });
         joinTable.append(joinBody);
-        joinTable.appendChild(document.createElement("tbody"));
         runtimeAlignmentContent.append(joinTable);
       } else {
         runtimeAlignmentContent.append(make("p", "benchmark-runtime-alignment-empty",
