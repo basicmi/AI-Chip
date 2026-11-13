@@ -173,6 +173,15 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div data-results-cross-layer-content aria-live="polite"></div>
   </section>
 
+  <section class="benchmark-runtime-alignment-panel" data-results-runtime-alignment hidden aria-labelledby="benchmark-runtime-alignment-title">
+    <div class="benchmark-runtime-alignment-heading">
+      <p class="eyebrow">RUNTIME TRACE × HARDWARE COUNTERS · TIME ALIGNMENT</p>
+      <h2 id="benchmark-runtime-alignment-title">Runtime phase alignment</h2>
+      <p>Check whether hardware-counter sampling windows can be joined to queue, prefill, decode, kernel or communication events. Bundle-level overlap is not phase attribution.</p>
+    </div>
+    <div data-results-runtime-alignment-content aria-live="polite"></div>
+  </section>
+
   <section class="benchmark-hardware-evidence-panel" data-results-hardware-evidence hidden aria-labelledby="benchmark-hardware-evidence-title">
     <div class="benchmark-hardware-evidence-heading">
       <p class="eyebrow">LOW-LEVEL COUNTERS · EVIDENCE READINESS</p>
