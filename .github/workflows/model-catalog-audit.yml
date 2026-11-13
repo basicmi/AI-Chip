@@ -55,6 +55,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ai-chip-intelligence-discovery
-          path: ${{ runner.temp }}/ai-chip-intelligence-discovery.json
+          path: |
+            ${{ runner.temp }}/ai-chip-intelligence-discovery.json
+            ${{ runner.temp }}/ai-chip-intelligence-summary.md
           if-no-files-found: ignore
           retention-days: 30
