@@ -64,10 +64,14 @@ def trace_for(events, *, clock_domain="utc_wall_clock", start_ms=0, end_ms=1000)
 
 
 def request_fixture(request_id="request-1", offset_ms=0):
-    def e(event_id, category, start, end, **kwargs):
-        return event(event_id, category, offset_ms + start, offset_ms + end, **kwargs)
+    def e(event_id, category, start, end, *, parent="root", correlation=None, token_index=None):
+        parent_id = f"{request_id}-{parent}" if parent is not None else None
+        return event(
+            f"{request_id}-{event_id}", category, offset_ms + start, offset_ms + end,
+            parent=parent_id, correlation=correlation, token_index=token_index,
+        )
     return [
-        e("request-event", "request", 0, 200, parent=None, correlation=request_id),
+        e("root", "request", 0, 200, parent=None, correlation=request_id),
         e("queue", "queue_wait", 0, 20),
         e("batch", "batch_wait", 20, 30),
         e("prefill", "prefill", 30, 50),
@@ -79,7 +83,6 @@ def request_fixture(request_id="request-1", offset_ms=0):
         e("token-2", "token_emit", 75, 75, token_index=2),
         e("token-3", "token_emit", 100, 100, token_index=3),
     ]
-
 
 def record(events, *, clock_domain="utc_wall_clock", start_ms=0, end_ms=1000):
     return {
