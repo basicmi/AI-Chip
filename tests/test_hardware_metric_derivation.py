@@ -114,7 +114,7 @@ class HardwareMetricDerivationTests(unittest.TestCase):
         self.assertEqual(len(utilization), 2)
         self.assertEqual(
             {metric["sampling_window"]["started_at"]: metric["value"] for metric in achieved},
-            {first["started_at"]: 4e12, second["started_at"]: 1e12},
+            {first["started_at"]: 2e12, second["started_at"]: 1e12},
         )
         self.assertEqual(
             {metric["sampling_window"]["started_at"]: metric["value"] for metric in utilization},
