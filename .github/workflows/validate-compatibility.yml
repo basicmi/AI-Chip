@@ -46,6 +46,8 @@ jobs:
           python3 scripts/validate_company_profiles.py
           python3 scripts/validate_model_support.py
           python3 scripts/validate_model_catalog.py
+          python3 scripts/validate_intelligence_sources.py
+          python3 -m unittest discover -s tests -p "test_intelligence_discovery.py"
           python3 -m unittest discover -s tests -p "test_model_catalog.py"
           python3 -m unittest discover -s tests -p "test_model_catalog_discovery.py"
           python3 scripts/validate_benchmark_results.py
