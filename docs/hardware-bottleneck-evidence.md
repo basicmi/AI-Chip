@@ -325,3 +325,40 @@ The request-level decomposition report adds critical_path to each request. It is
 3. Gaps along the selected chain are unclassified. They are not automatically queue wait, CPU scheduling, GPU idle, or communication stall.
 4. A parent/child relationship, stream ID, timestamp overlap, or matching request correlation ID is not sufficient to create a dependency edge.
 5. Cross-request dependencies are rejected in this version. Shared batch dependencies must not be marked complete until a future schema explicitly models their multi-request ownership.
+
+
+## OpenTelemetry OTLP JSON import (vLLM-compatible)
+
+scripts/import_otel_traces.py converts an exported OTLP JSON document (resourceSpans[]) into the existing records[].runtime_trace shape. It is an offline file importer, not a live OTLP receiver or an automatic vLLM instrumentation patch.
+
+A typical vLLM deployment can export traces to an OpenTelemetry Collector / Jaeger-compatible endpoint. vLLM exposes --otlp-traces-endpoint and --collect-detailed-traces; detailed model/worker timing can add overhead, so enable it only for controlled measurement runs. See the [vLLM OpenTelemetry setup](https://docs.vllm.ai/en/latest/examples/observability/opentelemetry/) and [tracing configuration](https://docs.vllm.ai/en/latest/api/vllm/config/).
+
+Example launch configuration:
+
+\`\`\`bash
+vllm serve <model> \\
+  --otlp-traces-endpoint=http://otel-collector:4318/v1/traces \\
+  --collect-detailed-traces=all
+\`\`\`
+
+Export the received trace as OTLP JSON, then import and analyze it:
+
+\`\`\`bash
+python3 scripts/import_otel_traces.py \\
+  --input traces/otlp-export.json \\
+  --output traces/ai-chip-runtime-records.json \\
+  --source-url 'http://localhost:16686/trace/<trace-id>' \\
+  --service-name vllm
+
+python3 scripts/decompose_runtime_phases.py \\
+  --input traces/ai-chip-runtime-records.json \\
+  --output traces/runtime-phase-report.json
+\`\`\`
+
+Request-root selection defaults to OpenTelemetry SPAN_KIND_SERVER spans. Use --root-span-name '<regex>' when the runtime emits a different root-span kind/name. --service-name filters which service may supply request roots; descendant spans from other services in the same trace remain eligible.
+
+Span categories are assigned in this order: explicit ai_chip.runtime.category / runtime.category / vllm.runtime.category span attribute; exact span-name mapping supplied through --category-map; conservative span-name heuristic. Unrecognized spans remain other.
+
+The importer preserves span parentage only when the parent is present and fully contains the child interval. It imports token markers only from explicit span events named token_emit / gen_ai.token.emit (or tagged ai_chip.event.category=token_emit) with a positive token_index. Aggregate attributes such as gen_ai.usage.completion_tokens and gen_ai.latency.time_to_first_token are not converted into fabricated token events or phase intervals.
+
+**Limits of this first adapter:** it does not receive OTLP live, derive dependency edges, infer GPU identity from process IDs, or map hardware profiler clocks. OTLP nanosecond timestamps are normalized to UTC at microsecond precision. A trace without explicit token markers can still contribute phase-span coverage, but TTFT/TPOT remain unavailable. The importer hashes the input artifact and records the supplied HTTP(S) source URL in provenance.
