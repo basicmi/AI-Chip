@@ -50,7 +50,7 @@ class DCGMTelemetryTests(unittest.TestCase):
         rows=parse_prometheus('# HELP foo hi\n'+row("DCGM_FI_DEV_BOARD_POWER_WATTS",230)+'\n')
         self.assertEqual(len(rows),1)
         self.assertEqual(rows[0]["labels"]["UUID"],"GPU-abc")
-        with self.assertRaisesRegex(ValueError,"unsupported Prometheus"):
+        with self.assertRaisesRegex(ValueError,"invalid Prometheus numeric value"):
             parse_prometheus("invalid bogus")
 
     def test_missing_sample_excludes_series_not_interpolated(self):
