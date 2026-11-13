@@ -197,6 +197,15 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div data-results-hardware-evidence-content aria-live="polite"></div>
   </section>
 
+  <section class="benchmark-gpu-execution-panel" data-results-gpu-execution hidden aria-labelledby="benchmark-gpu-execution-title">
+    <div class="benchmark-gpu-execution-heading">
+      <p class="eyebrow">GPU ACTIVITY · KERNEL / COMMUNICATION OVERLAP</p>
+      <h2 id="benchmark-gpu-execution-title">GPU execution efficiency</h2>
+      <p>Compare SM/Tensor/DRAM activity with explicit scope and capture boundaries, then inspect request-correlated kernel and communication interval overlap. This is evidence analysis, not an automatic bottleneck verdict.</p>
+    </div>
+    <div data-results-gpu-execution-content aria-live="polite"></div>
+  </section>
+
   <div class="compat-load-state" data-results-load role="status">Loading benchmark results…</div>
   <div class="benchmark-results-table-wrap">
     <table class="benchmark-results-table">
