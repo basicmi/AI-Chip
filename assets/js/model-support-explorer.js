@@ -7,6 +7,10 @@
   const levelFilter = $("[data-model-level]");
   const publisherFilter = $("[data-model-publisher]");
   const cards = $("[data-model-cards]");
+  const catalogCards = $("[data-catalog-cards]");
+  const catalogSearch = $("[data-catalog-search]");
+  const catalogPublisher = $("[data-catalog-publisher]");
+  const catalogCoverage = $("[data-catalog-coverage]");
   const load = $("[data-model-load]");
   const labels = {
     documented_recipe: "Documented recipe",
@@ -15,7 +19,7 @@
     independently_tested: "Independently tested",
     integration_only: "Integration only"
   };
-  let database, products = new Map(), platforms = new Map(), integrations = new Map();
+  let database, catalogDb, products = new Map(), platforms = new Map(), integrations = new Map();
   const el = (tag, cls, value) => {
     const node = document.createElement(tag);
     if (cls) node.className = cls;
@@ -93,6 +97,60 @@
     card.append(details);
     return card;
   };
+
+  // The catalog is independent of the evidence-backed deployment matrix.
+  // Model card metadata must never be interpreted as accelerator verification.
+  const ageDays = checked => {
+    const at = Date.parse(checked + "T00:00:00Z");
+    return Number.isFinite(at) ? Math.floor((Date.now() - at) / 86400000) : null;
+  };
+  const catalogCard = model => {
+    const paths = database.support_paths.filter(path => path.model_id === model.id);
+    const card = el("article", "model-support-card");
+    const head = el("div", "model-support-card-head");
+    const copy = el("div", "");
+    copy.append(el("p", "compat-vendor", model.publisher + " · " + model.family));
+    copy.append(el("h3", "", model.display_name));
+    copy.append(el("p", "model-support-id", model.model_id));
+    head.append(copy);
+    head.append(el("span", "status-pill", paths.length ? paths.length + " evidence-backed path(s)" : "No verified hardware path"));
+    card.append(head);
+    card.append(el("p", "model-support-stack",
+      model.parameter_count + " · " + model.architecture + " · " + model.modality));
+    const tags = el("div", "compat-tags");
+    if (model.access !== "not_assessed") tag(tags, model.access.replaceAll("_", " "));
+    if (model.context_length_tokens) tag(tags, (model.context_length_tokens / 1024).toLocaleString() + "K context");
+    (model.capabilities || []).forEach(value => tag(tags, value.replaceAll("_", " ")));
+    card.append(tags);
+    card.append(el("p", "compat-limitations", model.notes));
+    const freshness = ageDays(model.catalog_checked_at);
+    const details = el("div", "compat-evidence-meta");
+    details.append(el("span", "", "Model metadata checked " + model.catalog_checked_at +
+      (freshness === null ? " · date unknown" : freshness > 90 ? " · REVIEW OVERDUE" : " · checked") +
+      " · " + (model.catalog_source_status === "official_model_card" ? "official model card" : "existing registry")));
+    details.append(link(model.model_url, "Model page"));
+    card.append(details);
+    return card;
+  };
+  const renderCatalog = () => {
+    const query = catalogSearch.value.trim().toLowerCase();
+    const publisher = catalogPublisher.value;
+    const coverage = catalogCoverage.value;
+    const matches = catalogDb.models.filter(model => {
+      if (publisher && model.publisher !== publisher) return false;
+      const paths = database.support_paths.filter(path => path.model_id === model.id);
+      if (coverage === "evidence" && !paths.length) return false;
+      if (coverage === "catalog_only" && paths.length) return false;
+      const haystack = [model.display_name, model.model_id, model.publisher, model.family,
+        model.architecture, model.modality, model.parameter_count, ...(model.capabilities || [])].join(" ").toLowerCase();
+      return !query || haystack.includes(query);
+    });
+    catalogCards.replaceChildren(...matches.map(catalogCard));
+    $("[data-catalog-result-count]").textContent = String(matches.length);
+    $("[data-catalog-result-summary]").textContent = matches.length + " of " +
+      catalogDb.models.length + " models · catalog inclusion does not imply hardware support";
+    $("[data-catalog-empty]").hidden = matches.length > 0;
+  };
   const render = () => {
     const query = search.value.trim().toLowerCase();
     const selectedPlatform = platformFilter.value;
@@ -117,7 +175,9 @@
       database.support_paths.length + " documented paths · no performance ranking implied";
     $("[data-model-empty]").hidden = matches.length > 0;
   };
-  const initialize = ([models, profileDb, compatibility]) => {
+  const initialize = ([models, profileDb, compatibility, catalog]) => {
+    catalogDb = catalog;
+    if (!Array.isArray(catalogDb.models)) throw new Error("Model catalog is missing models");
     database = models;
     profileDb.companies.forEach(company => company.products.forEach(product => {
       products.set(product.id, { ...product, company: company.display_name });
@@ -125,6 +185,11 @@
     compatibility.platforms.forEach(platform => platforms.set(platform.id, platform));
     compatibility.integrations.forEach(integration => integrations.set(integration.id, integration));
     const levels = Object.keys(database.support_levels);
+    [...new Set(catalogDb.models.map(model => model.publisher))].sort().forEach(publisher => {
+      const option = el("option", "", publisher);
+      option.value = publisher;
+      catalogPublisher.append(option);
+    });
     [...new Set(database.models.map(model => model.publisher))].sort().forEach(publisher => {
       const option = el("option", "", publisher);
       option.value = publisher;
@@ -149,10 +214,20 @@
     }
     versionNode.textContent = database.database_version;
     reviewedNode.textContent = database.last_reviewed;
-    $("[data-model-stat=\"models\"]").textContent = String(database.models.length);
+    $("[data-model-stat=\"models\"]").textContent = String(catalogDb.models.length);
     $("[data-model-stat=\"paths\"]").textContent = String(database.support_paths.length);
     $("[data-model-stat=\"recipes\"]").textContent = String(database.support_paths.filter(path => path.support_level === "documented_recipe").length);
     $("[data-model-stat=\"upstream\"]").textContent = String(database.support_paths.filter(path => path.support_level === "upstream_verified").length);
+    catalogSearch.addEventListener("input", renderCatalog);
+    catalogPublisher.addEventListener("change", renderCatalog);
+    catalogCoverage.addEventListener("change", renderCatalog);
+    $("[data-catalog-reset]").addEventListener("click", () => {
+      catalogSearch.value = "";
+      catalogPublisher.value = "";
+      catalogCoverage.value = "";
+      renderCatalog();
+    });
+    renderCatalog();
     search.addEventListener("input", render);
     platformFilter.addEventListener("change", render);
     levelFilter.addEventListener("change", render);
@@ -167,7 +242,7 @@
     render();
     load.hidden = true;
   };
-  Promise.all([root.dataset.source, root.dataset.productSource, root.dataset.compatSource].map(url =>
+  Promise.all([root.dataset.source, root.dataset.productSource, root.dataset.compatSource, root.dataset.catalogSource].map(url =>
     fetch(url).then(response => {
       if (!response.ok) throw new Error("Request failed: " + response.status);
       return response.json();

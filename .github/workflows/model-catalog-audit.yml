@@ -1,0 +1,25 @@
+name: Weekly model catalog source audit
+
+on:
+  schedule:
+    - cron: "15 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read-only model source audit
+        run: python3 scripts/discover_model_catalog.py --output model-catalog-discovery.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-catalog-source-audit
+          path: model-catalog-discovery.json
+          retention-days: 21
