@@ -562,6 +562,22 @@ def validate_runtime_trace(trace, where):
             value = event.get(field)
             if value is not None and (not isinstance(value, str) or not value.strip()):
                 errors.append(f"{event_where}.{field} must be a non-empty string when provided")
+        dependencies = event.get("depends_on_event_ids")
+        if "depends_on_event_ids" in event:
+            if event.get("category") == "request":
+                errors.append(f"{event_where}: request root cannot declare completion dependencies")
+            if not isinstance(dependencies, list) or not dependencies:
+                errors.append(f"{event_where}.depends_on_event_ids must be a non-empty array when provided")
+            elif any(not isinstance(item, str) or not item.strip() for item in dependencies):
+                errors.append(f"{event_where}.depends_on_event_ids must contain non-empty event IDs")
+            elif len(set(dependencies)) != len(dependencies):
+                errors.append(f"{event_where}.depends_on_event_ids must not contain duplicates")
+        dependency_complete = event.get("dependency_graph_complete")
+        if "dependency_graph_complete" in event:
+            if event.get("category") != "request":
+                errors.append(f"{event_where}.dependency_graph_complete is only valid on request roots")
+            if not isinstance(dependency_complete, bool):
+                errors.append(f"{event_where}.dependency_graph_complete must be boolean")
 
     for index, event in enumerate(events):
         if not isinstance(event, dict):
@@ -594,6 +610,83 @@ def validate_runtime_trace(trace, where):
             visited.add(current)
             next_parent = event_map[current].get("parent_event_id")
             current = next_parent if isinstance(next_parent, str) else ""
+
+    # Completion dependencies are separate from parent/child containment.
+    # A request root is a release-time boundary at started_at, not request completion.
+    def resolve_event_correlation(event_id):
+        visited = set()
+        current = event_id
+        while isinstance(current, str) and current in event_map and current not in visited:
+            visited.add(current)
+            current_event = event_map[current]
+            correlation = current_event.get("correlation_id")
+            if isinstance(correlation, str) and correlation.strip():
+                return correlation
+            current = current_event.get("parent_event_id")
+        return None
+
+    dependency_edges = {}
+    for index, event in enumerate(events):
+        if not isinstance(event, dict):
+            continue
+        event_id = event.get("event_id")
+        dependencies = event.get("depends_on_event_ids")
+        if not isinstance(event_id, str) or not isinstance(dependencies, list):
+            continue
+        dependency_edges[event_id] = []
+        for dependency_id in dependencies:
+            if not isinstance(dependency_id, str) or not dependency_id.strip():
+                continue
+            if dependency_id == event_id:
+                errors.append(f"{prefix}.events[{index}]: event cannot depend on itself")
+                continue
+            predecessor = event_map.get(dependency_id)
+            if predecessor is None:
+                errors.append(f"{prefix}.events[{index}]: unknown depends_on_event_id {dependency_id}")
+                continue
+            dependency_edges[event_id].append(dependency_id)
+            event_correlation = resolve_event_correlation(event_id)
+            predecessor_correlation = resolve_event_correlation(dependency_id)
+            if (
+                event_correlation is None or predecessor_correlation is None
+                or event_correlation != predecessor_correlation
+            ):
+                errors.append(
+                    f"{prefix}.events[{index}]: completion dependency {dependency_id} "
+                    "must resolve to the same request correlation_id"
+                )
+            if event_id in parsed_events and dependency_id in parsed_events:
+                event_start, _ = parsed_events[event_id]
+                predecessor_start, predecessor_end = parsed_events[dependency_id]
+                completion_time = (
+                    predecessor_start if predecessor.get("category") == "request"
+                    else predecessor_end
+                )
+                if completion_time > event_start:
+                    errors.append(
+                        f"{prefix}.events[{index}]: dependency {dependency_id} "
+                        "must complete before the dependent event starts"
+                    )
+
+    # Kahn's algorithm avoids recursion on large traces.
+    indegree = {event_id: 0 for event_id in event_map}
+    reverse_edges = {event_id: [] for event_id in event_map}
+    for event_id, dependencies in dependency_edges.items():
+        for dependency_id in dependencies:
+            if dependency_id in indegree:
+                indegree[event_id] += 1
+                reverse_edges[dependency_id].append(event_id)
+    ready = [event_id for event_id, degree in indegree.items() if degree == 0]
+    visited_count = 0
+    while ready:
+        current = ready.pop()
+        visited_count += 1
+        for dependent_id in reverse_edges.get(current, []):
+            indegree[dependent_id] -= 1
+            if indegree[dependent_id] == 0:
+                ready.append(dependent_id)
+    if visited_count != len(indegree):
+        errors.append(f"{prefix}: completion dependency graph contains a cycle")
 
     return errors
 

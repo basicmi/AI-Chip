@@ -183,7 +183,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <div class="benchmark-runtime-decomposition">
       <p class="eyebrow">REQUEST-LEVEL LATENCY · TOKEN MARKERS</p>
       <h3>TTFT / TPOT phase decomposition</h3>
-      <p>Requires a request root and one timestamped token_emit marker per output token.</p>
+      <p>Requires a request root and one timestamped token_emit marker per output token. Optional TTFT dependency-path analysis requires a collector-attested complete graph and explicit completion-dependency edges; missing dependencies are never inferred.</p>
       <div data-results-phase-decomposition-content aria-live="polite"></div>
     </div>
   </section>

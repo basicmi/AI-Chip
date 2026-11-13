@@ -1224,6 +1224,7 @@
     // instantaneous token_emit markers. Aggregate benchmark p99s are not
     // reverse-engineered from phase durations.
     const phaseRows = [];
+    const criticalPathRows = [];
     const phasePrimary = ["queue_wait", "batch_wait", "prefill", "decode", "host_runtime", "other"];
     const phaseSub = ["kernel", "communication", "cpu_scheduling", "communication_wait"];
     const unionMs = intervals => {
@@ -1242,6 +1243,50 @@
       const position = (ordered.length - 1) * p;
       const low = Math.floor(position), high = Math.ceil(position);
       return ordered[low] + (ordered[high] - ordered[low]) * (position - low);
+    };
+    const criticalPathForRequest = (root, token, eventMap, trace, requestStart, ttftMs) => {
+      const memo = new Map(), visiting = new Set();
+      const visit = id => {
+        if (id === root.event_id) return {events:[],eventDurationMs:0,gapMs:0,ties:0};
+        if (memo.has(id)) return memo.get(id);
+        if (visiting.has(id) || visiting.size >= 900) return null;
+        const event = eventMap.get(id), deps = event?.depends_on_event_ids;
+        if (!event || !Array.isArray(deps) || !deps.length) return null;
+        const start = toEpoch(event.started_at,trace), end = toEpoch(event.ended_at,trace);
+        if (start === null || end === null || end < start) return null;
+        visiting.add(id);
+        const candidates=[];
+        for (const depId of deps) {
+          const predecessor=eventMap.get(depId), previous=visit(depId);
+          if (!predecessor || !previous) {visiting.delete(id);return null;}
+          const predStart=toEpoch(predecessor.started_at,trace);
+          const predEnd=predecessor.category==="request" && predecessor.event_id===root.event_id
+            ? requestStart : toEpoch(predecessor.ended_at,trace);
+          if (predStart===null || predEnd===null || predEnd>start ||
+              (predecessor.category==="request" && predecessor.event_id!==root.event_id)) {
+            visiting.delete(id);return null;
+          }
+          candidates.push({predEnd,previous,depId});
+        }
+        const latest=Math.max(...candidates.map(item=>item.predEnd));
+        const controlling=candidates.filter(item=>item.predEnd===latest);
+        controlling.sort((a,b)=>b.previous.eventDurationMs-a.previous.eventDurationMs ||
+          a.previous.events.map(x=>x.event_id).join("|").localeCompare(b.previous.events.map(x=>x.event_id).join("|")) ||
+          a.depId.localeCompare(b.depId));
+        const chosen=controlling[0], duration=end-start, gap=start-chosen.predEnd;
+        const result={
+          events:chosen.previous.events.concat([{event_id:id,name:event.name,category:event.category,duration_ms:duration,gap_before_ms:gap}]),
+          eventDurationMs:chosen.previous.eventDurationMs+duration,
+          gapMs:chosen.previous.gapMs+gap,
+          ties:chosen.previous.ties+(controlling.length>1?1:0)
+        };
+        visiting.delete(id);memo.set(id,result);return result;
+      };
+      const path=visit(token.event_id);
+      if (!path) return {status:"missing_dependency_path",path:[]};
+      const reconstructed=path.eventDurationMs+path.gapMs;
+      if (Math.abs(reconstructed-ttftMs)>0.001) return {status:"path_time_mismatch",path:path.events};
+      return {status:"available",path:path.events,eventDurationMs:path.eventDurationMs,gapMs:path.gapMs,ties:path.ties};
     };
     const phaseWindowCoverage = (events, start, end, trace) => {
       const categories = Object.fromEntries([...phasePrimary, ...phaseSub].map(key => [key, []]));
@@ -1301,6 +1346,19 @@
         const indexes = tokens.map(event => event.token_index);
         const tokenTimes = tokens.map(event => toEpoch(event.started_at, trace));
         const first = tokenTimes[0], last = tokenTimes[tokenTimes.length - 1];
+        const firstTokens = requestEvents.filter(event => event.category === "token_emit" && event.token_index === 1);
+        let critical = {status:root.dependency_graph_complete===false?"incomplete_graph":"not_attested",path:[]};
+        let criticalTtft = null;
+        if (firstTokens.length===1 && requestStart!==null && toEpoch(firstTokens[0].started_at,trace)!==null) {
+          criticalTtft=toEpoch(firstTokens[0].started_at,trace)-requestStart;
+          if (criticalTtft<0 || criticalTtft>requestEnd-requestStart) critical={status:"ttft_unavailable",path:[]};
+          else if (root.dependency_graph_complete===true) critical=criticalPathForRequest(root,firstTokens[0],eventMap,trace,requestStart,criticalTtft);
+        } else if (firstTokens.length===0) critical={status:"missing_first_token",path:[]};
+        else if (firstTokens.length>1) critical={status:"ambiguous_first_token",path:[]};
+        criticalPathRows.push({
+          recordId:record.id,requestId:root.correlation_id,ttftMs:criticalTtft,status:critical.status,
+          path:critical.path||[],eventDurationMs:critical.eventDurationMs,gapMs:critical.gapMs
+        });
         if (indexes[0] === 1 && first !== null && first >= requestStart && first <= requestEnd) {
           ttftValues.push(first - requestStart);
           ttftCoverage.push(phaseWindowCoverage(requestEvents, requestStart, first, trace));
@@ -1375,8 +1433,38 @@
       phaseTableWrap.append(phaseTable);
       phaseDecompositionContent.append(phaseTableWrap);
     }
-    phaseDecompositionContent.append(make("p", "benchmark-runtime-alignment-note",
-      "TTFT = request-root start to token 1. TPOT = mean interval between consecutive token emissions. CPU scheduling and communication wait are explicit subphase events; kernel/communication may overlap prefill/decode and are not additive. Kernel event time is not GPU-active time: synchronized SM-activity counters are required to quantify GPU busy/idle. Unclassified gaps are not presumed idle. Trace sample percentiles are not substitutes for published benchmark p99s."));
+    const availableCritical=criticalPathRows.filter(row=>row.status==="available").length;
+    phaseDecompositionContent.append(make("p","benchmark-runtime-alignment-summary",
+      availableCritical+" / "+criticalPathRows.length+" request roots have a collector-attested dependency path to the first token."));
+    if (criticalPathRows.length) {
+      const table=make("table","benchmark-runtime-alignment-table");
+      table.dataset.runtimeCriticalPath="";
+      const head=document.createElement("thead"), hr=document.createElement("tr");
+      ["Record","Request","TTFT","Controlling dependency chain","Event time","Unclassified dependency gaps","Status"].forEach(label=>hr.append(make("th","",""+label)));
+      head.append(hr);table.append(head);
+      const body=document.createElement("tbody");
+      const labels={available:"Available",not_attested:"Not attested",incomplete_graph:"Collector marked incomplete",
+        missing_first_token:"Missing token 1",ambiguous_first_token:"Ambiguous token 1",ttft_unavailable:"TTFT unavailable",
+        missing_dependency_path:"No rooted dependency path",path_time_mismatch:"Path does not reconcile"};
+      criticalPathRows.slice(0,100).forEach(row=>{
+        const tr=document.createElement("tr");tr.dataset.runtimeCriticalPathRecordId=row.recordId;
+        const chain=row.status==="available"?row.path.map(item=>item.name+" ["+item.category+"]").join(" → "):"—";
+        [row.recordId,row.requestId,row.ttftMs===null?"—":numberText(row.ttftMs)+" ms",chain,
+          row.eventDurationMs===undefined?"—":numberText(row.eventDurationMs)+" ms",
+          row.gapMs===undefined?"—":numberText(row.gapMs)+" ms",labels[row.status]||row.status]
+          .forEach(value=>tr.append(make("td","",value)));
+        body.append(tr);
+      });
+      table.append(body);
+      const wrap=make("div","benchmark-runtime-alignment-table-wrap");wrap.append(table);phaseDecompositionContent.append(wrap);
+      if(criticalPathRows.length>100) phaseDecompositionContent.append(make("p","benchmark-runtime-alignment-empty",
+        "Showing the first 100 request roots; the offline decomposition report retains all requests."));
+    } else {
+      phaseDecompositionContent.append(make("p","benchmark-runtime-alignment-empty","No request roots are available for dependency-path analysis."));
+    }
+    phaseDecompositionContent.append(make("p","benchmark-runtime-alignment-note",
+      "The controlling chain is shown only when the request root sets dependency_graph_complete=true and every prerequisite path is explicitly rooted at request start. Each depends_on_event_ids edge means predecessor completion is required before the dependent event starts. The chain follows the prerequisite with the latest observed completion; event time plus unclassified dependency gaps reconciles to trace-derived TTFT. Gaps are not automatically queue wait or GPU idle. This is a collector-attested trace dependency analysis, not a hardware-causality or bottleneck verdict."));
+
 
     const categories = [
       {
