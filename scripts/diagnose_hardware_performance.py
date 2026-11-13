@@ -697,9 +697,9 @@ def diagnose_record(record):
             "The roofline model uses measured arithmetic intensity and declared peak definitions; it does not account for cache reuse, instruction mix, occupancy or kernel launch overhead unless separately measured.",
             "Per-link utilization is not a critical-path measurement; topology and collective algorithm details are still required.",
             "No numeric confidence score or fixed utilization threshold is used because the evidence contract does not calibrate either.",
-            "Missing evidence is unknown, never zero.",
             "SM inactive-cycle complement is not a whole-GPU idle estimate; kernel time is not equivalent to SM-active time.",
             "Temporal kernel/communication overlap does not prove device-side concurrency or communication hiding.",
+            "Missing evidence is unknown, never zero.",
         ],
     }
 
