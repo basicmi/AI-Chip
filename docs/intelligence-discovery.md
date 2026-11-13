@@ -1,39 +1,52 @@
 # AI Chip Intelligence Discovery
 
-This is a read-only discovery and change-detection layer. It is not a source
-of truth and does not write to formal company, product, model-support or
-benchmark registries.
+The intelligence pipeline is a read-only discovery and evidence triage layer.
+It does not write to formal company, product, model-support or benchmark
+registries.
 
-## Sources
+## Source classes
 
-data/intelligence-sources.json is the curated registry of official project
-repositories. Each active GitHub Releases source is polled over a bounded
-lookback window. The existing Hugging Face model catalog audit is reused to
-check curated model repositories and discover unreviewed publisher candidates.
+- GitHub Releases: curated official software and benchmark repositories.
+- RSS/Atom: official vendor announcements and technical blogs (NVIDIA, AMD,
+  Google and AWS in the initial expansion).
+- arXiv API: recent preprints in computer architecture, distributed systems,
+  machine learning, programming languages and related systems areas.
+- Hugging Face: the existing model catalog audit is reused for model repository
+  metadata and publisher candidates.
 
-## Change detection
+Each source is explicit in data/intelligence-sources.json. The registry
+validator enforces source-kind-specific fields and HTTPS endpoints.
 
-- Release candidates have stable IDs derived from repository and tag.
-- Content fingerprints cover tag, title, notes, publication date, URL and
-  prerelease status. A changed fingerprint becomes an updated candidate.
-- Model repository candidates use Hugging Face repository SHA and modified
-  metadata.
-- The workflow restores a state file from GitHub Actions cache to classify
-  new/updated/unchanged items across weekly runs.
-- Cache eviction or a first run can cause candidates to appear new again.
+## Evidence normalization
 
-## Review policy
+Every item receives a stable candidate ID, content fingerprint, source
+identity, publication timestamp, canonical link, excerpt, topic tags and
+review actions. New/updated/unchanged classification is persisted in the
+GitHub Actions cache. Feed items without dates or usable links are skipped.
+One unavailable feed does not suppress other sources.
 
-Every candidate is an investigation lead, not an approved fact. Release notes
-and model repository metadata do not prove product specifications, model
-quality, hardware compatibility or benchmark performance. The pipeline does
-not auto-edit production registries or auto-merge PRs.
+arXiv results are explicitly marked as preprints; an arXiv record is not
+evidence of peer review. Vendor feed content is vendor-reported, not an
+independent measurement.
 
-Future phases can add official vendor announcement feeds, standards and
-research sources, evidence extraction, confidence scoring and a PR generator
-for narrowly scoped data changes with citations.
+## Evidence-to-PR workflow
+
+The generated Evidence Review Packet is an investigation queue, not an
+automated data patch. Reviewers should:
+1. Open and verify the original source.
+2. Extract atomic claims and preserve units, scope and lifecycle status.
+3. Seek independent corroboration for performance, availability and
+   compatibility claims.
+4. Map approved claims to existing registry fields and schemas.
+5. Create a narrow data PR with source links and tests.
+
+No company/product/model-support/benchmark registry is modified automatically.
+No PR is auto-created or auto-merged by the scheduled discovery workflow.
 
 ## Run locally
 
     python3 scripts/validate_intelligence_sources.py
-    python3 scripts/run_intelligence_discovery.py --output /tmp/ai-chip-intelligence.json
+    python3 -m unittest discover -s tests -p "test_intelligence_feeds.py"
+    python3 scripts/run_intelligence_discovery.py \
+      --output /tmp/ai-chip-intelligence.json \
+      --summary-path /tmp/ai-chip-intelligence-review.md

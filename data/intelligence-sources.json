@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "registry_version": "2026.11.13-1",
+  "registry_version": "2026.11.13-2",
   "last_reviewed": "2026-11-13",
-  "policy": "Curated official project repositories. Discovery candidates are leads for human review, not proof of product capability, model compatibility or benchmark results.",
+  "policy": "Curated official project repositories, vendor feeds and research discovery queries. Discovery candidates are leads for human review, not proof of product capability, model compatibility or benchmark results.",
   "sources": [
     {
       "id": "nvidia-tensorrt-llm",
@@ -166,6 +166,115 @@
       "repo": "mlcommons/inference",
       "source_url": "https://github.com/mlcommons/inference",
       "description": "Open benchmark suite and reference implementations.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "nvidia-newsroom-ai-platforms",
+      "name": "NVIDIA Newsroom — AI Platforms / Deployment",
+      "category": "vendor-announcement",
+      "kind": "rss_atom",
+      "publisher": "NVIDIA",
+      "feed_url": "https://nvidianews.nvidia.com/cats/ai_platforms_deployment.xml",
+      "source_url": "https://nvidianews.nvidia.com/rss",
+      "description": "Official NVIDIA Newsroom feed for AI platform and deployment announcements.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "nvidia-developer-blog",
+      "name": "NVIDIA Developer Technical Blog",
+      "category": "technical-blog",
+      "kind": "rss_atom",
+      "publisher": "NVIDIA",
+      "feed_url": "https://developer.nvidia.com/blog/feed/",
+      "source_url": "https://developer.nvidia.com/blog/",
+      "description": "Official technical articles, software releases, GPU programming and deployment guidance.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "amd-press-releases",
+      "name": "AMD Investor Relations — Press Releases",
+      "category": "vendor-announcement",
+      "kind": "rss_atom",
+      "publisher": "AMD",
+      "feed_url": "https://ir.amd.com/news-events/press-releases/rss",
+      "source_url": "https://ir.amd.com/news-events/press-releases",
+      "description": "Official AMD press releases, including accelerator, server and platform announcements.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "amd-rocm-blog",
+      "name": "AMD ROCm Blog",
+      "category": "technical-blog",
+      "kind": "rss_atom",
+      "publisher": "AMD",
+      "feed_url": "https://rocm.blogs.amd.com/blog/atom.xml",
+      "source_url": "https://rocm.blogs.amd.com/",
+      "description": "Official ROCm software, kernel and GPU systems engineering articles.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "google-cloud-blog",
+      "name": "Google Cloud Blog",
+      "category": "vendor-announcement",
+      "kind": "rss_atom",
+      "publisher": "Google Cloud",
+      "feed_url": "https://cloudblog.withgoogle.com/rss/",
+      "source_url": "https://cloud.google.com/blog",
+      "description": "Official Google Cloud infrastructure, TPU and AI systems announcements.",
+      "priority": "high",
+      "active": true
+    },
+    {
+      "id": "google-deepmind-blog",
+      "name": "Google DeepMind Blog",
+      "category": "research-and-models",
+      "kind": "rss_atom",
+      "publisher": "Google DeepMind",
+      "feed_url": "https://deepmind.google/blog/rss.xml",
+      "source_url": "https://deepmind.google/blog/",
+      "description": "Official research and model-system announcements; research claims remain vendor-reported.",
+      "priority": "normal",
+      "active": true
+    },
+    {
+      "id": "google-research-blog",
+      "name": "Google Research Blog",
+      "category": "research",
+      "kind": "rss_atom",
+      "publisher": "Google Research",
+      "feed_url": "https://research.google/blog/rss/",
+      "source_url": "https://research.google/blog/",
+      "description": "Official research articles and project announcements.",
+      "priority": "normal",
+      "active": true
+    },
+    {
+      "id": "aws-machine-learning-blog",
+      "name": "AWS Machine Learning Blog",
+      "category": "vendor-technical-blog",
+      "kind": "rss_atom",
+      "publisher": "Amazon Web Services",
+      "feed_url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/",
+      "description": "Official AWS machine-learning infrastructure, accelerator and deployment articles.",
+      "priority": "normal",
+      "active": true
+    },
+    {
+      "id": "arxiv-ai-systems",
+      "name": "arXiv — AI Hardware, Systems and Inference",
+      "category": "research-preprint",
+      "kind": "arxiv_api",
+      "publisher": "arXiv",
+      "query": "(cat:cs.DC OR cat:cs.AR OR cat:cs.LG OR cat:cs.PL OR cat:eess.SY) AND (all:accelerator OR all:GPU OR all:TPU OR all:HBM OR all:inference OR all:serving OR all:compiler OR all:kernel OR all:interconnect OR all:parallelism OR all:LLM)",
+      "max_results": 100,
+      "source_url": "https://arxiv.org/",
+      "description": "Searches recent preprints in distributed systems, architecture, machine learning, programming languages and signal systems for AI accelerator and inference-system work.",
       "priority": "high",
       "active": true
     }
