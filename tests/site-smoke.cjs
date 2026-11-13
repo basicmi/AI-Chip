@@ -524,8 +524,13 @@ const { chromium } = require("playwright");
           sampling: { started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:01:00Z" },
           provenance: { source_type: "runtime_trace_export", source_url: "https://example.com/runtime-trace/fixture-0", collected_at: "2026-11-12T10:02:01Z" },
           events: [
-            { event_id: "prefill-1", name: "prefill batch 1", category: "prefill", started_at: "2026-11-12T10:00:01Z", ended_at: "2026-11-12T10:00:08Z", entity_id: "gpu0" },
-            { event_id: "kernel-1", name: "attention kernel", category: "kernel", started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z", entity_id: "gpu0", parent_event_id: "prefill-1", correlation_id: "request-17", stream_id: "stream-0" }
+            { event_id: "request-root-17", name: "request 17", category: "request", started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:00:20Z", correlation_id: "request-17" },
+            { event_id: "queue-17", name: "queue wait", category: "queue_wait", started_at: "2026-11-12T10:00:00Z", ended_at: "2026-11-12T10:00:01Z", parent_event_id: "request-root-17" },
+            { event_id: "prefill-1", name: "prefill batch 1", category: "prefill", started_at: "2026-11-12T10:00:01Z", ended_at: "2026-11-12T10:00:08Z", entity_id: "gpu0", parent_event_id: "request-root-17" },
+            { event_id: "kernel-1", name: "attention kernel", category: "kernel", started_at: "2026-11-12T10:00:02Z", ended_at: "2026-11-12T10:00:04Z", entity_id: "gpu0", parent_event_id: "prefill-1", stream_id: "stream-0" },
+            { event_id: "decode-17", name: "decode phase", category: "decode", started_at: "2026-11-12T10:00:08Z", ended_at: "2026-11-12T10:00:12Z", parent_event_id: "request-root-17" },
+            { event_id: "token-17-1", name: "first token", category: "token_emit", started_at: "2026-11-12T10:00:08Z", ended_at: "2026-11-12T10:00:08Z", token_index: 1, parent_event_id: "request-root-17" },
+            { event_id: "token-17-2", name: "second token", category: "token_emit", started_at: "2026-11-12T10:00:12Z", ended_at: "2026-11-12T10:00:12Z", token_index: 2, parent_event_id: "request-root-17" }
           ]
         }
       } : {}),
@@ -684,6 +689,18 @@ const { chromium } = require("playwright");
       await page.locator("[data-runtime-phase-join]").count() !== 1 ||
       !(await page.locator("[data-runtime-phase-join]").textContent()).includes("kernel")) {
     throw new Error("Runtime phase alignment did not join the metric window to the exact nested kernel event");
+  }
+  const phaseDecompositionText = await page.locator("[data-results-phase-decomposition-content]").textContent();
+  if (!phaseDecompositionText.includes("1 request roots") ||
+      !phaseDecompositionText.includes("1 trace-derived TTFT samples") ||
+      !phaseDecompositionText.includes("1 trace-derived TPOT samples")) {
+    throw new Error("Request-level TTFT/TPOT decomposition did not report the explicit token-marker sample");
+  }
+  const phaseRow = page.locator("[data-runtime-phase-decomposition] tbody tr");
+  if (await phaseRow.count() !== 1 ||
+      !(await phaseRow.textContent()).includes("8,000 / 8,000 ms") ||
+      !(await phaseRow.textContent()).includes("4,000 / 4,000 ms")) {
+    throw new Error("Trace-derived TTFT/TPOT values do not match the request and token marker timestamps: " + await phaseRow.textContent());
   }
   const evidenceRecord = page.locator('[data-hardware-evidence-record-id="fixture-0"]');
   await page.locator(".benchmark-hardware-evidence-details summary").click();

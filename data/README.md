@@ -85,6 +85,7 @@ The link checker does not edit source data or promote references to evidence. HT
 - `scripts/diagnose_hardware_performance.py`: generates evidence-constrained roofline, per-link communication, serving-runtime and candidate-attribution reports; it never emits an automatic bottleneck verdict.
 - `scripts/correlate_cross_layer_performance.py`: matches strict InferenceX workload cohorts and compares hardware/software/serving execution groups with explicit non-causal and temporal-alignment limits.
 - `scripts/align_runtime_hardware_traces.py`: aligns UTC or explicitly mapped monotonic runtime trace events with hardware-counter sampling windows; phase joins require metric-specific windows, a containing leaf event and compatible entity identity.
+- `scripts/decompose_runtime_phases.py`: derives request-level TTFT/TPOT from explicit request and token-emission markers, and reports non-additive phase interval coverage, overlap and unclassified gaps.
 - `schemas/benchmark-results.schema.json`: also defines optional `runtime_trace` and per-metric `sampling_window` evidence contracts.
 - `/results/`: searchable result explorer with source, vendor, model, scenario, division, availability and system-type filters, plus strict-cohort hardware evidence coverage.
 

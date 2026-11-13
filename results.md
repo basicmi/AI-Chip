@@ -180,6 +180,12 @@ description: Source-linked public AI accelerator benchmark submissions and infer
       <p>Check whether hardware-counter sampling windows can be joined to queue, prefill, decode, kernel or communication events. Bundle-level overlap is not phase attribution.</p>
     </div>
     <div data-results-runtime-alignment-content aria-live="polite"></div>
+    <div class="benchmark-runtime-decomposition">
+      <p class="eyebrow">REQUEST-LEVEL LATENCY · TOKEN MARKERS</p>
+      <h3>TTFT / TPOT phase decomposition</h3>
+      <p>Requires a request root and one timestamped token_emit marker per output token.</p>
+      <div data-results-phase-decomposition-content aria-live="polite"></div>
+    </div>
   </section>
 
   <section class="benchmark-hardware-evidence-panel" data-results-hardware-evidence hidden aria-labelledby="benchmark-hardware-evidence-title">

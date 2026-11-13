@@ -39,7 +39,7 @@ A benchmark record may also carry an optional `runtime_trace` object. Its schema
 | provenance | Source type, HTTP(S) artifact URL, collection time and optional SHA-256 |
 | events[] | Event ID/name/category, start/end in the declared clock domain, optional entity/correlation/parent/stream IDs |
 
-Event categories are `queue_wait`, `batch_wait`, `prefill`, `decode`, `kernel`, `communication`, `host_runtime` and `other`. Events must lie within the trace capture window. Optional parent references must exist, be acyclic, and contain the child event's interval. This allows a trace to represent request → phase → kernel nesting without flattening away its hierarchy.
+Event categories are `request`, `queue_wait`, `batch_wait`, `prefill`, `decode`, `kernel`, `communication`, `host_runtime`, `cpu_scheduling`, `communication_wait`, `token_emit` and `other`. Duration events must lie within the trace capture window and have positive intervals. `token_emit` is the exception: it is an instantaneous point marker with equal start/end timestamps and a positive one-based `token_index`. A `request` event is a root interval with a required `correlation_id`; child events may inherit that ID through their parent chain. Optional parent references must exist, be acyclic, and contain the child event's interval. This allows a trace to represent request → phase → kernel nesting without flattening away its hierarchy.
 
 For `utc_wall_clock`, timestamps are timezone-aware ISO date-times. For `monotonic_ns`, timestamps are non-negative integer nanoseconds and `clock_mapping` must provide 2–64 anchors with strictly increasing monotonic and UTC values. Mapping is piecewise-linear only between supplied anchors; extrapolation is rejected. `max_error_ns` is carried into the report and used as a guard band: an event must still contain the complete metric window after shrinking both event boundaries by the declared mapping uncertainty. The mapping is explicit input evidence, not inferred by the tool.
 
@@ -63,6 +63,51 @@ A metric is eligible for a phase join only when all of the following hold:
 The report includes capture-window overlap, per-category interval coverage, candidate event matches, the selected leaf event (when unambiguous), clock-mapping uncertainty, and explicit reasons for rejected joins. Interval unions are used for category coverage so overlapping events do not double-count elapsed time. A timestamp overlap is not proof that the counter caused a latency or throughput change. The tool does not interpolate counters, infer idle periods, calculate phase loss scores, or produce a bottleneck verdict.
 
 Cross-host clock skew correction, calibration of GPU-to-host clock drift beyond supplied anchors, and multi-device synchronization remain the responsibility of the trace collector. A single host clock mapping must not be reused across unrelated devices or hosts without evidence.
+
+## Request-level TTFT/TPOT and phase decomposition
+
+Runtime traces can optionally include two marker categories in addition to the existing interval events:
+
+- \`request\`: one root interval per request, with a required \`correlation_id\`. Its start/end define the request envelope. Child events may inherit this correlation ID through their parent chain.
+- \`token_emit\`: an instantaneous marker whose \`started_at\` and \`ended_at\` are identical, with a positive, one-based \`token_index\`. Token markers are not duration events.
+
+Example request event sequence (timestamps abbreviated):
+
+\`\`\`json
+{
+  "event_id": "request-17",
+  "name": "request 17",
+  "category": "request",
+  "correlation_id": "request-17",
+  "started_at": "2026-11-13T10:00:00Z",
+  "ended_at": "2026-11-13T10:00:01Z"
+}
+\`\`\`
+
+The request's child events should carry the same \`correlation_id\` or inherit it through \`parent_event_id\`. Emit one \`token_emit\` marker per output token, with consecutive indices starting at 1. This allows the tool to measure:
+
+- **Trace-derived TTFT** = token 1 emission time − request root start time.
+- **Trace-derived TPOT** = (last token emission time − first token emission time) / (number of emitted tokens − 1).
+
+A missing first token, a gap or duplicate in token indices, non-increasing token timestamps, or fewer than two tokens makes the affected statistic unavailable. The tool does not infer missing token markers or output token counts.
+
+Run the offline report from the repository root:
+
+\`\`\`bash
+python3 scripts/decompose_runtime_phases.py \\
+  --input data/benchmark-results.json \\
+  --output runtime-phase-decomposition.json
+\`\`\`
+
+For each request, the report computes interval-union coverage for queue wait, batch wait, prefill, decode, host runtime and other primary phases. Kernel and communication are reported separately as subphases. TTFT-window and TPOT-window phase coverage are calculated independently. It also reports primary-phase overlap and unclassified wall-clock gaps.
+
+**Interpretation constraints:**
+
+1. Phase durations are wall-clock interval unions, not summed event durations. Nested and concurrent events can overlap.
+2. Kernel and communication subphases may overlap prefill/decode and are not added to primary phase totals.
+3. An unclassified gap means no primary phase event covers that interval; it is not proof that the GPU was idle.
+4. Trace-derived request-sample percentiles are not interchangeable with published benchmark p99 metrics unless the sampling population and workload definition match.
+5. No critical path or causal attribution is inferred from timestamps alone. A critical-path analysis needs explicit dependency and synchronization evidence.
 
 ## Canonical metric vocabulary
 
