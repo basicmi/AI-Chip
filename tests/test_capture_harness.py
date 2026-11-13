@@ -1,4 +1,4 @@
-import json, sqlite3, sys, tempfile, unittest
+import hashlib, json, sqlite3, sys, tempfile, unittest
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -82,6 +82,40 @@ class CaptureHarnessTests(unittest.TestCase):
         self.assertEqual(report["summary"]["nsys_utc_trace_records"], 0)
         self.assertNotIn("nsight-dcgm-alignment.json", outputs)
         self.assertTrue(any("clock anchors" in item for item in report["warnings"]))
+
+    def test_explicit_gpu_identity_manifest_maps_nsys_to_dcgm_uuid(self):
+        raw_dcgm = self.dcgm.read_text().replace("GPU-abc", "GPU-abcdef12")
+        self.dcgm.write_text(raw_dcgm)
+        manifest = {
+            "schema_version": "1.0",
+            "host_id": "node-0",
+            "identity_source": {
+                "method": "nvidia-smi query: index,uuid,pci.bus_id",
+                "artifact_sha256": "c" * 64,
+                "collected_at": "2026-11-13T00:00:00Z",
+            },
+            "nsys_artifact_sha256": hashlib.sha256(self.nsys.read_bytes()).hexdigest(),
+            "dcgm_artifact_sha256": hashlib.sha256(self.dcgm.read_bytes()).hexdigest(),
+            "devices": [{
+                "nsys_device_id": 0, "cuda_device_id": 0,
+                "dcgm_entity_id": "GPU-abcdef12", "pci_bus_id": "00000000:41:00.0",
+            }],
+        }
+        outputs, report = build_capture_bundle(
+            run_id="trial-identity", nsys_sqlite=self.nsys,
+            nsys_source_url="https://profiler.example/session.sqlite",
+            clock_anchors=self.anchors, dcgm_capture=self.dcgm,
+            dcgm_source_url="https://artifacts.example/dcgm.json",
+            gpu_identity_map=manifest,
+        )
+        identity = outputs["gpu-identity-reconciliation.json"]
+        self.assertEqual(identity["mapped_device_count"], 1)
+        self.assertEqual(report["summary"]["gpu_identity_mapped_devices"], 1)
+        pair = outputs["nsight-dcgm-alignment.json"]["pairs"][0]
+        self.assertEqual(pair["device_identity"], "GPU-abcdef12")
+        self.assertEqual(pair["pairing_basis"], "operator_attested_gpu_identity_mapping")
+        self.assertTrue(outputs["nsight-dcgm-alignment.json"]["identity_reconciled"])
+        self.assertEqual(outputs["nsight-profiler.json"]["events"][0]["event"]["entity_id"], "gpu0")
 
     def test_alignment_pair_limit_fails_closed(self):
         payload = json.loads(self.otel.read_text())

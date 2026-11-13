@@ -12,6 +12,7 @@ from import_dcgm_telemetry import import_dcgm
 from import_nsys_sqlite import import_nsys
 from import_otel_traces import import_otlp_json
 from process_otel_captures import assemble_captures
+from reconcile_gpu_identities import reconcile_gpu_identities
 
 def utc_now():
     return datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
@@ -34,29 +35,37 @@ def input_manifest(path, source_url, source_format):
             "source_url": http_url(source_url, source_format + " source URL"),
             "size_bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
 
-def pair_alignment(run_id, layer, traces, devices, max_pairs):
-    count = len(traces) * len(devices)
-    if count > max_pairs:
-        raise ValueError(f"{layer} x DCGM alignment would create {count} pairs (limit {max_pairs})")
-    pairs = []
+def pair_alignment(run_id, layer, traces, devices, max_pairs, identity_reconciled=False):
+    candidate_count = len(traces) * len(devices)
+    if candidate_count > max_pairs:
+        raise ValueError(f"{layer} x DCGM alignment would create {candidate_count} candidate pairs (limit {max_pairs})")
+    pairs, skipped_identity_pairs = [], 0
     for trace_record in traces:
         for device_record in devices:
+            canonical_id = device_record.get("canonical_device_id")
+            if identity_reconciled and canonical_id not in trace_record.get("canonical_device_ids", []):
+                skipped_identity_pairs += 1
+                continue
             pair_id = f"{run_id}:{layer}:{trace_record['id']}:{device_record['id']}"
             result = align_record({"id": pair_id, "runtime_trace": trace_record["runtime_trace"],
                                    "hardware_evidence": device_record["hardware_evidence"]})
             pairs.append({"pair_id": pair_id, "trace_record_id": trace_record["id"],
                           "device_record_id": device_record["id"],
-                          "device_identity": device_record.get("device_identity"),
-                          "pairing_basis": "co-supplied_in_one_capture_bundle_only",
+                          "device_identity": canonical_id or device_record.get("device_identity"),
+                          "pairing_basis": "operator_attested_gpu_identity_mapping" if identity_reconciled else "co-supplied_in_one_capture_bundle_only",
                           "alignment": result})
     return {
         "schema_version": "1.0", "generated_by": "scripts/run_capture_harness.py",
-        "run_id": run_id, "comparison": layer + "_versus_dcgm", "pair_count": len(pairs),
+        "run_id": run_id, "comparison": layer + "_versus_dcgm",
+        "candidate_pair_count": candidate_count, "pair_count": len(pairs),
+        "skipped_unmatched_identity_pair_count": skipped_identity_pairs,
+        "identity_reconciled": identity_reconciled,
         "records_with_overlapping_capture_windows": sum(p["alignment"]["status"] == "overlapping_capture_windows" for p in pairs),
         "eligible_metric_phase_join_count": sum(p["alignment"]["eligible_metric_phase_join_count"] for p in pairs),
         "pairs": pairs,
         "limitations": [
             "A shared run_id is an operator grouping, not proof of host, process, GPU or request identity.",
+            "When enabled, device matching uses the operator-attested identity manifest bound to exact Nsight and DCGM artifact hashes.",
             "Capture-window overlap is descriptive and does not assign a metric to a request or kernel.",
             "DCGM observations have no metric-specific sample window; phase-level metric joins are ineligible.",
             "No counter interpolation, causal attribution, critical path or bottleneck verdict is generated.",
@@ -67,6 +76,7 @@ def build_capture_bundle(*, run_id, otel_json=None, otel_capture_dir=None, otel_
                          service_name=None, root_span_name=None, category_map=None,
                          nsys_sqlite=None, nsys_source_url=None, clock_anchors=None,
                          dcgm_capture=None, dcgm_source_url=None, device_model=None,
+                         gpu_identity_map=None, gpu_identity_map_sha256=None,
                          max_alignment_pairs=500):
     if not isinstance(run_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,95}", run_id):
         raise ValueError("run_id must be 1..96 safe ASCII letters, digits, dot, underscore or hyphen")
@@ -126,17 +136,35 @@ def build_capture_bundle(*, run_id, otel_json=None, otel_capture_dir=None, otel_
         dcgm_records = dcgm_result["records"]
         outputs["dcgm-hardware-evidence.json"] = dcgm_result
         layers.append("nvidia_dcgm")
+    identity_reconciled = False
+    if gpu_identity_map is not None:
+        if nsys_result is None or dcgm_result is None:
+            raise ValueError("--gpu-identity-map requires both Nsight SQLite and DCGM capture inputs")
+        nsys_records, dcgm_records, identity_report = reconcile_gpu_identities(
+            nsys_result, dcgm_result, gpu_identity_map)
+        if gpu_identity_map_sha256:
+            identity_report["manifest_sha256"] = gpu_identity_map_sha256
+        outputs["gpu-identity-reconciliation.json"] = identity_report
+        inputs.append({"artifact": "gpu-identity-map.json",
+                       "source_format": "operator_attested_gpu_identity_manifest",
+                       "sha256": gpu_identity_map_sha256 or hashlib.sha256(
+                           json.dumps(gpu_identity_map, sort_keys=True, separators=(",", ":")).encode("utf-8")
+                       ).hexdigest()})
+        identity_reconciled = True
     if otel_records and dcgm_records:
         outputs["runtime-dcgm-alignment.json"] = pair_alignment(
             run_id, "opentelemetry_runtime", otel_records, dcgm_records, max_alignment_pairs)
     if nsys_records and dcgm_records:
         outputs["nsight-dcgm-alignment.json"] = pair_alignment(
-            run_id, "nsight_systems", nsys_records, dcgm_records, max_alignment_pairs)
+            run_id, "nsight_systems", nsys_records, dcgm_records, max_alignment_pairs,
+            identity_reconciled=identity_reconciled)
     if len(layers) < 2:
         warnings.append("Only one telemetry layer is present; this is a single-layer validation, not cross-layer analysis.")
     if dcgm_records:
         warnings.extend(["DCGM DRAM activity is not HBM bandwidth.",
                          "DCGM scrape receipt timestamps are not exact GPU sample boundaries or time-weighted averages."])
+    if nsys_result and dcgm_result and not identity_reconciled:
+        warnings.append("Nsight gpuN indices are session-local; per-GPU Nsight/DCGM identity matching is disabled without an explicit artifact-bound GPU identity manifest.")
     warnings.append("Nsight CUPTI correlation IDs are candidate launch associations, not request/kernel completion dependencies.")
     report = {
         "schema_version": "1.0", "generated_by": "scripts/run_capture_harness.py",
@@ -147,6 +175,7 @@ def build_capture_bundle(*, run_id, otel_json=None, otel_capture_dir=None, otel_
             "otel_request_records": len(otel_records),
             "nsys_events": len(nsys_result["events"]) if nsys_result else 0,
             "nsys_utc_trace_records": len(nsys_records), "dcgm_gpu_records": len(dcgm_records),
+            "gpu_identity_mapped_devices": outputs.get("gpu-identity-reconciliation.json", {}).get("mapped_device_count", 0),
             "runtime_dcgm_pairs": outputs.get("runtime-dcgm-alignment.json", {}).get("pair_count", 0),
             "nsys_dcgm_pairs": outputs.get("nsight-dcgm-alignment.json", {}).get("pair_count", 0),
         },
@@ -156,7 +185,7 @@ def build_capture_bundle(*, run_id, otel_json=None, otel_capture_dir=None, otel_
             "A user-assigned run_id does not prove that collectors observed the same host or process.",
             "Nsight timestamps are translated to UTC only with independently verified, in-range clock anchors.",
             "No Nsight kernel is assigned to an OTel request without explicit validated cross-collector correlation evidence.",
-            "GPU UUIDs are not inferred from local Nsight gpuN indices or OTel spans.",
+            "GPU UUIDs are not inferred from local Nsight gpuN indices or OTel spans; an optional explicit inventory manifest is required.",
             "Temporal overlap is not causal attribution; no bottleneck verdict is emitted.",
         ],
     }
@@ -220,6 +249,7 @@ def main():
     p.add_argument("--dcgm-capture", type=Path)
     p.add_argument("--dcgm-source-url")
     p.add_argument("--device-model")
+    p.add_argument("--gpu-identity-map", type=Path, help="Operator-attested GPU UUID / PCI / Nsight index mapping JSON")
     p.add_argument("--max-alignment-pairs", type=int, default=500)
     p.add_argument("--output-dir", type=Path, required=True)
     p.add_argument("--overwrite", action="store_true")
@@ -227,10 +257,15 @@ def main():
     try:
         category_map = json.loads(regular_file(args.category_map, "category map").read_text(encoding="utf-8")) if args.category_map else None
         anchors = json.loads(regular_file(args.clock_anchors, "clock anchors").read_text(encoding="utf-8")) if args.clock_anchors else None
+        identity_map_path = regular_file(args.gpu_identity_map, "GPU identity map") if args.gpu_identity_map else None
+        identity_map_raw = identity_map_path.read_bytes() if identity_map_path else None
+        identity_map = json.loads(identity_map_raw.decode("utf-8")) if identity_map_raw else None
         if category_map is not None and not isinstance(category_map, dict):
             raise ValueError("category map must be a JSON object")
         if anchors is not None and not isinstance(anchors, dict):
             raise ValueError("clock anchors must be a JSON object")
+        if identity_map is not None and not isinstance(identity_map, dict):
+            raise ValueError("GPU identity map must be a JSON object")
         if args.otel_capture_dir and args.output_dir.resolve() == args.otel_capture_dir.resolve():
             raise ValueError("output directory cannot be the OTLP capture directory")
         outputs, report = build_capture_bundle(
@@ -240,6 +275,8 @@ def main():
             nsys_sqlite=args.nsys_sqlite, nsys_source_url=args.nsys_source_url,
             clock_anchors=anchors, dcgm_capture=args.dcgm_capture,
             dcgm_source_url=args.dcgm_source_url, device_model=args.device_model,
+            gpu_identity_map=identity_map,
+            gpu_identity_map_sha256=hashlib.sha256(identity_map_raw).hexdigest() if identity_map_raw else None,
             max_alignment_pairs=args.max_alignment_pairs)
         write_bundle(args.output_dir, outputs, report, overwrite=args.overwrite)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError, FileExistsError) as error:
