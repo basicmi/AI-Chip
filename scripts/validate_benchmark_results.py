@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import sys
+from datetime import timedelta
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlparse
@@ -339,8 +340,45 @@ RUNTIME_TRACE_CATEGORIES = {
 }
 
 
+def _parse_runtime_trace_timestamp(value, clock_domain, clock_mapping):
+    """Convert one trace timestamp to an aware UTC datetime without extrapolation."""
+    if clock_domain == "utc_wall_clock":
+        parsed = _parse_iso_datetime(value)
+        if parsed is None or parsed.utcoffset() is None:
+            return None
+        return parsed
+    if clock_domain != "monotonic_ns" or isinstance(value, bool) or not isinstance(value, int):
+        return None
+    anchors = clock_mapping.get("anchors") if isinstance(clock_mapping, dict) else None
+    if not isinstance(anchors, list) or len(anchors) < 2:
+        return None
+    parsed_anchors = []
+    for anchor in anchors:
+        if not isinstance(anchor, dict):
+            return None
+        monotonic_ns = anchor.get("monotonic_ns")
+        utc_at = _parse_iso_datetime(anchor.get("utc_at"))
+        if (
+            isinstance(monotonic_ns, bool) or not isinstance(monotonic_ns, int)
+            or monotonic_ns < 0 or utc_at is None or utc_at.utcoffset() is None
+        ):
+            return None
+        parsed_anchors.append((monotonic_ns, utc_at))
+    if value < parsed_anchors[0][0] or value > parsed_anchors[-1][0]:
+        return None
+    for (left_ns, left_utc), (right_ns, right_utc) in zip(parsed_anchors, parsed_anchors[1:]):
+        if left_ns <= value <= right_ns:
+            if right_ns <= left_ns or right_utc <= left_utc:
+                return None
+            ratio = (value - left_ns) / (right_ns - left_ns)
+            return left_utc + (right_utc - left_utc) * ratio
+    if value == parsed_anchors[-1][0]:
+        return parsed_anchors[-1][1]
+    return None
+
+
 def validate_runtime_trace(trace, where):
-    """Validate an optional UTC wall-clock runtime trace and its event hierarchy."""
+    """Validate a runtime trace and explicitly map monotonic timestamps when supplied."""
     errors = []
     if trace is None:
         return errors
@@ -362,25 +400,82 @@ def validate_runtime_trace(trace, where):
         if version is not None and not isinstance(version, str):
             errors.append(f"{prefix}.collector.version must be a string or null")
 
-    if trace.get("clock_domain") != "utc_wall_clock":
-        errors.append(f"{prefix}.clock_domain must be utc_wall_clock; monotonic clocks need an explicit mapping first")
+    clock_domain = trace.get("clock_domain")
+    if clock_domain not in {"utc_wall_clock", "monotonic_ns"}:
+        errors.append(f"{prefix}.clock_domain must be utc_wall_clock or monotonic_ns")
+
+    clock_mapping = trace.get("clock_mapping")
+    mapping_valid = clock_domain == "utc_wall_clock"
+    if clock_domain == "utc_wall_clock":
+        if clock_mapping is not None:
+            errors.append(f"{prefix}.clock_mapping must be omitted for utc_wall_clock traces")
+    elif clock_domain == "monotonic_ns":
+        mapping_valid = True
+        if not isinstance(clock_mapping, dict):
+            errors.append(f"{prefix}.clock_mapping is required for monotonic_ns traces")
+            mapping_valid = False
+        else:
+            if clock_mapping.get("method") != "piecewise_linear":
+                errors.append(f"{prefix}.clock_mapping.method must be piecewise_linear")
+                mapping_valid = False
+            anchors = clock_mapping.get("anchors")
+            if not isinstance(anchors, list) or len(anchors) < 2 or len(anchors) > 64:
+                errors.append(f"{prefix}.clock_mapping.anchors must contain 2 to 64 clock anchors")
+                mapping_valid = False
+            else:
+                previous_ns = None
+                previous_utc = None
+                for index, anchor in enumerate(anchors):
+                    anchor_where = f"{prefix}.clock_mapping.anchors[{index}]"
+                    if not isinstance(anchor, dict):
+                        errors.append(f"{anchor_where}: must be an object")
+                        mapping_valid = False
+                        continue
+                    monotonic_ns = anchor.get("monotonic_ns")
+                    utc_at = _parse_iso_datetime(anchor.get("utc_at"))
+                    if isinstance(monotonic_ns, bool) or not isinstance(monotonic_ns, int) or monotonic_ns < 0:
+                        errors.append(f"{anchor_where}.monotonic_ns must be a non-negative integer")
+                        mapping_valid = False
+                    if utc_at is None or utc_at.utcoffset() is None:
+                        errors.append(f"{anchor_where}.utc_at must be a timezone-aware ISO date-time")
+                        mapping_valid = False
+                    if (
+                        isinstance(monotonic_ns, int) and not isinstance(monotonic_ns, bool)
+                        and utc_at is not None and utc_at.utcoffset() is not None
+                    ):
+                        if previous_ns is not None and monotonic_ns <= previous_ns:
+                            errors.append(f"{anchor_where}: monotonic_ns anchors must be strictly increasing")
+                            mapping_valid = False
+                        if previous_utc is not None and utc_at <= previous_utc:
+                            errors.append(f"{anchor_where}: UTC anchors must be strictly increasing")
+                            mapping_valid = False
+                        previous_ns, previous_utc = monotonic_ns, utc_at
+            max_error = clock_mapping.get("max_error_ns")
+            if (
+                isinstance(max_error, bool) or not isinstance(max_error, (int, float))
+                or not math.isfinite(max_error) or max_error < 0
+            ):
+                errors.append(f"{prefix}.clock_mapping.max_error_ns must be a non-negative finite number")
+                mapping_valid = False
 
     sampling = trace.get("sampling")
     trace_start = trace_end = None
     if not isinstance(sampling, dict):
         errors.append(f"{prefix}.sampling must be an object")
     else:
-        parsed_start = _parse_iso_datetime(sampling.get("started_at"))
-        parsed_end = _parse_iso_datetime(sampling.get("ended_at"))
-        if parsed_start is None or parsed_end is None:
-            errors.append(f"{prefix}.sampling timestamps must be ISO date-times")
-        elif (
-            parsed_start.utcoffset() is None or parsed_end.utcoffset() is None
-            or parsed_end <= parsed_start
-        ):
-            errors.append(f"{prefix}.sampling window must be positive and timezone-aware")
-        else:
-            trace_start, trace_end = parsed_start, parsed_end
+        if mapping_valid:
+            trace_start = _parse_runtime_trace_timestamp(
+                sampling.get("started_at"), clock_domain, clock_mapping
+            )
+            trace_end = _parse_runtime_trace_timestamp(
+                sampling.get("ended_at"), clock_domain, clock_mapping
+            )
+        if trace_start is None or trace_end is None:
+            errors.append(
+                f"{prefix}.sampling timestamps must match the clock domain and, for monotonic_ns, lie within clock anchors"
+            )
+        elif trace_end <= trace_start:
+            errors.append(f"{prefix}.sampling window must be positive")
 
     provenance = trace.get("provenance")
     if not isinstance(provenance, dict):
@@ -428,12 +523,20 @@ def validate_runtime_trace(trace, where):
             errors.append(f"{event_where}.name must be non-empty")
         if event.get("category") not in RUNTIME_TRACE_CATEGORIES:
             errors.append(f"{event_where}.category is invalid")
-        start = _parse_iso_datetime(event.get("started_at"))
-        end = _parse_iso_datetime(event.get("ended_at"))
+        start = end = None
+        if mapping_valid:
+            start = _parse_runtime_trace_timestamp(
+                event.get("started_at"), clock_domain, clock_mapping
+            )
+            end = _parse_runtime_trace_timestamp(
+                event.get("ended_at"), clock_domain, clock_mapping
+            )
         if start is None or end is None:
-            errors.append(f"{event_where}: event timestamps must be ISO date-times")
-        elif start.utcoffset() is None or end.utcoffset() is None or end <= start:
-            errors.append(f"{event_where}: event interval must be positive and timezone-aware")
+            errors.append(
+                f"{event_where}: event timestamps must match the clock domain and lie within clock anchors"
+            )
+        elif end <= start:
+            errors.append(f"{event_where}: event interval must be positive")
         else:
             if isinstance(event_id, str) and event_id.strip():
                 parsed_events[event_id] = (start, end)
