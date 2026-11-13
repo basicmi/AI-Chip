@@ -94,11 +94,13 @@ def validate_catalog(catalog, metric_units=None):
                 errors.append(f"{where}: ratio_to_percent requires ratio -> %")
             elif conversion == "mhz_to_hz" and (source_unit != "MHz" or canonical_unit != "Hz"):
                 errors.append(f"{where}: mhz_to_hz requires MHz -> Hz")
-            elif not isinstance(conversion, str) or conversion not in {"identity", "ratio_to_percent", "mhz_to_hz"}:
+            elif conversion == "mib_to_bytes" and (source_unit != "MiB" or canonical_unit != "byte"):
+                errors.append(f"{where}: mib_to_bytes requires MiB -> byte")
+            elif not isinstance(conversion, str) or conversion not in {"identity", "ratio_to_percent", "mhz_to_hz", "mib_to_bytes"}:
                 errors.append(f"{where}: invalid conversion for mapped metric")
         if status == "direct" and conversion != "identity":
             errors.append(f"{where}: direct mapping must use identity conversion")
-        if status == "unit_converted" and conversion not in {"ratio_to_percent", "mhz_to_hz"}:
+        if status == "unit_converted" and conversion not in {"ratio_to_percent", "mhz_to_hz", "mib_to_bytes"}:
             errors.append(f"{where}: unit_converted mapping must declare a supported conversion")
         if status == "proxy" and mapping.get("mapping_quality") != "proxy":
             errors.append(f"{where}: proxy status must retain proxy mapping_quality")
