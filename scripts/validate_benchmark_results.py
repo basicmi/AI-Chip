@@ -124,6 +124,7 @@ def validate_hardware_evidence(row, where):
             if system_scope.get(field) is not None and not isinstance(system_scope[field], str):
                 errors.append(f"{where}: hardware_evidence.system_scope.{field} must be a string")
 
+    sampling_start = sampling_end = None
     sampling = evidence.get("sampling")
     if not isinstance(sampling, dict):
         errors.append(f"{where}: hardware_evidence.sampling must be an object")
