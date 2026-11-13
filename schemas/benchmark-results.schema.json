@@ -1201,12 +1201,10 @@
           ]
         },
         "started_at": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/$defs/runtimeTraceTimestamp"
         },
         "ended_at": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/$defs/runtimeTraceTimestamp"
         },
         "entity_id": {
           "type": "string",
@@ -1269,10 +1267,13 @@
           }
         },
         "clock_domain": {
-          "const": "utc_wall_clock"
+          "enum": [
+            "utc_wall_clock",
+            "monotonic_ns"
+          ]
         },
         "sampling": {
-          "$ref": "#/$defs/timeWindow"
+          "$ref": "#/$defs/runtimeTraceWindow"
         },
         "provenance": {
           "type": "object",
@@ -1314,6 +1315,94 @@
         },
         "notes": {
           "type": "string"
+        },
+        "clock_mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "anchors",
+            "max_error_ns"
+          ],
+          "properties": {
+            "method": {
+              "const": "piecewise_linear"
+            },
+            "anchors": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "monotonic_ns",
+                  "utc_at"
+                ],
+                "properties": {
+                  "monotonic_ns": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "utc_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            },
+            "max_error_ns": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "clock_domain": {
+                "const": "monotonic_ns"
+              }
+            },
+            "required": [
+              "clock_domain"
+            ]
+          },
+          "then": {
+            "required": [
+              "clock_mapping"
+            ]
+          }
+        }
+      ]
+    },
+    "runtimeTraceTimestamp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ]
+    },
+    "runtimeTraceWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_at",
+        "ended_at"
+      ],
+      "properties": {
+        "started_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
+        },
+        "ended_at": {
+          "$ref": "#/$defs/runtimeTraceTimestamp"
         }
       }
     }
