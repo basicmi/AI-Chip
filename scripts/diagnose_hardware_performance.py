@@ -671,7 +671,6 @@ def diagnose_record(record):
     )
     next_measurements = [
         "Compute: interval FLOP count plus a precision/sparsity-matched device peak and SM/Tensor activity.",
-        "Memory: same-boundary DRAM read/write byte totals and measured peak bandwidth.",
         "Communication: per-link directional byte totals, directionality-matched peak bandwidth, and physical/logical topology.",
         "KV cache: used bytes/tokens and allocator capacity at the same scope and time window.",
         "GPU activity: SM active-cycle, Tensor activity, kernel-scoped throughput and synchronized sampling windows.",
