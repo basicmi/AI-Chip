@@ -95,7 +95,7 @@ def runtime_fixture():
         event("request-root", "request", 0, 10, parent=None, entity=None, correlation="r1"),
         event("prefill", "prefill", 1, 2),
         event("decode", "decode", 2, 6),
-        event("kernel", "kernel", 3, 5),
+        event("kernel", "kernel", 3, 5, parent="decode"),
         event("communication", "communication", 4, 6),
         event("communication-wait", "communication_wait", 5, 6),
     ])
