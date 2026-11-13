@@ -44,11 +44,20 @@ jobs:
             --days "$LOOKBACK_DAYS" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-summary.md"
-      - name: Publish review summary
+      - name: Extract structured claim candidates
+        run: |
+          python3 scripts/extract_intelligence_claims.py \
+            --input "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --summary-path "$RUNNER_TEMP/ai-chip-intelligence-claims.md"
+      - name: Publish review summaries
         if: always()
         run: |
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-summary.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-summary.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-claims.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-claims.md" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Upload discovery report
         if: always()
@@ -58,5 +67,7 @@ jobs:
           path: |
             ${{ runner.temp }}/ai-chip-intelligence-discovery.json
             ${{ runner.temp }}/ai-chip-intelligence-summary.md
+            ${{ runner.temp }}/ai-chip-intelligence-claims.json
+            ${{ runner.temp }}/ai-chip-intelligence-claims.md
           if-no-files-found: ignore
           retention-days: 30

@@ -1,52 +1,37 @@
-# AI Chip Intelligence Discovery
+# AI Chip Intelligence Discovery and Claim Extraction
 
 The intelligence pipeline is a read-only discovery and evidence triage layer.
-It does not write to formal company, product, model-support or benchmark
-registries.
+It does not write to formal company, product, model-support or benchmark registries.
 
-## Source classes
+## Claim extraction
 
-- GitHub Releases: curated official software and benchmark repositories.
-- RSS/Atom: official vendor announcements and technical blogs (NVIDIA, AMD,
-  Google and AWS in the initial expansion).
-- arXiv API: recent preprints in computer architecture, distributed systems,
-  machine learning, programming languages and related systems areas.
-- Hugging Face: the existing model catalog audit is reused for model repository
-  metadata and publisher candidates.
+scripts/extract_intelligence_claims.py consumes the discovery report review
+queue and emits structured claim candidates. Version 1 is a deterministic,
+conservative baseline based on technical topic signals and numeric-unit
+patterns. It is not LLM semantic understanding; it is testable in CI and has
+no model/API credentials.
 
-Each source is explicit in data/intelligence-sources.json. The registry
-validator enforces source-kind-specific fields and HTTPS endpoints.
+Each record preserves the original candidate and source URL, a quote from the
+source excerpt, claim type/topic, numeric value and unit when recognized,
+explicit scope markers, qualifiers, extraction method and human-review gates.
 
-## Evidence normalization
-
-Every item receives a stable candidate ID, content fingerprint, source
-identity, publication timestamp, canonical link, excerpt, topic tags and
-review actions. New/updated/unchanged classification is persisted in the
-GitHub Actions cache. Feed items without dates or usable links are skipped.
-One unavailable feed does not suppress other sources.
-
-arXiv results are explicitly marked as preprints; an arXiv record is not
-evidence of peer review. Vendor feed content is vendor-reported, not an
-independent measurement.
+The extractor can miss claims, split sentences imperfectly or produce false
+positives. It does not resolve product identity, infer chip-vs-system scope
+when the source is silent, decide truth, or verify performance/compatibility.
+"Supports FP8" remains a candidate claim, not a verified support path. An arXiv
+record remains a preprint unless peer review is separately established.
 
 ## Evidence-to-PR workflow
 
-The generated Evidence Review Packet is an investigation queue, not an
-automated data patch. Reviewers should:
-1. Open and verify the original source.
-2. Extract atomic claims and preserve units, scope and lifecycle status.
-3. Seek independent corroboration for performance, availability and
-   compatibility claims.
-4. Map approved claims to existing registry fields and schemas.
-5. Create a narrow data PR with source links and tests.
+Claim Candidates JSON and Markdown summaries are retained as GitHub Actions
+artifacts for 30 days. They are an investigation queue, not an automated data
+patch. Reviewers verify the original source, preserve units/scope, seek
+independent corroboration, and only then map accepted claims to formal fields.
 
 No company/product/model-support/benchmark registry is modified automatically.
-No PR is auto-created or auto-merged by the scheduled discovery workflow.
+No PR is auto-created or auto-merged by scheduled discovery.
 
 ## Run locally
 
-    python3 scripts/validate_intelligence_sources.py
-    python3 -m unittest discover -s tests -p "test_intelligence_feeds.py"
-    python3 scripts/run_intelligence_discovery.py \
-      --output /tmp/ai-chip-intelligence.json \
-      --summary-path /tmp/ai-chip-intelligence-review.md
+    python3 -m unittest discover -s tests -p "test_intelligence_claims.py"
+    python3 scripts/extract_intelligence_claims.py --input /tmp/ai-chip-intelligence.json --output /tmp/ai-chip-claims.json --summary-path /tmp/ai-chip-claims.md
