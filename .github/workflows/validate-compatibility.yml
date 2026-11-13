@@ -60,6 +60,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_nsys_sqlite_import.py"
           python3 -m unittest discover -s tests -p "test_dcgm_telemetry_import.py"
           python3 -m unittest discover -s tests -p "test_capture_harness.py"
+          python3 -m unittest discover -s tests -p "test_gpu_identity_reconciliation.py"
           python3 -m unittest discover -s tests -p "test_cross_layer_performance_correlation.py"
 
   build-and-smoke-test:
