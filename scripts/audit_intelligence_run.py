@@ -41,6 +41,23 @@ def audit_pipeline(discovery, claims, graph, triage, review_state, *, generated_
         warnings.append(f"{len(unavailable)} of {len(source_rows)} discovery sources unavailable")
     if discovery.get("errors"):
         warnings.append(f"{len(discovery['errors'])} discovery error records; investigate external sources")
+    severe = [row.get("source_id") for row in source_rows
+              if isinstance(row, dict) and row.get("failure_tier") == "critical"]
+    recovered = [row.get("source_id") for row in source_rows
+                 if isinstance(row, dict) and row.get("health_transition") == "recovered"]
+    if severe:
+        warnings.append(f"{len(severe)} discovery sources have failed at least 3 consecutive runs")
+    if recovered:
+        warnings.append(f"{len(recovered)} discovery sources recovered since their last failure")
+    for row in source_rows:
+        if not isinstance(row, dict):
+            continue
+        if row.get("status") == "unavailable" and row.get("failure_category") is not None and (
+                row["failure_category"] not in {
+                    "http_rate_limit", "http_server_error", "http_client_error",
+                    "timeout", "network", "parse_error", "invalid_payload", "source_error"}):
+            errors.append("unknown classified source failure")
+
     if discovery.get("model_catalog_summary", {}).get("known_models_checked", 0) and (
         discovery.get("model_catalog_summary", {}).get("known_model_repositories_observed", 0) == 0
     ):
@@ -127,6 +144,9 @@ def audit_pipeline(discovery, claims, graph, triage, review_state, *, generated_
         "source_count": len(source_rows),
         "sources_observed": observed,
         "sources_unavailable": len(unavailable),
+        "sources_critical_failures": len(severe),
+        "sources_recovered": len(recovered),
+        "sources_empty_success": sum(row.get("status") == "observed" and row.get("recent_item_count") == 0 for row in source_rows if isinstance(row, dict)),
         "source_unavailable_ids": sorted(str(x) for x in unavailable),
         "review_candidates": len(candidates),
         "extracted_claims": len(claim_rows),

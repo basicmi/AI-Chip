@@ -58,6 +58,11 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
             "kind": source.get("kind"),
             "status": source["status"],
             "recent_item_count": source.get("recent_item_count", 0),
+            "failure_category": source.get("failure_category"),
+            "failure_tier": source.get("failure_tier"),
+            "consecutive_failures": source.get("consecutive_failures", 0),
+            "health_transition": source.get("health_transition"),
+            "attempt_count": source.get("attempt_count"),
         })
     summary = health.get("summary", {})
     observed = sum(source["status"] == "observed" for source in per_source)
@@ -92,6 +97,9 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
             "sources_total": len(per_source),
             "sources_observed": observed,
             "sources_unavailable": unavailable,
+            "sources_critical_failures": summary.get("sources_critical_failures", 0),
+            "sources_recovered": summary.get("sources_recovered", 0),
+            "sources_empty_success": summary.get("sources_empty_success", 0),
             "availability_percent": round(100 * observed / len(per_source), 1) if per_source else None,
             "candidate_count": discovery.get("candidate_count"),
             "new_candidates": discovery.get("change_counts", {}).get("new"),
