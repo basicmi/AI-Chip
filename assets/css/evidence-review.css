@@ -16,3 +16,18 @@
 @media (max-width: 760px) {
  .evidence-workbench .workload-filters { display: grid; grid-template-columns: 1fr; }
 }
+
+.evidence-workbench [data-ew-decision-panel],
+.evidence-workbench [data-ew-approval-panel] { margin-top: 1.5rem; }
+.evidence-workbench .ew-block-label { display: block; margin: .9rem 0; }
+.evidence-workbench .ew-block-label textarea,
+.evidence-workbench .ew-block-label input[type=file] { display: block; width: 100%; margin-top: .35rem; }
+.evidence-workbench .ew-confirm { display: flex; align-items: flex-start; gap: .65rem; margin: 1.2rem 0; }
+.evidence-workbench .ew-confirm input { margin-top: .35rem; flex: 0 0 auto; }
+.evidence-workbench [data-ew-decision-status],
+.evidence-workbench [data-ew-approval-status] { margin: .65rem 0; }
+.evidence-workbench [data-ew-approval-status].is-error { color: #b3483d; font-weight: 650; }
+.evidence-workbench [data-ew-review-claim] { margin-top: .85rem; }
+.evidence-workbench [data-ew-approval-panel] button:disabled { opacity: .5; cursor: not-allowed; }
+.evidence-workbench [data-ew-approval-panel] textarea,
+.evidence-workbench [data-ew-decision-panel] textarea { min-height: 80px; width: 100%; }

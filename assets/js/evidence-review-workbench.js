@@ -33,6 +33,7 @@
   const clear = () => {
     claimData = null;
     graphData = null;
+    root.dispatchEvent(new CustomEvent("ew-clear-review"));
     ui.claims.value = "";
     ui.graph.value = "";
     ui.search.value = "";
@@ -161,6 +162,11 @@
     (claim.review_gates || []).slice(0, 8).forEach(gate => gates.append(element("li", "", gate)));
     details.append(gates);
     card.append(details);
+    const review = element("button", "text-button", "Review this claim");
+    review.type = "button";
+    review.dataset.ewReviewClaim = claim.claim_id;
+    review.addEventListener("click", () => root.dispatchEvent(new CustomEvent("ew-select-claim", {detail: {claim}})));
+    card.append(review);
     return card;
   };
   const render = () => {
@@ -207,6 +213,7 @@
       const graph = ui.graph.files.length ? validateGraph(await readJson(ui.graph.files[0]), claims) : null;
       claimData = claims;
       graphData = graph;
+      root.dispatchEvent(new CustomEvent("ew-clear-review"));
       options(ui.topic, claims.claims.map(item => item.topic), "topics");
       options(ui.publisher, claims.claims.map(item => item.source?.publisher || item.source?.source_name || "Unknown source"), "publishers");
       [ui.search, ui.topic, ui.publisher, ui.relationship].forEach(node => { node.disabled = false; });
@@ -228,6 +235,7 @@
     } catch (error) {
       claimData = null;
       graphData = null;
+      root.dispatchEvent(new CustomEvent("ew-clear-review"));
       ui.results.replaceChildren();
       ui.empty.hidden = false;
       ["claims", "sources", "duplicates", "conflicts"].forEach(key => {

@@ -1158,6 +1158,65 @@ const { chromium } = require("playwright");
   if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 1) {
     throw new Error("Evidence Workbench claim search failed");
   }
+  // PR #96 review-decision and Approval Manifest Builder exercise.
+  await page.locator("[data-ew-clear-filters]").click();
+  await page.locator("[data-ew-review-claim='claim-test-a']").click();
+  await page.locator("[data-ew-decision]").selectOption("accepted_for_evidence_attachment");
+  await page.locator("[data-ew-decision-note]").fill("CI synthetic fixture: manual review would be required for a real Claim and exact source.");
+  await page.locator("[data-ew-record-decision]").click();
+  if (!(await page.locator("[data-ew-decision-status]").textContent()).includes("Local decision recorded")) {
+    throw new Error("Workbench did not record an explicit local review decision");
+  }
+  const profileFixture = {
+    schema_version:"1.0",
+    companies:[{id:"test-company",name:"Test Company",evidence:[],claims:[{
+      id:"existing-hbm-claim",subject_type:"product",subject_id:"test-gpu",topic:"memory_capacity",
+      statement:"Example test card has a synthetic capacity claim.",scope:"Per GPU",
+      claim_status:"vendor_reported",value:180,unit:"GB",evidence_ids:[],last_reviewed:"2026-11-14"
+    }]}]
+  };
+  await page.locator("[data-ew-profiles]").setInputFiles(artifact("company-profiles.json", profileFixture));
+  await page.locator("[data-ew-company]").selectOption("test-company");
+  await page.locator("[data-ew-existing]").selectOption("existing-hbm-claim");
+  await page.locator("[data-ew-approval-id]").fill("test-only-approval-2026");
+  await page.locator("[data-ew-evidence-id]").fill("test-only-evidence");
+  await page.locator("[data-ew-reviewer]").fill("ci-synthetic-fixture-not-a-real-reviewer");
+  await page.locator("[data-ew-reviewed]").fill("2026-11-14");
+  await page.locator("[data-ew-title]").fill("CI Test source (not a factual datasheet)");
+  await page.locator("[data-ew-publisher-input]").fill("Synthetic Test Publisher");
+  await page.locator("[data-ew-published]").fill("2026-11-12");
+  await page.locator("[data-ew-checked]").fill("2026-11-14");
+  await page.locator("[data-ew-evidence-notes]").fill("Synthetic fixture only; this must never enter the production registry.");
+  await page.locator("[data-ew-review-notes]").fill("This automated browser fixture tests manifest serialization; it does not represent genuine human review.");
+  if (!(await page.locator("[data-ew-export-manifest]").isDisabled())) {
+    throw new Error("Workbench enabled approval export without explicit human consent");
+  }
+  await page.locator("[data-ew-confirm]").check();
+  const [approvalDownload] = await Promise.all([
+    page.waitForEvent("download"),
+    page.locator("[data-ew-export-manifest]").click()
+  ]);
+  if (approvalDownload.suggestedFilename() !== "test-only-approval-2026.json") {
+    throw new Error("Workbench downloaded an unexpected approval file name");
+  }
+  const approvalPath = require("path").join(require("os").tmpdir(), "ai-chip-manifest-smoke.json");
+  await approvalDownload.saveAs(approvalPath);
+  const exportedApproval = JSON.parse(require("fs").readFileSync(approvalPath, "utf8"));
+  const canonical = object => Array.isArray(object) ? "[" + object.map(canonical).join(",") + "]" :
+    object && typeof object === "object" ? "{" + Object.keys(object).sort().map(
+      key => JSON.stringify(key) + ":" + canonical(object[key])).join(",") + "}" : JSON.stringify(object);
+  const expectedHash = require("crypto").createHash("sha256").update(
+    canonical(profileFixture.companies[0].claims[0])).digest("hex");
+  if (exportedApproval.expected_claim_sha256 !== expectedHash ||
+      exportedApproval.extracted_claim_id !== "claim-test-a" ||
+      exportedApproval.evidence.url !== "https://example.org/vendor-release" ||
+      exportedApproval.decision !== "approved_evidence_attachment") {
+    throw new Error("Approval export mismatched existing Claim SHA256, selected source or approval format");
+  }
+  if (!(await page.locator("[data-ew-export-manifest]").isDisabled())) {
+    throw new Error("Approval confirmation was not cleared after export");
+  }
+  require("fs").unlinkSync(approvalPath);
   await page.locator("[data-ew-claims]").setInputFiles(artifact("invalid-claims.json", {
     ...reviewClaimJson, claims:[{...reviewClaims[0], review_status:"verified"}], claim_count:1
   }));
