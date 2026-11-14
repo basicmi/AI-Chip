@@ -7,3 +7,7 @@
 .intelligence-operations [data-ops-cache] {margin-top:.85rem}
 .intelligence-operations [data-ops-select] {max-width:100%;margin-top:.4rem}
 .intelligence-operations [data-ops-files] {width:100%;margin-top:.5rem}
+
+/* Author display rules must not override the hidden state after invalid file input. */
+.intelligence-operations [data-ops-history-panel][hidden],
+.intelligence-operations [data-ops-sources-panel][hidden] { display: none !important; }
