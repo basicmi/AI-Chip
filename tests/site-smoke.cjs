@@ -1234,6 +1234,11 @@ const { chromium } = require("playwright");
   await page.locator("[data-ew-claims]").setInputFiles(artifact("invalid-claims.json", {
     ...reviewClaimJson, claims:[{...reviewClaims[0], review_status:"verified"}], claim_count:1
   }));
+  await page.waitForFunction(() => {
+    const status = document.querySelector("[data-ew-status]")?.textContent || "";
+    const count = document.querySelector("[data-ew-result-count]")?.textContent || "";
+    return status.includes("Cannot load review artifact") && count === "0";
+  });
   if (!(await page.locator("[data-ew-status]").textContent()).includes("Cannot load review artifact") ||
       Number(await page.locator("[data-ew-result-count]").textContent()) !== 0) {
     throw new Error("Evidence Workbench did not reject an unsafe verified-status file");
