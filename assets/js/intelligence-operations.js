@@ -66,8 +66,13 @@
     sourcesBody.replaceChildren();
     for(const source of data.sources){
       const tr=document.createElement("tr");
+      const diagnostics = source.status==="unavailable"
+        ? "unavailable · " + (source.failure_category || "unclassified") +
+          (source.failure_tier ? " · " + source.failure_tier : "") +
+          (Number.isSafeInteger(source.consecutive_failures) ? " · streak " + source.consecutive_failures : "")
+        : source.health_transition==="recovered" ? "observed · recovered" : "observed";
       tr.append(cell(source.name||source.source_id),cell(source.kind||"unknown"),
-        cell(source.status),cell(source.recent_item_count));
+        cell(diagnostics),cell(source.recent_item_count));
       sourcesBody.append(tr);
     }
     $("[data-ops-cache]").textContent=

@@ -11,6 +11,8 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import socket
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -45,13 +47,53 @@ def parse_time(value):
         except (TypeError, ValueError, OverflowError):
             return None
 
-def fetch_bytes(url, *, timeout=20, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
+RETRY_HTTP_STATUS = frozenset({429, 500, 502, 503, 504})
+MAX_RESPONSE_BYTES = 8 * 1024 * 1024
+MAX_ATTEMPTS = 3
+
+def failure_category(error):
+    """Classify operational errors without including URLs, credentials or bodies."""
+    if isinstance(error, urllib.error.HTTPError):
+        return "http_rate_limit" if error.code == 429 else "http_server_error" if error.code >= 500 else "http_client_error"
+    if isinstance(error, (TimeoutError, socket.timeout)):
+        return "timeout"
+    if isinstance(error, (urllib.error.URLError, ConnectionError)):
+        return "network"
+    if isinstance(error, (ET.ParseError, UnicodeError, json.JSONDecodeError)):
+        return "parse_error"
+    if isinstance(error, (ValueError, TypeError, KeyError)):
+        return "invalid_payload"
+    return "source_error"
+
+def retryable(error):
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in RETRY_HTTP_STATUS
+    return isinstance(error, (TimeoutError, socket.timeout, urllib.error.URLError, ConnectionError))
+
+def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep):
+    if not isinstance(attempts, int) or not 1 <= attempts <= 3:
+        raise ValueError("attempts must be between 1 and 3")
+    for attempt in range(1, attempts + 1):
+        try:
+            return call(), attempt
+        except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
+                ValueError, RuntimeError, ET.ParseError, OSError) as error:
+            if attempt == attempts or not retryable(error):
+                raise
+            # Local bounded backoff; honor neither untrusted Retry-After nor URL contents.
+            sleep(0.2 * (2 ** (attempt - 1)))
+    raise RuntimeError("unreachable")
+
+def fetch_bytes(url, *, timeout=12, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
     with urllib.request.urlopen(request, timeout=timeout) as response:
         status = getattr(response, "status", 200)
         if status < 200 or status >= 300:
             raise RuntimeError("unexpected HTTP status")
-        return response.read()
+        payload = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(payload) > MAX_RESPONSE_BYTES:
+            raise ValueError("source response exceeds 8 MiB")
+        return payload
 
 def fetch_json(url, *, timeout=20):
     return json.loads(fetch_bytes(url, timeout=timeout, accept="application/vnd.github+json").decode("utf-8"))
@@ -362,26 +404,65 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
     now_text = now_dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
     since = now_dt.astimezone(timezone.utc) - timedelta(days=days)
     source_results, candidates, errors = [], [], []
+    state = state if state is not None else {"schema_version": "1.0", "items": {}}
+    source_health = state.setdefault("source_health", {})
+    if not isinstance(source_health, dict):
+        raise ValueError("invalid persistent source_health state")
     for source in registry["sources"]:
         if not source.get("active"):
             continue
+        source_id = source["id"]
+        previous = source_health.get(source_id, {})
+        if not isinstance(previous, dict):
+            raise ValueError("invalid source health record")
+        failures = previous.get("consecutive_failures", 0)
+        if not isinstance(failures, int) or failures < 0:
+            raise ValueError("invalid consecutive source failure count")
+        kind = source["kind"]
+        attempts = 0
         try:
-            kind = source["kind"]
-            if kind == "github_releases":
-                found = collect_releases(source, since=since, fetcher=release_fetcher)
-            elif kind == "rss_atom":
-                found = collect_rss_atom(source, since=since, fetcher=feed_fetcher)
-            elif kind == "arxiv_api":
-                found = collect_arxiv(source, since=since, fetcher=feed_fetcher)
-            else:
+            def fetch_source():
+                if kind == "github_releases":
+                    return collect_releases(source, since=since, fetcher=release_fetcher)
+                if kind == "rss_atom":
+                    return collect_rss_atom(source, since=since, fetcher=feed_fetcher)
+                if kind == "arxiv_api":
+                    return collect_arxiv(source, since=since, fetcher=feed_fetcher)
                 raise ValueError("unsupported_source_kind")
+            # Retry the full parse as well as transport, but only for transient
+            # network/HTTP errors. A malformed feed is not retried.
+            found, attempts = bounded_retry(fetch_source)
             candidates.extend(found)
-            source_results.append({"source_id": source["id"], "source_name": source["name"],
-                                   "kind": kind, "status": "observed", "recent_item_count": len(found)})
-        except (urllib.error.URLError, TimeoutError, ValueError, RuntimeError, ET.ParseError, OSError) as error:
-            errors.append({"source_id": source["id"], "error": type(error).__name__})
-            source_results.append({"source_id": source["id"], "source_name": source["name"],
-                                   "kind": source.get("kind"), "status": "unavailable", "recent_item_count": 0})
+            status = "recovered" if failures else "healthy"
+            source_health[source_id] = {
+                "consecutive_failures": 0, "last_success_at": now_text,
+                "last_failure_at": previous.get("last_failure_at"),
+                "last_failure_category": None,
+            }
+            source_results.append({
+                "source_id": source_id, "source_name": source["name"],
+                "kind": kind, "status": "observed", "recent_item_count": len(found),
+                "health_transition": status, "consecutive_failures": 0,
+                "attempt_count": attempts,
+            })
+        except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
+                ValueError, RuntimeError, ET.ParseError, OSError) as error:
+            category = failure_category(error)
+            failures += 1
+            tier = "critical" if failures >= 3 else "warning" if failures == 2 else "transient"
+            source_health[source_id] = {
+                "consecutive_failures": failures,
+                "last_success_at": previous.get("last_success_at"),
+                "last_failure_at": now_text, "last_failure_category": category,
+            }
+            errors.append({"source_id": source_id, "error": type(error).__name__,
+                           "failure_category": category, "failure_tier": tier})
+            source_results.append({
+                "source_id": source_id, "source_name": source["name"],
+                "kind": kind, "status": "unavailable", "recent_item_count": 0,
+                "failure_category": category, "failure_tier": tier,
+                "consecutive_failures": failures, "attempt_count": MAX_ATTEMPTS if retryable(error) else 1,
+            })
     if model_report is not None:
         for item in model_report.get("models", []):
             if item.get("status") == "observed":
@@ -391,7 +472,6 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
         errors.extend({"source_id": "huggingface-model-catalog",
                        "error": item.get("error", "publisher_listing_unavailable")}
                       for item in model_report.get("publisher_discovery_errors", []))
-    state = state if state is not None else {"schema_version": "1.0", "items": {}}
     changes = apply_change_detection(candidates, state, now=now_text)
     counts = {key: sum(item["change_status"] == key for item in changes)
               for key in ("new", "updated", "unchanged")}
@@ -403,9 +483,14 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
     report = {
         "schema_version": "1.1", "generated_at": now_text, "lookback_days": days, "read_only": True,
         "source_count": len(source_results), "sources_observed": sum(item["status"] == "observed" for item in source_results),
-        "sources_unavailable": len(errors), "candidate_count": len(candidates), "candidate_type_counts": type_counts,
+        "sources_unavailable": sum(row["status"] == "unavailable" for row in source_results), "candidate_count": len(candidates), "candidate_type_counts": type_counts,
         "change_counts": counts, "review_queue": actionable, "all_observations": changes,
         "source_results": source_results, "errors": errors,
+        "source_health_summary": {
+            "recovered": sum(row.get("health_transition") == "recovered" for row in source_results),
+            "critical_failures": sum(row.get("failure_tier") == "critical" for row in source_results),
+            "empty_successes": sum(row["status"] == "observed" and row["recent_item_count"] == 0 for row in source_results),
+        },
         "model_catalog_summary": {
             "known_models_checked": (model_report or {}).get("model_count", 0),
             "known_model_repositories_observed": (model_report or {}).get("observed", 0),
