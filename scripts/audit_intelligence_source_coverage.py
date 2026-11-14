@@ -119,7 +119,21 @@ def coverage_report(registry, discovery, *, generated_at=None):
         # indicator; it does not prove a release is missing.
         cap = 20 if source["kind"] == "github_releases" else (
             source.get("max_results", 100) if source["kind"] == "arxiv_api" else None)
-        at_cap = row["status"] == "observed" and isinstance(cap, int) and cap > 0 and len(items) >= cap
+        pagination = row.get("pagination")
+        if pagination is not None and source["kind"] == "github_releases":
+            if (not isinstance(pagination, dict)
+                    or pagination.get("per_page") != 20
+                    or pagination.get("max_pages") != 3
+                    or not isinstance(pagination.get("pages_fetched"), int)
+                    or not 1 <= pagination["pages_fetched"] <= 3
+                    or not isinstance(pagination.get("raw_items_scanned"), int)
+                    or pagination["raw_items_scanned"] < len(items)
+                    or not isinstance(pagination.get("paging_cap_reached"), bool)):
+                raise ValueError("invalid GitHub release pagination diagnostics for " + sid)
+            at_cap = pagination["paging_cap_reached"]
+        else:
+            # Legacy source reports and arXiv only expose filtered counts.
+            at_cap = row["status"] == "observed" and isinstance(cap, int) and cap > 0 and len(items) >= cap
         repeated = sum(1 for item in items if (
             normalized_url(item.get("url")) in shared_urls))
         risk_flags = []
@@ -147,6 +161,7 @@ def coverage_report(registry, discovery, *, generated_at=None):
             "latest_observed_publication_age_days": latest_age,
             "invalid_publication_date_count": invalid_dates[sid],
             "per_request_item_limit": cap,
+            "pagination": pagination if source["kind"] == "github_releases" else None,
             "possible_window_truncation": bool(at_cap),
             "same_url_observations": repeated,
             "failure_category": row.get("failure_category"),
