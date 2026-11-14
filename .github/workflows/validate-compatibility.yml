@@ -57,6 +57,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_intelligence_source_recovery.py"
           python3 -m unittest discover -s tests -p "test_intelligence_source_coverage.py"
           python3 -m unittest discover -s tests -p "test_intelligence_pagination.py"
+          python3 -m unittest discover -s tests -p "test_intelligence_arxiv_pagination.py"
           python3 -m unittest discover -s tests -p "test_intelligence_operational_snapshot.py"
           python3 -m unittest discover -s tests -p "test_evidence_update_proposal.py"
           python3 -m unittest discover -s tests -p "test_evidence_to_pr_rehearsal.py"
