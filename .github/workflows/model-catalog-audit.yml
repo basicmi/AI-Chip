@@ -41,6 +41,14 @@ jobs:
           key: ai-chip-review-state-${{ github.run_id }}
           restore-keys: |
             ai-chip-review-state-
+      - name: Stage both caches for transactional checkpointing
+        run: |
+          if [ -f .cache/ai-chip-intelligence-state.json ]; then
+            cp .cache/ai-chip-intelligence-state.json "$RUNNER_TEMP/intelligence-state-staged.json"
+          fi
+          if [ -f .cache/ai-chip-review-state.json ]; then
+            cp .cache/ai-chip-review-state.json "$RUNNER_TEMP/review-state-staged.json"
+          fi
       - name: Validate curated source registry
         run: python3 scripts/validate_intelligence_sources.py
       - name: Discover releases, model changes and publisher candidates
@@ -49,6 +57,7 @@ jobs:
         run: |
           python3 scripts/run_intelligence_discovery.py \
             --days "$LOOKBACK_DAYS" \
+            --state-file "$RUNNER_TEMP/intelligence-state-staged.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-summary.md"
       - name: Extract structured claim candidates
@@ -76,10 +85,27 @@ jobs:
           python3 scripts/track_intelligence_review_state.py \
             --triage "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
             --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
-            --state ".cache/ai-chip-review-state.json" \
+            --state "$RUNNER_TEMP/review-state-staged.json" \
             --ledger "data/intelligence-review-decisions.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md"
+      - name: Audit end-to-end stage consistency and source health
+        run: |
+          python3 scripts/audit_intelligence_run.py \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --graph "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
+            --triage "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-health.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-health.md"
+      - name: Commit cached checkpoints after successful audit
+        run: |
+          test -s "$RUNNER_TEMP/intelligence-state-staged.json"
+          test -s "$RUNNER_TEMP/review-state-staged.json"
+          mkdir -p .cache
+          cp "$RUNNER_TEMP/intelligence-state-staged.json" .cache/ai-chip-intelligence-state.json
+          cp "$RUNNER_TEMP/review-state-staged.json" .cache/ai-chip-review-state.json
       - name: Publish review summaries
         if: always()
         run: |
@@ -94,6 +120,9 @@ jobs:
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-health.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-health.md" >> "$GITHUB_STEP_SUMMARY"
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" >> "$GITHUB_STEP_SUMMARY"
@@ -114,5 +143,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
             ${{ runner.temp }}/ai-chip-intelligence-review-state.json
             ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
+            ${{ runner.temp }}/ai-chip-intelligence-health.json
+            ${{ runner.temp }}/ai-chip-intelligence-health.md
           if-no-files-found: ignore
           retention-days: 30
