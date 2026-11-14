@@ -31,7 +31,7 @@ class IntelligenceDiscoveryTests(unittest.TestCase):
   def fetcher(url):
    if "NVIDIA/TensorRT-LLM" in url: raise TimeoutError()
    return []
-  report=run_discovery(REGISTRY,CATALOG,now=NOW,release_fetcher=fetcher,model_report={"models":[],"model_count":0,"observed":0,"new_publisher_candidates":[],"publisher_discovery_errors":[]},state={"schema_version":"1.0","items":{}})
+  report=run_discovery(REGISTRY,CATALOG,now=NOW,release_fetcher=fetcher,feed_fetcher=lambda _: "<rss><channel></channel></rss>",model_report={"models":[],"model_count":0,"observed":0,"new_publisher_candidates":[],"publisher_discovery_errors":[]},state={"schema_version":"1.0","items":{}})
   self.assertTrue(report["read_only"]); self.assertEqual(report["sources_unavailable"],1); self.assertEqual(len(report["source_results"]),len(REGISTRY["sources"]))
   self.assertIn("does not update formal",report["policy"])
  def test_model_repo_updates_are_fingerprinted_without_claiming_support(self):
