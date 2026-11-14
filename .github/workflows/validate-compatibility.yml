@@ -50,6 +50,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_intelligence_discovery.py"
           python3 -m unittest discover -s tests -p "test_intelligence_feeds.py"
           python3 -m unittest discover -s tests -p "test_intelligence_claims.py"
+          python3 -m unittest discover -s tests -p "test_intelligence_evidence_graph.py"
           python3 -m unittest discover -s tests -p "test_model_catalog.py"
           python3 -m unittest discover -s tests -p "test_model_catalog_discovery.py"
           python3 scripts/validate_benchmark_results.py

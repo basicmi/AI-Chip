@@ -50,6 +50,12 @@ jobs:
             --input "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-claims.md"
+      - name: Build conservative cross-source evidence graph
+        run: |
+          python3 scripts/build_intelligence_evidence_graph.py \
+            --input "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
+            --summary-path "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md"
       - name: Publish review summaries
         if: always()
         run: |
@@ -58,6 +64,9 @@ jobs:
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-claims.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-claims.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Upload discovery report
         if: always()
@@ -69,5 +78,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-summary.md
             ${{ runner.temp }}/ai-chip-intelligence-claims.json
             ${{ runner.temp }}/ai-chip-intelligence-claims.md
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
           if-no-files-found: ignore
           retention-days: 30
