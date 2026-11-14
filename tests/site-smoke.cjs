@@ -38,12 +38,61 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/intelligence-operations/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
+  }
+
+  // PR #101: local-only multi-run Intelligence Operations dashboard.
+  await page.goto(base + "/intelligence-operations/", {waitUntil:"networkidle"});
+  const opsSource = (id,status) => ({
+    source_id:id,name:id,kind:"rss_atom",status,recent_item_count:status==="observed"?3:0
+  });
+  const opsRun = (generated_at, unresolved, health, restored) => ({
+    schema_version:"1.0",generated_at,operational_only:true,health,
+    cache:{checkpoint_audit_passed:true,
+      discovery_restored_file_present:restored,review_restored_file_present:restored},
+    summary:{sources_total:2,sources_observed:health==="healthy"?2:1,
+      sources_unavailable:health==="healthy"?0:1,
+      availability_percent:health==="healthy"?100:50,
+      review_leads:5,extracted_claims:3,persistent_backlog:unresolved+1,
+      unresolved_backlog:unresolved,oldest_unresolved_days:21},
+    sources:[opsSource("vendor-feed","observed"),
+      opsSource("arxiv",health==="healthy"?"observed":"unavailable")],
+    warnings:health==="degraded"?["arxiv feed unavailable"]:[]
+  });
+  const earlyOps=opsRun("2026-11-02T10:00:00Z",7,"degraded",false);
+  const lateOps=opsRun("2026-11-09T10:00:00Z",9,"healthy",true);
+  const opsFile=(name,data)=>({name,mimeType:"application/json",buffer:Buffer.from(JSON.stringify(data))});
+  await page.locator("[data-ops-files]").setInputFiles([
+    opsFile("late.json",lateOps),opsFile("early.json",earlyOps)
+  ]);
+  await page.waitForFunction(()=>document.querySelector("[data-ops-stat='runs']")?.textContent==="2");
+  if(await page.locator("[data-ops-stat='backlog']").textContent()!=="9" ||
+     await page.locator("[data-ops-stat='availability']").textContent()!=="100%"){
+    throw Error("Intelligence Operations did not summarize latest completed run");
+  }
+  const firstRow=await page.locator("[data-ops-history] tr").first().textContent();
+  if(!firstRow.includes("2026-11-02") || !firstRow.includes("degraded")){
+    throw Error("Intelligence Operations did not sort timestamps chronologically");
+  }
+  await page.locator("[data-ops-select]").selectOption("2026-11-02T10:00:00Z");
+  if(!(await page.locator("[data-ops-cache]").textContent()).includes("no restored file") ||
+     !(await page.locator("[data-ops-warnings]").textContent()).includes("arxiv feed unavailable")){
+    throw Error("Source-level outage or cache restore diagnostics missing");
+  }
+  const forgedOps={...earlyOps,operational_only:false};
+  await page.locator("[data-ops-files]").setInputFiles(opsFile("forged.json",forgedOps));
+  await page.waitForFunction(()=>document.querySelector("[data-ops-status]")?.textContent?.includes("Cannot load snapshots"));
+  if(!(await page.locator("[data-ops-history-panel]").isHidden())){
+    throw Error("Forged operation status was accepted as successful telemetry");
+  }
+  await page.locator("[data-ops-clear]").click();
+  if(await page.locator("[data-ops-stat='runs']").textContent()!=="—"){
+    throw Error("Intelligence Operations reset failed");
   }
 
   homeDataRequests.length = 0;
@@ -1316,7 +1365,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: ten routes including Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: eleven routes including Intelligence Operations, Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);

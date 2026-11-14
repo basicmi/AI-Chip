@@ -90,6 +90,13 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <p>Explore unverified intelligence claim candidates, source provenance, duplicates and reviewer-scoped conflicts from local Actions artifacts.</p>
       <span class="feature-link">Open review workbench <span aria-hidden="true">→</span></span>
     </a>
+    <a class="feature-card" href="{{ '/intelligence-operations/' | relative_url }}">
+      <span class="feature-number">08 / OPERATIONS</span>
+      <span class="feature-icon" aria-hidden="true">▤</span>
+      <h3>Intelligence Operations</h3>
+      <p>Compare actual weekly source health, unresolved review backlog and cache recovery from local operational snapshots.</p>
+      <span class="feature-link">Open operations dashboard <span aria-hidden="true">→</span></span>
+    </a>
   </div>
 </section>
 
