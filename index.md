@@ -83,10 +83,17 @@ description: An evidence-led map of AI accelerator hardware, software ecosystems
       <p>Understand model, serving, kernel, memory, interconnect, power and cost benchmarks.</p>
       <span class="feature-link">Explore benchmarks <span aria-hidden="true">→</span></span>
     </a>
+    <a class="feature-card" href="{{ '/evidence-review/' | relative_url }}">
+      <span class="feature-number">07 / INTELLIGENCE</span>
+      <span class="feature-icon" aria-hidden="true">◇</span>
+      <h3>Evidence Review Workbench</h3>
+      <p>Explore unverified intelligence claim candidates, source provenance, duplicates and reviewer-scoped conflicts from local Actions artifacts.</p>
+      <span class="feature-link">Open review workbench <span aria-hidden="true">→</span></span>
+    </a>
   </div>
 </section>
 
-<section class="home-bottom-grid">
+<section class="home-bottom-grid"
   <div class="home-note-card">
     <p class="eyebrow">EDITORIAL PRINCIPLES</p>
     <h2>Evidence before rankings.</h2>

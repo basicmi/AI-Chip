@@ -1,0 +1,18 @@
+.evidence-workbench .compat-filter-panel { margin-bottom: 1.2rem; }
+.evidence-workbench .workload-stat-grid { margin: 1.1rem 0 1.5rem; }
+.evidence-workbench input[type="file"] {
+  display: block; width: 100%; padding: .65rem; border: 1px dashed var(--line, #9cabbc);
+  border-radius: 8px; background: var(--surface, transparent); color: inherit;
+}
+.evidence-workbench [data-ew-status] { margin-top: .85rem; }
+.evidence-workbench [data-ew-status].is-error { color: #b3483d; font-weight: 650; }
+.evidence-workbench [data-ew-provenance] { margin-top: .45rem; overflow-wrap: anywhere; }
+.evidence-workbench .model-support-card { min-width: 0; overflow-wrap: anywhere; }
+.evidence-workbench .model-support-card h3 { font-size: 1.04rem; line-height: 1.45; }
+.evidence-workbench .compat-evidence-meta { overflow-wrap: anywhere; }
+.evidence-workbench .compat-evidence-meta a { text-decoration: underline; }
+.evidence-workbench .compat-details p { margin: .6rem 0; overflow-wrap: anywhere; }
+.evidence-workbench .compat-tags { margin-top: .8rem; }
+@media (max-width: 760px) {
+ .evidence-workbench .workload-filters { display: grid; grid-template-columns: 1fr; }
+}

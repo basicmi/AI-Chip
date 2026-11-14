@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -1091,6 +1091,85 @@ const { chromium } = require("playwright");
     throw new Error("Model support platform filter did not return both AWS Trainium paths");
   }
 
+  // Local-only Evidence Review Workbench: no network-provided claim snapshot.
+  await page.goto(base + "/evidence-review/", { waitUntil: "networkidle" });
+  if (!(await page.locator("[data-ew-search]").isDisabled())) {
+    throw new Error("Evidence Workbench unexpectedly allowed browsing before local upload");
+  }
+  const reviewClaims = [
+    {claim_id:"claim-test-a",statement:"Example accelerator provides 180 GB HBM per GPU.",
+     topic:"memory_capacity",claim_type:"quantitative_specification",value:180,unit:"GB",
+     scope:{status:"explicit_per_unit",text:"per GPU"},qualifiers:[],review_status:"unverified_candidate",
+     evidence_quote:"Example accelerator provides 180 GB HBM per GPU.",
+     extraction:{method:"deterministic_rules_v1",confidence:"low"},
+     source:{url:"https://example.org/vendor-release",publisher:"Example Vendor",published_at:"2026-11-12",
+       evidence_scope:"official_vendor_feed_metadata_and_excerpt"},
+     review_gates:["Read the original primary source."]},
+    {claim_id:"claim-test-b",statement:"Example accelerator provides 180 GB HBM per GPU.",
+     topic:"memory_capacity",claim_type:"quantitative_specification",value:180,unit:"GB",
+     scope:{status:"explicit_per_unit",text:"per GPU"},qualifiers:[],review_status:"unverified_candidate",
+     evidence_quote:"Example accelerator provides 180 GB HBM per GPU.",
+     extraction:{method:"deterministic_rules_v1",confidence:"low"},
+     source:{url:"https://example.org/reprint",publisher:"Example Reporter",published_at:"2026-11-13",
+       evidence_scope:"independent_media_metadata"},
+     review_gates:["Check reprint and dependency on original source."]},
+    {claim_id:"claim-test-c",statement:"Example accelerator provides 192 GB HBM per GPU.",
+     topic:"memory_capacity",claim_type:"quantitative_specification",value:192,unit:"GB",
+     scope:{status:"explicit_per_unit",text:"per GPU"},qualifiers:[],review_status:"unverified_candidate",
+     evidence_quote:"Example accelerator provides 192 GB HBM per GPU.",
+     extraction:{method:"deterministic_rules_v1",confidence:"low"},
+     source:{url:"https://example.org/other-report",publisher:"Example Third Party",published_at:"2026-11-14",
+       evidence_scope:"research_preprint_metadata"},
+     review_gates:["Confirm hardware SKU, version and scope."]}
+  ];
+  const reviewClaimJson = {schema_version:"1.0",claim_count:3,generated_at:"2026-11-14T00:00:00Z",claims:reviewClaims};
+  const reviewGraphJson = {
+    schema_version:"1.0",input_claim_count:3,generated_at:"2026-11-14T01:00:00Z",
+    summary:{independently_verified_claims:0},
+    nodes:reviewClaims.map(item=>({type:"claim_candidate",claim_id:item.claim_id,review_status:"unverified_candidate"})),
+    edges:[],
+    duplicate_clusters:[{claim_ids:["claim-test-a","claim-test-b"],independent_corroboration:false}],
+    scoped_comparisons:[{claim_ids:["claim-test-a","claim-test-c"],
+      subject_key:"example:gpu",metric_key:"hbm-capacity",
+      context_key:"per-gpu:capacity",status:"possible_specification_conflict",independently_verified:false}]
+  };
+  const artifact = (name, data) => ({
+    name, mimeType:"application/json", buffer:Buffer.from(JSON.stringify(data))
+  });
+  await page.locator("[data-ew-claims]").setInputFiles(artifact("ai-chip-intelligence-claims.json", reviewClaimJson));
+  await page.locator("[data-ew-graph]").setInputFiles(artifact("ai-chip-intelligence-evidence-graph.json", reviewGraphJson));
+  await page.waitForFunction(() => document.querySelector("[data-ew-stat='claims']").textContent === "3" &&
+    document.querySelector("[data-ew-stat='duplicates']").textContent === "1" &&
+    document.querySelector("[data-ew-stat='conflicts']").textContent === "1");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 3 ||
+      !(await page.locator("[data-ew-status]").textContent()).includes("Nothing was uploaded or approved")) {
+    throw new Error("Evidence workbench did not load local unverified review artifacts");
+  }
+  await page.locator("[data-ew-relationship]").selectOption("conflicts");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
+    throw new Error("Evidence Workbench failed reviewer-scoped conflict filter");
+  }
+  await page.locator("[data-ew-relationship]").selectOption("duplicates");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
+    throw new Error("Evidence Workbench failed exact-text duplicate filter");
+  }
+  await page.locator("[data-ew-clear-filters]").click();
+  await page.locator("[data-ew-search]").fill("192 GB");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 1) {
+    throw new Error("Evidence Workbench claim search failed");
+  }
+  await page.locator("[data-ew-claims]").setInputFiles(artifact("invalid-claims.json", {
+    ...reviewClaimJson, claims:[{...reviewClaims[0], review_status:"verified"}], claim_count:1
+  }));
+  if (!(await page.locator("[data-ew-status]").textContent()).includes("Cannot load review artifact") ||
+      Number(await page.locator("[data-ew-result-count]").textContent()) !== 0) {
+    throw new Error("Evidence Workbench did not reject an unsafe verified-status file");
+  }
+  await page.locator("[data-ew-reset]").click();
+  if (!(await page.locator("[data-ew-search]").isDisabled())) {
+    throw new Error("Evidence Workbench reset did not clear controls");
+  }
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("[data-nav-toggle]").click();
   if (await page.locator("[data-nav-toggle]").getAttribute("aria-expanded") !== "true") {
@@ -1102,7 +1181,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: nine routes, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: ten routes including Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
