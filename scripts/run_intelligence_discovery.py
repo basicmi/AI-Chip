@@ -205,39 +205,65 @@ def normalize_candidate(candidate):
     candidate["review_status"] = "requires_human_review"
     return candidate
 
-def collect_releases(source, *, since, fetcher=fetch_json):
+def collect_releases(source, *, since, fetcher=fetch_json, paging=None):
     repo = source["repo"]
-    payload = fetcher(f"https://api.github.com/repos/{repo}/releases?per_page=20")
-    if not isinstance(payload, list):
-        raise ValueError("GitHub releases API did not return a list")
+    # GitHub Releases returns newest releases first, but creation order does
+    # not guarantee publication order. Fetch a bounded set of pages and do not
+    # stop early solely because an older publication date was encountered.
+    per_page = 20
+    max_pages = 3
     candidates = []
-    for release in payload:
-        if not isinstance(release, dict) or release.get("draft") is True:
-            continue
-        published = parse_time(release.get("published_at") or release.get("created_at"))
-        if published is None or published < since:
-            continue
-        tag, link = release.get("tag_name"), release.get("html_url")
-        if not isinstance(tag, str) or not tag or not isinstance(link, str) or not link.startswith("https://github.com/"):
-            continue
-        body = clean_text(release.get("body") or "")
-        candidate = {
-            "candidate_id": f"github-release:{repo}:{tag}",
-            "candidate_type": "project_release",
-            "source_id": source["id"], "source_name": source["name"],
-            "publisher": source.get("publisher", source["name"]),
-            "source_type": "official_project", "independence": "project",
-            "category": source["category"], "repo": repo,
-            "title": release.get("name") or tag, "tag_name": tag,
-            "published_at": published.isoformat().replace("+00:00", "Z"),
-            "updated_at": release.get("updated_at"), "url": link,
-            "prerelease": bool(release.get("prerelease")),
-            "excerpt": body[:1400],
-            "body_excerpt": body[:1400],
-            "evidence_scope": "official_project_release_metadata",
-        }
-        candidate["fingerprint"] = candidate_fingerprint(candidate)
-        candidates.append(normalize_candidate(candidate))
+    seen_tags = set()
+    pages_fetched = 0
+    last_page_full = False
+    raw_items = 0
+    for page in range(1, max_pages + 1):
+        payload = fetcher(f"https://api.github.com/repos/{repo}/releases?per_page={per_page}&page={page}")
+        if not isinstance(payload, list) or len(payload) > per_page:
+            raise ValueError("GitHub releases API returned malformed or oversized page")
+        pages_fetched += 1
+        raw_items += len(payload)
+        last_page_full = len(payload) == per_page
+        for release in payload:
+            if not isinstance(release, dict) or release.get("draft") is True:
+                continue
+            published = parse_time(release.get("published_at") or release.get("created_at"))
+            if published is None or published < since:
+                continue
+            tag, link = release.get("tag_name"), release.get("html_url")
+            if not isinstance(tag, str) or not tag or not isinstance(link, str) or not link.startswith("https://github.com/"):
+                continue
+            if tag in seen_tags:
+                continue
+            seen_tags.add(tag)
+            body = clean_text(release.get("body") or "")
+            candidate = {
+                "candidate_id": f"github-release:{repo}:{tag}",
+                "candidate_type": "project_release",
+                "source_id": source["id"], "source_name": source["name"],
+                "publisher": source.get("publisher", source["name"]),
+                "source_type": "official_project", "independence": "project",
+                "category": source["category"], "repo": repo,
+                "title": release.get("name") or tag, "tag_name": tag,
+                "published_at": published.isoformat().replace("+00:00", "Z"),
+                "updated_at": release.get("updated_at"), "url": link,
+                "prerelease": bool(release.get("prerelease")),
+                "excerpt": body[:1400],
+                "body_excerpt": body[:1400],
+                "evidence_scope": "official_project_release_metadata",
+            }
+            candidate["fingerprint"] = candidate_fingerprint(candidate)
+            candidates.append(normalize_candidate(candidate))
+        if not last_page_full:
+            break
+    if paging is not None:
+        paging.update({
+            "pages_fetched": pages_fetched,
+            "raw_items_scanned": raw_items,
+            "paging_cap_reached": bool(last_page_full and pages_fetched == max_pages),
+            "max_pages": max_pages,
+            "per_page": per_page,
+        })
     return sorted(candidates, key=lambda item: (item["published_at"], item["candidate_id"]), reverse=True)
 
 def collect_rss_atom(source, *, since, fetcher=fetch_text):
@@ -420,10 +446,11 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
             raise ValueError("invalid consecutive source failure count")
         kind = source["kind"]
         attempts = 0
+        paging = {}
         try:
             def fetch_source():
                 if kind == "github_releases":
-                    return collect_releases(source, since=since, fetcher=release_fetcher)
+                    return collect_releases(source, since=since, fetcher=release_fetcher, paging=paging)
                 if kind == "rss_atom":
                     return collect_rss_atom(source, since=since, fetcher=feed_fetcher)
                 if kind == "arxiv_api":
@@ -444,6 +471,7 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 "kind": kind, "status": "observed", "recent_item_count": len(found),
                 "health_transition": status, "consecutive_failures": 0,
                 "attempt_count": attempts,
+                **({"pagination": paging} if paging else {}),
             })
         except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
                 ValueError, RuntimeError, ET.ParseError, OSError) as error:
