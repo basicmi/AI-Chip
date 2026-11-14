@@ -30,6 +30,9 @@ description: Local-only review of unverified intelligence claim and evidence gra
       <label>Evidence graph JSON (optional)
         <input type="file" accept=".json,application/json" data-ew-graph>
       </label>
+      <label>Priority triage JSON (optional, same run)
+        <input type="file" accept=".json,application/json" data-ew-triage>
+      </label>
     </div>
     <p class="compat-load-state" data-ew-status role="status" aria-live="polite">Choose a Claim JSON file to begin.</p>
     <p class="compat-limitations" data-ew-provenance hidden></p>

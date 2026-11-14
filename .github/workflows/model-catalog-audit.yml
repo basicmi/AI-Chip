@@ -56,6 +56,14 @@ jobs:
             --input "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md"
+      - name: Prioritize unverified evidence review queue
+        run: |
+          python3 scripts/triage_intelligence_claims.py \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --graph "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-triage.md"
       - name: Publish review summaries
         if: always()
         run: |
@@ -64,6 +72,9 @@ jobs:
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-claims.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-claims.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-triage.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-triage.md" >> "$GITHUB_STEP_SUMMARY"
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" >> "$GITHUB_STEP_SUMMARY"
@@ -80,5 +91,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-claims.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
+            ${{ runner.temp }}/ai-chip-intelligence-triage.json
+            ${{ runner.temp }}/ai-chip-intelligence-triage.md
           if-no-files-found: ignore
           retention-days: 30

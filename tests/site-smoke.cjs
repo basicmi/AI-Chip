@@ -1145,6 +1145,20 @@ const { chromium } = require("playwright");
       !(await page.locator("[data-ew-status]").textContent()).includes("Nothing was uploaded or approved")) {
     throw new Error("Evidence workbench did not load local unverified review artifacts");
   }
+  const triageFixture = {
+    schema_version:"1.0", ranking_method:"transparent_rule_based_v1",
+    score_is_truth_confidence:false,
+    summary:{input_claims:3,automatically_verified:0},
+    queue:[
+      {claim_id:"claim-test-c",score:99,review_status:"unverified_candidate",related_claim_ids:["claim-test-c"]},
+      {claim_id:"claim-test-a",score:75,review_status:"unverified_candidate",related_claim_ids:["claim-test-a","claim-test-b"]}
+    ]
+  };
+  await page.locator("[data-ew-triage]").setInputFiles(artifact("ai-chip-intelligence-triage.json",triageFixture));
+  await page.waitForFunction(() => document.querySelector("[data-ew-provenance]").textContent.includes("Sorted by review urgency"));
+  if (!(await page.locator("[data-ew-results] .model-support-card").first().textContent()).includes("192 GB")) {
+    throw new Error("Evidence Workbench did not sort by triage review priority");
+  }
   await page.locator("[data-ew-relationship]").selectOption("conflicts");
   if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
     throw new Error("Evidence Workbench failed reviewer-scoped conflict filter");
