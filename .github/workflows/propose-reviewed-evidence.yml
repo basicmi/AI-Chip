@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   propose:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -44,9 +45,13 @@ jobs:
                       p.is_absolute() or ".." in p.parts or p.is_symlink() or not p.is_file() or
                       not p.resolve().is_relative_to(Path.cwd().resolve())):
                   raise SystemExit("Invalid committed review path: " + name)
-          print("PASS: reviewed manifest paths are confined to the checkout")
+              import subprocess
+              subprocess.run(["git", "ls-files", "--error-unmatch", "--", value], check=True,
+                             stdout=subprocess.DEVNULL)
+          print("PASS: reviewed manifest paths are committed and confined to master")
           PY
       - name: Generate evidence-only change
+        id: evidence_proposal
         env:
           APPROVAL_PATH: ${{ inputs.approval_path }}
           CLAIM_PATH: ${{ inputs.claim_report_path }}
@@ -58,7 +63,14 @@ jobs:
             --output "$RUNNER_TEMP/company-profiles-proposal.json" \
             --audit-output "$RUNNER_TEMP/evidence-approval-audit.json" \
             --diff-output "$RUNNER_TEMP/evidence-update.diff"
+          python3 scripts/verify_evidence_patch.py \
+            --original data/company-profiles.json \
+            --updated "$RUNNER_TEMP/company-profiles-proposal.json" \
+            --approval "$APPROVAL_PATH" \
+            --audit "$RUNNER_TEMP/evidence-approval-audit.json" \
+            --output "$RUNNER_TEMP/evidence-patch-verification.json"
           cp "$RUNNER_TEMP/company-profiles-proposal.json" data/company-profiles.json
+          echo "approval_id=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["approval_id"])' "$APPROVAL_PATH")" >> "$GITHUB_OUTPUT"
       - name: Validate generated company profile data and bounded changed paths
         run: |
           python3 scripts/validate_company_profiles.py
@@ -77,12 +89,13 @@ jobs:
           path: |
             ${{ runner.temp }}/evidence-approval-audit.json
             ${{ runner.temp }}/evidence-update.diff
+            ${{ runner.temp }}/evidence-patch-verification.json
           retention-days: 30
       - name: Create review-only pull request
         uses: peter-evans/create-pull-request@v7
         with:
           add-paths: data/company-profiles.json
-          branch: automation/reviewed-evidence-attachment
+          branch: automation/reviewed-evidence-${{ steps.evidence_proposal.outputs.approval_id }}
           delete-branch: true
           commit-message: "Attach human-reviewed evidence to existing company claim"
           title: "Review approved evidence attachment to company profile"
@@ -91,6 +104,10 @@ jobs:
             It attaches one reviewed source to one existing claim without changing any claim
             value, unit, scope, status, product identity or model support.
 
-            The workflow validated the company-profile registry; inspect the linked
-            approval manifest, original source and SHA256 target claim guard before merge.
+            Approval manifest: ${{ inputs.approval_path }}
+            Extracted claim report: ${{ inputs.claim_report_path }}
+
+            The workflow validated the company-profile registry and independently checked
+            that only one evidence record and one reference were appended. Inspect
+            the linked approval manifest, original source and SHA256 guard before merge.
             The extracted source remains an unverified candidate.
