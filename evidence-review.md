@@ -8,7 +8,7 @@ description: Local-only review of unverified intelligence claim and evidence gra
 <section class="page-heading">
   <p class="eyebrow">INTELLIGENCE · EVIDENCE · HUMAN REVIEW</p>
   <h1>Evidence Review Workbench</h1>
-  <p>Review unverified technical claims, original sources, duplicate wording and reviewer-scoped comparison flags. Files are read locally in your browser; nothing is uploaded or approved.</p>
+  <p>Review unverified technical claims, original sources, duplicate wording and reviewer-scoped comparison flags. Files are read locally in your browser; nothing is uploaded or approved. Optional persistent review state tracks backlog age, not factual truth.</p>
   <div class="page-meta">
     <span>Data <strong>local GitHub Actions artifacts</strong></span>
     <a href="https://github.com/basicmi/AI-Chip/actions/workflows/model-catalog-audit.yml" target="_blank" rel="noopener noreferrer">Download weekly discovery artifact ↗</a>
@@ -32,6 +32,9 @@ description: Local-only review of unverified intelligence claim and evidence gra
       </label>
       <label>Priority triage JSON (optional, same run)
         <input type="file" accept=".json,application/json" data-ew-triage>
+      </label>
+      <label>Persistent review state JSON (optional, same run)
+        <input type="file" accept=".json,application/json" data-ew-aging>
       </label>
     </div>
     <p class="compat-load-state" data-ew-status role="status" aria-live="polite">Choose a Claim JSON file to begin.</p>
@@ -67,7 +70,41 @@ description: Local-only review of unverified intelligence claim and evidence gra
           <option value="standalone">No flagged relationship</option>
         </select>
       </label>
+      <label>First observed (review backlog)
+        <select data-ew-age-filter disabled>
+          <option value="">Any review age</option>
+          <option value="overdue_7d">7+ days</option>
+          <option value="overdue_14d">14+ days</option>
+          <option value="overdue_30d">30+ days</option>
+        </select>
+      </label>
+      <label>Review workflow status
+        <select data-ew-state-filter disabled>
+          <option value="">Any review state</option>
+          <option value="pending">Pending</option>
+          <option value="needs_more_evidence">Needs more evidence</option>
+          <option value="rejected">Rejected</option>
+          <option value="accepted_for_evidence_attachment">Accepted for evidence attachment</option>
+        </select>
+      </label>
     </div>
+  </section>
+  <section class="compat-filter-panel" data-ew-aging-panel hidden aria-label="Review backlog and aging alerts">
+    <div class="compat-filter-heading">
+      <div><p class="eyebrow">REVIEW BACKLOG / SNAPSHOT</p><h2>Unresolved review aging</h2></div>
+      <span class="status-pill">Not verification</span>
+    </div>
+    <p data-ew-aging-meta>Waiting time is measured from first observation in the Actions cache, not from original publication.</p>
+    <div class="workload-stat-grid ew-aging-stats">
+      <div class="compat-stat"><span>Tracked backlog</span><strong data-ew-aging-count="tracked">—</strong></div>
+      <div class="compat-stat"><span>Unresolved 7+ days</span><strong data-ew-aging-count="seven">—</strong></div>
+      <div class="compat-stat"><span>Unresolved 14+ days</span><strong data-ew-aging-count="fourteen">—</strong></div>
+      <div class="compat-stat"><span>Unresolved 30+ days</span><strong data-ew-aging-count="thirty">—</strong></div>
+    </div>
+    <h3>Not observed in the current discovery</h3>
+    <p>These historical IDs remain in the cached backlog even though the current Claim JSON no longer contains their full extracted statements. They cannot be reviewed or approved from this page without retrieving the original report.</p>
+    <div data-ew-historical-list class="ew-historical-list"></div>
+    <p data-ew-historical-summary></p>
   </section>
   <div class="workload-results-heading">
     <div><p class="eyebrow">03 / REVIEW QUEUE</p><h2><span data-ew-result-count>0</span> candidates</h2></div>
