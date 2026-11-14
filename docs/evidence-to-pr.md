@@ -60,3 +60,10 @@ This initial phase does not create new claims, modify numeric values, change
 claim statuses or alter model support, compatibility, benchmark, product
 identity, hardware scope or lifecycle state. These require separate governed
 workflows with stronger claim-level evidence checks.
+
+## End-to-end CI rehearsal and independent verification (PR #94)
+
+See [Evidence-to-PR Rehearsal](evidence-to-pr-rehearsal.md) for a test-only
+replay using a real existing company claim, an independent exact-change
+gate, and hardened manual-workflow constraints. No test fixture is treated
+as human-approved factual evidence.
