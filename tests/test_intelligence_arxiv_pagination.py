@@ -41,10 +41,11 @@ class ArxivPaginationTests(unittest.TestCase):
         diag={}
         result=collect_arxiv(SOURCE,since=datetime(2026,10,1,tzinfo=timezone.utc),
                              fetcher=fetch,paging=diag,sleep=sleeps.append)
-        self.assertEqual(calls,[0,2])
-        self.assertEqual(sleeps,[3])
+        self.assertEqual(calls,[0,2,4])
+        self.assertEqual(sleeps,[3,3])
         self.assertEqual(len(result),3)
         self.assertEqual(diag["raw_items_scanned"],4)
+        self.assertEqual(diag["pages_fetched"],3)
         self.assertFalse(diag["paging_cap_reached"])
     def test_short_first_page_avoids_additional_requests(self):
         fetch,calls=fetch_pages({0:["2611.00001"]})
