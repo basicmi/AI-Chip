@@ -4,14 +4,14 @@
   if (!root) return;
   const $ = selector => root.querySelector(selector);
   const ui = {
-    claims: $("[data-ew-claims]"), graph: $("[data-ew-graph]"),
+    claims: $("[data-ew-claims]"), graph: $("[data-ew-graph]"), triage: $("[data-ew-triage]"),
     status: $("[data-ew-status]"), provenance: $("[data-ew-provenance]"),
     search: $("[data-ew-search]"), topic: $("[data-ew-topic]"),
     publisher: $("[data-ew-publisher]"), relationship: $("[data-ew-relationship]"),
     results: $("[data-ew-results]"), empty: $("[data-ew-empty]"),
     count: $("[data-ew-result-count]"), summary: $("[data-ew-summary]")
   };
-  let claimData = null, graphData = null;
+  let claimData = null, graphData = null, triageData = null;
   const MAX_BYTES = 12 * 1024 * 1024;
   const element = (tag, cls = "", text) => {
     const node = document.createElement(tag);
@@ -33,9 +33,11 @@
   const clear = () => {
     claimData = null;
     graphData = null;
+    triageData = null;
     root.dispatchEvent(new CustomEvent("ew-clear-review"));
     ui.claims.value = "";
     ui.graph.value = "";
+    ui.triage.value = "";
     ui.search.value = "";
     ui.topic.replaceChildren(element("option", "", "All topics"));
     ui.publisher.replaceChildren(element("option", "", "All publishers"));
@@ -89,6 +91,31 @@
       }
     }
     return graph;
+  };
+  const validateTriage = (data, claims) => {
+    if (!data || data.schema_version !== "1.0" ||
+        data.ranking_method !== "transparent_rule_based_v1" ||
+        data.score_is_truth_confidence !== false ||
+        data.summary?.automatically_verified !== 0 ||
+        data.summary?.input_claims !== claims.claims.length ||
+        !Array.isArray(data.queue)) {
+      throw new Error("Triage JSON has incompatible version, claim counts or confidence policy.");
+    }
+    const ids = new Set(claims.claims.map(item => item.claim_id));
+    const seen = new Set();
+    for (const group of data.queue) {
+      if (!group || !Array.isArray(group.related_claim_ids) ||
+          group.related_claim_ids.length === 0 ||
+          !ids.has(group.claim_id) || !Number.isFinite(group.score) ||
+          group.review_status !== "unverified_candidate") {
+        throw new Error("Invalid triage group or review status.");
+      }
+      for (const id of group.related_claim_ids) {
+        if (!ids.has(id) || seen.has(id)) throw new Error("Invalid or repeated triage Claim ID.");
+        seen.add(id);
+      }
+    }
+    return data;
   };
   const readJson = async file => {
     if (!file || file.size === 0 || file.size > MAX_BYTES) {
@@ -186,6 +213,14 @@
         claim.source?.publisher, claim.source?.url, claim.evidence_quote].filter(Boolean).join(" ").toLowerCase();
       return !query || haystack.includes(query);
     });
+    const priorities = new Map();
+    if (triageData) {
+      for (const group of triageData.queue) {
+        for (const id of group.related_claim_ids) priorities.set(id, group.score);
+      }
+      matches.sort((a,b) => (priorities.get(b.claim_id) ?? -1) - (priorities.get(a.claim_id) ?? -1) ||
+        a.claim_id.localeCompare(b.claim_id));
+    }
     ui.results.replaceChildren(...matches.slice(0, 250).map(item => renderCard(item, relations.get(item.claim_id))));
     ui.count.textContent = String(matches.length);
     ui.summary.textContent = "Showing " + Math.min(250, matches.length) + " of " + matches.length +
@@ -211,8 +246,10 @@
     try {
       const claims = validateClaims(await readJson(ui.claims.files[0]));
       const graph = ui.graph.files.length ? validateGraph(await readJson(ui.graph.files[0]), claims) : null;
+      const triage = ui.triage.files.length ? validateTriage(await readJson(ui.triage.files[0]), claims) : null;
       claimData = claims;
       graphData = graph;
+      triageData = triage;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
       options(ui.topic, claims.claims.map(item => item.topic), "topics");
       options(ui.publisher, claims.claims.map(item => item.source?.publisher || item.source?.source_name || "Unknown source"), "publishers");
@@ -228,6 +265,7 @@
       ui.provenance.textContent = "Claims generated " + (claims.generated_at || "unknown") +
         " · " + (graph ? "Graph generated " + (graph.generated_at || "unknown") :
           "No graph loaded: duplicate/conflict filters are unavailable") +
+        " · " + (triage ? "Sorted by review urgency, not truth confidence" : "Default source order") +
         " · All candidates stay unverified. Files remain in this browser session.";
       ui.provenance.hidden = false;
       status("Artifacts loaded locally. Nothing was uploaded or approved.");
@@ -235,6 +273,7 @@
     } catch (error) {
       claimData = null;
       graphData = null;
+      triageData = null;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
       ui.results.replaceChildren();
       ui.empty.hidden = false;
@@ -248,6 +287,7 @@
   };
   ui.claims.addEventListener("change", load);
   ui.graph.addEventListener("change", load);
+  ui.triage.addEventListener("change", load);
   ui.search.addEventListener("input", render);
   [ui.topic, ui.publisher, ui.relationship].forEach(node => node.addEventListener("change", render));
   $("[data-ew-reset]").addEventListener("click", clear);

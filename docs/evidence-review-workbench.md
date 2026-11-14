@@ -47,3 +47,13 @@ The Playwright smoke test exercises local review selection, decision recording,
 blocked export without explicit confirmation, approval JSON export using a
 synthetic test-only company Claim, and SHA256 equality with Node crypto.
 No synthetic source is represented as real evidence or saved to production.
+
+## Priority triage (PR #97)
+
+Optionally load `ai-chip-intelligence-triage.json` from the same weekly run.
+The browser validates the input Claim IDs and unverified status, then orders
+all matched Claim cards by the transparent rule-based **review urgency** score.
+Scores do not represent truth confidence; exact-text duplicates are still
+not independent evidence. The triage file is local-only and never auto-approves
+claims or updates the company/product databases. The original Claim and Graph
+files remain required/optional exactly as before.
