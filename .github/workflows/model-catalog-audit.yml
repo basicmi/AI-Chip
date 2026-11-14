@@ -64,6 +64,13 @@ jobs:
             --state-file "$RUNNER_TEMP/intelligence-state-staged.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-summary.md"
+      - name: Audit source coverage and possible discovery gaps
+        run: |
+          python3 scripts/audit_intelligence_source_coverage.py \
+            --registry "data/intelligence-sources.json" \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-source-coverage.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-source-coverage.md"
       - name: Extract structured claim candidates
         run: |
           python3 scripts/extract_intelligence_claims.py \
@@ -125,6 +132,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-summary.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-summary.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-source-coverage.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-source-coverage.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-claims.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-claims.md" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -148,6 +158,8 @@ jobs:
           path: |
             ${{ runner.temp }}/ai-chip-intelligence-discovery.json
             ${{ runner.temp }}/ai-chip-intelligence-summary.md
+            ${{ runner.temp }}/ai-chip-intelligence-source-coverage.json
+            ${{ runner.temp }}/ai-chip-intelligence-source-coverage.md
             ${{ runner.temp }}/ai-chip-intelligence-claims.json
             ${{ runner.temp }}/ai-chip-intelligence-claims.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
