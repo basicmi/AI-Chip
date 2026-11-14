@@ -1,0 +1,13 @@
+.intelligence-operations .ops-table-scroll {overflow-x:auto;margin-top:1rem}
+.intelligence-operations .ops-table {width:100%;border-collapse:collapse;min-width:650px;font-size:.92rem}
+.intelligence-operations .ops-table th,
+.intelligence-operations .ops-table td {padding:.7rem .8rem;text-align:left;border-bottom:1px solid var(--line,#d7dce0)}
+.intelligence-operations .ops-table th {font-weight:650;white-space:nowrap}
+.intelligence-operations [data-ops-status].is-error {color:#b3483d;font-weight:650}
+.intelligence-operations [data-ops-cache] {margin-top:.85rem}
+.intelligence-operations [data-ops-select] {max-width:100%;margin-top:.4rem}
+.intelligence-operations [data-ops-files] {width:100%;margin-top:.5rem}
+
+/* Author display rules must not override the hidden state after invalid file input. */
+.intelligence-operations [data-ops-history-panel][hidden],
+.intelligence-operations [data-ops-sources-panel][hidden] { display: none !important; }

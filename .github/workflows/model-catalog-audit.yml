@@ -49,6 +49,10 @@ jobs:
           if [ -f .cache/ai-chip-review-state.json ]; then
             cp .cache/ai-chip-review-state.json "$RUNNER_TEMP/review-state-staged.json"
           fi
+      - name: Record restored-cache presence
+        run: |
+          printf 'DISCOVERY_CACHE_PRESENT=%s\n' "$(test -f .cache/ai-chip-intelligence-state.json && echo true || echo false)" >> "$GITHUB_ENV"
+          printf 'REVIEW_CACHE_PRESENT=%s\n' "$(test -f .cache/ai-chip-review-state.json && echo true || echo false)" >> "$GITHUB_ENV"
       - name: Validate curated source registry
         run: python3 scripts/validate_intelligence_sources.py
       - name: Discover releases, model changes and publisher candidates
@@ -99,6 +103,15 @@ jobs:
             --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-health.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-health.md"
+      - name: Produce operational observability snapshot
+        run: |
+          python3 scripts/build_intelligence_operational_snapshot.py \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --health "$RUNNER_TEMP/ai-chip-intelligence-health.json" \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --discovery-cache-present "$DISCOVERY_CACHE_PRESENT" \
+            --review-cache-present "$REVIEW_CACHE_PRESENT" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-operations.json"
       - name: Commit cached checkpoints after successful audit
         run: |
           test -s "$RUNNER_TEMP/intelligence-state-staged.json"
@@ -145,5 +158,6 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
             ${{ runner.temp }}/ai-chip-intelligence-health.json
             ${{ runner.temp }}/ai-chip-intelligence-health.md
+            ${{ runner.temp }}/ai-chip-intelligence-operations.json
           if-no-files-found: ignore
           retention-days: 30
