@@ -1159,6 +1159,53 @@ const { chromium } = require("playwright");
   if (!(await page.locator("[data-ew-results] .model-support-card").first().textContent()).includes("192 GB")) {
     throw new Error("Evidence Workbench did not sort by triage review priority");
   }
+  // PR #99 persistent review state snapshot (all data synthetic and read-only).
+  const historyFixture = [
+    {claim_id:"claim-test-a",observed_this_run:true,days_since_first_seen:16,
+     first_seen_at:"2026-10-29T00:00:00Z",last_seen_at:"2026-11-14T00:00:00Z",
+     review_state:"pending",alert_level:"overdue_14d",review_is_factual_verification:false,
+     source_url:"https://example.org/vendor-release"},
+    {claim_id:"claim-test-b",observed_this_run:true,days_since_first_seen:35,
+     first_seen_at:"2026-10-10T00:00:00Z",last_seen_at:"2026-11-14T00:00:00Z",
+     review_state:"needs_more_evidence",alert_level:"follow_up_needed",review_is_factual_verification:false,
+     source_url:"https://example.org/reprint"},
+    {claim_id:"claim-test-c",observed_this_run:true,days_since_first_seen:40,
+     first_seen_at:"2026-10-05T00:00:00Z",last_seen_at:"2026-11-14T00:00:00Z",
+     review_state:"rejected",alert_level:"handled",review_is_factual_verification:false,
+     source_url:"https://example.org/other-report"},
+    {claim_id:"claim-test-old",observed_this_run:false,days_since_first_seen:52,
+     first_seen_at:"2026-09-23T00:00:00Z",last_seen_at:"2026-11-07T00:00:00Z",
+     review_state:"pending",alert_level:"overdue_30d",review_is_factual_verification:false,
+     source_url:"https://example.org/old-claim"}
+  ];
+  const historyJson = {
+    schema_version:"1.0",generated_at:"2026-11-14T00:00:00Z",
+    observation_state:"cache_persisted",state_is_approval:false,
+    summary:{tracked_current_claims:3,tracked_backlog_claims:4,backlog_not_observed_this_run:1,
+      unknown_first_seen_if_cache_reset:true,
+      review_states:{pending:2,needs_more_evidence:1,rejected:1,accepted_for_evidence_attachment:0}},
+    claim_aging:historyFixture,
+    aging_backlog:[historyFixture[0],historyFixture[1],historyFixture[3]],
+    queue:[]
+  };
+  await page.locator("[data-ew-aging]").setInputFiles(artifact("ai-chip-intelligence-review-state.json",historyJson));
+  await page.waitForFunction(() => document.querySelector("[data-ew-aging-count='tracked']")?.textContent === "4");
+  if (await page.locator("[data-ew-aging-count='fourteen']").textContent() !== "3" ||
+      await page.locator("[data-ew-aging-count='thirty']").textContent() !== "2" ||
+      !(await page.locator("[data-ew-historical-list]").textContent()).includes("claim-test-old")) {
+    throw new Error("Persistent review state dashboard did not show accurate historical backlog");
+  }
+  await page.locator("[data-ew-age-filter]").selectOption("overdue_30d");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
+    throw new Error("Evidence Review Workbench 30+ day review age filter failed");
+  }
+  await page.locator("[data-ew-age-filter]").selectOption("");
+  await page.locator("[data-ew-state-filter]").selectOption("needs_more_evidence");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 1 ||
+      !(await page.locator("[data-ew-results]").textContent()).includes("claim-test-b")) {
+    throw new Error("Evidence Review Workbench workflow review-state filter failed");
+  }
+  await page.locator("[data-ew-clear-filters]").click();
   await page.locator("[data-ew-relationship]").selectOption("conflicts");
   if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
     throw new Error("Evidence Workbench failed reviewer-scoped conflict filter");
@@ -1231,6 +1278,16 @@ const { chromium } = require("playwright");
     throw new Error("Approval confirmation was not cleared after export");
   }
   require("fs").unlinkSync(approvalPath);
+  await page.locator("[data-ew-aging]").setInputFiles(artifact("invalid-review-state.json", {
+    ...historyJson,
+    state_is_approval:true
+  }));
+  await page.waitForFunction(() => document.querySelector("[data-ew-status]")?.textContent?.includes("Cannot load review artifact"));
+  if (!(await page.locator("[data-ew-age-filter]").isDisabled())) {
+    throw new Error("Evidence Workbench accepted a forged approval-state snapshot");
+  }
+  await page.locator("[data-ew-aging]").setInputFiles(artifact("ai-chip-intelligence-review-state.json",historyJson));
+  await page.waitForFunction(() => document.querySelector("[data-ew-aging-count='tracked']")?.textContent === "4");
   await page.locator("[data-ew-claims]").setInputFiles(artifact("invalid-claims.json", {
     ...reviewClaimJson, claims:[{...reviewClaims[0], review_status:"verified"}], claim_count:1
   }));

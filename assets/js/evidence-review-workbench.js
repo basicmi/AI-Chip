@@ -4,14 +4,15 @@
   if (!root) return;
   const $ = selector => root.querySelector(selector);
   const ui = {
-    claims: $("[data-ew-claims]"), graph: $("[data-ew-graph]"), triage: $("[data-ew-triage]"),
+    claims: $("[data-ew-claims]"), graph: $("[data-ew-graph]"), triage: $("[data-ew-triage]"), aging: $("[data-ew-aging]"),
     status: $("[data-ew-status]"), provenance: $("[data-ew-provenance]"),
     search: $("[data-ew-search]"), topic: $("[data-ew-topic]"),
     publisher: $("[data-ew-publisher]"), relationship: $("[data-ew-relationship]"),
+    ageFilter: $("[data-ew-age-filter]"), stateFilter: $("[data-ew-state-filter]"),
     results: $("[data-ew-results]"), empty: $("[data-ew-empty]"),
     count: $("[data-ew-result-count]"), summary: $("[data-ew-summary]")
   };
-  let claimData = null, graphData = null, triageData = null;
+  let claimData = null, graphData = null, triageData = null, agingData = null;
   const MAX_BYTES = 12 * 1024 * 1024;
   const element = (tag, cls = "", text) => {
     const node = document.createElement(tag);
@@ -34,17 +35,22 @@
     claimData = null;
     graphData = null;
     triageData = null;
+    agingData = null;
     root.dispatchEvent(new CustomEvent("ew-clear-review"));
     ui.claims.value = "";
     ui.graph.value = "";
     ui.triage.value = "";
+    ui.aging.value = "";
     ui.search.value = "";
     ui.topic.replaceChildren(element("option", "", "All topics"));
     ui.publisher.replaceChildren(element("option", "", "All publishers"));
     ui.topic.firstChild.value = "";
     ui.publisher.firstChild.value = "";
     ui.relationship.value = "";
-    [ui.search, ui.topic, ui.publisher, ui.relationship].forEach(node => { node.disabled = true; });
+    ui.ageFilter.value = "";
+    ui.stateFilter.value = "";
+    $("[data-ew-aging-panel]").hidden = true;
+    [ui.search, ui.topic, ui.publisher, ui.relationship, ui.ageFilter, ui.stateFilter].forEach(node => { node.disabled = true; });
     ui.provenance.hidden = true;
     ui.results.replaceChildren();
     ui.empty.hidden = false;
@@ -117,6 +123,90 @@
     }
     return data;
   };
+  const VALID_REVIEW_STATES = new Set(["pending", "needs_more_evidence", "rejected", "accepted_for_evidence_attachment"]);
+  const VALID_ALERTS = new Set(["within_7d", "overdue_7d", "overdue_14d", "overdue_30d", "follow_up_needed", "handled"]);
+  const validateAging = (data, claims) => {
+    if (!data || data.schema_version !== "1.0" || data.state_is_approval !== false ||
+        data.observation_state !== "cache_persisted" ||
+        !Array.isArray(data.claim_aging) || !Array.isArray(data.aging_backlog) ||
+        !Array.isArray(data.queue) ||
+        !data.summary || data.summary.tracked_current_claims !== claims.claims.length ||
+        data.summary.tracked_backlog_claims !== data.claim_aging.length ||
+        data.summary.unknown_first_seen_if_cache_reset !== true ||
+        data.summary.backlog_not_observed_this_run !== data.claim_aging.length - claims.claims.length) {
+      throw new Error("Incompatible review state snapshot or backlog counts.");
+    }
+    const currentIds = new Set(claims.claims.map(claim => claim.claim_id));
+    const ids = new Set();
+    for (const entry of data.claim_aging) {
+      if (!entry || typeof entry.claim_id !== "string" || ids.has(entry.claim_id) ||
+          typeof entry.observed_this_run !== "boolean" ||
+          entry.observed_this_run !== currentIds.has(entry.claim_id) ||
+          !Number.isSafeInteger(entry.days_since_first_seen) || entry.days_since_first_seen < 0 ||
+          !VALID_REVIEW_STATES.has(entry.review_state) ||
+          !VALID_ALERTS.has(entry.alert_level) || entry.review_is_factual_verification !== false ||
+          !Number.isFinite(Date.parse(entry.first_seen_at)) ||
+          !Number.isFinite(Date.parse(entry.last_seen_at)) ||
+          Date.parse(entry.first_seen_at) > Date.parse(entry.last_seen_at)) {
+        throw new Error("Malformed or contradictory persisted review state entry.");
+      }
+      ids.add(entry.claim_id);
+    }
+    if ([...currentIds].some(id => !ids.has(id))) throw new Error("Review snapshot missing current Claim IDs.");
+    const pendingIds = new Set(data.claim_aging.filter(row =>
+      row.review_state === "pending" || row.review_state === "needs_more_evidence").map(row => row.claim_id));
+    const seenPending = new Set();
+    for (const row of data.aging_backlog) {
+      if (!row || !pendingIds.has(row.claim_id) || seenPending.has(row.claim_id)) {
+        throw new Error("Unresolved backlog references invalid or handled claim IDs.");
+      }
+      seenPending.add(row.claim_id);
+    }
+    if (seenPending.size !== pendingIds.size) throw new Error("Unresolved backlog is incomplete.");
+    for (const state of VALID_REVIEW_STATES) {
+      const actual = data.claim_aging.filter(row => row.review_state === state).length;
+      if (data.summary.review_states?.[state] !== actual) throw new Error("Review state summary is inconsistent.");
+    }
+    return data;
+  };
+  const renderBacklog = () => {
+    const panel = $("[data-ew-aging-panel]");
+    panel.hidden = !agingData;
+    if (!agingData) return;
+    const entries = agingData.claim_aging;
+    const active = entries.filter(x => x.review_state === "pending" || x.review_state === "needs_more_evidence");
+    const count = key => $("[data-ew-aging-count='" + key + "']");
+    count("tracked").textContent = String(entries.length);
+    count("seven").textContent = String(active.filter(x => x.days_since_first_seen >= 7).length);
+    count("fourteen").textContent = String(active.filter(x => x.days_since_first_seen >= 14).length);
+    count("thirty").textContent = String(active.filter(x => x.days_since_first_seen >= 30).length);
+    $("[data-ew-aging-meta]").textContent =
+      "Snapshot " + (agingData.generated_at || "unknown") +
+      " · First observed in a best-effort Actions cache; eviction or changed Claim IDs can reset age. " +
+      "These are operational review states, never verified facts.";
+    const list = $("[data-ew-historical-list]");
+    const historical = entries.filter(x => !x.observed_this_run);
+    historical.sort((a,b) => b.days_since_first_seen - a.days_since_first_seen ||
+      a.claim_id.localeCompare(b.claim_id));
+    list.replaceChildren();
+    for (const item of historical.slice(0, 100)) {
+      const row = element("div", "ew-backlog-row");
+      row.append(element("strong", "", item.claim_id));
+      row.append(element("span", "", item.days_since_first_seen + " days · " + item.review_state +
+        " · last observed " + item.last_seen_at));
+      const url = safeUrl(item.source_url);
+      if (url) {
+        const link = element("a", "", "Original source ↗");
+        link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
+        row.append(link);
+      }
+      list.append(row);
+    }
+    if (!historical.length) list.append(element("p", "", "No historical claims absent from this run."));
+    $("[data-ew-historical-summary]").textContent =
+      "Showing " + Math.min(100, historical.length) + " / " + historical.length +
+      " previously observed records (historical details require their original Claim report).";
+  };
   const readJson = async file => {
     if (!file || file.size === 0 || file.size > MAX_BYTES) {
       throw new Error("JSON files must be non-empty and at most 12 MiB.");
@@ -158,6 +248,13 @@
       addTag(tags, String(claim.value) + " " + (claim.unit || "unit unknown"));
     }
     if (claim.scope?.text) addTag(tags, claim.scope.text);
+    const aging = agingData?.claim_aging.find(item => item.claim_id === claim.claim_id);
+    if (aging) {
+      addTag(tags, aging.days_since_first_seen + " days in review queue");
+      addTag(tags, aging.review_state.replaceAll("_", " ") + " (workflow only)");
+      if (aging.alert_level !== "within_7d" && aging.alert_level !== "handled")
+        addTag(tags, "Aging alert: " + aging.alert_level);
+    }
     (claim.qualifiers || []).slice(0, 5).forEach(value => addTag(tags, value));
     if (rel?.duplicates.length) addTag(tags, "Exact wording duplicate (not corroboration)");
     if (rel?.conflicts.length) addTag(tags, "Possible specification conflict");
@@ -201,8 +298,14 @@
     const relations = makeRelations();
     const query = ui.search.value.trim().toLowerCase();
     const topic = ui.topic.value, publisher = ui.publisher.value, relationship = ui.relationship.value;
+    const agingMap = new Map((agingData?.claim_aging || []).map(entry => [entry.claim_id, entry]));
+    const age = ui.ageFilter.value, reviewState = ui.stateFilter.value;
     const matches = claimData.claims.filter(claim => {
       const rel = relations.get(claim.claim_id);
+      const record = agingMap.get(claim.claim_id);
+      if (reviewState && record?.review_state !== reviewState) return false;
+      if (age && (!record || record.days_since_first_seen <
+        (age === "overdue_30d" ? 30 : age === "overdue_14d" ? 14 : 7))) return false;
       if (topic && claim.topic !== topic) return false;
       if (publisher && (claim.source?.publisher || claim.source?.source_name || "Unknown source") !== publisher) return false;
       if (relationship === "duplicates" && !rel?.duplicates.length) return false;
@@ -247,13 +350,17 @@
       const claims = validateClaims(await readJson(ui.claims.files[0]));
       const graph = ui.graph.files.length ? validateGraph(await readJson(ui.graph.files[0]), claims) : null;
       const triage = ui.triage.files.length ? validateTriage(await readJson(ui.triage.files[0]), claims) : null;
+      const aging = ui.aging.files.length ? validateAging(await readJson(ui.aging.files[0]), claims) : null;
       claimData = claims;
       graphData = graph;
       triageData = triage;
+      agingData = aging;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
       options(ui.topic, claims.claims.map(item => item.topic), "topics");
       options(ui.publisher, claims.claims.map(item => item.source?.publisher || item.source?.source_name || "Unknown source"), "publishers");
       [ui.search, ui.topic, ui.publisher, ui.relationship].forEach(node => { node.disabled = false; });
+      [ui.ageFilter, ui.stateFilter].forEach(node => { node.disabled = !aging; node.value = ""; });
+      renderBacklog();
       ui.search.value = "";
       ui.relationship.value = "";
       const sources = new Set(claims.claims.map(item => safeUrl(item.source.url)).filter(Boolean));
@@ -266,6 +373,7 @@
         " · " + (graph ? "Graph generated " + (graph.generated_at || "unknown") :
           "No graph loaded: duplicate/conflict filters are unavailable") +
         " · " + (triage ? "Sorted by review urgency, not truth confidence" : "Default source order") +
+        " · " + (aging ? "Persistent review snapshot loaded (not factual verification)" : "No aging snapshot loaded") +
         " · All candidates stay unverified. Files remain in this browser session.";
       ui.provenance.hidden = false;
       status("Artifacts loaded locally. Nothing was uploaded or approved.");
@@ -274,13 +382,15 @@
       claimData = null;
       graphData = null;
       triageData = null;
+      agingData = null;
+      $("[data-ew-aging-panel]").hidden = true;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
       ui.results.replaceChildren();
       ui.empty.hidden = false;
       ["claims", "sources", "duplicates", "conflicts"].forEach(key => {
         $("[data-ew-stat='" + key + "']").textContent = "—";
       });
-      [ui.search, ui.topic, ui.publisher, ui.relationship].forEach(node => { node.disabled = true; });
+      [ui.search, ui.topic, ui.publisher, ui.relationship, ui.ageFilter, ui.stateFilter].forEach(node => { node.disabled = true; });
       ui.count.textContent = "0";
       status("Cannot load review artifact: " + error.message, true);
     }
@@ -288,11 +398,13 @@
   ui.claims.addEventListener("change", load);
   ui.graph.addEventListener("change", load);
   ui.triage.addEventListener("change", load);
+  ui.aging.addEventListener("change", load);
   ui.search.addEventListener("input", render);
-  [ui.topic, ui.publisher, ui.relationship].forEach(node => node.addEventListener("change", render));
+  [ui.topic, ui.publisher, ui.relationship, ui.ageFilter, ui.stateFilter].forEach(node => node.addEventListener("change", render));
   $("[data-ew-reset]").addEventListener("click", clear);
   $("[data-ew-clear-filters]").addEventListener("click", () => {
     ui.search.value = ""; ui.topic.value = ""; ui.publisher.value = ""; ui.relationship.value = "";
+    ui.ageFilter.value = ""; ui.stateFilter.value = "";
     render();
   });
   clear();

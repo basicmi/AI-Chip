@@ -57,3 +57,35 @@ Scores do not represent truth confidence; exact-text duplicates are still
 not independent evidence. The triage file is local-only and never auto-approves
 claims or updates the company/product databases. The original Claim and Graph
 files remain required/optional exactly as before.
+
+
+## Persistent review backlog dashboard (PR #99)
+
+Load the optional \`ai-chip-intelligence-review-state.json\` from **the same
+workflow run** as the Claim and (optionally) Evidence Graph / Triage files.
+The workbench validates the versioned snapshot, current Claim membership,
+review-state counts, backlog coverage, age values, and the explicit
+\`state_is_approval: false\` boundary.
+
+The dashboard displays:
+- A point-in-time backlog count with unresolved 7/14/30+ day distributions;
+- First-observed aging and workflow status on current Claim cards;
+- Filters for 7+/14+/30+ day review age and operational review status;
+- A separate list of previously observed Claim IDs **absent from this week's
+  discovery**. These entries have only the retained ID, last known source
+  and operational metadata, not their original Claim text. They cannot be
+  approved from this view without retrieving the original report.
+
+**A single snapshot is not a historical trend.** The tool does not invent
+time-series charts from one observation; accurate week-over-week trends
+would require multiple persisted snapshots. Actions cache eviction, metadata
+changes or regenerated IDs may reset first-seen time. Source publication age
+and first-seen wait age are different quantities.
+
+\`accepted_for_evidence_attachment\` is an operational review decision, not
+independent verification of a product claim. No website upload or GitHub
+write occurs. The manually gated Evidence-to-PR approval is unchanged.
+
+The browser smoke test uses synthetic Claim/Graph/Triage/Review-State
+snapshots, covers old-but-not-observed backlog, aging counters, review-state
+and age filters, and rejects a fabricated \`state_is_approval: true\` file.

@@ -31,3 +31,10 @@
 .evidence-workbench [data-ew-approval-panel] button:disabled { opacity: .5; cursor: not-allowed; }
 .evidence-workbench [data-ew-approval-panel] textarea,
 .evidence-workbench [data-ew-decision-panel] textarea { min-height: 80px; width: 100%; }
+
+.evidence-workbench .ew-aging-stats { margin: 1rem 0; }
+.evidence-workbench .ew-historical-list { display: grid; gap: .6rem; margin: .9rem 0; }
+.evidence-workbench .ew-backlog-row { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr) auto; gap: 1rem; align-items: start; padding: .8rem; border: 1px solid var(--line, #d7dce0); border-radius: 8px; overflow-wrap: anywhere; }
+.evidence-workbench .ew-backlog-row span { color: var(--muted, #687386); }
+.evidence-workbench .ew-backlog-row a { text-decoration: underline; }
+@media(max-width: 720px) { .evidence-workbench .ew-backlog-row { grid-template-columns: 1fr; gap: .25rem; } }
