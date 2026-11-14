@@ -34,6 +34,13 @@ jobs:
           key: ai-chip-intelligence-state-${{ github.run_id }}
           restore-keys: |
             ai-chip-intelligence-state-
+      - name: Restore persistent review aging state
+        uses: actions/cache@v4
+        with:
+          path: .cache/ai-chip-review-state.json
+          key: ai-chip-review-state-${{ github.run_id }}
+          restore-keys: |
+            ai-chip-review-state-
       - name: Validate curated source registry
         run: python3 scripts/validate_intelligence_sources.py
       - name: Discover releases, model changes and publisher candidates
@@ -64,6 +71,15 @@ jobs:
             --graph "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-triage.md"
+      - name: Track first-seen claims and review aging
+        run: |
+          python3 scripts/track_intelligence_review_state.py \
+            --triage "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
+            --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --state ".cache/ai-chip-review-state.json" \
+            --ledger "data/intelligence-review-decisions.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md"
       - name: Publish review summaries
         if: always()
         run: |
@@ -75,6 +91,9 @@ jobs:
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-triage.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-triage.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" >> "$GITHUB_STEP_SUMMARY"
           fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" >> "$GITHUB_STEP_SUMMARY"
@@ -93,5 +112,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
+            ${{ runner.temp }}/ai-chip-intelligence-review-state.json
+            ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
           if-no-files-found: ignore
           retention-days: 30
