@@ -35,3 +35,12 @@ No PR is auto-created or auto-merged by scheduled discovery.
 
     python3 -m unittest discover -s tests -p "test_intelligence_claims.py"
     python3 scripts/extract_intelligence_claims.py --input /tmp/ai-chip-intelligence.json --output /tmp/ai-chip-claims.json --summary-path /tmp/ai-chip-claims.md
+
+## Cross-source evidence graph (PR #91)
+
+See [Evidence Graph and Cross-source Review](evidence-graph-review.md) for exact
+text deduplication and optional reviewer-scoped numeric comparisons.
+
+Default weekly runs create an unverified Claim -> Source graph and a Markdown
+review report. No automatic independent corroboration or production database
+update is performed.
