@@ -12,7 +12,7 @@ from html import unescape
 from pathlib import Path
 from urllib.parse import urlparse
 
-METHOD = "deterministic_rules_v2"
+METHOD = "deterministic_rules_v3"
 
 # Ordered from specific system domains to broader technical categories.
 # Terms are matched on token boundaries; e.g. "eda" must not match inside a URL.
@@ -105,41 +105,66 @@ TOPICS = {
 }
 
 DIRECT_ANCHORS = (
-    "gpu", "gpus", "accelerator", "accelerators", "tpu", "npu", "asic", "fpga",
-    "hbm", "dram", "sram", "nvlink", "infiniband", "ualink", "cuda", "rocm",
-    "triton", "cutlass", "flashattention", "flash attention", "tilelang", "kernel",
-    "compiler", "chiplet", "2.5d", "3d stack", "process node", "semiconductor",
-    "silicon", "verilog", "rtl", "eda", "tensor core", "fp8", "fp4", "bf16",
-    "int8", "int4", "kv cache", "prefill", "decode", "continuous batching",
-    "speculative decoding", "ttft", "tpot", "tokens/s", "tokens per second",
-    "inference engine", "inference serving", "serving engine", "distributed training",
-    "tensor parallel", "pipeline parallel", "expert parallel", "all-reduce", "allreduce",
-    "alltoall", "mixture of experts", "systolic array", "matrix multiplication", "matmul",
-    "memory bandwidth", "memory capacity", "joules/token", "mlperf", "inferencex",
-    "gpu scheduling", "accelerator scheduling", "gpu utilization", "accelerator utilization",
-    "gpu capacity", "idle gpu", "command scheduling", "gpu excursion", "workload placement",
-    "job placement", "graphics processor", "reconfigurable logic", "custom chip",
-    "gpu inference", "on-device inference", "gpu memory", "lora fine-tuning",
-    "lora finetuning", "llm agent workload", "inference environment", "batch makespan",
-    "microarchitecture", "cpu architecture", "cpu core", "data-center cpu",
-    "cache hierarchy", "memory subsystem", "hardware counters", "spec cpu",
+    "tpu", "npu", "asic", "fpga", "hbm", "dram", "sram",
+    "nvlink", "infiniband", "ualink", "cuda", "rocm", "triton", "cutlass",
+    "flashattention", "flash attention", "tilelang", "ptx",
+    "chiplet", "2.5d", "3d stack", "process node", "semiconductor", "silicon",
+    "verilog", "rtl", "eda", "tensor core", "fp8", "fp4", "bf16", "int8", "int4",
+    "kv cache", "continuous batching", "speculative decoding", "ttft", "tpot",
+    "tokens/s", "tokens per second", "inference engine", "inference serving",
+    "serving engine", "distributed training", "tensor parallel", "pipeline parallel",
+    "expert parallel", "all-reduce", "allreduce", "alltoall", "systolic array",
+    "gpu scheduling", "accelerator scheduling", "gpu utilization",
+    "accelerator utilization", "gpu capacity", "idle gpu", "command scheduling",
+    "workload placement", "job placement", "graphics processor",
+    "reconfigurable logic", "custom chip", "microarchitecture", "cpu architecture",
+    "cpu core", "data-center cpu", "cache hierarchy", "memory subsystem",
+    "hardware counters", "spec cpu", "mlperf", "inferencex",
+    "ai accelerator", "machine learning accelerator", "deep learning accelerator",
+    "gpu kernel", "tpu kernel", "npu kernel", "accelerator kernel",
+    "gpu architecture", "gpu platform", "gpu cluster", "gpu inference", "gpu serving", "gpu training",
+    "gpu memory system", "gpu memory bandwidth", "gpu data movement", "gpu thread",
+    "gpu warp", "gpu programming", "gpu compiler", "gpu storage", "gpu interconnect",
+    "gpu rack", "gpus per rack",
+    "warp scheduling", "subgroup scheduling", "warp synchronization",
+    "intra-warp", "thread block", "sm occupancy", "reconfigurable dataflow accelerator",
+    "dataflow accelerator", "in-memory computing", "optical interconnect",
 )
-
+GPU_GENERIC_ANCHORS = ("gpu", "gpus", "graphics processor")
+GPU_WORKLOAD_CONTEXT = (
+    "gpu memory", "gpu inference", "gpu training", "gpu energy", "gpu power",
+    "gpu performance", "gpu bandwidth", "gpu utilization", "single gpu",
+    "gpu memory rails", "cpu and gpu", "gpu and memory",
+)
+AI_WORKLOAD_CONTEXT = (
+    "llm", "large language model", "language model", "foundation model",
+    "machine learning", "deep learning", "neural network", "neural networks",
+    "transformer", "mixture of experts", "moe", "ai model", "ai workload",
+    "robotics", "robot learning", "world model", "physical ai", "embodied ai",
+    "agent runtime", "llm agent", "multi-agent llm",
+)
+SYSTEM_CONTEXT = (
+    "inference", "serving", "training", "runtime", "scheduling", "parallelism",
+    "prefill", "decode", "kv cache", "speculative decoding", "kernel", "compiler",
+    "throughput", "latency", "memory", "energy", "power", "bandwidth", "compute",
+    "execution time", "tokens per second", "joules per token",
+)
 ADJACENT_ANCHORS = (
-    "model architecture", "llm architecture", "transformer", "attention",
-    "mixture of experts", "mamba", "state space model", "looped transformer",
-    "latent attention", "scaling law", "scaling laws", "agent runtime",
-    "agentic runtime", "agent orchestration", "tool execution", "tool calling",
-    "gpu coding agent", "agent sandbox", "agent scheduling", "multi-agent system",
-    "long-running agent", "agent workflow", "agent state", "robotics", "embodied ai",
-    "physical ai", "world model", "robot learning", "training efficiency",
-    "training system", "training cluster", "large-scale training", "pretraining",
-    "post-training",
+    "llm inference", "model inference", "inference serving", "llm serving",
+    "distributed training", "large-scale training", "training cluster",
+    "tensor parallel", "pipeline parallel", "expert parallel", "fsdp",
+    "deepspeed", "continuous batching", "prefill", "decode", "kv cache",
+    "speculative decoding", "agent runtime", "agentic runtime", "agent orchestration",
+    "tool execution", "tool calling", "tool-using agent", "gpu coding agent",
+    "coding agent", "agent sandbox", "agent scheduling", "multi-agent system",
+    "multi-agent llm", "llm agents", "long-running agent", "agent workflow",
+    "agent state", "llm agent workload", "test-time compute", "inference-time compute",
+    "world model", "robotics", "robot learning", "embodied ai", "physical ai",
+    "service robot", "service robots",
 )
 
-SIGNALS = tuple(dict.fromkeys(
-    term for terms in TOPICS.values() for term in terms
-))
+SIGNALS = tuple(dict.fromkeys(term for terms in TOPICS.values() for term in terms))
+
 UNITS = (
     r"tokens?\s*/\s*s|tokens?\s+per\s+second|TB\s*/\s*s|GB\s*/\s*s|MB\s*/\s*s|"
     r"PFLOPS?|TFLOPS?|GFLOPS?|TOPS|TB|GB|MB|PB|kW|MW|W|nm|ms|us|µs|μs|"
@@ -222,11 +247,29 @@ def topic_for(sentence):
 
 def relevance_for(text):
     direct = matching_terms(text, DIRECT_ANCHORS)
-    adjacent = matching_terms(text, ADJACENT_ANCHORS)
     if direct:
         return "direct_ai_compute", direct
+
+    adjacent = matching_terms(text, ADJACENT_ANCHORS)
     if adjacent:
         return "adjacent_ai_systems", adjacent
+
+    # A generic GPU mention is not sufficient: require both an AI workload
+    # context and a system/performance context. This retains workload-level
+    # efficiency evidence without treating every GPU-using application paper
+    # as an accelerator architecture contribution.
+    gpu = matching_terms(text, GPU_GENERIC_ANCHORS)
+    ai_context = matching_terms(text, AI_WORKLOAD_CONTEXT)
+    system_context = matching_terms(text, SYSTEM_CONTEXT)
+    if gpu and ai_context and system_context:
+        return "adjacent_ai_systems", gpu + ai_context[:3] + system_context[:3]
+
+    # Generic compiler/kernel papers are only adjacent when explicitly tied
+    # to an AI model/workload and an execution-system concern.
+    software = matching_terms(text, ("compiler", "kernel", "code generation", "operator fusion", "llvm", "mlir", "xla", "tvm", "halide"))
+    if software and ai_context and system_context:
+        return "adjacent_ai_systems", software + ai_context[:3] + system_context[:3]
+
     return None, []
 
 
@@ -340,11 +383,21 @@ def extract_candidate_claims(candidate, diagnostics=None):
         topic = topic_for(sentence)
         # A paper must be relevant at candidate level, and a sentence must carry
         # its own system signal or a recognizable technical topic.
-        if not sentence_relevance and topic == "other":
+        if not sentence_relevance and context_relevance in ("adjacent_ai_systems", "direct_ai_compute"):
+            # A candidate may be relevant because its title/abstract establishes
+            # an AI workload, while a metric sentence only repeats "GPU".
+            # Permit that narrow case only when the sentence itself names a
+            # GPU resource or measured execution concern.
+            sentence_gpu = matching_terms(sentence, GPU_GENERIC_ANCHORS)
+            sentence_system = matching_terms(sentence, SYSTEM_CONTEXT)
+            if sentence_gpu and sentence_system:
+                sentence_relevance = "adjacent_ai_systems"
+                sentence_signals = sentence_gpu + sentence_system[:3]
+        if not sentence_relevance:
             diagnostics["sentences_filtered_out_of_scope"] += 1
             continue
-        relevance_class = sentence_relevance or context_relevance
-        relevance_signals = sentence_signals or context_signals
+        relevance_class = sentence_relevance
+        relevance_signals = sentence_signals
         metrics = list(METRIC_RE.finditer(sentence))
         claim_type = claim_type_for(sentence, candidate, metrics)
         assertion_class = assertion_class_for(sentence, claim_type, candidate)

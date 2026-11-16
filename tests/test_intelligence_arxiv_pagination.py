@@ -1,4 +1,5 @@
 """Bounded arXiv paging, id deduplication, and raw-cap coverage audit."""
+import json
 import sys
 import unittest
 from datetime import datetime,timezone
@@ -34,6 +35,18 @@ def fetch_pages(pages):
     return fetch,calls
 
 class ArxivPaginationTests(unittest.TestCase):
+    def test_curated_arxiv_query_avoids_broad_single_word_terms(self):
+        registry = json.loads((ROOT / "data/intelligence-sources.json").read_text(encoding="utf-8"))
+        source = next(item for item in registry["sources"] if item["id"] == "arxiv-ai-systems")
+        query = source["query"]
+        for term in ("all:compiler", "all:kernel", "all:inference", "all:serving",
+                     "all:parallelism"):
+            self.assertNotIn(term, query)
+        self.assertIn('(all:GPU AND (all:"machine learning"', query)
+        for term in ('all:TPU', 'all:NPU', 'all:HBM', 'all:"GPU kernel"',
+                     'all:"LLM inference"', 'all:"agent runtime"'):
+            self.assertIn(term, query)
+
     def test_reads_second_page_deduplicates_and_waits(self):
         fetch,calls=fetch_pages({0:["2611.00001","2611.00002"],
                                  2:["2611.00002","2611.00003"]})
