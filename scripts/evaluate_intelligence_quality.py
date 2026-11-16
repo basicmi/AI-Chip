@@ -258,6 +258,24 @@ def markdown_report(report: dict) -> str:
         f"- Repeated metric rows collapsed for sentence scoring: **{q['duplicate_claim_rows_collapsed_for_sentence_scoring']}**",
         f"- Evidence-quote failures: **{q['evidence_quote_failures']}**",
         "",
+        "## Claim extraction mismatches",
+        "",
+    ]
+    mismatches = [item for item in q["per_candidate"] if item["false_positive"] or item["false_negative"]]
+    if mismatches:
+        for item in mismatches:
+            lines.append(
+                f"- {item['candidate_id']} — {item['title']}: "
+                f"{item['false_positive']} unexpected, {item['false_negative']} missed"
+            )
+            for fragment in item["missed_fragments"]:
+                lines.append(f"  - Missed: {fragment}")
+            for statement in item["unexpected_statements"]:
+                lines.append(f"  - Unexpected: {statement}")
+    else:
+        lines.append("- None")
+    lines += [
+        "",
         "## Relevance false positives",
         "",
     ]
