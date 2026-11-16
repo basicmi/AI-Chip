@@ -48,6 +48,12 @@ class OperationalSnapshotTests(unittest.TestCase):
   self.assertEqual(result["sources"][0]["source_id"],"feed")
   self.assertEqual(result["schema_version"],"1.1")
 
+ def test_no_cache_info_is_unknown_not_false(self):
+  report=snapshot(DISCOVERY,HEALTH,REVIEW)
+  self.assertIsNone(report["cache"]["discovery_restored_file_present"])
+  self.assertIsNone(report["cache"]["review_restored_file_present"])
+
+
  def test_request_telemetry_is_aggregated_and_retained_per_source(self):
   result=snapshot(DISCOVERY,HEALTH,REVIEW)
   summary=result["summary"]
@@ -137,6 +143,12 @@ class OperationalSnapshotTests(unittest.TestCase):
  def test_unknown_failure_category_rejected(self):
   discovery=copy.deepcopy(DISCOVERY)
   discovery["source_results"][0]["request_diagnostics"]["last_request_failure_category"]="raw_exception"
+  with self.assertRaisesRegex(ValueError,"failure category"):
+   snapshot(discovery,HEALTH,REVIEW)
+
+ def test_non_string_failure_category_rejected(self):
+  discovery=copy.deepcopy(DISCOVERY)
+  discovery["source_results"][0]["request_diagnostics"]["last_request_failure_category"]={"raw":"exception"}
   with self.assertRaisesRegex(ValueError,"failure category"):
    snapshot(discovery,HEALTH,REVIEW)
 
