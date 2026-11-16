@@ -93,6 +93,7 @@ class ArxivPaginationTests(unittest.TestCase):
         self.assertEqual(report["sources_unavailable"], 1)
         self.assertEqual(report["candidate_count"], 1)
         self.assertEqual(report["source_results"][0]["attempt_count"], 2)
+        self.assertEqual(report["source_results"][0]["failure_category"], "timeout")
         self.assertEqual(report["source_results"][1]["status"], "observed")
         self.assertEqual(len(calls), 3)
         # One backoff retry plus one inter-query delay to respect arXiv's

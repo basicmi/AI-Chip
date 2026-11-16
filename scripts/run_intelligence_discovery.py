@@ -614,7 +614,8 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 "source_id": source_id, "source_name": source["name"],
                 "kind": kind, "status": "unavailable", "recent_item_count": 0,
                 "failure_category": category, "failure_tier": tier,
-                "consecutive_failures": failures, "attempt_count": attempts or (MAX_ATTEMPTS if retryable(error) else 1),
+                "consecutive_failures": failures,
+                "attempt_count": attempts or (source.get("max_attempts", MAX_ATTEMPTS) if retryable(error) else 1),
                 "request_diagnostics": request_diagnostics_snapshot(request_metrics),
             })
     if model_report is not None:
