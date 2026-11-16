@@ -21,7 +21,7 @@ Step Summary. It does not itself make extra HTTP requests.
   the age of the latest observed publication, and missing/invalid dates;
 - A zero-item **successful** source is distinguished from an unavailable
   or parser-broken source;
-- A source that returned exactly the configured GitHub Releases (20) or
+- A source that returned exactly the configured GitHub Releases (50) or
   arXiv search result cap is flagged as **possibly truncated**. The API
   might contain additional recent results: saturation does not prove loss;
 - Repeated **same normalized URL across different sources** is flagged

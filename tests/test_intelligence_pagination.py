@@ -26,7 +26,10 @@ def release(tag,when="2026-11-12T00:00:00Z"):
 def pages(mapping):
     calls=[]
     def fetch(url):
-        page=int(parse_qs(urlsplit(url).query)["page"][0])
+        query=parse_qs(urlsplit(url).query)
+        page=int(query["page"][0])
+        if query.get("per_page") != ["50"]:
+            raise AssertionError("GitHub Releases page size must be 50")
         calls.append(page)
         result=mapping.get(page,[])
         if isinstance(result,Exception):raise result

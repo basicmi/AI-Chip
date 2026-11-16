@@ -252,7 +252,7 @@ def collect_releases(source, *, since, fetcher=fetch_json, paging=None):
     # GitHub Releases returns newest releases first, but creation order does
     # not guarantee publication order. Fetch a bounded set of pages and do not
     # stop early solely because an older publication date was encountered.
-    per_page = 20
+    per_page = 50
     max_pages = 3
     candidates = []
     seen_tags = set()
