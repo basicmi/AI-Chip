@@ -10,6 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 from run_intelligence_discovery import collect_arxiv,run_discovery
 from audit_intelligence_source_coverage import coverage_report
+from validate_intelligence_sources import validate_registry
 
 NOW=datetime(2026,11,14,12,tzinfo=timezone.utc)
 SOURCE={"id":"arxiv-test","name":"Test arXiv query","kind":"arxiv_api",
@@ -57,6 +58,21 @@ class ArxivPaginationTests(unittest.TestCase):
         self.assertIn("all:HBM", by_id["arxiv-ai-hardware"])
         self.assertIn("all:CUDA", by_id["arxiv-ai-kernels-compilers"])
         self.assertIn('all:"agent runtime"', by_id["arxiv-agentic-physical-ai"])
+
+    def test_registry_validates_arxiv_limits_against_collector(self):
+        registry = json.loads((ROOT / "data/intelligence-sources.json").read_text(encoding="utf-8"))
+        source = next(item for item in registry["sources"] if item["kind"] == "arxiv_api")
+        original = dict(source)
+        source["max_results"] = 101
+        self.assertTrue(any("max_results" in error for error in validate_registry(registry, today=NOW.date())))
+        source.clear()
+        source.update(original)
+        source["max_pages"] = 4
+        self.assertTrue(any("max_pages" in error for error in validate_registry(registry, today=NOW.date())))
+        source.clear()
+        source.update(original)
+        source["max_attempts"] = 0
+        self.assertTrue(any("max_attempts" in error for error in validate_registry(registry, today=NOW.date())))
 
     def test_arxiv_source_max_pages_is_configurable(self):
         source = {**SOURCE, "max_pages": 1}
