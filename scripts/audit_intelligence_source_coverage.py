@@ -208,8 +208,22 @@ def markdown_report(report):
         f"- Empty successful sources: {s['empty_success_sources']}",
         f"- Possible per-request truncation: {s['potentially_truncated_sources']}",
         f"- Cross-source shared URL groups: {s['cross_source_shared_url_groups']}",
-        "", "## Attention queue", "",
+        f"- HTTP requests / failed requests: {s.get('total_requests', 0)} / {s.get('failed_requests', 0)}",
+        f"- Total response payload: {s.get('response_bytes', 0)} bytes",
+        f"- Sources with a request taking at least 5 seconds: {s.get('sources_with_slow_request_over_5s', 0)}",
+        "", "## Per-source runtime diagnostics", "",
+        "| Source | Status | Requests | Failed | Avg ms | Max ms | Bytes |",
+        "|---|---:|---:|---:|---:|---:|---:|",
     ]
+    for source in report["sources"]:
+        metrics = source.get("request_diagnostics") or {}
+        lines.append(
+            f"| {source['source_id']} | {source['status']} | "
+            f"{metrics.get('request_count', '—')} | {metrics.get('failed_request_count', '—')} | "
+            f"{metrics.get('average_request_ms', '—')} | {metrics.get('max_request_ms', '—')} | "
+            f"{metrics.get('response_bytes', '—')} |"
+        )
+    lines.extend(["", "## Attention queue", ""])
     if report["attention"]:
         for row in report["attention"]:
             lines.append(f"- **{row['source_id']}** — {', '.join(row['risk_flags'])}")
