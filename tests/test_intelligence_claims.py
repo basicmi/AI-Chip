@@ -23,9 +23,9 @@ class ClaimExtractionTests(unittest.TestCase):
             "url": "https://example.com/announcement",
             "published_at": "2026-11-12T00:00:00Z",
             "evidence_scope": "official_vendor_feed_metadata_and_excerpt",
-            "title": "New GPU platform announced",
+            "title": "New AI GPU platform for LLM inference announced",
             "excerpt": (
-                "The system provides 72 GPUs per rack and up to 1.8 TB/s interconnect bandwidth. "
+                "The LLM inference system provides 72 GPUs per rack and up to 1.8 TB/s interconnect bandwidth. "
                 "The platform supports FP8 inference."
             ),
         }
@@ -170,7 +170,7 @@ class ClaimExtractionTests(unittest.TestCase):
     def test_deduplicates_identical_sentence(self):
         candidate = {
             **self.candidate,
-            "title": "Overview of GPU platform",
+            "title": "Overview of LLM inference GPU platform",
             "excerpt": (
                 "The system provides 72 GPUs per rack. "
                 "The system provides 72 GPUs per rack."

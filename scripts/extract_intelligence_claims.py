@@ -115,7 +115,7 @@ DIRECT_ANCHORS = (
     # Explicit AI-system and model-serving signals.
     "kv cache", "kv-cache", "cached kv state", "continuous batching", "speculative decoding",
     "ttft", "tpot", "tokens/s", "tokens per second",
-    "inference engine", "inference serving", "serving engine", "serving engines",
+    "inference engine", "inference serving", "serving engine", "serving engines", "gpu inference", "gpu serving", "gpu training",
     "llm inference", "llm serving", "llm training", "moe inference", "moe serving",
     "expert parallelism", "distributed training", "tensor parallel", "pipeline parallel",
     "expert parallel", "all-reduce", "allreduce", "alltoall", "all-to-all communication",
