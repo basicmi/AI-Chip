@@ -160,7 +160,9 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
             "id": group["id"], "name": group["name"], "query": group["query"],
             "status": status, "error": error, "attempts": attempts,
             "request_diagnostics": request_diagnostics_snapshot(metrics),
-            "raw_returned_count": len(candidates), "unique_paper_count": len(ids),
+            "candidate_observation_count": len(candidates),
+            "api_raw_items_scanned": paging.get("raw_items_scanned", 0),
+            "unique_paper_count": len(ids),
             "baseline_overlap_count": len(ids & baseline_ids),
             "incremental_unique_count": len(incremental_ids),
             "known_seed_hits": sorted(group_seed_hits),
@@ -174,7 +176,8 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
     for candidate in all_candidates_by_id.values():
         label, _ = relevance_for(" ".join((candidate.get("title", ""), candidate.get("excerpt", ""))))
         predicted[label or "out_of_scope"] += 1
-    raw_total = sum(row["raw_returned_count"] for row in group_reports)
+    candidate_total = sum(row["candidate_observation_count"] for row in group_reports)
+    api_raw_total = sum(row["api_raw_items_scanned"] for row in group_reports)
     total_unique_by_group = sum(row["unique_paper_count"] for row in group_reports)
     all_ok = all(row["status"] == "observed" for row in group_reports)
     return {
@@ -189,7 +192,9 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
             "query_group_count": len(groups),
             "successful_group_count": sum(row["status"] == "observed" for row in group_reports),
             "request_count": sum(row["request_diagnostics"]["request_count"] for row in group_reports),
-            "raw_returned_count": raw_total, "unique_papers_across_groups": len(all_group_ids),
+            "api_raw_items_scanned": api_raw_total,
+            "candidate_observation_count": candidate_total,
+            "unique_papers_across_groups": len(all_group_ids),
             "cross_group_duplicate_count": total_unique_by_group - len(all_group_ids),
             "baseline_overlap_count": len(all_group_ids & baseline_ids),
             "incremental_unique_papers": len(all_incremental_ids),
@@ -197,7 +202,7 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
             "incremental_known_seed_hits": sorted(all_incremental_seed_hits),
             "known_seed_hits_after": len(combined_seed_hits),
             "known_seed_denominator": len(eligible),
-            "known_seed_recall_after": round(len(combined_seed_hits) / len(eligible), 4) if eligible else None,
+            "known_seed_recall_after": round(len(combined_seed_hits) / len(eligible), 4) if eligible and all_ok else None,
             "rule_screening_counts_unique_papers_unvalidated": dict(sorted(predicted.items())),
             "measured_precision": None,
             "precision_note": "Precision is not measurable: experiment candidates have not been independently human-labelled. Rule-screening counts are unvalidated triage signals, not precision.",
@@ -228,7 +233,8 @@ def markdown_report(report):
     lines.extend([
         "", "## Aggregate result", "",
         f"- Requests: {summary.get('request_count', 0)}",
-        f"- Raw results: {summary.get('raw_returned_count', 0)}",
+        f"- API raw entries scanned: {summary.get('api_raw_items_scanned', 0)}",
+        f"- Candidate observations after date filtering: {summary.get('candidate_observation_count', 0)}",
         f"- Unique papers across groups: {summary.get('unique_papers_across_groups', 0)}",
         f"- New unique papers beyond baseline: {summary.get('incremental_unique_papers', 0)}",
         f"- Cross-group duplicates: {summary.get('cross_group_duplicate_count', 0)}",
