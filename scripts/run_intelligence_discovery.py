@@ -417,7 +417,7 @@ def candidate_from_hf(model):
     model_id = model["model_id"]
     payload = {key: model.get(key) for key in (
         "model_id", "repo_sha", "created_at", "last_modified", "pipeline_tag",
-        "library_name", "tags", "downloads", "likes", "gated", "private",
+        "library_name", "tags", "gated", "private",
     )}
     fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     is_listing_candidate = model.get("status") == "discovery_candidate_not_reviewed"

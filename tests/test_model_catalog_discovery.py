@@ -95,6 +95,15 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(candidate["source_type"], "publisher_listing")
         self.assertEqual(candidate["pipeline_tag"], "text-generation")
         self.assertEqual(candidate["repo_sha"], "abc")
+        popularity_only_change = candidate_from_hf({
+            "model_id": "Qwen/example", "created_at": "2026-11-10T00:00:00Z",
+            "last_modified": "2026-11-12T00:00:00Z", "repo_sha": "abc",
+            "pipeline_tag": "text-generation", "library_name": "transformers",
+            "tags": ["text-generation"], "downloads": 9000, "likes": 500,
+            "gated": False, "private": False,
+            "status": "discovery_candidate_not_reviewed",
+        })
+        self.assertEqual(candidate["fingerprint"], popularity_only_change["fingerprint"])
         self.assertNotIn("support_paths", candidate)
 
 
