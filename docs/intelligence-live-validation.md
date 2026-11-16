@@ -209,3 +209,27 @@ tag, a model repository, or a high topic match does not establish a product
 announcement, production availability, benchmark result, accelerator
 compatibility or technical claim. Formal registries remain unchanged until
 a human verifies original sources and approves a narrowly scoped data PR.
+
+## First live run after PR #114 — 2026-11-16
+
+Run: [GitHub Actions #43815816745](https://github.com/basicmi/AI-Chip/actions/runs/43815816745)
+
+- 23/24 configured sources were observed (95.8%). All 15/15 GitHub Release
+  sources were reachable after authenticated API discovery was enabled.
+- Google DeepMind's official RSS feed recovered and yielded 18 recent items.
+  This confirms the earlier parser failure was transient; the configured
+  endpoint and existing RSS/Atom parser worked on this run.
+- The single unavailable source was the broad arXiv query. All three attempts
+  timed out at approximately 20 seconds each. The source made zero successful
+  requests and was unavailable after 60.2 seconds of request time.
+- Discovery recorded 239 observations, all unchanged; there were zero new or
+  updated candidates and therefore zero new Claim Candidates. This is a
+  delta-run result, not evidence that the sources contain no new publications.
+- The run made 36 requests, 3 failed, and received 22,647,817 bytes. Four
+  sources were reachable but empty. The overall pipeline completed its audit
+  and checkpoint, with operational health marked degraded due to arXiv.
+
+PR #115 splits the arXiv search into four independently monitored, bounded
+queries. The next scheduled run should be used to assess whether this reduces
+timeouts without creating unacceptable pagination truncation or relevance
+noise.

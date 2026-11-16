@@ -35,24 +35,69 @@ def fetch_pages(pages):
     return fetch,calls
 
 class ArxivPaginationTests(unittest.TestCase):
-    def test_curated_arxiv_query_avoids_broad_single_word_terms(self):
+    def test_curated_arxiv_queries_are_sharded_and_bounded(self):
         registry = json.loads((ROOT / "data/intelligence-sources.json").read_text(encoding="utf-8"))
-        source = next(item for item in registry["sources"] if item["id"] == "arxiv-ai-systems")
-        query = source["query"]
-        for term in ("all:compiler", "all:kernel", "all:inference", "all:serving",
-                     "all:parallelism", 'OR all:"world model"', 'all:"machine learning" OR',
-                     'all:"deep learning" OR', 'all:"neural network" OR'):
-            self.assertNotIn(term, query)
-        self.assertIn('(all:GPU AND (all:LLM', query)
-        self.assertIn('(all:CUDA AND (all:LLM', query)
-        self.assertIn('(all:ROCm AND (all:LLM', query)
-        self.assertIn('(all:"GPU kernel" AND (all:LLM', query)
-        self.assertIn('(all:"GPU scheduling" AND (all:LLM', query)
-        self.assertIn('(all:robotics AND (all:"world model"', query)
-        for term in ('all:TPU', 'all:NPU', 'all:HBM', 'all:"LLM inference"',
-                     'all:"MoE serving"', 'all:"agent runtime"',
-                     'all:"vision-language-action"', 'all:"on-device reinforcement learning"'):
-            self.assertIn(term, query)
+        sources = [item for item in registry["sources"] if item["kind"] == "arxiv_api"]
+        self.assertEqual(len(sources), 4)
+        self.assertEqual({item["id"] for item in sources}, {
+            "arxiv-ai-systems", "arxiv-ai-hardware",
+            "arxiv-ai-kernels-compilers", "arxiv-agentic-physical-ai",
+        })
+        for source in sources:
+            self.assertEqual(source["max_results"], 50)
+            self.assertEqual(source["max_pages"], 2)
+            self.assertEqual(source["max_attempts"], 2)
+            query = source["query"]
+            for term in ("all:compiler", "all:kernel", "all:inference", "all:serving",
+                         "all:parallelism", 'all:"machine learning" OR',
+                         'all:"deep learning" OR', 'all:"neural network" OR'):
+                self.assertNotIn(term, query)
+        by_id = {item["id"]: item["query"] for item in sources}
+        self.assertIn('all:"LLM inference"', by_id["arxiv-ai-systems"])
+        self.assertIn("all:HBM", by_id["arxiv-ai-hardware"])
+        self.assertIn("all:CUDA", by_id["arxiv-ai-kernels-compilers"])
+        self.assertIn('all:"agent runtime"', by_id["arxiv-agentic-physical-ai"])
+
+    def test_arxiv_source_max_pages_is_configurable(self):
+        source = {**SOURCE, "max_pages": 1}
+        fetch, calls = fetch_pages({0:["2611.00001", "2611.00002"]})
+        diag = {}
+        result = collect_arxiv(source, since=datetime(2026,10,1,tzinfo=timezone.utc),
+                               fetcher=fetch, paging=diag, sleep=lambda _:None)
+        self.assertEqual(len(result), 2)
+        self.assertEqual(calls, [0])
+        self.assertEqual(diag["pages_fetched"], 1)
+        self.assertTrue(diag["paging_cap_reached"])
+
+    def test_arxiv_shards_fail_independently_and_respect_spacing(self):
+        sources = [
+            {**SOURCE, "id":"arxiv-slow", "name":"Slow shard",
+             "query":"cat:cs.DC", "max_pages":1, "max_attempts":2},
+            {**SOURCE, "id":"arxiv-good", "name":"Working shard",
+             "query":"cat:cs.AR", "max_pages":1, "max_attempts":2},
+        ]
+        calls = []
+        sleeps = []
+        def fetch(url):
+            query = parse_qs(urlsplit(url).query)["search_query"][0]
+            calls.append(query)
+            if "cs.DC" in query:
+                raise TimeoutError("synthetic arXiv timeout")
+            return atom(["2611.00009"])
+        state = {"schema_version":"1.0", "items":{}}
+        report = run_discovery(
+            {"sources":sources}, {"models":[]}, now=NOW,
+            feed_fetcher=fetch, model_report=MODEL, state=state,
+            retry_sleep=sleeps.append)
+        self.assertEqual(report["sources_observed"], 1)
+        self.assertEqual(report["sources_unavailable"], 1)
+        self.assertEqual(report["candidate_count"], 1)
+        self.assertEqual(report["source_results"][0]["attempt_count"], 2)
+        self.assertEqual(report["source_results"][1]["status"], "observed")
+        self.assertEqual(len(calls), 3)
+        # One backoff retry plus one inter-query delay to respect arXiv's
+        # request spacing even when a previous shard failed.
+        self.assertEqual(sleeps, [3.0, 3])
 
     def test_reads_second_page_deduplicates_and_waits(self):
         fetch,calls=fetch_pages({0:["2611.00001","2611.00002"],

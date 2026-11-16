@@ -81,6 +81,12 @@ def validate_registry(data, *, today=None):
             limit = source.get("max_results", 100)
             if type(limit) is not int or not 1 <= limit <= 200:
                 errors.append(prefix + ".max_results must be an integer from 1 to 200")
+            pages = source.get("max_pages", 3)
+            if type(pages) is not int or not 1 <= pages <= 3:
+                errors.append(prefix + ".max_pages must be an integer from 1 to 3")
+            attempts = source.get("max_attempts", 3)
+            if type(attempts) is not int or not 1 <= attempts <= 3:
+                errors.append(prefix + ".max_attempts must be an integer from 1 to 3")
     return errors
 
 def main():
