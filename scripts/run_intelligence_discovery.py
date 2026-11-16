@@ -271,9 +271,7 @@ def collect_releases(source, *, since, fetcher=fetch_json, paging=None):
     # not guarantee publication order. Fetch a bounded set of pages and do not
     # stop early solely because an older publication date was encountered.
     per_page = 50
-    max_pages = source.get("max_pages", 3)
-    if type(max_pages) is not int or not 1 <= max_pages <= 3:
-        raise ValueError("arXiv max_pages must be 1..3")
+    max_pages = 3
     candidates = []
     seen_tags = set()
     pages_fetched = 0
@@ -366,7 +364,9 @@ def collect_arxiv(source, *, since, fetcher=fetch_text, paging=None, sleep=time.
     per_page = source.get("max_results", 100)
     if type(per_page) is not int or not 1 <= per_page <= 100:
         raise ValueError("arXiv max_results must be 1..100")
-    max_pages = 3
+    max_pages = source.get("max_pages", 3)
+    if type(max_pages) is not int or not 1 <= max_pages <= 3:
+        raise ValueError("arXiv max_pages must be 1..3")
     candidates = []
     seen_papers = set()
     pages_fetched = 0
