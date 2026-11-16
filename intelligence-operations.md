@@ -8,7 +8,7 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
 <section class="page-heading">
   <p class="eyebrow">INTELLIGENCE · OPERATIONAL HEALTH · HISTORY</p>
   <h1>Intelligence Operations</h1>
-  <p>Compare actual weekly discovery snapshots: source availability, generated review leads, unverified claims and unresolved backlog. This is an operational view, not evidence verification or a live status monitor.</p>
+  <p>Compare actual weekly discovery snapshots: source availability, request latency and failures, generated review leads, unverified claims and unresolved backlog. This is an operational view, not evidence verification or a live status monitor.</p>
   <div class="page-meta">
     <span>Input <strong>local Actions JSON snapshots</strong></span>
     <a href="https://github.com/basicmi/AI-Chip/actions/workflows/model-catalog-audit.yml" target="_blank" rel="noopener noreferrer">Browse weekly runs ↗</a>
@@ -41,10 +41,10 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
       <div><p class="eyebrow">02 / RUN HISTORY</p><h2>Observed run-to-run changes</h2></div>
       <span class="status-pill">Not a live feed</span>
     </div>
-    <p>One point per imported run. Counts are operational outputs from completed workflows; a single snapshot is not a trend.</p>
+    <p>One point per imported run. Request totals include pagination and retry attempts; response bytes count successful payloads only. Missing legacy telemetry is shown as unavailable, not zero.</p>
     <div class="ops-table-scroll">
       <table class="ops-table">
-        <thead><tr><th>Run timestamp (UTC)</th><th>Health</th><th>Sources</th><th>Leads</th><th>Claims</th><th>Backlog</th><th>Oldest unresolved</th></tr></thead>
+        <thead><tr><th>Run timestamp (UTC)</th><th>Health</th><th>Sources</th><th>Leads</th><th>Claims</th><th>Backlog</th><th>Oldest unresolved</th><th>Requests</th><th>Failed</th><th>Slow sources ≥5s</th></tr></thead>
         <tbody data-ops-history></tbody>
       </table>
     </div>
@@ -52,7 +52,7 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
 
   <section class="compat-filter-panel" data-ops-sources-panel hidden>
     <div class="compat-filter-heading">
-      <div><p class="eyebrow">03 / SOURCE DIAGNOSTICS</p><h2>Source availability by run</h2></div>
+      <div><p class="eyebrow">03 / SOURCE DIAGNOSTICS</p><h2>Source availability and request behavior</h2></div>
       <span class="status-pill">Observed ≠ verified</span>
     </div>
     <label>Inspect snapshot
@@ -62,7 +62,7 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
     <div data-ops-warnings class="compat-limitations"></div>
     <div class="ops-table-scroll">
       <table class="ops-table">
-        <thead><tr><th>Source</th><th>Type</th><th>Run status</th><th>Recent items</th></tr></thead>
+        <thead><tr><th>Source</th><th>Type</th><th>Run status</th><th>Recent items</th><th>Requests</th><th>Failed</th><th>Avg ms</th><th>Max ms</th><th>Payload bytes</th></tr></thead>
         <tbody data-ops-sources></tbody>
       </table>
     </div>
@@ -71,7 +71,7 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
 
 <section class="compat-method-note">
   <div><p class="eyebrow">DATA BOUNDARIES</p><h2>Operational success is not factual verification.</h2></div>
-  <p>Source availability means a feed was reached and parsed during a scan—not that its hardware or software claims are true. Cache presence is an observation, not a guarantee of preserved history. Missing failed runs, expired Actions artifacts, or manually omitted snapshots make trends incomplete. No production registry or review status is changed here.</p>
+  <p>Request timing includes individual pages and retries. Failed-request counts describe fetch attempts, not failed weekly runs. Payload bytes include successful response bodies only. A reachable and parseable source does not establish that its hardware or software claims are true. Cache presence is an observation, not a guarantee of preserved history. Missing failed runs, expired Actions artifacts, or manually omitted snapshots make trends incomplete. No production registry or review status is changed here.</p>
 </section>
 
 <link rel="stylesheet" href="{{ '/assets/css/evidence-review.css' | relative_url }}">

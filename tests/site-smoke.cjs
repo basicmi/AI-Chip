@@ -66,6 +66,21 @@ const { chromium } = require("playwright");
   });
   const earlyOps=opsRun("2026-11-02T10:00:00Z",7,"degraded",false);
   const lateOps=opsRun("2026-11-09T10:00:00Z",9,"healthy",true);
+  lateOps.schema_version="1.1";
+  lateOps.sources[0].request_diagnostics={
+    request_count:3,failed_request_count:1,response_bytes:2048,
+    total_elapsed_ms:9000,average_request_ms:3000,max_request_ms:5000,
+    last_http_error_status:503,last_request_failure_category:"http_server_error"
+  };
+  lateOps.sources[1].request_diagnostics={
+    request_count:2,failed_request_count:0,response_bytes:1024,
+    total_elapsed_ms:1000,average_request_ms:500,max_request_ms:600,
+    last_http_error_status:null,last_request_failure_category:null
+  };
+  Object.assign(lateOps.summary,{
+    request_telemetry_sources:2,total_requests:5,failed_requests:1,
+    response_bytes:3072,sources_with_slow_request_over_5s:1
+  });
   const opsFile=(name,data)=>({name,mimeType:"application/json",buffer:Buffer.from(JSON.stringify(data))});
   await page.locator("[data-ops-files]").setInputFiles([
     opsFile("late.json",lateOps),opsFile("early.json",earlyOps)
@@ -75,6 +90,10 @@ const { chromium } = require("playwright");
      await page.locator("[data-ops-stat='availability']").textContent()!=="100%"){
     throw Error("Intelligence Operations did not summarize latest completed run");
   }
+  const latestHistoryRow=await page.locator("[data-ops-history] tr").last().textContent();
+  if(!latestHistoryRow.includes("5") || !latestHistoryRow.includes("1")) {
+    throw Error("Intelligence Operations did not expose request totals in run history");
+  }
   const firstRow=await page.locator("[data-ops-history] tr").first().textContent();
   if(!firstRow.includes("2026-11-02") || !firstRow.includes("degraded")){
     throw Error("Intelligence Operations did not sort timestamps chronologically");
@@ -83,6 +102,24 @@ const { chromium } = require("playwright");
   if(!(await page.locator("[data-ops-cache]").textContent()).includes("no restored file") ||
      !(await page.locator("[data-ops-warnings]").textContent()).includes("arxiv feed unavailable")){
     throw Error("Source-level outage or cache restore diagnostics missing");
+  }
+  if(!(await page.locator("[data-ops-cache]").textContent()).includes("Request telemetry unavailable") ||
+     await page.locator("[data-ops-sources] tr").first().locator("td").nth(4).textContent()!=="—") {
+    throw Error("Legacy Operations snapshots must show missing request telemetry as unavailable");
+  }
+  await page.locator("[data-ops-select]").selectOption("2026-11-09T10:00:00Z");
+  const vendorRequestRow=page.locator("[data-ops-sources] tr").filter({hasText:"vendor-feed"});
+  const vendorRequestCells=await vendorRequestRow.locator("td").allTextContents();
+  if(vendorRequestCells[4]!=="3" || vendorRequestCells[5]!=="1" ||
+     vendorRequestCells[6]!=="3,000" || vendorRequestCells[7]!=="5,000" ||
+     vendorRequestCells[8]!=="2,048 B") {
+    throw Error("Per-source request latency and payload metrics were not rendered: "+vendorRequestCells.join("|"));
+  }
+  const inconsistentOps={...lateOps,summary:{...lateOps.summary,failed_requests:99}};
+  await page.locator("[data-ops-files]").setInputFiles(opsFile("inconsistent-telemetry.json",inconsistentOps));
+  await page.waitForFunction(()=>document.querySelector("[data-ops-status]")?.textContent?.includes("Cannot load snapshots"));
+  if(!(await page.locator("[data-ops-history-panel]").isHidden())) {
+    throw Error("Inconsistent request telemetry totals were accepted");
   }
   const forgedOps={...earlyOps,operational_only:false};
   await page.locator("[data-ops-files]").setInputFiles(opsFile("forged.json",forgedOps));

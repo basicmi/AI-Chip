@@ -8,9 +8,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+REQUEST_FAILURE_CATEGORIES = {
+    "http_rate_limit", "http_server_error", "http_client_error",
+    "timeout", "network", "parse_error", "invalid_payload", "source_error",
+}
 
 
 def timestamp(value):
@@ -23,6 +29,65 @@ def timestamp(value):
         return parsed.astimezone(timezone.utc)
     except ValueError as error:
         raise ValueError("invalid timezone-aware timestamp") from error
+
+
+def checked_request_diagnostics(value, source_id):
+    """Validate and copy only the allowlisted, URL-free request metrics."""
+    if value is None:
+        return None  # Backward-compatible with discovery artifacts before PR #106.
+    if not isinstance(value, dict):
+        raise ValueError("request diagnostics must be an object for " + source_id)
+
+    for field in ("request_count", "failed_request_count", "response_bytes"):
+        item = value.get(field)
+        if type(item) is not int or item < 0:
+            raise ValueError("invalid request diagnostic " + field + " for " + source_id)
+    count = value["request_count"]
+    failed = value["failed_request_count"]
+    if failed > count:
+        raise ValueError("failed request count exceeds total for " + source_id)
+
+    for field in ("total_elapsed_ms", "max_request_ms"):
+        item = value.get(field)
+        if type(item) not in (int, float) or not math.isfinite(item) or item < 0:
+            raise ValueError("invalid request timing " + field + " for " + source_id)
+
+    average = value.get("average_request_ms")
+    if count == 0:
+        if (average is not None or value["response_bytes"] != 0 or failed != 0
+                or value["total_elapsed_ms"] != 0 or value["max_request_ms"] != 0):
+            raise ValueError("zero-request diagnostics are inconsistent for " + source_id)
+    else:
+        if (type(average) not in (int, float) or not math.isfinite(average)
+                or average < 0
+                or abs(average - value["total_elapsed_ms"] / count) > 0.002):
+            raise ValueError("average request latency is inconsistent for " + source_id)
+        if value["max_request_ms"] > value["total_elapsed_ms"] + 0.002:
+            raise ValueError("maximum request latency exceeds total for " + source_id)
+
+    status = value.get("last_http_error_status")
+    if status is not None and (type(status) is not int or not 100 <= status <= 599):
+        raise ValueError("invalid HTTP error status for " + source_id)
+    category = value.get("last_request_failure_category")
+    if category is not None and (
+            not isinstance(category, str) or category not in REQUEST_FAILURE_CATEGORIES):
+        raise ValueError("invalid request failure category for " + source_id)
+    if count == 0 and (status is not None or category is not None):
+        raise ValueError("zero-request diagnostics cannot contain a failure for " + source_id)
+    if failed == 0 and (status is not None or category is not None):
+        raise ValueError("failure metadata without failed requests for " + source_id)
+
+    # Explicitly copy fields; never forward arbitrary source data such as URLs.
+    return {
+        "request_count": count,
+        "failed_request_count": failed,
+        "response_bytes": value["response_bytes"],
+        "total_elapsed_ms": round(value["total_elapsed_ms"], 3),
+        "average_request_ms": round(average, 3) if average is not None else None,
+        "max_request_ms": round(value["max_request_ms"], 3),
+        "last_http_error_status": status,
+        "last_request_failure_category": category,
+    }
 
 
 def snapshot(discovery, health, review, *, discovery_cache_present=None, review_cache_present=None):
@@ -41,6 +106,7 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
         observed = timestamp(item.get("generated_at"))
         if abs((generated - observed).total_seconds()) > 3600:
             raise ValueError("operational report stages are from different runs")
+
     sources = discovery.get("source_results")
     if not isinstance(sources, list):
         raise ValueError("discovery source_results must be an array")
@@ -49,12 +115,13 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
     for source in sources:
         if not isinstance(source, dict) or not isinstance(source.get("source_id"), str):
             raise ValueError("source is missing a stable ID")
-        if source["source_id"] in names or source.get("status") not in {"observed", "unavailable"}:
+        source_id = source["source_id"]
+        if source_id in names or source.get("status") not in {"observed", "unavailable"}:
             raise ValueError("invalid duplicate/unknown source status")
-        names.add(source["source_id"])
+        names.add(source_id)
         per_source.append({
-            "source_id": source["source_id"],
-            "name": str(source.get("source_name") or source["source_id"]),
+            "source_id": source_id,
+            "name": str(source.get("source_name") or source_id),
             "kind": source.get("kind"),
             "status": source["status"],
             "recent_item_count": source.get("recent_item_count", 0),
@@ -63,7 +130,10 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
             "consecutive_failures": source.get("consecutive_failures", 0),
             "health_transition": source.get("health_transition"),
             "attempt_count": source.get("attempt_count"),
+            "request_diagnostics": checked_request_diagnostics(
+                source.get("request_diagnostics"), source_id),
         })
+
     summary = health.get("summary", {})
     observed = sum(source["status"] == "observed" for source in per_source)
     unavailable = len(per_source) - observed
@@ -77,13 +147,24 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
                 expected.get("review_states", {}).get("pending", 0) +
                 expected.get("review_states", {}).get("needs_more_evidence", 0))):
         raise ValueError("health/review backlog mismatch")
-    for field in ("discovery_cache_present", "review_cache_present"):
-        value = {"discovery_cache_present": discovery_cache_present,
-                 "review_cache_present": review_cache_present}[field]
+
+    for field, value in (("discovery_cache_present", discovery_cache_present),
+                         ("review_cache_present", review_cache_present)):
         if value is not None and type(value) is not bool:
             raise ValueError("cache presence must be boolean or unknown")
+
+    measured = [source["request_diagnostics"] for source in per_source
+                if source["request_diagnostics"] is not None]
+    request_summary = {
+        "request_telemetry_sources": len(measured),
+        "total_requests": sum(item["request_count"] for item in measured),
+        "failed_requests": sum(item["failed_request_count"] for item in measured),
+        "response_bytes": sum(item["response_bytes"] for item in measured),
+        "sources_with_slow_request_over_5s": sum(
+            item["max_request_ms"] >= 5000 for item in measured),
+    }
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "generated_at": health["generated_at"],
         "health": health["health"],
         "operational_only": True,
@@ -109,6 +190,7 @@ def snapshot(discovery, health, review, *, discovery_cache_present=None, review_
             "persistent_backlog": summary.get("persistent_backlog"),
             "unresolved_backlog": summary.get("unresolved_backlog"),
             "oldest_unresolved_days": summary.get("oldest_unresolved_days"),
+            **request_summary,
         },
         "sources": sorted(per_source, key=lambda x: x["source_id"]),
         "warnings": list(health.get("warnings", [])),
@@ -133,7 +215,8 @@ def main():
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"PASS: operational snapshot {data['health']}, "
-              f"{data['summary']['sources_observed']}/{data['summary']['sources_total']} sources")
+              f"{data['summary']['sources_observed']}/{data['summary']['sources_total']} sources; "
+              f"{data['summary']['total_requests']} requests, {data['summary']['failed_requests']} failed.")
         return 0
     except (OSError, ValueError, TypeError, KeyError) as error:
         print("FAIL: " + str(error), file=sys.stderr)
