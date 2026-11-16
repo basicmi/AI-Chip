@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "arxiv-targeted-query-expansion-2026-11-v1",
+  "purpose": "Isolated one-page experiment to measure incremental retrieval coverage for GPU communication, inference economics and agentic infrastructure, and physical-AI runtime terms. No production query changes.",
+  "max_results_per_group": 50,
+  "groups": [
+    {
+      "id": "gpu-communication",
+      "name": "GPU communication and interconnect",
+      "max_results": 50,
+      "query": "cat:cs.DC AND (all:\"GPU-initiated communication\" OR all:\"GPU communication\" OR all:\"GPU networking\" OR all:NCCL OR all:NVSHMEM OR all:RDMA OR all:\"all-to-all\")"
+    },
+    {
+      "id": "inference-energy",
+      "name": "LLM inference energy and KV cache",
+      "max_results": 50,
+      "query": "(cat:cs.LG OR cat:cs.AI) AND (all:\"LLM inference\" OR all:\"inference energy\" OR all:\"energy cost\" OR all:\"KV-cache\" OR all:\"agentic serving\" OR all:\"inference power\")"
+    },
+    {
+      "id": "agentic-gpu-capacity",
+      "name": "Agentic GPU capacity and short-lived jobs",
+      "max_results": 50,
+      "query": "(cat:cs.DC OR cat:cs.AI OR cat:cs.LG) AND (all:\"warm GPU capacity\" OR all:\"GPU job scheduling\" OR all:\"agentic workload\" OR all:\"reinforcement learning workload\" OR all:\"warm pool\" OR all:\"GPU capacity\")"
+    },
+    {
+      "id": "physical-ai-runtime",
+      "name": "Physical-AI runtime and world-action models",
+      "max_results": 50,
+      "query": "(cat:cs.RO OR cat:cs.CV OR cat:cs.AI) AND (all:\"world-action model\" OR all:\"robot policies\" OR all:\"runtime adaptation\" OR all:\"action-interface mismatch\" OR all:\"state-action-effect\" OR all:\"mobile robotic mission\" OR all:\"robot learning\" OR all:\"world model\")"
+    }
+  ]
+}

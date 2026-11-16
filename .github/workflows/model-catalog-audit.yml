@@ -11,6 +11,7 @@ on:
       - "data/model-catalog.json"
       - "data/intelligence-review-decisions.json"
       - "data/intelligence-quality-golden.json"
+      - "data/intelligence-retrieval-experiments.json"
       - "schemas/intelligence-claims.schema.json"
       - "scripts/*intelligence*.py"
       - "scripts/discover_model_catalog.py"
@@ -101,6 +102,14 @@ jobs:
             --registry data/intelligence-sources.json \
             --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md"
+      - name: Run isolated targeted arXiv retrieval experiment
+        run: |
+          python3 scripts/run_intelligence_retrieval_experiment.py \
+            --config data/intelligence-retrieval-experiments.json \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --baseline "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.md"
       - name: Extract structured claim candidates
         run: |
           python3 scripts/extract_intelligence_claims.py \
@@ -183,6 +192,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-triage.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-triage.md" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -213,6 +225,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-evaluation.md
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-diagnosis.json
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-diagnosis.md
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-experiment.json
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-experiment.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
