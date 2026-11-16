@@ -20,16 +20,16 @@ REGISTRY = {"sources": [
     {"id":"b","name":"Vendor announcement","active":True,"kind":"rss_atom","publisher":"Test Vendor",
      "category":"vendor-announcement","feed_url":"https://example.org/feed"}
 ]}
-RELEASE = [{"tag_name":"v1.0","name":"GPU runtime release v1.0",
+RELEASE = [{"tag_name":"v1.0","name":"LLM GPU runtime release v1.0",
     "published_at":"2026-11-13T00:00:00Z",
     "updated_at":"2026-11-13T00:00:00Z",
     "html_url":"https://github.com/test/project/releases/tag/v1.0",
-    "body":"New kernel supports FP8 inference and 180 GB memory per GPU.",
+    "body":"New LLM inference kernel supports FP8 inference and 180 GB HBM memory per GPU.",
     "prerelease":False,"draft":False}]
-RSS = """<rss><channel><item><title>Test accelerator memory</title>
+RSS = """<rss><channel><item><title>Test LLM accelerator memory</title>
 <link>https://example.org/test-accelerator</link>
 <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
-<description>GPU platform has 192 GB memory per GPU.</description>
+<description>LLM inference GPU platform has 192 GB HBM memory per GPU.</description>
 </item></channel></rss>"""
 MODEL_REPORT = {"models":[],"model_count":0,"observed":0,
                 "new_publisher_candidates":[],"publisher_discovery_errors":[]}
