@@ -11,28 +11,35 @@ relevance-gated first stage based on token-boundary topic signals and
 numeric-unit patterns. It is not LLM semantic understanding; it is testable
 in CI and has no model/API credentials.
 
-Version 2 makes four changes:
+Version 2 introduced deterministic relevance labels and fair source/candidate
+limits. The first post-merge live run exposed remaining false positives from
+generic single-word signals, so Version 3 tightens both candidate and
+sentence-level relevance.
 
-1. A candidate must have a hardware, AI-compute, systems, compiler/runtime,
-   model-architecture, agent-runtime or physical-AI relevance anchor. A
-   generic mention of "agent", "inference", "performance", "benchmark" or
-   a number is not sufficient by itself.
-2. A title is context for relevance, not an asserted Claim. Claims are
-   extracted from the source excerpt only. Sentences without their own
-   technical topic or system anchor are filtered.
-3. Claims carry separate `relevance.class`, `topic`, `claim_type`,
-   `assertion_class` and `evidence_class` labels. This distinguishes
-   direct compute/system evidence from adjacent research, and separates
-   roadmap intent, speculation, vendor marketing language, technical
-   specifications, research-result candidates and capability statements.
-4. Per-candidate and global limits are explicit. If the queue is capped,
-   selection is round-robin across sources and candidates rather than allowing
-   the first high-volume source to consume the entire budget.
-5. Human-review triage carries the relevance, assertion and evidence labels
-   forward. Direct compute/system evidence receives a modest review-priority
-   boost over adjacent research; roadmap, speculation, vendor-marketing and
-   preprint labels add caution flags. These scores prioritize review effort,
-   not factual confidence.
+Version 3 makes these changes:
+
+1. Generic words such as "compiler", "kernel", "inference", "serving",
+   "parallelism" and "LLM" are no longer sufficient relevance anchors.
+   A GPU mention requires a paired AI-workload and system/performance context;
+   generic compiler/kernel work requires an explicit AI workload and execution
+   context. Specific accelerator, memory, interconnect, ISA, RTL/EDA and
+   low-level GPU software terms remain direct anchors.
+2. Candidate-level relevance is context only. A Claim sentence must carry its
+   own specific hardware or AI-system signal. A narrow exception allows a
+   sentence that reports a GPU resource/metric when the candidate itself is
+   already classified as adjacent AI-system work.
+3. Robotics/agent candidates no longer cause every sentence in their abstract
+   to become a Claim; unrelated methodology sentences are filtered.
+4. The arXiv query removes broad single-word OR terms and retains explicit
+   accelerator, GPU software, memory, inference/serving, distributed-training,
+   agent-runtime and architecture phrases.
+5. Regression tests use real false-positive patterns observed in the
+   2026-11-16 live run, alongside positive TPU/NPU/GPU kernel cases.
+
+Claims still carry separate `relevance.class`, `topic`, `claim_type`,
+`assertion_class` and `evidence_class` labels. Human-review triage keeps
+direct compute/system evidence distinct from adjacent workload evidence.
+The score prioritizes review effort, not factual confidence.
 
 Each record preserves the original candidate and source URL, a quote from the
 source excerpt, claim type/topic, numeric value and unit when recognized,

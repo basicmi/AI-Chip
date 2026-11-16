@@ -109,6 +109,30 @@ Run: [GitHub Actions #43789263891](https://github.com/basicmi/AI-Chip/actions/ru
   PR #110 introduces a relevance gate, richer routing labels and fair
   source/candidate caps; compare the next run against this baseline.
 
+
+## First post-PR-110 live run — 2026-11-16
+
+Run: [GitHub Actions #43795362021](https://github.com/basicmi/AI-Chip/actions/runs/43795362021)
+
+- All 24/24 configured sources were observed; 36 requests completed with
+  zero failures and 23,391,069 response bytes.
+- Persistent change detection found 47 new review leads out of 539 cumulative
+  observations. All 47 were arXiv preprints; this was a delta run, not a
+  reprocessing of all historical observations.
+- Version 2 extracted 92 Claim candidates and the triage stage produced 84
+  groups (8 duplicate Claims collapsed). All 92 remained unverified research
+  preprint candidates.
+- Manual sampling found remaining false positives from broad compiler/kernel
+  terms, incidental GPU mentions in application papers, and sentences that
+  inherited candidate relevance without carrying their own technical signal.
+  PR #111 tightens the arXiv query and sentence-level gate; it adds regression
+  cases drawn from these observed examples.
+- The 1,513-item persistent review backlog includes 1,421 Claims from earlier
+  runs not observed in this delta. It is not a count of newly extracted Claims.
+
+This run was operationally healthy, but the source-query and relevance
+precision still need improvement. Do not treat 92/47 as a precision score.
+
 ## When to score source quality
 
 Do not assign a composite score from one scan. Keep the following dimensions

@@ -1,3 +1,4 @@
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -217,6 +218,16 @@ class ClaimExtractionTests(unittest.TestCase):
         claim = extract_candidate_claims(self.candidate)[0]
         claim["assertion_class"] = "verified_fact"
         self.assertIn("invalid assertion class", validate_claim(claim))
+
+    def test_schema_contract_matches_extractor_v3(self):
+        schema = json.loads((ROOT / "schemas/intelligence-claims.schema.json").read_text(encoding="utf-8"))
+        self.assertEqual(schema["properties"]["extraction_method"]["const"], METHOD)
+        claim = schema["$defs"]["claim"]
+        for field in ("assertion_class", "relevance", "evidence_class"):
+            self.assertIn(field, claim["required"])
+            self.assertIn(field, claim["properties"])
+        self.assertEqual(claim["properties"]["extraction"]["properties"]["method"]["const"], METHOD)
+        self.assertEqual(claim["properties"]["extraction"]["properties"]["confidence"]["const"], "low")
 
     def test_per_candidate_limit_is_reported(self):
         candidate = {

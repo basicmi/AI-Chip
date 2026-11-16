@@ -1,32 +1,452 @@
 {
- "$schema":"https://json-schema.org/draft/2020-12/schema",
- "$id":"https://basicmi.github.io/AI-Chip/schemas/intelligence-claims.schema.json",
- "title":"AI Chip Intelligence Extracted Claim Candidates","type":"object","additionalProperties":false,
- "required":["schema_version","generated_at","input_candidate_count","claim_count","extraction_method","claims","errors","policy"],
- "properties":{
-  "schema_version":{"const":"1.0"},"generated_at":{"type":"string","format":"date-time"},
-  "input_candidate_count":{"type":"integer","minimum":0},"claim_count":{"type":"integer","minimum":0},
-  "extraction_method":{"const":"deterministic_rules_v1"},"claims":{"type":"array","items":{"$ref":"#/$defs/claim"}},
-  "errors":{"type":"array"},"policy":{"type":"string","minLength":1}},
- "$defs":{"claim":{"type":"object","additionalProperties":false,
-  "required":["claim_id","candidate_id","claim_type","topic","statement","value","unit","scope","qualifiers","source","evidence_quote","extraction","review_status","review_gates"],
-  "properties":{
-   "claim_id":{"type":"string","pattern":"^claim-[a-f0-9]{20}$"},"candidate_id":{"type":"string","minLength":1},
-   "claim_type":{"enum":["performance_result","availability_or_lifecycle","research_finding","software_or_capability","quantitative_specification","qualitative_capability"]},
-   "topic":{"enum":["memory_bandwidth","memory_capacity","interconnect","power","compute","process_node","packaging","software_support","availability","performance","architecture","other"]},
-   "statement":{"type":"string","minLength":1,"maxLength":1200},"value":{"type":["number","null"]},"unit":{"type":["string","null"]},
-   "scope":{"type":"object","additionalProperties":false,"required":["status","text"],"properties":{
-    "status":{"enum":["explicit_per_unit","explicit_level","explicit_aggregate","not_explicitly_stated"]},"text":{"type":["string","null"]}}},
-   "qualifiers":{"type":"array","items":{"type":"string"}},
-   "source":{"type":"object","additionalProperties":false,
-    "required":["candidate_id","source_id","source_name","publisher","source_type","independence","url","published_at","evidence_scope"],
-    "properties":{"candidate_id":{"type":["string","null"]},"source_id":{"type":["string","null"]},
-     "source_name":{"type":["string","null"]},"publisher":{"type":["string","null"]},"source_type":{"type":"string"},
-     "independence":{"type":"string"},"url":{"type":"string","format":"uri"},
-     "published_at":{"type":["string","null"]},"evidence_scope":{"type":"string"}}},
-   "evidence_quote":{"type":"string","minLength":1},
-   "extraction":{"type":"object","additionalProperties":false,"required":["method","confidence","matched_signals","requires_semantic_review"],
-    "properties":{"method":{"const":"deterministic_rules_v1"},"confidence":{"enum":["low","medium"]},
-     "matched_signals":{"type":"array","items":{"type":"string"}},"requires_semantic_review":{"const":true}}},
-   "review_status":{"const":"unverified_candidate"},"review_gates":{"type":"array","minItems":1,"items":{"type":"string"}}}}}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/intelligence-claims.schema.json",
+  "title": "AI Chip Intelligence Extracted Claim Candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "input_candidate_count",
+    "candidate_count_with_claims",
+    "candidate_count_without_claims",
+    "out_of_scope_candidate_count",
+    "candidate_relevance_counts",
+    "candidate_skip_reason_counts",
+    "filtered_sentence_count",
+    "claim_count",
+    "claim_count_before_limits",
+    "claim_count_after_candidate_limits",
+    "claims_dropped_by_limits",
+    "truncated",
+    "max_claims",
+    "max_claims_per_candidate",
+    "topic_counts",
+    "claim_type_counts",
+    "assertion_class_counts",
+    "evidence_class_counts",
+    "relevance_counts",
+    "source_counts",
+    "extraction_method",
+    "claims",
+    "errors",
+    "policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidate_count_with_claims": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidate_count_without_claims": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "out_of_scope_candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidate_relevance_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "candidate_skip_reason_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "filtered_sentence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claim_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claim_count_before_limits": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claim_count_after_candidate_limits": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claims_dropped_by_limits": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "max_claims": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "max_claims_per_candidate": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "topic_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "claim_type_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "assertion_class_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "evidence_class_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "relevance_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "source_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "extraction_method": {
+      "const": "deterministic_rules_v3"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "errors"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "candidate_id",
+        "claim_type",
+        "assertion_class",
+        "topic",
+        "relevance",
+        "statement",
+        "value",
+        "unit",
+        "scope",
+        "qualifiers",
+        "source",
+        "evidence_class",
+        "evidence_quote",
+        "extraction",
+        "review_status",
+        "review_gates"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^claim-[a-f0-9]{20}$"
+        },
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_type": {
+          "enum": [
+            "performance_result",
+            "availability_or_lifecycle",
+            "research_finding",
+            "software_or_capability",
+            "quantitative_specification",
+            "qualitative_capability"
+          ]
+        },
+        "assertion_class": {
+          "enum": [
+            "roadmap_or_future_intent",
+            "speculation_or_hypothesis",
+            "vendor_marketing_claim",
+            "research_result_candidate",
+            "vendor_reported_result_candidate",
+            "performance_result_candidate",
+            "technical_specification_candidate",
+            "availability_statement",
+            "capability_or_compatibility_statement",
+            "research_finding_candidate",
+            "vendor_technical_statement",
+            "technical_statement_candidate"
+          ]
+        },
+        "topic": {
+          "enum": [
+            "interconnect",
+            "memory_bandwidth",
+            "memory_capacity",
+            "gpu_scheduling",
+            "inference_serving",
+            "training_systems",
+            "agent_runtime",
+            "compiler_kernel",
+            "packaging",
+            "process_node",
+            "power",
+            "compute",
+            "performance",
+            "software_support",
+            "availability",
+            "architecture",
+            "rtl_eda",
+            "benchmark",
+            "physical_ai",
+            "other"
+          ]
+        },
+        "relevance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "class",
+            "matched_signals"
+          ],
+          "properties": {
+            "class": {
+              "enum": [
+                "direct_ai_compute",
+                "adjacent_ai_systems"
+              ]
+            },
+            "matched_signals": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "text"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "explicit_per_unit",
+                "explicit_level",
+                "explicit_aggregate",
+                "not_explicitly_stated"
+              ]
+            },
+            "text": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "qualifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "candidate_id",
+            "source_id",
+            "source_name",
+            "publisher",
+            "source_type",
+            "independence",
+            "url",
+            "published_at",
+            "evidence_scope"
+          ],
+          "properties": {
+            "candidate_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "source_type": {
+              "type": "string"
+            },
+            "independence": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "published_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence_scope": {
+              "type": "string"
+            }
+          }
+        },
+        "evidence_class": {
+          "enum": [
+            "research_preprint",
+            "vendor_primary_statement",
+            "project_maintainer_statement",
+            "repository_metadata",
+            "independent_reporting",
+            "unclassified_source"
+          ]
+        },
+        "evidence_quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "extraction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "confidence",
+            "matched_signals",
+            "requires_semantic_review"
+          ],
+          "properties": {
+            "method": {
+              "const": "deterministic_rules_v3"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "matched_signals": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "requires_semantic_review": {
+              "const": true
+            }
+          }
+        },
+        "review_status": {
+          "const": "unverified_candidate"
+        },
+        "review_gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }

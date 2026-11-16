@@ -271,7 +271,7 @@
       "category": "research-preprint",
       "kind": "arxiv_api",
       "publisher": "arXiv",
-      "query": "(cat:cs.DC OR cat:cs.AR OR cat:cs.LG OR cat:cs.PL OR cat:eess.SY) AND (all:accelerator OR all:GPU OR all:TPU OR all:HBM OR all:inference OR all:serving OR all:compiler OR all:kernel OR all:interconnect OR all:parallelism OR all:LLM)",
+      "query": "(cat:cs.DC OR cat:cs.AR OR cat:cs.LG OR cat:cs.PL OR cat:eess.SY) AND (all:TPU OR all:NPU OR all:ASIC OR all:FPGA OR all:HBM OR all:CUDA OR all:ROCm OR all:NVLink OR all:UALink OR all:CUTLASS OR all:Triton OR all:FlashAttention OR all:\"AI accelerator\" OR all:\"machine learning accelerator\" OR all:\"GPU kernel\" OR all:\"GPU scheduling\" OR all:\"GPU memory\" OR all:\"GPU inference\" OR all:\"GPU cluster\" OR all:\"LLM inference\" OR all:\"LLM serving\" OR all:\"distributed training\" OR all:\"tensor parallel\" OR all:\"expert parallel\" OR all:\"KV cache\" OR all:\"agent runtime\" OR all:\"world model\" OR all:\"reconfigurable accelerator\" OR all:\"dataflow accelerator\" OR all:chiplet OR (all:GPU AND (all:\"machine learning\" OR all:\"deep learning\" OR all:LLM OR all:\"large language model\" OR all:\"neural network\")))",
       "max_results": 100,
       "source_url": "https://arxiv.org/",
       "description": "Searches recent preprints in distributed systems, architecture, machine learning, programming languages and signal systems for AI accelerator and inference-system work.",
