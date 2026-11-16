@@ -57,7 +57,8 @@ class RetrievalDiagnosisTests(unittest.TestCase):
 
     def test_suggestions_must_be_grounded_in_abstract_excerpt(self):
         data = json.loads(json.dumps(GOLDEN))
-        data["examples"][0]["candidate_query_terms"] = ["invented phrase"]
+        item = next(x for x in data["examples"] if x["paper_id"].endswith("2611.18145v1"))
+        item["candidate_query_terms"] = ["invented phrase"]
         with self.assertRaisesRegex(ValueError, "Ungrounded"):
             diagnose(data, evaluation(["2611.18145"]), REGISTRY)
 
