@@ -172,7 +172,7 @@ class ClaimExtractionTests(unittest.TestCase):
             **self.candidate,
             "title": "Overview of LLM inference GPU platform",
             "excerpt": (
-                "The system provides 72 GPUs per rack. "
+                "The LLM inference system provides 72 GPUs per rack. "
                 "The system provides 72 GPUs per rack."
             ),
         }
