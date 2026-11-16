@@ -70,9 +70,11 @@ def retryable(error):
         return error.code in RETRY_HTTP_STATUS
     return isinstance(error, (TimeoutError, socket.timeout, urllib.error.URLError, ConnectionError))
 
-def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep):
+def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep, backoff_seconds=0.2):
     if not isinstance(attempts, int) or not 1 <= attempts <= 3:
         raise ValueError("attempts must be between 1 and 3")
+    if not isinstance(backoff_seconds, (int, float)) or backoff_seconds < 0:
+        raise ValueError("backoff_seconds must be non-negative")
     for attempt in range(1, attempts + 1):
         try:
             return call(), attempt
@@ -81,7 +83,7 @@ def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep):
             if attempt == attempts or not retryable(error):
                 raise
             # Local bounded backoff; honor neither untrusted Retry-After nor URL contents.
-            sleep(0.2 * (2 ** (attempt - 1)))
+            sleep(backoff_seconds * (2 ** (attempt - 1)))
     raise RuntimeError("unreachable")
 
 def fetch_bytes(url, *, timeout=12, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
@@ -537,7 +539,10 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 raise ValueError("unsupported_source_kind")
             # Retry the full parse as well as transport, but only for transient
             # network/HTTP errors. A malformed feed is not retried.
-            found, attempts = bounded_retry(fetch_source, sleep=retry_sleep)
+            retry_backoff_seconds = 3.0 if kind == "arxiv_api" else 0.2
+            found, attempts = bounded_retry(
+                fetch_source, sleep=retry_sleep,
+                backoff_seconds=retry_backoff_seconds)
             candidates.extend(found)
             status = "recovered" if failures else "healthy"
             source_health[source_id] = {
