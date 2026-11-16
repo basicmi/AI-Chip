@@ -82,7 +82,13 @@
       "source_url": "https://arxiv.org/abs/2611.03330",
       "published_on": "2026-11-02",
       "expected_relevance": "direct_ai_compute",
-      "rationale": "Analytical compute, memory, and energy model for LLM inference"
+      "rationale": "Analytical compute, memory, and energy model for LLM inference",
+      "candidate_query_terms": [
+        "LLM inference",
+        "energy cost",
+        "KV-cache",
+        "agentic serving"
+      ]
     },
     {
       "paper_id": "arxiv:2611.10832v1",

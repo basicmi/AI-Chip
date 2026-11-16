@@ -183,3 +183,34 @@ query: the cause could be term/category coverage, indexing latency, request
 timing or a capped search window. Full-page truncation warnings remain
 visible next to the metric. CI checks evaluator correctness but does not
 require an arbitrary minimum hit rate.
+
+## Retrieval miss diagnosis (PR #118)
+
+The weekly workflow now follows known-item Recall@K with a deterministic
+diagnosis report. It parses the active arXiv shard categories and literal
+`all:` query phrases, then compares them with the manually curated title and
+abstract excerpt of each missed seed. A category-aware lexical proxy classifies
+misses as a likely category-filter gap, query-vocabulary gap, configured-phrase
+match not returned, or unknown-category lexical gap.
+
+The report includes category provenance, source shards covering each known
+category, phrase matches and evidence-grounded candidate terms. It is not an
+arXiv API replay: phrase matching does not prove the API's exact query
+semantics, and a phrase match followed by a miss can still reflect indexing,
+ranking or page-cap truncation. Category metadata from secondary indexes is
+explicitly provisional; uncaptured metadata stays unknown.
+
+Run locally:
+
+```bash
+python3 scripts/diagnose_intelligence_retrieval.py \
+  --golden data/intelligence-retrieval-golden.json \
+  --evaluation /tmp/ai-chip-retrieval-eval.json \
+  --registry data/intelligence-sources.json \
+  --output /tmp/ai-chip-retrieval-diagnosis.json \
+  --markdown /tmp/ai-chip-retrieval-diagnosis.md
+```
+
+Candidate terms are review proposals only. The diagnostic does not change
+source queries automatically. Broadening OR clauses without measuring result
+quality can increase page-cap competition and reduce precision.

@@ -93,6 +93,14 @@ jobs:
             --registry data/intelligence-sources.json \
             --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.md"
+      - name: Diagnose missed arXiv retrieval seeds
+        run: |
+          python3 scripts/diagnose_intelligence_retrieval.py \
+            --golden data/intelligence-retrieval-golden.json \
+            --evaluation "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.json" \
+            --registry data/intelligence-sources.json \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md"
       - name: Extract structured claim candidates
         run: |
           python3 scripts/extract_intelligence_claims.py \
@@ -172,6 +180,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-retrieval-diagnosis.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-triage.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-triage.md" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -200,6 +211,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-quality-evaluation.md
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-evaluation.json
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-evaluation.md
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-diagnosis.json
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-diagnosis.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
