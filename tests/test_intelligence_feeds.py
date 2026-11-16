@@ -11,7 +11,7 @@ from run_intelligence_discovery import (
 )
 from validate_intelligence_sources import validate_registry
 
-NOW = datetime(2026, 11, 13, 12, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 11, 16, 12, 0, tzinfo=timezone.utc)
 
 RSS = """<?xml version="1.0"?><rss version="2.0"><channel>
 <item><title>New GPU inference stack</title><link>https://vendor.example/news/gpu</link>
