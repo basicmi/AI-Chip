@@ -383,7 +383,7 @@ def extract_candidate_claims(candidate, diagnostics=None):
         topic = topic_for(sentence)
         # A paper must be relevant at candidate level, and a sentence must carry
         # its own system signal or a recognizable technical topic.
-        if not sentence_relevance and context_relevance == "adjacent_ai_systems":
+        if not sentence_relevance and context_relevance in ("adjacent_ai_systems", "direct_ai_compute"):
             # A candidate may be relevant because its title/abstract establishes
             # an AI workload, while a metric sentence only repeats "GPU".
             # Permit that narrow case only when the sentence itself names a
