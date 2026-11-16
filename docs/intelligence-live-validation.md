@@ -22,7 +22,7 @@ The curated registry version `2026.11.13-2` has 24 active sources:
 
 | Source kind | Count | Collection method |
 |---|---:|---|
-| GitHub Releases | 15 | Up to 3 pages × 20 releases per repository |
+| GitHub Releases | 15 | Up to 3 pages × 50 releases per repository |
 | RSS / Atom | 8 | One feed document per publisher |
 | arXiv API | 1 | Up to 3 pages × 100 entries, with 3-second spacing |
 
@@ -54,6 +54,38 @@ Treat the first real run as a baseline, not a quality ranking.
    heuristic, not a factual verifier.
 8. **Model-catalog boundary:** separate repository presence and SHA changes
    from runtime support, hardware compatibility or model quality.
+
+## First live baseline — 2026-11-16
+
+Run: [GitHub Actions #43787532670](https://github.com/basicmi/AI-Chip/actions/runs/43787532670)
+
+- Discovery completed successfully; end-to-end audit allowed the cache
+  checkpoint. Both cache files were absent at run start, so this is the
+  first-seen baseline, not a continuity measurement.
+- 23/24 sources were observed (95.8%); 1 source, `arxiv-ai-systems`,
+  timed out on all 3 attempts. It accounted for 3 failed requests.
+- 47 HTTP requests were made in total, 3 failed; successful response payloads
+  totalled 19,304,125 bytes. One source had an individual request over 5 s.
+- Four sources were empty but reachable: `deepseek-deepep`,
+  `mlcommons-inference`, `nvidia-newsroom-ai-platforms` and
+  `rocm-composable-kernel`. These are not outages.
+- Seven GitHub release sources reached the 3-page / 60-item cap:
+  `aws-neuron-sdk`, `flashinfer`, `nvidia-cutlass`,
+  `nvidia-tensorrt-llm`, `pytorch`, `sglang` and `vllm`.
+  This is a possible completeness warning, not proof of missing releases.
+- Discovery produced 393 observations: 47 project releases, 34 technical
+  articles, 136 vendor announcements and 176 model-repository records.
+  The 176 model records included 13 curated repositories and 163 unreviewed
+  publisher-listing candidates. The first scan did not request expanded
+  Hugging Face fields, so most listing candidates lacked creation date, SHA
+  and task metadata; PR #109 corrects this and applies the 45-day lookback.
+- Claim extraction emitted 421 candidates. All had low extraction confidence;
+  199 were classified as `other`. Five exact-text duplicate clusters
+  collapsed six claims; no claim was independently verified. This is a
+  clear signal-quality limitation and is the next separate improvement area.
+
+This single scan is an operational baseline only. It is not a source-quality
+ranking or factual validation of any product, model, benchmark or capability.
 
 ## When to score source quality
 

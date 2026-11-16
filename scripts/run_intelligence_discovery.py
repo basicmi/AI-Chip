@@ -634,7 +634,7 @@ def main():
             if state.get("schema_version") != "1.0" or not isinstance(state.get("items"), dict):
                 raise ValueError("invalid discovery state file")
         from discover_model_catalog import discover, discover_publisher_candidates
-        model_report = discover(catalog, publisher_search=discover_publisher_candidates)
+        model_report = discover(catalog, publisher_search=discover_publisher_candidates, days=args.days)
         report = run_discovery(registry, catalog, days=args.days, model_report=model_report, state=state)
         args.state_file.parent.mkdir(parents=True, exist_ok=True)
         args.output.parent.mkdir(parents=True, exist_ok=True)

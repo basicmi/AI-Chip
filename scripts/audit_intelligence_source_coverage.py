@@ -158,11 +158,11 @@ def coverage_report(registry, discovery, *, generated_at=None):
         latest_age = max(0, (timestamp - latest).days) if latest else None
         # Reaching the configured extraction cap is a possible missed-page
         # indicator; it does not prove a release is missing.
-        cap = 20 if source["kind"] == "github_releases" else (
+        cap = 50 if source["kind"] == "github_releases" else (
             source.get("max_results", 100) if source["kind"] == "arxiv_api" else None)
         pagination = row.get("pagination")
         if pagination is not None and source["kind"] in {"github_releases", "arxiv_api"}:
-            expected_per_page = 20 if source["kind"] == "github_releases" else source.get("max_results", 100)
+            expected_per_page = 50 if source["kind"] == "github_releases" else source.get("max_results", 100)
             if (not isinstance(pagination, dict)
                     or pagination.get("per_page") != expected_per_page
                     or pagination.get("max_pages") != 3

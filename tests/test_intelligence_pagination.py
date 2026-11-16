@@ -35,20 +35,20 @@ def pages(mapping):
 
 class PaginationTests(unittest.TestCase):
     def test_page_two_is_retrieved_without_duplicate_release(self):
-        fetch,calls=pages({1:[release("v"+str(i)) for i in range(20)],
-                           2:[release("v19"),release("v20"),release("v21")]})
+        fetch,calls=pages({1:[release("v"+str(i)) for i in range(50)],
+                           2:[release("v49"),release("v50"),release("v51")]})
         diag={}
         found=collect_releases(SOURCE,since=datetime(2026,10,1,tzinfo=timezone.utc),
                                fetcher=fetch,paging=diag)
         self.assertEqual(calls,[1,2])
-        self.assertEqual(len(found),22)
+        self.assertEqual(len(found),52)
         self.assertEqual(diag["pages_fetched"],2)
         self.assertFalse(diag["paging_cap_reached"])
-        self.assertEqual(diag["raw_items_scanned"],23)
+        self.assertEqual(diag["raw_items_scanned"],53)
     def test_full_third_page_warns_even_when_few_results_in_window(self):
         old="2026-01-01T00:00:00Z"
         fetch,calls=pages({i:[release(f"v{i}-{j}",old if j else "2026-11-13T00:00:00Z")
-                             for j in range(20)] for i in (1,2,3)})
+                             for j in range(50)] for i in (1,2,3)})
         diag={}
         found=collect_releases(SOURCE,since=datetime(2026,10,1,tzinfo=timezone.utc),
                                fetcher=fetch,paging=diag)
@@ -58,7 +58,7 @@ class PaginationTests(unittest.TestCase):
         report=run_discovery({"sources":[SOURCE]},{"models":[]},now=NOW,
                              release_fetcher=fetch,model_report=MODEL,
                              state={"schema_version":"1.0","items":{}})
-        self.assertEqual(report["source_results"][0]["pagination"]["raw_items_scanned"],60)
+        self.assertEqual(report["source_results"][0]["pagination"]["raw_items_scanned"],150)
         result=coverage_report({"schema_version":"1.0","sources":[SOURCE]},report)
         self.assertEqual(result["summary"]["potentially_truncated_sources"],1)
         self.assertEqual(result["sources"][0]["recent_item_count"],3)
@@ -71,7 +71,7 @@ class PaginationTests(unittest.TestCase):
         self.assertEqual(len(found),1)
         self.assertEqual(diag["pages_fetched"],1)
     def test_later_page_failure_does_not_checkpoint_partial_source(self):
-        fetch,calls=pages({1:[release("v"+str(i)) for i in range(20)],
+        fetch,calls=pages({1:[release("v"+str(i)) for i in range(50)],
                            2:ValueError("synthetic malformed release response")})
         state={"schema_version":"1.0","items":{}}
         report=run_discovery({"sources":[SOURCE]},{"models":[]},now=NOW,
@@ -81,15 +81,15 @@ class PaginationTests(unittest.TestCase):
         self.assertEqual(report["candidate_count"],0)
         self.assertEqual(state["items"],{})
     def test_oversized_page_is_invalid_payload(self):
-        fetch,calls=pages({1:[release("v"+str(i)) for i in range(21)]})
+        fetch,calls=pages({1:[release("v"+str(i)) for i in range(51)]})
         with self.assertRaisesRegex(ValueError,"oversized"):
             collect_releases(SOURCE,since=datetime(2026,10,1,tzinfo=timezone.utc),fetcher=fetch)
     def test_full_third_page_without_more_page_is_not_claimed_complete(self):
-        fetch,calls=pages({i:[release(f"v{i}-{j}") for j in range(20)] for i in (1,2,3)})
+        fetch,calls=pages({i:[release(f"v{i}-{j}") for j in range(50)] for i in (1,2,3)})
         diag={}
         found=collect_releases(SOURCE,since=datetime(2026,10,1,tzinfo=timezone.utc),
                                fetcher=fetch,paging=diag)
-        self.assertEqual(len(found),60)
+        self.assertEqual(len(found),150)
         self.assertTrue(diag["paging_cap_reached"])
         self.assertEqual(max(calls),3)
     def test_invalid_pagination_diagnostics_rejected(self):
