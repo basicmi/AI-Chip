@@ -101,6 +101,48 @@ def fetch_json(url, *, timeout=20):
 def fetch_text(url, *, timeout=20):
     return fetch_bytes(url, timeout=timeout).decode("utf-8", errors="replace")
 
+def instrument_fetcher(fetcher, metrics, *, clock=time.perf_counter):
+    """Measure per-request runtime and payload size without retaining source URLs."""
+    def measured(url):
+        started = clock()
+        try:
+            payload = fetcher(url)
+            if isinstance(payload, bytes):
+                size = len(payload)
+            elif isinstance(payload, str):
+                size = len(payload.encode("utf-8"))
+            else:
+                size = len(json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+            metrics["response_bytes"] += size
+            return payload
+        except Exception as error:
+            metrics["failed_request_count"] += 1
+            if isinstance(error, urllib.error.HTTPError):
+                metrics["last_http_error_status"] = error.code
+            metrics["last_request_failure_category"] = failure_category(error)
+            raise
+        finally:
+            elapsed_ms = max(0.0, (clock() - started) * 1000.0)
+            metrics["request_count"] += 1
+            metrics["total_elapsed_ms"] += elapsed_ms
+            metrics["max_request_ms"] = max(metrics["max_request_ms"], elapsed_ms)
+    return measured
+
+
+def request_diagnostics_snapshot(metrics):
+    count = metrics["request_count"]
+    total = metrics["total_elapsed_ms"]
+    return {
+        "request_count": count,
+        "failed_request_count": metrics["failed_request_count"],
+        "response_bytes": metrics["response_bytes"],
+        "total_elapsed_ms": round(total, 3),
+        "average_request_ms": round(total / count, 3) if count else None,
+        "max_request_ms": round(metrics["max_request_ms"], 3),
+        "last_http_error_status": metrics["last_http_error_status"],
+        "last_request_failure_category": metrics["last_request_failure_category"],
+    }
+
 def release_fingerprint(release):
     payload = {key: release.get(key) for key in ("tag_name", "name", "body", "published_at", "updated_at", "html_url", "prerelease")}
     encoded = json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
@@ -450,7 +492,8 @@ def build_evidence_review_packet(report):
     return "\n".join(lines) + "\n"
 
 def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch_json,
-                  feed_fetcher=fetch_text, model_report=None, state=None):
+                  feed_fetcher=fetch_text, model_report=None, state=None,
+                  clock=time.perf_counter, retry_sleep=time.sleep):
     now_dt = now or datetime.now(timezone.utc)
     if now_dt.utcoffset() is None:
         raise ValueError("now must be timezone-aware")
@@ -476,18 +519,25 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
         kind = source["kind"]
         attempts = 0
         paging = {}
+        request_metrics = {
+            "request_count": 0, "failed_request_count": 0, "response_bytes": 0,
+            "total_elapsed_ms": 0.0, "max_request_ms": 0.0,
+            "last_http_error_status": None, "last_request_failure_category": None,
+        }
+        measured_release_fetcher = instrument_fetcher(release_fetcher, request_metrics, clock=clock)
+        measured_feed_fetcher = instrument_fetcher(feed_fetcher, request_metrics, clock=clock)
         try:
             def fetch_source():
                 if kind == "github_releases":
-                    return collect_releases(source, since=since, fetcher=release_fetcher, paging=paging)
+                    return collect_releases(source, since=since, fetcher=measured_release_fetcher, paging=paging)
                 if kind == "rss_atom":
-                    return collect_rss_atom(source, since=since, fetcher=feed_fetcher)
+                    return collect_rss_atom(source, since=since, fetcher=measured_feed_fetcher)
                 if kind == "arxiv_api":
-                    return collect_arxiv(source, since=since, fetcher=feed_fetcher, paging=paging)
+                    return collect_arxiv(source, since=since, fetcher=measured_feed_fetcher, paging=paging)
                 raise ValueError("unsupported_source_kind")
             # Retry the full parse as well as transport, but only for transient
             # network/HTTP errors. A malformed feed is not retried.
-            found, attempts = bounded_retry(fetch_source)
+            found, attempts = bounded_retry(fetch_source, sleep=retry_sleep)
             candidates.extend(found)
             status = "recovered" if failures else "healthy"
             source_health[source_id] = {
@@ -500,6 +550,7 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 "kind": kind, "status": "observed", "recent_item_count": len(found),
                 "health_transition": status, "consecutive_failures": 0,
                 "attempt_count": attempts,
+                "request_diagnostics": request_diagnostics_snapshot(request_metrics),
                 **({"pagination": paging} if paging else {}),
             })
         except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
@@ -518,7 +569,8 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 "source_id": source_id, "source_name": source["name"],
                 "kind": kind, "status": "unavailable", "recent_item_count": 0,
                 "failure_category": category, "failure_tier": tier,
-                "consecutive_failures": failures, "attempt_count": MAX_ATTEMPTS if retryable(error) else 1,
+                "consecutive_failures": failures, "attempt_count": attempts or (MAX_ATTEMPTS if retryable(error) else 1),
+                "request_diagnostics": request_diagnostics_snapshot(request_metrics),
             })
     if model_report is not None:
         for item in model_report.get("models", []):

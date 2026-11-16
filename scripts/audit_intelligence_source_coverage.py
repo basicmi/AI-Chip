@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -104,10 +105,50 @@ def coverage_report(registry, discovery, *, generated_at=None):
     shared_urls = {url: sorted(source_ids) for url, source_ids in url_sources.items()
                    if len(source_ids) > 1}
     kinds = Counter(source["kind"] for source in active)
+    def checked_request_diagnostics(row, source_id):
+        diagnostics = row.get("request_diagnostics")
+        if diagnostics is None:
+            return None  # Backward-compatible with reports created before telemetry.
+        if not isinstance(diagnostics, dict):
+            raise ValueError("request diagnostics must be an object for " + source_id)
+        integer_fields = ("request_count", "failed_request_count", "response_bytes")
+        for field in integer_fields:
+            if type(diagnostics.get(field)) is not int or diagnostics[field] < 0:
+                raise ValueError("invalid request diagnostic " + field + " for " + source_id)
+        if diagnostics["failed_request_count"] > diagnostics["request_count"]:
+            raise ValueError("failed request count exceeds total for " + source_id)
+        for field in ("total_elapsed_ms", "max_request_ms"):
+            value = diagnostics.get(field)
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError("invalid request timing " + field + " for " + source_id)
+        average = diagnostics.get("average_request_ms")
+        if diagnostics["request_count"] == 0:
+            if (average is not None or diagnostics["response_bytes"] != 0
+                    or diagnostics["failed_request_count"] != 0
+                    or diagnostics["total_elapsed_ms"] != 0
+                    or diagnostics["max_request_ms"] != 0):
+                raise ValueError("zero-request diagnostics are inconsistent for " + source_id)
+        else:
+            if (type(average) not in (int, float) or not math.isfinite(average)
+                    or average < 0
+                    or abs(average - diagnostics["total_elapsed_ms"] / diagnostics["request_count"]) > 0.002):
+                raise ValueError("average request latency is inconsistent for " + source_id)
+            if diagnostics["max_request_ms"] > diagnostics["total_elapsed_ms"] + 0.002:
+                raise ValueError("maximum request latency exceeds total for " + source_id)
+        status = diagnostics.get("last_http_error_status")
+        if status is not None and (type(status) is not int or not 100 <= status <= 599):
+            raise ValueError("invalid HTTP error status for " + source_id)
+        category = diagnostics.get("last_request_failure_category")
+        allowed = {"http_rate_limit", "http_server_error", "http_client_error",
+                   "timeout", "network", "parse_error", "invalid_payload", "source_error"}
+        if category is not None and category not in allowed:
+            raise ValueError("invalid request failure category for " + source_id)
+        return diagnostics
     records, warnings = [], []
     for source in active:
         sid = source["id"]
         row = scans[sid]
+        request_metrics = checked_request_diagnostics(row, sid)
         items = grouped[sid]
         if row.get("recent_item_count") != len(items):
             raise ValueError("recent item count differs from observations for " + sid)
@@ -168,6 +209,7 @@ def coverage_report(registry, discovery, *, generated_at=None):
             "failure_category": row.get("failure_category"),
             "failure_tier": row.get("failure_tier"),
             "consecutive_failures": failures,
+            "request_diagnostics": request_metrics,
             "risk_flags": risk_flags,
         }
         records.append(result)
@@ -188,6 +230,10 @@ def coverage_report(registry, discovery, *, generated_at=None):
             "potentially_truncated_sources": sum(x["possible_window_truncation"] for x in records),
             "cross_source_shared_url_groups": len(shared_urls),
             "sources_needing_attention": len(warnings),
+            "total_requests": sum((x["request_diagnostics"] or {}).get("request_count", 0) for x in records),
+            "failed_requests": sum((x["request_diagnostics"] or {}).get("failed_request_count", 0) for x in records),
+            "response_bytes": sum((x["request_diagnostics"] or {}).get("response_bytes", 0) for x in records),
+            "sources_with_slow_request_over_5s": sum(bool(x["request_diagnostics"] and x["request_diagnostics"]["max_request_ms"] >= 5000) for x in records),
         },
         "sources": sorted(records, key=lambda x: x["source_id"]),
         # Do not publish source URL values in the report: paths and queries
@@ -208,8 +254,22 @@ def markdown_report(report):
         f"- Empty successful sources: {s['empty_success_sources']}",
         f"- Possible per-request truncation: {s['potentially_truncated_sources']}",
         f"- Cross-source shared URL groups: {s['cross_source_shared_url_groups']}",
-        "", "## Attention queue", "",
+        f"- HTTP requests / failed requests: {s.get('total_requests', 0)} / {s.get('failed_requests', 0)}",
+        f"- Total response payload: {s.get('response_bytes', 0)} bytes",
+        f"- Sources with a request taking at least 5 seconds: {s.get('sources_with_slow_request_over_5s', 0)}",
+        "", "## Per-source runtime diagnostics", "",
+        "| Source | Status | Requests | Failed | Avg ms | Max ms | Bytes |",
+        "|---|---:|---:|---:|---:|---:|---:|",
     ]
+    for source in report["sources"]:
+        metrics = source.get("request_diagnostics") or {}
+        lines.append(
+            f"| {source['source_id']} | {source['status']} | "
+            f"{metrics.get('request_count', '—')} | {metrics.get('failed_request_count', '—')} | "
+            f"{metrics.get('average_request_ms', '—')} | {metrics.get('max_request_ms', '—')} | "
+            f"{metrics.get('response_bytes', '—')} |"
+        )
+    lines.extend(["", "## Attention queue", ""])
     if report["attention"]:
         for row in report["attention"]:
             lines.append(f"- **{row['source_id']}** — {', '.join(row['risk_flags'])}")
