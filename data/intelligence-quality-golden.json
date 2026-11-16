@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "ai-chip-intelligence-live-arxiv-2026-11-16-v1",
+  "created_at": "2026-11-16",
+  "source_run": 43798131776,
+  "curation": "Human-curated seed set from the first live run after PR #112. Direct means AI chip/hardware or concrete AI system contribution; adjacent means robot/agent/physical-AI workload relevance without a direct hardware contribution; out_of_scope means no material AI chip/system contribution. Not a statistically representative estimate of production precision.",
+  "scope_policy": {
+    "direct_ai_compute": "AI accelerator/chip architecture, hardware, memory/interconnect, compiler/kernel, training, inference/serving, or a concrete AI system/runtime contribution.",
+    "adjacent_ai_systems": "Agent, robotics, world-model, or physical-AI workload research with plausible implications for AI system design, but without a direct hardware/system contribution.",
+    "out_of_scope": "Generic ML applications, scientific simulation, general-purpose GPU/HPC algorithms, or other work without a material AI chip/system contribution."
+  },
+  "evaluation_limits": [
+    "Measures candidate relevance classification and sentence extraction on judged examples.",
+    "Does not measure retrieval recall over papers never returned by arXiv search.",
+    "Does not establish factual truth, peer-review status, or production compatibility.",
+    "Claim fragments are sentence-level anchors; multiple numeric rows for one sentence are counted once and reported separately as duplicate rows."
+  ],
+  "examples": [
+    {
+      "candidate_id": "arxiv:2611.18459v1",
+      "title": "Callo: Serving Cache-Miss Requests with Speculative Decoding on Invalidated KV under Prefill-Decode Disaggregation",
+      "url": "https://arxiv.org/abs/2611.18459v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "LLM serving and speculative decoding system",
+      "excerpt": "Agent sessions may involve frequent context edits, which effectively invalidate cached KV state and force requests to wait for re-prefill before decoding. We present Callo, a disaggregated serving system that leverages invalidated KV for speculative drafts to reduce this latency, while verifying drafts against the exact KV after prefill before committing tokens. Callo makes effective use of decode resources by scheduling speculations during periods of underutilization and preempting speculations when drafts are likely to not be accepted.",
+      "expected_claim_fragments": [
+        "invalidate cached KV state",
+        "disaggregated serving system",
+        "scheduling speculations during periods of underutilization"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.18422v1",
+      "title": "The State Is Not the Bottleneck: A Paged-State Gated-DeltaNet Tile on a Tri-Mode Multicast Mesh, Bit-Exact from RTL to Silicon",
+      "url": "https://arxiv.org/abs/2611.18422v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "FPGA implementation of a language-model layer with measured memory and decode costs",
+      "excerpt": "On an edge FPGA, this state can exceed the on-chip memory and must be paged to external memory. We built a hardware tile that computes one complete layer of a custom 369-million-parameter hybrid Gated DeltaNet model on an Agilex 5 FPGA and pages its recurrent state. State paging is therefore practical for such a model on an edge FPGA.",
+      "expected_claim_fragments": [
+        "state can exceed the on-chip memory",
+        "hardware tile that computes one complete layer",
+        "State paging is therefore practical"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.18145v1",
+      "title": "Compiling Specialized GPU-Initiated Networking",
+      "url": "https://arxiv.org/abs/2611.18145v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU-initiated networking compiler evaluated on LLM serving and multi-GPU systems",
+      "excerpt": "We present Obaleth, a compiler that makes GPU-initiated communication part of a kernel's intermediate representation, co-optimizes it alongside computation, and lowers it to specialized transport code. Obaleth plans completions around buffer lifetimes and optimizes memory ordering, synchronization, and batching across NVIDIA and AMD GPUs. On H100 GPUs, Obaleth sends small messages up to 3.3$\\times$ faster, and on 256 GPUs runs all-to-all 1.25$\\times$ and 2.3$\\times$ faster than NVSHMEM and NCCL GIN, with much smaller memory and register use.",
+      "expected_claim_fragments": [
+        "GPU-initiated communication",
+        "buffer lifetimes",
+        "On H100 GPUs"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.18075v1",
+      "title": "Zero-SM NCCL: A Systematic Guide to Designing and Deploying SM-Free GPU Communication",
+      "url": "https://arxiv.org/abs/2611.18075v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU collectives, NCCL, NVL72/B200, and distributed training",
+      "excerpt": "GPU communication libraries such as NCCL use Streaming Multiprocessors (SMs) for data movement and synchronization, slowing overlapped computation at a cost that grows with interconnect bandwidth. It synchronizes through CUDA stream memory operations, moves data asynchronously with copy engines within a scale-up domain, and drives network RDMA from a stream-ordered CPU proxy. It supports data-movement collectives such as AllGather and AlltoAll, plus one-sided ncclPutSignal and ncclWaitSignal APIs. In Megatron-LM training, they accelerate FSDP by up to 3.5%, and one-sided puts accelerate pipeline parallelism by up to 15%. Through an end-to-end study across models and parallelism strategies, we show that it pays off for large transfers in GPU-bound workloads and for deep pipelines with large bubbles, but loses on small messages and host-bound workloads.",
+      "expected_claim_fragments": [
+        "Streaming Multiprocessors (SMs)",
+        "network RDMA from a stream-ordered CPU proxy",
+        "AllGather and AlltoAll",
+        "accelerate FSDP",
+        "GPU-bound workloads"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.17908v1",
+      "title": "DiffusionSSD: Achieving Extreme Visual Compression with Dual-stage Diffusion and Cross-level Near-Data Processing",
+      "url": "https://arxiv.org/abs/2611.17908v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "NPU and near-data-processing architecture for neural codecs",
+      "excerpt": "(2) At the architecture level, in NPU-centered devices, neural codecs occupy the NPU, interfering with other AI applications. Compared with NPU+DRAM and near-data-processing design such as SmartSSD, cUFS+PIM improves coding throughput by 2.32 times and 2.91 times on average, respectively.",
+      "expected_claim_fragments": [
+        "NPU-centered devices",
+        "cUFS+PIM improves coding throughput"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.17108v2",
+      "title": "LazyWeights: Decode-on-Demand Edge LLMs",
+      "url": "https://arxiv.org/abs/2611.17108v2",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Edge LLM memory path and dedicated ASIC decoder",
+      "excerpt": "LazyWeights keeps these formats but tunes GPTQ so the codes compress, Huffman-codes them losslessly in interleaved lanes, and decodes them on demand in a small unit between DRAM and L2, so GPU kernels run unchanged and DRAM moves only coded bytes. A bit-exact 0.21 mm^2 ASIC decoder unit (1 GHz, 7 nm) cuts Orin latency and energy per token by up to 36% and 38% (54% and 44% with prompt-lookup speculation). A Huffman decoder beats an rANS decoder in rate and area at equal throughput; the ASIC decoder unit runs bit-exact on a Zynq UltraScale+ FPGA (AMD ZCU102).",
+      "expected_claim_fragments": [
+        "small unit between DRAM and L2",
+        "0.21 mm^2 ASIC decoder unit",
+        "Huffman decoder beats an rANS decoder"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.11857v1",
+      "title": "OverlapAdvisor: Modeling and Adapting Computation-Communication Overlap for Distributed MoE Serving",
+      "url": "https://arxiv.org/abs/2611.11857v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Distributed MoE serving and computation-communication overlap",
+      "excerpt": "Mixture-of-Experts (MoE) inference with expert parallelism (EP) relies on All-to-All communication, making computation-communication overlap strategies critical for achieving high performance. In SGLang and vLLM, it improves end-to-end throughput up to 31.7%.",
+      "expected_claim_fragments": [
+        "Mixture-of-Experts (MoE) inference",
+        "end-to-end throughput up to 31.7%"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.10930v1",
+      "title": "Beyond Host-Side Control: HBM Controller Partitioning Across Host and HBM Base Dies",
+      "url": "https://arxiv.org/abs/2611.10930v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "HBM4 base-die controller partitioning and silicon-interposer architecture",
+      "excerpt": "We present the first systematic quantitative study of function-level controller placement between the host and the HBM4 base die on a silicon interposer. We extend Ramulator 2 with HBM4 timing and maintenance, model a die-to-die (D2D) link with timing checks at the DRAM interface, and compose area, energy, and temperature from synthesized controller blocks, modeled storage, and interface data.",
+      "expected_claim_fragments": [
+        "HBM4 base die",
+        "function-level controller placement",
+        "HBM4 timing and maintenance"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.03392v1",
+      "title": "TinyML Hits the Memory Wall: A Benchmark of Ten Sub-Watt Edge Devices",
+      "url": "https://arxiv.org/abs/2611.03392v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Benchmark of sub-watt edge AI devices and NPUs",
+      "excerpt": "We benchmark sub-watt edge AI hardware by evaluating four CNNs (MobileNetV3, MCUNetV1, EfficientNet, SqueezeNet) and two tiny transformers (MobileViT-XXS, DeiT-tiny) on ten commercial devices: an in-sensor DSP (Sony IMX500), four MCUs with an NPU (STM32N6, Alif Ensemble E7/E8, GreenWaves GAP9), and five MCUs without an NPU (STM32U5, Apollo510B, ESP32-S3 Xtensa LX7, RA8M2, STM32V8). Latency on all four accelerators scales with memory traffic (bytes of weights and activations, r >= 0.98) and not with MACs, so they are memory-bound, while no MCU without an NPU is. The NPU advantage grows with intensity from 1.4x over a 1 GHz Cortex-M85 on MCUNetV1 to 8.2x on SqueezeNet.",
+      "expected_claim_fragments": [
+        "sub-watt edge AI hardware",
+        "scales with memory traffic",
+        "NPU advantage grows"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.03330v1",
+      "title": "The SIMPLE Law for Energy Cost of LLM Inference",
+      "url": "https://arxiv.org/abs/2611.03330v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Analytical compute, memory, and energy model for LLM inference",
+      "excerpt": "We derive closed-form expressions of the computational and memory-access complexity of LLM inference in terms of architectural hyperparameters, covering MHA and GQA, and compare a family of analytical models of increasing granularity. From these, we obtain the SIMPLE Inference Model to Predict LLMs Energy (SIMPLE), a four-parameter law that separates prefill from decode, and decode into KV-cache cost and next-token computation. Agentic serving raises energy per request by 13.0x relative to non-agentic ones, driven by the growth of both the prefill and the KV-cache terms with input length; while prefix caching removes most of the prefill cost (-93%), the KV-cache term is unaffected, so even a cached agentic request costs 4.8x more.",
+      "expected_claim_fragments": [
+        "computational and memory-access complexity of LLM inference",
+        "four-parameter law",
+        "Agentic serving raises energy per request"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.10832v1",
+      "title": "Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn",
+      "url": "https://arxiv.org/abs/2611.10832v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU capacity broker for agentic and RL workloads",
+      "excerpt": "AI agents and reinforcement-learning (RL) trainers run thousands of short, isolated GPU jobs: tool calls, verifiers, and rollouts. Firepool, the sandbox and execution broker behind agentic and RL workloads at LinkedIn, meets both requirements. Over a sampled peak period in production, Firepool serves 94.7% of 3,206 pod requests from warm or standby capacity. In paired benchmarks with fixed-duration jobs on production H200 nodes, agent and RL loops finish 13x and 10.8x faster than with a fresh pod per job; against a fresh reuse tag per job, warm reuse cuts p90 start latency from 59.1 s to 3.5 s.",
+      "expected_claim_fragments": [
+        "isolated GPU jobs",
+        "execution broker behind agentic and RL workloads",
+        "94.7% of 3,206 pod requests",
+        "p90 start latency from 59.1 s to 3.5 s"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.18035v1",
+      "title": "RL$^{\\mathrm{RT}}$: On-Device Reinforcement Learning Runtime",
+      "url": "https://arxiv.org/abs/2611.18035v1",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "On-device reinforcement-learning runtime on embedded GPUs",
+      "excerpt": "On-device reinforcement learning runs a periodic actor and a learner on one embedded GPU shared with other workloads. We present RL$^{\\mathrm{RT}}$, an on-device runtime that makes this coupling a tunable parameter: a refresh bound limits actor releases between refreshes, and a GPU permit with slack-aware admission prioritises the actor and fills spare time with training atop any base scheduler. Under the real refresh cost on two Jetson boards, RL$^{\\mathrm{RT}}$ keeps a 16.8 M-parameter policy's deadline misses below 1%, against 85 to 100% without it.",
+      "expected_claim_fragments": [
+        "one embedded GPU",
+        "on-device runtime",
+        "two Jetson boards"
+      ]
+    },
+    {
+      "candidate_id": "arxiv:2611.18372v1",
+      "title": "Vision-Language-Action Models: A Life-Cycle Survey of Design, Training and Deployment",
+      "url": "https://arxiv.org/abs/2611.18372v1",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Vision-language-action model lifecycle and robot deployment",
+      "excerpt": "Vision-language-action (VLA) models adapt web-pretrained vision-language models to output robot actions, so that web knowledge carries over to physical control. In under 4 years the field has moved from RT-2, the first VLA, to open models t"
+    },
+    {
+      "candidate_id": "arxiv:2611.10498v1",
+      "title": "EmbodiedIntentBench: Benchmarking Intent-Driven Runtime Adaptation for Mobile Robotic Missions",
+      "url": "https://arxiv.org/abs/2611.10498v1",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Runtime adaptation benchmark for mobile robotic missions",
+      "excerpt": "Mobile robotic sensing systems must adapt to operator requirements, limited resources, changing connectivity, and observation opportunities shaped by physical motion. Evaluating runtime strategies therefore requires assessing whether their decisions fulfill mission objectives, beyond isolated perception accuracy or execution efficiency. We present EmbodiedIntentBench, a benchmark for intent-driven runtime adaptation in mobile robotic missions. It represents mission intent through structured contracts for coverage, temporal evidence, reporting, urgency, and resources, and couples simulated unmanned aerial vehicle (UAV) workloads with causal, resource-accounted execution. Computation decisions affect mission time, resource use, and which observations can contribute evidence. We evaluate fixed and adaptive perception strategies in multi-phase missions and under changing urgency, connectivity, and battery conditions. In the multi-phase Depot study, a configuration with 87.5% full-bank target recall across visible target observations completes only 1 of 16 missions, whereas a lower-recall configuration completes 14. In an ablation, ignoring execution-induced observation loss increases aggregate mission success and reverses the ordering of two runtime strategies. Replays using Jetson AGX Orin CPU and GPU profiles change the relative success of local and remote strategies. In selected Jetson GPU-profile replays, intent-driven adaptation reduces modeled task energy by up to 28% with unchanged mission success. EmbodiedIntentBench provides an extensible framework for evaluating runtime decisions against mission fulfillment under physical and resource constraints."
+    },
+    {
+      "candidate_id": "arxiv:2611.08156v1",
+      "title": "La-JEPA: Compact Robot Policies with Latent World Modeling",
+      "url": "https://arxiv.org/abs/2611.08156v1",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Compact robot policies using latent world modeling",
+      "excerpt": "World-action models adapt pretrained video generators, and vision-language-action models build on pretrained vision-language backbones; both tie policy architecture and inference cost to large transformers designed for generation rather than control. It remains unclear how much these generation-oriented choices affect control. In this work, we introduce Latent Action JEPA (La-JEPA), a compact world-action model whose policy transformer is trained from scratch in the feature space of a pretrained V-JEPA 2.1 encoder. Following Fast-WAM, La-JEPA learns to predict future features jointly with actions during training and generates only actions at inference. Among policies without embodied pretraining, La-JEPA achieves state-of-the-art performance in clean and randomized RoboTwin 2.0 scenes and on LIBERO-Plus with correct instructions, while using far fewer parameters than the strongest competing policies. It runs substantially faster than Fast-WAM at comparable performance and outperforms the closest JEPA-based methods, LeapBot-WA and JEPA-WAM, on LIBERO-Plus and RoboTwin 2.0 without their pretrained policy backbones. On four real-robot tasks, its average success is comparable to pi0.5 and above non-embodied-pretrained baselines. Through a design study of the choices behind La-JEPA, we show that JEPA features outperform video VAE latents, most clearly out of distribution, and that training-time future prediction choices significantly impact the policy even when future prediction is skipped at inference. We correct the LIBERO-Plus instructions, as the officially released evaluator corrupts them for most variants, and re-evaluate several strong open baselines. Without a generative pretrained policy backbone, La-JEPA is better and faster than far larger policies, suggesting that robot foundation models may benefit from architectures designed for control rather than inherited from generation."
+    },
+    {
+      "candidate_id": "arxiv:2611.06653v1",
+      "title": "Detecting Silent Action-Interface Mismatch with Calibrated Relational World Models",
+      "url": "https://arxiv.org/abs/2611.06653v1",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Robot action-interface contracts and learned world models",
+      "excerpt": "A robot action can satisfy shape and range constraints yet carry the wrong semantics: axes may be permuted, signs inverted, rotations rescaled, or gripper polarity reversed. We study learned state-action-effect relations as offline contracts for detecting these mismatches and ranking their likely fields. Clean held-out transitions calibrate alarms; a fixed inverse vocabulary supports closed-set localization. On ten LIBERO Spatial tasks comprising 432 source episodes, a capacity-controlled comparison at 2.5% empirical clean false-positive rate gives 46.1% recall for a ridge forward residual, 61.0% for a four-component joint Gaussian mixture, and 65.7% for the exact conditional of that same mixture. The joint score retains a 14.9 percentage-point advantage over ridge, while conditioning improves recall by a further 4.7 points. Joint scoring instead has higher localization: 95.8% versus 94.6%. These matched-rate comparisons are retrospective diagnostics, not deployment calibration guarantees. Earlier Object/Goal results broaden tasks within the LIBERO convention; DROID, all three HYDRA tasks, short temporal faults, small offsets, exact repair, and simulated mitigation fail their respective gates, while xArm contributes one task only. The evidence supports a bounded offline diagnostic and a detection-localization tradeoff, rather than joint-density superiority or cross-robot safety."
+    },
+    {
+      "candidate_id": "arxiv:2611.18111v1",
+      "title": "Multi-GPU Tridiagonal Partition Algorithm",
+      "url": "https://arxiv.org/abs/2611.18111v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Generic multi-GPU CUDA linear algebra, no AI workload",
+      "excerpt": "This paper presents a multi-GPU version and a multi-GPU recursive version of the parallel partition method for systems of linear algebraic equations with tridiagonal coefficient matrices and their implementations in CUDA.",
+      "expected_claim_fragments": []
+    },
+    {
+      "candidate_id": "arxiv:2611.18393v1",
+      "title": "WeatherDreamer: Learning a World Model from Multimodal Earth Observations",
+      "url": "https://arxiv.org/abs/2611.18393v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Weather forecasting world model; GPU is only an implementation detail",
+      "excerpt": "We introduce WeatherDreamer, a world model that learns this cycle end-to-end from 18 global observing systems, without reanalysis.",
+      "expected_claim_fragments": []
+    },
+    {
+      "candidate_id": "arxiv:2611.10487v1",
+      "title": "GEAR: A GPU-Accelerated Global Solver for Bounded Continuous Nonlinear Programs via Linear Bound Propagation",
+      "url": "https://arxiv.org/abs/2611.10487v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "GPU nonlinear-program solver and neural-network verification, not AI compute systems",
+      "excerpt": "We present a novel GPU-accelerated global solver for constrained nonlinear programming (NLP) inspired by the efficient linear bound propagation framework in neural network (NN) verification.",
+      "expected_claim_fragments": []
+    },
+    {
+      "candidate_id": "arxiv:2611.05121v1",
+      "title": "An Investigation on Numerical Bugs in GPU Programs Towards Automated Bug Detection",
+      "url": "https://arxiv.org/abs/2611.05121v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "General GPU numerical-bug study across mathematical libraries",
+      "excerpt": "General-purpose graphics processing unit (GPU) computing has emerged as a leading parallel computing paradigm, offering significant performance gains in various domains such as scientific computing and deep learning.",
+      "expected_claim_fragments": []
+    },
+    {
+      "candidate_id": "arxiv:2611.04063v1",
+      "title": "TB-Transolver: Parallelized and Coherent Long-Horizon Rollouts via Temporal Bundling for Time-Dependent PDEs",
+      "url": "https://arxiv.org/abs/2611.04063v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Physics-informed neural operator for PDE simulation",
+      "excerpt": "Transolver has recently gained widespread adoption for solving diverse physical problems on unstructured geometric meshes by leveraging its Physics-Attention mechanism, which seamlessly extends standard softmax attention to handle physical "
+    },
+    {
+      "candidate_id": "arxiv:2611.04566v1",
+      "title": "A research world model of power engineering learns its dynamics and reveals what-ifs",
+      "url": "https://arxiv.org/abs/2611.04566v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Research-field world model for power engineering, not physical AI or AI systems",
+      "excerpt": "Decisions about the direction of research in power engineering determine which technologies mature and, through them, shape infrastructure that lasts decades, yet their consequences cannot be observed before they are taken, and existing for"
+    },
+    {
+      "candidate_id": "arxiv:2611.04476v1",
+      "title": "KeyWise: Efficient Video-Only Piano Transcription with a Lightweight Per-Key Architecture",
+      "url": "https://arxiv.org/abs/2611.04476v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Video-only piano transcription application",
+      "excerpt": "Audio-based piano transcription is hampered by the sustain pedal and by noisy or missing soundtracks, problems that video-only transcription avoids, since a top-view video shows directly when each key is pressed and released. Most visual tr"
+    },
+    {
+      "candidate_id": "arxiv:2611.04010v1",
+      "title": "Decision Transformer with Task-Aware Representations for Offline Meta-Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2611.04010v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "Generic offline meta-reinforcement-learning algorithm",
+      "excerpt": "To enable effective generalization in offline meta-RL, it is essential to accurately infer the underlying task through latent task representations, which provide a compact and transferable summary of task-specific characteristics for guidin"
+    },
+    {
+      "candidate_id": "arxiv:2611.03934v1",
+      "title": "Accelerating FastDEC Clustering Algorithm with GPUs",
+      "url": "https://arxiv.org/abs/2611.03934v1",
+      "expected_relevance": "out_of_scope",
+      "rationale": "GPU acceleration of a generic clustering algorithm",
+      "excerpt": "Fast Dominance Estimation Clustering (FastDEC) is an efficient variant of Density Peak Clustering (DPC) that achieves high clustering quality through dominance-based density estimation, but remains constrained by the computational cost of e"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT/"scripts"))
 from validate_intelligence_sources import validate_registry
 from run_intelligence_discovery import apply_change_detection,collect_releases,run_discovery,release_fingerprint
 REGISTRY=json.loads((ROOT/"data/intelligence-sources.json").read_text()); CATALOG={"models":[]}
-NOW=datetime(2026,11,13,12,0,tzinfo=timezone.utc)
+NOW=datetime(2026,11,16,12,0,tzinfo=timezone.utc)
 class IntelligenceDiscoveryTests(unittest.TestCase):
  def test_registry_is_valid_and_unique(self):
   self.assertEqual(validate_registry(REGISTRY,today=NOW.date()),[]); self.assertGreaterEqual(len(REGISTRY["sources"]),12)

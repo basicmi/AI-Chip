@@ -12,34 +12,42 @@ numeric-unit patterns. It is not LLM semantic understanding; it is testable
 in CI and has no model/API credentials.
 
 Version 2 introduced deterministic relevance labels and fair source/candidate
-limits. The first post-merge live run exposed remaining false positives from
-generic single-word signals, so Version 3 tightens both candidate and
-sentence-level relevance.
+limits. Version 3 tightened broad single-word query and sentence relevance
+signals after the first live run. The first live run after PR #112 then exposed
+two remaining classes of error: generic GPU/HPC papers entering through CUDA
+or broad GPU terms, and useful AI runtime papers being missed when their
+titles used terms such as MoE serving or on-device RL rather than the current
+anchor vocabulary.
 
-Version 3 makes these changes:
+Version 4 makes these changes:
 
-1. Generic words such as "compiler", "kernel", "inference", "serving",
-   "parallelism" and "LLM" are no longer sufficient relevance anchors.
-   A GPU mention requires a paired AI-workload and system/performance context;
-   generic compiler/kernel work requires an explicit AI workload and execution
-   context. Specific accelerator, memory, interconnect, ISA, RTL/EDA and
-   low-level GPU software terms remain direct anchors.
-2. Candidate-level relevance is context only. A Claim sentence must carry its
-   own specific hardware or AI-system signal. A narrow exception allows a
-   sentence that reports a GPU resource/metric when the candidate itself is
-   already classified as adjacent AI-system work.
-3. Robotics/agent candidates no longer cause every sentence in their abstract
-   to become a Claim; unrelated methodology sentences are filtered.
-4. The arXiv query removes broad single-word OR terms and retains explicit
-   accelerator, GPU software, memory, inference/serving, distributed-training,
-   agent-runtime and architecture phrases.
-5. Regression tests use real false-positive patterns observed in the
-   2026-11-16 live run, alongside positive TPU/NPU/GPU kernel cases.
+1. Specific AI hardware and AI-system signals remain direct anchors, including
+   NPU/TPU/ASIC/FPGA, HBM, chip design, KV cache, speculative decoding,
+   distributed training, MoE inference/serving, NCCL and named LLM serving
+   runtimes.
+2. Generic CUDA/ROCm/Triton/compiler/kernel or GPU mentions are contextual.
+   They need a specific AI workload plus an execution/system concern; generic
+   CUDA linear algebra, neural-network verification solvers and general GPU
+   numerical-bug studies are not treated as AI-chip contributions by default.
+3. Generic "world model" is no longer sufficient for relevance. Robot,
+   robotics, VLA, physical-AI and world-action-model signals remain adjacent
+   workload topics, while weather and research-field world models are not
+   pulled in solely by the phrase "world model".
+4. Candidate relevance is still only context. A sentence must carry a
+   hardware/system signal or a measured system result; metric-bearing
+   sentences may be retained when the candidate itself is already a direct
+   AI-system contribution.
+5. An offline, human-curated golden set now evaluates three-way candidate
+   relevance (direct, adjacent, out of scope) and sentence-level Claim
+   extraction. The evaluator reports precision, recall, F1, a confusion
+   matrix, false positives/negatives, quote fidelity and repeated sentence
+   rows. It runs in CI and in the weekly discovery workflow.
 
-Claims still carry separate `relevance.class`, `topic`, `claim_type`,
-`assertion_class` and `evidence_class` labels. Human-review triage keeps
-direct compute/system evidence distinct from adjacent workload evidence.
-The score prioritizes review effort, not factual confidence.
+The golden set is a calibration seed, not a statistically representative
+production sample. Its recall is only recall against judged examples; it
+cannot measure papers that the upstream arXiv query never retrieved.
+Deterministic extraction confidence remains low, and all Claims remain
+unverified until human review.
 
 Each record preserves the original candidate and source URL, a quote from the
 source excerpt, claim type/topic, numeric value and unit when recognized,
@@ -52,6 +60,28 @@ positives. It does not resolve product identity, infer chip-vs-system scope
 when the source is silent, decide truth, or verify performance/compatibility.
 "Supports FP8" remains a candidate claim, not a verified support path. An arXiv
 record remains a preprint unless peer review is separately established.
+
+
+## Offline quality evaluation
+
+The weekly discovery workflow runs
+`scripts/evaluate_intelligence_quality.py` against
+`data/intelligence-quality-golden.json`. It emits a JSON and Markdown report
+as part of the same 30-day Actions artifact. The golden set was curated from
+real candidates observed in the first post-PR-112 run on 2026-11-16.
+
+Candidate relevance is scored as a three-class problem (direct AI compute,
+adjacent AI systems, out of scope), with a separate binary relevant-vs-out-of-
+scope precision/recall view. Sentence extraction is evaluated against
+human-curated sentence fragments, with repeated numeric rows collapsed to
+sentence granularity and reported separately. Quote fidelity is checked
+against the supplied abstract excerpt.
+
+The seed set contains 25 candidates (12 direct, 4 adjacent, 9 out of scope)
+and 16 sentence-extraction cases. It is intentionally small and curated to
+cover positive cases and known false-positive patterns. Do not interpret its
+scores as unbiased production estimates. It cannot measure recall over papers
+that arXiv search did not return, nor can it establish claim truth.
 
 ## Evidence-to-PR workflow
 
@@ -66,6 +96,8 @@ No PR is auto-created or auto-merged by scheduled discovery.
 ## Run locally
 
     python3 -m unittest discover -s tests -p "test_intelligence_claims.py"
+    python3 -m unittest discover -s tests -p "test_intelligence_quality.py"
+    python3 scripts/evaluate_intelligence_quality.py --golden data/intelligence-quality-golden.json
     python3 scripts/extract_intelligence_claims.py --input /tmp/ai-chip-intelligence.json --output /tmp/ai-chip-claims.json --summary-path /tmp/ai-chip-claims.md
 
 ## Cross-source evidence graph (PR #91)

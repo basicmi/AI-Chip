@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "registry_version": "2026.11.13-2",
-  "last_reviewed": "2026-11-13",
+  "registry_version": "2026.11.16-2",
+  "last_reviewed": "2026-11-16",
   "policy": "Curated official project repositories, vendor feeds and research discovery queries. Discovery candidates are leads for human review, not proof of product capability, model compatibility or benchmark results.",
   "sources": [
     {
@@ -271,10 +271,10 @@
       "category": "research-preprint",
       "kind": "arxiv_api",
       "publisher": "arXiv",
-      "query": "(cat:cs.DC OR cat:cs.AR OR cat:cs.LG OR cat:cs.PL OR cat:eess.SY) AND (all:TPU OR all:NPU OR all:ASIC OR all:FPGA OR all:HBM OR all:CUDA OR all:ROCm OR all:NVLink OR all:UALink OR all:CUTLASS OR all:Triton OR all:FlashAttention OR all:\"AI accelerator\" OR all:\"machine learning accelerator\" OR all:\"GPU kernel\" OR all:\"GPU scheduling\" OR all:\"GPU memory\" OR all:\"GPU inference\" OR all:\"GPU cluster\" OR all:\"LLM inference\" OR all:\"LLM serving\" OR all:\"distributed training\" OR all:\"tensor parallel\" OR all:\"expert parallel\" OR all:\"KV cache\" OR all:\"agent runtime\" OR all:\"world model\" OR all:\"reconfigurable accelerator\" OR all:\"dataflow accelerator\" OR all:chiplet OR (all:GPU AND (all:\"machine learning\" OR all:\"deep learning\" OR all:LLM OR all:\"large language model\" OR all:\"neural network\")))",
+      "query": "(cat:cs.DC OR cat:cs.AR OR cat:cs.LG OR cat:cs.PL OR cat:eess.SY) AND (all:TPU OR all:NPU OR all:ASIC OR all:HBM OR all:HBM4 OR all:NVLink OR all:Infiniband OR all:UALink OR all:\"AI accelerator\" OR all:\"machine learning accelerator\" OR all:\"deep learning accelerator\" OR all:\"LLM inference\" OR all:\"LLM serving\" OR all:\"LLM training\" OR all:\"MoE serving\" OR all:\"MoE inference\" OR all:\"expert parallelism\" OR all:\"distributed training\" OR all:\"tensor parallel\" OR all:\"KV cache\" OR all:\"speculative decoding\" OR all:\"agent runtime\" OR all:\"agentic serving\" OR all:\"reconfigurable accelerator\" OR all:\"dataflow accelerator\" OR all:chiplet OR all:\"robot learning\" OR all:\"vision-language-action\" OR all:VLA OR all:\"world-action model\" OR all:\"physical AI\" OR all:\"embodied AI\" OR all:\"on-device reinforcement learning\" OR all:\"reinforcement learning runtime\" OR (all:robotics AND (all:\"world model\" OR all:\"robot policy\" OR all:VLA OR all:\"physical AI\" OR all:\"embodied AI\")) OR (all:FPGA AND (all:LLM OR all:\"large language model\" OR all:\"AI accelerator\" OR all:\"machine learning inference\" OR all:\"deep learning inference\" OR all:MoE)) OR (all:GPU AND (all:LLM OR all:\"large language model\" OR all:\"foundation model\" OR all:\"mixture of experts\" OR all:MoE OR all:\"neural codec\" OR all:\"AI accelerator\" OR all:\"AI workload\" OR all:robotics OR all:\"robot learning\" OR all:\"physical AI\" OR all:\"agentic workload\")) OR (all:\"GPU kernel\" AND (all:LLM OR all:\"large language model\" OR all:MoE OR all:\"AI accelerator\" OR all:\"agentic workload\" OR all:\"neural codec\" OR all:TinyML)) OR (all:\"GPU scheduling\" AND (all:LLM OR all:\"large language model\" OR all:MoE OR all:\"agentic workload\" OR all:\"AI workload\")) OR (all:\"GPU memory\" AND (all:LLM OR all:\"large language model\" OR all:MoE OR all:\"AI accelerator\")) OR (all:CUDA AND (all:LLM OR all:\"large language model\" OR all:\"AI accelerator\" OR all:\"machine learning inference\" OR all:\"deep learning inference\" OR all:MoE)) OR (all:ROCm AND (all:LLM OR all:\"large language model\" OR all:\"AI accelerator\" OR all:\"machine learning inference\" OR all:MoE)) OR (all:Triton AND (all:LLM OR all:\"large language model\" OR all:\"AI accelerator\" OR all:\"machine learning inference\" OR all:MoE)) OR (all:Cutlass AND (all:LLM OR all:\"large language model\" OR all:\"AI accelerator\" OR all:MoE)))",
       "max_results": 100,
       "source_url": "https://arxiv.org/",
-      "description": "Searches recent preprints in distributed systems, architecture, machine learning, programming languages and signal systems for AI accelerator and inference-system work.",
+      "description": "Targets explicit AI accelerator hardware and AI-system workloads. Generic GPU, FPGA, CUDA, ROCm and Triton matches are conditional on an AI workload context. Robotics/world-action, VLA and on-device RL terms are retained as adjacent physical-AI workload signals; generic world-model and general GPU/HPC papers are intentionally not broad OR matches.",
       "priority": "high",
       "active": true
     }
