@@ -163,6 +163,8 @@ ADJACENT_ANCHORS = (
     "service robot", "service robots",
 )
 
+SIGNALS = tuple(dict.fromkeys(term for terms in TOPICS.values() for term in terms))
+
 UNITS = (
     r"tokens?\s*/\s*s|tokens?\s+per\s+second|TB\s*/\s*s|GB\s*/\s*s|MB\s*/\s*s|"
     r"PFLOPS?|TFLOPS?|GFLOPS?|TOPS|TB|GB|MB|PB|kW|MW|W|nm|ms|us|µs|μs|"
