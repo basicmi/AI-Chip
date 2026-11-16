@@ -5,8 +5,8 @@
 The discovery workflow has three entry points:
 
 - Weekly scheduled run: Monday at 06:15 UTC.
-- Manual run: \`workflow_dispatch\`, with a 45-day default lookback.
-- Relevant master-branch changes: a push to \`master\` that changes the
+- Manual run: `workflow_dispatch`, with a 45-day default lookback.
+- Relevant master-branch changes: a push to `master` that changes the
   discovery workflow, source registry, model catalog, review ledger, claim
   schema, or an intelligence pipeline script.
 
@@ -18,7 +18,7 @@ state after a successful end-to-end audit, and uploads a 30-day artifact.
 
 ## Current source inventory
 
-The curated registry version \`2026.11.13-2\` has 24 active sources:
+The curated registry version `2026.11.13-2` has 24 active sources:
 
 | Source kind | Count | Collection method |
 |---|---:|---|
@@ -75,19 +75,19 @@ documented weighting policy.
 
 ## Artifacts
 
-Each successful run uploads \`ai-chip-intelligence-discovery\`, including:
+Each successful run uploads `ai-chip-intelligence-discovery`, including:
 
-- \`ai-chip-intelligence-discovery.json\`
-- \`ai-chip-intelligence-source-coverage.json/.md\`
-- \`ai-chip-intelligence-claims.json/.md\`
-- \`ai-chip-intelligence-evidence-graph.json\`
-- \`ai-chip-intelligence-triage.json/.md\`
-- \`ai-chip-intelligence-review-state.json\`
-- \`ai-chip-intelligence-health.json/.md\`
-- \`ai-chip-intelligence-operations.json\`
+- `ai-chip-intelligence-discovery.json`
+- `ai-chip-intelligence-source-coverage.json/.md`
+- `ai-chip-intelligence-claims.json/.md`
+- `ai-chip-intelligence-evidence-graph.json`
+- `ai-chip-intelligence-triage.json/.md`
+- `ai-chip-intelligence-review-state.json`
+- `ai-chip-intelligence-health.json/.md`
+- `ai-chip-intelligence-operations.json`
 
 The Operations Dashboard can compare explicitly selected
-\`ai-chip-intelligence-operations.json\` files. It does not fetch live
+`ai-chip-intelligence-operations.json` files. It does not fetch live
 Actions data and cannot infer missing runs.
 
 ## Safety boundary
