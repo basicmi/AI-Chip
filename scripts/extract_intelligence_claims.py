@@ -122,7 +122,7 @@ DIRECT_ANCHORS = (
     "hardware counters", "spec cpu", "mlperf", "inferencex",
     "ai accelerator", "machine learning accelerator", "deep learning accelerator",
     "gpu kernel", "tpu kernel", "npu kernel", "accelerator kernel",
-    "gpu architecture", "gpu platform", "gpu cluster", "gpu inference", "gpu training",
+    "gpu architecture", "gpu platform", "gpu cluster", "gpu inference", "gpu serving", "gpu training",
     "gpu memory system", "gpu memory bandwidth", "gpu data movement", "gpu thread",
     "gpu warp", "gpu programming", "gpu compiler", "gpu storage", "gpu interconnect",
     "gpu rack", "gpus per rack",
