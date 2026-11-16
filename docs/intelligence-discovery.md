@@ -3,6 +3,22 @@
 The intelligence pipeline is a read-only discovery and evidence triage layer.
 It does not write to formal company, product, model-support or benchmark registries.
 
+
+## GitHub API authentication
+
+The scheduled discovery workflow passes its short-lived, read-only
+`GITHUB_TOKEN` to the release collector. The collector attaches a Bearer token
+and the documented GitHub API version only when the destination host is
+exactly `api.github.com` over HTTPS. It never forwards this credential to
+RSS/Atom publishers, arXiv, or arbitrary URLs.
+
+This avoids exhausting the unauthenticated GitHub REST API quota during a
+multi-project release scan. A GitHub 403 is classified as rate limiting only
+when the response explicitly reports `X-RateLimit-Remaining: 0`; other 403
+responses remain ordinary client/permission errors. No token value is written
+to reports or logs. Local runs remain supported without a token, subject to
+the unauthenticated API quota.
+
 ## Claim extraction
 
 scripts/extract_intelligence_claims.py consumes the discovery report review

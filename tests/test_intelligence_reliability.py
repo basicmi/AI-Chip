@@ -1,13 +1,16 @@
 """Offline end-to-end reliability replay for the intelligence stages."""
 import copy
+import os
 import sys
 import unittest
+from unittest.mock import patch
+import urllib.error
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from run_intelligence_discovery import run_discovery
+from run_intelligence_discovery import run_discovery, fetch_bytes, failure_category
 from extract_intelligence_claims import extract_report
 from build_intelligence_evidence_graph import graph_for_claims
 from triage_intelligence_claims import build_queue
@@ -52,6 +55,45 @@ def replay(now, discovery_state=None, review_cache=None, failure=None):
     audit=audit_pipeline(discovered,claim_report,graph,triage,review,
         generated_at=now.isoformat().replace("+00:00","Z"))
     return discovered,claim_report,graph,triage,review,audit,discovery_state,new_review
+
+
+class DummyResponse:
+    status = 200
+    def __enter__(self):
+        return self
+    def __exit__(self, *args):
+        return False
+    def read(self, limit):
+        return b"ok"
+
+
+class GitHubApiAuthenticationTests(unittest.TestCase):
+    def test_token_is_sent_only_to_official_github_api(self):
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "unit-test-token"}):
+            with patch("run_intelligence_discovery.urllib.request.urlopen",
+                       return_value=DummyResponse()) as opener:
+                fetch_bytes("https://api.github.com/repos/example/project/releases")
+                request = opener.call_args.args[0]
+                headers = {key.lower(): value for key, value in request.header_items()}
+                self.assertEqual(headers.get("authorization"), "Bearer unit-test-token")
+                self.assertEqual(headers.get("x-github-api-version"), "2022-11-28")
+
+                fetch_bytes("https://vendor.example/feed.xml")
+                request = opener.call_args.args[0]
+                headers = {key.lower(): value for key, value in request.header_items()}
+                self.assertNotIn("authorization", headers)
+                self.assertNotIn("x-github-api-version", headers)
+
+    def test_github_rate_limit_403_is_classified_explicitly(self):
+        rate_limited = urllib.error.HTTPError(
+            "https://api.github.com/repos/example/project/releases",
+            403, "rate limited", {"X-RateLimit-Remaining": "0"}, None)
+        forbidden = urllib.error.HTTPError(
+            "https://api.github.com/repos/example/project/releases",
+            403, "forbidden", {"X-RateLimit-Remaining": "42"}, None)
+        self.assertEqual(failure_category(rate_limited), "http_rate_limit")
+        self.assertEqual(failure_category(forbidden), "http_client_error")
+
 
 class IntelligenceReliabilityTests(unittest.TestCase):
     def test_all_stages_agree_and_no_factual_verification(self):
