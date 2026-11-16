@@ -15,7 +15,11 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-HIGH_TOPICS={"compute","memory_bandwidth","memory_capacity","interconnect","power","performance","availability"}
+HIGH_TOPICS={
+    "compute", "memory_bandwidth", "memory_capacity", "interconnect", "power",
+    "performance", "availability", "gpu_scheduling", "inference_serving",
+    "training_systems", "compiler_kernel", "rtl_eda", "architecture", "benchmark",
+}
 HIGH_TYPES={"performance_result","availability_or_lifecycle"}
 HIGH_RISK={"performance_result","software_or_capability","availability_or_lifecycle"}
 SOURCE_VALUES={"vendor_primary","company_primary","official_project","research_paper",
@@ -38,6 +42,8 @@ def score_claim(claim, candidate, *, now):
     date=parse_time(source.get("published_at"))
     age=max(0,(now-date).days) if date else None
     age_stale=age is None or age>30
+    relevance=claim.get("relevance",{})
+    relevance_class=relevance.get("class") if isinstance(relevance,dict) else None
     factors={
         "new_or_changed":18 if candidate.get("change_status")=="new" else 12 if candidate.get("change_status")=="updated" else 0,
         "high_impact_topic":18 if claim.get("topic") in HIGH_TOPICS else 0,
@@ -46,6 +52,8 @@ def score_claim(claim, candidate, *, now):
         "requires_context_review":10 if claim.get("claim_type") in HIGH_RISK else 0,
         "numeric_claim":8 if type(claim.get("value")) in (float,int) else 0,
         "source_with_provenance":8 if source.get("url") and source.get("source_type") in SOURCE_VALUES else 0,
+        "direct_ai_compute_relevance":8 if relevance_class=="direct_ai_compute" else 0,
+        "adjacent_ai_system_relevance":4 if relevance_class=="adjacent_ai_systems" else 0,
     }
     score=sum(factors.values())
     return score,factors,age,age_stale
@@ -84,9 +92,13 @@ def build_queue(discovery,claims,graph,*,now=None,top=100):
         key=norm(claim.get("statement"))
         if not key: raise ValueError("claim statement cannot be empty")
         groups[key].append(cid)
+        relevance=claim.get("relevance",{})
         scored.append({"claim_id":cid,"candidate_id":claim["candidate_id"],
             "score":score,"score_factors":factors,"source_age_days":age,"source_stale_or_undated":stale,
             "topic":claim.get("topic"),"claim_type":claim.get("claim_type"),
+            "assertion_class":claim.get("assertion_class"),
+            "evidence_class":claim.get("evidence_class"),
+            "relevance_class":relevance.get("class") if isinstance(relevance,dict) else None,
             "publisher":claim["source"].get("publisher"),"source_url":claim["source"].get("url"),
             "review_status":"unverified_candidate","risk_flags":[]})
     duplicate_ids=set()
@@ -111,6 +123,14 @@ def build_queue(discovery,claims,graph,*,now=None,top=100):
             row["score_factors"]["reviewer_scoped_conflict"]=12
         if row["source_stale_or_undated"]: row["risk_flags"].append("source_old_or_undated")
         if row["claim_type"] in HIGH_RISK: row["risk_flags"].append("claim_requires_configuration_evidence")
+        if row.get("assertion_class") in ("roadmap_or_future_intent","speculation_or_hypothesis"):
+            row["risk_flags"].append("forward_looking_or_speculative_assertion")
+        if row.get("assertion_class")=="vendor_marketing_claim":
+            row["risk_flags"].append("vendor_marketing_language_requires_corroboration")
+        if row.get("evidence_class")=="research_preprint":
+            row["risk_flags"].append("research_preprint_not_independent_measurement")
+        if row.get("evidence_class")=="vendor_primary_statement":
+            row["risk_flags"].append("vendor_primary_not_independent_corroboration")
     scored.sort(key=lambda x:(-x["score"],x["claim_id"]))
     by_id={x["claim_id"]:x for x in scored}
     queue=[]
@@ -157,6 +177,7 @@ def markdown(report):
     for index,item in enumerate(report["queue"],1):
         out.extend([f"### {index}. Priority {item['score']} · {item['topic']} · {item['claim_id']}",
                     f"- Source: {item['source_url']}",
+                    f"- Classification: {item.get('assertion_class') or 'legacy/unspecified'} · evidence: {item.get('evidence_class') or 'unspecified'} · relevance: {item.get('relevance_class') or 'unspecified'}",
                     f"- Signals: {', '.join(k for k,v in item['score_factors'].items() if v) or 'none'}",
                     f"- Risk flags: {', '.join(item['risk_flags']) or 'none'}",
                     f"- Related claim IDs: {', '.join(item['related_claim_ids'])}",""])
