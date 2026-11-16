@@ -28,6 +28,11 @@ Version 2 makes four changes:
 4. Per-candidate and global limits are explicit. If the queue is capped,
    selection is round-robin across sources and candidates rather than allowing
    the first high-volume source to consume the entire budget.
+5. Human-review triage carries the relevance, assertion and evidence labels
+   forward. Direct compute/system evidence receives a modest review-priority
+   boost over adjacent research; roadmap, speculation, vendor-marketing and
+   preprint labels add caution flags. These scores prioritize review effort,
+   not factual confidence.
 
 Each record preserves the original candidate and source URL, a quote from the
 source excerpt, claim type/topic, numeric value and unit when recognized,
