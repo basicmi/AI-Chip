@@ -144,7 +144,7 @@
       }
     },
     "extraction_method": {
-      "const": "deterministic_rules_v3"
+      "const": "deterministic_rules_v4"
     },
     "claims": {
       "type": "array",
@@ -420,7 +420,7 @@
           ],
           "properties": {
             "method": {
-              "const": "deterministic_rules_v3"
+              "const": "deterministic_rules_v4"
             },
             "confidence": {
               "const": "low"

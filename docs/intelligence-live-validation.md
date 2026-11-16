@@ -18,7 +18,7 @@ state after a successful end-to-end audit, and uploads a 30-day artifact.
 
 ## Current source inventory
 
-The curated registry version `2026.11.13-2` has 24 active sources:
+The curated registry version `2026.11.16-2` has 24 active sources:
 
 | Source kind | Count | Collection method |
 |---|---:|---|
@@ -132,6 +132,40 @@ Run: [GitHub Actions #43795362021](https://github.com/basicmi/AI-Chip/actions/ru
 
 This run was operationally healthy, but the source-query and relevance
 precision still need improvement. Do not treat 92/47 as a precision score.
+
+## First live run after PR #112 — 2026-11-16
+
+Run: [GitHub Actions #43798131776](https://github.com/basicmi/AI-Chip/actions/runs/43798131776)
+
+- Discovery observed 23/24 configured sources (95.8%). The unavailable source
+  was `google-deepmind-blog`, which returned a ParseError. The overall run
+  completed its audit and checkpoint, but the operational health was marked
+  degraded.
+- 36 HTTP requests completed with zero failed requests; successful response
+  payloads totalled 23,377,007 bytes. One source had a request slower than 5 s;
+  four sources were empty but reachable.
+- Change detection reported 521 cumulative observations: 300 arXiv preprints
+  and 219 new review leads, with 302 unchanged observations. This is a delta
+  run, not a fresh 521-item discovery.
+- Claim extraction emitted 422 unverified candidates from 152 of the 219
+  new leads. The other 67 candidates yielded no Claims: 56 were classified
+  out of scope and 11 had no excerpt sentence passing the sentence gate.
+  Relevance labels were 108 direct AI-compute and 55 adjacent AI-system
+  candidates. All 422 Claims were arXiv preprints; none were independently
+  verified.
+- Triage grouped the 422 Claims into 385 groups, with 22 exact-text duplicate
+  groups collapsing 37 rows. The persistent review backlog was 1,935 Claims,
+  all pending; 1,513 were not observed in this delta run.
+- Manual sampling still found generic GPU/HPC false positives (for example,
+  multi-GPU tridiagonal CUDA linear algebra, GPU nonlinear-program solving,
+  and generic GPU numerical-bug research), plus relevant MoE serving and
+  on-device RL runtime papers that the sentence gate did not fully capture.
+  PR #113 introduces the v4 contextual anchors and a human-curated evaluation
+  set to make these misses and false positives measurable.
+
+The run was operationally healthy enough to checkpoint state, but source
+coverage was degraded by one parser error. The 422 Claim count is not a
+precision score and is not evidence that all 219 new leads are relevant.
 
 ## When to score source quality
 

@@ -40,11 +40,18 @@ class ArxivPaginationTests(unittest.TestCase):
         source = next(item for item in registry["sources"] if item["id"] == "arxiv-ai-systems")
         query = source["query"]
         for term in ("all:compiler", "all:kernel", "all:inference", "all:serving",
-                     "all:parallelism"):
+                     "all:parallelism", 'OR all:"world model"', 'all:"machine learning" OR',
+                     'all:"deep learning" OR', 'all:"neural network" OR'):
             self.assertNotIn(term, query)
-        self.assertIn('(all:GPU AND (all:"machine learning"', query)
-        for term in ('all:TPU', 'all:NPU', 'all:HBM', 'all:"GPU kernel"',
-                     'all:"LLM inference"', 'all:"agent runtime"'):
+        self.assertIn('(all:GPU AND (all:LLM', query)
+        self.assertIn('(all:CUDA AND (all:LLM', query)
+        self.assertIn('(all:ROCm AND (all:LLM', query)
+        self.assertIn('(all:"GPU kernel" AND (all:LLM', query)
+        self.assertIn('(all:"GPU scheduling" AND (all:LLM', query)
+        self.assertIn('(all:robotics AND (all:"world model"', query)
+        for term in ('all:TPU', 'all:NPU', 'all:HBM', 'all:"LLM inference"',
+                     'all:"MoE serving"', 'all:"agent runtime"',
+                     'all:"vision-language-action"', 'all:"on-device reinforcement learning"'):
             self.assertIn(term, query)
 
     def test_reads_second_page_deduplicates_and_waits(self):

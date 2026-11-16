@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from extract_intelligence_claims import (
-    METHOD, extract_candidate_claims, extract_report, validate_claim, markdown_summary,
+    METHOD, extract_candidate_claims, extract_report, validate_claim, markdown_summary, relevance_for,
 )
 
 
@@ -228,6 +228,44 @@ class ClaimExtractionTests(unittest.TestCase):
             self.assertIn(field, claim["properties"])
         self.assertEqual(claim["properties"]["extraction"]["properties"]["method"]["const"], METHOD)
         self.assertEqual(claim["properties"]["extraction"]["properties"]["confidence"]["const"], "low")
+
+    def test_filters_generic_gpu_hpc_and_unrelated_world_models(self):
+        unrelated = [
+            ("Multi-GPU Tridiagonal Partition Algorithm",
+             "A multi-GPU recursive parallel partition method for tridiagonal linear algebra implemented in CUDA."),
+            ("WeatherDreamer: Learning a World Model from Earth Observations",
+             "We introduce a world model for global weather forecasting using observations from satellites."),
+            ("GEAR: GPU-Accelerated Global Solver",
+             "A GPU-accelerated solver for nonlinear programs and neural-network verification."),
+            ("Numerical Bugs in GPU Programs",
+             "General-purpose GPU computing supports scientific computing and deep learning libraries."),
+            ("Decision Transformer for Offline Meta-Reinforcement Learning",
+             "A generic offline meta-RL method learns latent task representations for policy generation."),
+        ]
+        for title, excerpt in unrelated:
+            with self.subTest(title=title):
+                self.assertIsNone(relevance_for(title + " " + excerpt)[0])
+
+    def test_keeps_specific_ai_hardware_system_and_physical_ai_signals(self):
+        cases = [
+            ("OverlapAdvisor: Distributed MoE Serving",
+             "MoE inference with expert parallelism relies on All-to-All communication."),
+            ("Firepool: Warm GPU Capacity for Agentic and RL Workloads",
+             "AI agents and RL trainers run isolated GPU jobs; the execution broker keeps GPU pods warm."),
+            ("On-Device Reinforcement Learning Runtime",
+             "On-device reinforcement learning runs an actor and learner on one embedded GPU."),
+            ("Vision-Language-Action Models",
+             "VLA models output robot actions for physical control."),
+            ("EmbodiedIntentBench",
+             "Mobile robotic sensing systems need runtime adaptation under resource constraints."),
+        ]
+        expected = [
+            "direct_ai_compute", "direct_ai_compute", "direct_ai_compute",
+            "adjacent_ai_systems", "adjacent_ai_systems",
+        ]
+        for (title, excerpt), label in zip(cases, expected):
+            with self.subTest(title=title):
+                self.assertEqual(relevance_for(title + " " + excerpt)[0], label)
 
     def test_per_candidate_limit_is_reported(self):
         candidate = {
