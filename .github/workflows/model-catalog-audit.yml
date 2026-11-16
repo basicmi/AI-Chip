@@ -71,6 +71,7 @@ jobs:
       - name: Discover releases, model changes and publisher candidates
         env:
           LOOKBACK_DAYS: ${{ inputs.lookback_days || 45 }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           python3 scripts/run_intelligence_discovery.py \
             --days "$LOOKBACK_DAYS" \

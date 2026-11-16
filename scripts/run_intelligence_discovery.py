@@ -6,6 +6,7 @@ import email.utils
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -54,7 +55,13 @@ MAX_ATTEMPTS = 3
 def failure_category(error):
     """Classify operational errors without including URLs, credentials or bodies."""
     if isinstance(error, urllib.error.HTTPError):
-        return "http_rate_limit" if error.code == 429 else "http_server_error" if error.code >= 500 else "http_client_error"
+        if error.code == 429:
+            return "http_rate_limit"
+        if error.code == 403:
+            headers = getattr(error, "headers", None) or {}
+            if str(headers.get("X-RateLimit-Remaining", "")).strip() == "0":
+                return "http_rate_limit"
+        return "http_server_error" if error.code >= 500 else "http_client_error"
     if isinstance(error, (TimeoutError, socket.timeout)):
         return "timeout"
     if isinstance(error, (urllib.error.URLError, ConnectionError)):
@@ -87,7 +94,16 @@ def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep, backoff_seco
     raise RuntimeError("unreachable")
 
 def fetch_bytes(url, *, timeout=12, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
+    headers = {"User-Agent": USER_AGENT, "Accept": accept}
+    parsed_url = urllib.parse.urlsplit(url)
+    # GitHub Actions provides a short-lived, read-only token. Use it only for
+    # the official GitHub API host; never forward credentials to feed vendors,
+    # arXiv, redirects supplied by a source, or arbitrary URLs.
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if parsed_url.scheme == "https" and parsed_url.hostname == "api.github.com" and token:
+        headers["Authorization"] = "Bearer " + token
+        headers["X-GitHub-Api-Version"] = "2022-11-28"
+    request = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(request, timeout=timeout) as response:
         status = getattr(response, "status", 200)
         if status < 200 or status >= 300:
