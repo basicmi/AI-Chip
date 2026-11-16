@@ -415,16 +415,31 @@ def collect_arxiv(source, *, since, fetcher=fetch_text, paging=None, sleep=time.
 
 def candidate_from_hf(model):
     model_id = model["model_id"]
-    payload = {key: model.get(key) for key in ("model_id", "repo_sha", "last_modified", "gated", "private")}
-    fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+    payload = {key: model.get(key) for key in (
+        "model_id", "repo_sha", "created_at", "last_modified", "pipeline_tag",
+        "library_name", "tags", "downloads", "likes", "gated", "private",
+    )}
+    fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    is_listing_candidate = model.get("status") == "discovery_candidate_not_reviewed"
+    tags = model.get("tags")
     candidate = {
         "candidate_id": "hf-model:" + model_id, "fingerprint": fingerprint,
         "candidate_type": "model_repository", "source_id": "huggingface-model-catalog",
         "source_name": "Hugging Face model repository", "publisher": "Hugging Face",
-        "source_type": "repository", "independence": "project", "category": "model",
-        "title": model_id, "model_id": model_id, "published_at": model.get("last_modified"),
+        "source_type": "publisher_listing" if is_listing_candidate else "repository",
+        "independence": "project", "category": "model",
+        "title": model_id, "model_id": model_id,
+        "published_at": model.get("created_at") or model.get("last_modified"),
+        "updated_at": model.get("last_modified"),
+        "created_at": model.get("created_at"),
         "url": "https://huggingface.co/" + model_id, "repo_sha": model.get("repo_sha"),
-        "excerpt": "", "evidence_scope": "model_repository_metadata_only",
+        "pipeline_tag": model.get("pipeline_tag"), "library_name": model.get("library_name"),
+        "tags": tags if isinstance(tags, list) else [],
+        "downloads": model.get("downloads"), "likes": model.get("likes"),
+        "gated": model.get("gated"), "private": model.get("private"),
+        "excerpt": "",
+        "evidence_scope": "publisher_listing_metadata_only" if is_listing_candidate else "model_repository_metadata_only",
+        "date_status": model.get("date_status", "observed" if model.get("created_at") or model.get("last_modified") else "unknown"),
     }
     return normalize_candidate(candidate)
 
