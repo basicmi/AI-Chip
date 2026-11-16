@@ -21,9 +21,10 @@ Step Summary. It does not itself make extra HTTP requests.
   the age of the latest observed publication, and missing/invalid dates;
 - A zero-item **successful** source is distinguished from an unavailable
   or parser-broken source;
-- A source that returned exactly the configured GitHub Releases (50) or
-  arXiv search result cap is flagged as **possibly truncated**. The API
-  might contain additional recent results: saturation does not prove loss;
+- A source that returned the configured bounded window (up to 3 pages × 50
+  GitHub Releases or 3 pages × 100 arXiv results) is flagged as **possibly
+  truncated**. The API might contain additional recent results: saturation
+  does not prove loss;
 - Repeated **same normalized URL across different sources** is flagged
   as potential syndication, not as independent corroboration;
 - Source failure categories, consecutive failed runs and critical health
@@ -37,9 +38,9 @@ URLs so potentially token-bearing URLs do not leak into Actions artifacts.
 ## Limits
 
 This is a scan-level metadata audit, **not a proof of exhaustiveness**.
-In particular, there is no pagination beyond the current first GitHub
-release page or the arXiv max_results window. Items that were never
-returned cannot be enumerated from local metadata alone. A source returning
+Pagination is bounded to at most three GitHub Release pages and three arXiv
+search pages per source run. Items beyond those windows cannot be enumerated
+from local metadata alone. A source returning
 few results may have a healthy feed, a tight query, a stale feed, or
 publication filtering; the audit cannot determine which without further
 source-specific investigation.

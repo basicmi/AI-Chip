@@ -72,6 +72,21 @@ class TriageTests(unittest.TestCase):
         g["summary"]["independently_verified_claims"]=1
         with self.assertRaisesRegex(ValueError,"verification"):
             build_queue(d,c,g,now=NOW)
+    def test_v2_relevance_and_evidence_labels_flow_into_triage(self):
+        d,c,g=fixtures()
+        c["claims"][0]["relevance"]={"class":"direct_ai_compute","matched_signals":["gpu"]}
+        c["claims"][0]["assertion_class"]="roadmap_or_future_intent"
+        c["claims"][0]["evidence_class"]="vendor_primary_statement"
+        result=build_queue(d,c,g,now=NOW)
+        row=next(item for item in result["queue"] if "a" in item["related_claim_ids"])
+        self.assertEqual(row["relevance_class"],"direct_ai_compute")
+        self.assertEqual(row["assertion_class"],"roadmap_or_future_intent")
+        self.assertEqual(row["evidence_class"],"vendor_primary_statement")
+        self.assertEqual(row["score_factors"]["direct_ai_compute_relevance"],8)
+        self.assertIn("forward_looking_or_speculative_assertion",row["risk_flags"])
+        self.assertIn("vendor_primary_not_independent_corroboration",row["risk_flags"])
+        self.assertIn("Classification:",markdown(result))
+
     def test_deterministic_tie_order_and_top_limit(self):
         a=build_queue(*fixtures(),now=NOW,top=1)
         b=build_queue(*fixtures(),now=NOW,top=1)

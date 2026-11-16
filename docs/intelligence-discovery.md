@@ -6,14 +6,39 @@ It does not write to formal company, product, model-support or benchmark registr
 ## Claim extraction
 
 scripts/extract_intelligence_claims.py consumes the discovery report review
-queue and emits structured claim candidates. Version 1 is a deterministic,
-conservative baseline based on technical topic signals and numeric-unit
-patterns. It is not LLM semantic understanding; it is testable in CI and has
-no model/API credentials.
+queue and emits structured claim candidates. Version 2 is a deterministic,
+relevance-gated first stage based on token-boundary topic signals and
+numeric-unit patterns. It is not LLM semantic understanding; it is testable
+in CI and has no model/API credentials.
+
+Version 2 makes four changes:
+
+1. A candidate must have a hardware, AI-compute, systems, compiler/runtime,
+   model-architecture, agent-runtime or physical-AI relevance anchor. A
+   generic mention of "agent", "inference", "performance", "benchmark" or
+   a number is not sufficient by itself.
+2. A title is context for relevance, not an asserted Claim. Claims are
+   extracted from the source excerpt only. Sentences without their own
+   technical topic or system anchor are filtered.
+3. Claims carry separate `relevance.class`, `topic`, `claim_type`,
+   `assertion_class` and `evidence_class` labels. This distinguishes
+   direct compute/system evidence from adjacent research, and separates
+   roadmap intent, speculation, vendor marketing language, technical
+   specifications, research-result candidates and capability statements.
+4. Per-candidate and global limits are explicit. If the queue is capped,
+   selection is round-robin across sources and candidates rather than allowing
+   the first high-volume source to consume the entire budget.
+5. Human-review triage carries the relevance, assertion and evidence labels
+   forward. Direct compute/system evidence receives a modest review-priority
+   boost over adjacent research; roadmap, speculation, vendor-marketing and
+   preprint labels add caution flags. These scores prioritize review effort,
+   not factual confidence.
 
 Each record preserves the original candidate and source URL, a quote from the
 source excerpt, claim type/topic, numeric value and unit when recognized,
-explicit scope markers, qualifiers, extraction method and human-review gates.
+explicit scope markers, qualifiers, relevance and evidence labels, extraction
+method and human-review gates. Deterministic extraction confidence remains
+low; the new labels are routing hints, not truth or quality scores.
 
 The extractor can miss claims, split sentences imperfectly or produce false
 positives. It does not resolve product identity, infer chip-vs-system scope

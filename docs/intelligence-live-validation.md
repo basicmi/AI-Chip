@@ -87,6 +87,28 @@ Run: [GitHub Actions #43787532670](https://github.com/basicmi/AI-Chip/actions/ru
 This single scan is an operational baseline only. It is not a source-quality
 ranking or factual validation of any product, model, benchmark or capability.
 
+
+## Second live run after PR #109 — 2026-11-16
+
+Run: [GitHub Actions #43789263891](https://github.com/basicmi/AI-Chip/actions/runs/43789263891)
+
+- 24/24 configured sources were observed; 36 HTTP requests completed with
+  zero failed requests. The arXiv source recovered and returned 300 recent
+  preprint records across three pages.
+- Discovery produced 539 observations and 323 review leads: 300 new arXiv
+  preprints and 23 Hugging Face publisher-listing updates/candidates.
+- The previous Claim Extractor reached its 1,000-Claim hard cap. All 1,000
+  Claims came from arXiv; 458 (45.8%) were tagged `other`, and 893 (89.3%)
+  were typed as the generic `research_finding`. This exposed both broad
+  research-feed noise and first-source truncation bias.
+- Triage produced 870 groups from those 1,000 Claims; the displayed queue
+  remained limited to 100 groups while persistent review state tracked 1,421
+  backlog Claims.
+- These counts are an operational and extraction baseline, not evidence that
+  all 300 papers are relevant or that any extracted statement is true.
+  PR #110 introduces a relevance gate, richer routing labels and fair
+  source/candidate caps; compare the next run against this baseline.
+
 ## When to score source quality
 
 Do not assign a composite score from one scan. Keep the following dimensions
