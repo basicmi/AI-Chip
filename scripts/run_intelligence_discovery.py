@@ -364,7 +364,9 @@ def collect_arxiv(source, *, since, fetcher=fetch_text, paging=None, sleep=time.
     per_page = source.get("max_results", 100)
     if type(per_page) is not int or not 1 <= per_page <= 100:
         raise ValueError("arXiv max_results must be 1..100")
-    max_pages = 3
+    max_pages = source.get("max_pages", 3)
+    if type(max_pages) is not int or not 1 <= max_pages <= 3:
+        raise ValueError("arXiv max_pages must be 1..3")
     candidates = []
     seen_papers = set()
     pages_fetched = 0
@@ -539,6 +541,7 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
     source_health = state.setdefault("source_health", {})
     if not isinstance(source_health, dict):
         raise ValueError("invalid persistent source_health state")
+    arxiv_sources_seen = 0
     for source in registry["sources"]:
         if not source.get("active"):
             continue
@@ -550,6 +553,10 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
         if not isinstance(failures, int) or failures < 0:
             raise ValueError("invalid consecutive source failure count")
         kind = source["kind"]
+        if kind == "arxiv_api":
+            if arxiv_sources_seen:
+                retry_sleep(3)
+            arxiv_sources_seen += 1
         attempts = 0
         paging = {}
         request_metrics = {
@@ -566,14 +573,16 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 if kind == "rss_atom":
                     return collect_rss_atom(source, since=since, fetcher=measured_feed_fetcher)
                 if kind == "arxiv_api":
-                    return collect_arxiv(source, since=since, fetcher=measured_feed_fetcher, paging=paging)
+                    return collect_arxiv(source, since=since, fetcher=measured_feed_fetcher,
+                                          paging=paging, sleep=retry_sleep)
                 raise ValueError("unsupported_source_kind")
-            # Retry the full parse as well as transport, but only for transient
-            # network/HTTP errors. A malformed feed is not retried.
+            # Keep arXiv query shards independent: one slow search must not
+            # suppress results from the other research areas.
+            # Respect arXiv's request spacing across both pages and source shards.
             retry_backoff_seconds = 3.0 if kind == "arxiv_api" else 0.2
             found, attempts = bounded_retry(
-                fetch_source, sleep=retry_sleep,
-                backoff_seconds=retry_backoff_seconds)
+                fetch_source, attempts=source.get("max_attempts", MAX_ATTEMPTS),
+                sleep=retry_sleep, backoff_seconds=retry_backoff_seconds)
             candidates.extend(found)
             status = "recovered" if failures else "healthy"
             source_health[source_id] = {
@@ -605,7 +614,8 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 "source_id": source_id, "source_name": source["name"],
                 "kind": kind, "status": "unavailable", "recent_item_count": 0,
                 "failure_category": category, "failure_tier": tier,
-                "consecutive_failures": failures, "attempt_count": attempts or (MAX_ATTEMPTS if retryable(error) else 1),
+                "consecutive_failures": failures,
+                "attempt_count": attempts or (source.get("max_attempts", MAX_ATTEMPTS) if retryable(error) else 1),
                 "request_diagnostics": request_diagnostics_snapshot(request_metrics),
             })
     if model_report is not None:

@@ -124,3 +124,20 @@ text deduplication and optional reviewer-scoped numeric comparisons.
 Default weekly runs create an unverified Claim -> Source graph and a Markdown
 review report. No automatic independent corroboration or production database
 update is performed.
+
+## arXiv query sharding and resilience
+
+The arXiv discovery source is split into four independently monitored query
+shards: distributed AI systems/inference (`cs.DC`), hardware/accelerator
+architecture (`cs.AR`, `eess.SY`), kernels/compilers/ML systems
+(`cs.LG`, `cs.PL`), and agentic/physical AI (`cs.AI`, `cs.RO`,
+`cs.CV`). Each shard requests 50 records per page, scans at most two pages
+per run, and retries transient failures at most twice. A failed shard no
+longer suppresses results from the other research areas.
+
+Requests are spaced by at least three seconds between pages and between
+configured arXiv shards. Each shard has independent source-health history and
+pagination/truncation diagnostics. The bounded 100-record per-shard scan is
+an operational compromise, not a completeness guarantee; any full second page
+is explicitly flagged as possible lookback-window truncation. Human review
+and the existing relevance-quality evaluation remain unchanged.
