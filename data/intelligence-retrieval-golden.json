@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "arxiv-known-item-recall-seed-2026-11-16-v1",
+  "curation": "16 manually classified, known relevant arXiv papers from the existing relevance seed. Publication CALENDAR dates cross-checked against arXiv abstracts for previously unobserved papers. Selection is not representative or independent of previous discovery.",
+  "assessment_policy": "Measure within-lookback known-item hit rate at per-source depths K=25,50,100; report missed IDs and pagination caps. This is not full-corpus retrieval recall.",
+  "examples": [
+    {
+      "paper_id": "arxiv:2611.18459v1",
+      "title": "Callo: Serving Cache-Miss Requests with Speculative Decoding on Invalidated KV under Prefill-Decode Disaggregation",
+      "source_url": "https://arxiv.org/abs/2611.18459",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "LLM serving and speculative decoding system"
+    },
+    {
+      "paper_id": "arxiv:2611.18422v1",
+      "title": "The State Is Not the Bottleneck: A Paged-State Gated-DeltaNet Tile on a Tri-Mode Multicast Mesh, Bit-Exact from RTL to Silicon",
+      "source_url": "https://arxiv.org/abs/2611.18422",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "FPGA implementation of a language-model layer with measured memory and decode costs"
+    },
+    {
+      "paper_id": "arxiv:2611.18145v1",
+      "title": "Compiling Specialized GPU-Initiated Networking",
+      "source_url": "https://arxiv.org/abs/2611.18145",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU-initiated networking compiler evaluated on LLM serving and multi-GPU systems"
+    },
+    {
+      "paper_id": "arxiv:2611.18075v1",
+      "title": "Zero-SM NCCL: A Systematic Guide to Designing and Deploying SM-Free GPU Communication",
+      "source_url": "https://arxiv.org/abs/2611.18075",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU collectives, NCCL, NVL72/B200, and distributed training"
+    },
+    {
+      "paper_id": "arxiv:2611.17908v1",
+      "title": "DiffusionSSD: Achieving Extreme Visual Compression with Dual-stage Diffusion and Cross-level Near-Data Processing",
+      "source_url": "https://arxiv.org/abs/2611.17908",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "NPU and near-data-processing architecture for neural codecs"
+    },
+    {
+      "paper_id": "arxiv:2611.17108v2",
+      "title": "LazyWeights: Decode-on-Demand Edge LLMs",
+      "source_url": "https://arxiv.org/abs/2611.17108",
+      "published_on": "2026-11-12",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Edge LLM memory path and dedicated ASIC decoder"
+    },
+    {
+      "paper_id": "arxiv:2611.11857v1",
+      "title": "OverlapAdvisor: Modeling and Adapting Computation-Communication Overlap for Distributed MoE Serving",
+      "source_url": "https://arxiv.org/abs/2611.11857",
+      "published_on": "2026-11-09",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Distributed MoE serving and computation-communication overlap"
+    },
+    {
+      "paper_id": "arxiv:2611.10930v1",
+      "title": "Beyond Host-Side Control: HBM Controller Partitioning Across Host and HBM Base Dies",
+      "source_url": "https://arxiv.org/abs/2611.10930",
+      "published_on": "2026-11-07",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "HBM4 base-die controller partitioning and silicon-interposer architecture"
+    },
+    {
+      "paper_id": "arxiv:2611.03392v1",
+      "title": "TinyML Hits the Memory Wall: A Benchmark of Ten Sub-Watt Edge Devices",
+      "source_url": "https://arxiv.org/abs/2611.03392",
+      "published_on": "2026-11-02",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Benchmark of sub-watt edge AI devices and NPUs"
+    },
+    {
+      "paper_id": "arxiv:2611.03330v1",
+      "title": "The SIMPLE Law for Energy Cost of LLM Inference",
+      "source_url": "https://arxiv.org/abs/2611.03330",
+      "published_on": "2026-11-02",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "Analytical compute, memory, and energy model for LLM inference"
+    },
+    {
+      "paper_id": "arxiv:2611.10832v1",
+      "title": "Firepool: Brokering Warm GPU Capacity for Agentic and RL Workloads at LinkedIn",
+      "source_url": "https://arxiv.org/abs/2611.10832",
+      "published_on": "2026-11-07",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "GPU capacity broker for agentic and RL workloads"
+    },
+    {
+      "paper_id": "arxiv:2611.18035v1",
+      "title": "RL$^{\\mathrm{RT}}$: On-Device Reinforcement Learning Runtime",
+      "source_url": "https://arxiv.org/abs/2611.18035",
+      "published_on": "2026-11-13",
+      "expected_relevance": "direct_ai_compute",
+      "rationale": "On-device reinforcement-learning runtime on embedded GPUs"
+    },
+    {
+      "paper_id": "arxiv:2611.18372v1",
+      "title": "Vision-Language-Action Models: A Life-Cycle Survey of Design, Training and Deployment",
+      "source_url": "https://arxiv.org/abs/2611.18372",
+      "published_on": "2026-11-13",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Vision-language-action model lifecycle and robot deployment"
+    },
+    {
+      "paper_id": "arxiv:2611.10498v1",
+      "title": "EmbodiedIntentBench: Benchmarking Intent-Driven Runtime Adaptation for Mobile Robotic Missions",
+      "source_url": "https://arxiv.org/abs/2611.10498",
+      "published_on": "2026-11-07",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Runtime adaptation benchmark for mobile robotic missions"
+    },
+    {
+      "paper_id": "arxiv:2611.08156v1",
+      "title": "La-JEPA: Compact Robot Policies with Latent World Modeling",
+      "source_url": "https://arxiv.org/abs/2611.08156",
+      "published_on": "2026-11-05",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Compact robot policies using latent world modeling"
+    },
+    {
+      "paper_id": "arxiv:2611.06653v1",
+      "title": "Detecting Silent Action-Interface Mismatch with Calibrated Relational World Models",
+      "source_url": "https://arxiv.org/abs/2611.06653",
+      "published_on": "2026-11-04",
+      "expected_relevance": "adjacent_ai_systems",
+      "rationale": "Robot action-interface contracts and learned world models"
+    }
+  ]
+}

@@ -258,3 +258,27 @@ Run: [GitHub Actions #43819178894](https://github.com/basicmi/AI-Chip/actions/ru
 
 The 212 new/updated count is a Discovery delta result. It must not be read as
 212 independently verified claims or as a relevance/recall score.
+
+## First successful full run after PR #116 — 2026-11-16
+
+Run: [GitHub Actions #43820741766](https://github.com/basicmi/AI-Chip/actions/runs/43820741766).
+
+- 27/27 sources observed; zero failed HTTP requests across 41 requests.
+  Previously broken Source Coverage Audit passed, and the entire pipeline
+  through Claim extraction, triage, review-state and health audit completed.
+- The four arXiv shards each returned 100 raw records (two 50-record pages).
+  All four hit their page caps; this flags possible retrieval truncation.
+  There were 381 distinct arXiv paper IDs in those 400 source observations.
+- 639 total observations, including 212 new/updated review leads, produced
+  581 **unverified** Claim candidates. The persistent review backlog reached
+  2,516; none of these figures establishes factual verification.
+- A comparison with the 16 manually labelled relevant papers used for PR #117
+  found 8/16 present by per-shard depth 25, 9/16 by depth 50 and 9/16
+  by depth 100. Seven known relevant papers were not observed in the capped
+  four-shard result. This is a biased known-item calibration, not a production
+  estimate of corpus recall.
+
+PR #117 makes this calculation reproducible and adds it to the weekly
+artifacts. Missing papers should be reviewed to determine whether query
+taxonomy, arXiv categories or the page cap is responsible, rather than
+immediately broadening all OR terms.

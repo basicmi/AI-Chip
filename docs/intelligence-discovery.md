@@ -151,3 +151,35 @@ three-page bound; arXiv sources use each source's configured `max_pages`
 that disagree with the configured bound or report more fetched pages than
 allowed. This keeps collector and audit behavior aligned when query shards
 use different operational limits.
+
+## Known-item retrieval evaluation
+
+`data/intelligence-retrieval-golden.json` is a small **positive-only**
+calibration set of 16 previously reviewed, relevant arXiv papers (12 direct
+AI-compute, four adjacent AI-system/physical-AI). Publication calendar dates
+are explicit. The offline evaluator runs after source-coverage audit:
+
+```bash
+python3 scripts/evaluate_intelligence_retrieval.py \
+  --golden data/intelligence-retrieval-golden.json \
+  --discovery /tmp/ai-chip-intelligence-discovery.json \
+  --registry data/intelligence-sources.json \
+  --output /tmp/ai-chip-retrieval-eval.json \
+  --markdown /tmp/ai-chip-retrieval-eval.md
+```
+
+It reports Recall@25/50/100 where K is the **observed candidate depth
+within each source**, not an arbitrary global ranking. Paper IDs match
+independently of arXiv version; duplicates across shards count once.
+Only papers within the discovery lookback period contribute to the denominator.
+Unreachable arXiv shards make the evaluation non-scorable, rather than
+misleadingly treating every missing paper as an algorithmic failure.
+
+**Interpretation:** This is a known-item seed-set hit rate, not unbiased
+production Recall@K or corpus-wide recall. The dataset was sampled from
+papers previously discovered and manually selected, so selection bias is
+inherent. Every missing item is a diagnosis candidate, not proof of a bad
+query: the cause could be term/category coverage, indexing latency, request
+timing or a capped search window. Full-page truncation warnings remain
+visible next to the metric. CI checks evaluator correctness but does not
+require an arbitrary minimum hit rate.
