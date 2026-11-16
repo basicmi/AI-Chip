@@ -163,11 +163,15 @@ def coverage_report(registry, discovery, *, generated_at=None):
         pagination = row.get("pagination")
         if pagination is not None and source["kind"] in {"github_releases", "arxiv_api"}:
             expected_per_page = 50 if source["kind"] == "github_releases" else source.get("max_results", 100)
-            if (not isinstance(pagination, dict)
+            # GitHub Release collection currently has a fixed three-page bound;
+            # arXiv page bounds are source-specific and live in the registry.
+            expected_max_pages = 3 if source["kind"] == "github_releases" else source.get("max_pages", 3)
+            if (type(expected_max_pages) is not int or not 1 <= expected_max_pages <= 3
+                    or not isinstance(pagination, dict)
                     or pagination.get("per_page") != expected_per_page
-                    or pagination.get("max_pages") != 3
+                    or pagination.get("max_pages") != expected_max_pages
                     or type(pagination.get("pages_fetched")) is not int
-                    or not 1 <= pagination["pages_fetched"] <= 3
+                    or not 1 <= pagination["pages_fetched"] <= expected_max_pages
                     or type(pagination.get("raw_items_scanned")) is not int
                     or pagination["raw_items_scanned"] < len(items)
                     or type(pagination.get("paging_cap_reached")) is not bool):

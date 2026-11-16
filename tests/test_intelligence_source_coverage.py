@@ -13,7 +13,7 @@ def fixtures():
     registry={"schema_version":"1.0","sources":[
         {"id":"releases","kind":"github_releases","active":True},
         {"id":"rss","kind":"rss_atom","active":True},
-        {"id":"arxiv","kind":"arxiv_api","active":True,"max_results":2},
+        {"id":"arxiv","kind":"arxiv_api","active":True,"max_results":2,"max_pages":3},
         {"id":"off","kind":"rss_atom","active":False},
     ]}
     rows=[
@@ -47,6 +47,35 @@ class SourceCoverageTests(unittest.TestCase):
         self.assertTrue(arxiv["possible_window_truncation"])
         self.assertFalse(result["factual_verification_performed"])
         self.assertFalse(result["verified_remote_endpoints"])
+    def test_arxiv_pagination_audit_uses_registry_page_limit(self):
+        reg,disc=fixtures()
+        reg["sources"][2]["max_pages"]=2
+        row=next(x for x in disc["source_results"] if x["source_id"]=="arxiv")
+        row["pagination"]={
+            "pages_fetched":2,"raw_items_scanned":4,
+            "paging_cap_reached":True,"max_pages":2,"per_page":2,
+        }
+        report=coverage_report(reg,disc)
+        arxiv=next(x for x in report["sources"] if x["source_id"]=="arxiv")
+        self.assertTrue(arxiv["possible_window_truncation"])
+        self.assertEqual(arxiv["pagination"]["max_pages"],2)
+
+        # The audit must reject diagnostics that disagree with the registry.
+        row["pagination"]["max_pages"]=3
+        with self.assertRaisesRegex(ValueError,"pagination diagnostics"):
+            coverage_report(reg,disc)
+
+    def test_arxiv_pagination_audit_rejects_pages_beyond_registry_cap(self):
+        reg,disc=fixtures()
+        reg["sources"][2]["max_pages"]=2
+        row=next(x for x in disc["source_results"] if x["source_id"]=="arxiv")
+        row["pagination"]={
+            "pages_fetched":3,"raw_items_scanned":6,
+            "paging_cap_reached":True,"max_pages":3,"per_page":2,
+        }
+        with self.assertRaisesRegex(ValueError,"pagination diagnostics"):
+            coverage_report(reg,disc)
+
     def test_empty_success_is_not_outage(self):
         reg,disc=fixtures()
         disc["all_observations"]=[x for x in disc["all_observations"] if x["source_id"]!="rss"]

@@ -233,3 +233,28 @@ PR #115 splits the arXiv search into four independently monitored, bounded
 queries. The next scheduled run should be used to assess whether this reduces
 timeouts without creating unacceptable pagination truncation or relevance
 noise.
+
+## First live run after PR #115 — 2026-11-16
+
+Run: [GitHub Actions #43819178894](https://github.com/basicmi/AI-Chip/actions/runs/43819178894)
+
+- Discovery itself completed and recorded 621 observations, including 212
+  new or updated review leads.
+- All four arXiv shards returned their full two-page allowance: 100 raw
+  records per shard, 400 raw arXiv records in total. Each shard correctly
+  set `paging_cap_reached=true`; these are explicit possible-truncation
+  signals, not evidence of exhaustive coverage.
+- 26/27 sources were observed. The Google DeepMind RSS source returned a
+  parse error on this run; its 33,960-byte response was received successfully
+  over HTTP, so this is a parser/payload issue rather than a transport failure.
+  The run does not retain the raw response, so the exact malformed XML
+  construct is not established.
+- The Source Coverage Audit rejected the four arXiv records because it still
+  hard-coded a three-page maximum after PR #115 changed the configured shard
+  bound to two. Claim extraction and downstream stages were skipped, and the
+  transactional cache checkpoint did not run.
+- PR #116 updates the audit to validate the actual registry page bound and
+  adds regression tests for both matching and mismatched two-page metadata.
+
+The 212 new/updated count is a Discovery delta result. It must not be read as
+212 independently verified claims or as a relevance/recall score.

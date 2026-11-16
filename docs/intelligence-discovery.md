@@ -141,3 +141,13 @@ pagination/truncation diagnostics. The bounded 100-record per-shard scan is
 an operational compromise, not a completeness guarantee; any full second page
 is explicitly flagged as possible lookback-window truncation. Human review
 and the existing relevance-quality evaluation remain unchanged.
+
+## Pagination configuration contract
+
+Source Coverage Audit validates pagination diagnostics against the active
+source registry. GitHub Release collection currently uses its fixed
+three-page bound; arXiv sources use each source's configured `max_pages`
+(defaulting to three for older registries). The audit rejects diagnostics
+that disagree with the configured bound or report more fetched pages than
+allowed. This keeps collector and audit behavior aligned when query shards
+use different operational limits.
