@@ -70,9 +70,11 @@ def retryable(error):
         return error.code in RETRY_HTTP_STATUS
     return isinstance(error, (TimeoutError, socket.timeout, urllib.error.URLError, ConnectionError))
 
-def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep):
+def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep, backoff_seconds=0.2):
     if not isinstance(attempts, int) or not 1 <= attempts <= 3:
         raise ValueError("attempts must be between 1 and 3")
+    if not isinstance(backoff_seconds, (int, float)) or backoff_seconds < 0:
+        raise ValueError("backoff_seconds must be non-negative")
     for attempt in range(1, attempts + 1):
         try:
             return call(), attempt
@@ -81,7 +83,7 @@ def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep):
             if attempt == attempts or not retryable(error):
                 raise
             # Local bounded backoff; honor neither untrusted Retry-After nor URL contents.
-            sleep(0.2 * (2 ** (attempt - 1)))
+            sleep(backoff_seconds * (2 ** (attempt - 1)))
     raise RuntimeError("unreachable")
 
 def fetch_bytes(url, *, timeout=12, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
@@ -252,7 +254,7 @@ def collect_releases(source, *, since, fetcher=fetch_json, paging=None):
     # GitHub Releases returns newest releases first, but creation order does
     # not guarantee publication order. Fetch a bounded set of pages and do not
     # stop early solely because an older publication date was encountered.
-    per_page = 20
+    per_page = 50
     max_pages = 3
     candidates = []
     seen_tags = set()
@@ -413,16 +415,31 @@ def collect_arxiv(source, *, since, fetcher=fetch_text, paging=None, sleep=time.
 
 def candidate_from_hf(model):
     model_id = model["model_id"]
-    payload = {key: model.get(key) for key in ("model_id", "repo_sha", "last_modified", "gated", "private")}
-    fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+    payload = {key: model.get(key) for key in (
+        "model_id", "repo_sha", "created_at", "last_modified", "pipeline_tag",
+        "library_name", "tags", "gated", "private",
+    )}
+    fingerprint = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    is_listing_candidate = model.get("status") == "discovery_candidate_not_reviewed"
+    tags = model.get("tags")
     candidate = {
         "candidate_id": "hf-model:" + model_id, "fingerprint": fingerprint,
         "candidate_type": "model_repository", "source_id": "huggingface-model-catalog",
         "source_name": "Hugging Face model repository", "publisher": "Hugging Face",
-        "source_type": "repository", "independence": "project", "category": "model",
-        "title": model_id, "model_id": model_id, "published_at": model.get("last_modified"),
+        "source_type": "publisher_listing" if is_listing_candidate else "repository",
+        "independence": "project", "category": "model",
+        "title": model_id, "model_id": model_id,
+        "published_at": model.get("created_at") or model.get("last_modified"),
+        "updated_at": model.get("last_modified"),
+        "created_at": model.get("created_at"),
         "url": "https://huggingface.co/" + model_id, "repo_sha": model.get("repo_sha"),
-        "excerpt": "", "evidence_scope": "model_repository_metadata_only",
+        "pipeline_tag": model.get("pipeline_tag"), "library_name": model.get("library_name"),
+        "tags": tags if isinstance(tags, list) else [],
+        "downloads": model.get("downloads"), "likes": model.get("likes"),
+        "gated": model.get("gated"), "private": model.get("private"),
+        "excerpt": "",
+        "evidence_scope": "publisher_listing_metadata_only" if is_listing_candidate else "model_repository_metadata_only",
+        "date_status": model.get("date_status", "observed" if model.get("created_at") or model.get("last_modified") else "unknown"),
     }
     return normalize_candidate(candidate)
 
@@ -537,7 +554,10 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 raise ValueError("unsupported_source_kind")
             # Retry the full parse as well as transport, but only for transient
             # network/HTTP errors. A malformed feed is not retried.
-            found, attempts = bounded_retry(fetch_source, sleep=retry_sleep)
+            retry_backoff_seconds = 3.0 if kind == "arxiv_api" else 0.2
+            found, attempts = bounded_retry(
+                fetch_source, sleep=retry_sleep,
+                backoff_seconds=retry_backoff_seconds)
             candidates.extend(found)
             status = "recovered" if failures else "healthy"
             source_health[source_id] = {
@@ -634,7 +654,7 @@ def main():
             if state.get("schema_version") != "1.0" or not isinstance(state.get("items"), dict):
                 raise ValueError("invalid discovery state file")
         from discover_model_catalog import discover, discover_publisher_candidates
-        model_report = discover(catalog, publisher_search=discover_publisher_candidates)
+        model_report = discover(catalog, publisher_search=discover_publisher_candidates, days=args.days)
         report = run_discovery(registry, catalog, days=args.days, model_report=model_report, state=state)
         args.state_file.parent.mkdir(parents=True, exist_ok=True)
         args.output.parent.mkdir(parents=True, exist_ok=True)

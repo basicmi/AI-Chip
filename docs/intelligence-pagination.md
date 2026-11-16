@@ -8,13 +8,13 @@ all configured feeds are healthy. PR #103 added the metadata audit that
 must run after an actual network-backed discovery.
 
 A concrete coverage defect existed: each GitHub Releases source requested
-only \`per_page=20\` and filtered by publication date **after** fetching
+only \`per_page=50\` and filtered by publication date **after** fetching
 that first page. For busy projects this may miss releases still inside
 the 45-day lookback window.
 
 ## Fix
 
-- Scan at most **3 pages × 20 GitHub Releases** per repository, stopping on
+- Scan at most **3 pages × 50 GitHub Releases** per repository, stopping on
   a short page. Each page remains subject to the existing request timeout,
   response-size bound and source-level retry policy.
 - Do **not** assume the API's list order is monotonic in \`published_at\`.

@@ -70,6 +70,26 @@ class ArxivPaginationTests(unittest.TestCase):
         self.assertEqual(diag["raw_items_scanned"],6)
         # Compare the metadata from the actual scanner result, without network.
         # Keeping each page below cap would mask this risk under the old audit.
+    def test_arxiv_retry_uses_three_second_spacing(self):
+        calls = []
+        sleeps = []
+        def fetch(url):
+            calls.append(url)
+            if len(calls) == 1:
+                raise TimeoutError("synthetic timeout")
+            return atom(["2611.00001"])
+        state = {"schema_version": "1.0", "items": {}}
+        report = run_discovery(
+            {"sources": [SOURCE]}, {"models": []}, now=NOW,
+            feed_fetcher=fetch, model_report=MODEL, state=state,
+            retry_sleep=sleeps.append)
+        row = report["source_results"][0]
+        self.assertEqual(row["status"], "observed")
+        self.assertEqual(row["attempt_count"], 2)
+        self.assertEqual(sleeps, [3.0])
+        self.assertEqual(row["request_diagnostics"]["request_count"], 2)
+        self.assertEqual(row["request_diagnostics"]["failed_request_count"], 1)
+
     def test_subsequent_page_failure_fails_entire_source(self):
         def fetch(url):
             start=int(parse_qs(urlsplit(url).query)["start"][0])
