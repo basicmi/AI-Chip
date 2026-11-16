@@ -393,6 +393,8 @@ def extract_candidate_claims(candidate, diagnostics=None):
                     "Seek independent corroboration before treating performance, compatibility or availability as verified.",
                 ],
             })
+    if not output:
+        diagnostics.setdefault("skip_reason", "no_relevant_excerpt_sentences")
     return output
 
 
@@ -408,6 +410,22 @@ def validate_claim(claim):
             errors.append("missing " + key)
     if not isinstance(claim.get("statement"), str) or not claim["statement"].strip():
         errors.append("statement must be nonempty")
+    if claim.get("claim_type") not in (
+        "performance_result", "availability_or_lifecycle", "software_or_capability",
+        "quantitative_specification", "research_finding", "qualitative_capability",
+    ):
+        errors.append("invalid claim type")
+    if claim.get("assertion_class") not in (
+        "roadmap_or_future_intent", "speculation_or_hypothesis", "vendor_marketing_claim",
+        "research_result_candidate", "vendor_reported_result_candidate",
+        "performance_result_candidate", "technical_specification_candidate",
+        "availability_statement", "capability_or_compatibility_statement",
+        "research_finding_candidate", "vendor_technical_statement",
+        "technical_statement_candidate",
+    ):
+        errors.append("invalid assertion class")
+    if claim.get("topic") not in set(TOPICS) | {"other"}:
+        errors.append("invalid topic")
     if claim.get("review_status") != "unverified_candidate":
         errors.append("claim must remain unverified")
     extraction = claim.get("extraction", {})
@@ -473,8 +491,14 @@ def _round_robin_claims(source_groups, limit):
 
 
 def extract_report(discovery, generated_at=None, max_claims=3000, max_claims_per_candidate=25):
+    if type(max_claims) is not int or not 1 <= max_claims <= 10000:
+        raise ValueError("max_claims must be between 1 and 10000")
+    if type(max_claims_per_candidate) is not int or not 1 <= max_claims_per_candidate <= 100:
+        raise ValueError("max_claims_per_candidate must be between 1 and 100")
+    if not isinstance(discovery, dict) or not isinstance(discovery.get("review_queue"), list):
+        raise ValueError("expected discovery report with a review_queue list")
     now = generated_at or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    candidates = discovery.get("review_queue", [])
+    candidates = discovery["review_queue"]
     source_groups = {}
     errors = []
     diagnostics_rows = []
@@ -506,6 +530,13 @@ def extract_report(discovery, generated_at=None, max_claims=3000, max_claims_per
     evidence_counts = Counter(claim["evidence_class"] for claim in claims)
     relevance_counts = Counter(claim["relevance"]["class"] for claim in claims)
     source_counts = Counter(claim["source"].get("source_id") or "unknown_source" for claim in claims)
+    candidate_relevance_counts = Counter(
+        row.get("candidate_relevance") for row in diagnostics_rows
+        if row.get("candidate_relevance") in ("direct_ai_compute", "adjacent_ai_systems")
+    )
+    candidate_skip_reason_counts = Counter(
+        row.get("skip_reason") for row in diagnostics_rows if row.get("skip_reason")
+    )
     dropped = valid_before_limits - len(claims)
     return {
         "schema_version": "1.0",
@@ -514,6 +545,8 @@ def extract_report(discovery, generated_at=None, max_claims=3000, max_claims_per
         "candidate_count_with_claims": sum(bool(group) for groups in source_groups.values() for group in groups),
         "candidate_count_without_claims": len(candidates) - sum(bool(group) for groups in source_groups.values() for group in groups),
         "out_of_scope_candidate_count": sum(row.get("skip_reason") == "candidate_out_of_scope" for row in diagnostics_rows),
+        "candidate_relevance_counts": dict(sorted(candidate_relevance_counts.items())),
+        "candidate_skip_reason_counts": dict(sorted(candidate_skip_reason_counts.items())),
         "filtered_sentence_count": sum(row.get("sentences_filtered_out_of_scope", 0) for row in diagnostics_rows),
         "claim_count": len(claims),
         "claim_count_before_limits": valid_before_limits,
@@ -553,9 +586,15 @@ def markdown_summary(report):
         f"- Candidate/global limits dropped: {report['claims_dropped_by_limits']} (truncated: {str(report['truncated']).lower()})",
         f"- Extraction method: {report['extraction_method']}",
         "",
-        "## Relevance distribution",
+        "## Candidate relevance distribution",
         "",
     ]
+    for key, value in report["candidate_relevance_counts"].items():
+        lines.append(f"- {key}: {value}")
+    lines.extend(["", "## Candidate skip reasons", ""])
+    for key, value in report["candidate_skip_reason_counts"].items():
+        lines.append(f"- {key}: {value}")
+    lines.extend(["", "## Claim relevance distribution", ""])
     for key, value in report["relevance_counts"].items():
         lines.append(f"- {key}: {value}")
     lines.extend(["", "## Topic distribution", ""])

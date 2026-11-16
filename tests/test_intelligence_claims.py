@@ -205,6 +205,19 @@ class ClaimExtractionTests(unittest.TestCase):
         self.assertTrue(report["truncated"])
         self.assertEqual(report["claims_dropped_by_limits"], 4)
 
+    def test_report_rejects_invalid_limits_and_discovery_shape(self):
+        with self.assertRaisesRegex(ValueError, "max_claims"):
+            extract_report({"review_queue": []}, max_claims=0)
+        with self.assertRaisesRegex(ValueError, "max_claims_per_candidate"):
+            extract_report({"review_queue": []}, max_claims_per_candidate=0)
+        with self.assertRaisesRegex(ValueError, "review_queue"):
+            extract_report({"candidates": []})
+
+    def test_validation_rejects_unknown_assertion_class(self):
+        claim = extract_candidate_claims(self.candidate)[0]
+        claim["assertion_class"] = "verified_fact"
+        self.assertIn("invalid assertion class", validate_claim(claim))
+
     def test_per_candidate_limit_is_reported(self):
         candidate = {
             **self.candidate,
