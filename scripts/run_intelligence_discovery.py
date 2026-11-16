@@ -300,43 +300,72 @@ def collect_rss_atom(source, *, since, fetcher=fetch_text):
     candidates.sort(key=lambda item: (item["published_at"], item["candidate_id"]), reverse=True)
     return candidates
 
-def collect_arxiv(source, *, since, fetcher=fetch_text):
-    params = urllib.parse.urlencode({
-        "search_query": source["query"], "start": 0,
-        "max_results": source.get("max_results", 100),
-        "sortBy": "submittedDate", "sortOrder": "descending",
-    })
-    payload = fetcher("https://export.arxiv.org/api/query?" + params)
-    entries = parse_feed_document(payload)
+def collect_arxiv(source, *, since, fetcher=fetch_text, paging=None, sleep=time.sleep):
+    per_page = source.get("max_results", 100)
+    if type(per_page) is not int or not 1 <= per_page <= 100:
+        raise ValueError("arXiv max_results must be 1..100")
+    max_pages = 3
     candidates = []
-    for entry in entries:
-        title = clean_text(child_text(entry, {"title"}))
-        abstract = clean_text(child_text(entry, {"summary"}))
-        published = parse_time(child_text(entry, {"published"}))
-        raw_id = child_text(entry, {"id"})
-        if not title or not raw_id or published is None or published < since:
-            continue
-        match = re.search(r"arxiv\.org/abs/([^?#]+)", raw_id)
-        if not match:
-            continue
-        paper_id = match.group(1)
-        link = "https://arxiv.org/abs/" + paper_id
-        updated = parse_time(child_text(entry, {"updated"}))
-        candidate = {
-            "candidate_id": "arxiv:" + paper_id,
-            "candidate_type": "research_preprint",
-            "source_id": source["id"], "source_name": source["name"],
-            "publisher": "arXiv", "source_type": "research_paper",
-            "independence": "independent", "category": source["category"],
-            "title": title, "published_at": published.isoformat().replace("+00:00", "Z"),
-            "updated_at": updated.isoformat().replace("+00:00", "Z") if updated else None,
-            "url": link, "excerpt": abstract[:2400],
-            "authors": item_authors(entry), "categories": item_categories(entry),
-            "evidence_scope": "arxiv_preprint_metadata_and_abstract_not_peer_reviewed",
-            "peer_review_status": "not_verified",
-        }
-        candidate["fingerprint"] = candidate_fingerprint(candidate)
-        candidates.append(normalize_candidate(candidate))
+    seen_papers = set()
+    pages_fetched = 0
+    raw_items_scanned = 0
+    last_page_full = False
+    for page in range(max_pages):
+        if page:
+            sleep(3)  # Respect arXiv API spacing between paginated queries.
+        params = urllib.parse.urlencode({
+            "search_query": source["query"], "start": page * per_page,
+            "max_results": per_page,
+            "sortBy": "submittedDate", "sortOrder": "descending",
+        })
+        payload = fetcher("https://export.arxiv.org/api/query?" + params)
+        entries = parse_feed_document(payload)
+        if len(entries) > per_page:
+            raise ValueError("arXiv returned more entries than requested")
+        pages_fetched += 1
+        raw_items_scanned += len(entries)
+        last_page_full = len(entries) == per_page
+        for entry in entries:
+            title = clean_text(child_text(entry, {"title"}))
+            abstract = clean_text(child_text(entry, {"summary"}))
+            published = parse_time(child_text(entry, {"published"}))
+            raw_id = child_text(entry, {"id"})
+            if not title or not raw_id or published is None or published < since:
+                continue
+            match = re.search(r"arxiv\.org/abs/([^?#]+)", raw_id)
+            if not match:
+                continue
+            paper_id = match.group(1)
+            link = "https://arxiv.org/abs/" + paper_id
+            updated = parse_time(child_text(entry, {"updated"}))
+            if paper_id in seen_papers:
+                continue
+            seen_papers.add(paper_id)
+            candidate = {
+                "candidate_id": "arxiv:" + paper_id,
+                "candidate_type": "research_preprint",
+                "source_id": source["id"], "source_name": source["name"],
+                "publisher": "arXiv", "source_type": "research_paper",
+                "independence": "independent", "category": source["category"],
+                "title": title, "published_at": published.isoformat().replace("+00:00", "Z"),
+                "updated_at": updated.isoformat().replace("+00:00", "Z") if updated else None,
+                "url": link, "excerpt": abstract[:2400],
+                "authors": item_authors(entry), "categories": item_categories(entry),
+                "evidence_scope": "arxiv_preprint_metadata_and_abstract_not_peer_reviewed",
+                "peer_review_status": "not_verified",
+            }
+            candidate["fingerprint"] = candidate_fingerprint(candidate)
+            candidates.append(normalize_candidate(candidate))
+        if not last_page_full:
+            break
+    if paging is not None:
+        paging.update({
+            "pages_fetched": pages_fetched,
+            "raw_items_scanned": raw_items_scanned,
+            "paging_cap_reached": bool(last_page_full and pages_fetched == max_pages),
+            "max_pages": max_pages,
+            "per_page": per_page,
+        })
     candidates.sort(key=lambda item: (item["published_at"], item["candidate_id"]), reverse=True)
     return candidates
 
@@ -454,7 +483,7 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
                 if kind == "rss_atom":
                     return collect_rss_atom(source, since=since, fetcher=feed_fetcher)
                 if kind == "arxiv_api":
-                    return collect_arxiv(source, since=since, fetcher=feed_fetcher)
+                    return collect_arxiv(source, since=since, fetcher=feed_fetcher, paging=paging)
                 raise ValueError("unsupported_source_kind")
             # Retry the full parse as well as transport, but only for transient
             # network/HTTP errors. A malformed feed is not retried.
