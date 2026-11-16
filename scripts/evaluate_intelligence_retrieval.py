@@ -90,6 +90,11 @@ def evaluate(golden, discovery, *, registry=None):
             "expected_relevance": entry["expected_relevance"],
             "rationale": entry["rationale"],
             "published_on": published,
+            "abstract_excerpt": entry.get("abstract_excerpt", ""),
+            "arxiv_categories": entry.get("arxiv_categories", []),
+            "category_metadata_status": entry.get("category_metadata_status", "not_captured"),
+            "category_evidence_url": entry.get("category_evidence_url"),
+            "candidate_query_terms": entry.get("candidate_query_terms", []),
             "positions": positions.get(pid, {}),
         }
         if not published:

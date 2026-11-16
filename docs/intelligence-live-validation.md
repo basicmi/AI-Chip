@@ -282,3 +282,20 @@ PR #117 makes this calculation reproducible and adds it to the weekly
 artifacts. Missing papers should be reviewed to determine whether query
 taxonomy, arXiv categories or the page cap is responsible, rather than
 immediately broadening all OR terms.
+
+## First automated miss diagnosis after PR #117 — 2026-11-16
+
+Run: [GitHub Actions #43837297395](https://github.com/basicmi/AI-Chip/actions/runs/43837297395)
+
+- 27/27 sources observed; all four arXiv shards returned 100 raw records and
+  reached their two-page caps.
+- The 16-paper known-item seed scored 8/16 at per-shard depth 25 and 9/16 at
+  depth 50 and 100. Seven papers remained absent.
+- PR #118 adds a category-aware lexical diagnostic over those seven misses.
+  It preserves explicit uncertainty where category metadata is not captured
+  or comes from a secondary index, and distinguishes a configured phrase
+  visible in the abstract from a phrase gap.
+- Candidate query terms are evidence-grounded suggestions, not automatic
+  query edits. The next stage will trial a small, isolated query expansion
+  and compare incremental recall, source volume, page-cap behavior and
+  relevance precision before adopting it.

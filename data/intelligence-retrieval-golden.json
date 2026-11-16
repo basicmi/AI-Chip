@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "benchmark_id": "arxiv-known-item-recall-seed-2026-11-16-v1",
-  "curation": "16 manually classified, known relevant arXiv papers from the existing relevance seed. Publication CALENDAR dates cross-checked against arXiv abstracts for previously unobserved papers. Selection is not representative or independent of previous discovery.",
+  "curation": "16 manually classified, known relevant arXiv papers from the existing relevance seed. Publication CALENDAR dates cross-checked against arXiv abstracts for previously unobserved papers. Selection is not representative or independent of previous discovery. Missed-paper abstracts and query-term hypotheses added for PR #118; categories are explicitly tagged by provenance and left unknown where not captured.",
   "assessment_policy": "Measure within-lookback known-item hit rate at per-source depths K=25,50,100; report missed IDs and pagination caps. This is not full-corpus retrieval recall.",
   "examples": [
     {
@@ -26,7 +26,21 @@
       "source_url": "https://arxiv.org/abs/2611.18145",
       "published_on": "2026-11-13",
       "expected_relevance": "direct_ai_compute",
-      "rationale": "GPU-initiated networking compiler evaluated on LLM serving and multi-GPU systems"
+      "rationale": "GPU-initiated networking compiler evaluated on LLM serving and multi-GPU systems",
+      "abstract_excerpt": "We present Obaleth, a compiler that makes GPU-initiated communication part of a kernel's intermediate representation, co-optimizes it alongside computation, and lowers it to specialized transport code. Obaleth plans completions around buffer lifetimes and optimizes memory ordering, synchronization, and batching across NVIDIA and AMD GPUs. On H100 GPUs, Obaleth sends small messages up to 3.3$\\times$ faster, and on 256 GPUs runs all-to-all 1.25$\\times$ and 2.3$\\times$ faster than NVSHMEM and NCCL GIN, with much smaller memory and register use.",
+      "arxiv_categories": [
+        "cs.DC",
+        "cs.LG",
+        "cs.PL"
+      ],
+      "category_metadata_status": "arxiv_primary",
+      "category_evidence_url": "https://arxiv.org/abs/2611.18145",
+      "candidate_query_terms": [
+        "GPU-initiated communication",
+        "NCCL GIN",
+        "NVSHMEM",
+        "all-to-all"
+      ]
     },
     {
       "paper_id": "arxiv:2611.18075v1",
@@ -34,7 +48,20 @@
       "source_url": "https://arxiv.org/abs/2611.18075",
       "published_on": "2026-11-13",
       "expected_relevance": "direct_ai_compute",
-      "rationale": "GPU collectives, NCCL, NVL72/B200, and distributed training"
+      "rationale": "GPU collectives, NCCL, NVL72/B200, and distributed training",
+      "abstract_excerpt": "GPU communication libraries such as NCCL use Streaming Multiprocessors (SMs) for data movement and synchronization, slowing overlapped computation at a cost that grows with interconnect bandwidth. It synchronizes through CUDA stream memory operations, moves data asynchronously with copy engines within a scale-up domain, and drives network RDMA from a stream-ordered CPU proxy. It supports data-movement collectives such as AllGather and AlltoAll, plus one-sided ncclPutSignal and ncclWaitSignal APIs. In Megatron-LM training, they accelerate FSDP by up to 3.5%, and one-sided puts accelerate pipeline parallelism by up to 15%. Through an end-to-end study across models and parallelism strategies, we show that it pays off for large transfers in GPU-bound workloads and for deep pipelines with large bubbles, but loses on small messages and host-bound workloads.",
+      "arxiv_categories": [
+        "cs.DC"
+      ],
+      "category_metadata_status": "arxiv_primary",
+      "category_evidence_url": "https://arxiv.org/abs/2611.18075",
+      "candidate_query_terms": [
+        "NCCL",
+        "GPU communication",
+        "AllGather",
+        "AlltoAll",
+        "RDMA"
+      ]
     },
     {
       "paper_id": "arxiv:2611.17908v1",
@@ -82,7 +109,21 @@
       "source_url": "https://arxiv.org/abs/2611.03330",
       "published_on": "2026-11-02",
       "expected_relevance": "direct_ai_compute",
-      "rationale": "Analytical compute, memory, and energy model for LLM inference"
+      "rationale": "Analytical compute, memory, and energy model for LLM inference",
+      "candidate_query_terms": [
+        "LLM inference",
+        "energy cost",
+        "KV-cache",
+        "agentic serving"
+      ],
+      "abstract_excerpt": "We derive closed-form expressions of the computational and memory-access complexity of LLM inference in terms of architectural hyperparameters, covering MHA and GQA, and compare a family of analytical models of increasing granularity. From these, we obtain the SIMPLE Inference Model to Predict LLMs Energy (SIMPLE), a four-parameter law that separates prefill from decode, and decode into KV-cache cost and next-token computation. Agentic serving raises energy per request by 13.0x relative to non-agentic ones, driven by the growth of both the prefill and the KV-cache terms with input length; while prefix caching removes most of the prefill cost (-93%), the KV-cache term is unaffected, so even a cached agentic request costs 4.8x more.",
+      "arxiv_categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.PF"
+      ],
+      "category_metadata_status": "secondary_index",
+      "category_evidence_url": "https://arxivlens.com/paperview/details/the-simple-law-for-energy-cost-of-llm-inference-7ba872a5aebdc686"
     },
     {
       "paper_id": "arxiv:2611.10832v1",
@@ -90,7 +131,16 @@
       "source_url": "https://arxiv.org/abs/2611.10832",
       "published_on": "2026-11-07",
       "expected_relevance": "direct_ai_compute",
-      "rationale": "GPU capacity broker for agentic and RL workloads"
+      "rationale": "GPU capacity broker for agentic and RL workloads",
+      "abstract_excerpt": "AI agents and reinforcement-learning (RL) trainers run thousands of short, isolated GPU jobs: tool calls, verifiers, and rollouts. Firepool, the sandbox and execution broker behind agentic and RL workloads at LinkedIn, meets both requirements. Over a sampled peak period in production, Firepool serves 94.7% of 3,206 pod requests from warm or standby capacity. In paired benchmarks with fixed-duration jobs on production H200 nodes, agent and RL loops finish 13x and 10.8x faster than with a fresh pod per job; against a fresh reuse tag per job, warm reuse cuts p90 start latency from 59.1 s to 3.5 s.",
+      "arxiv_categories": [],
+      "category_metadata_status": "not_captured",
+      "candidate_query_terms": [
+        "warm GPU capacity",
+        "GPU jobs",
+        "agentic and RL workloads",
+        "pod requests"
+      ]
     },
     {
       "paper_id": "arxiv:2611.18035v1",
@@ -114,7 +164,16 @@
       "source_url": "https://arxiv.org/abs/2611.10498",
       "published_on": "2026-11-07",
       "expected_relevance": "adjacent_ai_systems",
-      "rationale": "Runtime adaptation benchmark for mobile robotic missions"
+      "rationale": "Runtime adaptation benchmark for mobile robotic missions",
+      "abstract_excerpt": "Mobile robotic sensing systems must adapt to operator requirements, limited resources, changing connectivity, and observation opportunities shaped by physical motion. Evaluating runtime strategies therefore requires assessing whether their decisions fulfill mission objectives, beyond isolated perception accuracy or execution efficiency. We present EmbodiedIntentBench, a benchmark for intent-driven runtime adaptation in mobile robotic missions. It represents mission intent through structured contracts for coverage, temporal evidence, reporting, urgency, and resources, and couples simulated unmanned aerial vehicle (UAV) workloads with causal, resource-accounted execution. Computation decisions affect mission time, resource use, and which observations can contribute evidence. We evaluate fixed and adaptive perception strategies in multi-phase missions and under changing urgency, connectivity, and battery conditions. In the multi-phase Depot study, a configuration with 87.5% full-bank target recall across visible target observations completes only 1 of 16 missions, whereas a lower-recall configuration completes 14. In an ablation, ignoring execution-induced observation loss increases aggregate mission success and reverses the ordering of two runtime strategies. Replays using Jetson AGX Orin CPU and GPU profiles change the relative success of local and remote strategies. In selected Jetson GPU-profile replays, intent-driven adaptation reduces modeled task energy by up to 28% with unchanged mission success. EmbodiedIntentBench provides an extensible framework for evaluating runtime decisions against mission fulfillment under physical and resource constraints.",
+      "arxiv_categories": [],
+      "category_metadata_status": "not_captured",
+      "candidate_query_terms": [
+        "mobile robotic sensing",
+        "runtime adaptation",
+        "mission objectives",
+        "Jetson AGX Orin"
+      ]
     },
     {
       "paper_id": "arxiv:2611.08156v1",
@@ -122,7 +181,21 @@
       "source_url": "https://arxiv.org/abs/2611.08156",
       "published_on": "2026-11-05",
       "expected_relevance": "adjacent_ai_systems",
-      "rationale": "Compact robot policies using latent world modeling"
+      "rationale": "Compact robot policies using latent world modeling",
+      "abstract_excerpt": "World-action models adapt pretrained video generators, and vision-language-action models build on pretrained vision-language backbones; both tie policy architecture and inference cost to large transformers designed for generation rather than control. It remains unclear how much these generation-oriented choices affect control. In this work, we introduce Latent Action JEPA (La-JEPA), a compact world-action model whose policy transformer is trained from scratch in the feature space of a pretrained V-JEPA 2.1 encoder. Following Fast-WAM, La-JEPA learns to predict future features jointly with actions during training and generates only actions at inference. Among policies without embodied pretraining, La-JEPA achieves state-of-the-art performance in clean and randomized RoboTwin 2.0 scenes and on LIBERO-Plus with correct instructions, while using far fewer parameters than the strongest competing policies. It runs substantially faster than Fast-WAM at comparable performance and outperforms the closest JEPA-based methods, LeapBot-WA and JEPA-WAM, on LIBERO-Plus and RoboTwin 2.0 without their pretrained policy backbones. On four real-robot tasks, its average success is comparable to pi0.5 and above non-embodied-pretrained baselines. Through a design study of the choices behind La-JEPA, we show that JEPA features outperform video VAE latents, most clearly out of distribution, and that training-time future prediction choices significantly impact the policy even when future prediction is skipped at inference. We correct the LIBERO-Plus instructions, as the officially released evaluator corrupts them for most variants, and re-evaluate several strong open baselines. Without a generative pretrained policy backbone, La-JEPA is better and faster than far larger policies, suggesting that robot foundation models may benefit from architectures designed for control rather than inherited from generation.",
+      "arxiv_categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "category_metadata_status": "secondary_index",
+      "category_evidence_url": "https://www.alphaxiv.org/abs/2611.08156",
+      "candidate_query_terms": [
+        "La-JEPA",
+        "world-action model",
+        "robot policies",
+        "V-JEPA"
+      ]
     },
     {
       "paper_id": "arxiv:2611.06653v1",
@@ -130,7 +203,17 @@
       "source_url": "https://arxiv.org/abs/2611.06653",
       "published_on": "2026-11-04",
       "expected_relevance": "adjacent_ai_systems",
-      "rationale": "Robot action-interface contracts and learned world models"
+      "rationale": "Robot action-interface contracts and learned world models",
+      "abstract_excerpt": "A robot action can satisfy shape and range constraints yet carry the wrong semantics: axes may be permuted, signs inverted, rotations rescaled, or gripper polarity reversed. We study learned state-action-effect relations as offline contracts for detecting these mismatches and ranking their likely fields. Clean held-out transitions calibrate alarms; a fixed inverse vocabulary supports closed-set localization. On ten LIBERO Spatial tasks comprising 432 source episodes, a capacity-controlled comparison at 2.5% empirical clean false-positive rate gives 46.1% recall for a ridge forward residual, 61.0% for a four-component joint Gaussian mixture, and 65.7% for the exact conditional of that same mixture. The joint score retains a 14.9 percentage-point advantage over ridge, while conditioning improves recall by a further 4.7 points. Joint scoring instead has higher localization: 95.8% versus 94.6%. These matched-rate comparisons are retrospective diagnostics, not deployment calibration guarantees. Earlier Object/Goal results broaden tasks within the LIBERO convention; DROID, all three HYDRA tasks, short temporal faults, small offsets, exact repair, and simulated mitigation fail their respective gates, while xArm contributes one task only. The evidence supports a bounded offline diagnostic and a detection-localization tradeoff, rather than joint-density superiority or cross-robot safety.",
+      "arxiv_categories": [],
+      "category_metadata_status": "not_captured",
+      "candidate_query_terms": [
+        "action-interface mismatch",
+        "robot action",
+        "world models",
+        "state-action-effect"
+      ]
     }
-  ]
+  ],
+  "dataset_version": "1.1"
 }

@@ -52,6 +52,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_intelligence_claims.py"
           python3 -m unittest discover -s tests -p "test_intelligence_quality.py"
           python3 -m unittest discover -s tests -p "test_intelligence_retrieval.py"
+          python3 -m unittest discover -s tests -p "test_intelligence_retrieval_diagnosis.py"
           python3 scripts/evaluate_intelligence_quality.py --golden data/intelligence-quality-golden.json
           python3 -m unittest discover -s tests -p "test_intelligence_evidence_graph.py"
           python3 -m unittest discover -s tests -p "test_intelligence_triage.py"
