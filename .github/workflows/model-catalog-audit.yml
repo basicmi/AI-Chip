@@ -1,20 +1,7 @@
 name: Weekly AI Chip intelligence discovery
 
 on:
-  # Run live source validation after relevant merged changes, not after unrelated site/data edits.
-  push:
-    branches:
-      - master
-    paths:
-      - ".github/workflows/model-catalog-audit.yml"
-      - "data/intelligence-sources.json"
-      - "data/model-catalog.json"
-      - "data/intelligence-review-decisions.json"
-      - "data/intelligence-quality-golden.json"
-      - "data/intelligence-retrieval-experiments.json"
-      - "schemas/intelligence-claims.schema.json"
-      - "scripts/*intelligence*.py"
-      - "scripts/discover_model_catalog.py"
+  # Live discovery is scheduled or explicitly dispatched; PR/push validation stays in CI.
   schedule:
     - cron: "15 6 * * 1"
   workflow_dispatch:

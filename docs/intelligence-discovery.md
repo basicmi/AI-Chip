@@ -290,3 +290,24 @@ shows a Wilson 95% interval; when the entire returned set was sampled, the
 measured proportion is exact for that bounded set. Partially reviewed groups
 show descriptive progress only, not a precision estimate. These results
 describe one bounded run and do not establish corpus-wide retrieval quality.
+
+
+## Discovery cadence and arXiv rate-limit handling (PR #122 follow-through)
+
+Live Discovery runs on the weekly Monday schedule (06:15 UTC) or by explicit
+`workflow_dispatch`. Ordinary pushes and merged PRs do not launch another
+full external scan. Repository changes remain covered by the normal PR/push
+validation workflow; manually dispatch Discovery after a deliberate source
+registry change when an immediate live check is needed.
+
+The arXiv client parses both forms of the HTTP `Retry-After` header: delta
+seconds and an HTTP date. It never retries earlier than the server-requested
+delay. A 429 without a usable header uses a conservative 30-second fallback.
+Automatic retry waits are bounded to 300 seconds; if the server requests a
+longer wait, the current shard is marked unavailable and remaining arXiv
+shards are deferred for that run rather than sent into the same rate-limit
+window. The existing three-second minimum spacing between arXiv pages and
+independent shards remains in place.
+
+These controls reduce request bursts but do not guarantee availability or
+eliminate upstream throttling.

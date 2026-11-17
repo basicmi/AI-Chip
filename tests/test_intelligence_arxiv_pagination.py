@@ -2,13 +2,13 @@
 import json
 import sys
 import unittest
-from datetime import datetime,timezone
+from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from urllib.parse import parse_qs,urlsplit
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
-from run_intelligence_discovery import collect_arxiv,run_discovery
+from run_intelligence_discovery import (collect_arxiv,run_discovery, retry_after_seconds, bounded_retry)
 from audit_intelligence_source_coverage import coverage_report
 from validate_intelligence_sources import validate_registry
 
@@ -214,4 +214,112 @@ class ArxivPaginationTests(unittest.TestCase):
         row["pagination"]["pages_fetched"]=4
         with self.assertRaisesRegex(ValueError,"pagination diagnostics"):
             coverage_report(registry,discovery)
+
+class RetryAfterTests(unittest.TestCase):
+    @staticmethod
+    def http_error(code, headers=None):
+        import urllib.error
+        return urllib.error.HTTPError(
+            "https://export.arxiv.org/api/query", code, "synthetic", headers or {}, None
+        )
+
+    def test_retry_after_delta_seconds(self):
+        error = self.http_error(429, {"Retry-After": "12"})
+        self.assertEqual(retry_after_seconds(error, now=NOW), 12.0)
+
+    def test_retry_after_http_date(self):
+        import email.utils
+        retry_at = NOW + timedelta(seconds=25)
+        error = self.http_error(503, {"Retry-After": email.utils.format_datetime(retry_at, usegmt=True)})
+        self.assertEqual(retry_after_seconds(error, now=NOW), 25.0)
+
+    def test_bounded_retry_honors_server_retry_after(self):
+        calls, sleeps = [], []
+        def call():
+            calls.append(1)
+            if len(calls) == 1:
+                raise self.http_error(429, {"Retry-After": "12"})
+            return "ok"
+        result, attempts = bounded_retry(call, attempts=2, sleep=sleeps.append, backoff_seconds=3)
+        self.assertEqual((result, attempts), ("ok", 2))
+        self.assertEqual(sleeps, [12.0])
+
+    def test_rate_limit_without_header_uses_conservative_cooldown(self):
+        calls, sleeps = [], []
+        def call():
+            calls.append(1)
+            if len(calls) == 1:
+                raise self.http_error(429)
+            return "ok"
+        bounded_retry(call, attempts=2, sleep=sleeps.append, backoff_seconds=3)
+        self.assertEqual(sleeps, [30.0])
+
+    def test_retry_after_beyond_budget_fails_without_early_retry(self):
+        calls, sleeps = [], []
+        def call():
+            calls.append(1)
+            raise self.http_error(429, {"Retry-After": "301"})
+        with self.assertRaises(Exception):
+            bounded_retry(call, attempts=3, sleep=sleeps.append, backoff_seconds=3)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(sleeps, [])
+
+    def test_arxiv_cooldown_is_shared_across_query_shards(self):
+        sources = [
+            {**SOURCE, "id": "arxiv-limited", "name": "Rate limited",
+             "query": "all:limited", "max_pages": 1, "max_attempts": 1},
+            {**SOURCE, "id": "arxiv-next", "name": "Next shard",
+             "query": "all:next", "max_pages": 1, "max_attempts": 1},
+            {**SOURCE, "id": "arxiv-last", "name": "Last shard",
+             "query": "all:last", "max_pages": 1, "max_attempts": 1},
+        ]
+        calls, sleeps, elapsed = [], [], [0.0]
+        def fetch(url):
+            query = parse_qs(urlsplit(url).query)["search_query"][0]
+            calls.append(query)
+            if query == "all:limited":
+                raise self.http_error(429, {"Retry-After": "10"})
+            return atom(["2611.00009"])
+        def sleep(seconds):
+            sleeps.append(seconds)
+            elapsed[0] += seconds
+        report = run_discovery(
+            {"sources": sources}, {"models": []}, now=NOW,
+            feed_fetcher=fetch, model_report=MODEL,
+            state={"schema_version": "1.0", "items": {}},
+            clock=lambda: elapsed[0], retry_sleep=sleep,
+        )
+        self.assertEqual(calls, ["all:limited", "all:next", "all:last"])
+        self.assertEqual(sleeps, [10.0, 3])
+        self.assertEqual(report["source_results"][0]["failure_category"], "http_rate_limit")
+        self.assertEqual(report["source_results"][1]["status"], "observed")
+        self.assertEqual(report["source_results"][2]["status"], "observed")
+
+    def test_long_arxiv_cooldown_defers_remaining_shards(self):
+        sources = [
+            {**SOURCE, "id": "arxiv-limited", "query": "all:limited",
+             "max_pages": 1, "max_attempts": 1},
+            {**SOURCE, "id": "arxiv-next", "query": "all:next",
+             "max_pages": 1, "max_attempts": 1},
+            {**SOURCE, "id": "arxiv-last", "query": "all:last",
+             "max_pages": 1, "max_attempts": 1},
+        ]
+        calls = []
+        def fetch(url):
+            query = parse_qs(urlsplit(url).query)["search_query"][0]
+            calls.append(query)
+            import urllib.error
+            raise urllib.error.HTTPError(url, 429, "synthetic", {"Retry-After": "600"}, None)
+        report = run_discovery(
+            {"sources": sources}, {"models": []}, now=NOW,
+            feed_fetcher=fetch, model_report=MODEL,
+            state={"schema_version": "1.0", "items": {}},
+            clock=lambda: 0.0, retry_sleep=lambda _: self.fail("must defer instead of waiting"),
+        )
+        self.assertEqual(calls, ["all:limited"])
+        self.assertEqual(report["source_results"][1]["failure_category"], "rate_limit_cooldown_deferred")
+        self.assertEqual(report["source_results"][2]["failure_category"], "rate_limit_cooldown_deferred")
+        self.assertEqual(report["source_results"][1]["attempt_count"], 0)
+
+
 if __name__=="__main__":unittest.main()
