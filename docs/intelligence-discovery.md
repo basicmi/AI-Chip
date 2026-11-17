@@ -217,7 +217,7 @@ quality can increase page-cap competition and reduce precision.
 
 ## Isolated targeted retrieval experiment (PR #119)
 
-The weekly workflow now runs four bounded, one-page arXiv query experiments
+The weekly workflow now runs four bounded, two-page arXiv query experiments
 after the baseline Recall@K and miss diagnosis:
 
 1. GPU communication and interconnect.
@@ -225,8 +225,9 @@ after the baseline Recall@K and miss diagnosis:
 3. Agentic GPU capacity and short-lived jobs.
 4. Physical-AI runtime and world-action models.
 
-Each query is limited to 50 results and is kept outside the production source
-registry. The runner waits three seconds between experiment queries, uses the
+Each query is limited to 50 results per page and at most two pages (up to 100
+raw entries per group), and is kept outside the production source registry.
+The runner waits three seconds between pages and query groups, uses the
 existing Atom parser and bounded retry policy, and applies the same discovery
 lookback window. The baseline discovery and recall evaluation must be
 scorable before any experimental requests are made.
@@ -253,7 +254,7 @@ python3 scripts/run_intelligence_retrieval_experiment.py \
 ## Human relevance review for targeted retrieval (PR #121)
 
 The targeted-query experiment now retains the complete bounded result set
-(up to 50 unique papers per query group), including title, arXiv URL, abstract
+(up to 100 unique papers per query group), including title, arXiv URL, abstract
 excerpt, categories, deterministic screening label and observed position.
 The position is newest-first after local date filtering; it is **not** a
 relevance rank.
@@ -311,3 +312,37 @@ independent shards remains in place.
 
 These controls reduce request bursts but do not guarantee availability or
 eliminate upstream throttling.
+
+
+## Recoverable historical Claim review backlog (PR #125)
+
+The persistent review cache originally retained Claim IDs, first/last-seen
+timestamps and selected priority metadata, but not the Claim statement,
+source excerpt or full source context. This made historical pending entries
+countable but not directly reviewable.
+
+The workflow now performs a one-time, read-only recovery from eight retained
+GitHub Actions artifacts. It validates each archived discovery/Claim/evidence
+graph bundle, recomputes the existing deterministic triage score against the
+original run timestamp, and matches recovered Claim IDs to the persistent
+cache. The recovery covers 2,525 unique Claim IDs observed in the current
+backlog. It preserves original first-seen timestamps and does not create,
+change or approve any human decision.
+
+The recovered Claim payload and priority metadata are retained in the review
+cache. Subsequent change-only runs preserve those payloads even when a Claim
+is absent from the current discovery. Newly extracted Claims are also stored
+with their source text. The review-aging artifact now includes the full
+source-grounded Claim statement and evidence quote for unresolved items.
+
+Recovery is automatic and idempotent: empty caches and already-hydrated caches
+skip network access. If one or more historical artifacts are no longer
+available, the report identifies missing Claim payloads and leaves the cache
+usable; the workflow does not treat missing artifacts as reviewed Claims.
+The one-time artifacts have normal GitHub Actions retention limits, so the
+first run after this change should happen before those artifacts expire.
+
+All restored records remain unverified extraction candidates. Priority scores
+are work-routing signals, not truth confidence; review decisions are not
+factual verification. No formal company, product, model-support or benchmark
+registry is modified.

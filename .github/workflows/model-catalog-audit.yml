@@ -13,6 +13,7 @@ on:
         default: 45
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -54,6 +55,17 @@ jobs:
         run: |
           printf 'DISCOVERY_CACHE_PRESENT=%s\n' "$(test -f .cache/ai-chip-intelligence-state.json && echo true || echo false)" >> "$GITHUB_ENV"
           printf 'REVIEW_CACHE_PRESENT=%s\n' "$(test -f .cache/ai-chip-review-state.json && echo true || echo false)" >> "$GITHUB_ENV"
+      - name: Recover historical Claim payloads from retained discovery artifacts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 scripts/hydrate_intelligence_review_backlog.py \
+            --state "$RUNNER_TEMP/review-state-staged.json" \
+            --repo "$GITHUB_REPOSITORY" \
+            --token "$GITHUB_TOKEN" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.md"
       - name: Validate curated source registry
         run: python3 scripts/validate_intelligence_sources.py
       - name: Discover releases, model changes and publisher candidates
@@ -194,6 +206,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-health.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-health.md" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -228,6 +243,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
             ${{ runner.temp }}/ai-chip-intelligence-review-state.json
             ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
+            ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.json
+            ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.md
             ${{ runner.temp }}/ai-chip-intelligence-health.json
             ${{ runner.temp }}/ai-chip-intelligence-health.md
             ${{ runner.temp }}/ai-chip-intelligence-operations.json
