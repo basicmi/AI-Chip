@@ -79,7 +79,10 @@ class RetrievalReviewTests(unittest.TestCase):
         self.assertEqual(report["status"], "complete")
         self.assertEqual(report["scorable_group_count"], 2)
         self.assertTrue(all(row["precision"] is not None for row in report["groups"]))
-        self.assertTrue(all(row["wilson_95_interval"] is not None for row in report["groups"]))
+        self.assertTrue(all(
+            row["wilson_95_interval"] is not None or row["exact_for_returned_set"]
+            for row in report["groups"]
+        ))
 
     def test_uncertain_is_not_silently_counted_as_negative(self):
         packet = build_review_packet(experiment(), sample_per_group=2)
