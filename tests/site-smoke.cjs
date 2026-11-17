@@ -1313,8 +1313,8 @@ const { chromium } = require("playwright");
     throw new Error("Persistent review state dashboard did not show accurate historical backlog");
   }
   await page.locator("[data-ew-age-filter]").selectOption("overdue_30d");
-  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
-    throw new Error("Evidence Review Workbench 30+ day review age filter failed");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 3) {
+    throw new Error("Evidence Review Workbench 30+ day review age filter failed after adding the restored batch Claim");
   }
   await page.locator("[data-ew-age-filter]").selectOption("");
   await page.locator("[data-ew-state-filter]").selectOption("needs_more_evidence");
