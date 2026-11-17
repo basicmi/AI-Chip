@@ -263,13 +263,15 @@
       " · First observed in a best-effort Actions cache; eviction or changed Claim IDs can reset age. " +
       "These are operational review states, never verified facts.";
     const list = $("[data-ew-historical-list]");
+    const retainedClaims = new Map((agingData.aging_backlog || []).map(item =>
+      [item.claim_id, item.claim_snapshot || null]));
     const historical = entries.filter(x => !x.observed_this_run);
     historical.sort((a,b) => b.days_since_first_seen - a.days_since_first_seen ||
       a.claim_id.localeCompare(b.claim_id));
     list.replaceChildren();
     for (const item of historical.slice(0, 100)) {
       const row = element("div", "ew-backlog-row");
-      const claim = item.claim_snapshot || null;
+      const claim = item.claim_snapshot || retainedClaims.get(item.claim_id) || null;
       row.append(element("strong", "", item.claim_id));
       row.append(element("span", "", item.days_since_first_seen + " days · " + item.review_state +
         " · last observed " + item.last_seen_at));
