@@ -139,22 +139,30 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
         all_incremental_ids.update(incremental_ids)
         all_incremental_seed_hits.update(incremental_seed_hits)
 
-        screening, previews = Counter(), []
-        for pid, candidate in sorted(
+        screening, previews, candidate_results = Counter(), [], []
+        for position, (pid, candidate) in enumerate(sorted(
             by_id.items(),
             key=lambda item: (item[1].get("published_at") or "", item[0]),
             reverse=True,
-        ):
+        ), start=1):
             label, signals = relevance_for(" ".join((candidate.get("title", ""), candidate.get("excerpt", ""))))
-            screening[label or "out_of_scope"] += 1
+            predicted = label or "out_of_scope"
+            screening[predicted] += 1
+            result = {
+                "paper_id": pid, "candidate_id": candidate["candidate_id"],
+                "title": candidate["title"], "url": candidate["url"],
+                "published_at": candidate.get("published_at"),
+                "excerpt": candidate.get("excerpt", ""),
+                "categories": candidate.get("categories", []),
+                "authors": candidate.get("authors", []),
+                "observed_position": position,
+                "predicted_relevance": predicted,
+                "screening_signals": signals[:8],
+                "is_known_seed": pid in eligible, "was_in_baseline": pid in baseline_ids,
+            }
+            candidate_results.append(result)
             if len(previews) < 15:
-                previews.append({
-                    "paper_id": pid, "title": candidate["title"], "url": candidate["url"],
-                    "published_at": candidate.get("published_at"),
-                    "predicted_relevance": label or "out_of_scope",
-                    "screening_signals": signals[:8], "excerpt": candidate.get("excerpt", "")[:600],
-                    "is_known_seed": pid in eligible, "was_in_baseline": pid in baseline_ids,
-                })
+                previews.append({**result, "excerpt": result["excerpt"][:600]})
 
         group_reports.append({
             "id": group["id"], "name": group["name"], "query": group["query"],
@@ -168,6 +176,9 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
             "known_seed_hits": sorted(group_seed_hits),
             "incremental_known_seed_hits": sorted(incremental_seed_hits),
             "paging": paging, "rule_screening_counts": dict(sorted(screening.items())),
+            # Full bounded result set is retained for reproducible human relevance review.
+            # observed_position follows the collector's newest-first local ordering, not a relevance rank.
+            "candidate_results": candidate_results,
             "preview": previews,
         })
 
