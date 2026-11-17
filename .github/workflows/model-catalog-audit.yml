@@ -110,6 +110,12 @@ jobs:
             --baseline "$RUNNER_TEMP/ai-chip-intelligence-retrieval-evaluation.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.md"
+      - name: Build stratified human retrieval-review sample
+        run: |
+          python3 scripts/build_intelligence_retrieval_review.py \
+            --input "$RUNNER_TEMP/ai-chip-intelligence-retrieval-experiment.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-retrieval-review-template.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-retrieval-review-template.md"
       - name: Extract structured claim candidates
         run: |
           python3 scripts/extract_intelligence_claims.py \
@@ -227,6 +233,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-diagnosis.md
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-experiment.json
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-experiment.md
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-review-template.json
+            ${{ runner.temp }}/ai-chip-intelligence-retrieval-review-template.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-triage.json

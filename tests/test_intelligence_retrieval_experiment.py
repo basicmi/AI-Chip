@@ -81,6 +81,9 @@ class RetrievalExperimentTests(unittest.TestCase):
         self.assertEqual(report["summary"]["known_seed_hits_after"], 2)
         self.assertEqual(report["summary"]["known_seed_recall_after"], 1.0)
         self.assertTrue(report["groups"][0]["paging"]["paging_cap_reached"])
+        self.assertEqual(len(report["groups"][0]["candidate_results"]), 2)
+        self.assertTrue(report["groups"][0]["candidate_results"][0]["excerpt"])
+        self.assertIn("observed_position", report["groups"][0]["candidate_results"][0])
         self.assertIsNone(report["summary"]["measured_precision"])
         self.assertIn("not available", markdown_report(report))
 

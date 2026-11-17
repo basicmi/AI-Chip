@@ -248,3 +248,45 @@ python3 scripts/run_intelligence_retrieval_experiment.py \
   --output /tmp/ai-chip-retrieval-experiment.json \
   --markdown /tmp/ai-chip-retrieval-experiment.md
 ```
+
+
+## Human relevance review for targeted retrieval (PR #121)
+
+The targeted-query experiment now retains the complete bounded result set
+(up to 50 unique papers per query group), including title, arXiv URL, abstract
+excerpt, categories, deterministic screening label and observed position.
+The position is newest-first after local date filtering; it is **not** a
+relevance rank.
+
+The weekly workflow creates
+`ai-chip-intelligence-retrieval-review-template.json` as an Actions artifact.
+It selects a deterministic simple-random sample without replacement from
+each successfully observed query group (12 papers per group by default).
+A paper selected in multiple groups appears once in the template and records
+all groups for which it was sampled. The selection seed is derived from the
+experiment and group IDs, so the same run is reproducible.
+
+Reviewers should fill `adjudication.label` with one of:
+`direct_ai_compute`, `adjacent_ai_systems`, `out_of_scope`, or
+`uncertain`, and record a reviewer identifier. The deterministic
+`predicted_relevance` field is context only and must not be copied into the
+adjudicated label without checking the title and abstract. Direct and adjacent
+both count as relevant for retrieval precision; uncertain labels remain
+unresolved and are never silently counted as negative.
+
+After annotation, evaluate the edited template:
+
+```bash
+python3 scripts/evaluate_intelligence_retrieval_review.py \
+  --input reviewed-retrieval-template.json \
+  --output retrieval-review-evaluation.json \
+  --markdown retrieval-review-evaluation.md
+```
+
+Precision is reported separately for each query group. It is only reported
+when every sampled paper for that group has a resolved label and reviewer.
+For a simple-random sample smaller than the returned population, the report
+shows a Wilson 95% interval; when the entire returned set was sampled, the
+measured proportion is exact for that bounded set. Partially reviewed groups
+show descriptive progress only, not a precision estimate. These results
+describe one bounded run and do not establish corpus-wide retrieval quality.
