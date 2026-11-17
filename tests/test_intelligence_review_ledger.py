@@ -106,6 +106,18 @@ class ReviewLedgerValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "timezone-aware"):
             load_decisions(ledger(), None, datetime(2026, 11, 17))
 
+    def test_cli_rejects_null_ledger_file(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "ledger.json"
+            path.write_text("null", encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(ROOT / "scripts" / "validate_intelligence_review_ledger.py"),
+                 "--ledger", str(path)],
+                cwd=ROOT, capture_output=True, text=True, check=False
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("not null", result.stderr)
+
     def test_cli_validates_repository_ledger(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "ledger.json"

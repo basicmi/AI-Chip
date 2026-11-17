@@ -63,7 +63,7 @@ def load_decisions(ledger, allowed_ids=None, now=None):
             raise ValueError("human decision references unknown Claim ID: " + claim_id)
         if claim_id in result:
             raise ValueError("duplicate human decision Claim ID: " + claim_id)
-        if decision["decision"] not in DECISIONS:
+        if not isinstance(decision["decision"], str) or decision["decision"] not in DECISIONS:
             raise ValueError("invalid human decision outcome for " + claim_id)
         reviewer = decision["reviewer"]
         if not isinstance(reviewer, str) or not reviewer.strip():
@@ -92,6 +92,8 @@ def main():
     args = parser.parse_args()
     try:
         ledger = json.loads(args.ledger.read_text(encoding="utf-8"))
+        if ledger is None:
+            raise ValueError("ledger file must contain a schema 1.0 object, not null")
         allowed_ids = None
         if args.review_state:
             state = json.loads(args.review_state.read_text(encoding="utf-8"))
