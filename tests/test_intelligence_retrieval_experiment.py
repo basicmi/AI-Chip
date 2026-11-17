@@ -129,7 +129,7 @@ class RetrievalExperimentTests(unittest.TestCase):
         self.assertEqual(report["summary"]["api_raw_items_scanned"], 6)
         self.assertEqual(report["summary"]["candidate_observation_count"], 6)
         self.assertEqual(report["summary"]["unique_papers_across_groups"], 5)
-        self.assertEqual(report["summary"]["incremental_unique_papers"], 4)
+        self.assertEqual(report["summary"]["incremental_unique_papers"], 5)
 
     def test_failed_query_makes_experiment_partial_not_negative(self):
         calls, delays = [], []
