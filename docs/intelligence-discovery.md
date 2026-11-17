@@ -346,3 +346,31 @@ All restored records remain unverified extraction candidates. Priority scores
 are work-routing signals, not truth confidence; review decisions are not
 factual verification. No formal company, product, model-support or benchmark
 registry is modified.
+
+
+## Bounded human Claim review batches (PR #126)
+
+The weekly workflow now emits a deterministic first-pass review batch from the
+persistent Claim review state. By default, each batch contains up to 25 Claims
+with state `pending`, ordered by the existing triage priority score (high to
+low), then first-seen age (oldest first), then Claim ID. Claims already marked
+`needs_more_evidence` are placed in a separate follow-up queue so they do not
+repeatedly displace never-reviewed Claims.
+
+Each item includes the original extracted statement, source URL and excerpt,
+claim/evidence classifications, scope, value/unit, qualifiers, age, priority
+factors and risk flags. The batch also emits a JSON decision template with
+exactly the same top-level and per-decision fields as
+`data/intelligence-review-decisions.json`; blank fields must be completed by
+a human before the ledger will accept them.
+
+The template is not imported automatically. Human decisions still require a
+reviewer, a non-future timestamp and at least 30 characters of rationale.
+`accepted_for_evidence_attachment` only requests preparation of a separate
+evidence proposal; it does not verify the Claim or authorize a formal registry
+write. Priority remains a work-routing signal, never truth confidence.
+
+The batch ID is deterministic for the selected Claim IDs. After decisions are
+committed to the human ledger, the next discovery run removes handled Claims
+from the first-pass queue and advances to the next pending set. The default
+batch size is 25 and can be changed in the workflow invocation (1–100).
