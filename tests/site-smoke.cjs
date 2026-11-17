@@ -1264,6 +1264,18 @@ const { chromium } = require("playwright");
      review_state:"pending",alert_level:"overdue_30d",review_is_factual_verification:false,
      source_url:"https://example.org/old-claim"}
   ];
+  const historicalBatchClaim = {
+    ...reviewClaims[0],
+    claim_id:"claim-test-old",candidate_id:"candidate-test-old",
+    statement:"Historical restored Claim: Example accelerator reaches 160 GB HBM per GPU.",
+    evidence_quote:"The archived source lists 160 GB HBM per accelerator.",
+    source:{url:"https://example.org/historical-source",publisher:"Historical Vendor",
+      published_at:"2026-10-01",evidence_scope:"official_vendor_feed_metadata_and_excerpt"}
+  };
+  const historicalBacklogRow = {
+    ...historyFixture[3],claim_snapshot:historicalBatchClaim,
+    priority:{score:65,score_factors:{high_impact_topic:18},risk_flags:["vendor_primary_not_independent_corroboration"]}
+  };
   const historyJson = {
     schema_version:"1.0",generated_at:"2026-11-14T00:00:00Z",
     observation_state:"cache_persisted",state_is_approval:false,
@@ -1271,19 +1283,38 @@ const { chromium } = require("playwright");
       unknown_first_seen_if_cache_reset:true,
       review_states:{pending:2,needs_more_evidence:1,rejected:1,accepted_for_evidence_attachment:0}},
     claim_aging:historyFixture,
-    aging_backlog:[historyFixture[0],historyFixture[1],historyFixture[3]],
+    aging_backlog:[historyFixture[0],historyFixture[1],historicalBacklogRow],
     queue:[]
   };
   await page.locator("[data-ew-aging]").setInputFiles(artifact("ai-chip-intelligence-review-state.json",historyJson));
   await page.waitForFunction(() => document.querySelector("[data-ew-aging-count='tracked']")?.textContent === "4");
+  const reviewBatchFixture = {
+    schema_version:"1.0",generated_at:historyJson.generated_at,status:"ready",
+    batch_id:"claim-review-smoke",batch_size_limit:25,
+    summary:{pending_claims:2,selected_for_this_batch:1},
+    policy:{decisions_written:false,factual_verification_performed:false,priority_is_truth_confidence:false},
+    items:[{claim_id:"claim-test-old",review_state:"pending",first_seen_at:"2026-09-23T00:00:00Z",
+      days_since_first_seen:52,priority_score:65,priority_score_is_truth_confidence:false,
+      priority_score_factors:{high_impact_topic:18},risk_flags:["vendor_primary_not_independent_corroboration"],
+      claim:historicalBatchClaim}],
+    decision_template:{schema_version:"1.0",decisions:[{
+      claim_id:"claim-test-old",decision:"",reviewer:"",decided_at:"",notes:""
+    }]}
+  };
+  await page.locator("[data-ew-batch]").setInputFiles(artifact("ai-chip-intelligence-claim-review-batch.json",reviewBatchFixture));
+  await page.waitForFunction(() => document.querySelector("[data-ew-stat='claims']")?.textContent === "4");
+  if (!(await page.locator("[data-ew-results]").textContent()).includes("Historical restored Claim") ||
+      !(await page.locator("[data-ew-historical-list]").textContent()).includes("Historical restored Claim")) {
+    throw new Error("Evidence Workbench did not load restored historical Claim details from the bounded batch");
+  }
   if (await page.locator("[data-ew-aging-count='fourteen']").textContent() !== "3" ||
       await page.locator("[data-ew-aging-count='thirty']").textContent() !== "2" ||
       !(await page.locator("[data-ew-historical-list]").textContent()).includes("claim-test-old")) {
     throw new Error("Persistent review state dashboard did not show accurate historical backlog");
   }
   await page.locator("[data-ew-age-filter]").selectOption("overdue_30d");
-  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 2) {
-    throw new Error("Evidence Review Workbench 30+ day review age filter failed");
+  if (Number(await page.locator("[data-ew-result-count]").textContent()) !== 3) {
+    throw new Error("Evidence Review Workbench 30+ day review age filter failed after adding the restored batch Claim");
   }
   await page.locator("[data-ew-age-filter]").selectOption("");
   await page.locator("[data-ew-state-filter]").selectOption("needs_more_evidence");
@@ -1307,13 +1338,37 @@ const { chromium } = require("playwright");
   }
   // PR #96 review-decision and Approval Manifest Builder exercise.
   await page.locator("[data-ew-clear-filters]").click();
+  await page.locator("[data-ew-ledger]").setInputFiles(artifact("intelligence-review-decisions.json",{
+    schema_version:"1.0",decisions:[]
+  }));
   await page.locator("[data-ew-review-claim='claim-test-a']").click();
   await page.locator("[data-ew-decision]").selectOption("accepted_for_evidence_attachment");
+  await page.locator("[data-ew-reviewer]").fill("ci-synthetic-fixture-not-a-real-reviewer");
+  await page.locator("[data-ew-reviewed]").fill("2026-11-14");
   await page.locator("[data-ew-decision-note]").fill("CI synthetic fixture: manual review would be required for a real Claim and exact source.");
   await page.locator("[data-ew-record-decision]").click();
-  if (!(await page.locator("[data-ew-decision-status]").textContent()).includes("Local decision recorded")) {
+  if (!(await page.locator("[data-ew-decision-status]").textContent()).includes("Decision recorded locally")) {
     throw new Error("Workbench did not record an explicit local review decision");
   }
+  const [ledgerDownload] = await Promise.all([
+    page.waitForEvent("download"),
+    page.locator("[data-ew-export-decisions]").click()
+  ]);
+  if (ledgerDownload.suggestedFilename() !== "intelligence-review-decisions.json") {
+    throw new Error("Workbench downloaded an unexpected decision ledger name");
+  }
+  const ledgerPath = require("path").join(require("os").tmpdir(), "ai-chip-review-ledger-smoke.json");
+  await ledgerDownload.saveAs(ledgerPath);
+  const exportedLedger = JSON.parse(require("fs").readFileSync(ledgerPath, "utf8"));
+  const ledgerDecision = exportedLedger.decisions.find(item => item.claim_id === "claim-test-a");
+  if (Object.keys(exportedLedger).sort().join(",") !== "decisions,schema_version" ||
+      Object.keys(ledgerDecision || {}).sort().join(",") !== "claim_id,decided_at,decision,notes,reviewer" ||
+      ledgerDecision.decision !== "accepted_for_evidence_attachment" ||
+      ledgerDecision.reviewer !== "ci-synthetic-fixture-not-a-real-reviewer" ||
+      ledgerDecision.notes.length < 30 || !Number.isFinite(Date.parse(ledgerDecision.decided_at))) {
+    throw new Error("Workbench did not export a tracker-compatible human decision ledger");
+  }
+  require("fs").unlinkSync(ledgerPath);
   const profileFixture = {
     schema_version:"1.0",
     companies:[{id:"test-company",name:"Test Company",evidence:[],claims:[{

@@ -1,16 +1,24 @@
 # Evidence Review Workbench — reviewer decisions and manifest export (PR #96)
 
 At /evidence-review/, users load local intelligence Claim JSON and optional
-Evidence Graph JSON from a weekly GitHub Actions artifact.
+Evidence Graph, Triage, Review-State and bounded Claim Review Batch JSON from
+the same weekly GitHub Actions artifact. All files are read locally in the
+browser; no upload or automatic approval occurs.
 
 ## Local review decisions
 
-Select "Review this claim". Record a local outcome: needs more evidence,
-reject, or accept for evidence attachment review. At least 30 characters of
-review notes are required. Export a local decision log if useful.
+Select "Review this claim". Record an outcome: needs more evidence, reject,
+or accept for evidence attachment review. Enter the real reviewer identity,
+review date and at least 30 characters of rationale. Load the current
+`data/intelligence-review-decisions.json` from master before exporting; the
+workbench validates it and merges new decisions without discarding prior ones.
 
-The log remains a session-local draft, never an authoritative status change.
-Browser refresh clears it. No approval is inferred from the extracted source.
+The exported file uses the exact schema consumed by
+`track_intelligence_review_state.py`. It remains a local file until a human
+commits the updated ledger to master. The next weekly Discovery run consumes
+that committed ledger. Browser refresh clears unexported decisions. No
+approval or factual verification is inferred from the extracted source.
+Decision dates are exported as timezone-aware ISO-8601 timestamps.
 
 ## Human-reviewed Approval Manifest
 
@@ -89,3 +97,35 @@ write occurs. The manually gated Evidence-to-PR approval is unchanged.
 The browser smoke test uses synthetic Claim/Graph/Triage/Review-State
 snapshots, covers old-but-not-observed backlog, aging counters, review-state
 and age filters, and rejects a fabricated \`state_is_approval: true\` file.
+
+
+## Bounded historical Claim review batches (PR #127)
+
+The weekly artifact now includes
+`ai-chip-intelligence-claim-review-batch.json`. Load it alongside the Claim
+report and the Review-State JSON from the **same run**. The workbench checks
+the batch timestamp, selected Claim IDs, unresolved state, source URL,
+retained Claim snapshot and blank decision-template rows before merging the
+selected Claims into the review cards.
+
+This makes recovered historical Claims reviewable even when they no longer
+appear in the current discovery's Claim extraction report. The persistent
+backlog panel also displays retained historical statements and source excerpts
+when present. The batch remains bounded (default 25); the workbench does not
+silently load the entire historical backlog into the card list.
+
+## Exporting the formal human decision ledger (PR #127)
+
+The workbench requires the current master decision ledger before export.
+Existing entries are preserved; duplicate Claim IDs are rejected. Every new
+decision requires a reviewer identity, a valid non-future review date and at
+least 30 characters of rationale. The exported JSON has exactly the
+`schema_version` and `decisions` fields, with each decision containing
+exactly `claim_id`, `decision`, `reviewer`, `decided_at` and `notes`.
+
+The export is still local. Commit the reviewed file as
+`data/intelligence-review-decisions.json`; no browser action writes to GitHub.
+The next Discovery run will update operational review states from this ledger.
+`accepted_for_evidence_attachment` remains only a request to prepare a
+separate, explicitly reviewed Evidence-to-PR manifest. It is not a verified
+technical claim or permission to update a formal registry.

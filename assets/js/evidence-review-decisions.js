@@ -6,7 +6,7 @@
   const ui = {
     selected:$("[data-ew-selected]"), decision:$("[data-ew-decision]"),
     decisionNote:$("[data-ew-decision-note]"), decisionStatus:$("[data-ew-decision-status]"),
-    exportDecisions:$("[data-ew-export-decisions]"), profiles:$("[data-ew-profiles]"),
+    exportDecisions:$("[data-ew-export-decisions]"), ledger:$("[data-ew-ledger]"), profiles:$("[data-ew-profiles]"),
     company:$("[data-ew-company]"), existing:$("[data-ew-existing]"),
     approvalId:$("[data-ew-approval-id]"), evidenceId:$("[data-ew-evidence-id]"),
     reviewer:$("[data-ew-reviewer]"), reviewed:$("[data-ew-reviewed]"),
@@ -19,8 +19,9 @@
   };
   const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
   const choices = new Set(["needs_more_evidence", "rejected", "accepted_for_evidence_attachment"]);
-  let selected = null, profiles = null;
+  let selected = null, profiles = null, ledgerLoaded = false;
   const decisions = new Map();
+  let existingDecisions = new Map();
   const html = (tag, label, value) => {
     const el = document.createElement(tag);
     el.textContent = label;
@@ -31,6 +32,41 @@
     if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
     const parsed = new Date(value + "T00:00:00Z");
     return Number.isFinite(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
+  };
+  const dateIsNotFuture = value => validDate(value) &&
+    new Date(value + "T00:00:00").getTime() <= Date.now();
+  const localDateAtNoonIso = value => {
+    const [year, month, day] = value.split("-").map(Number);
+    return new Date(year, month - 1, day, 12, 0, 0).toISOString();
+  };
+  const validateLedger = data => {
+    const keys = value => value && typeof value === "object" && !Array.isArray(value) ?
+      Object.keys(value).sort().join(",") : "";
+    if (keys(data) !== "decisions,schema_version" || data.schema_version !== "1.0" ||
+        !Array.isArray(data.decisions) || data.decisions.length > 10000) {
+      throw new Error("Expected the current schema 1.0 decision ledger.");
+    }
+    const result = new Map();
+    for (const item of data.decisions) {
+      if (keys(item) !== "claim_id,decided_at,decision,notes,reviewer" ||
+          typeof item.claim_id !== "string" || !item.claim_id.trim() ||
+          result.has(item.claim_id) || !choices.has(item.decision) ||
+          typeof item.reviewer !== "string" || !item.reviewer.trim() ||
+          typeof item.notes !== "string" || item.notes.trim().length < 30 ||
+          typeof item.decided_at !== "string" ||
+          !/(Z|[+-][0-9]{2}:[0-9]{2})$/.test(item.decided_at) ||
+          !Number.isFinite(Date.parse(item.decided_at)) || Date.parse(item.decided_at) > Date.now()) {
+        throw new Error("Decision ledger contains an invalid, duplicate or future-dated human decision.");
+      }
+      result.set(item.claim_id, {
+        claim_id:item.claim_id, decision:item.decision, reviewer:item.reviewer,
+        decided_at:new Date(item.decided_at).toISOString(), notes:item.notes
+      });
+    }
+    return result;
+  };
+  const updateDecisionExport = () => {
+    ui.exportDecisions.disabled = !ledgerLoaded || decisions.size === 0;
   };
   const canonical = value => {
     if (Array.isArray(value)) return "[" + value.map(canonical).join(",") + "]";
@@ -99,7 +135,7 @@
     ui.decisionNote.disabled = true;
     ui.selected.textContent = "No Claim selected. Use “Review this claim” in a card above.";
     ui.decisionStatus.textContent = "No review decision recorded. Decisions remain in this browser session.";
-    ui.exportDecisions.disabled = true;
+    updateDecisionExport();
     clearApprovalConsent();
     updateAvailability();
   };
@@ -126,19 +162,36 @@
   ui.decisionNote.addEventListener("input", clearApprovalConsent);
   const saveDecision = () => {
     if (!selected || !choices.has(ui.decision.value)) return;
+    const reviewer = ui.reviewer.value.trim();
+    const reviewDate = ui.reviewed.value;
     const notes = ui.decisionNote.value.trim();
+    if (!reviewer) {
+      ui.decisionStatus.textContent = "Enter the real reviewer identity before recording a decision.";
+      return;
+    }
+    if (!dateIsNotFuture(reviewDate)) {
+      ui.decisionStatus.textContent = "Enter a valid review date that is not in the future.";
+      return;
+    }
     if (notes.length < 30) {
       ui.decisionStatus.textContent = "Please write at least 30 characters of review notes.";
       return;
     }
+    if (!ledgerLoaded) {
+      ui.decisionStatus.textContent = "Load the current master decision ledger before recording decisions for export.";
+      return;
+    }
+    if (existingDecisions.has(selected.claim_id)) {
+      ui.decisionStatus.textContent = "This Claim already has a committed decision. Edit the existing ledger entry deliberately instead of creating a duplicate.";
+      return;
+    }
     decisions.set(selected.claim_id, {
       claim_id:selected.claim_id, decision:ui.decision.value,
-      notes, original_source_url:selected.source.url,
-      decision_kind:"local_reviewer_draft_not_formal_approval"
+      reviewer, decided_at:localDateAtNoonIso(reviewDate), notes
     });
-    ui.exportDecisions.disabled = false;
-    ui.decisionStatus.textContent = "Local decision recorded for " + selected.claim_id +
-      ". Decisions can be exported but are not formal approvals.";
+    updateDecisionExport();
+    ui.decisionStatus.textContent = "Decision recorded locally for " + selected.claim_id +
+      ". Export the merged ledger and commit it to master; no workflow or registry has been changed.";
     clearApprovalConsent();
     updateAvailability();
   };
@@ -149,10 +202,39 @@
   ui.decisionStatus.before(record);
   record.addEventListener("click", saveDecision);
   ui.exportDecisions.addEventListener("click", () => {
-    saveJson("ai-chip-local-review-decisions.json", {
-      schema_version:"1.0", status:"local_draft_only",
-      decisions:[...decisions.values()]
+    if (!ledgerLoaded || decisions.size === 0) {
+      ui.decisionStatus.textContent = "Load the current ledger and record at least one valid human decision first.";
+      return;
+    }
+    const merged = [...existingDecisions.values(), ...decisions.values()]
+      .sort((a,b) => a.claim_id.localeCompare(b.claim_id));
+    saveJson("intelligence-review-decisions.json", {
+      schema_version:"1.0", decisions:merged
     });
+    ui.decisionStatus.textContent = "Valid schema 1.0 ledger exported locally. Commit data/intelligence-review-decisions.json to master; the next discovery run will consume it. No facts or registries were changed.";
+  });
+  ui.ledger.addEventListener("change", async () => {
+    ledgerLoaded = false;
+    existingDecisions = new Map();
+    decisions.clear();
+    updateDecisionExport();
+    try {
+      const file = ui.ledger.files[0];
+      if (!file || file.size === 0 || file.size > 2 * 1024 * 1024) {
+        throw new Error("Choose the current, non-empty decision ledger (maximum 2 MiB).");
+      }
+      const ledger = JSON.parse(await file.text());
+      existingDecisions = validateLedger(ledger);
+      ledgerLoaded = true;
+      ui.decisionStatus.textContent = "Current ledger loaded: " + existingDecisions.size +
+        " existing decisions. New decisions will be merged without overwriting them.";
+      updateDecisionExport();
+    } catch (error) {
+      ui.decisionStatus.textContent = "Cannot load decision ledger: " + error.message;
+      ledgerLoaded = false;
+      existingDecisions = new Map();
+      updateDecisionExport();
+    }
   });
   ui.profiles.addEventListener("change", async () => {
     profiles = null;
@@ -197,7 +279,7 @@
           ui.evidenceNotes.value.trim().length === 0 || !ui.title.value.trim() || !ui.publisher.value.trim()) {
         throw new Error("Provide a real reviewer, publisher, title and meaningful review/evidence notes.");
       }
-      if (!validDate(ui.reviewed.value) || !validDate(ui.checked.value) ||
+      if (!dateIsNotFuture(ui.reviewed.value) || !dateIsNotFuture(ui.checked.value) ||
           (ui.published.value && !validDate(ui.published.value))) {
         throw new Error("Review, checked and publication dates must be valid ISO dates.");
       }
