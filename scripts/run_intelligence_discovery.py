@@ -51,6 +51,8 @@ def parse_time(value):
 RETRY_HTTP_STATUS = frozenset({429, 500, 502, 503, 504})
 MAX_RESPONSE_BYTES = 8 * 1024 * 1024
 MAX_ATTEMPTS = 3
+MAX_RETRY_AFTER_SECONDS = 300
+ARXIV_RATE_LIMIT_FALLBACK_SECONDS = 30.0
 
 def failure_category(error):
     """Classify operational errors without including URLs, credentials or bodies."""
@@ -77,6 +79,35 @@ def retryable(error):
         return error.code in RETRY_HTTP_STATUS
     return isinstance(error, (TimeoutError, socket.timeout, urllib.error.URLError, ConnectionError))
 
+def retry_after_seconds(error, *, now=None):
+    """Parse an HTTP Retry-After delta or HTTP-date without trusting response bodies."""
+    if not isinstance(error, urllib.error.HTTPError):
+        return None
+    headers = getattr(error, "headers", None) or {}
+    value = headers.get("Retry-After") if hasattr(headers, "get") else None
+    if value is None:
+        return None
+    value = str(value).strip()
+    if not value:
+        return None
+    try:
+        delay = float(value)
+    except ValueError:
+        try:
+            retry_at = email.utils.parsedate_to_datetime(value)
+        except (TypeError, ValueError, OverflowError):
+            return None
+        if retry_at.tzinfo is None:
+            retry_at = retry_at.replace(tzinfo=timezone.utc)
+        reference = now or datetime.now(timezone.utc)
+        if reference.utcoffset() is None:
+            raise ValueError("now must be timezone-aware")
+        delay = (retry_at.astimezone(timezone.utc) -
+                 reference.astimezone(timezone.utc)).total_seconds()
+    if delay != delay or delay == float("inf") or delay == float("-inf"):
+        return None
+    return max(0.0, delay)
+
 def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep, backoff_seconds=0.2):
     if not isinstance(attempts, int) or not 1 <= attempts <= 3:
         raise ValueError("attempts must be between 1 and 3")
@@ -89,8 +120,19 @@ def bounded_retry(call, *, attempts=MAX_ATTEMPTS, sleep=time.sleep, backoff_seco
                 ValueError, RuntimeError, ET.ParseError, OSError) as error:
             if attempt == attempts or not retryable(error):
                 raise
-            # Local bounded backoff; honor neither untrusted Retry-After nor URL contents.
-            sleep(backoff_seconds * (2 ** (attempt - 1)))
+            server_delay = retry_after_seconds(error)
+            if server_delay is not None:
+                # Do not retry earlier than the server requested. If the wait is
+                # beyond our bounded run budget, fail closed instead of hammering.
+                if server_delay > MAX_RETRY_AFTER_SECONDS:
+                    raise
+                delay = server_delay
+            elif isinstance(error, urllib.error.HTTPError) and error.code == 429:
+                delay = max(ARXIV_RATE_LIMIT_FALLBACK_SECONDS,
+                            backoff_seconds * (2 ** (attempt - 1)))
+            else:
+                delay = backoff_seconds * (2 ** (attempt - 1))
+            sleep(delay)
     raise RuntimeError("unreachable")
 
 def fetch_bytes(url, *, timeout=12, accept="application/atom+xml, application/rss+xml, application/xml, text/xml, application/json"):
@@ -542,6 +584,7 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
     if not isinstance(source_health, dict):
         raise ValueError("invalid persistent source_health state")
     arxiv_sources_seen = 0
+    arxiv_cooldown_until = 0.0
     for source in registry["sources"]:
         if not source.get("active"):
             continue
@@ -554,7 +597,37 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
             raise ValueError("invalid consecutive source failure count")
         kind = source["kind"]
         if kind == "arxiv_api":
-            if arxiv_sources_seen:
+            cooldown_remaining = max(0.0, arxiv_cooldown_until - clock())
+            if cooldown_remaining > MAX_RETRY_AFTER_SECONDS:
+                # A long server cooldown applies to the whole arXiv API, not
+                # just the shard that received the 429. Defer remaining shards.
+                category = "rate_limit_cooldown_deferred"
+                failures += 1
+                tier = "critical" if failures >= 3 else "warning" if failures == 2 else "transient"
+                source_health[source_id] = {
+                    "consecutive_failures": failures,
+                    "last_success_at": previous.get("last_success_at"),
+                    "last_failure_at": now_text,
+                    "last_failure_category": category,
+                }
+                errors.append({"source_id": source_id, "error": "RateLimitCooldownDeferred",
+                               "failure_category": category, "failure_tier": tier})
+                request_metrics = {
+                    "request_count": 0, "failed_request_count": 0, "response_bytes": 0,
+                    "total_elapsed_ms": 0.0, "max_request_ms": 0.0,
+                    "last_http_error_status": None, "last_request_failure_category": None,
+                }
+                source_results.append({
+                    "source_id": source_id, "source_name": source["name"],
+                    "kind": kind, "status": "unavailable", "recent_item_count": 0,
+                    "failure_category": category, "failure_tier": tier,
+                    "consecutive_failures": failures, "attempt_count": 0,
+                    "request_diagnostics": request_diagnostics_snapshot(request_metrics),
+                })
+                continue
+            if cooldown_remaining > 0:
+                retry_sleep(cooldown_remaining)
+            elif arxiv_sources_seen:
                 retry_sleep(3)
             arxiv_sources_seen += 1
         attempts = 0
@@ -600,6 +673,11 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
             })
         except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
                 ValueError, RuntimeError, ET.ParseError, OSError) as error:
+            if kind == "arxiv_api" and isinstance(error, urllib.error.HTTPError) and error.code == 429:
+                delay = retry_after_seconds(error)
+                if delay is None:
+                    delay = ARXIV_RATE_LIMIT_FALLBACK_SECONDS
+                arxiv_cooldown_until = max(arxiv_cooldown_until, clock() + delay)
             category = failure_category(error)
             failures += 1
             tier = "critical" if failures >= 3 else "warning" if failures == 2 else "transient"
