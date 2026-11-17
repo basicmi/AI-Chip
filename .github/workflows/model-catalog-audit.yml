@@ -150,6 +150,14 @@ jobs:
             --ledger "data/intelligence-review-decisions.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md"
+      - name: Build bounded human Claim review batch
+        run: |
+          python3 scripts/build_intelligence_claim_review_batch.py \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --batch-size 25 \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.md" \
+            --decision-template "$RUNNER_TEMP/ai-chip-intelligence-claim-review-decisions-template.json"
       - name: Audit end-to-end stage consistency and source health
         run: |
           python3 scripts/audit_intelligence_run.py \
@@ -206,6 +214,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-review-aging.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-review-backlog-hydration.md" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -242,6 +253,9 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
             ${{ runner.temp }}/ai-chip-intelligence-review-state.json
+            ${{ runner.temp }}/ai-chip-intelligence-claim-review-batch.json
+            ${{ runner.temp }}/ai-chip-intelligence-claim-review-batch.md
+            ${{ runner.temp }}/ai-chip-intelligence-claim-review-decisions-template.json
             ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
             ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.json
             ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.md
