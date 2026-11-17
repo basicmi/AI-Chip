@@ -673,11 +673,12 @@ def run_discovery(registry, catalog, *, now=None, days=45, release_fetcher=fetch
             })
         except (urllib.error.URLError, TimeoutError, socket.timeout, ConnectionError,
                 ValueError, RuntimeError, ET.ParseError, OSError) as error:
-            if kind == "arxiv_api" and isinstance(error, urllib.error.HTTPError) and error.code == 429:
+            if kind == "arxiv_api" and isinstance(error, urllib.error.HTTPError):
                 delay = retry_after_seconds(error)
-                if delay is None:
+                if delay is None and error.code == 429:
                     delay = ARXIV_RATE_LIMIT_FALLBACK_SECONDS
-                arxiv_cooldown_until = max(arxiv_cooldown_until, clock() + delay)
+                if delay is not None:
+                    arxiv_cooldown_until = max(arxiv_cooldown_until, clock() + delay)
             category = failure_category(error)
             failures += 1
             tier = "critical" if failures >= 3 else "warning" if failures == 2 else "transient"
