@@ -27,7 +27,8 @@ not a durable audit database.
 
 Optional committed \`data/intelligence-review-decisions.json\` is the
 human-controlled ledger. Each item explicitly specifies an extracted Claim
-ID, reviewer identity, date, decision and at least 30 characters of reasoning.
+ID, reviewer identity, timezone-aware ISO-8601 decision timestamp, decision
+and at least 30 characters of reasoning.
 Allowed review outcomes are: needs_more_evidence, rejected, and
 accepted_for_evidence_attachment.
 
@@ -55,3 +56,35 @@ The output summary and JSON artifact are added to the weekly Actions run.
 No automatic commits, notifications, external messages or data PRs are
 created. All individual Claim statuses remain unverified for factual
 content, regardless of the operational review queue state.
+
+
+## Ledger validation (PR #128)
+
+The repository CI validates the committed decision ledger before merge, not
+only when the next weekly discovery happens to consume it. The shared
+`scripts/validate_intelligence_review_ledger.py` validator is also used by
+`track_intelligence_review_state.py`, so CI and the scheduled pipeline enforce
+the same rules.
+
+The validator rejects:
+- Unknown schema fields, unsupported versions or malformed decision rows;
+- Duplicate, malformed or (when a review-state file is supplied) unknown
+  Claim IDs;
+- Unsupported outcomes, empty reviewer identities or short review notes;
+- Invalid, timezone-naive or future-dated timestamps.
+
+Run the standalone check:
+
+    python3 scripts/validate_intelligence_review_ledger.py \
+      --ledger data/intelligence-review-decisions.json
+
+To additionally verify every decision against a persisted Claim-state cache:
+
+    python3 scripts/validate_intelligence_review_ledger.py \
+      --ledger data/intelligence-review-decisions.json \
+      --review-state /path/to/ai-chip-intelligence-review-state.json
+
+A passing ledger validation checks record structure and workflow consistency;
+it does not authenticate the reviewer, inspect the original source or verify
+the technical truth of a Claim. Human GitHub review and the separate
+Evidence-to-PR approval process remain required.
