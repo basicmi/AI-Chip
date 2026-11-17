@@ -45,6 +45,9 @@ def validate_config(config):
         limit = group.get("max_results", 50)
         if type(limit) is not int or not 1 <= limit <= 50:
             raise ValueError(prefix + ".max_results must be 1..50")
+        pages = group.get("max_pages", 1)
+        if type(pages) is not int or not 1 <= pages <= 2:
+            raise ValueError(prefix + ".max_pages must be 1..2")
     return groups
 
 
@@ -110,7 +113,8 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
         source = {
             "id": "experiment-" + group["id"], "name": group["name"],
             "kind": "arxiv_api", "query": group["query"],
-            "max_results": group.get("max_results", 50), "max_pages": 1,
+            "max_results": group.get("max_results", 50),
+            "max_pages": group.get("max_pages", 1),
             "category": "retrieval-experiment",
         }
         try:
@@ -220,7 +224,7 @@ def run_experiment(config, discovery, baseline, *, fetcher=fetch_text, sleep=tim
         },
         "groups": group_reports,
         "interpretation_limits": [
-            "This is a one-page, one-run query experiment, not a statistically controlled or exhaustive search.",
+            "This is a bounded, one-run query experiment (at most two pages per group), not a statistically controlled or exhaustive search.",
             "Known-seed recall uses a curated 16-paper calibration set and is not corpus-wide recall.",
             "New-result relevance precision is not measured because experiment results are not independently human-labelled.",
             "Rule-screening labels are heuristic triage only and must not be treated as verified relevance.",

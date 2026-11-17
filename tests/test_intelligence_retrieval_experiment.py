@@ -56,6 +56,9 @@ class RetrievalExperimentTests(unittest.TestCase):
         bad = {**CONFIG, "groups": [{**CONFIG["groups"][0], "query": "https://example.com"}]}
         with self.assertRaisesRegex(ValueError, "not a URL"):
             validate_config(bad)
+        bad = {**CONFIG, "groups": [{**CONFIG["groups"][0], "max_pages": 3}]}
+        with self.assertRaisesRegex(ValueError, "max_pages must be 1..2"):
+            validate_config(bad)
 
     def test_incremental_hits_dedup_overlap_and_courtesy_delay(self):
         calls, delays = [], []
@@ -86,6 +89,47 @@ class RetrievalExperimentTests(unittest.TestCase):
         self.assertIn("observed_position", report["groups"][0]["candidate_results"][0])
         self.assertIsNone(report["summary"]["measured_precision"])
         self.assertIn("not available", markdown_report(report))
+
+    def test_second_page_adds_incremental_candidates_and_is_counted(self):
+        config = {
+            **CONFIG,
+            "groups": [
+                {**CONFIG["groups"][0], "max_pages": 2},
+                CONFIG["groups"][1],
+            ],
+        }
+        calls, delays = [], []
+
+        def fetch(url):
+            params = parse_qs(urlsplit(url).query)
+            query = params["search_query"][0]
+            start = int(params["start"][0])
+            calls.append((query, start))
+            if "GPU" in query:
+                return atom(
+                    ["2611.12346v1", "2611.12347v1"]
+                    if start == 0 else ["2611.12349v1", "2611.12350v1"]
+                )
+            return atom(["2611.12346v2", "2611.12348v1"])
+
+        report = run_experiment(config, DISCOVERY, BASELINE, fetcher=fetch, sleep=delays.append)
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(calls, [
+            ("cat:cs.DC AND all:GPU", 0),
+            ("cat:cs.DC AND all:GPU", 2),
+            ("cat:cs.AI AND all:agent", 0),
+        ])
+        self.assertEqual(delays, [3, 3])
+        first = report["groups"][0]
+        self.assertEqual(first["paging"]["pages_fetched"], 2)
+        self.assertEqual(first["paging"]["raw_items_scanned"], 4)
+        self.assertTrue(first["paging"]["paging_cap_reached"])
+        self.assertEqual(first["candidate_observation_count"], 4)
+        self.assertEqual(report["summary"]["request_count"], 3)
+        self.assertEqual(report["summary"]["api_raw_items_scanned"], 6)
+        self.assertEqual(report["summary"]["candidate_observation_count"], 6)
+        self.assertEqual(report["summary"]["unique_papers_across_groups"], 5)
+        self.assertEqual(report["summary"]["incremental_unique_papers"], 4)
 
     def test_failed_query_makes_experiment_partial_not_negative(self):
         calls, delays = [], []
