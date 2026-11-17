@@ -4,7 +4,7 @@
   if (!root) return;
   const $ = selector => root.querySelector(selector);
   const ui = {
-    claims: $("[data-ew-claims]"), graph: $("[data-ew-graph]"), triage: $("[data-ew-triage]"), aging: $("[data-ew-aging]"),
+    claims: $("[data-ew-claims]"), batch: $("[data-ew-batch]"), graph: $("[data-ew-graph]"), triage: $("[data-ew-triage]"), aging: $("[data-ew-aging]"),
     status: $("[data-ew-status]"), provenance: $("[data-ew-provenance]"),
     search: $("[data-ew-search]"), topic: $("[data-ew-topic]"),
     publisher: $("[data-ew-publisher]"), relationship: $("[data-ew-relationship]"),
@@ -12,7 +12,7 @@
     results: $("[data-ew-results]"), empty: $("[data-ew-empty]"),
     count: $("[data-ew-result-count]"), summary: $("[data-ew-summary]")
   };
-  let claimData = null, graphData = null, triageData = null, agingData = null;
+  let claimData = null, graphData = null, triageData = null, agingData = null, batchData = null;
   const MAX_BYTES = 12 * 1024 * 1024;
   const element = (tag, cls = "", text) => {
     const node = document.createElement(tag);
@@ -36,8 +36,10 @@
     graphData = null;
     triageData = null;
     agingData = null;
+    batchData = null;
     root.dispatchEvent(new CustomEvent("ew-clear-review"));
     ui.claims.value = "";
+    ui.batch.value = "";
     ui.graph.value = "";
     ui.triage.value = "";
     ui.aging.value = "";
@@ -169,6 +171,82 @@
     }
     return data;
   };
+  const validateBatch = (data, aging) => {
+    if (!aging) throw new Error("Load the persistent Review-State JSON from the same run before loading a Claim review batch.");
+    if (!data || data.schema_version !== "1.0" ||
+        !["ready", "partial", "empty", "follow_up_only", "unavailable"].includes(data.status) ||
+        typeof data.batch_id !== "string" || !Number.isSafeInteger(data.batch_size_limit) ||
+        data.batch_size_limit < 1 || data.batch_size_limit > 100 ||
+        !Array.isArray(data.items) || data.items.length > data.batch_size_limit ||
+        data.summary?.selected_for_this_batch !== data.items.length ||
+        data.summary?.pending_claims < data.items.length ||
+        data.policy?.decisions_written !== false ||
+        data.policy?.factual_verification_performed !== false ||
+        data.policy?.priority_is_truth_confidence !== false ||
+        data.generated_at !== aging.generated_at) {
+      throw new Error("Claim review batch has an incompatible schema, policy or run timestamp.");
+    }
+    const backlog = new Map(aging.aging_backlog.map(row => [row.claim_id, row]));
+    const agingRows = new Map(aging.claim_aging.map(row => [row.claim_id, row]));
+    const seen = new Set();
+    for (const item of data.items) {
+      const claim = item?.claim;
+      const row = backlog.get(item?.claim_id);
+      const age = agingRows.get(item?.claim_id);
+      if (!item || typeof item.claim_id !== "string" || seen.has(item.claim_id) ||
+          item.review_state !== "pending" || item.priority_score_is_truth_confidence !== false ||
+          !Number.isFinite(item.priority_score) || !Number.isSafeInteger(item.days_since_first_seen) ||
+          item.days_since_first_seen < 0 || !claim || claim.claim_id !== item.claim_id ||
+          claim.review_status !== "unverified_candidate" || typeof claim.statement !== "string" ||
+          !claim.statement.trim() || !safeUrl(claim.source?.url) ||
+          !row || row.review_state !== "pending" || !row.claim_snapshot ||
+          row.claim_snapshot.claim_id !== claim.claim_id ||
+          row.claim_snapshot.statement !== claim.statement ||
+          row.claim_snapshot.source?.url !== claim.source?.url ||
+          !age || age.review_state !== "pending") {
+        throw new Error("Claim review batch contains an invalid, stale, handled or mismatched Claim.");
+      }
+      seen.add(item.claim_id);
+    }
+    const template = data.decision_template;
+    const keys = value => value && typeof value === "object" && !Array.isArray(value) ?
+      Object.keys(value).sort().join(",") : "";
+    if (!template || keys(template) !== "decisions,schema_version" ||
+        template.schema_version !== "1.0" || !Array.isArray(template.decisions) ||
+        template.decisions.length !== data.items.length) {
+      throw new Error("Claim review batch decision template is malformed.");
+    }
+    const templateIds = new Set();
+    for (const decision of template.decisions) {
+      if (keys(decision) !== "claim_id,decided_at,decision,notes,reviewer" ||
+          !seen.has(decision.claim_id) || templateIds.has(decision.claim_id) ||
+          decision.decision !== "" || decision.reviewer !== "" ||
+          decision.decided_at !== "" || decision.notes !== "") {
+        throw new Error("Claim review batch decision template must contain one blank row per selected Claim.");
+      }
+      templateIds.add(decision.claim_id);
+    }
+    return data;
+  };
+  const mergeBatchClaims = (claims, batch) => {
+    if (!batch) return claims;
+    const combined = [...claims.claims];
+    const byId = new Map(combined.map(claim => [claim.claim_id, claim]));
+    for (const item of batch.items) {
+      const existing = byId.get(item.claim_id);
+      if (existing) {
+        if (existing.statement !== item.claim.statement ||
+            existing.candidate_id !== item.claim.candidate_id ||
+            existing.source?.url !== item.claim.source?.url) {
+          throw new Error("Batch Claim conflicts with the current Claim report: " + item.claim_id);
+        }
+      } else {
+        combined.push(item.claim);
+        byId.set(item.claim_id, item.claim);
+      }
+    }
+    return {...claims, claim_count:combined.length, claims:combined};
+  };
   const renderBacklog = () => {
     const panel = $("[data-ew-aging-panel]");
     panel.hidden = !agingData;
@@ -191,10 +269,13 @@
     list.replaceChildren();
     for (const item of historical.slice(0, 100)) {
       const row = element("div", "ew-backlog-row");
+      const claim = item.claim_snapshot || null;
       row.append(element("strong", "", item.claim_id));
       row.append(element("span", "", item.days_since_first_seen + " days · " + item.review_state +
         " · last observed " + item.last_seen_at));
-      const url = safeUrl(item.source_url);
+      if (claim?.statement) row.append(element("p", "", claim.statement));
+      if (claim?.evidence_quote) row.append(element("p", "compat-limitations", "Source excerpt: " + claim.evidence_quote));
+      const url = safeUrl(claim?.source?.url || item.source_url);
       if (url) {
         const link = element("a", "", "Original source ↗");
         link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
@@ -205,7 +286,7 @@
     if (!historical.length) list.append(element("p", "", "No historical claims absent from this run."));
     $("[data-ew-historical-summary]").textContent =
       "Showing " + Math.min(100, historical.length) + " / " + historical.length +
-      " previously observed records (historical details require their original Claim report).";
+      " previously observed records. Recovered Claim text is shown when retained; load the bounded batch to review its selected Claims below.";
   };
   const readJson = async file => {
     if (!file || file.size === 0 || file.size > MAX_BYTES) {
@@ -317,9 +398,14 @@
       return !query || haystack.includes(query);
     });
     const priorities = new Map();
-    if (triageData) {
-      for (const group of triageData.queue) {
-        for (const id of group.related_claim_ids) priorities.set(id, group.score);
+    if (triageData || batchData) {
+      if (triageData) {
+        for (const group of triageData.queue) {
+          for (const id of group.related_claim_ids) priorities.set(id, group.score);
+        }
+      }
+      if (batchData) {
+        for (const item of batchData.items) priorities.set(item.claim_id, item.priority_score);
       }
       matches.sort((a,b) => (priorities.get(b.claim_id) ?? -1) - (priorities.get(a.claim_id) ?? -1) ||
         a.claim_id.localeCompare(b.claim_id));
@@ -351,20 +437,22 @@
       const graph = ui.graph.files.length ? validateGraph(await readJson(ui.graph.files[0]), claims) : null;
       const triage = ui.triage.files.length ? validateTriage(await readJson(ui.triage.files[0]), claims) : null;
       const aging = ui.aging.files.length ? validateAging(await readJson(ui.aging.files[0]), claims) : null;
-      claimData = claims;
+      const batch = ui.batch.files.length ? validateBatch(await readJson(ui.batch.files[0]), aging) : null;
+      claimData = mergeBatchClaims(claims, batch);
       graphData = graph;
       triageData = triage;
       agingData = aging;
+      batchData = batch;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
-      options(ui.topic, claims.claims.map(item => item.topic), "topics");
-      options(ui.publisher, claims.claims.map(item => item.source?.publisher || item.source?.source_name || "Unknown source"), "publishers");
+      options(ui.topic, claimData.claims.map(item => item.topic), "topics");
+      options(ui.publisher, claimData.claims.map(item => item.source?.publisher || item.source?.source_name || "Unknown source"), "publishers");
       [ui.search, ui.topic, ui.publisher, ui.relationship].forEach(node => { node.disabled = false; });
       [ui.ageFilter, ui.stateFilter].forEach(node => { node.disabled = !aging; node.value = ""; });
       renderBacklog();
       ui.search.value = "";
       ui.relationship.value = "";
-      const sources = new Set(claims.claims.map(item => safeUrl(item.source.url)).filter(Boolean));
-      $("[data-ew-stat='claims']").textContent = String(claims.claims.length);
+      const sources = new Set(claimData.claims.map(item => safeUrl(item.source.url)).filter(Boolean));
+      $("[data-ew-stat='claims']").textContent = String(claimData.claims.length);
       $("[data-ew-stat='sources']").textContent = String(sources.size);
       $("[data-ew-stat='duplicates']").textContent = graph ? String(graph.duplicate_clusters.length) : "—";
       $("[data-ew-stat='conflicts']").textContent = graph ?
@@ -374,6 +462,7 @@
           "No graph loaded: duplicate/conflict filters are unavailable") +
         " · " + (triage ? "Sorted by review urgency, not truth confidence" : "Default source order") +
         " · " + (aging ? "Persistent review snapshot loaded (not factual verification)" : "No aging snapshot loaded") +
+        " · " + (batch ? batch.items.length + " bounded batch Claims merged" : "No bounded batch loaded") +
         " · All candidates stay unverified. Files remain in this browser session.";
       ui.provenance.hidden = false;
       status("Artifacts loaded locally. Nothing was uploaded or approved.");
@@ -383,6 +472,7 @@
       graphData = null;
       triageData = null;
       agingData = null;
+      batchData = null;
       $("[data-ew-aging-panel]").hidden = true;
       root.dispatchEvent(new CustomEvent("ew-clear-review"));
       ui.results.replaceChildren();
@@ -396,6 +486,7 @@
     }
   };
   ui.claims.addEventListener("change", load);
+  ui.batch.addEventListener("change", load);
   ui.graph.addEventListener("change", load);
   ui.triage.addEventListener("change", load);
   ui.aging.addEventListener("change", load);

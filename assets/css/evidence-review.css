@@ -38,3 +38,7 @@
 .evidence-workbench .ew-backlog-row span { color: var(--muted, #687386); }
 .evidence-workbench .ew-backlog-row a { text-decoration: underline; }
 @media(max-width: 720px) { .evidence-workbench .ew-backlog-row { grid-template-columns: 1fr; gap: .25rem; } }
+
+.evidence-workbench .ew-backlog-row p { grid-column: 1 / -1; margin: .15rem 0; }
+.evidence-workbench .ew-backlog-row .compat-limitations { color: var(--muted, #687386); }
+.evidence-workbench [data-ew-ledger] { margin-top: .25rem; }

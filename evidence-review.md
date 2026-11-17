@@ -22,12 +22,19 @@ description: Local-only review of unverified intelligence claim and evidence gra
       <div><p class="eyebrow">01 / LOAD</p><h2>Open a review artifact</h2></div>
       <button class="text-button" type="button" data-ew-reset>Clear files</button>
     </div>
-    <p>Download the ai-chip-intelligence-discovery artifact. Choose its Claim JSON and optional Evidence Graph JSON from the <strong>same run</strong>. The workbench does not fetch data automatically.</p>
+    <p>Download the ai-chip-intelligence-discovery artifact. Choose its Claim JSON, optional bounded Claim review batch and optional Evidence Graph / Triage / Review-State JSON from the <strong>same run</strong>. The batch adds recovered historical Claims that may be absent from the current discovery. The workbench does not fetch data automatically.</p>
+    <p>Before exporting formal review decisions, also load the current <a href="https://github.com/basicmi/AI-Chip/blob/master/data/intelligence-review-decisions.json" target="_blank" rel="noopener noreferrer">decision ledger from master</a>. This preserves earlier decisions when you export the updated ledger.</p>
     <div class="workload-filters">
-      <label>Claim extraction JSON (required)
+      <label>Claim extraction JSON (required, same run)
         <input type="file" accept=".json,application/json" data-ew-claims>
       </label>
-      <label>Evidence graph JSON (optional)
+      <label>Bounded Claim review batch JSON (optional, same run)
+        <input type="file" accept=".json,application/json" data-ew-batch>
+      </label>
+      <label>Current decision ledger JSON (required before exporting decisions)
+        <input type="file" accept=".json,application/json" data-ew-ledger>
+      </label>
+      <label>Evidence graph JSON (optional, same run)
         <input type="file" accept=".json,application/json" data-ew-graph>
       </label>
       <label>Priority triage JSON (optional, same run)
@@ -102,7 +109,7 @@ description: Local-only review of unverified intelligence claim and evidence gra
       <div class="compat-stat"><span>Unresolved 30+ days</span><strong data-ew-aging-count="thirty">—</strong></div>
     </div>
     <h3>Not observed in the current discovery</h3>
-    <p>These historical IDs remain in the cached backlog even though the current Claim JSON no longer contains their full extracted statements. They cannot be reviewed or approved from this page without retrieving the original report.</p>
+    <p>These historical IDs remain in the cached backlog even when the current Claim JSON no longer contains them. Restored Claim statements and source excerpts are shown when available. Load the bounded Claim review batch from the same run to open its selected historical Claims as review cards. Nothing is approved automatically.</p>
     <div data-ew-historical-list class="ew-historical-list"></div>
     <p data-ew-historical-summary></p>
   </section>
@@ -116,11 +123,11 @@ description: Local-only review of unverified intelligence claim and evidence gra
   <section class="compat-filter-panel" data-ew-decision-panel>
     <div class="compat-filter-heading">
       <div><p class="eyebrow">04 / HUMAN DECISION</p><h2>Review selected Claim</h2></div>
-      <span class="status-pill">Local draft only</span>
+      <span class="status-pill">Local until committed</span>
     </div>
     <p data-ew-selected>No Claim selected. Use “Review this claim” in a card above.</p>
     <div class="workload-filters">
-      <label>Decision (local)
+      <label>Decision
         <select data-ew-decision disabled>
           <option value="">Choose review outcome</option>
           <option value="needs_more_evidence">Needs more evidence</option>
@@ -128,12 +135,18 @@ description: Local-only review of unverified intelligence claim and evidence gra
           <option value="accepted_for_evidence_attachment">Accept for evidence attachment review</option>
         </select>
       </label>
-      <label>Review note
-        <textarea data-ew-decision-note rows="3" placeholder="Explain why and what was checked…" disabled></textarea>
+      <label>Reviewer identity
+        <input data-ew-reviewer type="text" placeholder="Real maintainer identity">
+      </label>
+      <label>Review date
+        <input data-ew-reviewed type="date">
+      </label>
+      <label>Review note (minimum 30 characters)
+        <textarea data-ew-decision-note rows="3" placeholder="Explain the original source, exact product/configuration, scope and what was checked…" disabled></textarea>
       </label>
     </div>
-    <p data-ew-decision-status role="status">No review decision recorded. Decisions remain in this browser session.</p>
-    <button class="text-button" type="button" data-ew-export-decisions disabled>Download local decision log</button>
+    <p data-ew-decision-status role="status">Load the current decision ledger, then record a review. Decisions remain local until the exported ledger is committed.</p>
+    <button class="text-button" type="button" data-ew-export-decisions disabled>Download updated decision ledger JSON</button>
   </section>
 
   <section class="compat-filter-panel" data-ew-approval-panel>
@@ -157,12 +170,6 @@ description: Local-only review of unverified intelligence claim and evidence gra
       </label>
       <label>New evidence ID
         <input data-ew-evidence-id type="text" placeholder="vendor-product-spec-2026">
-      </label>
-      <label>Reviewer (real identity)
-        <input data-ew-reviewer type="text" placeholder="Maintainer handle">
-      </label>
-      <label>Review date
-        <input data-ew-reviewed type="date">
       </label>
       <label>Evidence title (verified from original page)
         <input data-ew-title type="text" placeholder="Official datasheet / announcement">
