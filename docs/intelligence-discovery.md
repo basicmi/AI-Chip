@@ -214,3 +214,37 @@ python3 scripts/diagnose_intelligence_retrieval.py \
 Candidate terms are review proposals only. The diagnostic does not change
 source queries automatically. Broadening OR clauses without measuring result
 quality can increase page-cap competition and reduce precision.
+
+## Isolated targeted retrieval experiment (PR #119)
+
+The weekly workflow now runs four bounded, one-page arXiv query experiments
+after the baseline Recall@K and miss diagnosis:
+
+1. GPU communication and interconnect.
+2. LLM inference energy and KV-cache.
+3. Agentic GPU capacity and short-lived jobs.
+4. Physical-AI runtime and world-action models.
+
+Each query is limited to 50 results and is kept outside the production source
+registry. The runner waits three seconds between experiment queries, uses the
+existing Atom parser and bounded retry policy, and applies the same discovery
+lookback window. The baseline discovery and recall evaluation must be
+scorable before any experimental requests are made.
+
+The report measures incremental unique papers, overlap with the baseline,
+cross-group duplicates, known-seed hits and page-cap saturation. It also
+includes an explicitly unvalidated rule-based relevance screen for manual
+triage. **It does not report measured precision**: that requires independent
+human labels for the returned candidates. Experimental results do not enter
+the production review queue or change active discovery queries.
+
+Run locally:
+
+```bash
+python3 scripts/run_intelligence_retrieval_experiment.py \
+  --config data/intelligence-retrieval-experiments.json \
+  --discovery /tmp/ai-chip-intelligence-discovery.json \
+  --baseline /tmp/ai-chip-intelligence-retrieval-evaluation.json \
+  --output /tmp/ai-chip-retrieval-experiment.json \
+  --markdown /tmp/ai-chip-retrieval-experiment.md
+```
