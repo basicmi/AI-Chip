@@ -57,7 +57,8 @@ def update_state(triage, claims, previous=None, ledger=None, *, now=None, retent
         raise ValueError("expected triage schema 1.0")
     if not isinstance(claims,dict) or claims.get("schema_version")!="1.0" or not isinstance(claims.get("claims"),list):
         raise ValueError("expected Claim Extraction schema 1.0")
-    ids={c.get("claim_id") for c in claims["claims"]}
+    claim_by_id={c.get("claim_id"):c for c in claims["claims"]}
+    ids=set(claim_by_id)
     if len(ids)!=len(claims["claims"]) or any(not isinstance(cid,str) or not cid for cid in ids):
         raise ValueError("Claim IDs must be unique and non-empty")
     if any(c.get("review_status")!="unverified_candidate" for c in claims["claims"]):
@@ -80,7 +81,13 @@ def update_state(triage, claims, previous=None, ledger=None, *, now=None, retent
     priority_by_id={}
     for group in triage["queue"]:
         for cid in group["related_claim_ids"]:
-            priority_by_id[cid]={"score":group.get("score",0),"source_url":group.get("source_url"),"topic":group.get("topic")}
+            priority_by_id[cid]={
+                "score":group.get("score",0),"source_url":group.get("source_url"),"topic":group.get("topic"),
+                "score_factors":group.get("score_factors",{}),"risk_flags":group.get("risk_flags",[]),
+                "related_claim_ids":group.get("related_claim_ids",[]),
+                "duplicate_collapsed_count":group.get("duplicate_collapsed_count",0),
+                "score_is_truth_confidence":False,
+            }
     for cid in ids:
         row=items.get(cid)
         if row is None:
@@ -90,10 +97,16 @@ def update_state(triage, claims, previous=None, ledger=None, *, now=None, retent
             first=parse_utc(row.get("first_seen_at"))
             last=parse_utc(row.get("last_seen_at"))
             if first>now or last>now or first>last: raise ValueError("persisted claim timestamps are inconsistent")
-            row={"first_seen_at":iso(first),"last_seen_at":iso(now)}
+            row=copy.deepcopy(row)
+            row["first_seen_at"]=iso(first)
+            row["last_seen_at"]=iso(now)
+        # Retain the full source-grounded Claim payload across change-only
+        # discovery runs. This is still an unverified candidate, not approval.
+        row["claim_snapshot"]=copy.deepcopy(claim_by_id[cid])
         meta=priority_by_id.get(cid)
         if meta:
-            row.update(meta)
+            row.update({key:meta[key] for key in ("score","source_url","topic")})
+            row["priority"]=copy.deepcopy(meta)
         items[cid]=row
     # Keep historical IDs long enough to survive temporary source-feed gaps;
     # do not assert that absent Claims have been reviewed or rejected.
@@ -118,6 +131,7 @@ def update_state(triage, claims, previous=None, ledger=None, *, now=None, retent
             "review_state":state,"alert_level":level,
             "decision_recorded_at":decision["decided_at"] if decision else None,
             "decision_reviewer":decision["reviewer"] if decision else None,
+            "claim_payload_available":isinstance(items[cid].get("claim_snapshot"),dict),
             "review_is_factual_verification":False})
     lookup={x["claim_id"]:x for x in aging}
     presentation=[]
@@ -131,16 +145,26 @@ def update_state(triage, claims, previous=None, ledger=None, *, now=None, retent
     counts={key:sum(x["review_state"]==key for x in aging) for key in sorted(REVIEW_STATUSES)}
     alert_counts={level:sum(x["alert_level"]==level for x in aging) for level in
                   ("overdue_7d","overdue_14d","overdue_30d","follow_up_needed")}
+    unresolved=[]
+    for row in aging:
+        if row["review_state"] not in ("pending","needs_more_evidence"):
+            continue
+        enriched=dict(row)
+        enriched["claim_snapshot"]=copy.deepcopy(items[row["claim_id"]].get("claim_snapshot"))
+        enriched["priority"]=copy.deepcopy(items[row["claim_id"]].get("priority"))
+        unresolved.append(enriched)
+    unresolved.sort(key=lambda x:(-x["days_since_first_seen"],-(x["last_priority_score"] or 0),x["claim_id"]))
+    payloads_available=sum(isinstance(items[cid].get("claim_snapshot"),dict) for cid in items)
     output={"schema_version":"1.0","generated_at":iso(now),"observation_state":"cache_persisted",
         "state_is_approval":False,"summary":{"tracked_current_claims":len(ids),"tracked_backlog_claims":len(items),
         "backlog_not_observed_this_run":len(items)-len(ids),"review_states":counts,
-        "aging_alerts":alert_counts,"unknown_first_seen_if_cache_reset":True},
-        "claim_aging":aging,"queue":presentation,
-        "aging_backlog":sorted(
-            [row for row in aging if row["review_state"] in ("pending","needs_more_evidence")],
-            key=lambda x:(-x["days_since_first_seen"],-(x["last_priority_score"] or 0),x["claim_id"])),
-        "policy":"First-seen time is when this cache first observed a Claim, not its publication date. Missing cache resets age. Only committed explicit review decisions change review state. None of these decisions verifies factual claims."}
+        "aging_alerts":alert_counts,"claim_payloads_available":payloads_available,
+        "claim_payloads_missing":len(items)-payloads_available,"unknown_first_seen_if_cache_reset":True},
+        "claim_aging":aging,"queue":presentation,"aging_backlog":unresolved,
+        "policy":"First-seen time is when this cache first observed a Claim, not its publication date. Missing cache resets age. Claim snapshots preserve source text but remain unverified. Only committed explicit review decisions change review state; no decision verifies factual claims."}
     state={"schema_version":"1.0","last_run_at":iso(now),"items":items}
+    if previous.get("backlog_hydration"):
+        state["backlog_hydration"]=copy.deepcopy(previous["backlog_hydration"])
     return output,state
 
 def markdown(report):
@@ -153,8 +177,21 @@ def markdown(report):
            f"- Overdue 7/14/30 days: {s['aging_alerts']['overdue_7d']} / {s['aging_alerts']['overdue_14d']} / {s['aging_alerts']['overdue_30d']}",
            "- **Age is based on first discovery in the persistent cache, not paper publication.**",
            "- Decisions do not establish independent factual verification.","","## Unhandled high-priority items",""]
+    lines.append(f"- Claim payloads available: {s.get('claim_payloads_available',0)} / {s['tracked_backlog_claims']}")
+    lines.append("")
     for item in report["aging_backlog"][:40]:
-        lines.append(f"- {item['claim_id']} · wait {item['days_since_first_seen']}d · latest score {item.get('last_priority_score')} · alert {item['alert_level']} · observed this run {item['observed_this_run']}")
+        claim=item.get("claim_snapshot") or {}
+        statement=" ".join(str(claim.get("statement") or "[Claim text not recovered]").split())
+        source=claim.get("source") or {}
+        quote=" ".join(str(claim.get("evidence_quote") or "").split())
+        lines.append(f"### {item['claim_id']} · priority {item.get('last_priority_score')} · wait {item['days_since_first_seen']}d")
+        lines.append(f"- Topic/type: {claim.get('topic') or item.get('topic') or 'unknown'} / {claim.get('claim_type') or 'unknown'}")
+        lines.append(f"- Claim candidate: {statement}")
+        lines.append(f"- Source: {source.get('url') or item.get('source_url') or 'unavailable'}")
+        if quote:
+            lines.append(f"- Source excerpt: {quote}")
+        lines.append(f"- Review state: {item['review_state']} · alert: {item['alert_level']} · observed this run: {item['observed_this_run']}")
+        lines.append("")
     return "\n".join(lines)+"\n"
 
 def main():

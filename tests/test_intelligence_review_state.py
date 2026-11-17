@@ -99,6 +99,19 @@ class ReviewStateTests(unittest.TestCase):
         result,_=update_state(empty_triage,empty_claims,new,ledger,now=later)
         self.assertEqual(result["summary"]["review_states"]["rejected"],1)
         self.assertEqual(result["summary"]["review_states"]["pending"],2)
+    def test_full_claim_payload_survives_change_only_discovery_gap(self):
+        d,c,g=fixtures()
+        triage=__import__("triage_intelligence_claims").build_queue(d,c,g,now=NOW)
+        first,state=update_state(triage,c,now=NOW)
+        self.assertEqual(first["summary"]["claim_payloads_available"],3)
+        self.assertEqual(state["items"]["a"]["claim_snapshot"]["statement"],c["claims"][0]["statement"])
+        empty_triage={"schema_version":"1.0","queue":[],"summary":{"input_claims":0,"automatically_verified":0}}
+        empty_claims={"schema_version":"1.0","claims":[]}
+        later,state2=update_state(empty_triage,empty_claims,state,now=NOW+timedelta(days=16))
+        self.assertEqual(later["summary"]["claim_payloads_available"],3)
+        self.assertEqual(state2["items"]["a"]["claim_snapshot"]["statement"],c["claims"][0]["statement"])
+        self.assertTrue(any(x["claim_id"]=="a" and x["claim_snapshot"]["statement"]==c["claims"][0]["statement"] for x in later["aging_backlog"]))
+
     def test_claim_promotion_disallowed(self):
         d,c,g=fixtures()
         triage=__import__("triage_intelligence_claims").build_queue(d,c,g,now=NOW)
