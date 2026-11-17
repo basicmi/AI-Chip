@@ -12,8 +12,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from validate_intelligence_review_ledger import load_decisions
+
 REVIEW_STATUSES={"pending","needs_more_evidence","rejected","accepted_for_evidence_attachment"}
-DECISION_STATUSES=REVIEW_STATUSES-{"pending"}
 ALERT_THRESHOLDS=(7,14,30)
 
 def parse_utc(value):
@@ -26,28 +27,6 @@ def parse_utc(value):
 
 def iso(value):
     return value.astimezone(timezone.utc).isoformat().replace("+00:00","Z")
-
-def load_decisions(ledger, allowed_ids, now):
-    if ledger is None: return {}
-    if not isinstance(ledger,dict) or set(ledger)!={"schema_version","decisions"} or ledger.get("schema_version")!="1.0" or not isinstance(ledger.get("decisions"),list):
-        raise ValueError("human review decision ledger must be schema 1.0")
-    result={}
-    for decision in ledger["decisions"]:
-        if not isinstance(decision,dict) or set(decision)!={"claim_id","decision","reviewer","decided_at","notes"}:
-            raise ValueError("human decision must have exactly claim_id, decision, reviewer, decided_at and notes")
-        cid=decision["claim_id"]
-        if not isinstance(cid,str) or cid not in allowed_ids or cid in result:
-            raise ValueError("human decision references unknown or duplicate Claim ID")
-        if decision["decision"] not in DECISION_STATUSES:
-            raise ValueError("invalid human decision outcome")
-        if not isinstance(decision["reviewer"],str) or not decision["reviewer"].strip():
-            raise ValueError("human reviewer identity required")
-        if not isinstance(decision["notes"],str) or len(decision["notes"].strip())<30:
-            raise ValueError("human review notes must have at least 30 characters")
-        decided=parse_utc(decision["decided_at"])
-        if decided>now: raise ValueError("human decision cannot be future-dated")
-        result[cid]={**decision,"decided_at":iso(decided)}
-    return result
 
 def update_state(triage, claims, previous=None, ledger=None, *, now=None, retention_days=180):
     now=now or datetime.now(timezone.utc)
