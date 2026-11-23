@@ -48,3 +48,30 @@ score is produced.
 Older snapshots that were never downloaded, expired artifacts, and failed
 weekly runs are absent from trend comparisons. Percentage trends are based on
 the mix of extracted Claims in each run, not a fixed cohort.
+
+
+## Optional reviewer-reported semantic evaluation overlay (PR #133)
+
+The dashboard may optionally load a semantic evaluation JSON produced *after
+human review* by `scripts/review_intelligence_semantic_support.py --evaluate`.
+The evaluation is not part of the weekly generated evidence snapshot, because
+the weekly workflow has no access to completed human judgments.
+
+The JSON must match an imported snapshot's `semantic_batch_id`. The page
+checks exact selected-batch counts, reviewer-label totals, agreement
+arithmetic, unique Claim IDs, disagreement bookkeeping, and the explicit
+zero-auto-verification flag. Invalid or cross-batch files are rejected and
+their overlay is cleared.
+
+When a matching evaluation is available, the dashboard displays its raw
+reviewer agreement with the number of double-reviewed Claims and outstanding
+adjudication cases. The value is prominently labeled
+**reviewer-reported / not authenticated**. It is a measure of consistency
+within a small priority-selected review batch, not a claim of accuracy,
+independent replication, or a representative population statistic.
+
+The local file is never uploaded or committed. In particular, importing
+an evaluation does not change the immutable weekly snapshot, the Claim
+Decision Ledger, the evidence graph, or any production chip/benchmark data.
+A malicious or fabricated file can still imitate a structurally valid
+evaluation; the page cannot authenticate reviewer identity.
