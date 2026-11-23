@@ -1,0 +1,63 @@
+---
+layout: default
+title: Evidence Quality Dashboard
+permalink: /evidence-quality/
+description: Local-only trends for source provenance, quote traceability, and human-review workload.
+---
+
+<section class="page-heading">
+  <p class="eyebrow">INTELLIGENCE · EVIDENCE QUALITY · REVIEW COVERAGE</p>
+  <h1>Evidence Quality Dashboard</h1>
+  <p>Compare completed discovery reports for quote traceability, provenance coverage and review backlog. Source completeness is not factual accuracy; queued human reviews are not completed judgments.</p>
+  <div class="page-meta">
+    <span>Input <strong>local Actions JSON files</strong></span>
+    <a href="https://github.com/basicmi/AI-Chip/actions/workflows/model-catalog-audit.yml" target="_blank" rel="noopener noreferrer">Weekly discovery artifacts ↗</a>
+    <a href="https://github.com/basicmi/AI-Chip/blob/master/docs/intelligence-evidence-dashboard.md">Methodology ↗</a>
+  </div>
+</section>
+<section class="evidence-workbench intelligence-operations" data-quality-dashboard>
+  <section class="compat-filter-panel">
+    <div class="compat-filter-heading">
+      <div><p class="eyebrow">01 / IMPORT</p><h2>Load evidence-quality snapshots</h2></div>
+      <button class="text-button" type="button" data-eq-clear>Clear</button>
+    </div>
+    <p>Select one or more <code>ai-chip-intelligence-evidence-dashboard.json</code> files from completed weekly runs. All validation and rendering happens locally.</p>
+    <label>Evidence quality JSON snapshots
+      <input type="file" accept=".json,application/json" multiple data-eq-files>
+    </label>
+    <p class="compat-load-state" role="status" aria-live="polite" data-eq-status>No snapshots loaded.</p>
+  </section>
+  <div class="workload-stat-grid">
+    <div class="compat-stat"><span>Latest quote traceability</span><strong data-eq-stat="quotes">—</strong></div>
+    <div class="compat-stat"><span>Latest provenance completeness</span><strong data-eq-stat="provenance">—</strong></div>
+    <div class="compat-stat"><span>Latest unresolved Claims</span><strong data-eq-stat="unresolved">—</strong></div>
+    <div class="compat-stat"><span>Runs imported</span><strong data-eq-stat="runs">—</strong></div>
+  </div>
+  <section class="compat-filter-panel" data-eq-history-panel hidden>
+    <div class="compat-filter-heading">
+      <div><p class="eyebrow">02 / HISTORY</p><h2>Evidence hygiene and review queue trends</h2></div>
+      <span class="status-pill">Imported runs only</span>
+    </div>
+    <p>Missing human evaluations are displayed as N/A, never 0% or 100%. Percentages use the current run's Claim count as denominator. Backlog is persistent across runs.</p>
+    <div class="ops-table-scroll">
+      <table class="ops-table">
+        <thead><tr><th>Run UTC</th><th>Claims</th><th>Quote traceability</th><th>Provenance</th><th>Metadata mismatches</th><th>Source documents</th><th>Backlog</th><th>Unresolved</th><th>Payload coverage</th><th>Lineage queued</th><th>Semantic queued</th><th>Human agreement</th></tr></thead>
+        <tbody data-eq-history></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="compat-filter-panel" data-eq-detail-panel hidden>
+    <div class="compat-filter-heading"><div><p class="eyebrow">03 / CURRENT RUN</p><h2>Source evidence vs human judgments</h2></div></div>
+    <label>Inspect run
+      <select data-eq-select></select>
+    </label>
+    <div data-eq-details class="compat-limitations"></div>
+  </section>
+</section>
+<section class="compat-method-note">
+  <div><p class="eyebrow">INTERPRETATION BOUNDARIES</p><h2>No composite trust score</h2></div>
+  <p>A quote found in an excerpt does not imply semantic entailment. Different source URLs and publishers do not establish experimental independence. Blank human templates do not count as completed reviews; human agreement is unavailable until actual reviewed evaluations are supplied. Accepted-for-evidence-attachment is a workflow state, not factual verification. No database changes result from this dashboard.</p>
+</section>
+<link rel="stylesheet" href="{{ '/assets/css/evidence-review.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/intelligence-operations.css' | relative_url }}">
+<script src="{{ '/assets/js/intelligence-evidence-quality.js' | relative_url }}" defer></script>

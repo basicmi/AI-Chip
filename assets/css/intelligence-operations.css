@@ -11,3 +11,9 @@
 /* Author display rules must not override the hidden state after invalid file input. */
 .intelligence-operations [data-ops-history-panel][hidden],
 .intelligence-operations [data-ops-sources-panel][hidden] { display: none !important; }
+
+/* The common compat-filter-panel display rules override UA [hidden] styles.
+   Never expose stale evidence-quality data after a failed local file import. */
+.intelligence-operations [data-eq-history-panel][hidden],
+.intelligence-operations [data-eq-detail-panel][hidden] { display: none !important; }
+.intelligence-operations [data-eq-status].is-error { color: #b3483d; font-weight: 650; }

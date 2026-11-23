@@ -196,6 +196,15 @@ jobs:
             --discovery-cache-present "$DISCOVERY_CACHE_PRESENT" \
             --review-cache-present "$REVIEW_CACHE_PRESENT" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-operations.json"
+      - name: Build evidence quality dashboard snapshot
+        run: |
+          python3 scripts/build_intelligence_evidence_quality_snapshot.py \
+            --quality "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.json" \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --lineage "$RUNNER_TEMP/ai-chip-intelligence-source-lineage-review-template.json" \
+            --semantic "$RUNNER_TEMP/ai-chip-intelligence-semantic-review-template.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md"
       - name: Commit cached checkpoints after successful audit
         run: |
           test -s "$RUNNER_TEMP/intelligence-state-staged.json"
@@ -248,6 +257,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload discovery report
         if: always()
         uses: actions/upload-artifact@v4
@@ -274,6 +286,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.md
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-dashboard.json
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-dashboard.md
             ${{ runner.temp }}/ai-chip-intelligence-source-lineage-review-template.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md

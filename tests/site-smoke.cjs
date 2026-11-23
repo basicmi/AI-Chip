@@ -132,6 +132,57 @@ const { chromium } = require("playwright");
     throw Error("Intelligence Operations reset failed");
   }
 
+  // Evidence-quality dashboard: current-run hygiene is not human factual verification.
+  await page.goto(base + "/evidence-quality/", {waitUntil:"networkidle"});
+  const eqSnapshot=(stamp,claims,passed)=>({
+    schema_version:"1.0",generated_at:stamp,read_only:true,factual_verification_performed:false,
+    metrics:{
+      current_claims:claims,
+      quote_traceability:{passed,total:claims,rate:Math.round(passed/claims*10000)/10000},
+      provenance_completeness:{passed:claims,total:claims,rate:1},
+      source_metadata_mismatches:0,
+      distinct_source_documents:2,distinct_publishers:2,
+      review_backlog:14,unresolved_claims:12,pending_claims:9,needs_more_evidence:3,
+      accepted_for_evidence_attachment:1,rejected_claims:1,
+      payload_coverage:{passed:12,total:14,rate:Math.round(12/14*10000)/10000},
+      multi_document_exact_duplicate_clusters:2,lineage_clusters_queued:1,
+      semantic_claims_queued:2,
+      semantic_double_review_rate:null,semantic_reviewer_agreement:null,
+      lineage_human_review_coverage:null,independently_verified_claims:null
+    },
+    availability:{semantic_evaluation:"not_provided",lineage_evaluation:"not_provided",
+      independent_verification:"not_measured"}
+  });
+  const eqOld=eqSnapshot("2026-11-02T00:00:00Z",4,2);
+  const eqNew=eqSnapshot("2026-11-09T00:00:00Z",4,3);
+  const eqFile=(name,data)=>({name,mimeType:"application/json",buffer:Buffer.from(JSON.stringify(data))});
+  await page.locator("[data-eq-files]").setInputFiles([eqFile("eq-new.json",eqNew),eqFile("eq-old.json",eqOld)]);
+  await page.waitForFunction(()=>document.querySelector("[data-eq-stat='runs']")?.textContent==="2");
+  if(await page.locator("[data-eq-stat='quotes']").textContent()!=="75.0%" ||
+     await page.locator("[data-eq-stat='unresolved']").textContent()!=="12"){
+    throw Error("Evidence Quality Dashboard did not render latest run metrics");
+  }
+  if(await page.locator("[data-eq-history] tr").count()!==2 ||
+     !(await page.locator("[data-eq-history] tr").first().textContent()).includes("2026-11-02") ||
+     !(await page.locator("[data-eq-history] tr").last().textContent()).includes("N/A")){
+    throw Error("Evidence Quality Dashboard trend ordering or unavailable review status invalid");
+  }
+  const eqForged=eqSnapshot("2026-11-10T00:00:00Z",4,4);
+  eqForged.metrics.semantic_reviewer_agreement=1;
+  await page.locator("[data-eq-files]").setInputFiles(eqFile("eq-forged.json",eqForged));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-status]")?.textContent?.includes("Cannot load"));
+  if(!(await page.locator("[data-eq-status]").textContent()).includes("Human validation status cannot be inferred") ||
+     !(await page.locator("[data-eq-history-panel]").isHidden()) ||
+     !(await page.locator("[data-eq-detail-panel]").isHidden()) ||
+     await page.locator("[data-eq-history] tr").count()!==0 ||
+     await page.locator("[data-eq-stat='runs']").textContent()!=="—"){
+    throw Error("Evidence Quality Dashboard failed to reject and clear fabricated human agreement");
+  }
+  await page.locator("[data-eq-clear]").click();
+  if(await page.locator("[data-eq-stat='runs']").textContent()!=="—"){
+    throw Error("Evidence Quality Dashboard clear did not reset state");
+  }
+
   homeDataRequests.length = 0;
   await page.goto(base + "/", { waitUntil: "networkidle" });
   const landscape = page.locator(".hero-visual-frame img");
