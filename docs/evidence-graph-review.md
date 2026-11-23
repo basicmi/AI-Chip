@@ -75,3 +75,49 @@ candidate files.
 
 The workflow never edits published model, accelerator, company or benchmark
 registries and never opens or merges data update PRs.
+
+
+## Evidence provenance and quote traceability audit (PR #129)
+
+The weekly discovery workflow now runs a separate read-only audit after Claim
+extraction and evidence-graph construction:
+
+    python3 scripts/audit_intelligence_evidence_quality.py \
+      --discovery /tmp/ai-chip-intelligence-discovery.json \
+      --claims /tmp/ai-chip-intelligence-claims.json \
+      --graph /tmp/ai-chip-intelligence-evidence-graph.json \
+      --output /tmp/ai-chip-intelligence-evidence-quality.json \
+      --markdown /tmp/ai-chip-intelligence-evidence-quality.md
+
+The report measures operational evidence hygiene, not factual correctness:
+
+- **Quote traceability:** whether the extracted evidence quote can be found in
+  the fetched candidate excerpt after the same text normalization used by
+  extraction. This does not establish that the quote logically supports the
+  interpretation.
+- **Provenance completeness:** presence of a source URL, publisher, source
+  type, declared independence label, evidence scope and parseable publication
+  timestamp.
+- **Metadata consistency:** whether source metadata copied onto a Claim still
+  matches its originating discovery candidate.
+- **Source diversity:** counts of distinct source documents and publishers.
+  These are descriptive counts, not independent corroboration.
+- **Evidence/assertion classes:** distributions of preprint, vendor, project,
+  repository and reporting classes, plus assertion categories such as
+  roadmap, marketing, research-result candidate or specification.
+- **Reviewer-assigned origins:** counts only explicit origin annotations
+  already present in the evidence graph. The audit never infers origin from
+  publisher names or matching text.
+
+The audit is deliberately not a single weighted quality score. It does not
+rank a research preprint above a vendor primary source in all contexts,
+equate media coverage with replication, infer peer-review status, or convert
+the declared `independent` label into a verified relationship. Syndicated
+articles and documents from the same underlying source may still appear as
+different URLs or publishers. Exact-quote presence is necessary traceability,
+not semantic entailment.
+
+Every Claim remains `unverified_candidate`. No review state, company profile,
+model support record, benchmark result or hardware registry is changed by this
+audit. Human source inspection and the separate Evidence-to-PR approval gate
+remain mandatory.

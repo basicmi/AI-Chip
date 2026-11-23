@@ -133,6 +133,14 @@ jobs:
             --input "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md"
+      - name: Audit evidence provenance and quote traceability
+        run: |
+          python3 scripts/audit_intelligence_evidence_quality.py \
+            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
+            --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
+            --graph "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.md"
       - name: Prioritize unverified evidence review queue
         run: |
           python3 scripts/triage_intelligence_claims.py \
@@ -226,6 +234,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-quality.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload discovery report
         if: always()
         uses: actions/upload-artifact@v4
@@ -250,6 +261,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-retrieval-review-template.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-graph.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.json
+            ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.md
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
             ${{ runner.temp }}/ai-chip-intelligence-review-state.json
