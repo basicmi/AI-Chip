@@ -59,6 +59,7 @@ class LineageReviewTests(unittest.TestCase):
         docs[2].update(reviewed("source-vendor-1", "syndicated_reprint"))
         result = evaluate(packet)
         self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["generated_at"], "2026-11-23T00:00:00Z")
         self.assertEqual(result["same_reviewer_assigned_origin_clusters"], 1)
         self.assertEqual(result["different_reviewer_assigned_origin_clusters"], 0)
         self.assertEqual(result["automatically_verified_independent_evidence"], 0)

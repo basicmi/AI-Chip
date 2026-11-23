@@ -135,7 +135,9 @@ const { chromium } = require("playwright");
   // Evidence-quality dashboard: current-run hygiene is not human factual verification.
   await page.goto(base + "/evidence-quality/", {waitUntil:"networkidle"});
   const eqSnapshot=(stamp,claims,passed)=>({
-    schema_version:"1.0",generated_at:stamp,semantic_batch_id:"claim-review-"+stamp.slice(0,10),read_only:true,factual_verification_performed:false,
+    schema_version:"1.0",generated_at:stamp,semantic_batch_id:"claim-review-"+stamp.slice(0,10),
+    lineage_generated_at:stamp,lineage_cluster_ids:["lineage-"+stamp.slice(0,10)],
+    read_only:true,factual_verification_performed:false,
     metrics:{
       current_claims:claims,
       quote_traceability:{passed,total:claims,rate:Math.round(passed/claims*10000)/10000},
@@ -194,6 +196,37 @@ const { chromium } = require("playwright");
   await page.waitForFunction(()=>document.querySelector("[data-eq-eval-status]")?.textContent?.includes("Cannot load semantic evaluation"));
   if(!(await page.locator("[data-eq-eval-status]").textContent()).includes("does not match")){
     throw Error("Semantic evaluation from another batch must be refused");
+  }
+  const lineageReport={
+    schema_version:"1.0",review_type:"source_lineage",
+    generated_at:eqNew.lineage_generated_at,status:"complete",
+    cluster_count:1,fully_reviewed_clusters:1,pending_cluster_ids:[],
+    same_reviewer_assigned_origin_clusters:1,
+    different_reviewer_assigned_origin_clusters:0,
+    relationship_label_counts:{original_material:1,syndicated_reprint:1},
+    completed_clusters:[{cluster_id:eqNew.lineage_cluster_ids[0],
+      distinct_reviewer_assigned_origin_keys:1}],
+    automatically_verified_independent_evidence:0
+  };
+  await page.locator("[data-eq-lineage-eval]").setInputFiles(eqFile("lineage-report.json",lineageReport));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-lineage-status]")?.textContent?.includes("source-lineage review loaded"));
+  if(!(await page.locator("[data-eq-history] tr").last().textContent()).includes("1/1 (reviewer-reported)") ||
+     !(await page.locator("[data-eq-details]").textContent()).includes("same reviewer-assigned origin: 1")){
+    throw Error("Valid reviewer-reported source lineage must display on its matching run");
+  }
+  const incorrectLineage={...lineageReport,
+    same_reviewer_assigned_origin_clusters:0,
+    different_reviewer_assigned_origin_clusters:1};
+  await page.locator("[data-eq-lineage-eval]").setInputFiles(eqFile("lineage-invalid.json",incorrectLineage));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-lineage-status]")?.textContent?.includes("Cannot load lineage evaluation"));
+  if(!(await page.locator("[data-eq-history] tr").last().textContent()).includes("N/A")){
+    throw Error("Invalid source-lineage review must remove reviewer-reported overlay");
+  }
+  const wrongLineage={...lineageReport,generated_at:"2026-10-01T00:00:00Z"};
+  await page.locator("[data-eq-lineage-eval]").setInputFiles(eqFile("lineage-wrong-run.json",wrongLineage));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-lineage-status]")?.textContent?.includes("Cannot load lineage evaluation"));
+  if(!(await page.locator("[data-eq-lineage-status]").textContent()).includes("does not match")){
+    throw Error("Lineage evaluation from a different run must be rejected");
   }
   const eqForged=eqSnapshot("2026-11-10T00:00:00Z",4,4);
   eqForged.metrics.semantic_reviewer_agreement=1;

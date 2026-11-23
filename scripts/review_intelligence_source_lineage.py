@@ -183,6 +183,7 @@ def evaluate(packet):
             pending.append(cid)
     return {
         "schema_version": "1.0", "review_type": "source_lineage",
+        "generated_at": packet.get("generated_at"),
         "status": "complete" if not pending else "pending",
         "cluster_count": len(clusters),
         "fully_reviewed_clusters": len(complete),
