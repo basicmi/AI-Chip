@@ -133,6 +133,12 @@ jobs:
             --input "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
             --summary-path "$RUNNER_TEMP/ai-chip-intelligence-evidence-review.md"
+      - name: Prepare cross-source lineage review worksheet
+        run: |
+          python3 scripts/review_intelligence_source_lineage.py \
+            --graph "$RUNNER_TEMP/ai-chip-intelligence-evidence-graph.json" \
+            --max-clusters 25 \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-source-lineage-review-template.json"
       - name: Audit evidence provenance and quote traceability
         run: |
           python3 scripts/audit_intelligence_evidence_quality.py \
@@ -268,6 +274,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-evidence-review.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.md
+            ${{ runner.temp }}/ai-chip-intelligence-source-lineage-review-template.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
             ${{ runner.temp }}/ai-chip-intelligence-review-state.json
