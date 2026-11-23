@@ -166,6 +166,11 @@ jobs:
             --output "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.md" \
             --decision-template "$RUNNER_TEMP/ai-chip-intelligence-claim-review-decisions-template.json"
+      - name: Prepare two-reviewer semantic support packet for human review
+        run: |
+          python3 scripts/review_intelligence_semantic_support.py \
+            --batch "$RUNNER_TEMP/ai-chip-intelligence-claim-review-batch.json" \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-semantic-review-template.json"
       - name: Audit end-to-end stage consistency and source health
         run: |
           python3 scripts/audit_intelligence_run.py \
@@ -269,6 +274,7 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-claim-review-batch.json
             ${{ runner.temp }}/ai-chip-intelligence-claim-review-batch.md
             ${{ runner.temp }}/ai-chip-intelligence-claim-review-decisions-template.json
+            ${{ runner.temp }}/ai-chip-intelligence-semantic-review-template.json
             ${{ runner.temp }}/ai-chip-intelligence-review-aging.md
             ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.json
             ${{ runner.temp }}/ai-chip-intelligence-review-backlog-hydration.md

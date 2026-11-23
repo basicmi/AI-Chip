@@ -64,6 +64,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_intelligence_review_state.py"
           python3 -m unittest discover -s tests -p "test_intelligence_backlog_hydration.py"
           python3 -m unittest discover -s tests -p "test_intelligence_claim_review_batch.py"
+          python3 -m unittest discover -s tests -p "test_intelligence_semantic_support.py"
           python3 -m unittest discover -s tests -p "test_intelligence_reliability.py"
           python3 -m unittest discover -s tests -p "test_intelligence_source_recovery.py"
           python3 -m unittest discover -s tests -p "test_intelligence_source_coverage.py"
