@@ -51,6 +51,9 @@ def snapshot(quality, state, lineage, semantic):
     # template is built directly from the review-state batch and must match it.
     if semantic.get("generated_at") != stamp:
         raise ValueError("semantic template is from a different review-state run")
+    batch_id = semantic.get("batch_id")
+    if not isinstance(batch_id, str) or not batch_id.startswith("claim-review-"):
+        raise ValueError("semantic template must have a stable Claim review batch ID")
     q = quality.get("summary")
     s = state.get("summary")
     l = lineage.get("summary")
@@ -99,6 +102,7 @@ def snapshot(quality, state, lineage, semantic):
 
     return {
         "schema_version": "1.0", "generated_at": stamp,
+        "semantic_batch_id": batch_id,
         "read_only": True, "factual_verification_performed": False,
         "metrics": {
             "current_claims": total,

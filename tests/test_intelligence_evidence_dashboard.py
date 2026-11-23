@@ -27,7 +27,7 @@ def fixtures():
         "policy":{"independent_corroboration_automatically_verified":False}}
     blank={"reviewer":"","label":"","rationale":"","source_checked":False}
     semantic={"schema_version":"1.0","review_type":"human_semantic_support",
-        "generated_at":"2026-11-23T00:00:00Z",
+        "generated_at":"2026-11-23T00:00:00Z","batch_id":"claim-review-fixture",
         "policy":{"cannot_promote_to_verified":True},
         "items":[{"claim_id":"claim-a","reviewers":[dict(blank),dict(blank)]}]}
     return quality,state,lineage,semantic
@@ -63,6 +63,17 @@ class DashboardSnapshotTests(unittest.TestCase):
         reports=list(fixtures())
         reports[2]["policy"]["independent_corroboration_automatically_verified"]=True
         with self.assertRaisesRegex(ValueError,"lineage"):
+            snapshot(*reports)
+
+    def test_snapshot_retains_semantic_batch_identity_without_human_labels(self):
+        report=snapshot(*fixtures())
+        self.assertEqual(report["semantic_batch_id"],"claim-review-fixture")
+        self.assertIsNone(report["metrics"]["semantic_reviewer_agreement"])
+
+    def test_rejects_missing_semantic_batch_identity(self):
+        reports=list(fixtures())
+        del reports[3]["batch_id"]
+        with self.assertRaisesRegex(ValueError,"batch ID"):
             snapshot(*reports)
 
     def test_rejects_cross_run_semantic_template(self):

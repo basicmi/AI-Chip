@@ -4,10 +4,11 @@
   if(!root)return;
   const $=selector=>root.querySelector(selector);
   const input=$("[data-eq-files]"),status=$("[data-eq-status]");
+  const evaluationInput=$("[data-eq-semantic-eval]"),evaluationStatus=$("[data-eq-eval-status]");
   const table=$("[data-eq-history]"),select=$("[data-eq-select]");
   const history=$("[data-eq-history-panel]"),detail=$("[data-eq-detail-panel]");
   const MAX_RUNS=52,MAX_BYTES=2*1024*1024;
-  let runs=[];
+  let runs=[],semanticEvaluation=null;
   const integer=x=>Number.isSafeInteger(x)&&x>=0;
   const pair=(row,name)=>{
     if(!row||!integer(row.passed)||!integer(row.total)||row.passed>row.total)
@@ -47,12 +48,75 @@
       throw Error("Human evaluation availability must remain unknown.");
     return data;
   };
+  // An evaluation is supplied by the local reviewer; this validates internal
+  // arithmetic and batch identity, not reviewer identity or technical truth.
+  const semanticLabels=new Set(["supported_by_source","contradicted_by_source",
+    "insufficient_context","source_unavailable"]);
+  const validateEvaluation=data=>{
+    if(!data||data.schema_version!=="1.0"||typeof data.batch_id!=="string"||
+       !runs.some(r=>r.semantic_batch_id===data.batch_id)||
+       data.automatically_verified_claims!==0||
+       !["pending","complete"].includes(data.status))
+      throw Error("Semantic evaluation does not match an imported Claim review batch.");
+    const run=runs.find(r=>r.semantic_batch_id===data.batch_id);
+    if(!integer(data.total_claims)||data.total_claims!==run.metrics.semantic_claims_queued||
+       !integer(data.double_reviewed_claims)||data.double_reviewed_claims>data.total_claims||
+       !Array.isArray(data.pending_claim_ids)||!Array.isArray(data.agreements)||
+       !Array.isArray(data.disagreements)||!integer(data.human_adjudication_needed)||
+       !data.reviewer_label_counts||typeof data.reviewer_label_counts!=="object"||
+       Array.isArray(data.reviewer_label_counts))
+      throw Error("Malformed semantic evaluation counts.");
+    if(data.double_reviewed_claims!==data.agreements.length+data.disagreements.length||
+       data.total_claims!==data.double_reviewed_claims+data.pending_claim_ids.length||
+       data.human_adjudication_needed!==data.disagreements.length)
+      throw Error("Semantic evaluation coverage does not reconcile.");
+    const claimIds=new Set();
+    for(const cid of data.pending_claim_ids){
+      if(typeof cid!=="string"||!cid||claimIds.has(cid))throw Error("Duplicate evaluation Claim ID.");
+      claimIds.add(cid);
+    }
+    for(const item of data.agreements){
+      if(!item||typeof item.claim_id!=="string"||!item.claim_id||
+         !semanticLabels.has(item.label)||claimIds.has(item.claim_id))
+        throw Error("Invalid semantic agreement row.");
+      claimIds.add(item.claim_id);
+    }
+    for(const item of data.disagreements){
+      if(!item||typeof item.claim_id!=="string"||!item.claim_id||
+         claimIds.has(item.claim_id)||!Array.isArray(item.labels)||
+         item.labels.length!==2||!item.labels.every(x=>semanticLabels.has(x))||
+         item.labels[0]===item.labels[1]||item.requires_human_adjudication!==true)
+        throw Error("Invalid semantic disagreement row.");
+      claimIds.add(item.claim_id);
+    }
+    let labelsCount=0;
+    for(const [key,value] of Object.entries(data.reviewer_label_counts)){
+      if(!semanticLabels.has(key)||!integer(value))throw Error("Invalid reviewer label count.");
+      labelsCount+=value;
+    }
+    if(labelsCount!==2*data.double_reviewed_claims)
+      throw Error("Semantic reviewer labels do not reconcile.");
+    const expected=data.double_reviewed_claims?
+      Math.round(data.agreements.length/data.double_reviewed_claims*10000)/10000:null;
+    if(data.raw_agreement!==expected||
+       data.status!==(data.pending_claim_ids.length||data.disagreements.length?"pending":"complete"))
+      throw Error("Semantic agreement or status is inconsistent.");
+    return data;
+  };
+  const humanAgreement=run=>semanticEvaluation &&
+    run.semantic_batch_id===semanticEvaluation.batch_id?
+    (semanticEvaluation.raw_agreement===null?"N/A":
+      (100*semanticEvaluation.raw_agreement).toFixed(1)+"%"+
+      " (n="+semanticEvaluation.double_reviewed_claims+", reviewer-reported)"):"N/A";
   const fmt=x=>new Intl.NumberFormat().format(x);
   const percent=x=>x.rate===null?"N/A":(100*x.rate).toFixed(1)+"%";
   const cell=x=>{const td=document.createElement("td");td.textContent=String(x);return td;};
   const stat=(key,value)=>{$("[data-eq-stat='"+key+"']").textContent=String(value);};
   const reset=()=>{
-    runs=[];input.value="";table.replaceChildren();select.replaceChildren();
+    runs=[];semanticEvaluation=null;input.value="";evaluationInput.value="";
+    evaluationStatus.textContent="No human evaluation loaded. Reviewer reports are not independently authenticated.";
+    evaluationStatus.classList.remove("is-error");
+    table.replaceChildren();select.replaceChildren();
     history.hidden=true;detail.hidden=true;
     ["quotes","provenance","unresolved","runs"].forEach(k=>stat(k,"—"));
     status.textContent="No snapshots loaded.";status.classList.remove("is-error");
@@ -67,7 +131,10 @@
       " · publishers: "+fmt(m.distinct_publishers)+
       " · lineage worksheets queued: "+fmt(m.lineage_clusters_queued)+
       " · semantic Claims queued: "+fmt(m.semantic_claims_queued)+
-      " · human double-review agreement: N/A (not supplied)"+
+      " · human double-review agreement: "+humanAgreement(run)+
+      (semanticEvaluation && semanticEvaluation.batch_id===run.semantic_batch_id?
+        " · double-reviewed Claims: "+semanticEvaluation.double_reviewed_claims+"/"+semanticEvaluation.total_claims+
+        " · disagreements needing adjudication: "+semanticEvaluation.human_adjudication_needed:" · no matched human evaluation supplied") +
       " · independently verified Claims: N/A (not measured).";
   };
   const render=()=>{
@@ -81,7 +148,7 @@
           percent(m.provenance_completeness),fmt(m.source_metadata_mismatches),
           fmt(m.distinct_source_documents),fmt(m.review_backlog),fmt(m.unresolved_claims),
           percent(m.payload_coverage),fmt(m.lineage_clusters_queued),
-          fmt(m.semantic_claims_queued),"N/A"])tr.append(cell(val));
+          fmt(m.semantic_claims_queued),humanAgreement(run)])tr.append(cell(val));
       table.append(tr);
       const option=document.createElement("option");
       option.value=run.generated_at;option.textContent=run.generated_at;
@@ -104,10 +171,34 @@
       if(new Set(values.map(x=>x.generated_at)).size!==values.length)
         throw Error("Duplicate run timestamps.");
       runs=values.sort((a,b)=>Date.parse(a.generated_at)-Date.parse(b.generated_at));
+      semanticEvaluation=null;
+      evaluationInput.value="";
+      evaluationStatus.classList.remove("is-error");
+      evaluationStatus.textContent="No human evaluation loaded. Reviewer reports are not independently authenticated.";
       render();
     }catch(error){
       reset();status.classList.add("is-error");
       status.textContent="Cannot load evidence-quality snapshots: "+error.message;
+    }
+  });
+  evaluationInput.addEventListener("change",async()=>{
+    try{
+      if(!runs.length)throw Error("Load a matching Evidence Quality snapshot first.");
+      const file=evaluationInput.files[0];
+      if(!file||!file.size||file.size>MAX_BYTES)throw Error("Choose one nonempty semantic evaluation JSON under 2 MiB.");
+      const report=validateEvaluation(JSON.parse(await file.text()));
+      semanticEvaluation=report;
+      evaluationStatus.classList.remove("is-error");
+      evaluationStatus.textContent="Reviewer-reported evaluation loaded for "+report.batch_id+
+        " ("+report.double_reviewed_claims+"/"+report.total_claims+
+        " double-reviewed). Not authenticated and not factual verification.";
+      render();
+    }catch(error){
+      semanticEvaluation=null;
+      evaluationInput.value="";
+      evaluationStatus.classList.add("is-error");
+      evaluationStatus.textContent="Cannot load semantic evaluation: "+error.message;
+      if(runs.length)render();
     }
   });
   select.addEventListener("change",inspect);

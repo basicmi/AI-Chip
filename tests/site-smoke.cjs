@@ -135,7 +135,7 @@ const { chromium } = require("playwright");
   // Evidence-quality dashboard: current-run hygiene is not human factual verification.
   await page.goto(base + "/evidence-quality/", {waitUntil:"networkidle"});
   const eqSnapshot=(stamp,claims,passed)=>({
-    schema_version:"1.0",generated_at:stamp,read_only:true,factual_verification_performed:false,
+    schema_version:"1.0",generated_at:stamp,semantic_batch_id:"claim-review-"+stamp.slice(0,10),read_only:true,factual_verification_performed:false,
     metrics:{
       current_claims:claims,
       quote_traceability:{passed,total:claims,rate:Math.round(passed/claims*10000)/10000},
@@ -166,6 +166,34 @@ const { chromium } = require("playwright");
      !(await page.locator("[data-eq-history] tr").first().textContent()).includes("2026-11-02") ||
      !(await page.locator("[data-eq-history] tr").last().textContent()).includes("N/A")){
     throw Error("Evidence Quality Dashboard trend ordering or unavailable review status invalid");
+  }
+  // Load a *reviewer-reported*, batch-matched evaluation. Never present it
+  // as independently authenticated or as factual accuracy.
+  const eqEvaluation={
+    schema_version:"1.0",batch_id:eqNew.semantic_batch_id,status:"pending",
+    total_claims:2,double_reviewed_claims:1,
+    pending_claim_ids:["claim-b"],agreements:[{claim_id:"claim-a",label:"supported_by_source"}],
+    disagreements:[],raw_agreement:1,reviewer_label_counts:{supported_by_source:2},
+    human_adjudication_needed:0,automatically_verified_claims:0
+  };
+  await page.locator("[data-eq-semantic-eval]").setInputFiles(eqFile("semantic-evaluation.json",eqEvaluation));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-eval-status]")?.textContent?.includes("Reviewer-reported evaluation loaded"));
+  if(!(await page.locator("[data-eq-history] tr").last().textContent()).includes("100.0% (n=1, reviewer-reported)") ||
+     !(await page.locator("[data-eq-details]").textContent()).includes("double-reviewed Claims: 1/2") ||
+     !(await page.locator("[data-eq-eval-status]").textContent()).includes("Not authenticated")){
+    throw Error("Human semantic review overlay must show paired coverage and its provenance warning");
+  }
+  const eqBadEvaluation={...eqEvaluation,raw_agreement:0};
+  await page.locator("[data-eq-semantic-eval]").setInputFiles(eqFile("invalid-agreement.json",eqBadEvaluation));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-eval-status]")?.textContent?.includes("Cannot load semantic evaluation"));
+  if(!(await page.locator("[data-eq-history] tr").last().textContent()).includes("N/A")){
+    throw Error("Invalid semantic evaluation should clear reviewer-reported statistics");
+  }
+  const eqWrongBatch={...eqEvaluation,batch_id:"claim-review-other"};
+  await page.locator("[data-eq-semantic-eval]").setInputFiles(eqFile("wrong-batch.json",eqWrongBatch));
+  await page.waitForFunction(()=>document.querySelector("[data-eq-eval-status]")?.textContent?.includes("Cannot load semantic evaluation"));
+  if(!(await page.locator("[data-eq-eval-status]").textContent()).includes("does not match")){
+    throw Error("Semantic evaluation from another batch must be refused");
   }
   const eqForged=eqSnapshot("2026-11-10T00:00:00Z",4,4);
   eqForged.metrics.semantic_reviewer_agreement=1;

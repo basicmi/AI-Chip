@@ -26,6 +26,10 @@ description: Local-only trends for source provenance, quote traceability, and hu
       <input type="file" accept=".json,application/json" multiple data-eq-files>
     </label>
     <p class="compat-load-state" role="status" aria-live="polite" data-eq-status>No snapshots loaded.</p>
+    <label>Optional human semantic-review evaluation JSON (generated after two reviewers complete the same batch)
+      <input type="file" accept=".json,application/json" data-eq-semantic-eval>
+    </label>
+    <p class="compat-load-state" role="status" aria-live="polite" data-eq-eval-status>No human evaluation loaded. Results are supplied locally and are not independently authenticated.</p>
   </section>
   <div class="workload-stat-grid">
     <div class="compat-stat"><span>Latest quote traceability</span><strong data-eq-stat="quotes">—</strong></div>
@@ -41,7 +45,7 @@ description: Local-only trends for source provenance, quote traceability, and hu
     <p>Missing human evaluations are displayed as N/A, never 0% or 100%. Percentages use the current run's Claim count as denominator. Backlog is persistent across runs.</p>
     <div class="ops-table-scroll">
       <table class="ops-table">
-        <thead><tr><th>Run UTC</th><th>Claims</th><th>Quote traceability</th><th>Provenance</th><th>Metadata mismatches</th><th>Source documents</th><th>Backlog</th><th>Unresolved</th><th>Payload coverage</th><th>Lineage queued</th><th>Semantic queued</th><th>Human agreement</th></tr></thead>
+        <thead><tr><th>Run UTC</th><th>Claims</th><th>Quote traceability</th><th>Provenance</th><th>Metadata mismatches</th><th>Source documents</th><th>Backlog</th><th>Unresolved</th><th>Payload coverage</th><th>Lineage queued</th><th>Semantic queued</th><th>Human reported agreement</th></tr></thead>
         <tbody data-eq-history></tbody>
       </table>
     </div>
