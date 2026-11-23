@@ -171,8 +171,12 @@ const { chromium } = require("playwright");
   eqForged.metrics.semantic_reviewer_agreement=1;
   await page.locator("[data-eq-files]").setInputFiles(eqFile("eq-forged.json",eqForged));
   await page.waitForFunction(()=>document.querySelector("[data-eq-status]")?.textContent?.includes("Cannot load"));
-  if(!(await page.locator("[data-eq-history-panel]").isHidden())){
-    throw Error("Evidence Quality Dashboard accepted fabricated human agreement");
+  if(!(await page.locator("[data-eq-status]").textContent()).includes("Human validation status cannot be inferred") ||
+     !(await page.locator("[data-eq-history-panel]").isHidden()) ||
+     !(await page.locator("[data-eq-detail-panel]").isHidden()) ||
+     await page.locator("[data-eq-history] tr").count()!==0 ||
+     await page.locator("[data-eq-stat='runs']").textContent()!=="—"){
+    throw Error("Evidence Quality Dashboard failed to reject and clear fabricated human agreement");
   }
   await page.locator("[data-eq-clear]").click();
   if(await page.locator("[data-eq-stat='runs']").textContent()!=="—"){
