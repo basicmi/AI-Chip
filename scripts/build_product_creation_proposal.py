@@ -190,7 +190,7 @@ def build_package(database, claim_report, approval, registry_bytes, created_at=N
         raise ValueError("target company products, claims and evidence must be arrays")
     product, claim, evidence = approval["product"], approval["claim"], approval["evidence"]
     if any(item.get("id") == product["id"] for item in company["products"]):
-        raise ValueError("product ID already exists in target company")
+        raise ValueError("Product ID already exists in target company")
     if any(item.get("id") == claim["id"] for item in company["claims"]):
         raise ValueError("Claim ID already exists in target company")
     if any(item.get("id") == evidence["id"] or item.get("url") == evidence["url"] for item in company["evidence"]):
@@ -264,15 +264,22 @@ def build_package(database, claim_report, approval, registry_bytes, created_at=N
 def verify_package(database, package, registry_bytes, claim_report, approval):
     if not isinstance(package, dict) or package.get("proposal_type") != "company_profile_product_creation":
         raise ValueError("unsupported product proposal type")
-    if package.get("target_registry", {}).get("base_sha256") != sha256_bytes(registry_bytes):
+    registry_binding = package.get("target_registry")
+    if not isinstance(registry_binding, dict) or registry_binding.get("base_sha256") != sha256_bytes(registry_bytes):
         raise ValueError("proposal base SHA256 does not match current registry")
     if package.get("approval") != approval:
         raise ValueError("separate Approval Manifest does not exactly match proposal")
     if not isinstance(claim_report, dict):
         raise ValueError("original Claim report is required")
-    source_id = package.get("source_claim", {}).get("claim_id")
-    rows = [row for row in claim_report.get("claims", []) if isinstance(row, dict) and row.get("claim_id") == source_id]
-    if claim_report.get("claim_count") != len(claim_report.get("claims", [])) or len(rows) != 1 or rows[0] != package.get("source_claim"):
+    source_snapshot = package.get("source_claim")
+    if not isinstance(source_snapshot, dict):
+        raise ValueError("proposal source Claim snapshot is missing")
+    source_id = source_snapshot.get("claim_id")
+    report_rows = claim_report.get("claims")
+    if not isinstance(report_rows, list):
+        raise ValueError("original Claim report claims must be an array")
+    rows = [row for row in report_rows if isinstance(row, dict) and row.get("claim_id") == source_id]
+    if claim_report.get("claim_count") != len(report_rows) or len(rows) != 1 or rows[0] != source_snapshot:
         raise ValueError("separate original Claim report does not exactly match proposal")
     expected, patch, audit, diff, updated = build_package(
         database, claim_report, approval, registry_bytes, package.get("created_at"))

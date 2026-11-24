@@ -65,7 +65,9 @@
       if(packageHash!==pkg.package_sha256)throw Error("Proposal package SHA256 mismatch.");
       const baseHash=await digest(registryFile.bytes);
       if(baseHash!==pkg.target_registry.base_sha256)throw Error("Base registry SHA256 mismatch.");
-      if(!equal(pkg.approval,approval))throw Error("Separate Approval Manifest does not exactly match proposal.");
+      if(!equal(pkg.approval,approval)||pkg.proposal_id!==approval.approval_id||
+         approval.decision!=="approved_new_product_with_identity_claim")
+        throw Error("Separate Approval Manifest or explicit product-creation decision does not exactly match proposal.");
       if(report.schema_version!=="1.0"||!Array.isArray(report.claims)||report.claim_count!==report.claims.length)
         throw Error("Original Claim report schema or count is invalid.");
       const source=pkg.source_claim;
@@ -109,10 +111,14 @@
       if(proposedHash!==pkg.proposed_registry_sha256||pkg.audit?.proposed_registry_sha256!==proposedHash||
          pkg.audit?.base_registry_sha256!==baseHash||pkg.audit?.verification_status!=="exact_three_record_append"||
          pkg.audit?.unapproved_changes!==0||pkg.audit?.source_truth_verified!==false||
-         pkg.audit?.claim_status_changed!==false||pkg.audit?.new_claim_status!=="vendor_reported")
+         pkg.audit?.claim_status_changed!==false||pkg.audit?.new_claim_status!=="vendor_reported"||
+         pkg.audit?.approval_id!==approval.approval_id||pkg.audit?.source_claim_id!==source.claim_id||
+         pkg.audit?.source_url!==evidence.url||
+         pkg.audit?.evidence_quote_sha256!==await digest(new TextEncoder().encode(source.evidence_quote)))
         throw Error("Audit metadata or proposed registry SHA256 is inconsistent.");
       if(pkg.policy?.human_approval_required!==true||pkg.policy?.automatic_merge!==false||
-         pkg.policy?.source_truth_verified!==false||pkg.policy?.new_claim_status!=="vendor_reported")
+         pkg.policy?.source_truth_verified!==false||pkg.policy?.claim_status_changed!==false||
+         pkg.policy?.new_claim_status!=="vendor_reported")
         throw Error("Proposal policy guardrails are missing or inconsistent.");
       const patch={schema:"https://json.schemastore.org/json-patch.json",base_registry_sha256:baseHash,operations};
       verified={pkg,updated,patch,audit:pkg.audit};
