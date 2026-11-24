@@ -17,3 +17,7 @@
 .intelligence-operations [data-eq-history-panel][hidden],
 .intelligence-operations [data-eq-detail-panel][hidden] { display: none !important; }
 .intelligence-operations [data-eq-status].is-error { color: #b3483d; font-weight: 650; }
+
+/* Decision analytics panels are local-only imports; never reveal stale results after clear/error. */
+[data-decision-analytics] [data-da-results][hidden] { display: none !important; }
+[data-decision-analytics] [data-da-status].is-error { color: #b3483d; font-weight: 650; }

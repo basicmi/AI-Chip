@@ -63,6 +63,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_intelligence_evidence_quality.py"
           python3 -m unittest discover -s tests -p "test_intelligence_evidence_dashboard.py"
           python3 -m unittest discover -s tests -p "test_intelligence_conversion_funnel.py"
+          python3 -m unittest discover -s tests -p "test_intelligence_decision_analytics.py"
           python3 -m unittest discover -s tests -p "test_intelligence_triage.py"
           python3 -m unittest discover -s tests -p "test_intelligence_review_state.py"
           python3 -m unittest discover -s tests -p "test_intelligence_backlog_hydration.py"
