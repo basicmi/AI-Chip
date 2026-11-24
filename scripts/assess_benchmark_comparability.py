@@ -323,7 +323,12 @@ def build_report(database):
                 "source_url": record.get("source_url"),
             })
 
-        status = "directly_comparable" if len(software_fingerprints) == 1 and stable_configuration(members[0]["record"]) else "conditionally_comparable"
+        is_inferencex = (
+            members[0]["record"].get("source_id") == "inferencex"
+            or members[0]["record"].get("benchmark_suite") == "SemiAnalysis InferenceX"
+        )
+        config_complete = not is_inferencex or bool(stable_configuration(members[0]["record"]))
+        status = "directly_comparable" if len(software_fingerprints) == 1 and config_complete else "conditionally_comparable"
         pairs = len(entries) * (len(entries) - 1) // 2
         if status == "directly_comparable":
             direct_pairs += pairs
