@@ -142,6 +142,19 @@ class DatabaseIntegrationProposalTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "approved_evidence_attachment"):
             build_package(db, report, approval, raw, "2026-11-23T04:00:00.000Z")
 
+    def test_rejects_future_human_review_date(self):
+        db, report, approval, raw = fixture()
+        approval["reviewed_at"] = "2099-01-01"
+        approval["evidence"]["checked_at"] = "2098-12-31"
+        with self.assertRaisesRegex(ValueError, "review date cannot be in the future"):
+            build_package(db, report, approval, raw, "2099-01-01T12:00:00.000Z")
+
+    def test_rejects_evidence_published_after_checked_date(self):
+        db, report, approval, raw = fixture()
+        approval["evidence"]["published_at"] = "2026-11-21"
+        with self.assertRaisesRegex(ValueError, "publication date cannot follow"):
+            build_package(db, report, approval, raw, "2026-11-23T04:00:00.000Z")
+
     def test_rejects_future_package_timestamp(self):
         db, report, approval, raw = fixture()
         with self.assertRaisesRegex(ValueError, "future"):

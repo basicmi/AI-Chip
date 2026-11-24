@@ -12,7 +12,7 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from propose_evidence_update import create_patch, build_diff, fingerprint_claim
@@ -110,6 +110,13 @@ def build_package(database, claim_report, approval, registry_bytes, created_at=N
         raise ValueError("proposal must reference exactly one extracted source Claim")
     source_claim = copy.deepcopy(source_matches[0])
     updated, generated_audit = create_patch(database, claim_report, approval)
+    reviewed_date = date.fromisoformat(approval["reviewed_at"])
+    checked_date = date.fromisoformat(approval["evidence"]["checked_at"])
+    if reviewed_date > datetime.now(timezone.utc).date():
+        raise ValueError("human review date cannot be in the future")
+    if approval["evidence"]["published_at"] is not None and date.fromisoformat(
+            approval["evidence"]["published_at"]) > checked_date:
+        raise ValueError("evidence publication date cannot follow its checked date")
     verification = verify_patch(database, updated, approval, generated_audit)
     company_indexes = [i for i, row in enumerate(database["companies"])
                        if row.get("id") == approval["company_id"]]
@@ -130,6 +137,8 @@ def build_package(database, claim_report, approval, registry_bytes, created_at=N
     created = parse_aware(created_at, "created_at")
     if created > datetime.now(timezone.utc):
         raise ValueError("created_at cannot be in the future")
+    if created.date() < reviewed_date:
+        raise ValueError("proposal cannot predate the human review")
     target = {
         "company_id": company["id"],
         "company_display_name": company.get("display_name", company["id"]),
