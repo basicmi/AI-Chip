@@ -111,7 +111,7 @@ description: Local-only review of provenance-bound benchmark result proposals.
     <li>Prepare a separate Approval Manifest with the complete system, workload, software, precision, result and source-record context.</li>
     <li>Build the proposal locally and inspect the provenance chain, context fields, hashes and exact five-operation patch above.</li>
     <li>Commit the proposal under <code>reviews/benchmark-proposals/</code> and its Approval Manifest under <code>reviews/approvals/</code>.</li>
-    <li>Manually dispatch the integration workflow after it is available; inspect the generated PR and CI. Merge only after normal human review.</li>
+    <li>On `master`, manually dispatch **Integrate reviewed benchmark result proposal** with the two committed file paths; inspect the generated data PR, audit artifacts and CI. Merge only after normal human review.</li>
   </ol>
   <p>This adapter v1 only adds one result for an existing source. It does not create source definitions, change existing records, infer missing data, upgrade evidence class, or accept power/hardware-counter/runtime-trace claims.</p>
 </section>
