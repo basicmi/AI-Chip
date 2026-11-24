@@ -21,13 +21,13 @@ explicit limitations.
 
 ## V1 decision policy
 
-A record is eligible only when all of the following are available:
+The engine uses source-specific profiles for the two benchmark feeds already normalized by this repository, plus a conservative generic profile for future sources. A record is eligible only when all required fields for its profile are available:
 
-- benchmark suite and version;
+- benchmark suite and version (InferenceX currently publishes no version in this registry; its profile therefore remains scoped to the InferenceX source and exact workload signature);
 - model, scenario, division, availability, accuracy statement and weight data type;
 - explicit non-inferred result and zero reported errors;
-- non-empty workload and benchmark configuration objects;
-- system type, node count, total accelerator count, accelerators per node and host processor model;
+- explicit workload/configuration fields appropriate to the source profile;
+- a complete source-appropriate system boundary;
 - accelerator identity, software metadata and a numeric metric with a unit.
 
 Records are grouped only when the following match exactly:
