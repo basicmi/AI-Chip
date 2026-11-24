@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -129,6 +129,96 @@ const { chromium } = require("playwright");
   await page.waitForFunction(() => (document.querySelector("[data-pi-status]")?.textContent || "").includes("SHA256 mismatch"));
   if (!(await page.locator("[data-pi-results]").first().isHidden())) {
     throw new Error("Product Integration Workbench exposed a tampered proposal");
+  }
+
+  // PR #142: local-only typed Benchmark Result Integration Workbench.
+  await page.goto(base + "/benchmark-integration/", {waitUntil:"networkidle"});
+  for (const selector of ["[data-bi-package]","[data-bi-approval]","[data-bi-registry]","[data-bi-status]"]) {
+    await page.locator(selector).waitFor();
+  }
+  if (!(await page.locator("[data-bi-results]").first().isHidden())) {
+    throw new Error("Benchmark Integration Workbench must hide unverified results before loading a package");
+  }
+  const biSource = {
+    id:"vendor-benchmark",name:"Vendor Benchmark",publisher:"Vendor",
+    source_class:"vendor_reported",results_url:"https://vendor.example/benchmark/results",
+    record_count:0,notes:"Existing registered benchmark source"
+  };
+  const biRecord = {
+    id:"vendor-model-a-001",source_id:"vendor-benchmark",source_class:"vendor_reported",
+    evidence_level:"vendor_reported",benchmark_suite:"Vendor Inference Benchmark",
+    benchmark_version:"2026.1",publication_date:"2026-11-18",submitter:"Vendor",
+    accelerator_vendor:"Vendor",platform_id:null,product_id:null,system_type:"datacenter",
+    system_name:"Eight accelerator server",division:"closed",availability:"available",
+    model:"Model A",scenario:"offline",result_value:1250,result_unit:"tokens/s",
+    accuracy_text:"Not reported",inferred:false,power_metrics_available:false,
+    design_power_watts:null,system:{nodes:1,accelerator_model:"Vendor X",accelerators_per_node:8},
+    software:{framework:"Framework X"},notes:"Reviewed vendor result.",compliance:"Not independently assessed",
+    errors:0,weight_data_types:"BF16",source_record_key:"vendor-row-001",
+    source_location:"results table row 1",source_url:biSource.results_url,dataset_url:null,release_url:null
+  };
+  const biApproval = {
+    schema_version:"1.0",approval_id:"review-benchmark-001",reviewer:"reviewer@example.org",
+    reviewed_at:"2026-11-20",decision:"approved_new_benchmark_result",source_id:"vendor-benchmark",
+    record:biRecord,review_notes:"Inspected the original results page and confirmed workload and system context."
+  };
+  const biDb = {
+    schema_version:"1.0",database_version:"test",last_imported_at:"2026-11-01",
+    scope:"Synthetic browser test fixture",sources:[biSource],
+    summary:{total_records:0,by_source:{},by_availability:{},by_division:{},by_system_type:{},
+      inferred_records:0,power_records:0,submitters:0,models:0},records:[]
+  };
+  const biRegistryText=JSON.stringify(biDb,null,2)+"\\n";
+  const biBaseHash=piHash(biRegistryText);
+  const biUpdated=JSON.parse(JSON.stringify(biDb));
+  biUpdated.records.push(biRecord);biUpdated.sources[0].record_count=1;
+  biUpdated.last_imported_at=biApproval.reviewed_at;
+  biUpdated.database_version="test+reviewed-"+biApproval.approval_id;
+  biUpdated.summary={
+    total_records:1,by_source:{"vendor-benchmark":1},by_availability:{available:1},
+    by_division:{closed:1},by_system_type:{datacenter:1},inferred_records:0,
+    power_records:0,submitters:1,models:1
+  };
+  const biProposedHash=piHash(piCanonical(biUpdated));
+  const biOperations=[
+    {op:"add",path:"/records/-",value:biRecord},
+    {op:"replace",path:"/sources/0/record_count",value:1},
+    {op:"replace",path:"/last_imported_at",value:biApproval.reviewed_at},
+    {op:"replace",path:"/database_version",value:biUpdated.database_version},
+    {op:"replace",path:"/summary",value:biUpdated.summary}
+  ];
+  const biBody={
+    schema_version:"1.0",proposal_id:biApproval.approval_id,proposal_type:"benchmark_result_creation",
+    created_at:"2026-11-21T12:00:00Z",
+    target_registry:{path:"data/benchmark-results.json",schema_version:"1.0",base_sha256:biBaseHash},
+    source_snapshot:biSource,approval:biApproval,
+    target:{source_id:biSource.id,record_id:biRecord.id,source_record_key:biRecord.source_record_key},
+    operations:biOperations,
+    audit:{verification_status:"exact_one_result_append",unapproved_changes:0,
+      source_truth_verified:false,evidence_level_promoted:false,source_id:biSource.id,
+      source_class:biSource.source_class,reviewer:biApproval.reviewer,reviewed_at:biApproval.reviewed_at,
+      base_registry_sha256:biBaseHash,proposed_registry_sha256:biProposedHash},
+    proposed_registry_sha256:biProposedHash,
+    policy:{human_approval_required:true,source_truth_verified:false,evidence_level_promoted:false,
+      automatic_merge:false,power_claims_supported:false,allowed_changes:[
+        "append one result for an existing registered source",
+        "reconcile source record_count, database_version, last_imported_at and summary"]}
+  };
+  const biPackage={...biBody,package_sha256:piHash(piCanonical(biBody))};
+  await page.locator("[data-bi-package]").setInputFiles(piArtifact("benchmark-proposal.json",biPackage));
+  await page.locator("[data-bi-approval]").setInputFiles(piArtifact("benchmark-approval.json",biApproval));
+  await page.locator("[data-bi-registry]").setInputFiles({
+    name:"benchmark-results.json",mimeType:"application/json",buffer:Buffer.from(biRegistryText)
+  });
+  await page.waitForFunction(() => (document.querySelector("[data-bi-status]")?.textContent || "").includes("Verified locally"));
+  if (!(await page.locator("[data-bi-results]").first().isVisible())) {
+    throw new Error("Benchmark Integration Workbench failed to verify a valid one-result append fixture");
+  }
+  const biTampered={...biPackage,operations:[{...biOperations[0],path:"/records/0"},...biOperations.slice(1)]};
+  await page.locator("[data-bi-package]").setInputFiles(piArtifact("tampered-benchmark-proposal.json",biTampered));
+  await page.waitForFunction(() => (document.querySelector("[data-bi-status]")?.textContent || "").includes("SHA256 mismatch"));
+  if (!(await page.locator("[data-bi-results]").first().isHidden())) {
+    throw new Error("Benchmark Integration Workbench exposed a tampered proposal");
   }
 
   // PR #139: local-only provenance-bound Database Integration Workbench.
