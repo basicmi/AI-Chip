@@ -332,7 +332,11 @@ def build_report(database):
             conditional_reasons.append("software_stack_differs")
         if len(boundary_fingerprints) > 1:
             conditional_reasons.append("system_scale_or_topology_differs")
-        if len(configuration_fingerprints) > 1 or not stable_configuration(members[0]["record"]):
+        profile = members[0]["key"]["protocol"].get("profile")
+        configuration_is_required = profile in {"inferencex", "generic"}
+        if configuration_is_required and (
+            len(configuration_fingerprints) > 1 or not stable_configuration(members[0]["record"])
+        ):
             conditional_reasons.append("parallelism_or_run_configuration_differs_or_is_incomplete")
         status = "directly_comparable" if not conditional_reasons else "conditionally_comparable"
         pairs = len(entries) * (len(entries) - 1) // 2
