@@ -13,6 +13,7 @@ description: Local-only review of unverified intelligence claim and evidence gra
     <span>Data <strong>local GitHub Actions artifacts</strong></span>
     <a href="https://github.com/basicmi/AI-Chip/actions/workflows/model-catalog-audit.yml" target="_blank" rel="noopener noreferrer">Download weekly discovery artifact ↗</a>
     <a href="https://github.com/basicmi/AI-Chip/blob/master/docs/evidence-review-workbench.md">Review methodology ↗</a>
+    <a href="{{ '/database-integration/' | relative_url }}">Database Integration Workbench ↗</a>
   </div>
 </section>
 

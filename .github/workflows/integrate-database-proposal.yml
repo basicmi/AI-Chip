@@ -1,0 +1,136 @@
+name: Integrate reviewed database proposal
+
+on:
+  workflow_dispatch:
+    inputs:
+      proposal_path:
+        description: Committed proposal package under reviews/integration-proposals/
+        required: true
+        type: string
+      approval_path:
+        description: Committed human Approval Manifest under reviews/approvals/
+        required: true
+        type: string
+      claim_report_path:
+        description: Committed original Claim report under reviews/claims/
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: database-integration-proposal
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check committed proposal package path
+        env:
+          PROPOSAL_PATH: ${{ inputs.proposal_path }}
+          APPROVAL_PATH: ${{ inputs.approval_path }}
+          CLAIM_PATH: ${{ inputs.claim_report_path }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import subprocess
+          from pathlib import Path
+          checks = (
+              ("PROPOSAL_PATH", "reviews/integration-proposals/"),
+              ("APPROVAL_PATH", "reviews/approvals/"),
+              ("CLAIM_PATH", "reviews/claims/"),
+          )
+          for name, prefix in checks:
+              value = os.environ[name]
+              path = Path(value)
+              cursor = Path.cwd()
+              has_symlink = False
+              for part in path.parts:
+                  cursor = cursor / part
+                  has_symlink = has_symlink or cursor.is_symlink()
+              if (not value.startswith(prefix) or not value.endswith(".json") or
+                      path.is_absolute() or ".." in path.parts or has_symlink or
+                      not path.is_file() or not path.resolve().is_relative_to(Path.cwd().resolve())):
+                  raise SystemExit("Invalid committed review input path: " + name)
+              subprocess.run(["git", "ls-files", "--error-unmatch", "--", value], check=True,
+                             stdout=subprocess.DEVNULL)
+          print("PASS: proposal, approval and Claim report are committed under their designated paths")
+          PY
+      - name: Rebuild and verify proposal against current master registry
+        id: proposal
+        env:
+          PROPOSAL_PATH: ${{ inputs.proposal_path }}
+          APPROVAL_PATH: ${{ inputs.approval_path }}
+          CLAIM_PATH: ${{ inputs.claim_report_path }}
+        run: |
+          python3 scripts/build_database_integration_proposal.py verify \
+            --company-profiles data/company-profiles.json \
+            --proposal "$PROPOSAL_PATH" \
+            --claim-report "$CLAIM_PATH" \
+            --approval "$APPROVAL_PATH" \
+            --database-output "$RUNNER_TEMP/company-profiles-proposal.json" \
+            --patch-output "$RUNNER_TEMP/database-integration-patch.json" \
+            --audit-output "$RUNNER_TEMP/database-integration-audit.json" \
+            --diff-output "$RUNNER_TEMP/database-integration.diff"
+          python3 - <<'PY'
+          import json, os
+          p = json.load(open(os.environ["PROPOSAL_PATH"], encoding="utf-8"))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write("proposal_id=" + p["proposal_id"] + "\n")
+              out.write("company_id=" + p["target"]["company_id"] + "\n")
+              out.write("claim_id=" + p["target"]["claim_id"] + "\n")
+          PY
+      - name: Apply verified proposal to temporary checkout
+        run: |
+          cp "$RUNNER_TEMP/company-profiles-proposal.json" data/company-profiles.json
+          python3 scripts/validate_company_profiles.py
+          python3 - <<'PY'
+          import subprocess
+          paths = set(subprocess.check_output(["git", "diff", "--name-only"], text=True).splitlines())
+          if paths != {"data/company-profiles.json"}:
+              raise SystemExit("Unexpected modified paths: " + repr(paths))
+          print("PASS: only data/company-profiles.json is modified")
+          PY
+      - name: Upload proposal review artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-integration-${{ steps.proposal.outputs.proposal_id }}
+          path: |
+            ${{ runner.temp }}/database-integration-patch.json
+            ${{ runner.temp }}/database-integration-audit.json
+            ${{ runner.temp }}/database-integration.diff
+          retention-days: 30
+      - name: Create human-review pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: data/company-profiles.json
+          branch: automation/database-integration-${{ steps.proposal.outputs.proposal_id }}
+          delete-branch: true
+          commit-message: "Integrate reviewed evidence proposal ${{ steps.proposal.outputs.proposal_id }}"
+          title: "Integrate reviewed company database proposal"
+          body: |
+            This PR was generated from a committed, human-reviewed integration proposal.
+
+            Proposal: ${{ inputs.proposal_path }}
+            Approval manifest: ${{ inputs.approval_path }}
+            Original Claim report: ${{ inputs.claim_report_path }}
+            Proposal ID: ${{ steps.proposal.outputs.proposal_id }}
+            Company: ${{ steps.proposal.outputs.company_id }}
+            Existing Claim: ${{ steps.proposal.outputs.claim_id }}
+
+            The workflow regenerated the exact append-only patch against the current master
+            registry, checked the package and base-registry SHA256, independently verified
+            that only one Evidence object and one evidence ID were appended, and ran the
+            complete company-profile validator.
+
+            This does not verify source truth or upgrade the Claim status. Inspect the
+            committed proposal, original source, diff and CI results before merging.
