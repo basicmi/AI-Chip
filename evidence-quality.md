@@ -62,6 +62,47 @@ description: Local-only trends for source provenance, quote traceability, and hu
     <div data-eq-details class="compat-limitations"></div>
   </section>
 </section>
+<section class="evidence-workbench intelligence-operations" data-decision-analytics>
+  <section class="compat-filter-panel">
+    <div class="compat-filter-heading">
+      <div><p class="eyebrow">04 / DECISION ANALYTICS</p><h2>Human review outcomes and reasons</h2></div>
+      <button class="text-button" type="button" data-da-clear>Clear</button>
+    </div>
+    <p>Import <code>ai-chip-intelligence-decision-analytics.json</code> from completed weekly runs. Review reasons are counted only when explicitly coded by a human; free-text notes are never classified automatically.</p>
+    <label>Decision analytics JSON snapshots
+      <input type="file" accept=".json,application/json" multiple data-da-files>
+    </label>
+    <p class="compat-load-state" role="status" aria-live="polite" data-da-status>No decision analytics loaded.</p>
+  </section>
+  <div class="workload-stat-grid" data-da-results hidden>
+    <div class="compat-stat"><span>Decision coverage</span><strong data-da-stat="decision-coverage">—</strong></div>
+    <div class="compat-stat"><span>Explicit reason-code coverage</span><strong data-da-stat="reason-coverage">—</strong></div>
+    <div class="compat-stat"><span>Median decision latency</span><strong data-da-stat="median-latency">—</strong></div>
+    <div class="compat-stat"><span>Unresolved Claims 14+ days</span><strong data-da-stat="overdue">—</strong></div>
+  </div>
+  <section class="compat-filter-panel" data-da-results hidden>
+    <div class="compat-filter-heading"><div><p class="eyebrow">HISTORY</p><h2>Decision process over time</h2></div></div>
+    <div class="ops-table-scroll"><table class="ops-table">
+      <thead><tr><th>Run UTC</th><th>Decisions</th><th>Decision coverage</th><th>Reason-coded</th><th>Reason coverage</th><th>Median latency</th><th>Overdue 14+ days</th></tr></thead>
+      <tbody data-da-history></tbody>
+    </table></div>
+  </section>
+  <div class="workload-stat-grid" data-da-results hidden>
+    <section class="compat-filter-panel">
+      <p class="eyebrow">LATEST RUN</p><h2>Decision outcomes</h2>
+      <div class="ops-table-scroll"><table class="ops-table">
+        <thead><tr><th>Outcome</th><th>Claims</th></tr></thead><tbody data-da-outcomes></tbody>
+      </table></div>
+    </section>
+    <section class="compat-filter-panel">
+      <p class="eyebrow">LATEST RUN</p><h2>Explicit primary reasons</h2>
+      <div class="ops-table-scroll"><table class="ops-table">
+        <thead><tr><th>Reason code</th><th>Claims</th></tr></thead><tbody data-da-reasons></tbody>
+      </table></div>
+    </section>
+  </div>
+  <p class="compat-limitations">Decision latency starts at first observation in the persistent cache, not publication. Reason codes are reviewer assertions, not independently authenticated labels. These metrics describe workflow operations, not technical truth or reviewer accuracy.</p>
+</section>
 <section class="compat-method-note">
   <div><p class="eyebrow">INTERPRETATION BOUNDARIES</p><h2>No composite trust score</h2></div>
   <p>A quote found in an excerpt does not imply semantic entailment. Different source URLs, publishers or reviewer-assigned origin keys do not establish experimental independence. Blank human templates do not count as completed reviews; human agreement is unavailable until actual reviewed evaluations are supplied. Accepted-for-evidence-attachment is a workflow state, not factual verification. No database changes result from this dashboard.</p>
@@ -69,3 +110,4 @@ description: Local-only trends for source provenance, quote traceability, and hu
 <link rel="stylesheet" href="{{ '/assets/css/evidence-review.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/intelligence-operations.css' | relative_url }}">
 <script src="{{ '/assets/js/intelligence-evidence-quality.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/intelligence-decision-analytics.js' | relative_url }}" defer></script>

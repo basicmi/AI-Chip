@@ -1,0 +1,39 @@
+.di-chain {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+  gap:1rem;
+  align-items:stretch;
+  margin:1rem 0;
+}
+.di-chain article {
+  min-width:0;
+  padding:1rem;
+  border:1px solid var(--line,#d7dce0);
+  border-radius:12px;
+  background:var(--surface,rgba(127,127,127,.035));
+}
+.di-chain article h3 {overflow-wrap:anywhere;font-size:1rem;margin:.35rem 0 .6rem}
+.di-chain article p {overflow-wrap:anywhere}
+.di-chain article a {overflow-wrap:anywhere;font-size:.9rem}
+.di-chain-arrow {align-self:center;color:var(--muted,#737b82);font-size:1.4rem}
+.di-meta {font-size:.82rem;color:var(--muted,#737b82)}
+.di-hash {display:block;font:500 .72rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+.di-patch {margin-top:1rem;border-top:1px solid var(--line,#d7dce0);padding-top:.8rem}
+.di-patch summary {cursor:pointer;font-weight:650}
+.di-patch pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:24rem;overflow:auto;padding:1rem;background:var(--surface,rgba(127,127,127,.05));border-radius:8px;font-size:.8rem}
+.di-checks {display:grid;gap:.75rem}
+.di-check {display:flex;gap:.7rem;align-items:flex-start}
+.di-check-mark {flex:0 0 1.5rem;width:1.5rem;height:1.5rem;display:grid;place-items:center;border-radius:50%;background:rgba(40,130,90,.12);color:#24744f;font-weight:750}
+.di-check strong {display:block}
+.di-check p {margin:.15rem 0 0;color:var(--muted,#737b82);font-size:.88rem}
+.di-downloads {display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.1rem}
+@media(max-width:800px) {
+  .di-chain {grid-template-columns:1fr}
+  .di-chain-arrow {transform:rotate(90deg);justify-self:center}
+}
+
+/* Generic panel display rules must never expose unverified proposal output. */
+[data-database-integration] [data-di-results][hidden] { display: none !important; }
+
+/* Keep product proposal results hidden until the local provenance checks pass. */
+[data-product-integration] [data-pi-results][hidden] { display: none !important; }

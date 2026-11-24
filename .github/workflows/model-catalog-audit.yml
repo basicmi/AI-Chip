@@ -205,18 +205,22 @@ jobs:
             --semantic "$RUNNER_TEMP/ai-chip-intelligence-semantic-review-template.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md"
-      - name: Build read-only Evidence-to-Database conversion funnel
+      - name: Build Claim-to-Database conversion funnel
         run: |
           python3 scripts/build_intelligence_conversion_funnel.py \
-            --discovery "$RUNNER_TEMP/ai-chip-intelligence-discovery.json" \
-            --claims "$RUNNER_TEMP/ai-chip-intelligence-claims.json" \
-            --triage "$RUNNER_TEMP/ai-chip-intelligence-triage.json" \
             --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
             --ledger data/intelligence-review-decisions.json \
-            --integrations data/intelligence-database-integrations.json \
-            --repo-root . \
+            --integration-manifest data/intelligence-database-integration.json \
             --output "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md"
+      - name: Build human decision and reason-code analytics
+        run: |
+          python3 scripts/build_intelligence_decision_analytics.py \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --ledger data/intelligence-review-decisions.json \
+            --reason-codes data/intelligence-review-reason-codes.json \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-decision-analytics.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-decision-analytics.md"
       - name: Commit cached checkpoints after successful audit
         run: |
           test -s "$RUNNER_TEMP/intelligence-state-staged.json"
@@ -275,6 +279,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-decision-analytics.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-decision-analytics.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload discovery report
         if: always()
         uses: actions/upload-artifact@v4
@@ -305,6 +312,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-evidence-dashboard.md
             ${{ runner.temp }}/ai-chip-intelligence-conversion-funnel.json
             ${{ runner.temp }}/ai-chip-intelligence-conversion-funnel.md
+            ${{ runner.temp }}/ai-chip-intelligence-decision-analytics.json
+            ${{ runner.temp }}/ai-chip-intelligence-decision-analytics.md
             ${{ runner.temp }}/ai-chip-intelligence-source-lineage-review-template.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md
