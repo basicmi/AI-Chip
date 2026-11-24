@@ -197,7 +197,11 @@ def system_boundary(record):
             "physical_prefill_gpus": system["physical_prefill_gpus"],
             "physical_decode_gpus": system["physical_decode_gpus"],
             "is_multinode": system["is_multinode"],
-            "workers": system.get("workers") or [],
+            "worker_roles": sorted(
+                ({"role": worker.get("role"), "num_gpus": worker.get("num_gpus")}
+                 for worker in (system.get("workers") or []) if isinstance(worker, dict)),
+                key=lambda item: (str(item.get("role")), str(item.get("num_gpus"))),
+            ),
         }
     return {
         "system_type": record.get("system_type"),
@@ -205,18 +209,22 @@ def system_boundary(record):
         "total_accelerators": system["total_accelerators"],
         "accelerators_per_node": system["accelerators_per_node"],
         "host_processor_model": system["host_processor_model"],
+        "host_processors_per_node": system.get("host_processors_per_node"),
+        "host_processor_core_count": system.get("host_processor_core_count"),
     }
 
 
 def accelerator_identity(record):
     system = record.get("system") or {}
-    return {
+    identity = {
         "vendor": record.get("accelerator_vendor"),
         "platform_id": record.get("platform_id"),
         "product_id": record.get("product_id"),
         "model": system.get("accelerator_model"),
-        "system_name": record.get("system_name"),
     }
+    if not any(nonempty(identity.get(field)) for field in ("product_id", "model")):
+        identity["fallback_system_name"] = record.get("system_name")
+    return identity
 
 
 def build_report(database):
