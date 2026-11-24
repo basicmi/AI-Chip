@@ -257,6 +257,53 @@ def accelerator_identity(record):
     return identity
 
 
+def describe_metric_spread(entries, metric):
+    """Summarize observed spread without attributing it to any one factor."""
+    values = [entry["value"] for entry in entries]
+    low, high = min(values), max(values)
+    midpoint = (low + high) / 2
+    relative_spread = (high - low) / abs(midpoint) * 100 if midpoint != 0 else None
+    direction = metric.get("direction")
+    ranked = direction in {"higher", "lower"}
+    if ranked:
+        best_value = high if direction == "higher" else low
+        worst_value = low if direction == "higher" else high
+        best_ids = [entry["record_id"] for entry in entries if entry["value"] == best_value]
+        worst_ids = [entry["record_id"] for entry in entries if entry["value"] == worst_value]
+    else:
+        best_value = worst_value = None
+        best_ids = worst_ids = []
+
+    dimensions = {
+        "accelerator_identity": [entry.get("accelerator") for entry in entries],
+        "software": [entry.get("software") for entry in entries],
+        "system_boundary": [entry.get("system_boundary") for entry in entries],
+        "configuration": [entry.get("configuration") for entry in entries],
+        "evidence_class": [entry.get("evidence_level") or entry.get("source_class") for entry in entries],
+    }
+    varying = sorted(
+        name for name, observed in dimensions.items()
+        if len({canonical(value) for value in observed}) > 1
+    )
+    return {
+        "observation_count": len(entries),
+        "minimum": low,
+        "maximum": high,
+        "absolute_range": high - low,
+        "relative_spread_vs_midpoint_percent": relative_spread,
+        "ranking_direction": direction if ranked else None,
+        "best_value": best_value,
+        "best_record_ids": best_ids,
+        "worst_value": worst_value,
+        "worst_record_ids": worst_ids,
+        "varying_dimensions": varying,
+        "interpretation": (
+            "Descriptive spread only. Varying dimensions are candidate confounders, "
+            "not evidence of causal contribution."
+        ),
+    }
+
+
 def build_report(database):
     records = database.get("records") if isinstance(database, dict) else None
     if not isinstance(records, list):
@@ -330,7 +377,7 @@ def build_report(database):
                 "accelerator": accelerator_identity(record),
                 "software": software,
                 "configuration": stable_configuration(record),
-                "system_boundary": boundary,
+                "system_boundary": system_boundary(record),
                 "value": metric["value"],
                 "unit": metric["unit"],
                 "source_url": record.get("source_url"),
@@ -362,10 +409,11 @@ def build_report(database):
             "metric": members[0]["key"]["metric"],
             "conditional_reasons": conditional_reasons,
             "records": entries,
+            "observed_metric_spread": describe_metric_spread(entries, members[0]["key"]["metric"]),
             "review_notes": [
-                "Exact workload, configuration, benchmark version, accuracy statement and system boundary matched.",
+                "The benchmark protocol signature matched; system size/topology and run configuration may differ and are listed per record.",
                 "Different accelerator identities are retained as the comparison axis.",
-                "Differences in software, system scale/topology or stable parallelism configuration downgrade a group to conditional comparability.",
+                "Observed metric spread is descriptive; varying software, system and configuration dimensions are candidate confounders, not causal estimates.",
                 "Evidence class and source provenance remain visible and are not upgraded by this assessment.",
                 "A matching test definition does not prove source truth or eliminate measurement uncertainty.",
             ],
