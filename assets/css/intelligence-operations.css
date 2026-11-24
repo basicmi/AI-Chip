@@ -17,3 +17,23 @@
 .intelligence-operations [data-eq-history-panel][hidden],
 .intelligence-operations [data-eq-detail-panel][hidden] { display: none !important; }
 .intelligence-operations [data-eq-status].is-error { color: #b3483d; font-weight: 650; }
+
+
+/* Phase 2: local-only Claim-to-database conversion funnel */
+[data-conversion-funnel] .compat-stat strong {
+  font-variant-numeric: tabular-nums;
+}
+[data-conversion-funnel] [data-cf-details] {
+  line-height: 1.65;
+}
+[data-conversion-funnel] [data-cf-details] ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+[data-conversion-funnel] [data-cf-details] li {
+  margin: .25rem 0;
+}
+[data-conversion-funnel] [data-cf-status].is-error {
+  color: #b3483d;
+  font-weight: 650;
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "integrations": [],
+  "policy": {
+    "manual_only": true,
+    "automatic_registry_writes": false,
+    "description": "Receipts are added manually after a merged pull request updates an existing curated record. This manifest never triggers registry writes."
+  }
+}

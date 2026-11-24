@@ -169,3 +169,12 @@ Company profiles may include an optional corporate_status object. It records whe
 model-support.json links exact model checkpoints to accelerator products, software integration records, precision/quantization modes, execution modes and source-backed deployment evidence. Support levels distinguish documented recipes, upstream verification, vendor-reported claims, independent tests and integration-only paths. The validator cross-checks model IDs, product IDs, platform IDs and software integration IDs against the existing registries. A documented recipe is not an AI-Chip independent benchmark; measured performance belongs in benchmark-results.json.
 
 The first reviewed wave includes Llama 3.1 405B on AWS Trainium2 and Google TPU v6e, Llama 3.3 70B on Trainium2/Trainium3, and upstream vLLM FLY model/hardware verification for selected Llama 3.1 and Qwen3 models on AMD MI355X. Coverage is intentionally narrow and source-driven rather than extrapolated from platform-level support.
+
+
+## Evidence-to-database conversion tracking
+
+- `intelligence-review-decisions.json` records explicit human workflow decisions; acceptance for evidence attachment is not factual verification or final registry approval.
+- `intelligence-database-integrations.json` is a manually maintained receipt ledger. Each receipt links an accepted Claim to an existing record in an allowlisted curated registry and a reported merged AI-Chip pull request. It does not trigger writes.
+- `schemas/intelligence-database-integrations.schema.json` defines the receipt shape.
+- `scripts/build_intelligence_conversion_funnel.py` reconciles discovery, extraction, triage, persistent review state, human decisions and integration receipts into a read-only weekly snapshot.
+- `/intelligence-funnel/` compares downloaded weekly snapshots locally. Stage counts have explicitly named denominators and are not treated as a single monotonic conversion rate.
