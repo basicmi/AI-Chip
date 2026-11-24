@@ -152,7 +152,7 @@ class BenchmarkComparabilityTests(unittest.TestCase):
                     "concurrency": 32, "precision": "FP8",
                     "speculative_method": "none", "disaggregated": False,
                 },
-                "configuration": {"decode_tp": 8},
+                "configuration": {"decode_tp": 8, "workflow_run_id": rid, "run_started_at": "2026-11-24T08:00:00Z"},
                 "system": {
                     "accelerator_model": accelerator,
                     "physical_prefill_gpus": 0, "physical_decode_gpus": 8,
