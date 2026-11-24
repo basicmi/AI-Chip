@@ -64,45 +64,118 @@ def metric_observations(record):
 
 def observation_blockers(record):
     blockers = []
-    for field in ("id", "benchmark_suite", "benchmark_version", "model", "scenario",
-                  "division", "availability", "accuracy_text", "weight_data_types"):
+    source_id = record.get("source_id")
+    suite = record.get("benchmark_suite")
+    for field in ("id", "benchmark_suite", "model", "scenario", "division", "availability", "weight_data_types"):
         if not nonempty(record.get(field)):
             blockers.append("missing_" + field)
     if record.get("inferred") is not False:
         blockers.append("result_is_inferred_or_inference_status_unknown")
     if record.get("errors") != 0:
         blockers.append("nonzero_or_unknown_error_count")
-    if not isinstance(record.get("workload"), dict) or not record["workload"]:
-        blockers.append("missing_workload_definition")
-    if not isinstance(record.get("configuration"), dict) or not record["configuration"]:
-        blockers.append("missing_benchmark_configuration")
+
     system = record.get("system")
     if not isinstance(system, dict):
         blockers.append("missing_system_definition")
         system = {}
-    for field in ("nodes", "total_accelerators", "accelerators_per_node", "host_processor_model"):
-        value = system.get(field)
-        if field == "host_processor_model":
-            if not nonempty(value):
-                blockers.append("missing_system_" + field)
-        elif isinstance(value, bool) or not isinstance(value, int) or value < 1:
-            blockers.append("missing_or_invalid_system_" + field)
+    software = record.get("software")
+    if not isinstance(software, dict) or not nonempty(software.get("framework")):
+        blockers.append("missing_software_framework")
     if not (nonempty(record.get("product_id")) or nonempty(system.get("accelerator_model"))):
         blockers.append("missing_accelerator_identity")
-    software = record.get("software")
-    if not isinstance(software, dict) or not software:
-        blockers.append("missing_software_definition")
-    if not nonempty(record.get("result_unit")) and not record.get("normalized_metrics"):
-        blockers.append("missing_result_unit")
+
+    if source_id == "inferencex" or suite == "SemiAnalysis InferenceX":
+        workload = record.get("workload")
+        if not isinstance(workload, dict):
+            blockers.append("missing_inferencex_workload")
+            workload = {}
+        for field in ("benchmark_type", "isl", "osl", "concurrency", "precision"):
+            value = workload.get(field)
+            if value is None or value == "" or value == "unknown":
+                blockers.append("missing_inferencex_workload_" + field)
+        if not isinstance(workload.get("disaggregated"), bool):
+            blockers.append("missing_inferencex_serving_mode")
+        if not nonempty(workload.get("speculative_method")):
+            blockers.append("missing_inferencex_speculative_method")
+        if not isinstance(record.get("configuration"), dict):
+            blockers.append("missing_inferencex_configuration")
+        for field in ("physical_prefill_gpus", "physical_decode_gpus"):
+            value = system.get(field)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
+                blockers.append("missing_or_invalid_" + field)
+        if not isinstance(system.get("is_multinode"), bool):
+            blockers.append("missing_inferencex_topology")
+        if not nonempty(record.get("model_display_name")):
+            blockers.append("missing_model_display_name")
+    elif source_id == "mlperf-inference-v6.1" or suite == "MLPerf Inference":
+        for field in ("benchmark_version", "accuracy_text"):
+            if not nonempty(record.get(field)):
+                blockers.append("missing_" + field)
+        for field in ("nodes", "total_accelerators", "accelerators_per_node"):
+            value = system.get(field)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+                blockers.append("missing_or_invalid_system_" + field)
+        if not nonempty(system.get("host_processor_model")):
+            blockers.append("missing_system_host_processor_model")
+        if not nonempty(record.get("result_unit")):
+            blockers.append("missing_result_unit")
+    else:
+        for field in ("benchmark_version", "accuracy_text"):
+            if not nonempty(record.get(field)):
+                blockers.append("missing_" + field)
+        if not isinstance(record.get("workload"), dict) or not record["workload"]:
+            blockers.append("missing_workload_definition")
+        if not isinstance(record.get("configuration"), dict) or not record["configuration"]:
+            blockers.append("missing_benchmark_configuration")
+        for field in ("nodes", "total_accelerators", "accelerators_per_node"):
+            value = system.get(field)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+                blockers.append("missing_or_invalid_system_" + field)
+        if not nonempty(system.get("host_processor_model")):
+            blockers.append("missing_system_host_processor_model")
+
     if not metric_observations(record):
         blockers.append("missing_numeric_metric")
     return sorted(set(blockers))
 
 
 def protocol_signature(record):
-    # These fields define the measured task. Accelerator identity and software
-    # are deliberately kept outside the signature: they are comparison axes.
+    source_id = record.get("source_id")
+    suite = record.get("benchmark_suite")
+    if source_id == "inferencex" or suite == "SemiAnalysis InferenceX":
+        workload = record["workload"]
+        return {
+            "profile": "inferencex",
+            "source_id": source_id,
+            "benchmark_suite": suite,
+            "benchmark_version": record.get("benchmark_version"),
+            "model": record.get("model_display_name"),
+            "raw_model_key": record.get("model"),
+            "scenario": record.get("scenario"),
+            "division": record.get("division"),
+            "availability": record.get("availability"),
+            "weight_data_types": record.get("weight_data_types"),
+            "workload": {key: workload.get(key) for key in (
+                "benchmark_type", "isl", "osl", "concurrency", "precision",
+                "speculative_method", "disaggregated"
+            )},
+            "configuration": record.get("configuration") or {},
+        }
+    if source_id == "mlperf-inference-v6.1" or suite == "MLPerf Inference":
+        return {
+            "profile": "mlperf_inference",
+            "benchmark_suite": suite,
+            "benchmark_version": record.get("benchmark_version"),
+            "model": record.get("model"),
+            "scenario": record.get("scenario"),
+            "division": record.get("division"),
+            "availability": record.get("availability"),
+            "accuracy_text": record.get("accuracy_text"),
+            "weight_data_types": record.get("weight_data_types"),
+            "result_unit": record.get("result_unit"),
+        }
     return {
+        "profile": "generic",
         "benchmark_suite": record["benchmark_suite"],
         "benchmark_version": record["benchmark_version"],
         "model": record["model"],
@@ -118,14 +191,20 @@ def protocol_signature(record):
 
 def system_boundary(record):
     system = record["system"]
+    if record.get("source_id") == "inferencex" or record.get("benchmark_suite") == "SemiAnalysis InferenceX":
+        return {
+            "system_type": record.get("system_type"),
+            "physical_prefill_gpus": system["physical_prefill_gpus"],
+            "physical_decode_gpus": system["physical_decode_gpus"],
+            "is_multinode": system["is_multinode"],
+            "workers": system.get("workers") or [],
+        }
     return {
         "system_type": record.get("system_type"),
         "nodes": system["nodes"],
         "total_accelerators": system["total_accelerators"],
         "accelerators_per_node": system["accelerators_per_node"],
         "host_processor_model": system["host_processor_model"],
-        "physical_prefill_gpus": system.get("physical_prefill_gpus"),
-        "physical_decode_gpus": system.get("physical_decode_gpus"),
     }
 
 
@@ -255,10 +334,10 @@ def build_report(database):
         "groups": groups,
         "excluded_records": sorted(excluded, key=lambda x: str(x.get("record_id"))),
         "limitations": [
-            "Only exact benchmark suite/version, model, scenario, division, availability, accuracy, precision, workload and configuration matches are grouped.",
-            "System node count, accelerator count, accelerators per node and host processor model must match exactly.",
+            "Suite-specific profiles preserve MLPerf Inference and InferenceX workload semantics; other suites require explicit generic workload/configuration metadata.",
+            "System boundary must match exactly within each suite profile: MLPerf/generic node and accelerator counts plus host CPU, or InferenceX prefill/decode GPU counts and topology.",
             "Software metadata differences downgrade a group to conditional comparability.",
-            "Missing context is excluded rather than inferred.",
+            "Missing context is excluded rather than inferred. InferenceX publishes no benchmark version in this registry; comparisons remain within its source and model/workload signature.",
             "Cross-suite normalization, score conversion, causal attribution and leaderboard ranking are out of scope.",
             "Source class/evidence level describe provenance, not measurement correctness.",
         ],
