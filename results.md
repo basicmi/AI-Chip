@@ -41,6 +41,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
         <p class="eyebrow">SYSTEM COMPARISON</p>
         <h2 id="benchmark-comparison-title">Comparison workspace <span data-comparison-count>0 / 4</span></h2>
         <p>Select up to four result rows. Only records with the same strict benchmark/workload definition receive a side-by-side metric comparison.</p>
+        <p><a href="{{ '/docs/benchmark-comparability-assessment/' | relative_url }}">Read the comparability policy ↗</a> — missing workload or system context is not inferred, and provenance remains visible.</p>
       </div>
       <button class="text-button" type="button" data-comparison-clear disabled>Clear comparison</button>
     </div>
