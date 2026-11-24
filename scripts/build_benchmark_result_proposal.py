@@ -11,6 +11,7 @@ import copy
 import difflib
 import hashlib
 import json
+import math
 import re
 import sys
 from datetime import date, datetime, timezone
@@ -115,13 +116,13 @@ def validate_approval(approval):
     for field in ("benchmark_suite", "submitter", "system_type", "system_name", "division",
                   "availability", "model", "scenario", "source_record_key"):
         require_text(record[field], "record." + field)
-    for field in ("benchmark_version", "publication_date"):
-        if field in record and record[field] is not None:
-            require_date(record[field], "record." + field)
+    if record["publication_date"] is not None:
+        require_date(record["publication_date"], "record.publication_date")
     if record["publication_date"] and date.fromisoformat(record["publication_date"]) > reviewed:
         raise ValueError("publication_date cannot follow human review")
     if record["result_value"] is not None and (
         isinstance(record["result_value"], bool) or not isinstance(record["result_value"], (int, float))
+        or not math.isfinite(record["result_value"])
     ):
         raise ValueError("result_value must be a finite number or null")
     if not isinstance(record["inferred"], bool):
@@ -193,6 +194,10 @@ def build_package(database, registry_bytes, approval, created_at=None):
     updated["database_version"] = str(database["database_version"]) + "+reviewed-" + approval["approval_id"]
     from validate_benchmark_results import summarize
     updated["summary"] = summarize(updated["records"])
+    from validate_benchmark_results import validate_database
+    errors = validate_database(updated)
+    if errors:
+        raise ValueError("proposed registry fails benchmark validation: " + "; ".join(errors[:8]))
 
     operations = [
         {"op": "add", "path": "/records/-", "value": record},
