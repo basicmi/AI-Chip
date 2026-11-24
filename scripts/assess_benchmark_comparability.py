@@ -181,7 +181,6 @@ def protocol_signature(record):
                 "benchmark_type", "isl", "osl", "concurrency", "precision",
                 "speculative_method", "disaggregated"
             )},
-            "configuration": stable_configuration(record),
         }
     if source_id == "mlperf-inference-v6.1" or suite == "MLPerf Inference":
         return {
@@ -281,7 +280,6 @@ def build_report(database):
             observation_count += 1
             key = {
                 "protocol": protocol,
-                "system_boundary": boundary,
                 "metric": {k: metric.get(k) for k in ("key", "unit", "family", "direction")},
             }
             buckets[digest(key)].append({
@@ -305,11 +303,15 @@ def build_report(database):
 
         entries = []
         software_fingerprints = set()
+        boundary_fingerprints = set()
+        configuration_fingerprints = set()
         evidence_classes = set()
         for item in sorted(members, key=lambda x: x["record"].get("id", "")):
             record, metric = item["record"], item["metric"]
             software = record.get("software") or {}
             software_fingerprints.add(canonical(software))
+            boundary_fingerprints.add(canonical(system_boundary(record)))
+            configuration_fingerprints.add(canonical(stable_configuration(record)))
             evidence_classes.add(record.get("evidence_level") or record.get("source_class") or "unknown")
             entries.append({
                 "record_id": record["id"],
@@ -318,17 +320,21 @@ def build_report(database):
                 "evidence_level": record.get("evidence_level"),
                 "accelerator": accelerator_identity(record),
                 "software": software,
+                "configuration": stable_configuration(record),
+                "system_boundary": boundary,
                 "value": metric["value"],
                 "unit": metric["unit"],
                 "source_url": record.get("source_url"),
             })
 
-        is_inferencex = (
-            members[0]["record"].get("source_id") == "inferencex"
-            or members[0]["record"].get("benchmark_suite") == "SemiAnalysis InferenceX"
-        )
-        config_complete = not is_inferencex or bool(stable_configuration(members[0]["record"]))
-        status = "directly_comparable" if len(software_fingerprints) == 1 and config_complete else "conditionally_comparable"
+        conditional_reasons = []
+        if len(software_fingerprints) > 1:
+            conditional_reasons.append("software_stack_differs")
+        if len(boundary_fingerprints) > 1:
+            conditional_reasons.append("system_scale_or_topology_differs")
+        if len(configuration_fingerprints) > 1 or not stable_configuration(members[0]["record"]):
+            conditional_reasons.append("parallelism_or_run_configuration_differs_or_is_incomplete")
+        status = "directly_comparable" if not conditional_reasons else "conditionally_comparable"
         pairs = len(entries) * (len(entries) - 1) // 2
         if status == "directly_comparable":
             direct_pairs += pairs
@@ -339,13 +345,14 @@ def build_report(database):
             "status": status,
             "pair_count": pairs,
             "protocol": members[0]["key"]["protocol"],
-            "system_boundary": members[0]["key"]["system_boundary"],
+            "system_boundaries": sorted({canonical(system_boundary(item["record"])) for item in members}),
             "metric": members[0]["key"]["metric"],
+            "conditional_reasons": conditional_reasons,
             "records": entries,
             "review_notes": [
                 "Exact workload, configuration, benchmark version, accuracy statement and system boundary matched.",
                 "Different accelerator identities are retained as the comparison axis.",
-                "Direct comparability requires identical software metadata and explicit stable run-configuration fields; otherwise the group is conditional.",
+                "Differences in software, system scale/topology or stable parallelism configuration downgrade a group to conditional comparability.",
                 "Evidence class and source provenance remain visible and are not upgraded by this assessment.",
                 "A matching test definition does not prove source truth or eliminate measurement uncertainty.",
             ],
@@ -370,7 +377,7 @@ def build_report(database):
         "excluded_records": sorted(excluded, key=lambda x: str(x.get("record_id"))),
         "limitations": [
             "Suite-specific profiles preserve MLPerf Inference and InferenceX workload semantics; other suites require explicit generic workload/configuration metadata.",
-            "System boundary must match exactly within each suite profile: MLPerf/generic node and accelerator counts plus host CPU, or InferenceX prefill/decode GPU counts and topology.",
+            "System boundaries are retained as comparison dimensions; differences in node/GPU count or topology downgrade the group to conditional rather than being hidden.",
             "Software metadata differences downgrade a group to conditional comparability.",
             "Missing context is excluded rather than inferred. InferenceX publishes no benchmark version in this registry; comparisons remain within its source and model/workload signature.",
             "Cross-suite normalization, score conversion, causal attribution and leaderboard ranking are out of scope.",
