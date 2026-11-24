@@ -363,13 +363,25 @@ def build_report(database):
             "evidence_classes": sorted(evidence_classes),
         })
 
+    excluded_reason_counts = Counter(
+        reason for item in excluded for reason in item.get("reasons", [])
+    )
+    group_profile_counts = Counter(
+        group["protocol"].get("profile", "unknown") for group in groups
+    )
+    conditional_reason_counts = Counter(
+        reason for group in groups for reason in group.get("conditional_reasons", [])
+    )
     summary = {
         "records_seen": len(records),
         "eligible_metric_observations": observation_count,
         "excluded_records": len(excluded),
+        "excluded_reason_counts": dict(sorted(excluded_reason_counts.items())),
         "comparison_groups": len(groups),
+        "groups_by_profile": dict(sorted(group_profile_counts.items())),
         "direct_comparison_pairs": direct_pairs,
         "conditional_comparison_pairs": conditional_pairs,
+        "conditional_reason_counts": dict(sorted(conditional_reason_counts.items())),
         "unmatched_or_single_hardware_groups": max(0, len(buckets) - len(groups)),
     }
     return {
