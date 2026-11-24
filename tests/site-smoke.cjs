@@ -210,7 +210,12 @@ const { chromium } = require("playwright");
   await page.locator("[data-bi-registry]").setInputFiles({
     name:"benchmark-results.json",mimeType:"application/json",buffer:Buffer.from(biRegistryText)
   });
-  await page.waitForFunction(() => (document.querySelector("[data-bi-status]")?.textContent || "").includes("Verified locally"));
+  await page.waitForFunction(() => {
+    const message=document.querySelector("[data-bi-status]")?.textContent || "";
+    return message.includes("Verified locally") || message.includes("validation failed");
+  });
+  const biStatus=(await page.locator("[data-bi-status]").textContent()).trim();
+  if (!biStatus.includes("Verified locally")) throw new Error("Benchmark Integration Workbench fixture rejected: "+biStatus);
   if (!(await page.locator("[data-bi-results]").first().isVisible())) {
     throw new Error("Benchmark Integration Workbench failed to verify a valid one-result append fixture");
   }
