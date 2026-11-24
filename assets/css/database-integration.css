@@ -37,3 +37,8 @@
 
 /* Keep product proposal results hidden until the local provenance checks pass. */
 [data-product-integration] [data-pi-results][hidden] { display: none !important; }
+
+.di-chain-two { grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); }
+
+/* Never expose benchmark proposal output before all local integrity checks pass. */
+[data-benchmark-integration] [data-bi-results][hidden] { display: none !important; }
