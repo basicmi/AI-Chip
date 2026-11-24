@@ -30,6 +30,10 @@ description: Local-only trends for source provenance, quote traceability, and hu
       <input type="file" accept=".json,application/json" data-eq-semantic-eval>
     </label>
     <p class="compat-load-state" role="status" aria-live="polite" data-eq-eval-status>No human evaluation loaded. Results are supplied locally and are not independently authenticated.</p>
+    <label>Optional human source-lineage evaluation JSON (annotated source origins, same run)
+      <input type="file" accept=".json,application/json" data-eq-lineage-eval>
+    </label>
+    <p class="compat-load-state" role="status" aria-live="polite" data-eq-lineage-status>No source-lineage evaluation loaded. Reviewer statements are not independently authenticated.</p>
   </section>
   <div class="workload-stat-grid">
     <div class="compat-stat"><span>Latest quote traceability</span><strong data-eq-stat="quotes">—</strong></div>
@@ -45,7 +49,7 @@ description: Local-only trends for source provenance, quote traceability, and hu
     <p>Missing human evaluations are displayed as N/A, never 0% or 100%. Percentages use the current run's Claim count as denominator. Backlog is persistent across runs.</p>
     <div class="ops-table-scroll">
       <table class="ops-table">
-        <thead><tr><th>Run UTC</th><th>Claims</th><th>Quote traceability</th><th>Provenance</th><th>Metadata mismatches</th><th>Source documents</th><th>Backlog</th><th>Unresolved</th><th>Payload coverage</th><th>Lineage queued</th><th>Semantic queued</th><th>Human reported agreement</th></tr></thead>
+        <thead><tr><th>Run UTC</th><th>Claims</th><th>Quote traceability</th><th>Provenance</th><th>Metadata mismatches</th><th>Source documents</th><th>Backlog</th><th>Unresolved</th><th>Payload coverage</th><th>Lineage queued</th><th>Semantic queued</th><th>Human reported agreement</th><th>Lineage clusters reviewed</th></tr></thead>
         <tbody data-eq-history></tbody>
       </table>
     </div>
@@ -60,7 +64,7 @@ description: Local-only trends for source provenance, quote traceability, and hu
 </section>
 <section class="compat-method-note">
   <div><p class="eyebrow">INTERPRETATION BOUNDARIES</p><h2>No composite trust score</h2></div>
-  <p>A quote found in an excerpt does not imply semantic entailment. Different source URLs and publishers do not establish experimental independence. Blank human templates do not count as completed reviews; human agreement is unavailable until actual reviewed evaluations are supplied. Accepted-for-evidence-attachment is a workflow state, not factual verification. No database changes result from this dashboard.</p>
+  <p>A quote found in an excerpt does not imply semantic entailment. Different source URLs, publishers or reviewer-assigned origin keys do not establish experimental independence. Blank human templates do not count as completed reviews; human agreement is unavailable until actual reviewed evaluations are supplied. Accepted-for-evidence-attachment is a workflow state, not factual verification. No database changes result from this dashboard.</p>
 </section>
 <link rel="stylesheet" href="{{ '/assets/css/evidence-review.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/intelligence-operations.css' | relative_url }}">

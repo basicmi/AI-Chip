@@ -21,6 +21,7 @@ def fixtures():
         "review_states":{"pending":6,"needs_more_evidence":3,
         "rejected":2,"accepted_for_evidence_attachment":1}}}
     lineage={"schema_version":"1.0","review_type":"source_lineage",
+        "generated_at":"2026-11-23T00:01:00Z",
         "status":"human_review_required",
         "summary":{"multi_document_duplicate_clusters":3,"selected_clusters":1},
         "clusters":[{"cluster_id":"one"}],
@@ -63,6 +64,19 @@ class DashboardSnapshotTests(unittest.TestCase):
         reports=list(fixtures())
         reports[2]["policy"]["independent_corroboration_automatically_verified"]=True
         with self.assertRaisesRegex(ValueError,"lineage"):
+            snapshot(*reports)
+
+    def test_snapshot_preserves_exact_lineage_cluster_identity(self):
+        result=snapshot(*fixtures())
+        self.assertEqual(result["lineage_generated_at"],"2026-11-23T00:01:00Z")
+        self.assertEqual(result["lineage_cluster_ids"],["one"])
+        self.assertIsNone(result["metrics"]["lineage_human_review_coverage"])
+
+    def test_duplicate_lineage_cluster_ids_are_rejected(self):
+        reports=list(fixtures())
+        reports[2]["summary"].update(selected_clusters=2,multi_document_duplicate_clusters=2)
+        reports[2]["clusters"]=[{"cluster_id":"one"},{"cluster_id":"one"}]
+        with self.assertRaisesRegex(ValueError,"unique"):
             snapshot(*reports)
 
     def test_snapshot_retains_semantic_batch_identity_without_human_labels(self):

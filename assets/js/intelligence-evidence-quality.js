@@ -5,10 +5,11 @@
   const $=selector=>root.querySelector(selector);
   const input=$("[data-eq-files]"),status=$("[data-eq-status]");
   const evaluationInput=$("[data-eq-semantic-eval]"),evaluationStatus=$("[data-eq-eval-status]");
+  const lineageInput=$("[data-eq-lineage-eval]"),lineageStatus=$("[data-eq-lineage-status]");
   const table=$("[data-eq-history]"),select=$("[data-eq-select]");
   const history=$("[data-eq-history-panel]"),detail=$("[data-eq-detail-panel]");
   const MAX_RUNS=52,MAX_BYTES=2*1024*1024;
-  let runs=[],semanticEvaluation=null;
+  let runs=[],semanticEvaluation=null,lineageEvaluation=null;
   const integer=x=>Number.isSafeInteger(x)&&x>=0;
   const pair=(row,name)=>{
     if(!row||!integer(row.passed)||!integer(row.total)||row.passed>row.total)
@@ -103,6 +104,62 @@
       throw Error("Semantic agreement or status is inconsistent.");
     return data;
   };
+  const lineageRelationships=new Set(["original_material","syndicated_reprint",
+    "secondary_analysis","independent_measurement_claim","unknown"]);
+  const validateLineageEvaluation=data=>{
+    if(!data||data.schema_version!=="1.0"||data.review_type!=="source_lineage"||
+       data.automatically_verified_independent_evidence!==0||
+       !["pending","complete"].includes(data.status))
+      throw Error("Expected an unverified human source-lineage evaluation.");
+    const run=runs.find(r=>r.lineage_generated_at===data.generated_at &&
+      Array.isArray(r.lineage_cluster_ids)&&
+      r.lineage_cluster_ids.length===data.cluster_count);
+    if(!run)throw Error("Source-lineage evaluation timestamp or selected cluster count does not match any imported run.");
+    const ids=new Set(run.lineage_cluster_ids);
+    const completed=data.completed_clusters,pending=data.pending_cluster_ids;
+    if(!Array.isArray(completed)||!Array.isArray(pending)||
+       !integer(data.cluster_count)||!integer(data.fully_reviewed_clusters)||
+       !integer(data.same_reviewer_assigned_origin_clusters)||
+       !integer(data.different_reviewer_assigned_origin_clusters)||
+       !data.relationship_label_counts||
+       typeof data.relationship_label_counts!=="object"||
+       Array.isArray(data.relationship_label_counts)||
+       completed.length!==data.fully_reviewed_clusters||
+       completed.length+pending.length!==ids.size||
+       data.same_reviewer_assigned_origin_clusters+
+         data.different_reviewer_assigned_origin_clusters!==completed.length)
+      throw Error("Source-lineage review counts are inconsistent.");
+    const seen=new Set();
+    for(const id of pending){
+      if(typeof id!=="string"||!ids.has(id)||seen.has(id))
+        throw Error("Unknown or duplicate pending lineage cluster.");
+      seen.add(id);
+    }
+    let same=0,different=0;
+    for(const item of completed){
+      if(!item||typeof item.cluster_id!=="string"||!ids.has(item.cluster_id)||
+         seen.has(item.cluster_id)||
+         !integer(item.distinct_reviewer_assigned_origin_keys)||
+         item.distinct_reviewer_assigned_origin_keys<1)
+        throw Error("Invalid completed lineage cluster.");
+      seen.add(item.cluster_id);
+      if(item.distinct_reviewer_assigned_origin_keys===1)same++;
+      else different++;
+    }
+    if(same!==data.same_reviewer_assigned_origin_clusters||
+       different!==data.different_reviewer_assigned_origin_clusters||
+       data.status!==(pending.length?"pending":"complete"))
+      throw Error("Source-lineage origin distribution or status does not reconcile.");
+    for(const [key,value] of Object.entries(data.relationship_label_counts)){
+      if(!lineageRelationships.has(key)||!integer(value))
+        throw Error("Unknown source-lineage relationship label.");
+    }
+    return {evaluation:data,run};
+  };
+  const humanLineage=run=>lineageEvaluation &&
+    lineageEvaluation.run.generated_at===run.generated_at?
+    lineageEvaluation.evaluation.fully_reviewed_clusters+"/"+
+    lineageEvaluation.evaluation.cluster_count+" (reviewer-reported)":"N/A";
   const humanAgreement=run=>semanticEvaluation &&
     run.semantic_batch_id===semanticEvaluation.batch_id?
     (semanticEvaluation.raw_agreement===null?"N/A":
@@ -113,9 +170,12 @@
   const cell=x=>{const td=document.createElement("td");td.textContent=String(x);return td;};
   const stat=(key,value)=>{$("[data-eq-stat='"+key+"']").textContent=String(value);};
   const reset=()=>{
-    runs=[];semanticEvaluation=null;input.value="";evaluationInput.value="";
+    runs=[];semanticEvaluation=null;lineageEvaluation=null;
+    input.value="";evaluationInput.value="";lineageInput.value="";
     evaluationStatus.textContent="No human evaluation loaded. Reviewer reports are not independently authenticated.";
     evaluationStatus.classList.remove("is-error");
+    lineageStatus.textContent="No source-lineage evaluation loaded. Reviewer statements are not independently authenticated.";
+    lineageStatus.classList.remove("is-error");
     table.replaceChildren();select.replaceChildren();
     history.hidden=true;detail.hidden=true;
     ["quotes","provenance","unresolved","runs"].forEach(k=>stat(k,"—"));
@@ -135,6 +195,10 @@
       (semanticEvaluation && semanticEvaluation.batch_id===run.semantic_batch_id?
         " · double-reviewed Claims: "+semanticEvaluation.double_reviewed_claims+"/"+semanticEvaluation.total_claims+
         " · disagreements needing adjudication: "+semanticEvaluation.human_adjudication_needed:" · no matched human evaluation supplied") +
+      " · source-lineage reviewed clusters: "+humanLineage(run)+
+      (lineageEvaluation && lineageEvaluation.run.generated_at===run.generated_at?
+        " · same reviewer-assigned origin: "+lineageEvaluation.evaluation.same_reviewer_assigned_origin_clusters+
+        " · different reviewer-assigned origins: "+lineageEvaluation.evaluation.different_reviewer_assigned_origin_clusters:"")+
       " · independently verified Claims: N/A (not measured).";
   };
   const render=()=>{
@@ -148,7 +212,7 @@
           percent(m.provenance_completeness),fmt(m.source_metadata_mismatches),
           fmt(m.distinct_source_documents),fmt(m.review_backlog),fmt(m.unresolved_claims),
           percent(m.payload_coverage),fmt(m.lineage_clusters_queued),
-          fmt(m.semantic_claims_queued),humanAgreement(run)])tr.append(cell(val));
+          fmt(m.semantic_claims_queued),humanAgreement(run),humanLineage(run)])tr.append(cell(val));
       table.append(tr);
       const option=document.createElement("option");
       option.value=run.generated_at;option.textContent=run.generated_at;
@@ -172,7 +236,11 @@
         throw Error("Duplicate run timestamps.");
       runs=values.sort((a,b)=>Date.parse(a.generated_at)-Date.parse(b.generated_at));
       semanticEvaluation=null;
+      lineageEvaluation=null;
       evaluationInput.value="";
+      lineageInput.value="";
+      lineageStatus.classList.remove("is-error");
+      lineageStatus.textContent="No source-lineage evaluation loaded. Reviewer statements are not independently authenticated.";
       evaluationStatus.classList.remove("is-error");
       evaluationStatus.textContent="No human evaluation loaded. Reviewer reports are not independently authenticated.";
       render();
@@ -198,6 +266,27 @@
       evaluationInput.value="";
       evaluationStatus.classList.add("is-error");
       evaluationStatus.textContent="Cannot load semantic evaluation: "+error.message;
+      if(runs.length)render();
+    }
+  });
+  lineageInput.addEventListener("change",async()=>{
+    try{
+      if(!runs.length)throw Error("Load matching Evidence Quality snapshots first.");
+      const file=lineageInput.files[0];
+      if(!file||!file.size||file.size>MAX_BYTES)
+        throw Error("Choose one source-lineage evaluation JSON under 2 MiB.");
+      const checked=validateLineageEvaluation(JSON.parse(await file.text()));
+      lineageEvaluation=checked;
+      lineageStatus.classList.remove("is-error");
+      lineageStatus.textContent="Reviewer-reported source-lineage review loaded: "+
+        checked.evaluation.fully_reviewed_clusters+"/"+checked.evaluation.cluster_count+
+        " clusters. Not independently authenticated or verified.";
+      render();
+    }catch(error){
+      lineageEvaluation=null;
+      lineageInput.value="";
+      lineageStatus.classList.add("is-error");
+      lineageStatus.textContent="Cannot load lineage evaluation: "+error.message;
       if(runs.length)render();
     }
   });

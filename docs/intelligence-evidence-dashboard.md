@@ -75,3 +75,24 @@ an evaluation does not change the immutable weekly snapshot, the Claim
 Decision Ledger, the evidence graph, or any production chip/benchmark data.
 A malicious or fabricated file can still imitate a structurally valid
 evaluation; the page cannot authenticate reviewer identity.
+
+
+## Optional source-lineage reviewer assessment overlay (PR #134)
+
+The dashboard now accepts an optional local `lineage-evaluation.json` created
+by running `scripts/review_intelligence_source_lineage.py --evaluate` on
+a human-annotated lineage worksheet. The weekly evidence snapshot records the
+worksheet's generated-at timestamp and exact selected cluster IDs so the
+browser can reject evaluations for another run or another set of clusters.
+
+The overlay validates complete/pending counts, exact cluster identity,
+distinct reviewer-assigned origins, outcome counts, and the explicit
+`automatically_verified_independent_evidence = 0` guardrail. A missing or
+invalid evaluation is displayed as N/A and clears any previous lineage overlay.
+The raw evaluation is only reviewer-reported and **not authenticated**; a
+structurally valid report can still be fabricated.
+
+A single origin key means a reviewer marked the sampled source documents as
+drawing on the same underlying material. Multiple keys do not prove independent
+benchmark measurements or reproducibility. This dashboard does not update
+the Evidence Graph, the human Claim ledger or production registries.

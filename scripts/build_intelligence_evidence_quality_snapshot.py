@@ -87,6 +87,14 @@ def snapshot(quality, state, lineage, semantic):
     candidates = count(l.get("multi_document_duplicate_clusters"), "multi_document_duplicate_clusters")
     if selected > candidates or selected != len(lineage.get("clusters", [])):
         raise ValueError("lineage selected count mismatch")
+    lineage_stamp = lineage.get("generated_at")
+    if selected and not lineage_stamp:
+        raise ValueError("lineage worksheet timestamp is required")
+    if lineage_stamp:
+        utc_stamp(lineage_stamp)
+    lineage_ids = [row.get("cluster_id") for row in lineage["clusters"] if isinstance(row, dict)]
+    if len(lineage_ids) != selected or any(not isinstance(cid, str) or not cid for cid in lineage_ids) or len(set(lineage_ids)) != len(lineage_ids):
+        raise ValueError("lineage worksheet cluster IDs must be unique and nonempty")
     if len(items) > 100 or len({item.get("claim_id") for item in items}) != len(items):
         raise ValueError("invalid semantic review batch IDs")
     if not all(item.get("reviewers") == [
@@ -103,6 +111,8 @@ def snapshot(quality, state, lineage, semantic):
     return {
         "schema_version": "1.0", "generated_at": stamp,
         "semantic_batch_id": batch_id,
+        "lineage_generated_at": lineage_stamp,
+        "lineage_cluster_ids": sorted(lineage_ids),
         "read_only": True, "factual_verification_performed": False,
         "metrics": {
             "current_claims": total,
