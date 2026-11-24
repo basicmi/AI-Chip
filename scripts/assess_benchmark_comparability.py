@@ -32,6 +32,28 @@ def nonempty(value):
     return isinstance(value, str) and bool(value.strip())
 
 
+INFERENCEX_STABLE_CONFIGURATION_FIELDS = {
+    "prefill_tp", "prefill_ep", "prefill_dp_attention", "prefill_num_workers",
+    "decode_tp", "decode_ep", "decode_dp_attention", "decode_num_workers",
+    "offload_mode",
+}
+
+
+def stable_configuration(record):
+    configuration = record.get("configuration")
+    if not isinstance(configuration, dict):
+        return {}
+    if record.get("source_id") == "inferencex" or record.get("benchmark_suite") == "SemiAnalysis InferenceX":
+        # Workflow/run identifiers are provenance, not workload configuration;
+        # retaining them would make every execution its own cohort.
+        return {
+            key: configuration[key]
+            for key in sorted(INFERENCEX_STABLE_CONFIGURATION_FIELDS)
+            if key in configuration
+        }
+    return configuration
+
+
 def metric_observations(record):
     normalized = record.get("normalized_metrics")
     if isinstance(normalized, dict) and normalized:
@@ -159,7 +181,7 @@ def protocol_signature(record):
                 "benchmark_type", "isl", "osl", "concurrency", "precision",
                 "speculative_method", "disaggregated"
             )},
-            "configuration": record.get("configuration") or {},
+            "configuration": stable_configuration(record),
         }
     if source_id == "mlperf-inference-v6.1" or suite == "MLPerf Inference":
         return {
@@ -185,7 +207,7 @@ def protocol_signature(record):
         "accuracy_text": record["accuracy_text"],
         "weight_data_types": record["weight_data_types"],
         "workload": record["workload"],
-        "configuration": record["configuration"],
+        "configuration": stable_configuration(record),
     }
 
 
@@ -301,7 +323,7 @@ def build_report(database):
                 "source_url": record.get("source_url"),
             })
 
-        status = "directly_comparable" if len(software_fingerprints) == 1 else "conditionally_comparable"
+        status = "directly_comparable" if len(software_fingerprints) == 1 and stable_configuration(members[0]["record"]) else "conditionally_comparable"
         pairs = len(entries) * (len(entries) - 1) // 2
         if status == "directly_comparable":
             direct_pairs += pairs
@@ -318,7 +340,7 @@ def build_report(database):
             "review_notes": [
                 "Exact workload, configuration, benchmark version, accuracy statement and system boundary matched.",
                 "Different accelerator identities are retained as the comparison axis.",
-                "Direct comparability requires identical software metadata; differing software is conditional.",
+                "Direct comparability requires identical software metadata and explicit stable run-configuration fields; otherwise the group is conditional.",
                 "Evidence class and source provenance remain visible and are not upgraded by this assessment.",
                 "A matching test definition does not prove source truth or eliminate measurement uncertainty.",
             ],
