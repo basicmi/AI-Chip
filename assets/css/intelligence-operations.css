@@ -21,3 +21,8 @@
 /* Decision analytics panels are local-only imports; never reveal stale results after clear/error. */
 [data-decision-analytics] [data-da-results][hidden] { display: none !important; }
 [data-decision-analytics] [data-da-status].is-error { color: #b3483d; font-weight: 650; }
+
+
+/* Conversion funnel panels must respect hidden after invalid imports and clear. */
+.intelligence-operations [data-cf-history-panel][hidden],
+.intelligence-operations [data-cf-detail-panel][hidden] { display: none !important; }
