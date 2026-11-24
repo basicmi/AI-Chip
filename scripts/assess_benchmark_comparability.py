@@ -395,7 +395,10 @@ def build_report(database):
         ):
             conditional_reasons.append("parallelism_or_run_configuration_differs_or_is_incomplete")
         status = "directly_comparable" if not conditional_reasons else "conditionally_comparable"
-        pairs = len(entries) * (len(entries) - 1) // 2
+        accelerator_counts = Counter(canonical(entry["accelerator"]) for entry in entries)
+        all_pairs = len(entries) * (len(entries) - 1) // 2
+        same_accelerator_pairs = sum(count * (count - 1) // 2 for count in accelerator_counts.values())
+        pairs = all_pairs - same_accelerator_pairs
         if status == "directly_comparable":
             direct_pairs += pairs
         else:
