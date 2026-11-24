@@ -63,6 +63,14 @@ class BenchmarkComparabilityTests(unittest.TestCase):
         self.assertEqual(group["pair_count"], 1)
         self.assertEqual(group["metric"]["unit"], "token/s")
 
+    def test_pair_count_excludes_same_accelerator_record_pairs(self):
+        first = record("a1", "GPU A")
+        duplicate = record("a2", "GPU A")
+        second = record("b", "GPU B")
+        report = build_report({"records": [first, duplicate, second]})
+        self.assertEqual(report["groups"][0]["pair_count"], 2)
+        self.assertEqual(report["summary"]["direct_comparison_pairs"], 2)
+
     def test_metric_spread_is_descriptive_and_direction_aware(self):
         report = build_report({"records": [record("a", "GPU A"), record("b", "GPU B")]})
         spread = report["groups"][0]["observed_metric_spread"]
