@@ -12,6 +12,7 @@ description: Local-only review of provenance-bound database integration proposal
   <div class="page-meta">
     <span>Mode <strong>local-only review</strong></span>
     <a href="{{ '/evidence-review/' | relative_url }}">Evidence Review Workbench ↗</a>
+    <a href="{{ '/product-integration/' | relative_url }}">New Product Integration Workbench ↗</a>
     <a href="https://github.com/basicmi/AI-Chip/blob/master/docs/database-integration-workbench.md" target="_blank" rel="noopener noreferrer">Methodology ↗</a>
   </div>
 </section>
