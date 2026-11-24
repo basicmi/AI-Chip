@@ -31,3 +31,6 @@
   .di-chain {grid-template-columns:1fr}
   .di-chain-arrow {transform:rotate(90deg);justify-self:center}
 }
+
+/* Generic panel display rules must never expose unverified proposal output. */
+[data-database-integration] [data-di-results][hidden] { display: none !important; }
