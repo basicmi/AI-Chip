@@ -63,6 +63,41 @@ class BenchmarkComparabilityTests(unittest.TestCase):
         self.assertEqual(group["pair_count"], 1)
         self.assertEqual(group["metric"]["unit"], "token/s")
 
+    def test_pair_count_excludes_same_accelerator_record_pairs(self):
+        first = record("a1", "GPU A")
+        duplicate = record("a2", "GPU A")
+        second = record("b", "GPU B")
+        report = build_report({"records": [first, duplicate, second]})
+        self.assertEqual(report["groups"][0]["pair_count"], 2)
+        self.assertEqual(report["summary"]["direct_comparison_pairs"], 2)
+
+    def test_metric_spread_is_descriptive_and_direction_aware(self):
+        report = build_report({"records": [
+            record("a", "GPU A"), record("b", "GPU B", framework="TensorRT-LLM")
+        ]})
+        spread = report["groups"][0]["observed_metric_spread"]
+        self.assertEqual(spread["minimum"], 1000)
+        self.assertEqual(spread["maximum"], 1200)
+        self.assertEqual(spread["absolute_range"], 200)
+        self.assertEqual(spread["best_record_ids"], ["b"])
+        self.assertEqual(spread["worst_record_ids"], ["a"])
+        self.assertIn("software", spread["varying_dimensions"])
+        self.assertIn("not evidence of causal contribution", spread["interpretation"])
+
+    def test_each_record_retains_its_own_system_boundary(self):
+        first = record("a", "GPU A")
+        second = record("b", "GPU B")
+        second["system"]["total_accelerators"] = 16
+        second["system"]["accelerators_per_node"] = 16
+        report = build_report({"records": [first, second]})
+        rows = {item["record_id"]: item for item in report["groups"][0]["records"]}
+        self.assertEqual(rows["a"]["system_boundary"]["total_accelerators"], 8)
+        self.assertEqual(rows["b"]["system_boundary"]["total_accelerators"], 16)
+        self.assertIn(
+            "system_scale_or_topology_differs",
+            report["groups"][0]["conditional_reasons"],
+        )
+
     def test_software_difference_downgrades_to_conditional(self):
         report = build_report({
             "records": [record("a", "GPU A"), record("b", "GPU B", framework="TensorRT-LLM")]

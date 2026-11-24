@@ -95,3 +95,24 @@ python3 -m unittest discover -s tests -p "test_benchmark_comparability.py"
 Tests cover exact-match direct groups, software-difference downgrade,
 workload/version mismatch, missing system context, inferred results, repeated
 same-hardware records and missing metric units.
+
+
+## Descriptive performance-gap summary (v1.1)
+
+Each comparison group now includes `observed_metric_spread`:
+
+- minimum, maximum and absolute range for the published metric;
+- relative spread as a percentage of the absolute midpoint between minimum and maximum;
+- best/worst record IDs only when the metric direction is explicitly `higher` or `lower`;
+- dimensions that vary across the records: accelerator identity, software, system boundary,
+  configuration and evidence class.
+
+The spread is descriptive, not causal. Varying dimensions are candidate confounders;
+the report does not estimate how much of the performance difference is caused by
+the accelerator, software, scale or parallelism. Context metrics with no ranking
+direction deliberately have no best/worst result.
+
+Pair counts now count only pairs with distinct accelerator identities. Multiple
+records for the same accelerator no longer inflate cross-hardware comparison
+counts. Every record retains its own system-boundary fields so reviewers can see
+scale/topology differences rather than inheriting a group-level boundary.
