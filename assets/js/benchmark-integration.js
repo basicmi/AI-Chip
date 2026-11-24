@@ -250,7 +250,7 @@
       const patch={schema:"https://json.schemastore.org/json-patch.json",base_registry_sha256:baseHash,operations};
       verified={pkg,updated,patch,audit:pkg.audit};
       const sourceLink=$("[data-bi-source-link]");
-      const sourceUrl=sourceUrls[0] || record.source_url;
+      const sourceUrl=record.source_url;
       sourceLink.href=sourceUrl; sourceLink.textContent="Open registered source ↗";
       $("[data-bi-source-name]").textContent=source.name;
       $("[data-bi-source-publisher]").textContent=source.publisher;
