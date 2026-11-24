@@ -131,6 +131,63 @@ class BenchmarkComparabilityTests(unittest.TestCase):
         self.assertEqual(report["summary"]["comparison_groups"], 1)
         self.assertEqual(report["groups"][0]["status"], "directly_comparable")
 
+    def test_mlperf_system_scale_difference_is_conditional(self):
+        def mlperf(rid, accelerator, gpu_count):
+            return {
+                "id": rid, "source_id": "mlperf-inference-v6.1",
+                "source_class": "standardized_public_submission",
+                "evidence_level": "mlcommons_published_submission",
+                "benchmark_suite": "MLPerf Inference", "benchmark_version": "v6.1",
+                "model": "resnet", "scenario": "Server", "division": "closed",
+                "availability": "available", "accuracy_text": "99% target",
+                "weight_data_types": "INT8", "inferred": False, "errors": 0,
+                "result_value": 1000, "result_unit": "queries/s",
+                "system_type": "datacenter", "system_name": accelerator,
+                "product_id": accelerator.lower(), "accelerator_vendor": accelerator,
+                "system": {"nodes": 1, "total_accelerators": gpu_count,
+                           "accelerators_per_node": gpu_count,
+                           "host_processor_model": "CPU X", "accelerator_model": accelerator},
+                "software": {"framework": "LoadGen 1.0", "operating_system": "Linux"},
+            }
+        report = build_report({"records": [
+            mlperf("a", "GPU A", 8), mlperf("b", "GPU B", 16)
+        ]})
+        self.assertEqual(report["summary"]["conditional_comparison_pairs"], 1)
+        self.assertIn("system_scale_or_topology_differs", report["groups"][0]["conditional_reasons"])
+
+    def test_inferencex_parallelism_difference_is_conditional(self):
+        first = record("a", "GPU A")
+        second = record("b", "GPU B")
+        for item in (first, second):
+            item.update({
+                "source_id": "inferencex",
+                "benchmark_suite": "SemiAnalysis InferenceX",
+                "benchmark_version": None,
+                "model": "dsr1", "model_display_name": "DeepSeek-R1-0528",
+                "scenario": "single_turn", "division": "third_party",
+                "availability": "published", "accuracy_text": "",
+                "weight_data_types": "FP8", "result_value": None, "result_unit": "",
+                "workload": {
+                    "benchmark_type": "single_turn", "isl": 1024, "osl": 1024,
+                    "concurrency": 32, "precision": "FP8",
+                    "speculative_method": "none", "disaggregated": False,
+                },
+                "system": {
+                    "accelerator_model": item["system"]["accelerator_model"],
+                    "physical_prefill_gpus": 0, "physical_decode_gpus": 8,
+                    "is_multinode": False, "workers": [],
+                },
+                "software": {"framework": "vllm"},
+            })
+        first["configuration"] = {"decode_tp": 8}
+        second["configuration"] = {"decode_tp": 4}
+        report = build_report({"records": [first, second]})
+        self.assertEqual(report["summary"]["conditional_comparison_pairs"], 1)
+        self.assertIn(
+            "parallelism_or_run_configuration_differs_or_is_incomplete",
+            report["groups"][0]["conditional_reasons"],
+        )
+
     def test_inferencex_profile_uses_published_workload_and_gpu_roles(self):
         def inferencex(rid, accelerator):
             item = record(rid, accelerator)
