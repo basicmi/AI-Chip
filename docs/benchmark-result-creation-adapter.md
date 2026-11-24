@@ -90,3 +90,46 @@ python3 -m unittest discover -s tests -p "test_benchmark_result_proposal.py"
 Tests cover exact append/replay, duplicate record IDs and source keys, source
 URL binding, source-class preservation, excluded power claims, stale base
 registry and tampered operations.
+
+
+## Automated GitHub integration (PR #143)
+
+After the proposal and its separate Approval Manifest have been reviewed, committed
+and merged to `master`, the repository maintainer can dispatch the manual workflow:
+
+`.github/workflows/integrate-benchmark-result-proposal.yml`
+
+Expected committed paths:
+
+- Proposal package: `reviews/benchmark-proposals/<approval_id>.json`
+- Separate Approval Manifest: `reviews/approvals/<approval_id>.json`
+
+The two files must be committed to `master` before dispatch. The proposal
+package can be built locally with the commands above; use the exact
+`data/benchmark-results.json` from the current master revision as its base.
+Committing the review files does not change the benchmark registry itself.
+
+In GitHub Actions, select **Integrate reviewed benchmark result proposal**,
+keep the workflow ref on `master`, and supply the two repository-relative
+paths. The workflow:
+
+1. accepts only tracked JSON files under the two designated review directories,
+   rejects absolute paths, traversal and symlink paths;
+2. checks out current `master` and independently rebuilds the proposal with
+   the separate Approval Manifest and current benchmark registry;
+3. runs the full benchmark registry validator and proposal unit tests against
+   the proposed registry in a temporary checkout;
+4. verifies that the only changed tracked file is
+   `data/benchmark-results.json`;
+5. uploads the exact patch, audit JSON and unified diff as a 30-day artifact;
+6. opens or updates a separate human-review PR containing only the benchmark
+   registry change.
+
+The workflow has no direct push-to-master step and no auto-merge. Normal PR
+checks and maintainer review remain mandatory. A stale base SHA, duplicate
+record, changed source snapshot, mismatched approval, invalid registry or
+unexpected write set fails closed before a data PR is created.
+
+If the workflow reports a stale base registry, do not edit the package hash by
+hand. Rebuild the proposal against the latest master registry, review the new
+diff, commit the replacement package and dispatch again.
