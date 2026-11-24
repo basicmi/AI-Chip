@@ -103,7 +103,12 @@ def observation_blockers(record):
     software = record.get("software")
     if not isinstance(software, dict) or not nonempty(software.get("framework")):
         blockers.append("missing_software_framework")
-    if not (nonempty(record.get("product_id")) or nonempty(system.get("accelerator_model"))):
+    has_inferencex_hardware = (
+        (record.get("source_id") == "inferencex" or record.get("benchmark_suite") == "SemiAnalysis InferenceX")
+        and nonempty(system.get("hardware"))
+        and system.get("hardware", "").strip().lower() not in {"unknown", "not reported"}
+    )
+    if not (nonempty(record.get("product_id")) or nonempty(system.get("accelerator_model")) or has_inferencex_hardware):
         blockers.append("missing_accelerator_identity")
 
     if source_id == "inferencex" or suite == "SemiAnalysis InferenceX":
@@ -244,7 +249,11 @@ def accelerator_identity(record):
         "model": system.get("accelerator_model"),
     }
     if not any(nonempty(identity.get(field)) for field in ("product_id", "model")):
-        identity["fallback_system_name"] = record.get("system_name")
+        hardware_name = system.get("hardware")
+        if nonempty(hardware_name) and hardware_name.strip().lower() not in {"unknown", "not reported"}:
+            identity["fallback_hardware_name"] = hardware_name
+        else:
+            identity["fallback_system_name"] = record.get("system_name")
     return identity
 
 
