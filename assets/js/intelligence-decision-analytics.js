@@ -56,11 +56,20 @@
       throw Error("Unresolved age buckets do not reconcile.");
     const latency=m.review_latency_days;
     if(!latency||!latency.overall||!latency.by_outcome||
-       !OUTCOMES.every(k=>latency.by_outcome[k])||
+       !OUTCOMES.every(k=>latency.by_outcome[k]&&integer(latency.by_outcome[k].samples))||
        !integer(latency.overall.samples)||latency.overall.samples>m.decisions_recorded||
        !integer(latency.unavailable_due_to_cache_reset_or_clock_order)||
-       latency.overall.samples+latency.unavailable_due_to_cache_reset_or_clock_order!==m.decisions_recorded)
+       latency.overall.samples+latency.unavailable_due_to_cache_reset_or_clock_order!==m.decisions_recorded||
+       OUTCOMES.reduce((n,k)=>n+latency.by_outcome[k].samples,0)!==latency.overall.samples)
       throw Error("Review-latency samples do not reconcile.");
+    for(const row of [latency.overall,...OUTCOMES.map(k=>latency.by_outcome[k])]){
+      if(!integer(row.samples)||!(row.median_days===null||Number.isFinite(row.median_days)&&row.median_days>=0)||
+         !(row.p90_days===null||Number.isFinite(row.p90_days)&&row.p90_days>=0)||
+         !(row.max_days===null||Number.isFinite(row.max_days)&&row.max_days>=0)||
+         (row.samples===0&&(row.median_days!==null||row.p90_days!==null||row.max_days!==null))||
+         (row.samples>0&&(row.median_days===null||row.p90_days===null||row.max_days===null)))
+        throw Error("Invalid review-latency statistics.");
+    }
     return data;
   };
   const fmt=x=>new Intl.NumberFormat().format(x);

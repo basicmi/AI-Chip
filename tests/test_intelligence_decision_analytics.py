@@ -50,7 +50,8 @@ class DecisionAnalyticsTests(unittest.TestCase):
   r,l,c=fixtures();r["claim_aging"].pop()
   with self.assertRaisesRegex(ValueError,"do not match persistent backlog"):build(r,l,c)
  def test_age_buckets_count_only_unresolved(self):
-  r,l,c=fixtures();r["claim_aging"][1]["days_since_first_seen"]=15
+  r,l,c=fixtures();r["claim_aging"][1]["first_seen_at"]="2026-11-09T00:00:00Z"
+  r["claim_aging"][1]["days_since_first_seen"]=15
   out=build(r,l,c)
   self.assertEqual(out["metrics"]["overdue_14d_or_more"],1)
 if __name__=="__main__":unittest.main()

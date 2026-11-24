@@ -61,12 +61,19 @@ def build(review,ledger,reasons):
     for row in aging:
         if not isinstance(row,dict) or not isinstance(row.get("claim_id"),str) or not row["claim_id"] or row["claim_id"] in first_seen:
             raise ValueError("duplicate or malformed Claim aging row")
-        first_seen[row["claim_id"]]=parse_time(row.get("first_seen_at"),"first_seen_at")
+        first=parse_time(row.get("first_seen_at"),"first_seen_at")
+        if first>generated:raise ValueError("Claim first-seen timestamp is later than analytics snapshot")
+        first_seen[row["claim_id"]]=first
         age=count(row.get("days_since_first_seen"),"days_since_first_seen")
-        if row.get("review_state") in ("pending","needs_more_evidence"):
+        if age!=max(0,(generated-first).days):raise ValueError("Claim age does not match first-seen timestamp and snapshot time")
+        state=row.get("review_state")
+        if state not in (("pending",)+OUTCOMES):raise ValueError("unsupported persisted Claim review state")
+        if state in ("pending","needs_more_evidence"):
             bucket="within_7d" if age<7 else "7_to_13d" if age<14 else "14_to_29d" if age<30 else "30d_plus"
             unresolved_age[bucket]+=1
     if len(aging)!=backlog:raise ValueError("Claim aging rows do not match persistent backlog")
+    if sum(unresolved_age.values())!=expected["pending"]+expected["needs_more_evidence"]:
+        raise ValueError("unresolved Claim age buckets do not match review-state counts")
     if not isinstance(ledger,dict) or set(ledger)!={"schema_version","decisions"} or ledger.get("schema_version")!="1.0" or not isinstance(ledger.get("decisions"),list):
         raise ValueError("decision ledger schema mismatch")
     decisions={}
