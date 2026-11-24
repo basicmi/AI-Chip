@@ -38,12 +38,21 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/intelligence-operations/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
+  }
+
+  // PR #139: local-only provenance-bound Database Integration Workbench.
+  await page.goto(base + "/database-integration/", {waitUntil:"networkidle"});
+  for (const selector of ["[data-di-package]","[data-di-claims]","[data-di-registry]","[data-di-status]"]) {
+    await page.locator(selector).waitFor();
+  }
+  if (!(await page.locator("[data-di-results]").first().isHidden())) {
+    throw new Error("Database Integration Workbench must hide unverified results before loading a package");
   }
 
   // PR #101: local-only multi-run Intelligence Operations dashboard.
@@ -1569,7 +1578,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: eleven routes including Intelligence Operations, Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: twelve routes including Database Integration Workbench, Intelligence Operations, Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
