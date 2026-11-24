@@ -205,6 +205,14 @@ jobs:
             --semantic "$RUNNER_TEMP/ai-chip-intelligence-semantic-review-template.json" \
             --output "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.json" \
             --markdown "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md"
+      - name: Build Claim-to-Database conversion funnel
+        run: |
+          python3 scripts/build_intelligence_conversion_funnel.py \
+            --review-state "$RUNNER_TEMP/ai-chip-intelligence-review-state.json" \
+            --ledger data/intelligence-review-decisions.json \
+            --integration-manifest data/intelligence-database-integration.json \
+            --output "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.json" \
+            --markdown "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md"
       - name: Commit cached checkpoints after successful audit
         run: |
           test -s "$RUNNER_TEMP/intelligence-state-staged.json"
@@ -260,6 +268,9 @@ jobs:
           if [ -f "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md" ]; then
             cat "$RUNNER_TEMP/ai-chip-intelligence-evidence-dashboard.md" >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ -f "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md" ]; then
+            cat "$RUNNER_TEMP/ai-chip-intelligence-conversion-funnel.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Upload discovery report
         if: always()
         uses: actions/upload-artifact@v4
@@ -288,6 +299,8 @@ jobs:
             ${{ runner.temp }}/ai-chip-intelligence-evidence-quality.md
             ${{ runner.temp }}/ai-chip-intelligence-evidence-dashboard.json
             ${{ runner.temp }}/ai-chip-intelligence-evidence-dashboard.md
+            ${{ runner.temp }}/ai-chip-intelligence-conversion-funnel.json
+            ${{ runner.temp }}/ai-chip-intelligence-conversion-funnel.md
             ${{ runner.temp }}/ai-chip-intelligence-source-lineage-review-template.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.json
             ${{ runner.temp }}/ai-chip-intelligence-triage.md

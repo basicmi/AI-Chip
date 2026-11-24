@@ -88,3 +88,36 @@ A passing ledger validation checks record structure and workflow consistency;
 it does not authenticate the reviewer, inspect the original source or verify
 the technical truth of a Claim. Human GitHub review and the separate
 Evidence-to-PR approval process remain required.
+
+
+## Claim-to-Database Conversion Funnel (Phase 2)
+
+The weekly discovery workflow emits a conversion-funnel snapshot from the
+persistent review-state observation, the explicit human decision ledger, and
+`data/intelligence-database-integration.json`.
+
+The funnel distinguishes:
+- Current-run discovered Claims and the persistent backlog;
+- Explicit decisions: pending, needs-more-evidence, rejected, and accepted
+  for evidence attachment;
+- Database-integrated Claims recorded only after a merged pull request is
+  explicitly entered in the integration manifest.
+
+An accepted Claim is **not** a database integration. Integration records must
+name the Claim, target dataset, merged PR number, full merge commit SHA,
+timezone-aware integration timestamp, reviewer, and rationale. The CI
+validator rejects records for Claims not explicitly accepted for evidence
+attachment. The manifest is human-maintained and is not an authenticated
+claim of technical truth.
+
+Run locally:
+
+    python3 scripts/build_intelligence_conversion_funnel.py \
+      --review-state /path/to/ai-chip-intelligence-review-state.json \
+      --ledger data/intelligence-review-decisions.json \
+      --integration-manifest data/intelligence-database-integration.json \
+      --output /tmp/ai-chip-conversion-funnel.json \
+      --markdown /tmp/ai-chip-conversion-funnel.md
+
+No Claim, evidence graph, company/product record, or benchmark dataset is
+automatically changed by this reporting step.
