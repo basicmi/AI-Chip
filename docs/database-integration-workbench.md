@@ -69,17 +69,22 @@ Source → Extracted Claim → Existing Database Claim chain and a field-level
 diff. Files are read locally and are not uploaded.
 
 The browser review is a convenience layer. The Python verifier in CI is the
-authoritative acceptance gate.
+authoritative acceptance gate. During workflow replay, the original Claim
+report and Approval Manifest are separate required inputs; the package alone
+is not treated as its own source of provenance.
 
 ## Commit and create a review-only PR
 
-After inspecting the proposal, commit the package under:
+After inspecting the proposal, commit all three provenance inputs:
 
     reviews/integration-proposals/<proposal-id>.json
+    reviews/approvals/<approval-id>.json
+    reviews/claims/<discovery-run-claims>.json
 
 Then manually dispatch
 `.github/workflows/integrate-database-proposal.yml` on `master`, supplying
-that committed path. The workflow:
+the three committed paths. The workflow checks that the embedded source Claim
+and Approval Manifest exactly match those separate committed originals. It:
 
 1. Rejects paths outside the designated directory, uncommitted files,
    symlinks and path traversal.

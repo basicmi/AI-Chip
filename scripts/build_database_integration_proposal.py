@@ -201,7 +201,7 @@ def build_package(database, claim_report, approval, registry_bytes, created_at=N
     return package, patch, audit, diff, updated
 
 
-def verify_package(database, package, registry_bytes):
+def verify_package(database, package, registry_bytes, claim_report, approval_manifest):
     if not isinstance(package, dict) or set(package) != PACKAGE_KEYS:
         raise ValueError("proposal package must contain exactly the documented fields")
     if package.get("schema_version") != "1.0" or package.get("proposal_type") != PROPOSAL_TYPE:
@@ -219,9 +219,17 @@ def verify_package(database, package, registry_bytes):
     source_claim = package.get("source_claim")
     if not isinstance(approval, dict) or not isinstance(source_claim, dict):
         raise ValueError("proposal approval or source Claim snapshot is missing")
-    report = {"schema_version": "1.0", "claim_count": 1, "claims": [source_claim]}
+    if not isinstance(approval_manifest, dict) or approval_manifest != approval:
+        raise ValueError("committed Approval Manifest does not exactly match proposal")
+    if not isinstance(claim_report, dict) or claim_report.get("schema_version") != "1.0":
+        raise ValueError("committed original Claim report must use schema_version 1.0")
+    source_rows = [row for row in claim_report.get("claims", [])
+                   if isinstance(row, dict) and row.get("claim_id") == source_claim.get("claim_id")]
+    if (claim_report.get("claim_count") != len(claim_report.get("claims", [])) or
+            len(source_rows) != 1 or source_rows[0] != source_claim):
+        raise ValueError("committed original Claim report does not exactly match proposal source Claim")
     expected, patch, audit, diff, updated = build_package(
-        database, report, approval, registry_bytes, package["created_at"])
+        database, claim_report, approval_manifest, registry_bytes, package["created_at"])
     if expected != package:
         raise ValueError("proposal package does not match current registry, approval or source Claim")
     if package.get("proposal_id") != approval.get("approval_id"):
@@ -259,7 +267,9 @@ def verify_command(args):
     raw = args.company_profiles.read_bytes()
     database = json.loads(raw.decode("utf-8"))
     package = json.loads(args.proposal.read_text(encoding="utf-8"))
-    updated, patch, audit, diff = verify_package(database, package, raw)
+    claim_report = json.loads(args.claim_report.read_text(encoding="utf-8"))
+    approval = json.loads(args.approval.read_text(encoding="utf-8"))
+    updated, patch, audit, diff = verify_package(database, package, raw, claim_report, approval)
     write_json(args.database_output, updated)
     write_json(args.patch_output, patch)
     write_json(args.audit_output, audit)
@@ -289,6 +299,8 @@ def main():
     verify = sub.add_parser("verify", help="rebuild and verify a committed proposal against master")
     verify.add_argument("--company-profiles", type=Path, default=Path(REGISTRY_PATH))
     verify.add_argument("--proposal", type=Path, required=True)
+    verify.add_argument("--claim-report", type=Path, required=True)
+    verify.add_argument("--approval", type=Path, required=True)
     verify.add_argument("--database-output", type=Path, required=True)
     verify.add_argument("--patch-output", type=Path, required=True)
     verify.add_argument("--audit-output", type=Path, required=True)

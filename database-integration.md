@@ -84,8 +84,8 @@ description: Local-only review of provenance-bound database integration proposal
   <ol>
     <li>Generate a package locally from the current registry, the exact Claim report and the human-reviewed Approval Manifest.</li>
     <li>Review the provenance chain, field-level diff, base hash and audit gates above.</li>
-    <li>Commit the package under <code>reviews/integration-proposals/</code>.</li>
-    <li>Manually dispatch the <a href="https://github.com/basicmi/AI-Chip/actions/workflows/integrate-database-proposal.yml" target="_blank" rel="noopener noreferrer">Integrate reviewed database proposal workflow</a> on master.</li>
+    <li>Commit the package under <code>reviews/integration-proposals/</code>, the original Approval Manifest under <code>reviews/approvals/</code>, and the matching Claim report under <code>reviews/claims/</code>.</li>
+    <li>Manually dispatch the <a href="https://github.com/basicmi/AI-Chip/actions/workflows/integrate-database-proposal.yml" target="_blank" rel="noopener noreferrer">Integrate reviewed database proposal workflow</a> on master with all three committed paths.</li>
     <li>Inspect the generated PR and CI. Merge only after normal human review.</li>
   </ol>
   <p>The workflow replays the package against the current master registry. Any stale base, changed Claim, altered operation or unapproved field change fails closed.</p>

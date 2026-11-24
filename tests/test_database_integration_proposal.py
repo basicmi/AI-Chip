@@ -81,7 +81,7 @@ class DatabaseIntegrationProposalTests(unittest.TestCase):
 
     def test_package_verifies_against_exact_base_registry(self):
         db, report, approval, raw, (package, patch, audit, diff, updated) = self.build()
-        rebuilt, patch2, audit2, diff2 = verify_package(db, package, raw)
+        rebuilt, patch2, audit2, diff2 = verify_package(db, package, raw, report, approval)
         self.assertEqual(rebuilt, updated)
         self.assertEqual(patch2, patch)
         self.assertEqual(audit2, audit)
@@ -93,13 +93,27 @@ class DatabaseIntegrationProposalTests(unittest.TestCase):
         stale["companies"][0]["summary"] = "changed after proposal"
         stale_raw = (json.dumps(stale, indent=2, ensure_ascii=False) + "\n").encode()
         with self.assertRaisesRegex(ValueError, "does not match current registry"):
-            verify_package(stale, package, stale_raw)
+            verify_package(stale, package, stale_raw, report, approval)
+
+    def test_rejects_separate_approval_manifest_mismatch(self):
+        db, report, approval, raw, (package, *_rest) = self.build()
+        changed = copy.deepcopy(approval)
+        changed["reviewer"] = "different-reviewer"
+        with self.assertRaisesRegex(ValueError, "Approval Manifest"):
+            verify_package(db, package, raw, report, changed)
+
+    def test_rejects_separate_original_claim_report_mismatch(self):
+        db, report, approval, raw, (package, *_rest) = self.build()
+        changed = copy.deepcopy(report)
+        changed["claims"][0]["statement"] = "A different source statement."
+        with self.assertRaisesRegex(ValueError, "original Claim report"):
+            verify_package(db, package, raw, changed, approval)
 
     def test_rejects_tampered_package_hash(self):
         db, report, approval, raw, (package, *_rest) = self.build()
         package["target"]["claim_id"] = "different"
         with self.assertRaisesRegex(ValueError, "package SHA256 mismatch"):
-            verify_package(db, package, raw)
+            verify_package(db, package, raw, report, approval)
 
     def test_rejects_tampered_patch_even_when_package_rehashed(self):
         db, report, approval, raw, (package, *_rest) = self.build()
@@ -107,7 +121,7 @@ class DatabaseIntegrationProposalTests(unittest.TestCase):
         body = {k:v for k,v in package.items() if k != "package_sha256"}
         package["package_sha256"] = sha256_json(body)
         with self.assertRaisesRegex(ValueError, "does not match current registry"):
-            verify_package(db, package, raw)
+            verify_package(db, package, raw, report, approval)
 
     def test_rejects_source_claim_url_mismatch(self):
         db, report, approval, raw = fixture()
@@ -169,6 +183,8 @@ class DatabaseIntegrationProposalTests(unittest.TestCase):
             verify = subprocess.run(common + [
                 "verify", "--company-profiles", str(root / "registry.json"),
                 "--proposal", str(root / "proposal.json"),
+                "--claim-report", str(root / "claims.json"),
+                "--approval", str(root / "approval.json"),
                 "--database-output", str(root / "verified.json"),
                 "--patch-output", str(root / "verified-patch.json"),
                 "--audit-output", str(root / "verified-audit.json"),
