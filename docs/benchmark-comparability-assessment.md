@@ -32,24 +32,29 @@ The engine uses source-specific profiles for the two benchmark feeds already nor
 
 Records are grouped only when the following match exactly:
 
-1. benchmark suite and version;
+1. benchmark suite and version (or the same source-scoped version-unknown profile for InferenceX);
 2. model, scenario, division and availability;
-3. accuracy statement and weight data type;
-4. complete workload and configuration objects;
-5. system boundary (system type, nodes, accelerator count, accelerators per node,
-   host processor model, and any explicit prefill/decode GPU counts);
-6. metric key, unit, family and direction.
+3. accuracy statement and weight data type where that suite defines one;
+4. the complete source-specific workload signature;
+5. metric key, unit, family and direction.
+
+System size/topology and execution configuration are retained as comparison
+dimensions rather than silently used to split every group. This allows the report
+to show same-workload comparisons across different accelerator counts or
+parallelism layouts, but those differences downgrade the group to conditional
+comparability.
 
 Accelerator identity is intentionally the comparison axis, not a matching
 requirement. A group must contain at least two distinct accelerator identities.
 
 ### Direct vs conditional
 
-- **Directly comparable**: all protocol and system-boundary fields match and
-  software metadata is identical.
-- **Conditionally comparable**: protocol and system boundary match, but software
-  metadata differs. Results are shown together with the difference visible;
-  software differences may explain part of the observed performance gap.
+- **Directly comparable**: the exact protocol signature, software metadata,
+  system boundary and applicable stable configuration match.
+- **Conditionally comparable**: the test protocol matches, but software,
+  system scale/topology or applicable parallelism configuration differs or is
+  incomplete. Results are shown together with those differences visible; they
+  may explain part of the observed performance gap.
 
 Source class and evidence level remain attached to every record. Different
 provenance classes do not automatically invalidate a technical comparison, but
@@ -78,6 +83,8 @@ captured in the explicit configuration/software fields.
 The engine does not generate a leaderboard, composite score, cross-suite
 normalization, causal explanation or investment recommendation. Pairwise
 values should be inspected alongside original source links and evidence class.
+For InferenceX, run IDs and timestamps are excluded from the stable configuration
+signature; TP/EP, worker counts and offload mode remain comparison dimensions.
 
 ## Tests
 
