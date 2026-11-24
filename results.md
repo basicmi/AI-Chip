@@ -14,6 +14,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <span>Imported <strong data-results-imported>—</strong></span>
     <a href="{{ '/data/benchmark-results.json' | relative_url }}">Raw results ↗</a>
     <a href="{{ '/benchmarks/' | relative_url }}">Benchmark catalogue ↗</a>
+    <a href="{{ '/benchmark-integration/' | relative_url }}">Submit / review a result ↗</a>
   </div>
 </section>
 
