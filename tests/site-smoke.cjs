@@ -168,7 +168,7 @@ const { chromium } = require("playwright");
     summary:{total_records:0,by_source:{},by_availability:{},by_division:{},by_system_type:{},
       inferred_records:0,power_records:0,submitters:0,models:0},records:[]
   };
-  const biRegistryText=JSON.stringify(biDb,null,2)+"\\n";
+  const biRegistryText=JSON.stringify(biDb,null,2)+"\n";
   const biBaseHash=piHash(biRegistryText);
   const biUpdated=JSON.parse(JSON.stringify(biDb));
   biUpdated.records.push(biRecord);biUpdated.sources[0].record_count=1;
