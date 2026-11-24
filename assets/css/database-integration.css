@@ -34,3 +34,6 @@
 
 /* Generic panel display rules must never expose unverified proposal output. */
 [data-database-integration] [data-di-results][hidden] { display: none !important; }
+
+/* Keep product proposal results hidden until the local provenance checks pass. */
+[data-product-integration] [data-pi-results][hidden] { display: none !important; }

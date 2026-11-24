@@ -38,12 +38,97 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
+  }
+
+  // PR #140: local-only typed Product Integration Workbench.
+  await page.goto(base + "/product-integration/", {waitUntil:"networkidle"});
+  for (const selector of ["[data-pi-package]","[data-pi-claims]","[data-pi-approval]","[data-pi-registry]","[data-pi-status]"]) {
+    await page.locator(selector).waitFor();
+  }
+  if (!(await page.locator("[data-pi-results]").first().isHidden())) {
+    throw new Error("Product Integration Workbench must hide unverified results before loading a package");
+  }
+
+  const piCrypto = require("crypto");
+  const piCanonical = value => Array.isArray(value) ? "[" + value.map(piCanonical).join(",") + "]" :
+    value && typeof value === "object" ? "{" + Object.keys(value).sort().map(k =>
+      JSON.stringify(k) + ":" + piCanonical(value[k])).join(",") + "}" :
+    typeof value === "number" && Object.is(value,-0) ? "0" : JSON.stringify(value);
+  const piHash = value => piCrypto.createHash("sha256").update(value).digest("hex");
+  const piArtifact = (name,data) => ({name,mimeType:"application/json",buffer:Buffer.from(JSON.stringify(data))});
+  const piDb = {schema_version:"1.3",companies:[{id:"nvidia",display_name:"NVIDIA",products:[],claims:[],evidence:[]}]};
+  const piSource = {claim_id:"claim-rubin",review_status:"unverified_candidate",
+    statement:"NVIDIA announced the Rubin GPU architecture and product family.",
+    evidence_quote:"Rubin is our next-generation GPU architecture.",
+    source:{url:"https://vendor.example/rubin",publisher:"NVIDIA"}};
+  const piReport = {schema_version:"1.0",claim_count:1,claims:[piSource]};
+  const piEvidence = {id:"nvidia-rubin-announcement",title:"NVIDIA Rubin announcement",
+    url:"https://vendor.example/rubin",publisher:"NVIDIA",source_type:"vendor_primary",
+    independence:"vendor",published_at:"2026-10-28",checked_at:"2026-11-20",
+    review_status:"reviewed",notes:"Original vendor announcement inspected by reviewer."};
+  const piProduct = {id:"rubin",name:"Rubin",product_type:"gpu",availability:"announced",
+    claim_ids:["rubin-identity"],architecture:"Rubin",announced_at:"2026-10-28",
+    availability_history:[{status:"announced",effective_at:"2026-10-28",
+      evidence_id:piEvidence.id,notes:"Vendor announced the product family."}]};
+  const piClaim = {id:"rubin-identity",subject_type:"product",subject_id:"rubin",
+    topic:"product_identity",statement:piSource.statement,
+    scope:"Product identity and vendor-announced architecture only; no performance claim.",
+    claim_status:"vendor_reported",evidence_ids:[piEvidence.id],last_reviewed:"2026-11-20"};
+  const piApproval = {schema_version:"1.0",approval_id:"approve-rubin",
+    reviewer:"maintainer@example.org",reviewed_at:"2026-11-20",
+    decision:"approved_new_product_with_identity_claim",company_id:"nvidia",
+    extracted_claim_id:piSource.claim_id,product:piProduct,claim:piClaim,evidence:piEvidence,
+    review_notes:"Reviewer inspected the original vendor announcement and verified the product identity and source context."};
+  const piUpdated=JSON.parse(JSON.stringify(piDb));
+  piUpdated.companies[0].evidence.push(piEvidence);piUpdated.companies[0].products.push(piProduct);
+  piUpdated.companies[0].claims.push(piClaim);
+  const piRegistryText=JSON.stringify(piDb,null,2)+"\n",piBaseHash=piHash(piRegistryText);
+  const piProposedHash=piHash(piCanonical(piUpdated));
+  const piOperations=[
+    {op:"add",path:"/companies/0/evidence/-",value:piEvidence},
+    {op:"add",path:"/companies/0/products/-",value:piProduct},
+    {op:"add",path:"/companies/0/claims/-",value:piClaim}
+  ];
+  const piBody={schema_version:"1.0",proposal_id:"approve-rubin",
+    proposal_type:"company_profile_product_creation",created_at:"2026-11-23T04:00:00Z",
+    target_registry:{path:"data/company-profiles.json",schema_version:"1.3",base_sha256:piBaseHash},
+    source_claim:piSource,approval:piApproval,
+    target:{company_id:"nvidia",company_display_name:"NVIDIA",company_index:0,
+      product_id:"rubin",product_name:"Rubin",claim_id:"rubin-identity",source_claim_id:"claim-rubin"},
+    operations:piOperations,
+    audit:{verification_status:"exact_three_record_append",unapproved_changes:0,
+      source_truth_verified:false,claim_status_changed:false,new_claim_status:"vendor_reported",
+      approval_id:"approve-rubin",reviewer:"maintainer@example.org",reviewed_at:"2026-11-20",
+      source_claim_id:"claim-rubin",source_url:piEvidence.url,
+      evidence_quote_sha256:piHash(piSource.evidence_quote),
+      base_registry_sha256:piBaseHash,proposed_registry_sha256:piProposedHash},
+    proposed_registry_sha256:piProposedHash,
+    policy:{human_approval_required:true,source_truth_verified:false,claim_status_changed:false,
+      new_claim_status:"vendor_reported",automatic_merge:false,
+      allowed_changes:["append one reviewed Evidence","append one new Product",
+        "append one initial vendor_reported product_identity Claim"]}};
+  const piPackage={...piBody,package_sha256:piHash(piCanonical(piBody))};
+  await page.locator("[data-pi-package]").setInputFiles(piArtifact("product-proposal.json",piPackage));
+  await page.locator("[data-pi-claims]").setInputFiles(piArtifact("claims.json",piReport));
+  await page.locator("[data-pi-approval]").setInputFiles(piArtifact("approval.json",piApproval));
+  await page.locator("[data-pi-registry]").setInputFiles({
+    name:"company-profiles.json",mimeType:"application/json",buffer:Buffer.from(piRegistryText)
+  });
+  await page.waitForFunction(() => (document.querySelector("[data-pi-status]")?.textContent || "").includes("Verified locally"));
+  if (!(await page.locator("[data-pi-results]").first().isVisible())) {
+    throw new Error("Product Integration Workbench failed to verify the valid three-record append fixture");
+  }
+  const piTampered={...piPackage,operations:[{...piOperations[0],path:"/companies/0/summary"},...piOperations.slice(1)]};
+  await page.locator("[data-pi-package]").setInputFiles(piArtifact("tampered-product-proposal.json",piTampered));
+  await page.waitForFunction(() => (document.querySelector("[data-pi-status]")?.textContent || "").includes("SHA256 mismatch"));
+  if (!(await page.locator("[data-pi-results]").first().isHidden())) {
+    throw new Error("Product Integration Workbench exposed a tampered proposal");
   }
 
   // PR #139: local-only provenance-bound Database Integration Workbench.
@@ -1652,7 +1737,7 @@ const { chromium } = require("playwright");
   }
 
   if (errors.length) throw new Error("Browser errors:\n" + errors.join("\n"));
-  console.log("PASS: twelve routes including Database Integration Workbench, Intelligence Operations, Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
+  console.log("PASS: thirteen routes including Database Integration Workbench, Product Integration Workbench, Intelligence Operations, Evidence Review Workbench, Model Support Explorer, Benchmark Results Explorer, Product Explorer, landscape asset, homepage coverage stats, directory search/group/evidence filters, company profile registry, compatibility/workload/benchmark search, theme toggle and mobile navigation.");
   await browser.close();
 })().catch(error => {
   console.error(error);
