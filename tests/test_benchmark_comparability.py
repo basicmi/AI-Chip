@@ -72,7 +72,9 @@ class BenchmarkComparabilityTests(unittest.TestCase):
         self.assertEqual(report["summary"]["direct_comparison_pairs"], 2)
 
     def test_metric_spread_is_descriptive_and_direction_aware(self):
-        report = build_report({"records": [record("a", "GPU A"), record("b", "GPU B")]})
+        report = build_report({"records": [
+            record("a", "GPU A"), record("b", "GPU B", framework="TensorRT-LLM")
+        ]})
         spread = report["groups"][0]["observed_metric_spread"]
         self.assertEqual(spread["minimum"], 1000)
         self.assertEqual(spread["maximum"], 1200)
