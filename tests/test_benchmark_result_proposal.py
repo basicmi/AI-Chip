@@ -1,6 +1,8 @@
 import copy
 import json
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -152,6 +154,41 @@ class BenchmarkResultProposalTests(unittest.TestCase):
         raw = (json.dumps(changed, ensure_ascii=False, indent=2) + "\n").encode()
         with self.assertRaisesRegex(ValueError, "base SHA256"):
             verify_package(changed, package, raw, self.approval)
+
+    def test_cli_build_and_verify_round_trip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "registry.json").write_bytes(self.raw)
+            (root / "approval.json").write_text(json.dumps(self.approval), encoding="utf-8")
+            command = [sys.executable, str(ROOT / "scripts/build_benchmark_result_proposal.py")]
+            build = subprocess.run(command + [
+                "build", "--benchmark-results", str(root / "registry.json"),
+                "--approval", str(root / "approval.json"),
+                "--proposal-output", str(root / "proposal.json"),
+                "--database-output", str(root / "built-registry.json"),
+                "--patch-output", str(root / "patch.json"),
+                "--audit-output", str(root / "audit.json"),
+                "--diff-output", str(root / "proposal.diff")
+            ], capture_output=True, text=True)
+            self.assertEqual(build.returncode, 0, build.stdout + build.stderr)
+            verify = subprocess.run(command + [
+                "verify", "--benchmark-results", str(root / "registry.json"),
+                "--proposal", str(root / "proposal.json"),
+                "--approval", str(root / "approval.json"),
+                "--database-output", str(root / "verified-registry.json"),
+                "--patch-output", str(root / "verified-patch.json"),
+                "--audit-output", str(root / "verified-audit.json"),
+                "--diff-output", str(root / "verified.diff")
+            ], capture_output=True, text=True)
+            self.assertEqual(verify.returncode, 0, verify.stdout + verify.stderr)
+            self.assertEqual(
+                json.loads((root / "verified-registry.json").read_text(encoding="utf-8")),
+                json.loads((root / "built-registry.json").read_text(encoding="utf-8"))
+            )
+            self.assertEqual(
+                json.loads((root / "verified-patch.json").read_text(encoding="utf-8")),
+                json.loads((root / "patch.json").read_text(encoding="utf-8"))
+            )
 
 
 if __name__ == "__main__":
