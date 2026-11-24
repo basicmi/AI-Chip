@@ -108,6 +108,66 @@ class BenchmarkComparabilityTests(unittest.TestCase):
         report = build_report({"records": [record("a", "GPU A"), second]})
         self.assertEqual(report["summary"]["comparison_groups"], 0)
 
+    def test_mlperf_profile_uses_official_submission_context(self):
+        def mlperf(rid, accelerator):
+            item = {
+                "id": rid, "source_id": "mlperf-inference-v6.1",
+                "source_class": "standardized_public_submission",
+                "evidence_level": "mlcommons_published_submission",
+                "benchmark_suite": "MLPerf Inference", "benchmark_version": "v6.1",
+                "model": "resnet", "scenario": "Server", "division": "closed",
+                "availability": "available", "accuracy_text": "99% target",
+                "weight_data_types": "INT8", "inferred": False, "errors": 0,
+                "result_value": 1000 if accelerator == "GPU A" else 1200,
+                "result_unit": "queries/s",
+                "system_type": "datacenter", "system_name": accelerator,
+                "product_id": accelerator.lower(), "accelerator_vendor": accelerator,
+                "system": {"nodes": 1, "total_accelerators": 8, "accelerators_per_node": 8,
+                           "host_processor_model": "CPU X", "accelerator_model": accelerator},
+                "software": {"framework": "LoadGen 1.0", "operating_system": "Linux"},
+            }
+            return item
+        report = build_report({"records": [mlperf("a", "GPU A"), mlperf("b", "GPU B")]})
+        self.assertEqual(report["summary"]["comparison_groups"], 1)
+        self.assertEqual(report["groups"][0]["status"], "directly_comparable")
+
+    def test_inferencex_profile_uses_published_workload_and_gpu_roles(self):
+        def inferencex(rid, accelerator):
+            item = record(rid, accelerator)
+            item.update({
+                "source_id": "inferencex",
+                "benchmark_suite": "SemiAnalysis InferenceX",
+                "benchmark_version": None,
+                "model": "dsr1",
+                "model_display_name": "DeepSeek-R1-0528",
+                "scenario": "single_turn",
+                "division": "third_party",
+                "availability": "published",
+                "accuracy_text": "",
+                "weight_data_types": "FP8",
+                "result_value": None,
+                "result_unit": "",
+                "workload": {
+                    "benchmark_type": "single_turn", "isl": 1024, "osl": 1024,
+                    "concurrency": 32, "precision": "FP8",
+                    "speculative_method": "none", "disaggregated": False,
+                },
+                "configuration": {"decode_tp": 8},
+                "system": {
+                    "accelerator_model": accelerator,
+                    "physical_prefill_gpus": 0, "physical_decode_gpus": 8,
+                    "is_multinode": False, "workers": [],
+                },
+                "software": {"framework": "vllm", "operating_system": ""},
+            })
+            return item
+        report = build_report({
+            "records": [inferencex("a", "GPU A"), inferencex("b", "GPU B")]
+        })
+        self.assertEqual(report["summary"]["comparison_groups"], 1)
+        self.assertEqual(report["groups"][0]["status"], "directly_comparable")
+        self.assertEqual(report["groups"][0]["protocol"]["benchmark_version"], None)
+
 
 if __name__ == "__main__":
     unittest.main()
