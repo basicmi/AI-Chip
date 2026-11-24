@@ -412,6 +412,57 @@ const { chromium } = require("playwright");
     throw Error("Evidence Quality Dashboard clear did not reset state");
   }
 
+  // Evidence-to-database conversion funnel: local snapshots, explicit denominators.
+  await page.goto(base + "/intelligence-funnel/", {waitUntil:"networkidle"});
+  const cfSnapshot=(stamp,overrides={})=>{
+    const m={
+      discovery_candidates:5,candidates_with_claims:3,claims_extracted:4,
+      triage_groups:3,duplicate_claims_collapsed:1,persistent_review_backlog:5,
+      human_decisions_recorded:3,
+      review_states:{pending:2,needs_more_evidence:1,rejected:1,accepted_for_evidence_attachment:1},
+      decision_coverage:{numerator:3,denominator:5,rate:0.6},
+      accepted_for_evidence_attachment:1,
+      acceptance_rate_among_decisions:{numerator:1,denominator:3,rate:0.3333},
+      eligible_claims_not_integrated:1,integrated_claims:0,integration_receipts:0,
+      integration_coverage:{numerator:0,denominator:1,rate:0}
+    };
+    return {
+      schema_version:"1.0",generated_at:stamp,
+      source_timestamps:{discovery:stamp,claims:stamp,triage:stamp,review_state:stamp},
+      metrics:{...m,...overrides},
+      stages:[],integration_receipts:[],
+      policy:{read_only:true,formal_factual_verification_performed:false,
+        automatic_registry_writes:false,accepted_for_evidence_attachment_is_final_approval:false,
+        interpretation:"Stage counts have explicitly named denominators."}
+    };
+  };
+  const cfOld=cfSnapshot("2026-11-17T00:00:00Z");
+  const cfNew=cfSnapshot("2026-11-24T00:00:00Z",{discovery_candidates:8,claims_extracted:6});
+  await page.locator("[data-cf-files]").setInputFiles([
+    eqFile("funnel-new.json",cfNew),eqFile("funnel-old.json",cfOld)
+  ]);
+  await page.waitForFunction(()=>document.querySelector("[data-cf-stat='claims']")?.textContent==="6");
+  if(await page.locator("[data-cf-stat='candidates']").textContent()!=="8" ||
+     await page.locator("[data-cf-stat='decisions']").textContent()!=="3" ||
+     await page.locator("[data-cf-stat='integrated']").textContent()!=="0" ||
+     await page.locator("[data-cf-history] tr").count()!==2 ||
+     !(await page.locator("[data-cf-history] tr").last().textContent()).includes("0.0%")){
+    throw Error("Conversion Funnel dashboard failed to render ordered snapshots and explicit integration coverage");
+  }
+  const cfForged=cfSnapshot("2026-11-25T00:00:00Z",{
+    integration_coverage:{numerator:1,denominator:1,rate:1}
+  });
+  await page.locator("[data-cf-files]").setInputFiles(eqFile("funnel-forged.json",cfForged));
+  await page.waitForFunction(()=>document.querySelector("[data-cf-status]")?.textContent?.includes("Cannot load"));
+  if(!(await page.locator("[data-cf-history-panel]").isHidden()) ||
+     await page.locator("[data-cf-stat='claims']").textContent()!=="—"){
+    throw Error("Conversion Funnel accepted inconsistent integration metrics or retained stale data");
+  }
+  await page.locator("[data-cf-clear]").click();
+  if(await page.locator("[data-cf-stat='candidates']").textContent()!=="—"){
+    throw Error("Conversion Funnel clear did not reset metrics");
+  }
+
   homeDataRequests.length = 0;
   await page.goto(base + "/", { waitUntil: "networkidle" });
   const landscape = page.locator(".hero-visual-frame img");

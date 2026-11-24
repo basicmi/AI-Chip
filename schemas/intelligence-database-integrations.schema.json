@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://basicmi.github.io/AI-Chip/schemas/intelligence-database-integrations.schema.json",
+  "title": "AI Chip Intelligence Database Integration Receipts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "integrations",
+    "policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "target_registry",
+          "target_record_id",
+          "merged_pr_url",
+          "merge_commit_sha",
+          "integrated_at",
+          "reviewer",
+          "notes"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_registry": {
+            "enum": [
+              "data/company-profiles.json",
+              "data/benchmark-results.json",
+              "data/compatibility.json",
+              "data/model-support.json",
+              "data/workloads.json"
+            ]
+          },
+          "target_record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "merged_pr_url": {
+            "type": "string",
+            "pattern": "^https://github\\\\.com/basicmi/AI-Chip/pull/[1-9][0-9]*$"
+          },
+          "merge_commit_sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "integrated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 30
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manual_only",
+        "automatic_registry_writes",
+        "description"
+      ],
+      "properties": {
+        "manual_only": {
+          "const": true
+        },
+        "automatic_registry_writes": {
+          "const": false
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -77,3 +77,8 @@ description: Local-only multi-run observability of AI Chip Intelligence source h
 <link rel="stylesheet" href="{{ '/assets/css/evidence-review.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/intelligence-operations.css' | relative_url }}">
 <script src="{{ '/assets/js/intelligence-operations.js' | relative_url }}" defer></script>
+
+
+## Phase 2 — Evidence-to-Database Conversion
+
+The [Evidence-to-Database Funnel]({{ '/intelligence-funnel/' | relative_url }}) tracks discovery, Claim extraction, human review decisions and explicit merged integration receipts. It is read-only and does not publish or modify curated registries.
