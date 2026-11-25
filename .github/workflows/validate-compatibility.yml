@@ -91,6 +91,8 @@ jobs:
           python3 scripts/assess_benchmark_comparability.py --output "$RUNNER_TEMP/benchmark-comparability-report.json"
           python3 -m unittest discover -s tests -p "test_inferencex_concurrency.py"
           python3 scripts/analyze_inferencex_concurrency.py --output "$RUNNER_TEMP/inferencex-concurrency-report.json"
+          python3 -m unittest discover -s tests -p "test_inferencex_sequence_length.py"
+          python3 scripts/analyze_inferencex_sequence_length.py --output "$RUNNER_TEMP/inferencex-sequence-length-report.json"
           python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
           python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
           python3 -m unittest discover -s tests -p "test_hardware_performance_diagnosis.py"
@@ -112,6 +114,7 @@ jobs:
           path: |
             ${{ runner.temp }}/benchmark-comparability-report.json
             ${{ runner.temp }}/inferencex-concurrency-report.json
+            ${{ runner.temp }}/inferencex-sequence-length-report.json
           if-no-files-found: ignore
           retention-days: 14
 
