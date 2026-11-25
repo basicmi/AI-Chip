@@ -22,7 +22,7 @@ description: Explore completeness, missing metadata and metric coverage in the p
     <div class="compat-stat"><span>InferenceX records</span><strong data-coverage-stat="records">—</strong></div>
     <div class="compat-stat"><span>Complete comparability fields</span><strong data-coverage-stat="comparable">—</strong></div>
     <div class="compat-stat"><span>Hardware + recipe fingerprint</span><strong data-coverage-stat="hardware-recipe">—</strong></div>
-    <div class="compat-stat"><span>Valid normalized metric values</span><strong data-coverage-stat="metrics">—</strong></div>
+    <div class="compat-stat"><span>Records with a valid normalized metric</span><strong data-coverage-stat="metrics">—</strong></div>
   </div>
 
   <section class="coverage-panel">
