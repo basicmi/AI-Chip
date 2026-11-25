@@ -137,6 +137,6 @@
     render();
   }).catch(error=>{
     $("[data-coverage-load]").hidden=true;
-    const box=$("[data-coverage-error]");box.hidden=false;box.textContent=error.message;
+    const box=$("[data-coverage-error]");box.hidden=false;box.textContent=error.stack||error.message;
   });
 })();
