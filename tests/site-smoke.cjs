@@ -38,13 +38,46 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
   }
+
+  // Concurrency explorer: deterministic fixture through the production fetch/render path.
+  const sweepFixture = (id, concurrency, value, recipe="recipe-a") => ({
+    id, source_id:"inferencex", source_class:"third_party_public_benchmark",
+    evidence_level:"publisher_published_observation", benchmark_suite:"SemiAnalysis InferenceX",
+    benchmark_version:null, model:"model-a", model_display_name:"Model A",
+    scenario:"single_turn",division:"third_party",availability:"published",
+    weight_data_types:"FP8",inferred:false,errors:0,system_type:"datacenter",
+    system:{hardware:"GPU A",physical_prefill_gpus:0,physical_decode_gpus:8,is_multinode:false,workers:[]},
+    software:{framework:"vllm",recipe_fingerprint:recipe},
+    configuration:{decode_tp:8,workflow_run_id:id},
+    workload:{benchmark_type:"single_turn",isl:1024,osl:256,concurrency,precision:"FP8",speculative_method:"none",disaggregated:false},
+    normalized_metrics:{output_throughput_per_gpu:{value,unit:"tok/s/GPU",family:"throughput",direction:"higher"}},
+    source_url:"https://example.org/"+id
+  });
+  await page.route("**/data/benchmark-results.json.gz", route=>route.fulfill({
+    status:200,contentType:"application/json",body:JSON.stringify({records:[
+      sweepFixture("a",8,80),sweepFixture("b",32,120),sweepFixture("c",32,140),sweepFixture("d",64,200,"other")
+    ]})
+  }));
+  await page.goto(base+"/concurrency/",{waitUntil:"networkidle"});
+  await page.locator("[data-sweep-load]").click();
+  await page.waitForFunction(()=>document.querySelector("[data-sweep-status]").textContent.includes("Loaded 1 matching-context"));
+  if(await page.locator("[data-sweep-table] tr").count()!==2)throw Error("Concurrency explorer must show exactly two observed levels");
+  const sweepCells=await page.locator("[data-sweep-table] tr").nth(1).locator("td").allTextContents();
+  if(sweepCells.join(",")!=="32,2,120,130,140")throw Error("Concurrency repeated observation summary mismatch");
+  if(await page.locator("[data-sweep-chart] circle").count()!==3)throw Error("Concurrency plot lost source observations");
+  if(await page.locator("[data-sweep-records] a").count()!==3)throw Error("Concurrency plot lost source links");
+  await page.unroute("**/data/benchmark-results.json.gz");
+  await page.goto(base+"/concurrency/",{waitUntil:"networkidle"});
+  await page.locator("[data-sweep-load]").click();
+  await page.waitForFunction(()=>/Loaded \d+ matching-context metric series/.test(document.querySelector("[data-sweep-status]").textContent),null,{timeout:30000});
+  // Actual registry may validly have no qualifying sweeps.
 
   // PR #140: local-only typed Product Integration Workbench.
   await page.goto(base + "/product-integration/", {waitUntil:"networkidle"});
