@@ -26,7 +26,7 @@ METRIC_DEFINITIONS = {
 
 
 def present(value):
-    if value is None or value is False:
+    if value is None:
         return False
     if isinstance(value, str):
         return value.strip().lower() not in {"", "unknown", "not reported", "n/a", "none"}
