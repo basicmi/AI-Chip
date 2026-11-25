@@ -67,8 +67,9 @@ const { chromium } = require("playwright");
     ],database_version:"test-v1",last_updated:"2026-11-25"})
   }));
   await page.goto(base+"/coverage/",{waitUntil:"networkidle"});
-  await page.waitForFunction(()=>document.querySelector("[data-coverage-load]")?.hidden);
-  if((await page.locator("[data-coverage-stat='records']").textContent()).trim()!=="2")throw Error("Coverage explorer record count mismatch");
+  await page.waitForFunction(()=>document.querySelector("[data-coverage-load]")?.hidden && document.querySelector("[data-coverage-stat='records']")?.textContent.trim()!=="—");
+  const coverageTotal=(await page.locator("[data-coverage-stat='records']").textContent()).trim();
+  if(coverageTotal!=="2")throw Error("Coverage explorer record count mismatch: "+coverageTotal+"; error="+await page.locator("[data-coverage-error]").textContent());
   await page.locator("[data-coverage-dimension]").selectOption("recipe");
   if(!(await page.locator("[data-coverage-dimension-summary]").textContent()).includes("1 / 2 records"))throw Error("Coverage dimension percentage mismatch");
   await page.locator("[data-coverage-gap-field]").selectOption("hardware");
