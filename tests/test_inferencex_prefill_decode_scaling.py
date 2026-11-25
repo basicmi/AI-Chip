@@ -69,7 +69,7 @@ class PrefillDecodeScalingTests(unittest.TestCase):
         self.assertFalse(build_report({"records":[a,b]})["series"])
 
     def test_metric_units_are_validated_per_metric(self):
-        a,b=row("a",4,8),row("b",8,8)
+        a,b=row("a",4,8),row("b",4,16)
         b["normalized_metrics"]["median_ttft"]["unit"]="ms"
         report=build_report({"records":[a,b]})
         self.assertFalse(any(s["phase"]=="prefill" and s["metric"]=="median_ttft" for s in report["series"]))
