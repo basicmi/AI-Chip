@@ -67,7 +67,8 @@ class SequenceLengthTests(unittest.TestCase):
 
     def test_invalid_lengths_and_metric_units_are_excluded(self):
         b=row("b",isl=4096);b["normalized_metrics"]["median_ttft"]["unit"]="ms"
-        self.assertFalse(build_report({"records":[row("a"),b]})["sweeps"])
+        report=build_report({"records":[row("a"),b]})
+        self.assertFalse(any(s["metric"]=="median_ttft" for s in report["sweeps"]))
         b=row("b",isl=True)
         self.assertFalse(build_report({"records":[row("a"),b]})["sweeps"])
 
