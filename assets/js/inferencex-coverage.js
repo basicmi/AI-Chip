@@ -130,8 +130,8 @@
   loadRegistry().then(data=>{
     if(!Array.isArray(data.records))throw new Error("Registry has no records array.");
     records=data.records.filter(r=>r.source_id==="inferencex");
-    $("[data-coverage-version]").textContent=data.database_version||"—";
-    $("[data-coverage-imported]").textContent=data.last_imported||data.last_updated||"—";
+    document.querySelector("[data-coverage-version]").textContent=data.database_version||"—";
+    document.querySelector("[data-coverage-imported]").textContent=data.last_imported||data.last_updated||"—";
     $("[data-coverage-load]").hidden=true;
     if(!records.length)throw new Error("No InferenceX records were found in the registry.");
     render();
