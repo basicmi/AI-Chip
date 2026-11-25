@@ -101,6 +101,8 @@ jobs:
           python3 scripts/analyze_inferencex_coverage.py --output "$RUNNER_TEMP/inferencex-coverage-report.json"
           python3 -m unittest discover -s tests -p "test_inferencex_prefill_decode_scaling.py"
           python3 scripts/analyze_inferencex_prefill_decode_scaling.py --output "$RUNNER_TEMP/inferencex-prefill-decode-scaling-report.json"
+          python3 -m unittest discover -s tests -p "test_inferencex_parallelism.py"
+          python3 scripts/analyze_inferencex_parallelism.py --output "$RUNNER_TEMP/inferencex-parallelism-report.json"
           python3 -m unittest discover -s tests -p "test_hardware_counter_mappings.py"
           python3 -m unittest discover -s tests -p "test_hardware_metric_derivation.py"
           python3 -m unittest discover -s tests -p "test_hardware_performance_diagnosis.py"
@@ -127,6 +129,7 @@ jobs:
             ${{ runner.temp }}/inferencex-gpu-scaling-report.json
             ${{ runner.temp }}/inferencex-coverage-report.json
             ${{ runner.temp }}/inferencex-prefill-decode-scaling-report.json
+            ${{ runner.temp }}/inferencex-parallelism-report.json
           if-no-files-found: ignore
           retention-days: 14
 
