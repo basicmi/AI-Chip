@@ -53,7 +53,7 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(report["analysis_readiness"]["concurrency_sweeps"]["candidate_metric_series"],0)
 
     def test_isl_osl_grid_requires_two_values_on_both_axes(self):
-        rows=[row("a",isl=512,osl=128),row("b",isl=512,osl=512),row("c",isl=2048,osl=128)]
+        rows=[row("a",isl=512,osl=128),row("b",isl=512,osl=512),row("c",isl=512,osl=1024)]
         report=build_report({"records":rows})
         self.assertEqual(report["analysis_readiness"]["isl_osl_interaction"]["candidate_metric_series"],0)
         rows.append(row("d",isl=2048,osl=512))
