@@ -143,7 +143,7 @@ def main():
     retrieval = json.loads(args.retrieval.read_text(encoding="utf-8")) if args.retrieval else None
     report = compare(diagnosis, hypotheses, retrieval)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\\n",
+    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
                            encoding="utf-8")
 
 
