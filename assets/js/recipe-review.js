@@ -17,7 +17,7 @@
   const stableString=v=>{if(Array.isArray(v))return "["+v.map(stableString).join(",")+"]";if(v&&typeof v==="object")return "{"+Object.keys(v).sort().map(k=>JSON.stringify(k)+":"+stableString(v[k])).join(",")+"}";return JSON.stringify(v);};
   const make=(tag,cls,value)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(value!==undefined)n.textContent=String(value);return n;};
   const fmt=v=>new Intl.NumberFormat("en-US",{maximumFractionDigits:4}).format(v);
-  let groups=[],debug={records:0,contextMatches:0,metricObservations:0,buckets:0};
+  let groups=[];
   const metricValue=(r,key)=>{const m=r.normalized_metrics?.[key],d=metrics[key];return m&&typeof m.value==="number"&&Number.isFinite(m.value)&&m.value>=0&&m.unit===d.unit&&m.family===d.family&&m.direction===d.direction?m.value:null;};
   const recordContext=(r,axis)=>{
     const w=r.workload||{},s=r.system||{},sw=r.software||{},config=r.configuration||{};
@@ -32,14 +32,14 @@
     return {protocol:{benchmark_suite:r.benchmark_suite,benchmark_version:r.benchmark_version??null,model:r.model,scenario:r.scenario,division:r.division,availability:r.availability,weight_data_types:r.weight_data_types,workload:w},hardware:s.hardware,system_type:r.system_type,is_multinode:s.is_multinode,workers:(s.workers||[]).map(x=>x.role).filter(Boolean).sort(),software:swRest,other_configuration:rest,source_class:r.source_class,evidence_level:r.evidence_level};
   };
   const build=records=>{
-    const buckets=new Map();debug={records:records.filter(r=>r.source_id==="inferencex").length,contextMatches:0,metricObservations:0,buckets:0};
+    const buckets=new Map();
     records.filter(r=>r.source_id==="inferencex").forEach(r=>{
       axes.forEach(axis=>{
         const phase=axis.split("_")[0],cfg=r.configuration||{},degree=cfg[axis];
         if(!positive(degree))return;
-        const context=recordContext(r,axis);if(!context)return;debug.contextMatches++;
+        const context=recordContext(r,axis);if(!context)return;
         Object.entries(metrics).filter(([,d])=>d.phase===phase).forEach(([metric,def])=>{
-          const value=metricValue(r,metric);if(value===null)return;debug.metricObservations++;
+          const value=metricValue(r,metric);if(value===null)return;
           const key=axis+"|"+metric+"|"+stableString(context);
           if(!buckets.has(key))buckets.set(key,{axis,metric,context,levels:new Map()});
           const group=buckets.get(key);if(!group.levels.has(degree))group.levels.set(degree,[]);
@@ -47,7 +47,6 @@
         });
       });
     });
-    debug.buckets=buckets.size;
     return [...buckets.values()].filter(g=>{
       if(g.levels.size<2)return false;
       const obs=[...g.levels.values()].flat(),fps=new Set(obs.map(x=>x.fingerprint));
@@ -82,7 +81,7 @@
       host.append(card);
     });
     $("[data-rr-empty]").hidden=visible.length!==0;
-    $("[data-rr-status]").textContent="Showing "+Math.min(visible.length,100)+" of "+visible.length+" candidate groups. Candidate groups are metric-level and may overlap."+(groups.length===0?" Debug: "+JSON.stringify(debug):"");
+    $("[data-rr-status]").textContent="Showing "+Math.min(visible.length,100)+" of "+visible.length+" candidate groups. Candidate groups are metric-level and may overlap.";
   };
   const load=async()=>{
     const response=await fetch(root.dataset.source,{cache:"no-cache"});if(!response.ok)throw new Error("Registry request failed: HTTP "+response.status);
