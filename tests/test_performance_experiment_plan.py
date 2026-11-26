@@ -64,7 +64,7 @@ class PerformanceExperimentPlanTests(unittest.TestCase):
             self.assertTrue(item["disconfirming_result"])
             self.assertTrue(item["controls"])
             self.assertTrue(item["measurements"])
-            self.assertIn("not_proven", item["interpretation_limit"] if isinstance(item["interpretation_limit"], dict) else {"not_proven": item["interpretation_limit"]})
+            self.assertTrue(item["interpretation_limit"])
 
     def test_record_mismatch_and_non_undetermined_verdict_are_rejected(self):
         source = record()
