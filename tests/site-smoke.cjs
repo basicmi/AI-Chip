@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -75,6 +75,15 @@ const { chromium } = require("playwright");
   await page.locator("[data-coverage-gap-field]").selectOption("hardware");
   if(!(await page.locator("[data-coverage-gap-count]").textContent()).includes("1 records missing Hardware"))throw Error("Coverage gap filter mismatch");
   if(await page.locator("[data-coverage-gap-rows] a").count()!==1)throw Error("Coverage gap record source link missing");
+  // Performance Intelligence Workspace: filter the same published registry fixture.
+  await page.goto(base+"/performance/",{waitUntil:"networkidle"});
+  await page.locator("[data-pw-load]").waitFor({state:"hidden",timeout:15000});
+  if((await page.locator("[data-pw-stat='records']").textContent()).trim()!=="2")throw Error("Performance workspace registry count mismatch");
+  await page.locator("[data-pw-filter='model']").selectOption({label:"Model A"});
+  await page.locator("[data-pw-filter='hardware']").selectOption({label:"GPU A"});
+  if(!(await page.locator("[data-pw-filter-status]").textContent()).includes("Showing 1 of 2"))throw Error("Performance workspace filters did not narrow the registry");
+  await page.locator("[data-pw-metric]").selectOption("output_throughput_per_gpu");
+  if(await page.locator("[data-pw-observations] tr").count()!==1)throw Error("Performance workspace metric observation missing");
   await page.unroute("**/data/benchmark-results.json.gz");
 
   // Concurrency explorer: deterministic fixture through the production fetch/render path.
