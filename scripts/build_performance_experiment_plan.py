@@ -124,3 +124,167 @@ def _candidate_key(candidate: dict) -> str:
         return "roofline_compute" if "compute" in mechanism else "roofline_memory"
     return mechanism if mechanism in MECHANISMS else "runtime_scheduling_or_queueing"
 
+
+def _stable_id(record_id: str, index: int, mechanism: str) -> str:
+    digest = hashlib.sha256(f"{record_id}|{index}|{mechanism}".encode()).hexdigest()[:8]
+    return f"exp-{_slug(record_id)}-{index + 1}-{digest}"
+
+
+def build_plan(record: dict, diagnosis: dict, *, repetitions: int = 3) -> dict:
+    if not isinstance(record, dict) or not isinstance(diagnosis, dict):
+        raise ValueError("record and diagnosis must be JSON objects")
+    if type(repetitions) is not int or not 2 <= repetitions <= 10:
+        raise ValueError("repetitions must be an integer in 2..10")
+    if diagnosis.get("record_id") != record.get("id"):
+        raise ValueError("diagnosis record_id does not match input record id")
+    if diagnosis.get("overall_verdict") != "undetermined":
+        raise ValueError("only evidence-constrained diagnosis reports with undetermined verdict are accepted")
+    attribution = diagnosis.get("attribution")
+    candidates = attribution.get("candidates") if isinstance(attribution, dict) else None
+    if not isinstance(candidates, list) or not candidates:
+        raise ValueError("diagnosis attribution candidates are required")
+
+    workload = record.get("workload") if isinstance(record.get("workload"), dict) else {}
+    system = record.get("system") if isinstance(record.get("system"), dict) else {}
+    software = record.get("software") if isinstance(record.get("software"), dict) else {}
+    config = record.get("configuration") if isinstance(record.get("configuration"), dict) else {}
+    context = {
+        "record_id": record.get("id"),
+        "model": record.get("model_display_name") or record.get("model"),
+        "workload": {key: workload.get(key) for key in ("benchmark_type", "isl", "osl", "concurrency", "precision", "disaggregated") if workload.get(key) is not None},
+        "system": {key: system.get(key) for key in ("hardware", "nodes", "total_accelerators", "accelerators_per_node", "physical_prefill_gpus", "physical_decode_gpus") if system.get(key) is not None},
+        "framework": software.get("framework"),
+        "recipe_fingerprint": software.get("recipe_fingerprint"),
+        "configuration": config,
+        "source_url": record.get("source_url"),
+    }
+    experiments = []
+    for index, candidate in enumerate(candidates):
+        if not isinstance(candidate, dict):
+            continue
+        key = _candidate_key(candidate)
+        spec = MECHANISMS[key]
+        experiments.append({
+            "experiment_id": _stable_id(str(record.get("id") or "record"), index, key),
+            "mechanism": key,
+            "title": spec["title"],
+            "priority": "not_ranked",
+            "starting_evidence_status": candidate.get("status", "unknown"),
+            "observed_signal": candidate.get("observation", "No observation supplied."),
+            "hypothesis": spec["hypothesis"],
+            "falsifiable_question": "If the proposed mechanism is changed or measured independently while all declared controls remain fixed, does the predeclared serving outcome change repeatably?",
+            "baseline": {
+                "source_record_id": record.get("id"),
+                "captured_configuration": context,
+                "instruction": "Reproduce the selected published/local baseline before changing any factor; if the source result cannot be reproduced, mark the experiment blocked rather than treating a different run as baseline."
+            },
+            "treatment": {
+                "intervention": spec["intervention"],
+                "parameter": None,
+                "value": None,
+                "status": "requires_engineer_input"
+            },
+            "controls": spec["controls"],
+            "measurements": spec["measure"],
+            "supporting_result": spec["supports"],
+            "disconfirming_result": spec["weakens"],
+            "interpretation_limit": spec["caveat"],
+            "repetitions_per_condition": repetitions,
+            "randomize_or_interleave_runs": True,
+            "analysis_policy": [
+                "Predeclare one primary outcome and its direction before running.",
+                "Report every run, dispersion and failed/invalid run; do not report only the best run.",
+                "Keep offered load and workload identity fixed; record deviations explicitly.",
+                "Do not infer causality if control variables, time windows or system identity differ.",
+                "Do not set universal pass/fail thresholds; define a practical effect size from the engineering objective before execution."
+            ],
+            "execution": {"performed": False, "result": "not_run", "artifacts": []}
+        })
+    if not experiments:
+        raise ValueError("no valid diagnosis candidates found")
+    return {
+        "schema_version": "1.0",
+        "plan_id": _stable_id(str(record.get("id") or "record"), 0, "plan"),
+        "generated_by": DERIVER,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "record_context": context,
+        "diagnosis_verdict": "undetermined",
+        "automatic_experiment_execution": False,
+        "experiment_count": len(experiments),
+        "experiments": experiments,
+        "global_guardrails": [
+            "This is a proposed plan, not an executed experiment or a performance result.",
+            "A diagnosis candidate is a hypothesis prompt, not a bottleneck classification.",
+            "Missing evidence is unknown, never zero.",
+            "Use the same model, workload, system boundary and software recipe for baseline/treatment unless that is the single declared intervention.",
+            "No automatic ranking is assigned to hypotheses."
+        ]
+    }
+
+
+def markdown_report(plan: dict) -> str:
+    lines = [
+        "# Performance Experiment Plan",
+        "",
+        f"- Plan: `{plan['plan_id']}`",
+        f"- Source record: `{plan['record_context'].get('record_id')}`",
+        f"- Diagnosis verdict: **{plan['diagnosis_verdict']}**",
+        f"- Experiments proposed: {plan['experiment_count']}",
+        "- Execution: **not performed**",
+        "",
+        "> This is an investigation plan, not a bottleneck verdict or benchmark result.",
+        ""
+    ]
+    for item in plan["experiments"]:
+        lines += [
+            f"## {item['title']}",
+            "",
+            f"- ID: `{item['experiment_id']}`",
+            f"- Evidence status: {item['starting_evidence_status']}",
+            f"- Observation: {item['observed_signal']}",
+            f"- Hypothesis: {item['hypothesis']}",
+            f"- Falsifiable question: {item['falsifiable_question']}",
+            f"- Intervention: {item['treatment']['intervention']}",
+            "- Intervention parameter/value: **must be specified by the engineer before execution**",
+            "- Controls:"
+        ]
+        lines += [f"  - {value}" for value in item["controls"]]
+        lines += ["- Measurements:"] + [f"  - {value}" for value in item["measurements"]]
+        lines += [
+            f"- Result supporting hypothesis: {item['supporting_result']}",
+            f"- Result weakening hypothesis: {item['disconfirming_result']}",
+            f"- Interpretation limit: {item['interpretation_limit']}",
+            f"- Repetitions: {item['repetitions_per_condition']} per condition; interleave/randomize where practical.",
+            "- Execution status: **not run**",
+            ""
+        ]
+    lines += ["## Global guardrails", ""] + [f"- {item}" for item in plan["global_guardrails"]]
+    lines += [""]
+    return "\n".join(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", required=True, type=Path, help="One benchmark record JSON object")
+    parser.add_argument("--output", required=True, type=Path, help="Output experiment-plan JSON; input is never overwritten")
+    parser.add_argument("--markdown", type=Path, help="Optional Markdown plan output")
+    parser.add_argument("--repetitions", type=int, default=3, help="Proposed runs per condition (2..10; default 3)")
+    args = parser.parse_args()
+    try:
+        record = json.loads(args.input.read_text(encoding="utf-8"))
+        diagnosis = diagnose_record(record)
+        plan = build_plan(record, diagnosis, repetitions=args.repetitions)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(plan, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        if args.markdown:
+            args.markdown.parent.mkdir(parents=True, exist_ok=True)
+            args.markdown.write_text(markdown_report(plan), encoding="utf-8")
+    except Exception as error:
+        print(f"FAIL: {error}", file=sys.stderr)
+        return 1
+    print(f"PASS: proposed {plan['experiment_count']} experiments for {plan['record_context'].get('record_id')}; execution=false; verdict=undetermined")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
