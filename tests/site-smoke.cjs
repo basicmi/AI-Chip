@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -84,6 +84,32 @@ const { chromium } = require("playwright");
   if(!(await page.locator("[data-pw-filter-status]").textContent()).includes("Showing 1 of 2"))throw Error("Performance workspace filters did not narrow the registry");
   await page.locator("[data-pw-metric]").selectOption("output_throughput_per_gpu");
   if(await page.locator("[data-pw-observations] tr").count()!==1)throw Error("Performance workspace metric observation missing");
+  // Recipe evidence review: one axis changes, other stable configuration remains fixed.
+  const recipeFixture = (id, degree, fingerprint) => ({
+    id,source_id:"inferencex",source_class:"third_party_public_benchmark",
+    evidence_level:"publisher_published_observation",benchmark_suite:"SemiAnalysis InferenceX",
+    benchmark_version:"2026.1",model:"model-r",model_display_name:"Model R",
+    scenario:"single_turn",division:"third_party",availability:"published",
+    weight_data_types:"FP8",inferred:false,errors:0,system_type:"datacenter",
+    system:{hardware:"GPU R",physical_prefill_gpus:0,physical_decode_gpus:8,is_multinode:false,workers:[]},
+    software:{framework:"vllm",recipe_fingerprint:fingerprint},
+    configuration:{decode_tp:degree,decode_ep:1},
+    workload:{benchmark_type:"single_turn",isl:1024,osl:256,concurrency:32,precision:"FP8",speculative_method:"disabled",disaggregated:false},
+    normalized_metrics:{output_throughput_per_gpu:{value:100*degree,unit:"tok/s/GPU",family:"throughput",direction:"higher"}},
+    source_url:"https://example.org/"+id
+  });
+  await page.route("**/data/benchmark-results.json.gz", route=>route.fulfill({
+    status:200,contentType:"application/json",body:JSON.stringify({records:[
+      recipeFixture("recipe-a",4,"fingerprint-a"),recipeFixture("recipe-b",8,"fingerprint-b")
+    ]})
+  }));
+  await page.goto(base+"/recipe-review/",{waitUntil:"networkidle"});
+  await page.locator("[data-rr-load]").waitFor({state:"hidden",timeout:15000});
+  if((await page.locator("[data-rr-stat='groups']").textContent()).trim()!=="1")throw Error("Recipe review candidate grouping mismatch: groups="+(await page.locator("[data-rr-stat='groups']").textContent())+"; status="+await page.locator("[data-rr-status]").textContent()+"; error="+await page.locator("[data-rr-error]").textContent());
+  if(await page.locator("[data-rr-groups] .rr-group").count()!==1)throw Error("Recipe review candidate group missing");
+  if(await page.locator("[data-rr-groups] tbody tr").count()!==2)throw Error("Recipe review observations missing");
+  await page.locator("[data-rr-axis]").selectOption("decode_tp");
+  if(await page.locator("[data-rr-groups] .rr-group").count()!==1)throw Error("Recipe review axis filter failed");
   await page.unroute("**/data/benchmark-results.json.gz");
 
   // Concurrency explorer: deterministic fixture through the production fetch/render path.
