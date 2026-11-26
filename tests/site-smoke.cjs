@@ -70,7 +70,7 @@ const { chromium } = require("playwright");
   await uploadJson("[data-pe-submission]","bad-submission.json",badSubmission);
   if(!(await page.locator("[data-pe-status]").textContent()).includes("do not refer to the same evidence chain"))throw new Error("Performance Evidence Workbench accepted mismatched evidence identity");
   await page.locator("[data-pe-reset]").click();
-  if(!(await page.locator("[data-pe-status]").textContent()).includes("Choose the evidence files"))throw new Error("Performance Evidence Workbench reset failed");
+  if(!(await page.locator("[data-pe-status]").textContent()).includes("Choose the five evidence files"))throw new Error("Performance Evidence Workbench reset failed");
 
   // InferenceX coverage explorer: missing metadata remains visible and source-linked.
   const coverageFixture = (id, hardware, recipe) => ({
