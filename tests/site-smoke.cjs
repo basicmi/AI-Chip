@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/", "/cross-benchmark/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/", "/cross-benchmark/", "/diagnosis/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -139,7 +139,56 @@ const { chromium } = require("playwright");
   if(await page.locator("[data-cb-candidates] .cb-candidate").count()!==2)throw Error("Same-dimension candidate classification mismatch");
   await page.locator("[data-cb-relation]").selectOption("unit_review");
   if(await page.locator("[data-cb-candidates] .cb-candidate").count()!==3)throw Error("Unit-review candidate classification mismatch");
+  // Evidence-based diagnosis workbench: observed signals and missing profiler/trace inputs stay distinct.
+  const diagnosisRecord = (id, withEvidence) => ({
+    id,source_id:"inferencex",source_class:"third_party_public_benchmark",
+    evidence_level:"publisher_published_observation",benchmark_suite:"SemiAnalysis InferenceX",
+    benchmark_version:"2026.1",model:"model-d",model_display_name:"Model Diagnosis",
+    scenario:"single_turn",division:"third_party",availability:"published",weight_data_types:"FP8",
+    inferred:false,errors:0,system:{hardware:"GPU D",physical_decode_gpus:8},
+    software:{framework:"vllm"},source_url:"https://example.org/"+id,
+    normalized_metrics:{
+      p99_ttft:{value:1.2,unit:"s",family:"latency",direction:"lower",source_metric:"p99_ttft"},
+      p99_tpot:{value:0.12,unit:"s",family:"latency",direction:"lower",source_metric:"p99_tpot"},
+      output_throughput_per_gpu:{value:120,unit:"tok/s/GPU",family:"throughput",direction:"higher",source_metric:"output_tput"}
+    },
+    ...(withEvidence?{
+      hardware_evidence:{
+        collector:{name:"fixture-profiler",type:"profiler"},
+        system_scope:{scope_type:"per_gpu",device_count:1,device_model:"GPU D"},
+        sampling:{started_at:"2026-11-26T00:00:00Z",ended_at:"2026-11-26T00:00:10Z",sample_interval_ms:1000,sample_count:10},
+        provenance:{source_type:"profiler_export",source_url:"https://example.org/profiler.json",collected_at:"2026-11-26T00:00:11Z"},
+        metrics:[
+          {metric_id:"compute_flop_count",value:1000,unit:"FLOP",measurement_kind:"hardware_counter",aggregation:"sum",scope:"per_gpu",source_name:"flop"},
+          {metric_id:"dram_read_bytes",value:500,unit:"byte",measurement_kind:"hardware_counter",aggregation:"sum",scope:"per_gpu",source_name:"dram_read"},
+          {metric_id:"throttle_active_pct",value:0,unit:"%",measurement_kind:"telemetry",aggregation:"mean",scope:"per_gpu",source_name:"throttle"}
+        ]
+      },
+      runtime_trace:{
+        collector:{name:"fixture-trace",type:"runtime_trace"},clock_domain:"utc_wall_clock",
+        sampling:{started_at:"2026-11-26T00:00:00Z",ended_at:"2026-11-26T00:00:10Z"},
+        provenance:{source_type:"runtime_trace_export",source_url:"https://example.org/trace.json",collected_at:"2026-11-26T00:00:11Z"},
+        events:[{event_id:"q1",name:"queue",category:"queue_wait",started_at:"2026-11-26T00:00:01Z",ended_at:"2026-11-26T00:00:02Z"}]
+      }
+    }:{})
+  });
+  await page.route("**/data/benchmark-results.json.gz", route=>route.fulfill({
+    status:200,contentType:"application/json",body:JSON.stringify({records:[diagnosisRecord("diagnosis-a",true),diagnosisRecord("diagnosis-b",false)]})
+  }));
+  await page.goto(base+"/diagnosis/",{waitUntil:"networkidle"});
+  await page.locator("[data-dw-load]").waitFor({state:"hidden",timeout:15000});
+  if((await page.locator("[data-dw-stat='records']").textContent()).trim()!=="2")throw Error("Diagnosis workbench record count mismatch");
+  if((await page.locator("[data-dw-stat='hardware']").textContent()).trim()!=="1")throw Error("Diagnosis profiler evidence coverage count mismatch");
+  if((await page.locator("[data-dw-stat='traces']").textContent()).trim()!=="1")throw Error("Diagnosis runtime trace coverage count mismatch");
+  if((await page.locator("[data-dw-stat='serving']").textContent()).trim()!=="2")throw Error("Diagnosis serving metric coverage count mismatch");
+  if(await page.locator("[data-dw-runtime] tbody tr").count()!==3)throw Error("Diagnosis serving metrics were not rendered");
+  if(!(await page.locator("[data-dw-evidence]").textContent()).includes("compute_flop_count"))throw Error("Diagnosis profiler metric evidence missing");
+  if(!(await page.locator("[data-dw-mechanisms]").textContent()).includes("Missing: theoretical_peak_flops"))throw Error("Diagnosis missing-input checklist did not identify absent roofline inputs");
+  if(!(await page.locator("[data-dw-mechanisms]").textContent()).includes("No bottleneck verdict is generated"))throw Error("Diagnosis workbench must preserve no-automatic-verdict guardrail");
+  await page.locator("[data-dw-record]").selectOption("diagnosis-b");
+  if(!(await page.locator("[data-dw-provenance]").textContent()).includes("No profiler or runtime trace provenance"))throw Error("Missing evidence was not represented as unknown");
   await page.unroute("**/data/benchmark-results.json.gz");
+
 
   // Concurrency explorer: deterministic fixture through the production fetch/render path.
   const sweepFixture = (id, concurrency, value, recipe="recipe-a") => ({
