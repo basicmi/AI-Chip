@@ -66,9 +66,12 @@ def retrieve(catalog, query, target, metric=None, limit=20):
         else:
             tier = "not_applicable_under_declared_context"
             reason = "At least one declared context field differs."
-        if verdict not in ("supported", "refuted"):
+        if verdict == "refuted":
             tier = "exploratory_only"
-            reason = "Knowledge verdict is not a reusable Supported/Refuted claim."
+            reason = "Refuted claim retained as counter-evidence; never a reusable recommendation."
+        elif verdict != "supported":
+            tier = "exploratory_only"
+            reason = "Knowledge verdict is not a reusable Supported claim."
         candidates.append({
             "knowledge_id": entry["knowledge_id"],
             "topic": entry.get("topic"),
