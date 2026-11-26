@@ -169,6 +169,10 @@ jobs:
           test -s _site/coverage/index.html
           test -s _site/performance/index.html
           test -s _site/cross-benchmark/index.html
+          test -s _site/diagnosis/index.html
+          test -s _site/assets/js/performance-diagnosis.js
+          test -s _site/assets/css/performance-diagnosis.css
+          test -s docs/hardware-performance-diagnosis.md
           test -s _site/assets/js/cross-benchmark.js
           test -s _site/assets/css/cross-benchmark.css
           test -s docs/cross-benchmark-evidence.md
