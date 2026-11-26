@@ -105,7 +105,7 @@ const { chromium } = require("playwright");
   }));
   await page.goto(base+"/recipe-review/",{waitUntil:"networkidle"});
   await page.locator("[data-rr-load]").waitFor({state:"hidden",timeout:15000});
-  if((await page.locator("[data-rr-stat='groups']").textContent()).trim()!=="1")throw Error("Recipe review candidate grouping mismatch: "+await page.locator("[data-rr-error]").textContent());
+  if((await page.locator("[data-rr-stat='groups']").textContent()).trim()!=="1")throw Error("Recipe review candidate grouping mismatch: groups="+(await page.locator("[data-rr-stat='groups']").textContent())+"; status="+await page.locator("[data-rr-status]").textContent()+"; error="+await page.locator("[data-rr-error]").textContent());
   if(await page.locator("[data-rr-groups] .rr-group").count()!==1)throw Error("Recipe review candidate group missing");
   if(await page.locator("[data-rr-groups] tbody tr").count()!==2)throw Error("Recipe review observations missing");
   await page.locator("[data-rr-axis]").selectOption("decode_tp");
