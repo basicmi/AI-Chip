@@ -16,6 +16,7 @@ description: Source-linked public AI accelerator benchmark submissions and infer
     <a href="{{ '/benchmarks/' | relative_url }}">Benchmark catalogue ↗</a>
     <a href="{{ '/benchmark-integration/' | relative_url }}">Submit / review a result ↗</a>
     <a href="{{ '/concurrency/' | relative_url }}">Concurrency Explorer ↗</a>
+    <a href="{{ '/coverage/' | relative_url }}">InferenceX Coverage Explorer ↗</a>
   </div>
 </section>
 

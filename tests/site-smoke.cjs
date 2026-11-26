@@ -38,13 +38,44 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
   }
+
+  // InferenceX coverage explorer: missing metadata remains visible and source-linked.
+  const coverageFixture = (id, hardware, recipe) => ({
+    id, source_id:"inferencex", source_class:"third_party_public_benchmark",
+    evidence_level:"publisher_published_observation", benchmark_suite:"SemiAnalysis InferenceX",
+    benchmark_version:"2026.1", model:"model-a", model_display_name:"Model A",
+    scenario:"single_turn",division:"third_party",availability:"published",
+    weight_data_types:"FP8",inferred:false,errors:0,system_type:"datacenter",
+    system:{hardware,physical_prefill_gpus:0,physical_decode_gpus:8,is_multinode:false,workers:[]},
+    software:{framework:"vllm",recipe_fingerprint:recipe},
+    configuration:{decode_tp:8,workflow_run_id:id},
+    workload:{benchmark_type:"single_turn",isl:1024,osl:256,concurrency:32,precision:"FP8",speculative_method:"none",disaggregated:false},
+    normalized_metrics:{output_throughput_per_gpu:{value:100,unit:"tok/s/GPU",family:"throughput",direction:"higher"}},
+    source_url:"https://example.org/"+id
+  });
+  await page.route("**/data/benchmark-results.json.gz", route=>route.fulfill({
+    status:200,contentType:"application/json",body:JSON.stringify({records:[
+      coverageFixture("coverage-a","GPU A","recipe-a"),
+      coverageFixture("coverage-b",null,null)
+    ],database_version:"test-v1",last_updated:"2026-11-25"})
+  }));
+  await page.goto(base+"/coverage/",{waitUntil:"networkidle"});
+  await page.locator("[data-coverage-load]").waitFor({state:"hidden",timeout:15000});
+  const coverageTotal=(await page.locator("[data-coverage-stat='records']").textContent()).trim();
+  if(coverageTotal!=="2")throw Error("Coverage explorer record count mismatch: "+coverageTotal+"; error="+await page.locator("[data-coverage-error]").textContent()+"; root="+await page.locator("[data-coverage-explorer]").count());
+  await page.locator("[data-coverage-dimension]").selectOption("recipe");
+  if(!(await page.locator("[data-coverage-dimension-summary]").textContent()).includes("1 / 2 records"))throw Error("Coverage dimension percentage mismatch");
+  await page.locator("[data-coverage-gap-field]").selectOption("hardware");
+  if(!(await page.locator("[data-coverage-gap-count]").textContent()).includes("1 records missing Hardware"))throw Error("Coverage gap filter mismatch");
+  if(await page.locator("[data-coverage-gap-rows] a").count()!==1)throw Error("Coverage gap record source link missing");
+  await page.unroute("**/data/benchmark-results.json.gz");
 
   // Concurrency explorer: deterministic fixture through the production fetch/render path.
   const sweepFixture = (id, concurrency, value, recipe="recipe-a") => ({
