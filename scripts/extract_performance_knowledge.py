@@ -105,22 +105,27 @@ def build_catalog(item, existing=None):
     require(isinstance(existing, dict) and existing.get("schema_version") == "1.0"
             and isinstance(existing.get("entries"), list), "Invalid existing knowledge catalog")
     entries = deepcopy(existing["entries"])
+    conflicts = deepcopy(existing.get("potential_contradictions", []))
+    require(isinstance(conflicts, list), "Existing contradiction list must be an array")
     require(all(isinstance(x, dict) and x.get("knowledge_id") for x in entries),
             "Existing catalog contains invalid knowledge entries")
     if any(x["knowledge_id"] == item["knowledge_id"] for x in entries):
         raise ValueError("Knowledge entry already exists")
-    conflicts = []
+    known_pairs = {(x.get("knowledge_id_a"), x.get("knowledge_id_b")) for x in conflicts}
     for prior in entries:
         if (prior.get("topic") == item["topic"]
                 and prior.get("scope_sha256") == item["scope_sha256"]
                 and prior.get("verdict") in VERDICTS
                 and prior.get("verdict") != item["verdict"]):
-            conflicts.append({
+            pair = (prior["knowledge_id"], item["knowledge_id"])
+            if pair not in known_pairs:
+                conflicts.append({
                 "knowledge_id_a": prior["knowledge_id"],
                 "knowledge_id_b": item["knowledge_id"],
                 "type": "opposing_human_verdict_same_declared_scope",
                 "resolution": "unresolved_human_review_required",
-            })
+                })
+                known_pairs.add(pair)
     entries.append(item)
     return {"schema_version": "1.0", "entries": entries,
             "potential_contradictions": conflicts,
