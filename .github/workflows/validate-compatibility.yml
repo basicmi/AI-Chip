@@ -113,6 +113,7 @@ jobs:
           python3 -m unittest discover -s tests -p "test_performance_knowledge_applicability.py"
           python3 -m unittest discover -s tests -p "test_performance_knowledge_retrieval.py"
           python3 -m unittest discover -s tests -p "test_performance_hypothesis_comparison.py"
+          python3 -m unittest discover -s tests -p "test_discriminating_experiment_plan.py"
           python3 -m unittest discover -s tests -p "test_gpu_execution_efficiency.py"
           python3 -m unittest discover -s tests -p "test_runtime_hardware_alignment.py"
           python3 -m unittest discover -s tests -p "test_runtime_phase_decomposition.py"
