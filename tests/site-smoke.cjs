@@ -94,7 +94,7 @@ const { chromium } = require("playwright");
     system:{hardware:"GPU R",physical_prefill_gpus:0,physical_decode_gpus:8,is_multinode:false,workers:[]},
     software:{framework:"vllm",recipe_fingerprint:fingerprint},
     configuration:{decode_tp:degree,decode_ep:1},
-    workload:{benchmark_type:"single_turn",isl:1024,osl:256,concurrency:32,precision:"FP8",speculative_method:"none",disaggregated:false},
+    workload:{benchmark_type:"single_turn",isl:1024,osl:256,concurrency:32,precision:"FP8",speculative_method:"disabled",disaggregated:false},
     normalized_metrics:{output_throughput_per_gpu:{value:100*degree,unit:"tok/s/GPU",family:"throughput",direction:"higher"}},
     source_url:"https://example.org/"+id
   });
