@@ -38,7 +38,7 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/", "/cross-benchmark/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
@@ -110,6 +110,35 @@ const { chromium } = require("playwright");
   if(await page.locator("[data-rr-groups] tbody tr").count()!==2)throw Error("Recipe review observations missing");
   await page.locator("[data-rr-axis]").selectOption("decode_tp");
   if(await page.locator("[data-rr-groups] .rr-group").count()!==1)throw Error("Recipe review axis filter failed");
+  // Cross-benchmark crosswalk: exact signature, same-dimensional, and unit-review links.
+  const crossFixture = (id,suite,key,unit,label,sourceMetric) => ({
+    id,source_id:id,source_class:"third_party_public_benchmark",evidence_level:"publisher_published_observation",
+    benchmark_suite:suite,benchmark_version:"1.0",model:"Model X",scenario:"offline",division:"closed",
+    availability:"published",weight_data_types:"FP8",inferred:false,errors:0,
+    normalized_metrics:{[key]:{value:123,unit,family:"throughput",direction:"higher",label,source_metric:sourceMetric}},
+    source_url:"https://example.org/"+id
+  });
+  await page.route("**/data/benchmark-results.json.gz", route=>route.fulfill({
+    status:200,contentType:"application/json",body:JSON.stringify({records:[
+      crossFixture("cross-a","Suite Alpha","output_throughput","token/s","Output throughput","tokens_per_second"),
+      crossFixture("cross-b","Suite Beta","output_throughput","token/s","Generated tokens per second","tokens_per_second"),
+      crossFixture("cross-c","Suite Gamma","throughput_rate","token/s","Token generation rate","tokens_per_second"),
+      crossFixture("cross-d","Suite Delta","output_rate","k token/s","Output rate","output_rate")
+    ]})
+  }));
+  await page.goto(base+"/cross-benchmark/",{waitUntil:"networkidle"});
+  await page.locator("[data-cb-load]").waitFor({state:"hidden",timeout:15000});
+  if((await page.locator("[data-cb-stat='suites']").textContent()).trim()!=="4")throw Error("Cross-benchmark suite count mismatch");
+  if((await page.locator("[data-cb-stat='candidates']").textContent()).trim()!=="6")throw Error("Cross-benchmark candidate count mismatch");
+  await page.locator("[data-cb-relation]").selectOption("same_signature");
+  if(await page.locator("[data-cb-candidates] .cb-candidate").count()!==1)throw Error("Exact normalized metric signature mapping mismatch");
+  await page.locator("[data-cb-candidates] .cb-inspect-button").first().click();
+  if(!(await page.locator("[data-cb-inspector]").textContent()).includes("tokens_per_second"))throw Error("Cross-benchmark metric definition inspector omitted source metric");
+  if(await page.locator("[data-cb-inspector] a").count()!==1)throw Error("Cross-benchmark inspector omitted source traceability");
+  await page.locator("[data-cb-relation]").selectOption("same_dimension");
+  if(await page.locator("[data-cb-candidates] .cb-candidate").count()!==2)throw Error("Same-dimension candidate classification mismatch");
+  await page.locator("[data-cb-relation]").selectOption("unit_review");
+  if(await page.locator("[data-cb-candidates] .cb-candidate").count()!==3)throw Error("Unit-review candidate classification mismatch");
   await page.unroute("**/data/benchmark-results.json.gz");
 
   // Concurrency explorer: deterministic fixture through the production fetch/render path.
