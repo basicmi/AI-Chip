@@ -518,19 +518,26 @@
       performanceKeyFor(record) === activeCohort.performanceKey
     );
 
-    const readMetric = (record, key, unit, direction) => {
+    const readMetric = (record, key, unit, direction, family) => {
       const metric = record.normalized_metrics?.[key];
       if (!metric || typeof metric.value !== "number" || !Number.isFinite(metric.value) ||
-          metric.value <= 0 || metric.unit !== unit || metric.direction !== direction) return null;
+          metric.value <= 0 || metric.unit !== unit || metric.direction !== direction || metric.family !== family) return null;
       return metric.value;
     };
 
     const candidates = [];
+    const exclusions = [];
     cohortRecords.forEach(record => {
-      const ttft = readMetric(record, "p99_ttft", "s", "lower");
-      const tpot = readMetric(record, "p99_tpot", "s", "lower");
-      const throughput = readMetric(record, "output_throughput_per_gpu", "tok/s/GPU", "higher");
-      if (ttft === null || tpot === null || throughput === null) return;
+      const ttft = readMetric(record, "p99_ttft", "s", "lower", "latency");
+      const tpot = readMetric(record, "p99_tpot", "s", "lower", "latency");
+      const throughput = readMetric(record, "output_throughput_per_gpu", "tok/s/GPU", "higher", "throughput");
+      const reasons = [];
+      if (ttft === null) reasons.push("P99 TTFT missing or invalid");
+      if (tpot === null) reasons.push("P99 TPOT missing or invalid");
+      if (throughput === null) reasons.push("Output throughput/GPU missing or invalid");
+      if (record.inferred !== false) reasons.push("Inferred or unknown submission status");
+      if (record.errors !== 0) reasons.push("Nonzero or unknown error count");
+      if (reasons.length) { exclusions.push({record, reasons}); return; }
       candidates.push({ record, ttft, tpot, throughput, isPareto: false });
     });
 
@@ -549,6 +556,16 @@
       candidates.length + " report all three required metrics · " +
       frontier.length + " Pareto-optimal configurations · " +
       (cohortRecords.length - candidates.length) + " excluded for incomplete or invalid metrics."));
+
+    const excludedDetails = make("details", "benchmark-frontier-audit");
+    excludedDetails.append(make("summary", "", "Excluded observations (" + exclusions.length + ")"));
+    exclusions.forEach(({record,reasons}) => {
+      const item = make("p", "", record.id + " · " + reasons.join("; ") + " · ");
+      addLink(item, record.detail_url || record.source_url, "Source record");
+      excludedDetails.append(item);
+    });
+    if (!exclusions.length) excludedDetails.append(make("p", "", "No excluded observations."));
+    frontierContent.append(excludedDetails);
 
     if (candidates.length < 2) {
       frontierContent.append(make("p", "benchmark-frontier-empty",
@@ -703,6 +720,34 @@
     table.append(tbody);
     tableWrap.append(table);
     frontierContent.append(tableWrap);
+    const audit = make("details", "benchmark-frontier-audit");
+    audit.setAttribute("data-pareto-dominance-audit", "");
+    const dominated = candidates.filter(item => !item.isPareto);
+    audit.append(make("summary", "", "Why observations are dominated (" + dominated.length + ")"));
+    audit.append(make("p", "", "Each example identifies a non-dominated observation that is no worse on all three metrics and strictly better on at least one. This is a recorded metric comparison, not a causal hardware conclusion. Equal metric triples do not dominate each other."));
+    dominated.sort((a,b)=>String(a.record.id).localeCompare(String(b.record.id))).forEach(item => {
+      const witness = frontier.find(other => dominates(other,item));
+      if (!witness) return;
+      const section = make("section", "benchmark-frontier-dominance-item");
+      section.dataset.dominatedRecord = item.record.id;
+      section.dataset.dominatingRecord = witness.record.id;
+      section.append(make("h3", "", item.record.id + " is dominated by " + witness.record.id));
+      const list = make("ul", "");
+      [["P99 TTFT", item.ttft, witness.ttft, "s"], ["P99 TPOT", item.tpot, witness.tpot, "s"], ["Output throughput/GPU", item.throughput, witness.throughput, "tok/s/GPU"]].forEach(([label,before,after,unit]) => {
+        list.append(make("li", "", label + ": " + String(before) + " → " + String(after) + " " + unit + (before === after ? " (equal)" : " (better)")));
+      });
+      section.append(list);
+      [item,witness].forEach(point => {
+        const details = make("details", "");
+        details.append(make("summary", "", point.record.id + " · configuration and evidence"));
+        addLink(details, point.record.detail_url || point.record.source_url, "Source record");
+        details.append(make("pre", "", JSON.stringify({system:point.record.system,software:point.record.software,configuration:point.record.configuration,evidence_level:point.record.evidence_level},null,2)));
+        section.append(details);
+      });
+      audit.append(section);
+    });
+    if (!dominated.length) audit.append(make("p", "", "No dominated observations in this cohort."));
+    frontierContent.append(audit);
   };
 
 

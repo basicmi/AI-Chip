@@ -1059,7 +1059,7 @@ const { chromium } = require("playwright");
       }, model: "dsr1",
       model_display_name: "DeepSeek-R1-0528", scenario: "single_turn", availability: "published",
       division: "third_party", system_type: "datacenter", benchmark_suite: "SemiAnalysis InferenceX",
-      benchmark_version: null, publication_date: "2026-11-10", inferred: false,
+      benchmark_version: null, publication_date: "2026-11-10", inferred: false, errors: 0,
       result_value: null, result_unit: "", accuracy_text: "", source_url: "https://inferencex.semianalysis.com/",
       normalized_metrics: {
         output_throughput_per_gpu: { value, unit: "tok/s/GPU", label: "Output throughput", direction: "higher", family: "throughput" },
@@ -1372,6 +1372,12 @@ const { chromium } = require("playwright");
       !frontierIds.includes("fixture-2") || frontierIds.includes("fixture-0")) {
     throw new Error("Pareto frontier should retain the two non-dominated configurations and exclude fixture-0: " + frontierIds.join(", "));
   }
+  const dominanceAudit = page.locator("[data-pareto-dominance-audit]");
+  const dominatedObservation = dominanceAudit.locator("[data-dominated-record='fixture-0']");
+  if(await dominatedObservation.count()!==1)throw Error("Missing dominance witness for fixture-0");
+  if(await dominatedObservation.getAttribute("data-dominating-record")!=="fixture-2")throw Error("Unexpected non-dominated witness");
+  if(await dominatedObservation.locator("li").count()!==3)throw Error("Dominance explanation must cover all three metrics");
+  if(await dominanceAudit.locator("[data-dominated-record='fixture-1'], [data-dominated-record='fixture-2']").count())throw Error("Non-dominated records incorrectly marked dominated");
   const paretoPlot = page.locator("[data-pareto-plot]");
   if (await paretoPlot.locator(".benchmark-frontier-point").count() !== 3 ||
       await paretoPlot.locator(".benchmark-frontier-point.is-pareto").count() !== 2) {
