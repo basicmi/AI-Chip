@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "entries": [],
+  "potential_contradictions": [],
+  "policy": {
+    "automatic_truth_claims": false,
+    "only_human_reviewed_supported_or_refuted": true,
+    "contradictions_auto_resolved": false
+  }
+}
