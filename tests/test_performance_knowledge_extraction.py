@@ -56,6 +56,15 @@ class PerformanceKnowledgeTests(unittest.TestCase):
         self.assertEqual(conflicted["potential_contradictions"][0]["resolution"],
                          "unresolved_human_review_required")
 
+    def test_existing_contradictions_are_preserved(self):
+        r,p,s,report,ledger=prepared()
+        item=extract_knowledge(r,p,s,ledger)
+        prior={"knowledge_id":"prior","topic":item["topic"],"scope_sha256":item["scope_sha256"],"verdict":"refuted"}
+        old_conflict={"knowledge_id_a":"old-a","knowledge_id_b":"old-b","type":"existing","resolution":"unresolved_human_review_required"}
+        catalog=build_catalog(item,{"schema_version":"1.0","entries":[prior],"potential_contradictions":[old_conflict]})
+        self.assertIn(old_conflict,catalog["potential_contradictions"])
+        self.assertEqual(len(catalog["potential_contradictions"]),2)
+
     def test_blocked_evidence_rejected(self):
         r,p,s,report,ledger=prepared()
         s["runs"][0].update(status="failed",reason="timeout")
