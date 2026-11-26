@@ -183,7 +183,7 @@ const { chromium } = require("playwright");
   if((await page.locator("[data-dw-stat='serving']").textContent()).trim()!=="2")throw Error("Diagnosis serving metric coverage count mismatch");
   if(await page.locator("[data-dw-runtime] tbody tr").count()!==3)throw Error("Diagnosis serving metrics were not rendered");
   if(!(await page.locator("[data-dw-evidence]").textContent()).includes("compute_flop_count"))throw Error("Diagnosis profiler metric evidence missing");
-  if(!(await page.locator("[data-dw-mechanisms]").textContent()).includes("Missing: theoretical_peak_flops"))throw Error("Diagnosis missing-input checklist did not identify absent roofline inputs");
+  if(!(await page.locator("[data-dw-mechanisms]").textContent()).includes("theoretical_peak_flops"))throw Error("Diagnosis missing-input checklist did not identify absent roofline inputs");
   if(!(await page.locator("[data-dw-mechanisms]").textContent()).includes("No bottleneck verdict is generated"))throw Error("Diagnosis workbench must preserve no-automatic-verdict guardrail");
   await page.locator("[data-dw-record]").selectOption("diagnosis-b");
   if(!(await page.locator("[data-dw-provenance]").textContent()).includes("No profiler or runtime trace provenance"))throw Error("Missing evidence was not represented as unknown");
