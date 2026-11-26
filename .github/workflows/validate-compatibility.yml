@@ -168,6 +168,9 @@ jobs:
           test -s _site/concurrency/index.html
           test -s _site/coverage/index.html
           test -s _site/performance/index.html
+          test -s _site/recipe-review/index.html
+          test -s _site/assets/js/recipe-review.js
+          test -s _site/assets/css/recipe-review.css
           test -s _site/assets/js/performance-workspace.js
           test -s _site/assets/css/performance-workspace.css
           test -s _site/assets/js/inferencex-coverage.js
