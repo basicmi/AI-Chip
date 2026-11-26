@@ -25,8 +25,8 @@ applicability and limitations using simple token overlap.
 - `priority_human_review`: declared context matches and metric is exact or
   was not supplied. This is a review priority, not an approval or recommendation.
 - `exploratory_only`: context is incomplete, metric differs/is unknown, or
-  the human verdict is not Supported/Refuted. Includes Refuted claims as
-  counter-evidence; it never presents them as best practices.
+  the human verdict is Refuted or is not a reusable Supported claim. Refuted
+  claims remain visible as counter-evidence and are never promoted to best practices.
 - `not_applicable_under_declared_context`: at least one declared source
   context field differs. Retained as a possible boundary/counterexample, not
   eligible for direct reuse.
