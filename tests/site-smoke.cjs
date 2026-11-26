@@ -38,13 +38,39 @@ const { chromium } = require("playwright");
     }
   };
 
-  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/", "/cross-benchmark/", "/diagnosis/"];
+  const routes = ["/", "/directory/", "/products/", "/software-ecosystem/", "/compatibility/", "/workloads/", "/model-support/", "/evidence-review/", "/database-integration/", "/product-integration/", "/benchmark-integration/", "/intelligence-operations/", "/benchmarks/", "/results/", "/concurrency/", "/coverage/", "/performance/", "/recipe-review/", "/cross-benchmark/", "/diagnosis/", "/performance-evidence/"];
   for (const route of routes) {
     const response = await page.goto(base + route, { waitUntil: "networkidle" });
     if (!response || !response.ok()) throw new Error("Route failed: " + route);
     await page.locator("header.site-header").waitFor();
     await page.locator("main#main-content").waitFor();
   }
+
+  // Performance Evidence Workbench: local file loading, identity matching and decision-history rendering.
+  const peRecord = {id:"pe-fixture",model:"Fixture Model"};
+  const pePlan = {schema_version:"1.0",plan_id:"plan-fixture",record_context:{record_id:"pe-fixture"},experiment_count:1,experiments:[{experiment_id:"exp-fixture",title:"Decode TP experiment",mechanism:"runtime_scheduling_or_queueing",hypothesis:"Queueing contributes to the observed latency.",observed_signal:"Elevated p99 TPOT",baseline:{source_record_id:"pe-fixture"}}]};
+  const peSubmission = {schema_version:"1.0",plan_id:"plan-fixture",experiment_id:"exp-fixture",protocol:{parameter:"decode_tp",baseline_value:4,treatment_value:8,primary_metric:{key:"median_tpot",unit:"s"}}};
+  const hashFixture = "a".repeat(64);
+  const peReview = {schema_version:"1.0",report_type:"performance_evidence_review",record_id:"pe-fixture",plan_id:"plan-fixture",experiment_id:"exp-fixture",record_sha256:hashFixture,plan_sha256:"b".repeat(64),submission_sha256:"c".repeat(64),review_status:"needs_review",hypothesis_verdict:"undetermined",review_blockers:[],runs:[{run_id:"base-1",condition:"baseline",status:"valid",value:0.12,unit:"s",source_url:"https://example.org/base"},{run_id:"treat-1",condition:"treatment",status:"valid",value:0.1,unit:"s",source_url:"https://example.org/treat"}],statistics:{baseline:{valid_runs:1,min:0.12,max:0.12,median:0.12},treatment:{valid_runs:1,min:0.1,max:0.1,median:0.1}},relative_improvement_percent:16.67,effect_threshold_met:true};
+  peSubmission.record_sha256=hashFixture;
+  peSubmission.plan_sha256="b".repeat(64);
+  peSubmission.submission_sha256="c".repeat(64);
+  const peLedger = {schema_version:"1.0",entries:[{evidence_identity:{record_id:"pe-fixture",plan_id:"plan-fixture",experiment_id:"exp-fixture",submission_sha256:"c".repeat(64)},decision:{decision_id:"decision-1",verdict:"inconclusive",reviewer:"Fixture reviewer",reviewed_at:"2026-11-26T00:00:00Z",rationale:"Synthetic review only.",applicability:"Fixture only",limitations:"Not production evidence."},previous_entry_sha256:null,entry_sha256:"d".repeat(64)}]};
+  await page.goto(base+"/performance-evidence/",{waitUntil:"networkidle"});
+  const uploadJson = async (selector,name,value) => page.locator(selector).setInputFiles({name,mimeType:"application/json",buffer:Buffer.from(JSON.stringify(value))});
+  await uploadJson("[data-pe-record]","record.json",peRecord);
+  await uploadJson("[data-pe-plan]","plan.json",pePlan);
+  await uploadJson("[data-pe-submission]","submission.json",peSubmission);
+  await uploadJson("[data-pe-review]","review.json",peReview);
+  await uploadJson("[data-pe-ledger]","ledger.json",peLedger);
+  if(await page.locator("[data-pe-content]").isHidden())throw new Error("Performance Evidence Workbench did not render a matched evidence chain");
+  if((await page.locator("[data-pe-stat='runs']").textContent()).trim()!=="2")throw new Error("Performance Evidence Workbench run count mismatch");
+  if(!(await page.locator("[data-pe-decision-list]").textContent()).includes("inconclusive"))throw new Error("Performance Evidence Workbench did not render human decision history");
+  const badSubmission={...peSubmission,plan_id:"wrong-plan"};
+  await uploadJson("[data-pe-submission]","bad-submission.json",badSubmission);
+  if(!(await page.locator("[data-pe-status]").textContent()).includes("do not refer to the same evidence chain"))throw new Error("Performance Evidence Workbench accepted mismatched evidence identity");
+  await page.locator("[data-pe-reset]").click();
+  if(!(await page.locator("[data-pe-status]").textContent()).includes("Choose the evidence files"))throw new Error("Performance Evidence Workbench reset failed");
 
   // InferenceX coverage explorer: missing metadata remains visible and source-linked.
   const coverageFixture = (id, hardware, recipe) => ({
