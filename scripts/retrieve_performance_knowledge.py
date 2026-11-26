@@ -151,7 +151,7 @@ def main():
     metric = json.loads(args.metric.read_text(encoding="utf-8")) if args.metric else None
     report = retrieve(catalog, args.query, target, metric, args.limit)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\\n", encoding="utf-8")
+    args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
