@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Append explicit human decisions to an evidence-version-bound review ledger."""
 import argparse
+from copy import deepcopy
 import json
 from datetime import datetime
 from pathlib import Path
@@ -70,9 +71,9 @@ def append_decision(ledger, record, plan, submission, decision):
         require(all(checks.values()), "Definitive decision requires all human checks")
         require({known[x]["condition"] for x in refs if known[x]["status"] == "valid"} == {"baseline","treatment"}, "Both conditions require valid cited runs")
     entry = {"evidence_identity":ident, "review_sha256":digest(report),
-             "decision":decision, "previous_entry_sha256":previous}
+             "decision":deepcopy(decision), "previous_entry_sha256":previous}
     entry["entry_sha256"] = digest(entry)
-    result = {"schema_version":"1.0","entries":[*ledger["entries"],entry]}
+    result = {"schema_version":"1.0","entries":[*deepcopy(ledger["entries"]),entry]}
     validate_ledger(result)
     return result
 
