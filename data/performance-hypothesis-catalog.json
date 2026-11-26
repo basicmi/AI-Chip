@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "hypotheses": [
+    {
+      "hypothesis_id": "compute_execution_limit",
+      "title": "Compute-side execution limit",
+      "mechanism": "compute",
+      "statement": "A compute-side ceiling materially contributes to the end-to-end performance symptom.",
+      "knowledge_query": "compute roofline kernel execution",
+      "evidence_rules": [
+        {
+          "mechanism": "roofline_compute_ceiling",
+          "interpretation": "A lower compute ceiling is a model-side signal, not proof of runtime saturation."
+        }
+      ],
+      "discriminating_measurements": [
+        "Precision/sparsity-matched achieved FLOP/s and peak over the same interval",
+        "Kernel-scoped Tensor/SM active cycles and instruction mix",
+        "Request-correlated kernel duration and serving latency"
+      ],
+      "what_would_support": [
+        "A controlled compute-relevant intervention changes the targeted kernel metric and end-to-end metric at fixed workload."
+      ],
+      "what_would_weaken": [
+        "A validated compute intervention changes kernel execution but not the serving symptom."
+      ]
+    },
+    {
+      "hypothesis_id": "memory_bandwidth_limit",
+      "title": "Memory bandwidth limit",
+      "mechanism": "memory",
+      "statement": "DRAM bandwidth or memory-system behavior materially limits the target workload.",
+      "knowledge_query": "memory bandwidth HBM roofline",
+      "evidence_rules": [
+        {
+          "mechanism": "roofline_memory_ceiling",
+          "interpretation": "A memory-side roofline ceiling is a modeled ceiling, not proof that achieved traffic is on the critical path."
+        }
+      ],
+      "discriminating_measurements": [
+        "Same-boundary DRAM read/write bytes and peak bandwidth",
+        "L2 hit rate, cache reuse and memory-stall counters",
+        "Kernel-scoped memory throughput aligned to request phases"
+      ],
+      "what_would_support": [
+        "A controlled memory-system intervention changes measured memory stalls/bandwidth and serving performance."
+      ],
+      "what_would_weaken": [
+        "Memory traffic and stalls are low or unchanged during the symptom under a complete aligned capture."
+      ]
+    },
+    {
+      "hypothesis_id": "communication_critical_path",
+      "title": "Inter-GPU communication critical path",
+      "mechanism": "communication",
+      "statement": "Collective communication or fabric contention lies on the critical path.",
+      "knowledge_query": "all-to-all communication fabric link contention",
+      "evidence_rules": [
+        {
+          "mechanism": "communication_link_utilization",
+          "interpretation": "Per-link activity is an observation; critical-path attribution also needs collective timing and topology."
+        },
+        {
+          "mechanism": "communication",
+          "interpretation": "Missing link counters are unknown, not evidence of no communication cost."
+        }
+      ],
+      "discriminating_measurements": [
+        "Per-link directional traffic and matched capacity",
+        "Collective operation duration and wait time by rank",
+        "Communication/computation overlap on a mapped common clock",
+        "Physical/logical topology and routing/placement"
+      ],
+      "what_would_support": [
+        "A communication intervention reduces collective critical-path time and improves the serving metric."
+      ],
+      "what_would_weaken": [
+        "Collective time is not on the critical path or communication reduction has no serving effect."
+      ]
+    },
+    {
+      "hypothesis_id": "kv_cache_pressure",
+      "title": "KV-cache capacity or allocator pressure",
+      "mechanism": "kv_cache",
+      "statement": "KV-cache capacity, allocation, fragmentation, eviction or preemption contributes to decode degradation.",
+      "knowledge_query": "KV cache allocator eviction preemption",
+      "evidence_rules": [
+        {
+          "mechanism": "kv_cache_occupancy",
+          "interpretation": "Occupancy alone does not establish allocation pressure or eviction."
+        },
+        {
+          "mechanism": "kv_cache_capacity_pressure",
+          "interpretation": "Absence of a matched used/capacity pair leaves pressure unknown."
+        }
+      ],
+      "discriminating_measurements": [
+        "Used/capacity bytes or tokens at matched scope",
+        "Allocator block allocation, fragmentation, eviction and preemption events",
+        "Request-correlated decode stalls and TPOT/ITL"
+      ],
+      "what_would_support": [
+        "A controlled cache capacity/allocator change alters eviction or stall events and improves decode metrics."
+      ],
+      "what_would_weaken": [
+        "A complete matched capture shows no allocator pressure or request-correlated stalls."
+      ]
+    },
+    {
+      "hypothesis_id": "runtime_queueing",
+      "title": "Runtime scheduling or queueing",
+      "mechanism": "runtime",
+      "statement": "Queue wait, batch formation, CPU dispatch or kernel gaps contribute to latency.",
+      "knowledge_query": "runtime scheduling queueing batching dispatch",
+      "evidence_rules": [
+        {
+          "mechanism": "runtime_scheduling_or_queueing",
+          "interpretation": "Serving metrics alone do not isolate the runtime mechanism; the candidate is explicitly not attributed."
+        }
+      ],
+      "discriminating_measurements": [
+        "Request arrival, queue wait and batch formation timestamps",
+        "CPU scheduling, dispatch and synchronization traces",
+        "Kernel launch gaps and phase-aligned active duration",
+        "Offered load, achieved throughput and request mix"
+      ],
+      "what_would_support": [
+        "A scheduler intervention changes the targeted wait component and end-to-end latency at comparable offered load."
+      ],
+      "what_would_weaken": [
+        "Queue and dispatch components are negligible or their controlled reduction does not improve latency."
+      ]
+    },
+    {
+      "hypothesis_id": "thermal_power_throttling",
+      "title": "Thermal or power throttling",
+      "mechanism": "thermal_power",
+      "statement": "Active thermal or power throttling contributes to the performance symptom.",
+      "knowledge_query": "thermal power throttle clocks",
+      "evidence_rules": [
+        {
+          "mechanism": "thermal_or_power_throttling",
+          "interpretation": "Only throttle-active counters indicate reported throttling; temperature or power alone is insufficient."
+        }
+      ],
+      "discriminating_measurements": [
+        "Throttle-active reason counters and clocks over time",
+        "Power, temperature and cooling conditions",
+        "Kernel and serving metrics on the same time axis"
+      ],
+      "what_would_support": [
+        "A safe, controlled change to thermal/power conditions changes throttle activity and performance."
+      ],
+      "what_would_weaken": [
+        "Validated throttle counters remain inactive during the symptom and no related clock/power event occurs."
+      ]
+    }
+  ]
+}
